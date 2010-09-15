@@ -1,0 +1,963 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta content="text/html; charset=us-ascii" http-equiv="content-type">
+  <title>Navigation Timing</title>
+<style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Navigation Timing</h1>
+
+<h2 class="no-num no-toc" id="working-draft-august-27-2010">Editor's Draft
+August 27, 2010</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/NavigationTiming/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/NavigationTiming/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
+      class="org">Google Inc.</span>) &lt;<a
+      class="email" href="mailto:zhihengw@google.com">zhihengw@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
+    of Technology">MIT</acronym></a>, <a
+    href="http://www.ercim.org/"><acronym title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an interface for web applications to access
+timing information related to navigation and elements. </p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=[NT]%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[NT]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
+   rel="disclosure">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#navigation-timing-0"><span class="secno">4 </span>Navigation
+    Timing</a> 
+    <ol class="toc">
+      <li><a href="#introduction-0"><span class="secno">4.1
+        </span>Introduction</a></li>
+      <li><a href="#the-navigationtiming-interface"><span class="secno">4.2
+        </span>The <code>NavigationTiming</code> interface</a></li>
+      <li><a href="#the-navigationinfo-interface"><span class="secno">4.3
+        </span>The <code>NavigationInfo</code> interface</a></li>
+      <li><a href="#the-window.performance.timing-attribute"><span
+        class="secno">4.4 </span> The <code>window.performance.timing</code>
+        attribute</a></li>
+      <li><a href="#window.performance.timing"><span class="secno">4.5
+        </span>Processing Model</a></li>
+    </ol>
+  </li>
+  <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
+  <li><a href="#security"><span class="secno">6 </span>Security</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+User latency is an important quality benchmark for Web Applications. While
+JavaScript-based mechanisms can provide comprehensive instrumentation for
+user latency measurements within an application, in many cases, they are
+unable to provide a complete end-to-end latency picture. 
+
+<div class="example">
+<p>For example, the following Javascript shows the time it take to fully load
+a page: </p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+
+var start = new Date().getTime();
+function onLoad() {
+  var now = new Date().getTime();
+  var latency = now - start;
+  alert("page loading time: " + latency);
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="onLoad()"&gt;
+&lt;!- Main page body goes from here. --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<p>The script calculates the time it takes to load the page <b>after</b> the
+first bit of JavaScript in the head is executed, but it does not give any
+information about the time it takes to get the page from the server. </p>
+
+<p>To address the need for complete information on user experience, this
+document introduces the <a href="#navigation-timing">NavigationTiming</a> and
+<a href="#resource-timing">ResourceTiming</a> interfaces. These interfaces
+allow JavaScript mechanisms to provide complete client-side latency
+measurements within applications. With the proposed interface, the previous
+example can be modified to measure a user's perceived page load time. </p>
+
+<div class="example">
+<p>The following script calculates how much time has elapsed since the most
+recent navigation, such as the mouse click on a link. </p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+function onLoad() {
+  var now = new Date().getTime();
+  var latency = now - performance.timing.navigationStart;
+  alert("User-perceived page loading time: " + latency);
+}
+
+&lt;script&gt;
+&lt;/head&gt;
+&lt;body onload="onLoad()"&gt;
+&lt;!- Main page body goes from here. --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in RFC2119. For readability, these words
+do not appear in all uppercase letters in this specification. <a
+href="#references">[RFC2119]</a> </p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>The term DOM is used to refer to the API set made available to scripts in
+Web applications, and does not necessarily imply the existence of an actual
+<code>Document</code> object or of any other <code>Node</code> objects as
+defined in the DOM Core specifications. <a href="#references">[DOM3CORE]</a>
+</p>
+
+<p>A DOM attribute is said to be <em>getting</em> when its value is being
+retrieved (such as by author script), and is said to be <em>setting</em> when
+a new value is assigned to it. </p>
+
+<p>The term "JavaScript" is used to refer to ECMA262, rather than the
+official term ECMAScript, since the term JavaScript is more widely known. <a
+href="#references">[ECMA262]</a> </p>
+
+<h2 id="navigation-timing-0"><span class="secno">4 </span>Navigation
+Timing</h2>
+
+<h3 id="introduction-0"><span class="secno">4.1 </span>Introduction</h3>
+
+<p>This section is non-normative</p>
+
+<p>This specification introduces an interface that provides Web applications
+with timing-related information. This specification does not cover how Web
+applications leverage these interfaces to collect, store and report the
+provided information. </p>
+
+<h3 id="the-navigationtiming-interface"><span class="secno">4.2 </span>The
+<code><a href="#navigation-timing">NavigationTiming</a></code> interface</h3>
+<pre class="idl">interface <dfn id="navigation-timing">NavigationTiming</dfn> {
+  readonly attribute unsigned longlong <a href="#nt-navigation-start" title="navigationstart">navigationStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-unload-start" title="unloadeventstart">unloadEventStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-unload-end" title="unloadeventend">unloadEventEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-redirect-start" title="redirectstart">redirectStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-redirect-end" title="redirectend">redirectEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-fetch-start" title="fetchstart">fetchStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-domain-lookupstart" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-domain-lookupend" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-connect-start" title="connectstart">connectStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-connect-end" title="connectend">connectEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-request-start" title="requeststart">requestStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-request-end" title="requestend">requestEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-response-start" title="responsestart">responseStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-response-end" title="responseend">responseEnd</a>;
+  readonly attribute unsigned longlong <a href="#nt-dom-loading" title="domloading">domLoading</a>;
+  readonly attribute unsigned longlong <a href="#nt-dom-interactive" title="dominteractive">domInteractive</a>;
+  readonly attribute unsigned longlong <a href="#nt-dom-content-loaded" title="domcontentloaded">domContentLoaded</a>;
+  readonly attribute unsigned longlong <a href="#nt-dom-complete" title="domcomplete">domComplete</a>;
+  readonly attribute unsigned longlong <a href="#nt-load-start" title="loadeventstart">loadEventStart</a>;
+  readonly attribute unsigned longlong <a href="#nt-load-end" title="loadeventend">loadEventEnd</a>;
+};</pre>
+
+<h4 id="navigationstart-attribute"><code><dfn
+id="nt-navigation-start">navigationStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately after the user agent <a
+href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
+to unload</a> the previous document. <!--
+TODO(zhihengw:) to see if these two example still hold in the new definition.
+<div class=example><div class=exampleHeader>Example</div>
+<p>Different user agents may use different events to signal the start of navigation, for example
+<ul><li>In Internet Explorer, the navigationTime can be the number of
+milliseconds between midnight of January 1, 1970 (UTC) and the browser's
+BeforeNavigate2 event</li>
+<li>In Firefox, the navigationTime can be the number of milliseconds
+between midnight of January 1, 1970 (UTC) and the time
+when the browser's nsIWebProgressListener.STATE_START state changes.</li>
+</ul></div>
+-->
+ </p>
+
+<h4 id="unload-start-attribute"><code><dfn
+id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the user agent starts
+<a
+href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
+the last document. This should be after the user agent <a
+href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
+to unload the document</a>. If there is no previous document, this attribute
+must return zero.</p>
+<!--
+<div class=XXX><p>Exposing both unloadEventStart and unloadEventEnd potentially
+reveals information from the previous page, e.g., user prompts in the unload event
+handler. What is the privacy implication?</div> -->
+
+<h4 id="unload-end-attribute"><code><dfn
+id="nt-unload-end">unloadEventEnd</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time the user agent finishes <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
+the last document. If there is no previous document, this attribute must
+return zero.</p>
+
+<h4 id="redirectstart-attribute"><code><dfn
+id="nt-redirect-start">redirectStart</dfn></code> attribute </h4>
+
+<p>If the last navigation is a redirection, this attribute must return the
+number of milliseconds between midnight of January 1, 1970 (UTC) and the time
+when the last non-redirection <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#navigate">navigation</a>
+begins. If the last navigation is not a redirect, this attribute must return
+zero.</p>
+
+<h4 id="redirectend-attribute"><code><dfn
+id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
+
+<p>If the last navigation is a redirection, this attribute must return the
+number of milliseconds between midnight of January 1, 1970 (UTC) and the time
+when the last <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#navigate">navigation</a>
+ends. If the last navigation is not a redirect, this attribute must return
+zero. </p>
+
+<h4 id="fetchstart-attribute"><code><dfn
+id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent starts to <a
+href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a>
+the current document. This time should not be overwritten if the user agent
+retries fetching the same document due to previous failures. </p>
+
+<h4 id="domainlookupstart-attribute"><code><dfn
+id="nt-domain-lookupstart">domainLookupStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time the user agent starts the domain name
+lookup for the current document. If the current document is retrieved from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a> or an HTML file, this attribute must return the same
+value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+
+<h4 id="domainlookupend-attribute"><code><dfn
+id="nt-domain-lookupend">domainLookupEnd</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time the user agent finishes the domain name
+lookup for the current document. If the current document is retrieved from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a> or an HTML file, this attribute must return the same
+value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+
+<div class="example">
+
+<div class="exampleHeader">
+Example</div>
+
+<p>In case where the user agent already has the domain information in cache,
+domainLookupStart and domainLookupEnd represent the times when the user agent
+starts and ends the domain data retrieval from the cache. </p>
+</div>
+
+<h4 id="connectstart-attribute"><code><dfn
+id="nt-connect-start">connectStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent start establishing the
+connection to the server to retrieve the document. If a <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> is used or the current document is retrieved from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a> or an HTML file, this attribute must return the same
+value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+
+<h4 id="connectend-attribute"><code><dfn
+id="nt-connect-end">connectEnd</dfn></code> attribute </h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent finishes establishing
+the connection to the server to retrieve the current document. If a <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> is used or the current document is retrieved from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a> or an HTML file, this attribute must return the same
+value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+
+<p>If the transport connection fails and the user agent reopens a connection,
+<a href="#domtiming-connectstart">connectStart</a> and <a
+href="#domtiming-connectend">connectEnd</a> should return the corresponding
+values of the new connection. </p>
+<a href="#nt-connect-end">connectEnd</a> must include the time to establish
+the transport connection. It must not include other time such as SSL
+handshake and SOCKS authentication. 
+
+<h4 id="requeststart-attribute"><code><dfn
+id="nt-request-start">requestStart</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent starts requesting the
+current document from the server, or from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a>, or from an HTML file.</p>
+
+<h4 id="requestend-attribute"><code><dfn
+id="nt-request-end">requestEnd</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent finishes requesting
+the current document from the server, or from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a>, or from an HTML file.</p>
+
+<p>If the transport connection fails after a request is sent and the user
+agent reopens a connection and resend the request, <a
+href="#nt-request-start">requestStart</a> and <a
+href="#nt-request-end">requestEnd</a> should return the corresponding values
+of the new request. </p>
+
+<h4 id="responsestart-attribute"><code><dfn
+id="nt-response-start">responseStart</dfn></code> attribute </h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent receives the first
+byte of the response from the server, or from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a>, or from an HTML file. </p>
+
+<h4 id="responseend-attribute"><code><dfn
+id="nt-response-end">responseEnd</dfn></code> attribute </h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent finishes receiving the
+last byte of the current document from from <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+application caches</a>, or from an HTML file. </p>
+
+<h4 id="dom-loading-attribute"><code><dfn
+id="nt-dom-loading">domLoading</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the user agent sets the
+<a
+href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+document readiness</a> to "loading".</p>
+
+<h4 id="dom-interactive-attribute"><code><dfn
+id="nt-dom-interactive">domInteractive</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the user agent sets the
+<a
+href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+document readiness</a> to "interactive".</p>
+
+<h4 id="dom-content-loaded-attribute"><code><dfn
+id="nt-dom-content-loaded">domContentLoaded</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the user agent fires <a
+href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContendLoaded
+event</a> at the Document.</p>
+
+<h4 id="dom-complete-attribute"><code><dfn
+id="nt-dom-complete">domComplete</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the user agent sets the
+<a
+href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+document readiness</a> to "complete".</p>
+
+<h4 id="loadstart-attribute"><code><dfn
+id="nt-load-end">loadEventStart</dfn></code> attribute </h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time immediately before the load event of the
+the current document is fired. It must return zero when the load event is not
+fired yet.</p>
+
+<h4 id="loadend-attribute"><code><dfn
+id="nt-load-end">loadEventEnd</dfn></code> attribute</h4>
+
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the load event of the current
+document is completed. It must return zero when the load event is not fired
+yet.</p>
+
+<h3 id="the-navigationinfo-interface"><span class="secno">4.3 </span>The
+<code><a href="#navigation-info">NavigationInfo</a></code> interface</h3>
+<pre class="idl">interface <dfn id="navigation-info">NavigationInfo</dfn> {
+  const unsigned short <a href="#navigation-type-navigate">TYPE_NAVIGATE</a> = 0;
+  const unsigned short <a href="#navigation-type-reload">TYPE_RELOAD</a> = 1;
+  const unsigned short <a href="#navigation-type-forward-back">TYPE_BACK_FORWARD</a> = 2;
+  const unsigned short <a href="#navigation-type-newwindow">TYPE_NEW_WINDOW</a> = 3;
+  const unsigned short <a href="#navigation-type-reserved">TYPE_RESERVED</a> = 255;
+  readonly attribute unsigned short <a href="#nt-navigation-type" title="navigationtype">type</a>;
+  readonly attribute unsigned short <a href="#nt-redirect-count" title="redirectcount">redirectCount</a>;
+};</pre>
+
+<h4 id="usernavigationtype-attribute"><code><dfn
+id="nt-navigation-type">type</dfn></code> attribute</h4>
+
+<p>This attribute must return the type of the last non-redirection <a
+href="http://www.whatwg.org/specs/web-apps/current-work/#navigate">navigation</a>
+in the current browsing context. It must have one of the following <dfn
+id="nt-navigation-types">navigation type</dfn> values. </p>
+<dl>
+  <dt><dfn id="navigation-type-other">TYPE_NAVIGATE</dfn>: navigation started
+  by clicking on a link or entering the url in the user agent's address bar.
+  </dt>
+  <dt><dfn id="navigation-type-reload">TYPE_RELOAD</dfn>: Navigation through
+  the reload operation.</dt>
+  <dt><dfn id="navigation-forward-back">TYPE_BACK_FORWARD</dfn>: Navigation
+  through a forward or backward operation.</dt>
+  <dt><dfn id="navigation-type-newwindow">TYPE_NEW_WINDOW</dfn>: Current page
+  is opened in a new tab or window by the user agent.</dt>
+  <dt><dfn id="navigation-type-other">TYPE_RESERVED</dfn>: Any navigation
+  types not defined by values above.</dt>
+</dl>
+
+<h4 id="redirectcount-attribute"><code><dfn
+id="nt-redirect-count">redirectCount</dfn></code> attribute </h4>
+
+<p>This attribute must return the number of redirections since the last
+non-redirection navigation under the current browsing context. If there is no
+redirection, this attribute must return zero. </p>
+
+<h3 id="the-window.performance.timing-attribute"><span class="secno">4.4
+</span> The <code><a
+href="#window-performance-timing">window.performance.timing</a></code>
+attribute</h3>
+<pre class="idl">interface <a href="#window-performance">Performance</a> {
+  readonly attribute <a href="#navigation-timing">NavigationTiming</a> <a href="#window-performance-timing">timing</a>;
+  readonly attribute <a href="#navigation-info">NavigationInfo</a> <a href="#window-performance-navigation">navigation</a>;
+};
+
+[Supplemental]
+interface Window {
+  readonly attribute <a href="#window-performance">Performance</a> performance;
+};</pre>
+The <dfn id="window-performance">window.performance</dfn> attribute provides
+a hosting area for performance related attributes. Specifically, the <dfn
+id="window-performance-timing">window.performance.timing</dfn> attribute
+represents the timing information related to the browsing contexts since the
+last non-redirection navigation. Each browsing context must have a unique <a
+href="#window-performance-timing">window.performance.timing</a> attribute.
+NavigationTiming objects in the timing attribute must be sorted by the
+chronological order of the corresponding browsing context. 
+
+<div class="example">
+<p>Following is an example of how to use the interface in an HTML page: </p>
+<pre>var t = performance.timing;
+var n = performance.navigation;
+if (t.loadEnd &gt; 0) {
+  var page_load_time = t.loadEnd - t.navigationStart;
+  if (n.type == n.TYPE_LINK) {
+    alert (page_load_time);
+  }
+}</pre>
+</div>
+
+<h3 id="window.performance.timing"><span class="secno">4.5 </span>Processing
+Model</h3>
+
+<p class="note">All the attributes in window.performance.timing and
+window.performance.navigation should not be written to until <a
+href="http://www.whatwg.org/specs/web-apps/current-work/complete.html#create-a-document-object">the
+Window object of the current document is created</a>, even though their
+attributes are referred to in the following steps to facilitate
+description.</p>
+
+<div class="example">
+
+<div class="exampleHeader">
+Example</div>
+
+<p>A user agent may maintain instances of the NavigationTiming and
+NavigationInfo interfaces until the Window object associated with the current
+document is created, when window.performance.timing and
+window.performance.navigation are replaced with these instances.</p>
+</div>
+<ol>
+  <li>Immediately before the user agent navigates the browsing context: 
+    <ol>
+      <li>Set all the attributes in window.performance.timing and
+        window.performance.navigation to 0.</li>
+      <li>Record the current navigation type in
+        window.performance.navigation.type.</li>
+    </ol>
+  </li>
+  <li>If the navigation is aborted for any of the following reasons, abort
+    these steps. Changes made to window.performance.timing and
+    window.performance.navigation so far, if any, must be reverted. 
+    <ol>
+      <li>The navigation is aborted due to the <a href="">sandboxed
+        navigation browsing context flag</a> or the <a href="">sandboxed
+        top-level navigation browsing context flag</a>, or a preexist attempt
+        to navigate the <a href="">browsing context</a>.</li>
+      <li>The navigation is caused by <a
+        href="http://www.whatwg.org/specs/web-apps/current-work/#navigate-fragid-step"><em>fragment
+        identifiers</em></a> within the page.</li>
+      <li>The new resource is to be handled by some sort of inline
+      content.</li>
+      <li>The new resource is to be handled using a mechanism that does not
+        affect the browsing context.</li>
+      <li>The user <a
+        href="http://dev.w3.org/html5/spec/history.html#refused-to-allow-the-document-to-be-unloaded">refuses
+        to allow the document to be unloaded</a>.</li>
+    </ol>
+  </li>
+  <li>Immediately after the user agent <a
+    href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
+    to unload</a> the previous <a
+    href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>,
+    record the current time as <a
+    href="#nt-navigation-start">navigationStart</a>.</li>
+  <li>Immediately before the user agent <a
+    href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unloads</a>
+    the previous <a
+    href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
+    in the current <a
+    href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
+    context</a>, record the current time as <a
+    href="#nt-unload-end">unloadEventStart</a>.</li>
+  <li>Immediately after the user agent <a
+    href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unloads</a>
+    the previous <a
+    href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
+    in the current <a
+    href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
+    context</a>, record the current time as <a
+    href="#nt-unload-end">unloadEventEnd</a>.</li>
+  <li id="step-fetchstart">fetch start: Immediately before a user agent
+    checks with the <a
+    href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+    application caches</a>, record the current time as <a
+    href="#nt-fetch-start">fetchStart</a>.</li>
+  <li>let <a href="#nt-domain-lookup-start">domainLookupStart</a>, <a
+    href="#nt-domain-lookup-end">domainLookupEnd</a>, <a
+    href="#nt-connect-start">connectStart</a> and <a
+    href="#nt-connect-end">connectEnd</a> be the same value as <a
+    href="#nt-fetch-start">fetchStart</a></li>
+  <li>If the resource is fetched from the <a
+    href="http://dev.w3.org/html5/spec/Overview.html#application-cache">relevant
+    application cache</a> or an HTML file, go to step <a
+    href="#step-request-start">11</a>.</li>
+  <li>If no domain lookup is required, go to step <a
+    href="#step-request-start">11</a>. Otherwise, immediately before a user
+    agent starts the domain name lookup, record the time in the <a
+    href="#nt-domain-lookupstart">domainLookupStart</a> attribute. </li>
+  <li>Record the time as <a href="#nt-domain-lookupend">domainLookupEnd</a>
+    immediately when the domain name lookup is successfully done. A user
+    agent may need multiple retries before that. If the domain lookup fails,
+    abort the rest of the steps. </li>
+  <li id="step-connectstart">If a persistent transport connection is used to
+    fetch the resource, go to step <a href="#step-request-start">11</a>.
+    Otherwise, record the time as <a
+    href="#nt-connect-start">connectStart</a> immediately before initiating
+    the connection to the server.</li>
+  <li>Record the time as <a href="#nt-connect-end">connectEnd</a> when the
+    connection to the server or the proxy is established. A user agent may
+    need multiple retries before this time. If a connection can not be
+    established, abort the rest of the steps. </li>
+  <li id="step-request-start">Record the time as <a
+    href="#nt-request-start">requestStart</a> immediately before transmitting
+    the request to the server or proxy or other subsystems.</li>
+  <li>Record the time as <a href="#nt-request-end">requestEnd</a> immediately
+    after transmitting the entire request to the server or proxy or other
+    subsystem.</li>
+  <li id="step-response-start">Record the time as <a
+    href="#nt-response-start">responseStart</a> immediately after the user
+    agent receives the first trunk of the response.</li>
+  <li id="step-response-end">Record the time as <a
+    href="#nt-response-end">responseEnd</a> immediately after receiving the
+    entire response from the content provider or the <a
+    href="http://dev.w3.org/html5/spec/Overview.html#application-cache">relevant
+    application cache</a>. 
+    <p>Return to step <a href="#step-connect-start">9</a> if the user agent
+    fails to send the request or receive the entire response, and needs to
+    reopen the connection.</p>
+
+    <div class="example">
+
+    <div class="exampleHeader">
+    Example</div>
+    <p>When <a
+    href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+    connection</a> is enabled, a user agent may first try to re-use an open
+    connect to send the request while the connection can be <a
+    href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously
+    closed</a>. In such case, connectStart, connectEnd, requestStart and
+    requestEnd should represent timing information collected over the re-open
+    connection. </p>
+    </div>
+  </li>
+  <li>If the fetched resource results in an HTTP redirect or equivalent, then 
+    <ol>
+      <li>Increment window.performance.navigation.redirectCount by 1.</li>
+      <li>If the value of window.performance.navigation.redirectStart is
+        equal to 0, let it be the value of
+        window.performance.timing.fetchStart.</li>
+      <li>Let window.performance.navigation.redirectEnd be the value of
+        window.performance.timing.responseEnd.</li>
+      <li>Set all the attributes in window.performance.timing to 0 except
+        window.performance.timing.navigationStart,
+        window.performance.timing.unloadEventStart and
+        window.performance.timing.unloadEventEnd.</li>
+      <li>Return to step labeled "fetch starts" with the new resource.</li>
+    </ol>
+  </li>
+  <li>Record the time as <a href="#nt-dom-loading">domLoading</a> immediately
+    before the user agent sets the <a
+    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    document readiness</a> to "loading".</li>
+  <li>Record the time as <a href="#nt-dom-interactive">domInteractive</a>
+    immediately before the user agent sets the <a
+    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    document readiness</a> to "interactive".</li>
+  <li>Record the time as <a
+    href="#nt-dom-contend-loaded">domContentLoaded</a> immediately before the
+    user agent fires <a
+    href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
+    DOMContendLoaded event</a> at the document.</li>
+  <li>Record the time as <a href="#nt-dom-complete">domComplete</a>
+    immediately before the user agent sets the <a
+    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    document readiness</a> to "complete".</li>
+  <li>Record the time as <a href="#nt-load-event-start">loadEventStart</a>
+    immediately before the user agent fires the load event.</li>
+  <li>Record the time as <a href="#nt-load-event-end">loadEventEnd</a>
+    immediately after the load event towards the document's Window object is
+    fired.</li>
+</ol>
+
+<p>The accuracy of the timing-related attributes in the <a
+href="#navigation-timing">NavigationTiming</a> interfaces is recommended to
+be one millisecond or finer. </p>
+
+<div class="XXX">
+<p><b>Starting from Aug. 16, ResourceTiming has become its own W3C <a
+href="../ResourceTiming/Overview.html">draft</a> in the Web Performance
+WG.</b></p>
+</div>
+<!--
+<h2 id=resource-timing-0><span class=secno>5 </span>Resource Timing</h2>
+<h3 id=introduction-1><span class=secno>5.1 </span>Introduction</h3>
+<p>This section is non-normative</p>
+
+<p>
+While the <a href="#navigation-timing">NavigationTiming</a> interface provides
+timing information regarding the root document, the <a href="#resource-timing">
+ResourceTiming</a> and <a href="#resource-timing-collector">ResourceTimingCollector</a> interface
+facilitate timing measurement for elements on the root page. 
+The <dfn id=resource-timing>ResourceTiming</dfn> attribute represents the
+timing information related to an
+<a href=http://dev.w3.org/html5/spec/Overview.html#elements>element</a>.
+Each of the following elements must have a unique timing attribute:
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>, 
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-img-element">img</a>, 
+<a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>, 
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>, 
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a> and
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a> with the link type of
+<a href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">stylesheet</a>.
+
+
+
+</p><h3 id="the-resourcetiming-interface"><span class=secno>5.2 </span>The
+<code><a ref="#resource-timing">ResourceTiming</a></code> Interface</h3>
+<pre class=idl>interface <a href=#resource-timing>ResourceTiming</a> {
+const unsigned short <a href=#rt-resourcetype-script>RESOURCE_SCRIPT</a> = 1;
+const unsigned short <a href=#rt-resource-type-image>RESOURCE_IMAGE</a> = 2;
+const unsigned short <a href=#rt-resource-type-cssimage>RESOURCE_CSSIMAGE</a> = 3;
+const unsigned short <a href=#rt-resource-type-stylesheet>RESOURCE_STYLESHEET</a> = 4;
+const unsigned short <a href=#rt-resource-type-object>RESOURCE_OBJECT</a> = 5;
+const unsigned short <a href=#rt-resource-type-subdocument>RESOURCE_SUBDOCUMENT</a> = 6;
+const unsigned short <a href=#rt-resource-type-xhr>RESOURCE_XHLHTTPREQUEST</a> = 7;
+readonly attribute unsigned short <a href=#rt-resource-type title=resourcetype>resourceType</a>;
+
+readonly attribute DOMString <a href=#rt-url title=url>url</a>;
+readonly attribute unsigned longlong <a href=#rt-redirect-start title=redirectstart>redirectStart</a>;
+readonly attribute unsigned longlong <a href=#rt-redirect-end title=redirectend>redirectEnd</a>;
+readonly attribute unsigned short <a href=#rt-redirect-count title=redirectcount>redirectEnd</a>;
+readonly attribute unsigned longlong <a href=#rt-fetch-start title=resourcetime-fetchstart>fetchStart</a>;
+readonly attribute unsigned longlong <a href=#rt-load title=load>load</a>;
+};
+</pre>
+readonly attribute unsigned longlong <a href=#rt-fetch-end title=resourcetime-fetchend>fetchEnd</a>;
+
+<h4 id=resourcetype-attribute><code><dfn id=rt-resource-type>resourceType</dfn></code> attribute</h4>
+<p>This attribute must return one of the following <dfn id=nt-resource-type>resource types</dfn>:
+<dl>
+
+<dt><dfn id=rt-resource-type-script>RESOURCE_SCRIPT</dfn>: the resource is script.</dt>
+<dt><dfn id=rt-resource-type-image>RESOURCE_IMAGE</dfn>: the resource is an image.</dt>
+<dt><dfn id=rt-resource-type-cssimage>RESOURCE_CSSIMAGE</dfn>: the resource is a CSS image.</dt>
+<dt><dfn id=rt-resource-type-stylesheet>RESOURCE_STYLESHEET</dfn>: the resource is a stylesheet.</dt>
+<dt><dfn id=rt-resource-type-object>RESOURCE_OBJECT</dfn>: the resource is an object.</dt>
+<dt><dfn id=rt-resource-type-subdocument>RESOURCE_SUBDOCUMENT</dfn>: the resource is a document.</dt>
+<dt><dfn id=rt-resource-type-xhr>RESOURCE_XMLHTTPREQUEST</dfn>: the resource is a XML HTTP request.</dt>
+</dl>
+<h4 id=url-attribute><code><dfn id=rt-url>url</dfn></code> attribute</h4>
+<p>This attribute must return the <a href=http://dev.w3.org/html5/spec/Overview.html#url>URL</a> of the associated resource.
+
+<h4 id=fetchstart-attribute-0><code><dfn id=rt-fetch-start>fetchStart</dfn></code> attribute</h4><p>This attribute must return the number of milliseconds between midnight of January 1, 1970 (UTC) and the time when the user agent starts to <a href=http://dev.w3.org/html5/spec/Overview.html#fetching-resources>fetch</a> the resource. This time should not be overwritten if the user agent retries fetching the same resource due to failures.
+// fetchEnd needs to be removed in the interest of preserving user privacy.
+
+<h4 id=fetchend-attribute><code><dfn id=rt-fetch-end>fetchEnd</dfn></code>
+attribute</h4>
+<p>This attribute must return the number of milliseconds between midnight of
+January 1, 1970 (UTC) and the time when the user agent finish
+<a href=http://dev.w3.org/html5/spec/Overview.html#fetching-resources>fetching</a>
+the resource. This time should not be overwritten if the user agent retries
+fetching the same document due to failures.
+
+<h4 id=load-attribute><code><dfn id=rt-load>load</dfn></code> attribute
+</h4><p>This attribute must return the number of milliseconds between midnight of January 1, 1970 (UTC) and the time when the resource is loaded.
+
+</p><p> When an element is set or changed and if it results in a <a href=http://dev.w3.org/html5/spec/Overview.html#fetch>fetch</a>, 
+
+its timing attribute must be updated.
+
+</p><h3 id="the-resourcetimingcollector-interface"><span class=secno>5.3 </span>
+The <code><dfn href=resourcetimingcollector>ResourceTimingCollector</dfn></code> interface</h3>
+<pre class=idl>
+interface ResourceTimingEvent : Event {
+readonly attribute array[ResourceTiming] timing;
+};
+
+interface ResourceTimingCollector {
+void addEventListener(in EventListener listener)
+void removeEventListener(in EventListener listener)
+};
+
+[Supplemental]
+interface Window.performance {
+ResourceTimingCollector createResourceTimingCollector()
+};
+</pre>
+
+<p>ResourceTiming objects associated with embedded objects on the root document
+must be saved until the root document completes loading. If a
+ResourceTimingCollector object is created and an event handler is registered
+using addEventListener before the root document completes loading, all
+ResourceTiming objects must be delivered to the handler. If a
+ResourceTimingCollector object is created after the root document finishes
+loading, subsequent events should be delivered to the registered handlers as
+they occur.
+</p>
+
+<div class=example><div class=exampleHeader>Example</div><p>
+Any ResourceTiming object
+created prior to the end of onload will receive events for all resources (even
+if they complete prior to the object's creation). If a ResourceTiming object
+is created after onload, it will only receive events about resources completed
+after the object's creation. This allows the browser optimal opportunities to
+garbage collect. </div>
+<h3 id=processing-model><span class=secno>5.4 </span>Processing model</h3>
+<p>A user agent must allocate space to store all the <a href="#resource-timing">
+ResourceTiming</a> objects generated in the following process. 
+</p><ol>
+// We can't release these objects on navigation. A navigation could be
+// interrupted event after it's started, e.g., users refuse to unload the 
+// page, in which case we still want to keep these objects.
+
+<li>Before a user agent fetches a resource for an element that associates
+with a ResourceTiming object, the following steps must be run:
+<ol>
+<li>Create a new <a href=#resource-timing>ResourceTiming</a> object.</li>
+<li>Record the <a href=#rt-resource-type>resourceType</a> attribute.</li>
+<li>Before a user agent runs the
+<a href=http://dev.w3.org/html5/spec/Overview.html#changesToNetworkingModel>
+fetching algorithm</a>, it must record the current time in the
+<a href=#nt-fetch-start>fetchStart</a> attribute.</li>
+<li>Record the time as <a href=#rt-load>load</a> attribute
+immediately after the user agent finishes loading the resource into DOM.</li>
+<li>If a ResourceTimingCollector object exists, dispatch a ResourceTimingEvent
+with the ResourceTiming object to all registered event handlers.</li>
+<li>Save the ResourceTiming object unless the root document has finished 
+loading.</li>
+</ol></li>
+<li>When an event handler is added by <a href="">addEventListener</a>,
+the user agent must check if there is any saved
+<a href=#resource-timing>ResourceTiming</a> objects. If so, it must dispatch
+a ResourceTimingEvent to this new event handler and pass it with all
+the ResourceTiming objects.</li>
+<li>After the root document is loaded and the
+<a href="http://dev.w3.org/html5/spec/webappapis.html#handler-window-onload">
+onload</a> event is handled, a user agent may discard all the
+<a href=#resource-timing>ResourceTiming</a> objects it saves. All these objects
+must not be discarded before this time.</li>
+<li>Saved <a href="#resource-timing">ResourceTiming</a> objects should be
+cleaned up during the
+<a href="http://dev.w3.org/html5/spec/history.html#unloading-document-cleanup-steps">
+unloading document cleanup steps</a>.</li>
+</ol>
+<div class=example><div class=exampleHeader>Example</div><p>
+To avoid maintaining its own data storage while collecting timing information
+of all the resources, a page can create the ResourceTimingCollector and register
+the ResourceTimingEvent handler in the body onload handler. 
+</p></div>
+-->
+
+<h2 id="privacy"></h2>
+
+<h2 id="privacy1"><span class="secno">5 </span>Privacy</h2>
+
+<p>This section is non-normative.</p>
+
+<h2 id="security"><span class="secno">6 </span>Security</h2>
+
+<p>This section is non-normative.</p>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+<p>I would like to offer my sincere thanks to all the people that I have been
+in touch with regarding this draft, including Anderson Quach, Alex Russell,
+Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
+Lawrence, Jason Weber, Jonas Sicking, Kyle Scholz, Lenny Rachitsky, Nic
+Jansma, Richard Rabbat, Sergey Novikov, Steve Souders, Tony Gentilcore for
+their reviews and feedbacks.</p>
+</body>
+</html>
