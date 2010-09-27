@@ -437,7 +437,7 @@ id="nt-request-start">requestStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the number of milliseconds between midnight of
 January 1, 1970 (UTC) and the time when the user agent starts requesting the
-current document from the server, or from <a
+current document  from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file.</p>
 
@@ -445,8 +445,8 @@ application caches</a>, or from an HTML file.</p>
 id="nt-request-end">requestEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent finishes requesting
-the current document from the server, or from <a
+January 1, 1970 (UTC) and the time when the user agent receives the first byte
+of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file.</p>
 
@@ -464,6 +464,9 @@ January 1, 1970 (UTC) and the time when the user agent receives the first
 byte of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file. </p>
+
+<div class=XXX><p>responseStart and requestEnd are referring to the same time
+value. Both are kept to maintain the naming consistency.</p></div>
 
 <h4 id="responseend-attribute"><code><dfn
 id="nt-response-end">responseEnd</dfn></code> attribute </h4>
@@ -656,20 +659,14 @@ window.performance.navigation are replaced with these instances.</p>
     href="#nt-navigation-start">navigationStart</a>.</li>
   <li>Immediately before the user agent <a
     href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unloads</a>
-    the previous <a
-    href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
-    in the current <a
-    href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
-    context</a>, record the current time as <a
-    href="#nt-unload-end">unloadEventStart</a>.</li>
+    the previous <a href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
+    in the current <a href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
+    context</a>, record the current time as <a href="#nt-unload-end">unloadEventStart</a>.</li>
   <li>Immediately after the user agent <a
     href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unloads</a>
-    the previous <a
-    href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
-    in the current <a
-    href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
-    context</a>, record the current time as <a
-    href="#nt-unload-end">unloadEventEnd</a>.</li>
+    the previous <a href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
+    in the current <a href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
+    context</a>, record the current time as <a href="#nt-unload-end">unloadEventEnd</a>.</li>
   <li id="step-fetchstart">fetch start: Immediately before a user agent
     checks with the <a
     href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
@@ -704,11 +701,8 @@ window.performance.navigation are replaced with these instances.</p>
   <li id="step-request-start">Record the time as <a
     href="#nt-request-start">requestStart</a> immediately before transmitting
     the request to the server or proxy or other subsystems.</li>
-  <li>Record the time as <a href="#nt-request-end">requestEnd</a> immediately
-    after transmitting the entire request to the server or proxy or other
-    subsystem.</li>
-  <li id="step-response-start">Record the time as <a
-    href="#nt-response-start">responseStart</a> immediately after the user
+  <li>Record the time as <a href="#nt-request-end">requestEnd</a> and
+    <a href="#nt-response-start">responseStart</a> immediately after the user
     agent receives the first trunk of the response.</li>
   <li id="step-response-end">Record the time as <a
     href="#nt-response-end">responseEnd</a> immediately after receiving the
