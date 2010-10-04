@@ -38,15 +38,15 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-august-27-2010">Editor's Draft
-August 27, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-october-4-2010">Editor's Draft
+October 4, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
     <dd><a
-      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
+      href="http://dvcs.w3.org/hg/webperf/raw-file/6eea9b3aef6c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/6eea9b3aef6c/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -89,9 +89,9 @@ document</h2>
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[NT]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
-   with <samp>[NT]</samp> at the start of the subject line.</p>
+   with <samp>[NavigationTiming]</samp> at the start of the subject line.</p>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
@@ -140,8 +140,8 @@ cite this document as other than work in progress. </p>
       <li><a href="#the-window.performance.timing-attribute"><span
         class="secno">4.4 </span> The <code>window.performance.timing</code>
         attribute</a></li>
-      <li><a href="#window.performance.timing"><span class="secno">4.5
-        </span>Processing Model</a></li>
+      <li><a href="#window.performance.timing"><span class="secno">4.5 </span>Processing Model</a></li>
+      <li><a href="#garbage-collection"><span class="secno">4.6 </span>Garbage Collection</a></li>
     </ol>
   </li>
   <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
@@ -259,6 +259,9 @@ a new value is assigned to it. </p>
 official term ECMAScript, since the term JavaScript is more widely known. <a
 href="#references">[ECMA262]</a> </p>
 
+<p>Without otherwise specified, in rest of this work, time is measured in
+milliseconds since midnight of January 1, 1970 (UTC).</p>
+
 <h2 id="navigation-timing-0"><span class="secno">4 </span>Navigation
 Timing</h2>
 
@@ -299,28 +302,15 @@ provided information. </p>
 <h4 id="navigationstart-attribute"><code><dfn
 id="nt-navigation-start">navigationStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately after the user agent <a
+<p>This attribute must return the time immediately after the user agent <a
 href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
-to unload</a> the previous document. <!--
-TODO(zhihengw:) to see if these two example still hold in the new definition.
-<div class=example><div class=exampleHeader>Example</div>
-<p>Different user agents may use different events to signal the start of navigation, for example
-<ul><li>In Internet Explorer, the navigationTime can be the number of
-milliseconds between midnight of January 1, 1970 (UTC) and the browser's
-BeforeNavigate2 event</li>
-<li>In Firefox, the navigationTime can be the number of milliseconds
-between midnight of January 1, 1970 (UTC) and the time
-when the browser's nsIWebProgressListener.STATE_START state changes.</li>
-</ul></div>
--->
+to unload</a> the previous document.
  </p>
 
 <h4 id="unload-start-attribute"><code><dfn
 id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the user agent starts
+<p>This attribute must return the time immediately before the user agent starts
 <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
 the last document. This should be after the user agent <a
@@ -336,7 +326,7 @@ handler. What is the privacy implication?</div> -->
 id="nt-unload-end">unloadEventEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time the user agent finishes <a
+January 1, 1970 (UTC) and the time immediately after the user agent finishes <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
 the last document. If there is no previous document, this attribute must
 return zero.</p>
@@ -345,8 +335,7 @@ return zero.</p>
 id="nt-redirect-start">redirectStart</dfn></code> attribute </h4>
 
 <p>If the last navigation is a redirection, this attribute must return the
-number of milliseconds between midnight of January 1, 1970 (UTC) and the time
-when the last non-redirection <a
+time when the last non-redirection <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#navigate">navigation</a>
 begins. If the last navigation is not a redirect, this attribute must return
 zero.</p>
@@ -355,8 +344,7 @@ zero.</p>
 id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
 
 <p>If the last navigation is a redirection, this attribute must return the
-number of milliseconds between midnight of January 1, 1970 (UTC) and the time
-when the last <a
+time when the last <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#navigate">navigation</a>
 ends. If the last navigation is not a redirect, this attribute must return
 zero. </p>
@@ -364,17 +352,15 @@ zero. </p>
 <h4 id="fetchstart-attribute"><code><dfn
 id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent starts to <a
+<p>This attribute must return the time immediately before the user agent starts to <a
 href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a>
-the current document. This time should not be overwritten if the user agent
+the current document. This attribute should not be overwritten if the user agent
 retries fetching the same document due to previous failures. </p>
 
 <h4 id="domainlookupstart-attribute"><code><dfn
 id="nt-domain-lookupstart">domainLookupStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time the user agent starts the domain name
+<p>This attribute must return the time immediately before the user agent starts the domain name
 lookup for the current document. If the current document is retrieved from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or an HTML file, this attribute must return the same
@@ -383,9 +369,9 @@ value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 <h4 id="domainlookupend-attribute"><code><dfn
 id="nt-domain-lookupend">domainLookupEnd</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time the user agent finishes the domain name
-lookup for the current document. If the current document is retrieved from <a
+<p>This attribute must return the time immmediately after the user agent
+finishes the domain name lookup for the current document. If the current document
+is retrieved from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or an HTML file, this attribute must return the same
 value as <a href="#nt-fetch-start">fetchStart</a>. </p>
@@ -403,9 +389,8 @@ starts and ends the domain data retrieval from the cache. </p>
 <h4 id="connectstart-attribute"><code><dfn
 id="nt-connect-start">connectStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent start establishing the
-connection to the server to retrieve the document. If a <a
+<p>This attribute must return the time immediate before the user agent start
+establishing the connection to the server to retrieve the document. If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> is used or the current document is retrieved from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
@@ -415,9 +400,8 @@ value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 <h4 id="connectend-attribute"><code><dfn
 id="nt-connect-end">connectEnd</dfn></code> attribute </h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent finishes establishing
-the connection to the server to retrieve the current document. If a <a
+<p>This attribute must return the time immediately after the user agent
+finishes establishing the connection to the server to retrieve the current document. If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> is used or the current document is retrieved from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
@@ -428,25 +412,28 @@ value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 <a href="#domtiming-connectstart">connectStart</a> and <a
 href="#domtiming-connectend">connectEnd</a> should return the corresponding
 values of the new connection. </p>
-<a href="#nt-connect-end">connectEnd</a> must include the time to establish
-the transport connection. It must not include other time such as SSL
-handshake and SOCKS authentication. 
+<a href="#nt-connect-end">connectEnd</a> must include the time interval to
+establish the transport connection. It must not include other time interval
+such as SSL handshake and SOCKS authentication. 
 
 <h4 id="requeststart-attribute"><code><dfn
 id="nt-request-start">requestStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent starts requesting the
-current document  from the server, or from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a>, or from an HTML file.</p>
+<p>This attribute must return the time immediate before the user agent
+starts requesting the
+current document. If the new resource is to be fetched using HTTP GET
+<a href="http://dev.w3.org/html5/spec/Overview.html#concept-http-equivalent-get">or 
+equivalent</a>, requestStart must return the time when the user agent starts
+checking <a href="http://dev.w3.org/html5/spec/Overview.html#relevant-application-cache">
+any relevant application caches</a>. Otherwise, it must return the time when the
+user agent starts
+<a href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetching the resource</a>.</p>
 
 <h4 id="requestend-attribute"><code><dfn
 id="nt-request-end">requestEnd</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent receives the first byte
-of the response from the server, or from <a
+<p>This attribute must return the time immediately after the user agent receives
+the first byte of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file.</p>
 
@@ -459,38 +446,33 @@ of the new request. </p>
 <h4 id="responsestart-attribute"><code><dfn
 id="nt-response-start">responseStart</dfn></code> attribute </h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent receives the first
+<p>This attribute must return the time immediate after the user agent receives the first
 byte of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file. </p>
 
-<div class=XXX><p>responseStart and requestEnd are referring to the same time
+<div><p class="note">responseStart and requestEnd are referring to the same time
 value. Both are kept to maintain the naming consistency.</p></div>
 
 <h4 id="responseend-attribute"><code><dfn
 id="nt-response-end">responseEnd</dfn></code> attribute </h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the user agent finishes receiving the
-last byte of the current document from from <a
+<p>This attribute must return the time immediately after the user agent
+receives the last byte of the current document, either from the server, <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a>, or from an HTML file. </p>
 
 <h4 id="dom-loading-attribute"><code><dfn
 id="nt-dom-loading">domLoading</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the user agent sets the
-<a
-href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+<p>This attribute must return the time immediately before the user agent sets the
+<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
 document readiness</a> to "loading".</p>
 
 <h4 id="dom-interactive-attribute"><code><dfn
 id="nt-dom-interactive">domInteractive</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the user agent sets the
+<p>This attribute must return the time immediately before the user agent sets the
 <a
 href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
 document readiness</a> to "interactive".</p>
@@ -498,33 +480,33 @@ document readiness</a> to "interactive".</p>
 <h4 id="dom-content-loaded-attribute"><code><dfn
 id="nt-dom-content-loaded">domContentLoaded</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the user agent fires <a
-href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContendLoaded
+<p>This attribute must return the time immediately before the user agent fires <a
+href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContentLoaded
 event</a> at the Document.</p>
 
 <h4 id="dom-complete-attribute"><code><dfn
 id="nt-dom-complete">domComplete</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the user agent sets the
+<p>This attribute must return the time immediately before the user agent sets the
 <a
 href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
 document readiness</a> to "complete".</p>
 
+<p>If the <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">
+current document readiness</a> changes to the same state multiple times, the time
+of the first occurrence must be used.</p>
+
 <h4 id="loadstart-attribute"><code><dfn
 id="nt-load-end">loadEventStart</dfn></code> attribute </h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately before the load event of the
+<p>This attribute must return the time immediately before the load event of the
 the current document is fired. It must return zero when the load event is not
 fired yet.</p>
 
 <h4 id="loadend-attribute"><code><dfn
 id="nt-load-end">loadEventEnd</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time when the load event of the current
+<p>This attribute must return the time when the load event of the current
 document is completed. It must return zero when the load event is not fired
 yet.</p>
 
@@ -568,9 +550,8 @@ id="nt-redirect-count">redirectCount</dfn></code> attribute </h4>
 non-redirection navigation under the current browsing context. If there is no
 redirection, this attribute must return zero. </p>
 
-<h3 id="the-window.performance.timing-attribute"><span class="secno">4.4
-</span> The <code><a
-href="#window-performance-timing">window.performance.timing</a></code>
+<h3 id="the-window.performance-attribute"><span class="secno">4.4
+</span> The <code><a href="#window-performance">window.performance</a> </code> 
 attribute</h3>
 <pre class="idl">interface <a href="#window-performance">Performance</a> {
   readonly attribute <a href="#navigation-timing">NavigationTiming</a> <a href="#window-performance-timing">timing</a>;
@@ -632,8 +613,7 @@ window.performance.navigation are replaced with these instances.</p>
     </ol>
   </li>
   <li>If the navigation is aborted for any of the following reasons, abort
-    these steps. Changes made to window.performance.timing and
-    window.performance.navigation so far, if any, must be reverted. 
+    these steps.
     <ol>
       <li>The navigation is aborted due to the <a href="">sandboxed
         navigation browsing context flag</a> or the <a href="">sandboxed
@@ -667,11 +647,23 @@ window.performance.navigation are replaced with these instances.</p>
     the previous <a href="http://dev.w3.org/html5/spec/Overview.html#document">document</a>
     in the current <a href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">browsing
     context</a>, record the current time as <a href="#nt-unload-end">unloadEventEnd</a>.</li>
-  <li id="step-fetchstart">fetch start: Immediately before a user agent
-    checks with the <a
+  <li id="step-request-start">If the new resource is to be fetched using HTTP GET
+    <a href="http://dev.w3.org/html5/spec/Overview.html#concept-http-equivalent-get">or equivalent</a>,
+    immediately before a user agent checks with the <a
+    href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">
+    relevant application caches</a>, record the current time as
+    <a href="#nt-request-start">requestStart</a>.</li>
+  <li>If the new resource is not to be fetched using HTTP GET
+    <a href="http://dev.w3.org/html5/spec/Overview.html#concept-http-equivalent-get">or equivalent</a>,
+    immediately before a user agent starts the
+    <a href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">
+    fetching process</a>, record the current time as <a href="#nt-request-start">requestStart</a>.</li>
+  <li id="step-fetchstart">fetch start: Immediately before a user agent checks with the <a
     href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
     application caches</a>, record the current time as <a
     href="#nt-fetch-start">fetchStart</a>.</li>
+  <div class=XXX><p>TODO: With requestStart including the cache lookup time, the definition
+  of fetchStart needs more clarification.</p></div>
   <li>let <a href="#nt-domain-lookup-start">domainLookupStart</a>, <a
     href="#nt-domain-lookup-end">domainLookupEnd</a>, <a
     href="#nt-connect-start">connectStart</a> and <a
@@ -680,17 +672,17 @@ window.performance.navigation are replaced with these instances.</p>
   <li>If the resource is fetched from the <a
     href="http://dev.w3.org/html5/spec/Overview.html#application-cache">relevant
     application cache</a> or an HTML file, go to step <a
-    href="#step-request-start">11</a>.</li>
+    href="#step-request-end">14</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-request-start">11</a>. Otherwise, immediately before a user
+    href="#step-connect-start">13</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time in the <a
     href="#nt-domain-lookupstart">domainLookupStart</a> attribute. </li>
   <li>Record the time as <a href="#nt-domain-lookupend">domainLookupEnd</a>
     immediately when the domain name lookup is successfully done. A user
     agent may need multiple retries before that. If the domain lookup fails,
     abort the rest of the steps. </li>
-  <li id="step-connectstart">If a persistent transport connection is used to
-    fetch the resource, go to step <a href="#step-request-start">11</a>.
+  <li id="step-connect-start">If a persistent transport connection is used to
+    fetch the resource, go to step <a href="#step-request-end">14</a>.
     Otherwise, record the time as <a
     href="#nt-connect-start">connectStart</a> immediately before initiating
     the connection to the server.</li>
@@ -698,18 +690,15 @@ window.performance.navigation are replaced with these instances.</p>
     connection to the server or the proxy is established. A user agent may
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
-  <li id="step-request-start">Record the time as <a
-    href="#nt-request-start">requestStart</a> immediately before transmitting
-    the request to the server or proxy or other subsystems.</li>
-  <li>Record the time as <a href="#nt-request-end">requestEnd</a> and
-    <a href="#nt-response-start">responseStart</a> immediately after the user
-    agent receives the first trunk of the response.</li>
+  <li id="step-request-end">Record the time as <a href="#nt-request-end">
+    requestEnd</a> and <a href="#nt-response-start">responseStart</a> immediately
+    after the user agent receives the first trunk of the response.</li>
   <li id="step-response-end">Record the time as <a
     href="#nt-response-end">responseEnd</a> immediately after receiving the
     entire response from the content provider or the <a
     href="http://dev.w3.org/html5/spec/Overview.html#application-cache">relevant
     application cache</a>. 
-    <p>Return to step <a href="#step-connect-start">9</a> if the user agent
+    <p>Return to step <a href="#step-connect-start">13</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
 
@@ -739,7 +728,7 @@ window.performance.navigation are replaced with these instances.</p>
         window.performance.timing.navigationStart,
         window.performance.timing.unloadEventStart and
         window.performance.timing.unloadEventEnd.</li>
-      <li>Return to step labeled "fetch starts" with the new resource.</li>
+      <li>Return to step <a href="#step-request-start">6</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a href="#nt-dom-loading">domLoading</a> immediately
@@ -754,7 +743,7 @@ window.performance.navigation are replaced with these instances.</p>
     href="#nt-dom-contend-loaded">domContentLoaded</a> immediately before the
     user agent fires <a
     href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
-    DOMContendLoaded event</a> at the document.</li>
+    DOMContentLoaded event</a> at the document.</li>
   <li>Record the time as <a href="#nt-dom-complete">domComplete</a>
     immediately before the user agent sets the <a
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
@@ -769,6 +758,11 @@ window.performance.navigation are replaced with these instances.</p>
 <p>The accuracy of the timing-related attributes in the <a
 href="#navigation-timing">NavigationTiming</a> interfaces is recommended to
 be one millisecond or finer. </p>
+
+<h3 id="garbage-collection"><span class="secno">4.6 </span>Garbage Collection</h3>
+There are <a href="http://dev.w3.org/html5/spec/common-dom-interfaces.html#implied-strong-reference">
+implied strong references</a> from the window object to its
+window.performance.timing and window.performance.navigation objects.
 
 <h2 id="privacy"></h2>
 
