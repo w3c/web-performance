@@ -255,7 +255,7 @@ The term "resource" is also used to refer to these elements in this work. </p>
 <h3 id="the-resourcetiming-interface"><span class="secno">4.2 </span>The
 <code><a href="#resource-timing">ResourceTiming</a></code> Interface</h3>
 <pre class="idl">interface <a href="#resource-timing">ResourceTiming</a> {
-  const DOMString <a href="#rt-allowed-domains">allowedDomains</a>;
+  readonly attribute DOMString <a href="#rt-allowed-domains">allowedDomains</a>;
 
   const unsigned short <a href="#rt-resourcetype-script">RESOURCE_SCRIPT</a> = 1;
   const unsigned short <a href="#rt-resource-type-image">RESOURCE_IMAGE</a> = 2;
