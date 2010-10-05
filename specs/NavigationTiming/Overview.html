@@ -137,8 +137,8 @@ cite this document as other than work in progress. </p>
         </span>The <code>NavigationTiming</code> interface</a></li>
       <li><a href="#the-navigationinfo-interface"><span class="secno">4.3
         </span>The <code>NavigationInfo</code> interface</a></li>
-      <li><a href="#the-window.performance.timing-attribute"><span
-        class="secno">4.4 </span> The <code>window.performance.timing</code>
+      <li><a href="#the-window.performance-attribute"><span
+        class="secno">4.4 </span> The <code>window.performance</code>
         attribute</a></li>
       <li><a href="#window.performance.timing"><span class="secno">4.5 </span>Processing Model</a></li>
       <li><a href="#garbage-collection"><span class="secno">4.6 </span>Garbage Collection</a></li>
@@ -185,9 +185,9 @@ first bit of JavaScript in the head is executed, but it does not give any
 information about the time it takes to get the page from the server. </p>
 
 <p>To address the need for complete information on user experience, this
-document introduces the <a href="#navigation-timing">NavigationTiming</a> and
-<a href="#resource-timing">ResourceTiming</a> interfaces. These interfaces
-allow JavaScript mechanisms to provide complete client-side latency
+document introduces the <a href="#navigation-timing">NavigationTiming</a>
+interfaces. This interface
+allows JavaScript mechanisms to provide complete client-side latency
 measurements within applications. With the proposed interface, the previous
 example can be modified to measure a user's perceived page load time. </p>
 
@@ -317,16 +317,11 @@ the last document. This should be after the user agent <a
 href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
 to unload the document</a>. If there is no previous document, this attribute
 must return zero.</p>
-<!--
-<div class=XXX><p>Exposing both unloadEventStart and unloadEventEnd potentially
-reveals information from the previous page, e.g., user prompts in the unload event
-handler. What is the privacy implication?</div> -->
 
 <h4 id="unload-end-attribute"><code><dfn
 id="nt-unload-end">unloadEventEnd</dfn></code> attribute</h4>
 
-<p>This attribute must return the number of milliseconds between midnight of
-January 1, 1970 (UTC) and the time immediately after the user agent finishes <a
+<p>This attribute must return the time immediately after the user agent finishes <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
 the last document. If there is no previous document, this attribute must
 return zero.</p>
@@ -354,8 +349,11 @@ id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts to <a
 href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a>
-the current document. This attribute should not be overwritten if the user agent
-retries fetching the same document due to previous failures. </p>
+the current document.
+<!--This attribute should not be overwritten if the user agent
+retries fetching the same document due to previous failures.
+-->
+</p>
 
 <h4 id="domainlookupstart-attribute"><code><dfn
 id="nt-domain-lookupstart">domainLookupStart</dfn></code> attribute</h4>
