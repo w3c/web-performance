@@ -172,14 +172,14 @@
 	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
 	
 	<pre class="idl">interface <a href="#user-timing">UserTiming</a> {
-   void                           <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-                                       raises (<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
+   void                           <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
+                                       raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
    void                           <a href="#ut-markfullyloaded">markFullyLoaded</a>();
    void                           <a href="#ut-clearmarks">clearMarks</a>();		  
-   <a class="noxref" href="#DOMPerformanceTimingList">DOMPerformanceTimingList</a>       <a class="noxref" href="#ut-getmarks">getMarks</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+   <a class="noxref" href="#DOMPerformanceTimingList">DOMPerformanceTimingList</a>       <a class="noxref" href="#ut-getmarks">getMarks</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
                                            raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-   unsigned long long             <a href="#ut-mark">getMark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-                                          raises (<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
+   unsigned long long             <a href="#ut-mark">getMark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
+                                          raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
 		  		
 };</pre>
 
