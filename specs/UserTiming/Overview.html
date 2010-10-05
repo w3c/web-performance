@@ -187,7 +187,7 @@
    getter <a class="noxref" href="#DOMPerformanceTiming">DOMPerformanceTiming</a>(in unsigned long index);
 };</pre>
 
-<pre class="idl">interface <a href="#DOMPerformanceTimingList">DOMPerformanceTimingList</a> {
+<pre class="idl">interface <a href="#DOMPerformanceTimingList">DOMPerformanceTiming</a> {
    readonly attribute <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> name;
    readonly attribute unsigned long long time;
 };</pre>
@@ -232,7 +232,8 @@
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name of the mark to associate the timestamp captured.</p>
+			<p>[optional] The name of the mark to associate the timestamp captured. 
+			When no markName is provided, all marks are retrieved.</p>
 			<p><b>Return Value</b></p>
 			<p><code>DOMPerformanceTimingList</code> A list of DOMPerformanceTiming or null if the user agent has none.</p>
 			<p><b>Exceptions</b></p>
