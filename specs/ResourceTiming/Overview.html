@@ -217,19 +217,19 @@ The term "resource" is also used to refer to these elements in this work. </p>
   readonly attribute unsigned short <a href="#rt-resource-type" title="resourcetype">resourceType</a>;
   
   readonly attribute DOMString <a href="#rt-url" title="url">url</a>;
-  readonly attribute unsigned longlong <a href="#rt-redirect-start" title="redirectstart">redirectStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-redirect-end" title="redirectend">redirectEnd</a>;
-  readonly attribute unsigned longlong <a href="#rt-fetch-start" title="fetchstart">fetchStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-domain-lookupstart" title="domainlookupstart">domainLookupStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-domain-lookupend" title="domainlookupend">domainLookupEnd</a>;
-  readonly attribute unsigned longlong <a href="#rt-connect-start" title="connectstart">connectStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-connect-end" title="connectend">connectEnd</a>;
-  readonly attribute unsigned longlong <a href="#rt-request-start" title="requeststart">requestStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-request-end" title="requestend">requestEnd</a>;
-  readonly attribute unsigned longlong <a href="#rt-response-start" title="responsestart">responseStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-response-end" title="responseend">responseEnd</a>;
-  readonly attribute unsigned longlong <a href="#rt-load-start" title="loadeventstart">loadEventStart</a>;
-  readonly attribute unsigned longlong <a href="#rt-load-end" title="loadeventend">loadEventEnd</a>;  
+  readonly attribute unsigned long long <a href="#rt-redirect-start" title="redirectstart">redirectStart</a>;
+  readonly attribute unsigned long long <a href="#rt-redirect-end" title="redirectend">redirectEnd</a>;
+  readonly attribute unsigned long long <a href="#rt-fetch-start" title="fetchstart">fetchStart</a>;
+  readonly attribute unsigned long long <a href="#rt-domain-lookupstart" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute unsigned long long <a href="#rt-domain-lookupend" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute unsigned long long <a href="#rt-connect-start" title="connectstart">connectStart</a>;
+  readonly attribute unsigned long long <a href="#rt-connect-end" title="connectend">connectEnd</a>;
+  readonly attribute unsigned long long <a href="#rt-request-start" title="requeststart">requestStart</a>;
+  readonly attribute unsigned long long <a href="#rt-request-end" title="requestend">requestEnd</a>;
+  readonly attribute unsigned long long <a href="#rt-response-start" title="responsestart">responseStart</a>;
+  readonly attribute unsigned long long <a href="#rt-response-end" title="responseend">responseEnd</a>;
+  readonly attribute unsigned long long <a href="#rt-load-start" title="loadeventstart">loadEventStart</a>;
+  readonly attribute unsigned long long <a href="#rt-load-end" title="loadeventend">loadEventEnd</a>;  
 };</pre>
 
 <h4 id="alloweddomain-attribute"><code><dfn
@@ -415,13 +415,13 @@ interface</h3>
 };
 
 interface ResourceTimingCollector {
-  void addEventListener(in EventListener listener)
-  void removeEventListener(in EventListener listener)
+  void addEventListener(in EventListener listener);
+  void removeEventListener(in EventListener listener);
 };
 
 [Supplemental]
 interface Window.performance {
-  ResourceTimingCollector createResourceTimingCollector()
+  ResourceTimingCollector createResourceTimingCollector();
 };</pre>
 
 <p></p>
