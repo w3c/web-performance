@@ -38,14 +38,14 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-october-11-2010">Editor's Draft October 11, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-october-12-2010">Editor's Draft October 12, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/3bb1ac67bfb2/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/3bb1ac67bfb2/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/16d2d1da2f1e/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/16d2d1da2f1e/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -290,8 +290,6 @@ provided information. </p>
   readonly attribute unsigned long long <a href="#nt-load-end" title="loadeventend">loadEventEnd</a>;
 };</pre>
 
-<div class="XXX">TODO: have a diagram here to show all the timing below.</div>
-
 <h4><code><dfn id="nt-navigation-start">navigationStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the user agent finishes <a
@@ -465,14 +463,15 @@ application caches</a> or from local resources.</p>
 
 <p>This attribute must return the time immediately before the user agent sets the
 <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
-document readiness</a> to "loading".</p>
+document readiness</a> to 
+<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">"loading"</a>.</p>
 
 <h4><code><dfn id="nt-dom-interactive">domInteractive</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent sets the
-<a
-href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
-document readiness</a> to "interactive".</p>
+<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+document readiness</a> to
+<a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"interactive"</a>.</p>
 
 <h4><code><dfn id="nt-dom-content-loaded">domContentLoaded</dfn></code> attribute</h4>
 
@@ -484,7 +483,8 @@ event</a> at the Document.</p>
 
 <p>This attribute must return the time immediately before the user agent sets the
 <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
-document readiness</a> to "complete".</p>
+document readiness</a> to 
+<a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"complete"</a>.</p>
 
 <p>If the <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">
 current document readiness</a> changes to the same state multiple times,
@@ -545,18 +545,19 @@ redirection, this attribute must return zero. </p>
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#window-performance">window.performance</a> </code> 
 attribute</h3>
-<pre class="idl">interface <dfn id="window-performance">Performance</a> {
-  readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</a>;
-  readonly attribute <a href="#nt-navigation-info-interface">NavigationInfo</a> <dfn id="window-performance-navigation">navigation</a>;
+<pre class="idl">interface <dfn id="window-performance">Performance</dfn></a> {
+  readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</dfn></a>;
+  readonly attribute <a href="#nt-navigation-info-interface">NavigationInfo</a> <dfn id="window-performance-navigation">navigation</dfn></a>;
 };
 
 [Supplemental]
 interface Window {
   readonly attribute <a href="#window-performance">Performance</a> performance;
 };</pre>
+
 The <dfn id="window-performance">window.performance</dfn> attribute provides
 a hosting area for performance related attributes. Specifically, the <a
-href="#window-performance-timing">window.performance.timing</dfn> attribute
+href="#window-performance-timing">window.performance.timing</a> attribute
 represents the timing information related to the browsing contexts since the
 last non-redirection navigation. Each browsing context must have a unique <a
 href="#window-performance-timing">window.performance.timing</a> attribute.
@@ -585,15 +586,25 @@ attributes are referred to in the following steps to facilitate
 description.</p>
 
 <div class="example">
-
 <div class="exampleHeader">
 Example</div>
-
 <p>A user agent may maintain instances of the NavigationTiming and
 NavigationInfo interfaces until the Window object associated with the current
 document is created, when window.performance.timing and
 window.performance.navigation are replaced with these instances.</p>
 </div>
+
+<div class="example">
+<div class="exampleHeader">Illustration</div>
+<p>This secion is non-normative.</p>
+<p>The following graph illustrates the timing attributes defined by the 
+<a href="#nt-navigation-timing-interface">NavigationTiming</a> interface and the 
+<a href="#nt-navigation-info-interface">NavigationInfo</a> interface. Attributed underlined
+are only available when the previous document and the current document are from the
+<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>.</p>
+<p><img width="85%" src="./timing-overview.png"></img></p>
+</div>
+
 <ol>
   <li>If the navigation is aborted for any of the following reasons, abort
     these steps.
@@ -685,8 +696,7 @@ window.performance.navigation are replaced with these instances.</p>
     reopen the connection.</p>
 
     <div class="example">
-    <div class="exampleHeader">
-    Example</div>
+    <div class="exampleHeader">Example</div>
     <p>When <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
     connection</a> is enabled, a user agent may first try to re-use an open
     connect to send the request while the connection can be <a
