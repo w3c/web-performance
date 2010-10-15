@@ -38,14 +38,14 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-october-12-2010">Editor's Draft October 12, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-october-14-2010">Editor's Draft October 14, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/5ffdb419628c/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/5ffdb419628c/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/3bb1ac67bfb2/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/3bb1ac67bfb2/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -284,7 +284,8 @@ provided information. </p>
   readonly attribute unsigned long long <a href="#nt-response-end" title="responseend">responseEnd</a>;
   readonly attribute unsigned long long <a href="#nt-dom-loading" title="domloading">domLoading</a>;
   readonly attribute unsigned long long <a href="#nt-dom-interactive" title="dominteractive">domInteractive</a>;
-  readonly attribute unsigned long long <a href="#nt-dom-content-loaded" title="domcontentloaded">domContentLoaded</a>;
+  readonly attribute unsigned long long <a href="#nt-dom-content-event-start" title="domcontenteventstart">domContentEventStart</a>;
+  readonly attribute unsigned long long <a href="#nt-dom-content-event-end" title="domcontenteventend">domContentEventEnd</a>;
   readonly attribute unsigned long long <a href="#nt-dom-complete" title="domcomplete">domComplete</a>;
   readonly attribute unsigned long long <a href="#nt-load-start" title="loadeventstart">loadEventStart</a>;
   readonly attribute unsigned long long <a href="#nt-load-end" title="loadeventend">loadEventEnd</a>;
@@ -294,7 +295,8 @@ provided information. </p>
 
 <p>This attribute must return the time immediately after the user agent finishes <a
 href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompting
-to unload</a> the previous document.</p>
+to unload</a> the previous document. If there is no previous document, this attribute
+must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 
 <h4><code><dfn id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
 
@@ -325,7 +327,7 @@ before the redirect and the document at the end of the direct are from the
 this attribute must return the <a href="#nt-navigation-start">starting time
 of the navigation</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
 <div><p class="note">redirectStart is the equivalent of the
-<a href="#nt-navigate-start">navigateStart</a> attribute of the navigation that initiates
+<a href="#nt-navigate-start">navigationStart</a> attribute of the navigation that initiates
 the redirect.</p></div>
 
 <h4><code><dfn id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
@@ -473,11 +475,17 @@ document readiness</a> to
 document readiness</a> to
 <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"interactive"</a>.</p>
 
-<h4><code><dfn id="nt-dom-content-loaded">domContentLoaded</dfn></code> attribute</h4>
+<h4><code><dfn id="nt-dom-content-event-start">domContentEventStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent fires <a
 href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContentLoaded
 event</a> at the Document.</p>
+
+<h4><code><dfn id="nt-dom-content-event-end">domContentEventEnd</dfn></code> attribute</h4>
+
+<p>This attribute must return the time immediately after the document's <a
+href="http://dev.w3.org/html5/spec/the-end.html#the-end">DOMContentLoaded
+event</a> completes.</p>
 
 <h4><code><dfn id="nt-dom-complete">domComplete</dfn></code> attribute</h4>
 
@@ -607,7 +615,8 @@ are only available when the previous document and the current document are from 
 
 <ol>
   <li>If the navigation is aborted for any of the following reasons, abort
-    these steps.
+    these steps without changing the attributes in window.performance.timing
+    and window.performance.navigation.
     <ol>
       <li>The navigation is aborted due to the
         <a href="http://dev.w3.org/html5/spec/the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed
@@ -635,10 +644,10 @@ are only available when the previous document and the current document are from 
     href="#nt-navigation-start">navigationStart</a> and record the current navigation type in
     <a href="#nt-navigation-info-type">window.performance.navigation.type</a>
     if it has not been set.</li>
-  <li>If the current document and the previous document are from the
-    <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+  <li>If the current document and the previous document are from different 
+    <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>,
     set both <a href="#nt-unload-end">unloadEventStart</a> and 
-    <a href="#nt-unload-end">unloadEventEnd</a> then go to step
+    <a href="#nt-unload-end">unloadEventEnd</a> to 0 then go to step
     <a href="#step-fetch-start">6</a>. Otherwise, immediately before
     the unload event, record the current time as <a href="#nt-unload-end">unloadEventStart</a>.</li>
   <li>Immediately after the unload event is completed,
@@ -648,10 +657,7 @@ are only available when the previous document and the current document are from 
     immediately before a user agent checks with the <a
     href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
     relevant application caches</a>, record the current time as
-    <a href="#nt-fetch-start">fetchStart</a>.</li>
-  <li>If the new resource is not to be fetched using HTTP GET
-    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
-    immediately before a user agent starts the
+    <a href="#nt-fetch-start">fetchStart</a>. Otherwise, immediately before a user agent starts the
     <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">
     fetching process</a>, record the current time as <a href="#nt-fetch-start">fetchStart</a>.</li>
   <li>Let <a href="#nt-domain-lookup-start">domainLookupStart</a>, <a
@@ -712,14 +718,12 @@ are only available when the previous document and the current document are from 
     <ol>
       <li>Increment window.performance.navigation.redirectCount by 1.</li>
       <li>If the value of window.performance.navigation.redirectStart is
-        not set, let it be the value of <a href="#nt-fetch-start">fetchStart</a>.</li>
+        not set, let it be the value of <a href="#nt-navigate-start">navigationStart</a>.</li>
       <li>Let <a href="#nt-redirect-end">redirectEnd</a> be the value of
         <a href="#nt-response-end">responseEnd</a>.</li>
       <li>Set all the attributes in window.performance.timing to 0 except
-        window.performance.timing.navigationStart,
-        window.performance.timing.unloadEventStart and
-        window.performance.timing.unloadEventEnd.</li>
-      <div class="XXX">will a new window object be created during a redirect?</div>
+        <a href="#nt-redirect-start">redirectStart</a> and
+        <a href="#nt-redirect-end">redirectEnd</a>.</li>
       <li>Return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
     </ol>
     Otherwise, if <a href="#nt-redirect-count">redirectCount</a> is non-zero and 
