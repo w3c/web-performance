@@ -742,10 +742,13 @@ are only available when the previous document and the current document are from 
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
     document readiness</a> to "interactive".</li>
   <li>Record the time as <a
-    href="#nt-dom-contend-loaded">domContentLoaded</a> immediately before the
-    user agent fires <a
-    href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
+    href="#nt-dom-contend-event-start">domContentEventStart</a> immediately before the
+    user agent fires <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
     DOMContentLoaded event</a> at the document.</li>
+  <li>Record the time as <a
+    href="#nt-dom-contend-event-end">domContentEventEnd</a> immediately after
+    <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
+    DOMContentLoaded event</a> completes.</li>
   <li>Record the time as <a href="#nt-dom-complete">domComplete</a>
     immediately before the user agent sets the <a
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
