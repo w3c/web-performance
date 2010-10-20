@@ -38,14 +38,14 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-october-14-2010">Editor's Draft October 14, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-october-19-2010">Editor's Draft October 19, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/7900c0da4484/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/7900c0da4484/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/5ffdb419628c/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/5ffdb419628c/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/f3b325715455/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -322,7 +322,7 @@ current document or the unload is not yet completed, this attribute must return 
 
 <p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if the document
-before the redirect and the document at the end of the direct are from the
+before the redirect and the document at the end of the redirect are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the <a href="#nt-navigation-start">starting time
 of the navigation</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
@@ -335,21 +335,12 @@ the redirect.</p></div>
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if the document
-before the redirect and the document at the end of the direct are from the
+before the redirect and the document at the end of the redirect are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the time immediately after receiving the last chunk of
+this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 <div><p class="note">redirectEnd is the equivalent of the
 <a href="#nt-response-end">responseEnd</a> attribute of the last redirect.</p></div>
-
-<p>In case where the last navigation is a redirection, if the previous document and
-the current document have the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the time when the last <a
-href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
-ends. If the last navigation is not a redirect or the previous document has
-a different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
-current document, this attribute must return zero. </p>
 
 <div><p class="note">The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
 relaxed same orgin policy</a> doesn't provide sufficient protection against unauthorized visits
@@ -357,7 +348,6 @@ accross documents. In shared hosting, an untrusted third party is able to host a
 IP address but on a different port.</p></div>
 
 <h4><code><dfn id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
-
 </p>
 <p>If the new resource is to be fetched using HTTP GET
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or 
@@ -529,7 +519,7 @@ or is not completed.</p>
 
 <h4><code><dfn id="nt-navigation-info-type">type</dfn></code> attribute</h4>
 
-<p>This attribute must return the type of the last non-redirection <a
+<p>This attribute must return the type of the last non-redirect <a
 href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
 in the current browsing context. It must have one of the following <dfn
 id="#nt-navigation-info-type">navigation type</dfn> values. </p>
@@ -547,9 +537,9 @@ id="#nt-navigation-info-type">navigation type</dfn> values. </p>
 
 <h4><code><dfn id="nt-navigation-info-redirect-count">redirectCount</dfn></code> attribute </h4>
 
-<p>This attribute must return the number of redirections since the last
-non-redirection navigation under the current browsing context. If there is no
-redirection, this attribute must return zero. </p>
+<p>This attribute must return the number of redirects since the last
+non-redirect navigation under the current browsing context. If there is no
+redirect, this attribute must return zero. </p>
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#window-performance">window.performance</a> </code> 
 attribute</h3>
@@ -567,7 +557,7 @@ The <dfn id="window-performance">window.performance</dfn> attribute provides
 a hosting area for performance related attributes. Specifically, the <a
 href="#window-performance-timing">window.performance.timing</a> attribute
 represents the timing information related to the browsing contexts since the
-last non-redirection navigation. Each browsing context must have a unique <a
+last non-redirect navigation. Each browsing context must have a unique <a
 href="#window-performance-timing">window.performance.timing</a> attribute.
 NavigationTiming objects in the timing attribute must be sorted by the
 chronological order of the corresponding browsing context. 
@@ -576,9 +566,9 @@ chronological order of the corresponding browsing context.
 <p>Following is an example of how to use the interface in an HTML page: </p>
 <pre>var t = performance.timing;
 var n = performance.navigation;
-if (t.loadEnd &gt; 0) {
-  var page_load_time = t.loadEnd - t.navigationStart;
-  if (n.type == n.TYPE_LINK) {
+if (t.loadEventEnd &gt; 0) {
+  var page_load_time = t.loadEventEnd - t.navigationStart;
+  if (n.type == n.TYPE_NAVIGATE) {
     alert (page_load_time);
   }
 }</pre>
@@ -648,8 +638,8 @@ are only available when the previous document and the current document are from 
     <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>,
     set both <a href="#nt-unload-end">unloadEventStart</a> and 
     <a href="#nt-unload-end">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-fetch-start">6</a>. Otherwise, immediately before
-    the unload event, record the current time as <a href="#nt-unload-end">unloadEventStart</a>.</li>
+    <a href="#step-fetch-start">5</a>. Otherwise, record <a href="#nt-unload-end">unloadEventStart</a>
+    as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#nt-unload-end">unloadEventEnd</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
@@ -692,11 +682,11 @@ are only available when the previous document and the current document are from 
     request for the document, record the current time as <a
     href="#nt-request-start">requestStart</a>.</li>
   <li id="step-response-start">Record the time as <a href="#nt-response-start">
-    responseStart</a> immediately after the user agent receives the first trunk
+    responseStart</a> immediately after the user agent receives the first byte 
     of the response.</li>
   <li id="step-response-end">Record the time as <a
     href="#nt-response-end">responseEnd</a> immediately after receiving the
-    entire response.
+    last byte of the response.
     <p>Return to step <a href="#step-connect-start">11</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
@@ -756,8 +746,7 @@ are only available when the previous document and the current document are from 
   <li>Record the time as <a href="#nt-load-event-start">loadEventStart</a>
     immediately before the user agent fires the load event.</li>
   <li>Record the time as <a href="#nt-load-event-end">loadEventEnd</a>
-    immediately after the load event towards the document's Window object is
-    fired.</li>
+    immediately after the user agent completes the load event.</li>
 </ol>
 
 <p>The accuracy of the timing-related attributes in the <a
