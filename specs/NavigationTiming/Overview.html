@@ -38,14 +38,14 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-october-19-2010">Editor's Draft October 19, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-october-22-2010">Editor's Draft October 22, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/cf9fbbbcda09/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/cf9fbbbcda09/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/17ef9c9e2702/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/17ef9c9e2702/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/7900c0da4484/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/7900c0da4484/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -193,8 +193,8 @@ most recent navigation.</p>
 &lt;script type="text/javascript"&gt;
 function onLoad() {
   var now = new Date().getTime();
-  var latency = now - performance.timing.navigationStart;
-  alert("User-perceived page loading time: " + latency);
+  var page_load_time = now - performance.timing.navigationStart;
+  alert("User-perceived page loading time: " + page_load_time);
 }
 
 &lt;script&gt;
@@ -255,7 +255,7 @@ a new value is assigned to it. </p>
 <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<p>Without otherwise specified, in rest of this work, time is measured in
+<p>Unless otherwise specified, in rest of this work, time is measured in
 milliseconds since midnight of January 1, 1970 (UTC).</p>
 
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation
@@ -287,8 +287,8 @@ provided information. </p>
   readonly attribute unsigned long long <a href="#nt-response-end" title="responseend">responseEnd</a>;
   readonly attribute unsigned long long <a href="#nt-dom-loading" title="domloading">domLoading</a>;
   readonly attribute unsigned long long <a href="#nt-dom-interactive" title="dominteractive">domInteractive</a>;
-  readonly attribute unsigned long long <a href="#nt-dom-content-event-start" title="domcontenteventstart">domContentEventStart</a>;
-  readonly attribute unsigned long long <a href="#nt-dom-content-event-end" title="domcontenteventend">domContentEventEnd</a>;
+  readonly attribute unsigned long long <a href="#nt-dom-content-event-start" title="domcontenteventstart">domContentLoadedEventStart</a>;
+  readonly attribute unsigned long long <a href="#nt-dom-content-event-end" title="domcontenteventend">domContentLoadedEventEnd</a>;
   readonly attribute unsigned long long <a href="#nt-dom-complete" title="domcomplete">domComplete</a>;
   readonly attribute unsigned long long <a href="#nt-load-start" title="loadeventstart">loadEventStart</a>;
   readonly attribute unsigned long long <a href="#nt-load-end" title="loadeventend">loadEventEnd</a>;
@@ -468,13 +468,13 @@ document readiness</a> to
 document readiness</a> to
 <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"interactive"</a>.</p>
 
-<h4><code><dfn id="nt-dom-content-event-start">domContentEventStart</dfn></code> attribute</h4>
+<h4><code><dfn id="nt-dom-content-event-start">domContentLoadedEventStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent fires <a
 href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContentLoaded
 event</a> at the Document.</p>
 
-<h4><code><dfn id="nt-dom-content-event-end">domContentEventEnd</dfn></code> attribute</h4>
+<h4><code><dfn id="nt-dom-content-event-end">domContentLoadedEventEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the document's <a
 href="http://dev.w3.org/html5/spec/the-end.html#the-end">DOMContentLoaded
@@ -491,7 +491,8 @@ document readiness</a> to
 current document readiness</a> changes to the same state multiple times,
 <a href="#nt-dom-loading">domLoading</a>,
 <a href="#nt-dom-interactive">domInteractive</a>,
-<a href="#nt-dom-content-loaded">domContentLoaded</a> and
+<a href="#nt-dom-content-event-start">domContentLoadedEventStart</a>,
+<a href="#nt-dom-content-event-end">domContentLoadedEventEnd</a> and
 <a href="#nt-dom-complete">domComplete</a> must return the time of the first
 occurrence of the corresponding
 <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">document readiness</a>
@@ -602,7 +603,9 @@ window.performance.navigation are replaced with these instances.</p>
 <a href="#nt-navigation-timing-interface">NavigationTiming</a> interface and the 
 <a href="#nt-navigation-info-interface">NavigationInfo</a> interface. Attributed underlined
 are only available when the previous document and the current document are from the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>.</p>
+<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
+perform internal processing in between timings, which allow for non-normative intervals between
+timings.</p>
 <p><img width="85%" src="./timing-overview.png"></img></p>
 </div>
 
@@ -610,7 +613,7 @@ are only available when the previous document and the current document are from 
   <li>If the navigation is aborted for any of the following reasons, abort
     these steps without changing the attributes in window.performance.timing
     and window.performance.navigation.
-    <ol>
+    <ol style="list-style-type:lower-alpha;">
       <li>The navigation is aborted due to the
         <a href="http://dev.w3.org/html5/spec/the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed
         navigation browsing context flag</a> or the
@@ -663,9 +666,9 @@ are only available when the previous document and the current document are from 
     application cache</a> or local resources, go to step <a
     href="#step-request-start">12</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">11</a>. Otherwise, immediately before a user
-    agent starts the domain name lookup, record the time as <a
-    href="#nt-domain-lookupstart">domainLookupStart</a>. </li>
+    href="#step-connect-start">10</a>. Otherwise, immediately before a user
+    agent starts the domain name lookup, record the time as 
+    <a href="#nt-domain-lookupstart">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#nt-domain-lookupend">domainLookupEnd</a>
     immediately after the domain name lookup is successfully done. A user
     agent may need multiple retries before that. If the domain lookup fails,
@@ -708,15 +711,17 @@ are only available when the previous document and the current document are from 
   <li>If the fetched resource results in an HTTP redirect
     <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
     then
-    <ol>
+    <ol style="list-style-type:lower-alpha;">
       <li>Increment window.performance.navigation.redirectCount by 1.</li>
       <li>If the value of window.performance.navigation.redirectStart is
         not set, let it be the value of <a href="#nt-navigate-start">navigationStart</a>.</li>
       <li>Let <a href="#nt-redirect-end">redirectEnd</a> be the value of
         <a href="#nt-response-end">responseEnd</a>.</li>
       <li>Set all the attributes in window.performance.timing to 0 except
-        <a href="#nt-redirect-start">redirectStart</a> and
-        <a href="#nt-redirect-end">redirectEnd</a>.</li>
+        <a href="#nt-redirect-start">redirectStart</a>, 
+        <a href="#nt-redirect-end">redirectEnd</a>,
+        <a href="#nt-unload-start">unloadEventStart</a> and
+        <a href="#nt-unload-end">unloadEventEnd</a>.</li>
       <li>Return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
     </ol>
     Otherwise, if <a href="#nt-redirect-count">redirectCount</a> is non-zero and 
@@ -735,11 +740,11 @@ are only available when the previous document and the current document are from 
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
     document readiness</a> to "interactive".</li>
   <li>Record the time as <a
-    href="#nt-dom-contend-event-start">domContentEventStart</a> immediately before the
+    href="#nt-dom-contend-event-start">domContentLoadedEventStart</a> immediately before the
     user agent fires <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
     DOMContentLoaded event</a> at the document.</li>
   <li>Record the time as <a
-    href="#nt-dom-contend-event-end">domContentEventEnd</a> immediately after
+    href="#nt-dom-contend-event-end">domContentLoadedEventEnd</a> immediately after
     <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
     DOMContentLoaded event</a> completes.</li>
   <li>Record the time as <a href="#nt-dom-complete">domComplete</a>
