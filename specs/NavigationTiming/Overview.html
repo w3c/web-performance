@@ -130,7 +130,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation
     Timing</a> 
     <ol class="toc">
-      <li><a href="#introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-navigation-timing-introduction"><span class="secno">4.1 </span>Introduction</a></li>
       <li><a href="#sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>NavigationTiming</code> interface</a></li>
       <li><a href="#sec-navigation-info-interface"><span class="secno">4.3 </span>The <code>NavigationInfo</code> interface</a></li>
       <li><a href="#sec-window.performance-attribute"><span class="secno">4.4 </span> The <code>window.performance</code> attribute</a></li>
@@ -147,10 +147,13 @@ cite this document as other than work in progress. </p>
 <h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
 
 <p>This section is non-normative.</p>
+
+<p>
 User latency is an important quality benchmark for Web Applications. While
 JavaScript-based mechanisms can provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
 unable to provide a complete end-to-end latency picture. 
+</p>
 
 <div class="example">
 <p>For example, the following Javascript shows the time it take to fully load
@@ -261,7 +264,7 @@ milliseconds since midnight of January 1, 1970 (UTC).</p>
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation
 Timing</h2>
 
-<h3 id="introduction"><span class="secno">4.1 </span>Introduction</h3>
+<h3 id="sec-navigation-timing-introduction"><span class="secno">4.1 </span>Introduction</h3>
 
 <p>This section is non-normative</p>
 
@@ -351,7 +354,7 @@ accross documents. In shared hosting, an untrusted third party is able to host a
 IP address but on a different port.</p></div>
 
 <h4><code><dfn id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
-</p>
+
 <p>If the new resource is to be fetched using HTTP GET
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or 
 equivalent</a>, fetchStart must return the time immediately before the user agent starts
@@ -422,9 +425,11 @@ application caches</a> or local resources, this attribute must return the value 
 <a href="#nt-connect-start">connectStart</a> and
 <a href="#nt-connect-end">connectEnd</a> should return the corresponding
 values of the new connection. </p>
+<p>
 <a href="#nt-connect-end">connectEnd</a> must include the time interval to
 establish the transport connection. It must not include other time interval
-such as SSL handshake and SOCKS authentication. 
+such as SSL handshake and SOCKS authentication.
+</p>
 
 <h4><code><dfn id="nt-request-start">requestStart</dfn></code> attribute</h4>
 
@@ -498,7 +503,7 @@ occurrence of the corresponding
 <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">document readiness</a>
 change.</p>
 
-<h4><code><dfn id="nt-load-end">loadEventStart</dfn></code> attribute </h4>
+<h4><code><dfn id="nt-load-start">loadEventStart</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately before the load event of the
 the current document is fired. It must return zero when the load event is not
@@ -525,8 +530,8 @@ or is not completed.</p>
 
 <p>This attribute must return the type of the last non-redirect <a
 href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
-in the current browsing context. It must have one of the following <dfn
-id="#nt-navigation-info-type">navigation type</dfn> values. </p>
+in the current browsing context. It must have one of the following <a
+href="#nt-navigation-info-type">navigation type</a> values. </p>
 <dl>
   <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn>:
     navigation started by clicking on a link or entering the url in the user
@@ -547,17 +552,18 @@ redirect, this attribute must return zero. </p>
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#window-performance">window.performance</a> </code> 
 attribute</h3>
-<pre class="idl">interface <dfn id="window-performance">Performance</dfn></a> {
-  readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</dfn></a>;
-  readonly attribute <a href="#nt-navigation-info-interface">NavigationInfo</a> <dfn id="window-performance-navigation">navigation</dfn></a>;
+<pre class="idl">interface <dfn id="nt-performance-interface">Performance</dfn> {
+  readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</dfn>;
+  readonly attribute <a href="#nt-navigation-info-interface">NavigationInfo</a> <dfn id="window-performance-navigation">navigation</dfn>;
 };
 
 [Supplemental]
 interface Window {
-  readonly attribute <a href="#window-performance">Performance</a> performance;
+  readonly attribute <a href="#window-performance">Performance</a> <dfn id="nt-window-performance">performance</dfn>;
 };</pre>
 
-The <dfn id="window-performance">window.performance</dfn> attribute provides
+<p>
+The <a href="#nt-window-performance">window.performance</a> attribute provides
 a hosting area for performance related attributes. Specifically, the <a
 href="#window-performance-timing">window.performance.timing</a> attribute
 represents the timing information related to the browsing contexts since the
@@ -565,6 +571,7 @@ last non-redirect navigation. Each browsing context must have a unique <a
 href="#window-performance-timing">window.performance.timing</a> attribute.
 NavigationTiming objects in the timing attribute must be sorted by the
 chronological order of the corresponding browsing context. 
+</p>
 
 <div class="example">
 <p>Following is an example of how to use the interface in an HTML page: </p>
@@ -606,7 +613,7 @@ are only available when the previous document and the current document are from 
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
 perform internal processing in between timings, which allow for non-normative intervals between
 timings.</p>
-<p><img width="85%" src="./timing-overview.png"></img></p>
+<p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
 <ol>
@@ -767,9 +774,11 @@ the window.performance.timing and window.performance.navigation objects much not
 be altered during the navigation.</p>
 
 <h3 id="garbage-collection"><span class="secno">4.6 </span>Garbage Collection</h3>
+<p>
 There are <a href="http://dev.w3.org/html5/spec/common-dom-interfaces.html#implied-strong-reference">
 implied strong references</a> from the window object to its
 window.performance.timing and window.performance.navigation objects.
+</p>
 
 <h2 id="privacy1"><span class="secno">5 </span>Privacy</h2>
 
@@ -778,6 +787,14 @@ window.performance.timing and window.performance.navigation objects.
 <h2 id="security"><span class="secno">6 </span>Security</h2>
 
 <p>This section is non-normative.</p>
+
+<h2 id="references"><span class="secno">7 </span>References</h2>
+
+<dl>
+<dt></dt>
+<dd>
+</dd>
+</dl>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
