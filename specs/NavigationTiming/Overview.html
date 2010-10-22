@@ -340,7 +340,7 @@ before the redirect and the document at the end of the redirect are from the
 this attribute must return the <a href="#nt-navigation-start">starting time
 of the navigation</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
 <div><p class="note">redirectStart is the equivalent of the
-<a href="#nt-navigate-start">navigationStart</a> attribute of the navigation that initiates
+<a href="#nt-navigation-start">navigationStart</a> attribute of the navigation that initiates
 the redirect.</p></div>
 
 <h4><code><dfn id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
@@ -557,7 +557,7 @@ href="#nt-navigation-info-type">navigation type</a> values. </p>
 non-redirect navigation under the current browsing context. If there is no
 redirect, this attribute must return zero. </p>
 
-<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#window-performance">window.performance</a> </code> 
+<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#nt-window-performance">window.performance</a> </code> 
 attribute</h3>
 <pre class="idl">interface <dfn id="nt-performance-interface">Performance</dfn> {
   readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</dfn>;
@@ -682,15 +682,15 @@ timings.</p>
   <li>If no domain lookup is required, go to step <a
     href="#step-connect-start">10</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as 
-    <a href="#nt-domain-lookupstart">domainLookupStart</a>. </li>
-  <li>Record the time as <a href="#nt-domain-lookupend">domainLookupEnd</a>
+    <a href="#nt-domain-lookup-start">domainLookupStart</a>. </li>
+  <li>Record the time as <a href="#nt-domain-lookup-end">domainLookupEnd</a>
     immediately after the domain name lookup is successfully done. A user
     agent may need multiple retries before that. If the domain lookup fails,
     abort the rest of the steps. </li>
   <li id="step-connect-start">If a persistent transport connection is used to
     fetch the resource, let <a href="#nt-connect-start">connectStart</a> and
     <a href="#nt-connect-end">connectEnd</a> be the same value of
-    <a href="#nt-domain-lookupend">domainLookupEnd</a>.
+    <a href="#nt-domain-lookup-end">domainLookupEnd</a>.
     Otherwise, record the time as <a
     href="#nt-connect-start">connectStart</a> immediately before initiating
     the connection to the server and record the time as
@@ -728,7 +728,7 @@ timings.</p>
     <ol style="list-style-type:lower-alpha;">
       <li>Increment window.performance.navigation.redirectCount by 1.</li>
       <li>If the value of window.performance.navigation.redirectStart is
-        not set, let it be the value of <a href="#nt-navigate-start">navigationStart</a>.</li>
+        not set, let it be the value of <a href="#nt-navigation-start">navigationStart</a>.</li>
       <li>Let <a href="#nt-redirect-end">redirectEnd</a> be the value of
         <a href="#nt-response-end">responseEnd</a>.</li>
       <li>Set all the attributes in window.performance.timing to 0 except
@@ -754,20 +754,20 @@ timings.</p>
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
     document readiness</a> to "interactive".</li>
   <li>Record the time as <a
-    href="#nt-dom-contend-event-start">domContentLoadedEventStart</a> immediately before the
+    href="#nt-dom-content-event-start">domContentLoadedEventStart</a> immediately before the
     user agent fires <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
     DOMContentLoaded event</a> at the document.</li>
   <li>Record the time as <a
-    href="#nt-dom-contend-event-end">domContentLoadedEventEnd</a> immediately after
+    href="#nt-dom-content-event-end">domContentLoadedEventEnd</a> immediately after
     <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
     DOMContentLoaded event</a> completes.</li>
   <li>Record the time as <a href="#nt-dom-complete">domComplete</a>
     immediately before the user agent sets the <a
     href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
     document readiness</a> to "complete".</li>
-  <li>Record the time as <a href="#nt-load-event-start">loadEventStart</a>
+  <li>Record the time as <a href="#nt-load-start">loadEventStart</a>
     immediately before the user agent fires the load event.</li>
-  <li>Record the time as <a href="#nt-load-event-end">loadEventEnd</a>
+  <li>Record the time as <a href="#nt-load-end">loadEventEnd</a>
     immediately after the user agent completes the load event.</li>
 </ol>
 
@@ -786,8 +786,7 @@ There are <a href="http://dev.w3.org/html5/spec/common-dom-interfaces.html#impli
 implied strong references</a> from the window object to its
 window.performance.timing and window.performance.navigation objects.
 </p>
-
-<h2 id="privacy1"><span class="secno">5 </span>Privacy</h2>
+<h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
 
 <p>This section is non-normative.</p>
 
