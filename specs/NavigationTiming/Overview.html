@@ -140,6 +140,7 @@ cite this document as other than work in progress. </p>
   </li>
   <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
   <li><a href="#security"><span class="secno">6 </span>Security</a></li>
+  <li><a href="#references"><span class="secno">7 </span>References</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -220,7 +221,7 @@ specification is normative. </p>
 
 <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
 "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
-are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a>.
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
 For readability, these words do not appear in all uppercase letters in this specification.</p>
 
 <p>Requirements phrased in the imperative as part of algorithms (such as
@@ -247,15 +248,14 @@ title="">Foo</code>". </p>
 <p>The term DOM is used to refer to the API set made available to scripts in
 Web applications, and does not necessarily imply the existence of an actual
 <code>Document</code> object or of any other <code>Node</code> objects as
-defined in the <a href="http://www.w3.org/TR/DOM-Level-3-Core/">
-DOM Core specifications</a>.</p>
+defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
 
 <p>A DOM attribute is said to be <em>getting</em> when its value is being
 retrieved (such as by author script), and is said to be <em>setting</em> when
 a new value is assigned to it. </p>
 
 <p>The term "JavaScript" is used to refer to
-<a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA262</a>,
+<a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
 <p>Unless otherwise specified, in rest of this work, time is measured in
@@ -309,7 +309,7 @@ must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 <p>If the previous document and the current document have the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the time immediately before the user agent starts <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#unloading-documents">unloading</a>
+href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unloading</a>
 the previous document. If there is no previous document or the previous document has a
 different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
 current document, this attribute must return zero.</p>
@@ -382,7 +382,7 @@ value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 <div class="example">
 <p>This section is non-normative.</p>
 <p>Checking and retrieving contents from the
-<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a>
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a> [<a href='#rfc2616'>RFC 2616</a>]
 is part of the <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">
 fetching process</a>. It's covered by the
 <a href="#nt-request-start">requestStart</a>, 
@@ -404,7 +404,7 @@ starts and ends the domain data retrieval from the cache. </p>
 <p>This attribute must return the time immediate before the user agent start
 establishing the connection to the server to retrieve the document. If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> is used or the current document is retrieved from <a
+connection</a> [<a href='rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return value of 
 <a href="#nt-domain-lookup-end">domainLookupEnd</a>.</p>
@@ -415,7 +415,7 @@ application caches</a> or local resources, this attribute must return value of
 finishes establishing the connection to the server to retrieve the current document.
 If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> is used or the current document is retrieved from <a
+connection</a> [<a href='rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the value of
 <a href="#nt-domain-lookup-end">domainLookupEnd</a>
@@ -707,7 +707,7 @@ timings.</p>
     <div class="example">
     <div class="exampleHeader">Example</div>
     <p>When <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-    connection</a> is enabled, a user agent may first try to re-use an open
+    connection</a> [<a href='rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open
     connect to send the request while the connection can be <a
     href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously
     closed</a>. In such case, connectStart, connectEnd, requestStart and
@@ -790,10 +790,32 @@ window.performance.timing and window.performance.navigation objects.
 
 <h2 id="references"><span class="secno">7 </span>References</h2>
 
-<dl>
-<dt></dt>
+<dl id='references-list'>
+<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
 <dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
 </dd>
+<dt><a name='rfc2616' id='rfc2616'>[IETF RFC 2616]</a></dt>
+<dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
+</dd>
+<dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+<dd>
+        <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+        Specification</a></cite>, A. Le Hors, et al., Editors. World
+        Wide Web Consortium, 7 April 2004. This version of the Document
+        Object Model Level 3 Core Recommendation is
+        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core">latest version of
+        DOM Level 3 Core</a> is available at
+        http://www.w3.org/TR/DOM-Level-3-Core.
+      </dd>
+<dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt><dd>
+	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+	Edition. ECMA International, Standard
+	ECMA-262, December 2009. This version of the ECMAScript
+	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+<dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, June 2010. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The latest editor's draft is available at <a href='http://dev.w3.org/html5/spec/Overview.html'>http://dev.w3.org/html5/spec/Overview.html</a>.</dd>
 </dl>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
