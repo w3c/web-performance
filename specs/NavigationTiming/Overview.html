@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-october-24-2010">Editor's Draft October 24, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-november-02-2010">Editor's Draft November 02, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/3e49948f625b/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/3e49948f625b/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/cf9fbbbcda09/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/cf9fbbbcda09/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -138,8 +138,8 @@ cite this document as other than work in progress. </p>
     Timing</a> 
     <ol class="toc">
       <li><a href="#sec-navigation-timing-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>NavigationTiming</code> interface</a></li>
-      <li><a href="#sec-navigation-info-interface"><span class="secno">4.3 </span>The <code>NavigationInfo</code> interface</a></li>
+      <li><a href="#sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>PerformanceTiming</code> interface</a></li>
+      <li><a href="#sec-navigation-info-interface"><span class="secno">4.3 </span>The <code>PerformanceNavigation</code> interface</a></li>
       <li><a href="#sec-window.performance-attribute"><span class="secno">4.4 </span> The <code>window.performance</code> attribute</a></li>
       <li><a href="#processing-model"><span class="secno">4.5 </span>Processing Model</a></li>
       <li><a href="#garbage-collection"><span class="secno">4.6 </span>Garbage Collection</a></li>
@@ -190,7 +190,7 @@ first bit of JavaScript in the head is executed, but it does not give any
 information about the time it takes to get the page from the server. </p>
 
 <p>To address the need for complete information on user experience, this
-document introduces the <a href="#nt-navigation-timing-interface">NavigationTiming</a>
+document introduces the <a href="#nt-navigation-timing-interface">PerformanceTiming</a>
 interfaces. This interface
 allows JavaScript mechanisms to provide complete client-side latency
 measurements within applications. With the proposed interface, the previous
@@ -280,8 +280,8 @@ with timing-related information. This specification does not cover how Web
 applications leverage these interfaces to collect, store and report the
 provided information. </p>
 
-<h3 id="sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>NavigationTiming</code> interface</h3>
-<pre class="idl">interface <dfn id="nt-navigation-timing-interface">NavigationTiming</dfn> {
+<h3 id="sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>PerformanceTiming</code> interface</h3>
+<pre class="idl">interface <dfn id="nt-navigation-timing-interface">PerformanceTiming</dfn> {
   readonly attribute unsigned long long <a href="#nt-navigation-start" title="navigationstart">navigationStart</a>;
   readonly attribute unsigned long long <a href="#nt-unload-start" title="unloadeventstart">unloadEventStart</a>;
   readonly attribute unsigned long long <a href="#nt-unload-end" title="unloadeventend">unloadEventEnd</a>;
@@ -333,14 +333,15 @@ current document or the unload is not yet completed, this attribute must return 
 
 <h4><code><dfn id="nt-redirect-start">redirectStart</dfn></code> attribute </h4>
 
-<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<p>If there are HTTP redirects
+<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if the document
 before the redirect and the document at the end of the redirect are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the <a href="#nt-navigation-start">starting time
-of the navigation</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
+this attribute must return the <a href="#nt-fetch-start">starting time
+of the fetch</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
 <div><p class="note">redirectStart is the equivalent of the
-<a href="#nt-navigation-start">navigationStart</a> attribute of the navigation that initiates
+<a href="#nt-fetch-start">fetchStart</a> attribute of the navigation that initiates
 the redirect.</p></div>
 
 <h4><code><dfn id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
@@ -523,8 +524,8 @@ document is completed. It must return zero when the load event is not fired
 or is not completed.</p>
 
 <h3 id="sec-navigation-info-interface"><span class="secno">4.3 </span>The
-<code><a href="#nt-navigation-info-interface">NavigationInfo</a></code> interface</h3>
-<pre class="idl">interface <dfn id="nt-navigation-info-interface">NavigationInfo</dfn> {
+<code><a href="#nt-navigation-info-interface">PerformanceNavigation</a></code> interface</h3>
+<pre class="idl">interface <dfn id="nt-navigation-info-interface">PerformanceNavigation</dfn> {
   const unsigned short <a href="#nt-navigation-info-type-navigate">TYPE_NAVIGATE</a> = 0;
   const unsigned short <a href="#nt-navigation-info-type-reload">TYPE_RELOAD</a> = 1;
   const unsigned short <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a> = 2;
@@ -560,8 +561,8 @@ redirect, this attribute must return zero. </p>
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#nt-window-performance">window.performance</a> </code> 
 attribute</h3>
 <pre class="idl">interface <dfn id="nt-performance-interface">Performance</dfn> {
-  readonly attribute <a href="#nt-navigation-timing-interface">NavigationTiming</a> <dfn id="window-performance-timing">timing</dfn>;
-  readonly attribute <a href="#nt-navigation-info-interface">NavigationInfo</a> <dfn id="window-performance-navigation">navigation</dfn>;
+  readonly attribute <a href="#nt-navigation-timing-interface">PerformanceTiming</a> <dfn id="window-performance-timing">timing</dfn>;
+  readonly attribute <a href="#nt-navigation-info-interface">PerformanceNavigation</a> <dfn id="window-performance-navigation">navigation</dfn>;
 };
 
 [Supplemental]
@@ -576,7 +577,7 @@ href="#window-performance-timing">window.performance.timing</a> attribute
 represents the timing information related to the browsing contexts since the
 last non-redirect navigation. Each browsing context must have a unique <a
 href="#window-performance-timing">window.performance.timing</a> attribute.
-NavigationTiming objects in the timing attribute must be sorted by the
+PerformanceTiming objects in the timing attribute may be sorted by the
 chronological order of the corresponding browsing context. 
 </p>
 
@@ -601,11 +602,16 @@ Window object of the current document is created</a>, even though their
 attributes are referred to in the following steps to facilitate
 description.</p>
 
+<p class="note">User agents may provide users the option of disabling 
+the window.performance.timing and window.performance.navigation interfaces.
+When these interfaces are disabled, both window.performance.timing and 
+window.performance.navigation must return a null value.</p>
+
 <div class="example">
 <div class="exampleHeader">
 Example</div>
-<p>A user agent may maintain instances of the NavigationTiming and
-NavigationInfo interfaces until the Window object associated with the current
+<p>A user agent may maintain instances of the PerformanceTiming and
+PerformanceNavigation interfaces until the Window object associated with the current
 document is created, when window.performance.timing and
 window.performance.navigation are replaced with these instances.</p>
 </div>
@@ -614,12 +620,14 @@ window.performance.navigation are replaced with these instances.</p>
 <div class="exampleHeader">Illustration</div>
 <p>This secion is non-normative.</p>
 <p>The following graph illustrates the timing attributes defined by the 
-<a href="#nt-navigation-timing-interface">NavigationTiming</a> interface and the 
-<a href="#nt-navigation-info-interface">NavigationInfo</a> interface. Attributed underlined
+<a href="#nt-navigation-timing-interface">PerformanceTiming</a> interface and the 
+<a href="#nt-navigation-info-interface">PerformanceNavigation</a> interface
+with or without redirect, respectively. Attributed underlined
 are only available when the previous document and the current document are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
 perform internal processing in between timings, which allow for non-normative intervals between
 timings.</p>
+<p><img width="85%" src="timing-overview-nonredirect.png" alt='Timing attributes'></p>
 <p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
@@ -728,12 +736,15 @@ timings.</p>
     <ol style="list-style-type:lower-alpha;">
       <li>Increment window.performance.navigation.redirectCount by 1.</li>
       <li>If the value of window.performance.navigation.redirectStart is
-        not set, let it be the value of <a href="#nt-navigation-start">navigationStart</a>.</li>
+        not set, let it be the value of <a href="#nt-fetch-start">fetchStart</a>.</li>
       <li>Let <a href="#nt-redirect-end">redirectEnd</a> be the value of
         <a href="#nt-response-end">responseEnd</a>.</li>
       <li>Set all the attributes in window.performance.timing to 0 except
-        <a href="#nt-redirect-start">redirectStart</a> and 
-        <a href="#nt-redirect-end">redirectEnd</a>.</li>
+        <a href="#nt-navigation-start">navigationStart</a>,
+        <a href="#nt-redirect-start">redirectStart</a>,
+        <a href="#nt-redirect-end">redirectEnd</a>, 
+        <a href="#nt-unload-start">unloadEventStart</a> and
+        <a href="#nt-unload-end">unloadEventEnd</a>.</li>
       <li>Return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
     </ol>
     Otherwise, if <a href="#nt-redirect-count">redirectCount</a> is non-zero and 
@@ -770,7 +781,7 @@ timings.</p>
 </ol>
 
 <p>The accuracy of the timing-related attributes in the <a
-href="#nt-navigation-timing-interface">NavigationTiming</a> interfaces is recommended to
+href="#nt-navigation-timing-interface">PerformanceTiming</a> interfaces is recommended to
 be one millisecond or finer. </p>
 
 <p>Some user agents maintain the DOM structure of the document in memory
