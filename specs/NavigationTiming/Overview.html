@@ -358,7 +358,7 @@ the response of the last redirect. Otherwise, this attribute must return zero.</
 
 <div><p class="note">The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
 relaxed same orgin policy</a> doesn't provide sufficient protection against unauthorized visits
-accross documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
+across documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
 IP address but on a different port.</p></div>
 
 <h4><code><dfn id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
@@ -409,7 +409,7 @@ starts and ends the domain data retrieval from the cache. </p>
 
 <h4><code><dfn id="nt-connect-start">connectStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the time immediate before the user agent start
+<p>This attribute must return the time immediately before the user agent start
 establishing the connection to the server to retrieve the document. If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
@@ -441,7 +441,7 @@ such as SSL handshake and SOCKS authentication.
 
 <h4><code><dfn id="nt-request-start">requestStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the time immediate before the user agent
+<p>This attribute must return the time immediately before the user agent
 starts requesting the current document.</p>
 
 <p>If the transport connection fails after a request is sent and the user
@@ -453,7 +453,7 @@ of the new request.</p>
 
 <h4><code><dfn id="nt-response-start">responseStart</dfn></code> attribute </h4>
 
-<p>This attribute must return the time immediate after the user agent receives the first
+<p>This attribute must return the time immediately after the user agent receives the first
 byte of the response from the server, or from
 <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or from local resources. </p>
@@ -622,7 +622,7 @@ window.performance.navigation are replaced with these instances.</p>
 <p>The following graph illustrates the timing attributes defined by the 
 <a href="#nt-navigation-timing-interface">PerformanceTiming</a> interface and the 
 <a href="#nt-navigation-info-interface">PerformanceNavigation</a> interface
-with or without redirect, respectively. Attributed underlined
+with or without redirect, respectively. Attributes underlined
 are only available when the previous document and the current document are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
 perform internal processing in between timings, which allow for non-normative intervals between
@@ -725,9 +725,8 @@ timings.</p>
     connection</a> [<a href='rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open
     connect to send the request while the connection can be <a
     href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously
-    closed</a>. In such case, connectStart, connectEnd, requestStart and
-    requestEnd should represent timing information collected over the re-open
-    connection. </p>
+    closed</a>. In such case, connectStart, connectEnd and requestStart should represent
+    timing information collected over the re-open connection. </p>
     </div>
   </li>
   <li>If the fetched resource results in an HTTP redirect
@@ -786,7 +785,7 @@ be one millisecond or finer. </p>
 
 <p>Some user agents maintain the DOM structure of the document in memory
 during navigation operations such as forward and backward. In those cases,
-the window.performance.timing and window.performance.navigation objects much not
+the window.performance.timing and window.performance.navigation objects must not
 be altered during the navigation.</p>
 
 <h3 id="garbage-collection"><span class="secno">4.6 </span>Garbage Collection</h3>
@@ -840,6 +839,6 @@ in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
 Lawrence, Jason Weber, Jonas Sicking, Kyle Scholz, Lenny Rachitsky, Nic
 Jansma, Richard Rabbat, Sergey Novikov, Steve Souders, Tony Gentilcore for
-their reviews and feedbacks.</p>
+their reviews and feedback.</p>
 </body>
 </html>
