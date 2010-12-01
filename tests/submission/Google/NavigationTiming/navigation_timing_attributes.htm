@@ -1,25 +1,25 @@
-<!doctype html> 
-<html class="a"> 
- <head> 
-  <title>window.performance.timing attributes</title> 
-  <script src="http://test.w3.org/resources/testharness.js"></script> 
-</head> 
-<body class="a"> 
-  <div id="log"></div> 
+<!doctype html>
+<html class="a">
+ <head>
+  <title>window.performance.timing attributes</title>
+  <script src="http://test.w3.org/resources/testharness.js"></script>
+</head>
+<body class="a">
+  <div id="log"></div>
   <script>
-  
-  var nt_namespace = window.webkitPerformance
+
+  var nt_namespace = window.performance
   function test_window_performance() {
     assert_true(nt_namespace != undefined, "window.performance does not exist.");
   }
   test(test_window_performance, "window.performance is defined.");
-  
+
   function test_timing() {
     assert_true(nt_namespace.timing != undefined,
                 "window.performance.timing is defined.");
   }
   test(test_timing, "window.performance.timing is defined.");
-  
+
   // All the attributes under window.performance.timing exist. 
   var timing = nt_namespace.timing;
   var timing_attribute_list = new Array();
@@ -52,14 +52,14 @@
     test(test_timing_attributes,
          timing_attribute_list[a_counter] + " should be defined.");
   }
-       
+
   function test_navigation() {
     assert_true(nt_namespace.navigation != undefined,
                 "window.performance.navigation is defined.");
   }
   test(test_navigation, "window.performance.navigation is defined.");
 
-  // All the attributes under window.performance.navigation exist. 
+  // All the attributes under window.performance.navigation exist.
   var navigation = nt_namespace.navigation;
   var nav_attribute_list = new Array();
   nav_attribute_list[0] = "type";
@@ -74,7 +74,7 @@
     test(test_navigation_attributes,
          nav_attribute_list[a_counter] + " should be defined.");
   }
-  
-  </script> 
-</body> 
-</html> 
+
+  </script>
+</body>
+</html>
