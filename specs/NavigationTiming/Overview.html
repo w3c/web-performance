@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-november-02-2010">Editor's Draft November 02, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-november-30-2010">Editor's Draft November 30, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/4f07fd6f608a/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/4f07fd6f608a/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/3e49948f625b/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/3e49948f625b/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -315,9 +315,11 @@ must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 
 <p>If the previous document and the current document have the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the time immediately before the user agent starts <a
-href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unloading</a>
-the previous document. If there is no previous document or the previous document has a
+this attribute must return the time immediately before the user agent starts
+<a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unloading</a>
+the previous document. 
+
+If there is no previous document or the previous document has a
 different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
 current document, this attribute must return zero.</p>
 
@@ -335,26 +337,29 @@ current document or the unload is not yet completed, this attribute must return 
 
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when navigating and if the document
-before the redirect and the document at the end of the redirect are from the
+when navigating and if all the redirects or equivalent are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the <a href="#nt-fetch-start">starting time
-of the fetch</a> that intiates the redirect. Otherwise, this attribute must return zero.</p>
+of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
+
+<!--
 <div><p class="note">redirectStart is the equivalent of the
 <a href="#nt-fetch-start">fetchStart</a> attribute of the navigation that initiates
-the redirect.</p></div>
+the redirect.</p></div> -->
 
 <h4><code><dfn id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
 
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when navigating and if the document
-before the redirect and the document at the end of the redirect are from the
+when navigating and all redirects and equivalents are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
+
+<!--
 <div><p class="note">redirectEnd is the equivalent of the
 <a href="#nt-response-end">responseEnd</a> attribute of the last redirect.</p></div>
+-->
 
 <div><p class="note">The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
 relaxed same orgin policy</a> doesn't provide sufficient protection against unauthorized visits
@@ -381,7 +386,7 @@ value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 
 <h4><code><dfn id="nt-domain-lookup-end">domainLookupEnd</dfn></code> attribute</h4>
 
-<p>This attribute must return the time immmediately after the user agent
+<p>This attribute must return the time immediately after the user agent
 finishes the domain name lookup for the current document. If the current document
 is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the same
@@ -513,7 +518,7 @@ change.</p>
 
 <h4><code><dfn id="nt-load-start">loadEventStart</dfn></code> attribute </h4>
 
-<p>This attribute must return the time immediately before the load event of the
+<p>This attribute must return the time immediately before the load event of
 the current document is fired. It must return zero when the load event is not
 fired yet.</p>
 
@@ -542,7 +547,7 @@ in the current browsing context. It must have one of the following <a
 href="#nt-navigation-info-type">navigation type</a> values. </p>
 <dl>
   <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn>:
-    navigation started by clicking on a link or entering the url in the user
+    navigation started by clicking on a link or entering the URL in the user
     agent's address bar.</dt>
   <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn>: Navigation through
     the reload operation.</dt>
@@ -556,7 +561,9 @@ href="#nt-navigation-info-type">navigation type</a> values. </p>
 
 <p>This attribute must return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
-redirect, this attribute must return zero. </p>
+redirect or there is any redirect that is not from the 
+<a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
+same orgin</a> as the destination document, this attribute must return zero. </p>
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#nt-window-performance">window.performance</a> </code> 
 attribute</h3>
@@ -618,7 +625,7 @@ window.performance.navigation are replaced with these instances.</p>
 
 <div class="example">
 <div class="exampleHeader">Illustration</div>
-<p>This secion is non-normative.</p>
+<p>This section is non-normative.</p>
 <p>The following graph illustrates the timing attributes defined by the 
 <a href="#nt-navigation-timing-interface">PerformanceTiming</a> interface and the 
 <a href="#nt-navigation-info-interface">PerformanceNavigation</a> interface
@@ -627,7 +634,9 @@ are only available when the previous document and the current document are from 
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
 perform internal processing in between timings, which allow for non-normative intervals between
 timings.</p>
+<!-- 
 <p><img width="85%" src="timing-overview-nonredirect.png" alt='Timing attributes'></p>
+-->
 <p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
@@ -715,7 +724,7 @@ timings.</p>
   <li id="step-response-end">Record the time as <a
     href="#nt-response-end">responseEnd</a> immediately after receiving the
     last byte of the response.
-    <p>Return to step <a href="#step-connect-start">11</a> if the user agent
+    <p>Return to step <a href="#step-connect-start">10</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
 
@@ -838,7 +847,7 @@ window.performance.timing and window.performance.navigation objects.
 in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
 Lawrence, Jason Weber, Jonas Sicking, Kyle Scholz, Lenny Rachitsky, Nic
-Jansma, Richard Rabbat, Sergey Novikov, Steve Souders, Tony Gentilcore for
-their reviews and feedback.</p>
+Jansma, Richard Rabbat, Sergey Novikov, Sigbjørn Vik, Steve Souders,
+Tony Gentilcore for their reviews and feedback.</p>
 </body>
 </html>
