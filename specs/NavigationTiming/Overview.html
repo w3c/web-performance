@@ -292,6 +292,7 @@ provided information. </p>
   readonly attribute unsigned long long <a href="#nt-domain-lookup-end" title="domainlookupend">domainLookupEnd</a>;
   readonly attribute unsigned long long <a href="#nt-connect-start" title="connectstart">connectStart</a>;
   readonly attribute unsigned long long <a href="#nt-connect-end" title="connectend">connectEnd</a>;
+  readonly attribute unsigned long long <a href="#nt-handshake-start" title="handshake">handshakeStart</a>;
   readonly attribute unsigned long long <a href="#nt-request-start" title="requeststart">requestStart</a>;
   readonly attribute unsigned long long <a href="#nt-response-start" title="responsestart">responseStart</a>;
   readonly attribute unsigned long long <a href="#nt-response-end" title="responseend">responseEnd</a>;
@@ -316,8 +317,8 @@ must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 <p>If the previous document and the current document have the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the time immediately before the user agent starts
-<a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unloading</a>
-the previous document. 
+the <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload</a>
+event of the previous document. 
 
 If there is no previous document or the previous document has a
 different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
@@ -327,9 +328,9 @@ current document, this attribute must return zero.</p>
 
 <p>If the previous document and the current document have the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the time immediately after the user agent finishes <a
-href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unloading</a>
-the previous document. If there is no previous document or the previous document has
+this attribute must return the time immediately after the user agent finishes the
+<a href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unload</a>
+event of the previous document. If there is no previous document or the previous document has
 a different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
@@ -440,8 +441,19 @@ application caches</a> or local resources, this attribute must return the value 
 values of the new connection. </p>
 <p>
 <a href="#nt-connect-end">connectEnd</a> must include the time interval to
-establish the transport connection. It must not include other time interval
+establish the transport connection as well as other time interval
 such as SSL handshake and SOCKS authentication.
+</p>
+
+<h4><code><dfn id="nt-handshake-start">handshakeStart</dfn></code> attribute</h4>
+
+<p>This attribute is optional. User agents that don't have this attribute
+available must set it as undefined. When this attribute is available, if the
+<a href="http://dev.w3.org/html5/spec/urls.html#url-scheme">scheme</a> of the
+current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
+attribute must return the time immediately before the user agent starts the
+handshake process to secure the current connection. If the handshakeStart
+attribute is available but HTTPS is not used, this attribute must return zero.
 </p>
 
 <h4><code><dfn id="nt-request-start">requestStart</dfn></code> attribute</h4>
@@ -715,6 +727,15 @@ timings.</p>
     after the connection to the server or the proxy is established. A user agent may
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
+  <li>In step <a href="#step-connect-start">10</a>, a user agent should also
+    carry out these additional steps:</li>
+    <ol>
+    <li>If the scheme of the current document is HTTPS, the user agent must
+        record the time as <a href="#nt-handshake-start">handshakeStart</a>
+        immediately before the handshake process to secure the connection.</li>
+    <li>If the scheme of the current document is not HTTPS, the user agent must
+        set the value of <a href="#nt-handshake-start">handshakeStart</a> to 0.</li>
+    </ol>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
     href="#nt-request-start">requestStart</a>.</li>
