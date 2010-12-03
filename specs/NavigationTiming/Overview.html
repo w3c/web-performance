@@ -418,7 +418,7 @@ starts and ends the domain data retrieval from the cache. </p>
 <p>This attribute must return the time immediately before the user agent start
 establishing the connection to the server to retrieve the document. If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> [<a href='rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return value of 
 <a href="#nt-domain-lookup-end">domainLookupEnd</a>.</p>
@@ -429,7 +429,7 @@ application caches</a> or local resources, this attribute must return value of
 finishes establishing the connection to the server to retrieve the current document.
 If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> [<a href='rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the value of
 <a href="#nt-domain-lookup-end">domainLookupEnd</a>
@@ -728,14 +728,14 @@ timings.</p>
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
   <li>In step <a href="#step-connect-start">10</a>, a user agent should also
-    carry out these additional steps:</li>
+    carry out these additional steps:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
         record the time as <a href="#nt-handshake-start">handshakeStart</a>
         immediately before the handshake process to secure the connection.</li>
     <li>If the scheme of the current document is not HTTPS, the user agent must
         set the value of <a href="#nt-handshake-start">handshakeStart</a> to 0.</li>
-    </ol>
+    </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
     href="#nt-request-start">requestStart</a>.</li>
@@ -752,7 +752,7 @@ timings.</p>
     <div class="example">
     <div class="exampleHeader">Example</div>
     <p>When <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-    connection</a> [<a href='rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open
+    connection</a> [<a href='#rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open
     connect to send the request while the connection can be <a
     href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously
     closed</a>. In such case, connectStart, connectEnd and requestStart should represent
@@ -776,7 +776,7 @@ timings.</p>
         <a href="#nt-unload-end">unloadEventEnd</a>.</li>
       <li>Return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
     </ol>
-    Otherwise, if <a href="#nt-redirect-count">redirectCount</a> is non-zero and 
+    Otherwise, if <a href="#nt-navigation-info-redirect-count">redirectCount</a> is non-zero and 
     the document prior to the redirect and the current document are not from the
     <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
     set <a href="#nt-redirect-start">redirectStart</a>,
@@ -859,7 +859,7 @@ window.performance.timing and window.performance.navigation objects.
 	ECMA-262, December 2009. This version of the ECMAScript
 	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
 <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, June 2010. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, October 2010. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 </dl>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
