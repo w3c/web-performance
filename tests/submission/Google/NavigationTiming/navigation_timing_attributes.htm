@@ -33,16 +33,17 @@
   timing_attribute_list[7] = "domainLookupEnd";
   timing_attribute_list[8] = "connectStart";
   timing_attribute_list[9] = "connectEnd";
-  timing_attribute_list[10] = "requestStart";
-  timing_attribute_list[11] = "requestEnd";
-  timing_attribute_list[12] = "responseEnd";
-  timing_attribute_list[13] = "domLoading";
-  timing_attribute_list[14] = "domInteractive";
-  timing_attribute_list[15] = "domContentLoadedEventStart";
-  timing_attribute_list[16] = "domContentLoadedEventEnd";
-  timing_attribute_list[17] = "domComplete";
-  timing_attribute_list[18] = "loadEventStart";
-  timing_attribute_list[19] = "loadEventEnd";
+  timing_attribute_list[10] = "handshakeStart";
+  timing_attribute_list[11] = "requestStart";
+  timing_attribute_list[12] = "requestEnd";
+  timing_attribute_list[13] = "responseEnd";
+  timing_attribute_list[14] = "domLoading";
+  timing_attribute_list[15] = "domInteractive";
+  timing_attribute_list[16] = "domContentLoadedEventStart";
+  timing_attribute_list[17] = "domContentLoadedEventEnd";
+  timing_attribute_list[18] = "domComplete";
+  timing_attribute_list[19] = "loadEventStart";
+  timing_attribute_list[20] = "loadEventEnd";
   var a_counter = 0;
   function test_timing_attributes() {
     assert_true(timing[timing_attribute_list[a_counter]] != undefined,
