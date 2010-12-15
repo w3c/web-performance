@@ -2,7 +2,7 @@
 // Helper Functions for NavigationTiming W3C tests
 //
 
-var performanceNamespace = window.msPerformance;
+var performanceNamespace = window.performance;
 
 function test_namespace(child_name)
 {
