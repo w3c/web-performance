@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>window.performance.timing attributes</title>
+        <script src="../../../resources/testharness.js"></script>
+        <script src="mstestharness.js"></script>
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that all of the window.performance.timing attributes exist (but does not validate that their values are correct).</p>
+
+        <div id="log"></div>
+
+        <script>
+        test_namespace('timing');
+
+        test_attribute_exists('timing', 'navigationStart');
+        test_attribute_exists('timing', 'redirectStart');
+        test_attribute_exists('timing', 'redirectEnd');
+        test_attribute_exists('timing', 'unloadEventStart');
+        test_attribute_exists('timing', 'unloadEventEnd');
+        test_attribute_exists('timing', 'fetchStart');
+        test_attribute_exists('timing', 'domainLookupStart');
+        test_attribute_exists('timing', 'domainLookupEnd');
+        test_attribute_exists('timing', 'connectStart');
+        test_attribute_exists('timing', 'connectEnd');
+        test_attribute_exists('timing', 'requestStart');
+        test_attribute_exists('timing', 'responseStart');
+        test_attribute_exists('timing', 'responseEnd');
+        test_attribute_exists('timing', 'domLoading');
+        test_attribute_exists('timing', 'domInteractive');
+        test_attribute_exists('timing', 'domContentLoadedEventStart');
+        test_attribute_exists('timing', 'domContentLoadedEventEnd');
+        test_attribute_exists('timing', 'domComplete');
+        test_attribute_exists('timing', 'loadEventStart');
+        test_attribute_exists('timing', 'loadEventEnd');
+        </script>
+    </body>
+</html>

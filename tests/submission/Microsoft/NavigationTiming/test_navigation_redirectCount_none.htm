@@ -1,0 +1,23 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>window.performance.navigation.redirectCount on a non-redirected navigation</title>
+        <script src="../../../resources/testharness.js"></script>
+        <script src="mstestharness.js"></script>
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the value of the window.performance.navigation.redirectCount attribute, as well as the window.performance.timing.redirectStart and redirectEnd attributes on a non-redirected navigation.</p>
+
+        <div id="log"></div>
+
+        <script>
+        test_namespace('navigation');
+
+        test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart on an non-redirected navigation');
+        test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd on an non-redirected navigation');
+        test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount on an non-redirected navigation');
+        </script>
+    </body>
+</html>
