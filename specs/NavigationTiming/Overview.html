@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-november-30-2010">Editor's Draft November 30, 2010</h2>
+<h2 class="no-num no-toc" id="working-draft-december-20-2010">Editor's Draft December 20, 2010</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/16f80e9cfd02/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/16f80e9cfd02/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/4f07fd6f608a/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/4f07fd6f608a/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/a19a40b067ae/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/079217b145df/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -294,7 +294,7 @@ provided information. </p>
   readonly attribute unsigned long long <a href="#nt-domain-lookup-end" title="domainlookupend">domainLookupEnd</a>;
   readonly attribute unsigned long long <a href="#nt-connect-start" title="connectstart">connectStart</a>;
   readonly attribute unsigned long long <a href="#nt-connect-end" title="connectend">connectEnd</a>;
-  readonly attribute unsigned long long <a href="#nt-handshake-start" title="handshake">handshakeStart</a>;
+  readonly attribute unsigned long long <a href="#nt-secure-connect-start" title="secureconnectstart">secureConnectionStart</a>;
   readonly attribute unsigned long long <a href="#nt-request-start" title="requeststart">requestStart</a>;
   readonly attribute unsigned long long <a href="#nt-response-start" title="responsestart">responseStart</a>;
   readonly attribute unsigned long long <a href="#nt-response-end" title="responseend">responseEnd</a>;
@@ -447,7 +447,7 @@ establish the transport connection as well as other time interval
 such as SSL handshake and SOCKS authentication.
 </p>
 
-<h4><code><dfn id="nt-handshake-start">handshakeStart</dfn></code> attribute</h4>
+<h4><code><dfn id="nt-secure-connect-start">secureConnectionStart</dfn></code> attribute</h4>
 
 <p>This attribute is optional. User agents that don't have this attribute
 available must set it as undefined. When this attribute is available, if the
@@ -588,7 +588,7 @@ attribute</h3>
 
 [Supplemental]
 interface Window {
-  readonly attribute <a href="#nt-performance-interface">Performance</a> <dfn id="nt-window-performance">performance</dfn>;
+  attribute <a href="#nt-performance-interface">Performance</a> <dfn id="nt-window-performance">performance</dfn>;
 };</pre>
 
 <p>
@@ -733,10 +733,10 @@ timings.</p>
     carry out these additional steps:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
-        record the time as <a href="#nt-handshake-start">handshakeStart</a>
+        record the time as <a href="#nt-secure-connect-start">handshakeStart</a>
         immediately before the handshake process to secure the connection.</li>
     <li>If the scheme of the current document is not HTTPS, the user agent must
-        set the value of <a href="#nt-handshake-start">handshakeStart</a> to 0.</li>
+        set the value of <a href="#nt-secure-connect-start">handshakeStart</a> to 0.</li>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
