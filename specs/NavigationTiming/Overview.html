@@ -827,12 +827,36 @@ implied strong references</a> from the window object to its
 window.performance.timing and window.performance.navigation objects.
 </p>
 <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
-
 <p>This section is non-normative.</p>
+
+<h3 id="cross-directory"><span class="secno">5.1 </span>Cross-directory attacks</h3>
+<p> Different pages sharing one host name, for example contents from different authors hosted
+on geocities.com, are considered from the same origin because there is no feature to restrict
+the access by pathname. Navigating between these pages allows a latter page to access
+timing information of the previous one, such as timing regarding redirection and unload
+event.</p>
 
 <h2 id="security"><span class="secno">6 </span>Security</h2>
-
 <p>This section is non-normative.</p>
+
+<h3 id="authentication"><span class="secno">6.1 </span>Detecting proxy servers</h3>
+<p>In case a proxy is deployed between the user agent and the web server, 
+the time interval between the <a href="#nt-connect-start">connectStart</a> and
+the <a href="#nt-connect-end">connectEnd</a> attributes indicates the delay between
+the user agent and the proxy instead of the web server. With that, web server
+can potentially infer the existence of the proxy. For SOCKS proxy, this time interval
+includes the proxy authentication time and time the proxy takes to connect to the web
+server, which obfuscate the proxy detection. In case of an HTTP proxy, the user agent
+might not have any knowledge about the proxy server at all so it's not always feasible
+to mitigate this attack.</p>
+
+<h3 id="readonly"><span class="secno">6.2 </span>Replacing timing objects</h3>
+<p>The window.performance object is replaceable to avoid conflicts with existing
+pages using the same object. By doing that, it is possible for third-party to replace
+the object and scripts relying on the interface described in this work would break.</p>
+<!--
+<p>To mitigate this risk, an alternative proposal is to use an alternative name for
+the Performance object and make it read-only.</p> -->
 
 <h2 id="references"><span class="secno">7 </span>References</h2>
 
@@ -869,8 +893,8 @@ window.performance.timing and window.performance.navigation objects.
 <p>I would like to offer my sincere thanks to all the people that I have been
 in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
-Lawrence, Jason Weber, Jonas Sicking, Kyle Scholz, Lenny Rachitsky, Nic
-Jansma, Richard Rabbat, Sergey Novikov, SigbjÃ¸rn Vik, Steve Souders,
-Tony Gentilcore for their reviews and feedback.</p>
+Lawrence, James Simonsen, Jason Sobel, Jason Weber, Jonas Sicking, Kyle Scholz,
+Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjørn Vik,
+Steve Souders, Tony Gentilcore for their reviews and feedback.</p>
 </body>
 </html>
