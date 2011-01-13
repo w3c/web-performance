@@ -461,14 +461,13 @@ attribute is available but HTTPS is not used, this attribute must return zero.
 <h4><code><dfn id="nt-request-start">requestStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent
-starts requesting the current document.</p>
+starts requesting the current document. It is set prior to checking HTTP
+cache.</p>
 
 <p>If the transport connection fails after a request is sent and the user
 agent reopens a connection and resend the request, <a
 href="#nt-request-start">requestStart</a> should return the corresponding values
 of the new request.</p>
-
-<p class="note">requestStart is prior to checking HTTP cache.</p>
 
 <h4><code><dfn id="nt-response-start">responseStart</dfn></code> attribute </h4>
 
@@ -894,7 +893,7 @@ the Performance object and make it read-only.</p> -->
 in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
 Lawrence, James Simonsen, Jason Sobel, Jason Weber, Jonas Sicking, Kyle Scholz,
-Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjørn Vik,
+Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjï¿½rn Vik,
 Steve Souders, Tony Gentilcore for their reviews and feedback.</p>
 </body>
 </html>
