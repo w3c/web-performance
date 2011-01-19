@@ -1,4 +1,14 @@
-﻿//
+﻿/*
+Distributed under both the W3C Test Suite License [1] and the W3C
+3-clause BSD License [2]. To contribute to a W3C Test Suite, see the
+policies and contribution forms [3].
+
+[1] http://www.w3.org/Consortium/Legal/2008/04-testsuite-license
+[2] http://www.w3.org/Consortium/Legal/2008/03-bsd-license
+[3] http://www.w3.org/2004/10/27-testcases
+ */
+
+//
 // Helper Functions for NavigationTiming W3C tests
 //
 
@@ -13,21 +23,6 @@ function test_namespace(child_name)
         var msg2 = 'window.performance.' + child_name + ' is defined';
         test(function() { assert_true(performanceNamespace[child_name] !== undefined, msg2); }, msg2);
     }
-}
-
-function test_true(value, msg)
-{
-    test(function() { assert_true(value, msg); }, msg);
-}
-
-function test_equals(value, equals, msg)
-{
-    test(function() { assert_equals(value, equals, msg); }, msg);
-}
-
-function test_greater_than(value, greater_than, msg)
-{
-    test(function() { assert_true(value >= greater_than, msg); }, msg);
 }
 
 function test_attribute_exists(parent_name, attribute_name)
@@ -66,4 +61,20 @@ function test_timing_equals(attribute_name, equals, msg)
 {
     var test_msg = msg || "window.performance.timing." + attribute_name + " == " + equals;
     test_equals(performanceNamespace.timing[attribute_name], equals, test_msg);
+}
+
+//
+// Common helper functions
+//
+
+function test_true(value, msg) {
+    test(function () { assert_true(value, msg); }, msg);
+}
+
+function test_equals(value, equals, msg) {
+    test(function () { assert_equals(value, equals, msg); }, msg);
+}
+
+function test_greater_than(value, greater_than, msg) {
+    test(function () { assert_true(value >= greater_than, msg); }, msg);
 }
