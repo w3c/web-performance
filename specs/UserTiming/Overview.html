@@ -39,14 +39,14 @@
 <body class="draft">
 <div class="head">
 	<h1>User Timing</h1>
-	<h2 class="no-num no-toc" id="working-draft-august-09-2010">Working Draft Oct. 21, 2010</h2>
+	<h2 class="no-num no-toc" id="working-draft-Jan-24-2011">Working Draft Jan. 24, 2011</h2>
 	<dl>
 	  <dt>This version:</dt>
 	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
 	    http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
 	  <dt>Latest version:</dt>
-	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
-	    http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
+	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
+	    https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
 	  <dt>Editors:</dt>
 	    <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
 	      class="org">Microsoft Inc.</span>, <span
@@ -74,7 +74,7 @@
     use</a> rules apply.</p>
 	
 	<h2 class="no-num no-toc" id="abstract">Abstract</h2>
-	
+
 	<p>This specification defines an interface for web applications to capture timing information with 
 	a developer supplied name. The user agent captures the time stamp at the point and time specified in 
 	the code executing in the user agent.</p>
@@ -214,29 +214,31 @@ cite this document as other than work in progress. </p>
 	<h3 id="the-usertiming-interface"><span class="secno">4.2 
 	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
 	
-	<pre class="idl">interface <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#window-performance">Performance</a> {
-   void                           <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
-                                       raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-   void                           <a href="#ut-markfullyloaded">markFullyLoaded</a>();
-   void                           <a href="#ut-clearmarks">clearMarks</a>();		  
-   <a class="noxref" href="#PerformanceTimingList">PerformanceTimingList</a>          <a class="noxref" href="#ut-getmarks">getMarks</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
-                                           raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-   unsigned long long             <a href="#ut-mark">getMark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName)
-                                          raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-		  		
-};</pre>
+<pre class="idl">
+interface <a href="#PerformanceTimingList">PerformanceTiming</a> {
+  readonly attribute <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> name;
+  readonly attribute unsigned long long time;
+};
+</pre>
+	
+<pre class="idl">
+interface <a href="#PerformanceTimingList">PerformanceTimingList</a> {
+ readonly attribute unsigned long length;
+ getter <a class="noxref" href="#PerformanceTiming">PerformanceTiming</a>(in unsigned long index);
+};
+</pre>
 
-<pre class="idl">interface <a href="#PerformanceTimingList">PerformanceTimingList</a> {
-   readonly attribute unsigned long length;
-   getter <a class="noxref" href="#PerformanceTiming">PerformanceTiming</a>(in unsigned long index);
-};</pre>
+<pre class="idl">
+interface <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#window-performance">Performance</a> {
+  void <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName) raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
+  void <a href="#ut-markfullyloaded">markFullyLoaded</a>();
+  void <a href="#ut-clearmarks">clearMarks</a>();
+  <a class="noxref" href="#PerformanceTimingList">PerformanceTimingList</a> <a class="noxref" href="#ut-getmarks">getMarks</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName) raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
+  unsigned long long <a href="#ut-mark">getMark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName) raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
+};
+</pre>
 
-<pre class="idl">interface <a href="#PerformanceTimingList">PerformanceTiming</a> {
-   readonly attribute <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> name;
-   readonly attribute unsigned long long time;
-};</pre>
-
-	<div class="methods">
+<div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
 	<p>This method creates a mark at the point in time the code is executed in the user agent.</p>
 		<div class="parameters">
