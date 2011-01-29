@@ -64,6 +64,17 @@ function test_timing_equals(attribute_name, equals, msg)
 }
 
 //
+// Non-test related helper functions
+//
+
+function sleep_milliseconds(n) {
+    var start = new Date().getTime();
+    while (true) {
+        if ((new Date().getTime() - start) >= n) break;
+    }
+}
+
+//
 // Common helper functions
 //
 
@@ -77,4 +88,9 @@ function test_equals(value, equals, msg) {
 
 function test_greater_than(value, greater_than, msg) {
     test(function () { assert_true(value >= greater_than, msg); }, msg);
+}
+
+function test_not_equals(value, notequals, msg)
+{
+    test(function() { assert_true(value !== notequals, msg); }, msg);
 }
