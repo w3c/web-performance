@@ -1,0 +1,19 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance is read/write</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the window.performance object is read/write.</p>
+        <div id="log"></div>
+        <script type="text/javascript">
+            test_equals(performanceNamespace = "foo", "foo", 'performance namespace is read/write');
+        </script>
+    </body>
+</html>
