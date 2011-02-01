@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance.timing attribute ordering on a simple navigation start page</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+    </head>
+    <body onload="onload_test();" onunload="onunload_handler();">
+        <h1>Description</h1>
+        <p>This test validates the values of window.performance.timing attributes with a simple navigation.</p>
+
+        <h1>Setup</h1>
+        <p>This test will automatically start by navigating to this <a href="test_timing_attributes_order.htm">page</a>.</p>
+
+        <div id="log"></div>
+        <script type="text/javascript">
+            function navigate_to_test()
+            {
+                this.location.href = "test_timing_attributes_order.htm";
+            }
+
+            function onload_test()
+            {
+                setTimeout(navigate_to_test, 500);
+            }
+
+            function onunload_handler()
+            {
+                //sleep a little bit to cause an unload time.
+                sleep_milliseconds(500);
+            }
+        </script>
+    </body>
+</html>

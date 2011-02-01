@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance.timing attribute ordering on a simple navigation</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates the ordering of the window.performance.timing attributes.</p>
+
+        <h1>Setup</h1>
+        
+        <div id="log"></div>
+
+        <script type="text/javascript">
+            test_namespace('navigation');
+
+            //
+            // Test Setup Validation
+            //
+            test_equals(performanceNamespace.navigation.type,
+                        performanceNamespace.navigation.TYPE_NAVIGATE, 
+                        'window.performance.navigation.type == TYPE_NAVIGATE');
+
+            //
+            // Tests
+            //
+
+            // navigiation must be non-0
+            test_timing_greater_than('navigationStart', 0);
+
+            // must be no redirection for this test case
+            test_timing_equals('redirectStart', 0);
+            test_timing_equals('redirectEnd', 0);
+
+            // the unloadEvent may be before or after fetching, 
+            //so test this is greater than the navigationStart
+            test_timing_order('fetchStart', 'navigationStart');
+
+            // network events ordering
+            test_timing_order('domainLookupStart', 'fetchStart');
+            test_timing_order('domainLookupEnd', 'domainLookupStart');
+            test_timing_order('connectStart', 'domainLookupEnd');
+            test_timing_order('connectEnd', 'connectStart');
+            test_timing_order('requestStart', 'connectEnd');
+            test_timing_order('responseStart', 'requestStart');
+
+
+            // setup requires this page load to have a previous page
+            //This test can be run in a frame so we want the main page's data
+            performanceNamespace = window.parent.window.performance;
+            test_timing_order('unloadEventStart', 'navigationStart');
+            test_timing_order('unloadEventEnd', 'unloadEventStart');
+
+            // these must be 0 at this point
+            performanceNamespace = window.performance;
+            test_timing_equals('domComplete', 0, 'domComplete cannot have a value yet');
+            test_timing_equals('domContentLoadedEventStart', 0, 'domContentLoadedEventStart cannot have a value yet');
+            test_timing_equals('domContentLoadedEventEnd', 0, 'domContentLoadedEventEnd cannot have a value yet');
+            test_timing_equals('loadEventStart', 0, 'loadEventStart before onLoad event');
+            test_timing_equals('loadEventEnd', 0, 'loadEventEnd before onLoad event');
+
+            function onload_test()
+            {
+                // all of these should be filled in now
+                performanceNamespace = window.performance;
+                test_timing_order('responseEnd', 'responseStart');
+                test_timing_order('domLoading', 'responseEnd');
+                test_timing_order('domInteractive', 'domLoading');
+                test_timing_order('domContentLoadedEventStart', 'domInteractive');
+                test_timing_order('domContentLoadedEventEnd', 'domContentLoadedEventStart');
+                test_timing_order('domComplete', 'domContentLoadedEventEnd');
+
+                test_timing_order('loadEventStart', 'domContentLoadedEventEnd', 'loadEventStart before onLoad event');
+                test_timing_equals('loadEventEnd', 0, 'loadEventEnd during onLoad event');
+
+                performanceNamespace = window.parent.window.performance;
+                test_timing_order('unloadEventStart', 'navigationStart');
+                test_timing_order('unloadEventEnd', 'unloadEventStart');
+            }
+        </script>
+    </body>
+</html>
