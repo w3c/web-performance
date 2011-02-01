@@ -14,12 +14,14 @@ policies and contribution forms [3].
 
 var performanceNamespace = window.performance;
 
-function test_namespace(child_name)
+function test_namespace(child_name, skip_root) 
 {
-    var msg = 'window.performance is defined';
-    test(function() { assert_true(performanceNamespace !== undefined, msg); }, msg);
-    
-    if (child_name !== null) {
+    if (skip_root === undefined) {
+        var msg = 'window.performance is defined';
+        test(function () { assert_true(performanceNamespace !== undefined, msg); }, msg);
+    }
+
+    if (child_name !== undefined) {
         var msg2 = 'window.performance.' + child_name + ' is defined';
         test(function() { assert_true(performanceNamespace[child_name] !== undefined, msg2); }, msg2);
     }
@@ -67,7 +69,8 @@ function test_timing_equals(attribute_name, equals, msg)
 // Non-test related helper functions
 //
 
-function sleep_milliseconds(n) {
+function sleep_milliseconds(n) 
+{
     var start = new Date().getTime();
     while (true) {
         if ((new Date().getTime() - start) >= n) break;
@@ -78,15 +81,18 @@ function sleep_milliseconds(n) {
 // Common helper functions
 //
 
-function test_true(value, msg) {
+function test_true(value, msg)
+{
     test(function () { assert_true(value, msg); }, msg);
 }
 
-function test_equals(value, equals, msg) {
+function test_equals(value, equals, msg)
+{
     test(function () { assert_equals(value, equals, msg); }, msg);
 }
 
-function test_greater_than(value, greater_than, msg) {
+function test_greater_than(value, greater_than, msg)
+{
     test(function () { assert_true(value >= greater_than, msg); }, msg);
 }
 
