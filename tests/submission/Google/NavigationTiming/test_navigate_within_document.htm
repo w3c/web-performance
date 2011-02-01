@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="a">
  <head>
-  <title>window.performance.timing attributes</title>
+  <title>window.performance.timing in document navigation</title>
   <script src="../../../resources/testharness.js"></script>
   <script src="../../../resources/webperftestharness.js"></script>
 </head>
@@ -14,26 +14,26 @@
 var timing = performanceNamespace.timing;
 
 function checkTimingNotChanged() {
-    properties = Object.keys(timing).sort();
-    for (var i = 0; i < properties.length; ++i) {
-        property = properties[i];
-        test_equals(timing[property], initialTiming[property],
-                    property + " is the same after in document navigation.")
-    }
+  properties = Object.keys(timing).sort();
+  for (var i = 0; i < properties.length; ++i) {
+    property = properties[i];
+    test_equals(timing[property], initialTiming[property],
+                property + " is the same after in document navigation.")
+  }
 }
 
 var initialTiming = {};
 function saveTimingAfterLoad() {
-    for (var property in timing) {
-        initialTiming[property] = timing[property];
-    }
-    window.location.href = "#1";
-    setTimeout("checkTimingNotChanged()", 0);
+  for (var property in timing) {
+    initialTiming[property] = timing[property];
+  }
+  window.location.href = "#1";
+  setTimeout("checkTimingNotChanged()", 0);
 }
 
 function loadHandler() {
-    window.removeEventListener("load", loadHandler);
-    setTimeout("saveTimingAfterLoad()", 0);
+  window.removeEventListener("load", loadHandler);
+  setTimeout("saveTimingAfterLoad()", 0);
 }
 window.addEventListener("load", loadHandler, false);
   </script>
