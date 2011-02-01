@@ -1,27 +1,51 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE HTML>
 <html>
     <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <title>window.performance.navigation.type with a reloaded navigation</title>
-        <script src="/resources/testharness.js"></script>
-        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <script type="text/javascript" src="..\..\..\resources\testharness.js"></script>
+        <script type="text/javascript" src="..\..\..\resources\webperftestharness.js"></script>
+        <link rel="Stylesheet" href="..\..\..\resources\testharness.css" />
+    
+        <script type="text/javascript">
+            var reload_frame;
+            function onload_test()
+            {
+                reload_frame = document.getElementById("frameContext");
+                reload_frame.onload = do_test;
+                setTimeout("reload_the_frame();", 1000);
+            }
+
+            function reload_the_frame()
+            {
+                reload_frame.contentWindow.location.reload(true);
+            }
+
+            function do_test()
+            {
+                reload_frame.onload = "";
+                if (performanceNamespace)
+                {
+                    test_namespace('navigation');
+
+                    test_equals(reload_frame.contentWindow.performance.navigation.type,
+                                performanceNamespace.navigation.TYPE_RELOAD,
+                                'window.performance.navigation.type == TYPE_RELOAD');
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the value of window.performance.navigation.type with a reloaded navigation.</p>
-
-        <h1>Setup</h1>
-        <p>Click Reload in your browser to start the test.  Prior to hitting Reload, you should not see any tests below.  After you hit Reload, the tests should run and Pass, testing the window.performance.navigation.type.</p>
+        
+        <p>This page should be loaded with a green background frame below.  The frame will be automatically reloaded
+        and then verified that the window.performance.navigation.type = TYPE_RELOAD.</p>
 
         <div id="log"></div>
+        <br />
+        <iframe id="frameContext" src="blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
 
-        <script>
-        // this test could be improved -- the navigation type is the only way to determine that we've reloaded, and is the only attribute we can test.
-        if (performanceNamespace && performanceNamespace.navigation && performanceNamespace.navigation.type != performanceNamespace.navigation.TYPE_NAVIGATE)
-        {
-            test_namespace('navigation');
-            test_equals(performanceNamespace.navigation.type, performanceNamespace.navigation.TYPE_RELOAD, 'window.performance.navigation.type == TYPE_RELOAD');
-        }
-        </script>
+        
     </body>
 </html>

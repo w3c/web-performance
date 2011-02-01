@@ -13,10 +13,9 @@
         <p>This test validates that the navigation and timing attributes exist for window.performance 
         (but does not validate that their values are correct).</p>
         <div id="log"></div>
-        <script type="text/javascript">
-            
+        <script type="text/javascript">            
             test_namespace('navigation');
-            test_namespace('timing');
+            test_namespace('timing', true);
         </script>
     </body>
 </html>

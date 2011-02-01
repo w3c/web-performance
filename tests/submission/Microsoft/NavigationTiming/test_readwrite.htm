@@ -13,7 +13,12 @@
         <p>This test validates that the window.performance object is read/write.</p>
         <div id="log"></div>
         <script type="text/javascript">
-            test_equals(performanceNamespace = "foo", "foo", 'performance namespace is read/write');
+            // var performanceNamespace points to
+            // window.performance in webperftestharness.js
+            performanceNamespace = "foo";
+
+            test_equals(performanceNamespace, "foo", 'performance namespace is read/write');
+
         </script>
     </body>
 </html>
