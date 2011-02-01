@@ -1,0 +1,40 @@
+FAIL - document.open should have replaced this document.
+<script src="../../../resources/testharness.js"></script>
+<script src="../../../resources/webperftestharness.js"></script>
+<script>
+var timing = performanceNamespace.timing;
+var originalTiming = {};
+
+window.addEventListener("load", function() {
+ setTimeout(testTimingWithDocumentOpen, 0)
+}, false);
+
+function testTimingWithDocumentOpen() {
+  for (property in timing) {
+    originalTiming[property] = timing[property];
+  }
+
+  document.open();
+  document.write('<!doctype html>');
+  document.write('<html class="a">');
+  document.write('<head>');
+  document.write('<title>window.performance.timing in document open</title>');
+  document.write('<script src="../../../resources/testharness.js"></scr'+'ipt>');
+  document.write('</head>');
+  document.write('<body class="a">');
+  document.write('<h1>Description</h1>');
+  document.write('<p>This test validates that all of the window.performance.timing attributes remain unchanged after a document.open blows away the old document.</p>');
+  document.write('<div id="log"></div>');
+  document.write('</body>');
+  document.write('</html>');
+  document.close();
+
+  setTimeout(function() {
+    keys = Object.keys(timing).sort();
+    for (var i = 0; i < keys.length; ++i) {
+      test_equals(timing[keys[i]], originalTiming[keys[i]],
+                  keys[i] + " is the same after document open.");
+    }
+  }, 0);
+}
+</script>
