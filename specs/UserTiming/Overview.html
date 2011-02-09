@@ -222,6 +222,9 @@ cite this document as other than work in progress. </p>
   <pre class="idl">
   [Supplemental]
   interface <a href="#Performance">Performance</a> {
+    const string MARK_FULLY_LOADED = "fullyLoaded";
+
+  
     void mark(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     PerformanceAssociativeMarkList getMarks(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void clearMarks( in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
@@ -237,7 +240,9 @@ cite this document as other than work in progress. </p>
     getter unsigned long long(in unsigned long index);
   };
   </pre>
-
+<div class="XXX">
+    How should the constant MARK_FULLY_VISIBLE and MARK_FULLY_INTERACTIVE be defined for use by the web-developer?
+</div>
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
 	<p>This method creates a PerformanceMarkList and associates it with the name given, which is an associative array of unsigned long long accessible.</p>
