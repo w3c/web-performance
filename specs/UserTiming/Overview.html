@@ -39,12 +39,15 @@
 <body class="draft">
 <div class="head">
 	<h1>User Timing</h1>
-	<h2 class="no-num no-toc" id="working-draft-Jan-25-2011">Working Draft Jan. 25, 2011</h2>
+	<h2 class="no-num no-toc" id="working-draft-Jan-25-2011">Working Draft Feb. 
+	08, 2011</h2>
 	<dl>
 	  <dt>This version:</dt>
 	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
 	    http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
 	  <dt>Latest version:</dt>
+	    <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
+	    https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>	  
 	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
 	    https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
 	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
@@ -209,57 +212,39 @@ cite this document as other than work in progress. </p>
 	
 	<p>This section is non-normative</p>
 	
-	<p>The <a href="#user-timing-0">PerformanceUserTiming</a> interface facilitates the ability to buffer and collect timing measurements 
-	at the point and time specified in the code executing in the user agent. The PerformanceTiming 
+	<p>The <a href="#user-timing-0">User Timing</a> interface facilitates the ability to buffer and collect timing measurements 
+	at the point and time specified in the code executing in the user agent. The User Timing 
 	interface represents the timing information related to a mark.</p>
 
 	<h3 id="the-usertiming-interface"><span class="secno">4.2 
-	</span>The <code><a href="#user-timing">PerformanceUserTiming</a></code> Interface</h3>
+	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
 	
   <pre class="idl">
-  interface <a href="#PerformanceMark">PerformanceMark</a> {
-    const unsigned short TYPE_MARK = 0;
-    const unsigned short TYPE_MEASURE = 1;
-    readonly attribute unsigned short type;
-    readonly attribute unsigned long long mark;
-    readonly attribute unsigned long long measure;
-  };
-	
-  interface <a href="#PerformanceUserTiming">PerformanceUserTiming</a> {
-    readonly attribute unsigned long length;
-    getter <a class="noxref" href="#PerformanceMark">PerformanceMark</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>);
-  };
- 
-  [Supplemental]
-  interface <a href="#PerformanceTiming">PerformanceTiming</a> {
-    readonly attribute PerformanceUserTiming user;
-  };
-
   [Supplemental]
   interface <a href="#Performance">Performance</a> {
-    void <a href="#ut-mark">mark</a>( in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> name, in optional unsigned long long time ) raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-    void <a href="#ut-measure">measure</a>( in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> name, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> mark, in optional unsigned long long time ) raises(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-17189187">DOMException</a>);
-    void <a href="#ut-clearmarks">clearMarks</a>();
-    
-    void <a href="#ut-markfullyloaded">markFullyLoaded</a>();
+    void mark(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    PerformanceAssociativeMarkList getMarks(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void clearMarks( in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+  };
+	
+  interface <a href="#PerformanceAssociativeMarkList">PerformanceAssociativeMarkList</a> {
+    readonly attribute unsigned long length;
+    getter <a class="noxref" href="#PerformanceMarkList">PerformanceMarkList</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+  };
+ 
+  interface <a href="#PerformanceMarkList">PerformanceMarkList</a> {
+    readonly attribute unsigned long length;
+    getter unsigned long long(in unsigned long index);
   };
   </pre>
-<div class="XXX">
-TODO: do we still need getMark() and getMarks()?
-</div>
 
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
-	<p>This method creates a PerformanceMark object under the PerformanceUserTiming object and associates it with 
-     the name given. The PerformanceMark object's type attribute must be TYPE_MARK. If the optional time input is
-     specified, the object's <a href="">mark</a> attribute must take the input value. Otherwise, the object's
-     <a href="">mark</a> attribute must be the time when the method is call.</p>
+	<p>This method creates a PerformanceMarkList and associates it with the name given, which is an associative array of unsigned long long accessible.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
 			<p>The name associated with the PerformanceMark object.</p>
-			<code>time</code> type of unsigned long long
-			<p>If provided, this is the value to set the new object's <a href="">mark</a> attribute.</p>
 			<p><b>No Return Value</b></p>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
@@ -267,56 +252,35 @@ TODO: do we still need getMark() and getMarks()?
 		</div>
   </div>
   
+
   <div class="methods">
-	<h4 id="ut-measure"><code>measure</code> method</h4>
-	<p>This method creates a PerformanceMark object under the PerformanceUserTiming object and associates it with 
-     the name given.
-     <ol>
-     <li>The PerformanceMark object's type attribute must be TYPE_MEASURE.</li>
-     <li>The new object will have the <a href="">mark</a> attribute equal to that of the existing <a href="">PerformanceMark</a>
-         object associated with the name specified by the optional second input. If the second input is Null, the new object's
-         <a href="">mark</a> attribute must be the <a href="">fetchStart</a> value.</li>
-     <li>The new object's <a href="measure">measure</a> attribute is the difference between its <a href="">mark</a> attribute
-         and the time this method is called.</li>
-     <li>If the third input is specified, instead of the current time, the input time is use to calculated the value for
-         <a href="">measure</a> attribute.</li>
-     </ol>
-     
+	<h4 id="ut-getMarks"><code>getMarks</code> method</h4>
+	<p>This method retrieves all the marks, otherwise it retrieves all the marks by a specified name.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name associated with the PerformanceMark object.</p>
-			<code>mark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name associated with the referenced PerformanceMark object.</p>
-			<code>time</code> type of unsigned long long
-			<p>If provided, this is the value to calculate the time difference instead of the current time.</p>
-			<p><b>No Return Value</b></p>
+			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The name of the mark to associate the PerformanceAssociativeMarkList captured. When no markName is provided, all marks are retrieved.</p>
+			<p><b>Return Value</b></p>
+			<code>PerformanceAssociativeMarkList</code>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
 			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
 		</div>
-	</div>
-  
-	<div class="methods">
-	<h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
-	<p>This method remove all the <a href="">PerformanceMark</a> objects .</p>
-		<div class="parameters">
-			<p><b>No Parameters</b></p>
-			<p><b>No Return Value</b></p>
-			<p><b>No Exceptions</b></p>
-		</div>
-	</div>
+  </div>
 
-<div class="XXX">TODO: find a scalable way to create pre-defined PerformanceMarks.</div>
-	<div class="methods">
-	<h4 id="ut-markfullyloaded"><code>markFullyLoaded</code> method</h4>
-	<p>This method creates a <a href="">PerformanceMark</a> object named fullyLoaded at the point in time the code is executed in the user agent.</p>
-		<div class="parameters">
-			<p><b>No Parameters</b></p>
-			<p><b>No Return Value</b></p>
-			<p><b>No Exceptions</b></p>
-		</div>
-	</div>
+  
+  <div class="methods">
+  <h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
+  <p>This method remove all marks, otherwise if a name is specified only the associated <a href="">PerformanceMarkList</a> will be removed.</p>
+    <div class="parameters">
+			<p><b>Parameters</b></p>
+			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The name of the mark to associate the PerformanceAssociativeMarkList captured. When no markName is provided, all marks are retrieved.</p>
+      <p><b>No Return Value</b></p>
+      <p><b>No Exceptions</b></p>
+    </div>
+  </div>
+
   
 
 <!--
