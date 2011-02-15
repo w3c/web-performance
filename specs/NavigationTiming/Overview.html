@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-jan-06-2011">Editor's Draft January 31, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-feb-14-2011">Editor's Draft February 14, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/9d9a437808a8/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/9d9a437808a8/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/f3a7927db858/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/f3a7927db858/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/3f83b14dfbea/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/3f83b14dfbea/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/16f80e9cfd02/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/16f80e9cfd02/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -314,6 +314,12 @@ href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">pro
 to unload</a> the previous document. If there is no previous document, this attribute
 must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 
+<p>If there are HTTP redirects
+<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+when navigating and not all the redirects or equivalent are from the
+<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+this attribute must return the zero.</p>
+
 <h4><code><dfn id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
 
 <p>If the previous document and the current document have the
@@ -336,6 +342,7 @@ event of the previous document. If there is no previous document or the previous
 a different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
+
 <h4><code><dfn id="nt-redirect-start">redirectStart</dfn></code> attribute </h4>
 
 <p>If there are HTTP redirects
@@ -345,11 +352,6 @@ when navigating and if all the redirects or equivalent are from the
 this attribute must return the <a href="#nt-fetch-start">starting time
 of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
 
-<!--
-<div><p class="note">redirectStart is the equivalent of the
-<a href="#nt-fetch-start">fetchStart</a> attribute of the navigation that initiates
-the redirect.</p></div> -->
-
 <h4><code><dfn id="nt-redirect-end">redirectEnd</dfn></code> attribute </h4>
 
 <p>If there are HTTP redirects
@@ -358,11 +360,6 @@ when navigating and all redirects and equivalents are from the
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
-
-<!--
-<div><p class="note">redirectEnd is the equivalent of the
-<a href="#nt-response-end">responseEnd</a> attribute of the last redirect.</p></div>
--->
 
 <div><p class="note">The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
 relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
@@ -382,15 +379,19 @@ user agent starts
 <h4><code><dfn id="nt-domain-lookup-start">domainLookupStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts the domain name
-lookup for the current document. If the current document is retrieved from <a
-href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+lookup for the current document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document
+is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the same
 value as <a href="#nt-fetch-start">fetchStart</a>. </p>
 
 <h4><code><dfn id="nt-domain-lookup-end">domainLookupEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the user agent
-finishes the domain name lookup for the current document. If the current document
+finishes the domain name lookup for the current document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document
 is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the same
 value as <a href="#nt-fetch-start">fetchStart</a>. </p>
@@ -413,13 +414,14 @@ Example</div>
 <p>In case where the user agent already has the domain information in cache,
 domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
+
 </div>
 
 <h4><code><dfn id="nt-connect-start">connectStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent start
-establishing the connection to the server to retrieve the document. If a <a
-href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+establishing the connection to the server to retrieve the document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return value of 
@@ -659,9 +661,6 @@ are only available when the previous document and the current document are from 
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>. User agents may
 perform internal processing in between timings, which allow for non-normative intervals between
 timings.</p>
-<!-- 
-<p><img width="85%" src="timing-overview-nonredirect.png" alt='Timing attributes'></p>
--->
 <p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
@@ -840,34 +839,34 @@ window.performance.timing and window.performance.navigation objects.
 <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
 <p>This section is non-normative.</p>
 
-<h3 id="cross-directory"><span class="secno">5.1 </span>Cross-directory attacks</h3>
-<p> Different pages sharing one host name, for example contents from different authors hosted
-on geocities.com, are considered from the same origin because there is no feature to restrict
-the access by pathname. Navigating between these pages allows a latter page to access
-timing information of the previous one, such as timing regarding redirection and unload
-event.</p>
+<h3 id="cross-directory"><span class="secno">5.1 </span>Cross-directory access</h3>
+<p>Different pages sharing one host name, for example contents from different authors hosted
+on sites with user generated content are considered from the same origin because there is no
+feature to restrict the access by pathname. Navigating between these pages allows a latter page
+to access timing information of the previous one, such as timing regarding redirection and unload event.</p>
 
 <h2 id="security"><span class="secno">6 </span>Security</h2>
 <p>This section is non-normative.</p>
 
 <h3 id="authentication"><span class="secno">6.1 </span>Detecting proxy servers</h3>
-<p>In case a proxy is deployed between the user agent and the web server, 
-the time interval between the <a href="#nt-connect-start">connectStart</a> and
-the <a href="#nt-connect-end">connectEnd</a> attributes indicates the delay between
-the user agent and the proxy instead of the web server. With that, web server
-can potentially infer the existence of the proxy. For SOCKS proxy, this time interval
-includes the proxy authentication time and time the proxy takes to connect to the web
-server, which obfuscate the proxy detection. In case of an HTTP proxy, the user agent
-might not have any knowledge about the proxy server at all so it's not always feasible
-to mitigate this attack.</p>
+<p>In case a proxy is deployed between the user agent and the web server, the time interval
+between the <a href="#nt-connect-start">connectStart</a> and the
+<a href="#nt-connect-end">connectEnd</a> attributes indicates the delay between the user agent
+and the proxy instead of the web server. With that, web server can potentially infer the
+existence of the proxy. For SOCKS proxy, this time interval includes the proxy authentication
+time and time the proxy takes to connect to the web server, which obfuscate the proxy detection.
+In case of an HTTP proxy, the user agent might not have any knowledge about the proxy server at
+all so it's not always feasible to mitigate this attack.</p>
 
-<h3 id="readonly"><span class="secno">6.2 </span>Replacing timing objects</h3>
-<p>The window.performance object is replaceable to avoid conflicts with existing
-pages using the same object. By doing that, it is possible for third-party to replace
-the object and scripts relying on the interface described in this work would break.</p>
-<!--
-<p>To mitigate this risk, an alternative proposal is to use an alternative name for
-the Performance object and make it read-only.</p> -->
+<h3 id="readonly"><span class="secno">6.2 </span>Tampering by replacing timing objects</h3>
+<p>The window.performance object is replaceable to avoid conflicts with existing pages using the
+same object. By doing that, it is possible for third-party to replace the object and scripts
+relying on the interface described in this work would break.</p>
+
+<h3 id="info_disclosure"><span class="secno">6.3 </span>Information disclosure</h3>
+<p>There is the potential for disclosing an end-user’s browsing and activity history by using
+carefully crafted timing attacks. These attacks have been mitigated by disallowing the timing of
+the root document in cross-origin accesses.</p>
 
 <h2 id="references"><span class="secno">7 </span>References</h2>
 
