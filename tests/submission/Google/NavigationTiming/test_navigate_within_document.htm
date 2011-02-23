@@ -1,41 +1,69 @@
-<!doctype html>
-<html class="a">
- <head>
-  <title>window.performance.timing in document navigation</title>
-  <script src="../../../resources/testharness.js"></script>
-  <script src="../../../resources/webperftestharness.js"></script>
-</head>
-<body class="a">
-  <h1>Description</h1>
-  <p>This test validates that all of the window.performance.timing attributes remain unchanged after an in document navigation (URL fragment change).</p>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>window.performance.timing in document navigation</title>
+        <script src="../../../resources/testharness.js"></script>
+        <script src="../../../resources/webperftestharness.js"></script>
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that all of the window.performance.timing attributes remain unchanged after an in document navigation (URL fragment change).</p>
 
-  <div id="log"></div>
-  <script>
-var timing = performanceNamespace.timing;
+        <div id="log"></div>
+        <script>
+            var timing = performanceNamespace.timing;
+            var all_timing_properties = [
+                'connectEnd',
+                'connectStart',
+                'domComplete',
+                'domContentLoadedEventEnd',
+                'domContentLoadedEventStart',
+                'domInteractive',
+                'domLoading',
+                'domainLookupEnd',
+                'domainLookupStart',
+                'fetchStart',
+                'loadEventEnd',
+                'loadEventStart',
+                'navigationStart',
+                'redirectEnd',
+                'redirectStart',
+                'requestStart',
+                'responseEnd',
+                'responseStart',
+                'unloadEventEnd',
+                'unloadEventStart'
+            ];
 
-function checkTimingNotChanged() {
-  properties = Object.keys(timing).sort();
-  for (var i = 0; i < properties.length; ++i) {
-    property = properties[i];
-    test_equals(timing[property], initialTiming[property],
-                property + " is the same after in document navigation.")
-  }
-}
+            function check_timing_not_changed()
+            {
+                for (var i = 0; i < all_timing_properties.length; ++i)
+                {
+                    var property = all_timing_properties[i];
+                    test_equals(timing[property], initial_timing[property],
+                                property + " is the same after in document navigation.")
+                }
+            }
 
-var initialTiming = {};
-function saveTimingAfterLoad() {
-  for (var property in timing) {
-    initialTiming[property] = timing[property];
-  }
-  window.location.href = "#1";
-  setTimeout("checkTimingNotChanged()", 0);
-}
+           var initial_timing = {};
+           function save_timing_after_load()
+           {
+               for (var i = 0; i < all_timing_properties.length; ++i)
+               {
+                   var property = all_timing_properties[i];
+                   initial_timing[property] = timing[property];
+               }
+               window.location.href = "#1";
+               setTimeout("check_timing_not_changed()", 0);
+           }
 
-function loadHandler() {
-  window.removeEventListener("load", loadHandler);
-  setTimeout("saveTimingAfterLoad()", 0);
-}
-window.addEventListener("load", loadHandler, false);
-  </script>
-</body>
+           function load_handler()
+           {
+               window.removeEventListener("load", load_handler);
+               setTimeout("save_timing_after_load()", 0);
+           }
+
+           window.addEventListener("load", load_handler, false);
+       </script>
+    </body>
 </html>
