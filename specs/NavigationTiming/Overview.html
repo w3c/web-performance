@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-feb-15-2011">Editor's Draft February 15, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-feb-23-2011">Editor's Draft February 23, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/e313a5020039/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/e313a5020039/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/423e77acdc61/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/423e77acdc61/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/9d9a437808a8/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/9d9a437808a8/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -589,6 +589,13 @@ href="#nt-navigation-info-type">navigation type</a> values. </p>
   <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn>: Any navigation
   types not defined by values above.</dt>
 </dl>
+
+<div class="note">
+<p>Client-side redirects, such as those using <a href="http://dev.w3.org/html5/spec/semantics.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
+are not considered HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
+In those cases, the <a href="#nt-navigation-info-type">type</a> attribute should return appropriate value,
+such as <a href="#nt-navigation-info-type-navigate">TYPE_NAVIGATE</a>, as if in non-redirect navigation.</p>
+</div>
 
 <h4><code><dfn id="nt-navigation-info-redirect-count">redirectCount</dfn></code> attribute </h4>
 
