@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <html>
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -13,6 +13,8 @@
 
         <div id="log"></div>
         <script>
+            setup({explicit_done: true});
+
             var timing = performanceNamespace.timing;
             var all_timing_properties = [
                 'connectEnd',
@@ -43,29 +45,30 @@
                 {
                     var property = all_timing_properties[i];
                     test_equals(timing[property], initial_timing[property],
-                                property + " is the same after in document navigation.")
+                                property + " is the same after in document navigation.");
                 }
+                done();
             }
 
-           var initial_timing = {};
-           function save_timing_after_load()
-           {
-               for (var i = 0; i < all_timing_properties.length; ++i)
-               {
-                   var property = all_timing_properties[i];
-                   initial_timing[property] = timing[property];
-               }
-               window.location.href = "#1";
-               setTimeout("check_timing_not_changed()", 0);
-           }
+            var initial_timing = {};
+            function save_timing_after_load()
+            {
+                for (var i = 0; i < all_timing_properties.length; ++i)
+                {
+                    var property = all_timing_properties[i];
+                    initial_timing[property] = timing[property];
+                }
+                window.location.href = "#1";
+                setTimeout("check_timing_not_changed()", 0);
+            }
 
-           function load_handler()
-           {
-               window.removeEventListener("load", load_handler);
-               setTimeout("save_timing_after_load()", 0);
-           }
+            function load_handler()
+            {
+                window.removeEventListener("load", load_handler);
+                setTimeout("save_timing_after_load()", 0);
+            }
 
-           window.addEventListener("load", load_handler, false);
-       </script>
+            window.addEventListener("load", load_handler, false);
+        </script>
     </body>
 </html>
