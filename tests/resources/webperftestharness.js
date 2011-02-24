@@ -13,8 +13,30 @@ policies and contribution forms [3].
 //
 
 var performanceNamespace = window.performance;
+var timingAttributes = [
+    'connectEnd',
+    'connectStart',
+    'domComplete',
+    'domContentLoadedEventEnd',
+    'domContentLoadedEventStart',
+    'domInteractive',
+    'domLoading',
+    'domainLookupEnd',
+    'domainLookupStart',
+    'fetchStart',
+    'loadEventEnd',
+    'loadEventStart',
+    'navigationStart',
+    'redirectEnd',
+    'redirectStart',
+    'requestStart',
+    'responseEnd',
+    'responseStart',
+    'unloadEventEnd',
+    'unloadEventStart'
+];
 
-function test_namespace(child_name, skip_root) 
+function test_namespace(child_name, skip_root)
 {
     if (skip_root === undefined) {
         var msg = 'window.performance is defined';
