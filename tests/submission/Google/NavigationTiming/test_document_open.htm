@@ -8,19 +8,25 @@
 <link rel="stylesheet" href="/resources/testharness.css" />
 
 <script>
-var timing = performanceNamespace.timing;
 var originalTiming = {};
+var done = false;
 
 function onload_test() {
-  setTimeout(testTimingWithDocumentOpen, 0);
+  if (!done) {
+    setTimeout(testTimingWithDocumentOpen, 0);
+    done = true;
+  }
 }
 
 function testTimingWithDocumentOpen() {
-  for (property in timing) {
-    originalTiming[property] = timing[property];
+  var subcontentWindow = document.getElementById("frameContext").contentWindow;
+
+  var timing = subcontentWindow.performance.timing;
+  for (i in timingAttributes) {
+    originalTiming[timingAttributes[i]] = timing[timingAttributes[i]];
   }
 
-  var subdocument = document.getElementById("frameContext").contentWindow.document;
+  var subdocument = subcontentWindow.document;
   subdocument.open();
   subdocument.write('<!DOCTYPE HTML>');
   subdocument.write('<html>');
@@ -34,10 +40,10 @@ function testTimingWithDocumentOpen() {
   subdocument.close();
 
   setTimeout(function() {
-    keys = Object.keys(timing).sort();
-    for (var i = 0; i < keys.length; ++i) {
-      test_equals(timing[keys[i]], originalTiming[keys[i]],
-                  keys[i] + " is the same after document open.");
+    for (var i in timingAttributes) {
+      test_equals(timing[timingAttributes[i]],
+                  originalTiming[timingAttributes[i]],
+                  timingAttributes[i] + " is the same after document open.");
     }
   }, 0);
 }
