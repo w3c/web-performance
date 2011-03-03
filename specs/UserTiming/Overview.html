@@ -46,6 +46,8 @@
 	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
 	    http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
 	  <dt>Latest version:</dt>
+	    <dd><a href=https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
+	    https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
 	    <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
 	    https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>	  
 	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
@@ -243,11 +245,10 @@ cite this document as other than work in progress. </p>
 </div>
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
-	<p>This method returns an associative Array. Each key in the Array is a 
+	<p>This method stores a timestamp in milliseconds called a mark into an associative Array. Each key in the Array is a 
 	distinct mark name. The value associated with the mark name is an array of 
 	timestamps. </p>
-	<p>In JSON notation the data structure looks as follows: { &#8220;mark1&#8221;: 
-	[0, 1, 2], &#8220;mark2&#8221;: [3] };</p>
+	<p>In JSON notation the data structure looks as follows: { "mark1": [0, 1, 2], "mark2": [3] };</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
@@ -295,7 +296,7 @@ cite this document as other than work in progress. </p>
   
   <div class="methods">
 	<h4 id="ut-measure"><code>measure</code> method</h4>
-	<p>This method returns an associative Array. Each key in the Array is a 
+	<p>This stores a delta between two timestamps in milliseconds in an associative Array. Each key in the Array is a 
 	distinct measure name.  The value associated with the measure name is an array of 
 	timestamps. When calling measure with no parameters, measure will store the delta in 
 	milliseconds, the point and time 
@@ -311,8 +312,7 @@ cite this document as other than work in progress. </p>
 	</p>
 	<p>In the case where the supplied startMark or endMark name is invalid or the timestamped stored at mark name is zero the measure stored at measure name will be undefined.</p>
 	<p>
-	In JSON notation the data structure looks as follows: { &#8220;measure1&#8221;: 
-	[0, 1, 2], &#8220;measure2&#8221;: [3] };</p>
+		In JSON notation the data structure looks as follows: { "measure1": [0, 1, 2], "measure2": [3] };</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
