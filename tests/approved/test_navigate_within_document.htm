@@ -13,8 +13,6 @@
 
         <div id="log"></div>
         <script>
-            setup({explicit_done: true});
-
             var timing = performanceNamespace.timing;
 
             function check_timing_not_changed()
@@ -25,7 +23,6 @@
                     test_equals(timing[property], initial_timing[property],
                                 property + " is the same after in document navigation.");
                 }
-                done();
             }
 
             var initial_timing = {};
