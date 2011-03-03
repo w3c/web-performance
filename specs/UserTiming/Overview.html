@@ -39,8 +39,8 @@
 <body class="draft">
 <div class="head">
 	<h1>User Timing</h1>
-	<h2 class="no-num no-toc" id="working-draft-Jan-25-2011">Working Draft Feb. 
-	08, 2011</h2>
+	<h2 class="no-num no-toc" id="working-draft-Mar-02-2011">Working Draft Mar. 
+	02, 2011</h2>
 	<dl>
 	  <dt>This version:</dt>
 	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -215,6 +215,8 @@ cite this document as other than work in progress. </p>
 	<p>The <a href="#user-timing-0">User Timing</a> interface facilitates the ability to buffer and collect timing measurements 
 	at the point and time specified in the code executing in the user agent. The User Timing 
 	interface represents the timing information related to a mark.</p>
+	
+	<p>The accuracy of the timing-related attributes the User Timing interfaces must be one millisecond or finer.</p>
 
 	<h3 id="the-usertiming-interface"><span class="secno">4.2 
 	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
@@ -223,21 +225,17 @@ cite this document as other than work in progress. </p>
   [Supplemental]
   interface <a href="#Performance">Performance</a> {
     const string MARK_FULLY_LOADED = "fullyLoaded";
-
+    const string MARK_FULLY_VISIBLE = "fullyVisible";
+    const string MARK_ABOVE_THE_FOLD = "aboveTheFold";
+    const string MARK_TIME_TO_USER_ACTION = "timeToUserAction";
   
     void mark(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    PerformanceAssociativeMarkList getMarks(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    void clearMarks( in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-  };
-	
-  interface <a href="#PerformanceAssociativeMarkList">PerformanceAssociativeMarkList</a> {
-    readonly attribute unsigned long length;
-    getter <a class="noxref" href="#PerformanceMarkList">PerformanceMarkList</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-  };
- 
-  interface <a href="#PerformanceMarkList">PerformanceMarkList</a> {
-    readonly attribute unsigned long length;
-    getter unsigned long long(in unsigned long index);
+    Array getMarks(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void clearMarks(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    
+    void measure(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
+    Array getMeasures(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    void clearMeasures(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
   </pre>
 <div class="XXX">
@@ -245,11 +243,15 @@ cite this document as other than work in progress. </p>
 </div>
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
-	<p>This method creates a PerformanceMarkList and associates it with the name given, which is an associative array of unsigned long long accessible.</p>
+	<p>This method returns an associative Array. Each key in the Array is a 
+	distinct mark name. The value associated with the mark name is an array of 
+	timestamps. </p>
+	<p>In JSON notation the data structure looks as follows: { &#8220;mark1&#8221;: 
+	[0, 1, 2], &#8220;mark2&#8221;: [3] };</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name associated with the PerformanceMark object.</p>
+			<p>The name associated with the Array of timestamps.</p>
 			<p><b>No Return Value</b></p>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
@@ -260,13 +262,15 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
 	<h4 id="ut-getMarks"><code>getMarks</code> method</h4>
-	<p>This method retrieves all the marks, otherwise it retrieves all the marks by a specified name.</p>
+	<p>This method retrieves all the marks, when mark name equals null. Otherwise, retrieve all the marks by 
+	the specified name. </p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the mark to associate the PerformanceAssociativeMarkList captured. When no markName is provided, all marks are retrieved.</p>
+			<p>[optional] The name of the mark to associate the Array of timestamps captured. 
+			Return all marks when markName equals null.</p>
 			<p><b>Return Value</b></p>
-			<code>PerformanceAssociativeMarkList</code>
+			<code>Array</code>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
 			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
@@ -276,54 +280,86 @@ cite this document as other than work in progress. </p>
   
   <div class="methods">
   <h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
-  <p>This method remove all marks, otherwise if a name is specified only the associated <a href="">PerformanceMarkList</a> will be removed.</p>
+  <p>This method removes all marks. Otherwise, this interface removes only those 
+  marks specified by the mark name.</p>
     <div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the mark to associate the PerformanceAssociativeMarkList captured. When no markName is provided, all marks are retrieved.</p>
+			<p>[optional] The name of the mark to be cleared. Otherwise, clear all marks when 
+			the mark name supplied equals null.</p>
       <p><b>No Return Value</b></p>
       <p><b>No Exceptions</b></p>
     </div>
   </div>
 
   
+  <div class="methods">
+	<h4 id="ut-measure"><code>measure</code> method</h4>
+	<p>This method returns an associative Array. Each key in the Array is a 
+	distinct measure name.  The value associated with the measure name is an array of 
+	timestamps. When calling measure with no parameters, measure will store the delta in 
+	milliseconds, the point and time 
+	the code is excuted in the user agent from the fetchStart in Navigation Timing.
+	</p>
+	<p>
+	If the second parameter is not null, the user agent stores the delta from the point and time
+	the code is executed in the user agent to the last mark stored identified by 
+	startMark.</p>
+	<p>
+	If the third paramter is not null, the user agent stores the delta between the 
+	most recent end mark and most recent start mark.
+	</p>
+	<p>In the case where the supplied startMark or endMark name is invalid or the timestamped stored at mark name is zero the measure stored at measure name will be undefined.</p>
+	<p>
+	In JSON notation the data structure looks as follows: { &#8220;measure1&#8221;: 
+	[0, 1, 2], &#8220;measure2&#8221;: [3] };</p>
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>The name associated with the measure.</p>			
+			<code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The name of the start mark retrieved. The measure 
+			stored will be from the point and time the code is executed to the 
+			last start mark stored.</p>
+			<code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The mark name of the measure to be taken from the last startMark to the last endMark.</p>			
+			<p><b>No Return Value</b></p>
+			<p><b>Exceptions</b></p>
+			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
+			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
+		</div>
+  </div>
 
-<!--
-	<div class="methods">
-	<h4 id="ut-getmarks"><code>getMarks</code> method</h4>
-	<p>This method retrieves all the marks as specified by the name of the mark.</p>
+  <div class="methods">
+	<h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
+	<p>This method retrieves all the measures, when measure name equals null. Otherwise, retrieve all the 
+	measures by 
+	the specified name. </p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the mark to associate the 
-			PerformanceTiming captured. 
-			When no markName is provided, all marks are retrieved.</p>
+			<code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The name of a measure stored within the user agent. 
+			Retrieve all measures when measure name equals null.</p>
 			<p><b>Return Value</b></p>
-			<p><code>PerformanceTimingList</code> A PerformanceTimingList or an 
-			empty PerformanceTimingList if there are no matching marks 
-			associated to the markName.</p>
+			<code>Array</code>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
 			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
 		</div>
-	</div>
-	
-	<div class="methods">
-	<h4 id="ut-getmark"><code>getMark</code> method</h4>
-	<p>This method retrieves the most recent timestamp as specified by the name of the mark.</p>
-		<div class="parameters">
+  </div>
+
+  <div class="methods">
+  <h4 id="ut-clearmeasures"><code>clearMeasures</code> method</h4>
+  <p>This method remove all measures. Otherwise only those measures associated by that name will be removed.</p>
+    <div class="parameters">
 			<p><b>Parameters</b></p>
-			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name of the mark to associate the timestamp captured.</p>
-			<p><b>Return Value</b></p>
-			<p><code>dateTime</code> The most recent timestamp or 0 if this operation fails.</p>
-			<p><b>Exceptions</b></p>
-			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
-			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
-		</div>
-	</div>
-  
-  -->
+			<code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+			<p>[optional] The name of the measure to be cleared. Otherwise, 
+			clear all marks when the mark name supplied equals null.</p>
+      <p><b>No Return Value</b></p>
+      <p><b>No Exceptions</b></p>
+    </div>
+  </div>
 	
 	<h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
 	
