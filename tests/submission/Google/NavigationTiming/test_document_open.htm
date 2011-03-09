@@ -40,6 +40,7 @@ function testTimingWithDocumentOpen() {
   subdocument.close();
 
   setTimeout(function() {
+    var timing = subcontentWindow.performance.timing;
     for (var i in timingAttributes) {
       test_equals(timing[timingAttributes[i]],
                   originalTiming[timingAttributes[i]],
