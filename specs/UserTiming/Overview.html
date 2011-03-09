@@ -240,9 +240,6 @@ cite this document as other than work in progress. </p>
     void clearMeasures(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
   </pre>
-<div class="XXX">
-    How should the constant MARK_FULLY_VISIBLE and MARK_FULLY_INTERACTIVE be defined for use by the web-developer?
-</div>
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
 	<p>This method stores a timestamp in milliseconds since midnight of January 
@@ -251,6 +248,23 @@ cite this document as other than work in progress. </p>
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
 			<p>The name associated with the Array of timestamps.</p>
+			<p>Standard mark names, note that the user agent is only reasonsible for storing the 
+			marks denoted by the associated name and not responsible for programmatically determining
+			the time associated with the mark description. The developer uses these marks as appropriate 
+			in their application code</p>
+			<code>MARK_FULLY_LOADED</code>
+			<p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
+			<code>MARK_FULLY_VISIBLE</code>
+			<p>The time when the page is considered completely visible by an end-user as marked by the developer in 
+			their application.</p>			
+			<code>MARK_ABOVE_THE_FOLD</code>
+			<p>The time to when all contents in the visible viewport is present to the end-user.
+			This is a point of interest as end-users would generally consider the page is done 
+			loading given no visible change after this time.</p> 
+			<code>MARK_TIME_TO_USER_ACTION</code>
+			<p>The time of the first user action upon the page during or after a navigation, 
+			such as scroll or click. This could be used as another indication 
+			that the user considers the page ready to operate.</p> 
 			<p><b>No Return Value</b></p>
 			<p><b>Exceptions</b></p>
 			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
