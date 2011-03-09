@@ -82,9 +82,9 @@
 	
 	<h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-	<p>This specification defines an interface for web applications to capture timing information with 
-	a developer supplied name. The user agent captures the time stamp at the point and time specified in 
-	the code executing in the user agent.</p>
+	<p>This specification defines an interface for web applications to help 
+	developers assess and understand the performance of their application with 
+	the use of a high precession timer.</p>
 	
 	<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
 
@@ -214,11 +214,12 @@ cite this document as other than work in progress. </p>
 	
 	<p>This section is non-normative</p>
 	
-	<p>The <a href="#user-timing-0">User Timing</a> interface facilitates the ability to buffer and collect timing measurements 
-	at the point and time specified in the code executing in the user agent. The User Timing 
-	interface represents the timing information related to a mark.</p>
+	<p>The <a href="#user-timing-0">User Timing</a> interface facilitates the 
+	ability for developers to assess and understand the performance of their 
+	application by instrumenting their code and custom scenarios with a 
+	high precision timer.</p>
 	
-	<p>The accuracy of the timing-related attributes the User Timing interfaces must be one millisecond or finer.</p>
+	<p>The accuracy of the timing-related attributes in the User Timing interfaces must be one millisecond or finer.</p>
 
 	<h3 id="the-usertiming-interface"><span class="secno">4.2 
 	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
@@ -245,10 +246,8 @@ cite this document as other than work in progress. </p>
 </div>
   <div class="methods">
 	<h4 id="ut-mark"><code>mark</code> method</h4>
-	<p>This method stores a timestamp in milliseconds called a mark into an associative Array. Each key in the Array is a 
-	distinct mark name. The value associated with the mark name is an array of 
-	timestamps. </p>
-	<p>In JSON notation the data structure looks as follows: { "mark1": [0, 1, 2], "mark2": [3] };</p>
+	<p>This method stores a timestamp in milliseconds since midnight of January 
+	1, 1970 (UTC) with the associated name.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
@@ -264,7 +263,10 @@ cite this document as other than work in progress. </p>
   <div class="methods">
 	<h4 id="ut-getMarks"><code>getMarks</code> method</h4>
 	<p>This method retrieves all the marks, when mark name equals null. Otherwise, retrieve all the marks by 
-	the specified name. </p>
+	the specified name. Each key in the Array is a 
+	distinct mark name. The value associated with the mark name is an array of 
+	UTC timestamps of unsigned long long. </p>
+	<p>In JSON notation the data structure looks as follows: { "mark1": [0, 1, 2], "mark2": [3] };</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
@@ -296,23 +298,25 @@ cite this document as other than work in progress. </p>
   
   <div class="methods">
 	<h4 id="ut-measure"><code>measure</code> method</h4>
-	<p>This stores a delta between two timestamps in milliseconds in an associative Array. Each key in the Array is a 
-	distinct measure name.  The value associated with the measure name is an array of 
-	timestamps. When calling measure with no parameters, measure will store the delta in 
-	milliseconds, the point and time 
-	the code is excuted in the user agent from the fetchStart in Navigation Timing.
+	<p>This method stores the difference between two marks in milliseconds with the associated name. 
+	The intent is to capture a the duration of which&nbsp; a scenario took within an application. </p>
+	<p>When calling measure with no parameters, measure will store the delta in 
+	milliseconds from the time 
+	the code is excuted in the user agent from the fetchStart timestamp in Navigation Timing.
 	</p>
 	<p>
-	If the second parameter is not null, the user agent stores the delta from the point and time
+	If the second parameter is not null, the user agent stores the delta from 
+	the time
 	the code is executed in the user agent to the last mark stored identified by 
 	startMark.</p>
 	<p>
 	If the third paramter is not null, the user agent stores the delta between the 
 	most recent end mark and most recent start mark.
 	</p>
-	<p>In the case where the supplied startMark or endMark name is invalid or the timestamped stored at mark name is zero the measure stored at measure name will be undefined.</p>
-	<p>
-		In JSON notation the data structure looks as follows: { "measure1": [0, 1, 2], "measure2": [3] };</p>
+<div class="XXX">
+Setters should communicate to the developer when used wrong. What about throwing an exception
+when incorrect parameters are set?
+</div>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
@@ -332,9 +336,10 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
 	<h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
-	<p>This method retrieves all the measures, when measure name equals null. Otherwise, retrieve all the 
-	measures by 
-	the specified name. </p>
+	<p>This method retrieves all the measures, when mark name equals null. Otherwise, retrieve all the 
+	measures by the specified name. Each key in the Array is a distinct measure name. The value associated 
+	with the measure name is an array timestamp deltas of unsigned long long. </p>		
+	<p>	In JSON notation the data structure looks as follows: { "measure1": [0, 1, 2], "measure2": [3] };</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			<code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
