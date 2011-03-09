@@ -47,13 +47,14 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-march-06-2011">Working Draft March 6th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-march-07-2011">Working Draft March 7th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
       <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/f4afa13cc151/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/f4afa13cc151/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/10aa86c37245/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/10aa86c37245/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
@@ -143,16 +144,12 @@ cite this document as other than work in progress. </p>
     <ol class="toc">
       <li><a href="#introduction-1"><span class="secno">4.1
         </span>Introduction</a></li>
-      <li><a href="#the-resourcetiming-interface"><span class="secno">4.2
-        </span>The <code>ResourceTiming</code> Interface</a></li>
-      <li><a href="#the-resourcetimingcollector-interface"><span
-        class="secno">4.3 </span> The <code>ResourceTimingCollector</code>
-        interface</a></li>
-      <li><a href="#rt-performanceresourcetiming-interface"><span class="secno">4.4
-        </span>The <code>PerformanceResourceTiming</code> interface (An alternate approach)</a></li>
-        
-      <li><a href="#processing-model"><span class="secno">4.5
-        </span>Processing model</a></li>
+      <li><a href="#resourcetiming"><span class="secno">4.2
+        </span>The <code>PerformanceResourceTiming</code> Interface</a></li>
+      <li><a href="#resource-timing-methods"><span
+        class="secno">4.3 </span> The Resource Timing Methods</a></li>
+      <li><a href="#processing-model"><span class="secno">4.4
+        </span>Processing Model</a></li>
 
     </ol>
   </li>
@@ -244,22 +241,29 @@ href="http://pimpmyspec.net/aquarium.py/output?uri=http%3A%2F%2Fkvnwg.com%2FReso
 <p>This section is non-normative</p>
 
 <p>The <a href="#performance-resource-timing">PeformanceResourceTiming</a>
-interface facilitate timing measurement of elements on the root page. Its attributes
-represent the timing information related to an <a
-href="http://dev.w3.org/html5/spec/Overview.html#elements">element</a>. Each
-of the following elements must expose its timing information during a page
-load using the interfaces defined in this work: <a
-href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>,
+interface facilitates timing measurement of resources on the root page. It
+represents the timing information related to an <a
+href="http://dev.w3.org/html5/spec/Overview.html#elements">element</a>. 
+This interface is available for
+<a href="http://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest</a> and the following
+HTML elements:
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>,
 <a href="http://dev.w3.org/html5/spec/Overview.html#the-img-element">img</a>,
-<a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>, <a
-href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
-<a
-href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>
+<a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>,
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
+<a href="http://dev.w3.org/html5/spec/video.html#audio">audio</a>,
+<a href="http://dev.w3.org/html5/spec/video.html#video">video</a>,
+<a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>
 and <a
 href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a>
 with the link type of <a
-href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">stylesheet</a>.
-The term "resource" is also used to refer to these elements in this work. </p>
+href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">stylesheet</a>.</p>
+
+<p>The term "resource" is also used to refer to these elements in this work. </p>
+</div>
+
+<div class="note">
+<p>TODO: make availability a normative requirement.</p>
 </div>
 
 <div class="head">
@@ -317,7 +321,7 @@ added into the resource's HTML header: </p>
 </div>
 
 <div class="note">
-<p>TODO: The exact mechanism of the access control is still to be discussed.</p>
+<p>TODO: The exact mechanism of the access control is TBD.</p>
 </div>
 
 <h4 id="resourcetype-attribute"><code><dfn id="resource-type">resourceType</dfn></code> attribute</h4>
@@ -345,7 +349,7 @@ added into the resource's HTML header: </p>
 href="http://dev.w3.org/html5/spec/Overview.html#url">URL</a> of the
 associated resource.</p>
 
-<h4 id="fetchstart-attribute-0"><code><dfn
+<h4 id="fetch-start"><code><dfn
 id="rt-fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts to <a
@@ -356,114 +360,92 @@ and if it results in a <a
 href="http://dev.w3.org/html5/spec/Overview.html#fetch">fetch</a>, its timing
 attribute must be updated.</p>
 
-<h4 id="domainlookupstart-attribute"><code><dfn
-id="rt-domain-lookupstart">domainLookupStart</dfn></code> attribute</h4>
+<h4 id="domain-lookup-start"><code><dfn
+id="domain-lookup-start">domainLookupStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts
-the domain name lookup for the resource. If the resource is retrieved from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a> or an HTML file, this attribute must return the same
-value as <a href="#nt-fetch-start">fetchStart</a>.</p>
+the domain name lookup for the resource.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource
+is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+application caches</a> or local resources, this attribute must return the same
+value as <a href="#fetch-start">fetchStart</a>. </p>
 
-<h4 id="domainlookupend-attribute"><code><dfn
-id="rt-domain-lookupend">domainLookupEnd</dfn></code> attribute</h4>
+<h4 id="domain-lookup-end"><code><dfn id="domain-lookup-end">domainLookupEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
-the domain name lookup for the resource. If the resource is retrieved from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a> or an HTML file, this attribute must return the same
-value as <a href="#nt-fetch-start">fetchStart</a>.</p>
+the domain name lookup for the resource.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource
+is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+application caches</a> or local resources, this attribute must return the same
+value as <a href="#fetch-start">fetchStart</a>. </p>
 
-<p></p>
-
-<div class="example">
-
-<div class="exampleHeader">
-Example</div>
-
-<p>In case where the user agent already has the domain information in cache,
+<p>If the user agent has the domain information in cache,
 domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
-</div>
 
-<h4 id="connectstart-attribute"><code><dfn
-id="rt-connect-start">connectStart</dfn></code> attribute</h4>
+<h4 id="connect-start"><code><dfn id="connect-start">connectStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent start
-establishing the connection to the server to retrieve the resource. If a <a
-href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> is used or the current document is retrieved from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a> or an HTML file, this attribute must return the same
-value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+establishing the connection to the server to retrieve the resource. 
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
+href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+application caches</a> or local resources, this attribute must return value of 
+<a href="#domain-lookup-end">domainLookupEnd</a>.</p>
 
-<h4 id="connectend-attribute"><code><dfn
-id="rt-connect-end">connectEnd</dfn></code> attribute </h4>
+<h4 id="connect-end"><code><dfn
+id="connect-end">connectEnd</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
-establishing the connection to the server to retrieve the resource. If a <a
-href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-connection</a> is used or the resource is retrieved from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a> or an HTML file, this attribute must return the same
-value as <a href="#nt-fetch-start">fetchStart</a>. </p>
+establishing the connection to the server to retrieve the resource.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
+href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+application caches</a> or local resources, this attribute must return the value of
+<a href="#nt-domain-lookup-end">domainLookupEnd</a>.</p>
 
 <p>If the transport connection fails and the user agent reopens a connection,
-<a href="#resourcetiming-connectstart">connectStart</a> and <a
-href="#domtiming-connectend">connectEnd</a> should return the corresponding
+<a href="#connect-start">connectStart</a> and <a
+href="#connect-end">connectEnd</a> should return the corresponding
 values of the new connection. </p>
 
-<p><a href="#rt-connect-end">connectEnd</a> must include the time interval to
+<p><a href="#connect-end">connectEnd</a> must include the time interval to
 establish the transport connection. It must not include other time interval
 such as SSL handshake and SOCKS authentication. </p>
 
-<h4 id="requeststart-attribute"><code><dfn
-id="rt-request-start">requestStart</dfn></code> attribute</h4>
+<h4 id="request-start"><code><dfn id="request-start">requestStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the time immediately before the user agent starts
-requesting the resource from the server, or from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a>, or from an HTML file.</p>
-
-<h4 id="requestend-attribute"><code><dfn
-id="rt-request-end">requestEnd</dfn></code> attribute</h4>
-
-<p>This attribute must return the time immediately after the user agent receives
-the first byte of the response from the server, or from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a>, or from an HTML file.</p>
+<p>This attribute must return the time immediately before the user agent
+starts requesting the resource. It is set prior to checking HTTP cache.</p>
 
 <p>If the transport connection fails after a request is sent and the user
 agent reopens a connection and resend the request, <a
-href="#rt-request-start">requestStart</a> and <a
-href="#rt-request-end">requestEnd</a> should return the corresponding values
+href="#request-start">requestStart</a> must return the corresponding values
 of the new request.</p>
 
-<h4 id="responsestart-attribute"><code><dfn
-id="rt-response-start">responseStart</dfn></code> attribute </h4>
+<h4 id="response-start"><code><dfn id="response-start">responseStart</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent receives
 the first byte of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a>, or from an HTML file.</p>
+application caches</a> or from local resources.</p>
 
-<h4 id="responseend-attribute"><code><dfn
-id="rt-response-end">responseEnd</dfn></code> attribute </h4>
+<h4 id="response-end"><code><dfn id="response-end">responseEnd</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
 receiving the last byte of the resource from from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
-application caches</a>, or from an HTML file.</p>
+application caches</a> or from local resources.</p>
 
-<h4 id="loadstart-attribute"><code><dfn
-id="rt-load-start">loadEventStart</dfn></code> attribute</h4>
+<h4 id="load-event-start"><code><dfn id="rt-load-start">loadEventStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the load event of the
 the resource is fired. It must return zero when the load event is not fired
 yet.</p>
 
-<h4 id="loadend-attribute"><code><dfn
-id="rt-load-end">loadEventEnd</dfn></code> attribute</h4>
+<h4 id="load-event-end"><code><dfn id="load-event-end">loadEventEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the load event of the
 resource is completed. It must return zero when the load event is not fired yet.</p>
@@ -516,6 +498,8 @@ allows the browser optimal opportunities to garbage collect. </p>
 	 Interface (An alternate approach)
 </h3>
 -->
+
+<h3 id="the-resourcetiming-interface"><span class="secno">4.3 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
 [Supplemental] Performance {
@@ -655,7 +639,7 @@ id="rt-fetchend">fetchEnd</dfn></code> attribute</h4>
 -->
 
 
-<h3 id="processing-model"><span class="secno">4.5 </span>Processing model</h3>
+<h3 id="processing-model"><span class="secno">4.4 </span>Processing Model</h3>
 
 <div class="XXX">
 TODO: to handle dynamic sources such as those generated by DOM
