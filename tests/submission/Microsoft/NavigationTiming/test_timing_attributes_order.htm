@@ -7,14 +7,14 @@
         <script src="/resources/testharness.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-        
+
         <script type="text/javascript">
             var step = 1;
-            function navigate_the_frame()
+            function onload_test() 
             {
                 var navigation_frame = document.getElementById("frameContext").contentWindow;
                 performanceNamespace = navigation_frame.performance;
-                switch (step)
+                switch (step) 
                 {
                     case 1:
                     {
@@ -24,22 +24,37 @@
                     }
                     case 2:
                     {
-                        // all of these should be filled in now
-                        test_timing_order('responseEnd', 'responseStart');
-                        test_timing_order('domLoading', 'responseEnd');
-                        test_timing_order('domInteractive', 'domLoading');
-                        test_timing_order('domContentLoadedEventStart', 'domInteractive');
-                        test_timing_order('domContentLoadedEventEnd', 'domContentLoadedEventStart');
-                        test_timing_order('domComplete', 'domContentLoadedEventEnd');
+                        test_namespace('navigation');
 
-                        // network events ordering
+                        //
+                        // Tests
+                        //
+                        test_equals(performanceNamespace.navigation.type,
+                                performanceNamespace.navigation.TYPE_NAVIGATE,
+                                'window.performance.navigation.type == TYPE_NAVIGATE');
+
+                        // navigiation must be non-0
+                        test_timing_greater_than('navigationStart', 0);
+
+                        // must be no redirection for this test case
+                        test_timing_equals('redirectStart', 0);
+                        test_timing_equals('redirectEnd', 0);
+
+                        // validate attribute ordering
+                        test_timing_order('fetchStart', 'navigationStart');
                         test_timing_order('domainLookupStart', 'fetchStart');
                         test_timing_order('domainLookupEnd', 'domainLookupStart');
                         test_timing_order('connectStart', 'domainLookupEnd');
                         test_timing_order('connectEnd', 'connectStart');
                         test_timing_order('requestStart', 'connectEnd');
                         test_timing_order('responseStart', 'requestStart');
-                        test_timing_order('loadEventStart', 'domContentLoadedEventEnd', 'loadEventStart before onLoad event');
+                        test_timing_order('responseEnd', 'responseStart');
+                        test_timing_order('domLoading', 'responseEnd');
+                        test_timing_order('domInteractive', 'domLoading');
+                        test_timing_order('domContentLoadedEventStart', 'domInteractive');
+                        test_timing_order('domContentLoadedEventEnd', 'domContentLoadedEventStart');
+                        test_timing_order('domComplete', 'domContentLoadedEventEnd');
+                        test_timing_order('loadEventStart', 'domContentLoadedEventEnd');
                         test_timing_order('loadEventEnd', 'loadEventStart');
 
                         // setup requires the frame to have a previous page with an onunload event handler.
@@ -53,66 +68,24 @@
                         break;
                 }
             }
-
-            function onload_test()
-            {
-                //Do this with a timeout to see the visuals of the navigations.
-                setTimeout("navigate_the_frame();", 1000);
-            }
         </script>
     </head>
     <body>
         <h1>Description</h1>
         <p>This test validates the ordering of the window.performance.timing attributes.</p>
-        
+
         <p>This page should be loaded with a yellow background frame below which contains an unload event
-           handler.  As the page begins to load and before the frame is available, many of the frame's performance
-           timings should be zero.</p>
+           handler.</p>
 
-        <p>After the page loads, the frame is navigated to a new blank page with a green background.
-           At this point, the previously unavailable timings for the frame are now available.</p>
-           
-        <p>Throughout the lifetime of the frame, the navigation timeline is verified.</p>
+        <p>After the page loads, the frame is navigated to a new blank page with a green background.  At this point, the navigation timeline is verified</p>
 
-        <p>This test passes if all of the checks to the frame.window.performance.timing attributes are 
-           correct throughout the navigation scenario and the frame below ends with a green background.  
+        <p>This test passes if all of the checks to the frame.window.performance.timing attributes are
+           correct throughout the navigation scenario and the frame below ends with a green background.
            Otherwise, this test fails.</p>
 
         <h1>Setup</h1>
-        
+
         <div id="log"></div>
         <iframe id="frameContext" onload="onload_test();" src="blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
-
-        <script type="text/javascript">
-            var navigation_frame = document.getElementById("frameContext").contentWindow;
-            performanceNamespace = navigation_frame.performance;
-            
-            test_namespace('navigation');
-
-            //
-            // Tests
-            //
-            test_equals(performanceNamespace.navigation.type,
-                        performanceNamespace.navigation.TYPE_NAVIGATE,
-                        'window.performance.navigation.type == TYPE_NAVIGATE');
-
-            // navigiation must be non-0
-            test_timing_greater_than('navigationStart', 0);
-
-            // must be no redirection for this test case
-            test_timing_equals('redirectStart', 0);
-            test_timing_equals('redirectEnd', 0);
-
-            // the unloadEvent may be before or after fetching, 
-            //so test this is greater than the navigationStart
-            test_timing_order('fetchStart', 'navigationStart');
-
-            // these must be 0 at this point
-            test_timing_equals('domComplete', 0, 'domComplete cannot have a value yet');
-            test_timing_equals('domContentLoadedEventStart', 0, 'domContentLoadedEventStart cannot have a value yet');
-            test_timing_equals('domContentLoadedEventEnd', 0, 'domContentLoadedEventEnd cannot have a value yet');
-            test_timing_equals('loadEventStart', 0, 'loadEventStart before onLoad event');
-            test_timing_equals('loadEventEnd', 0, 'loadEventEnd before onLoad event');
-        </script>
     </body>
 </html>
