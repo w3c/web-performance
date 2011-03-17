@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+ <title>Web Performance Tests</title>
+ <meta charset='utf-8'>
+ <link href="http://www.w3.org/StyleSheets/TR/base.css" rel="stylesheet" type="text/css">
+<style>
+table { border-collapse: collapse; }
+th, td { border: 1px solid black; padding: 0.5ex; }
+td { text-align: left; }
+</style>
+</head>
+<body>
+
+<div class="head">
+
+<a href="http://www.w3.org/"><img height="48" width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home"/></a>
+
+<h1>Web Performance Tests</h1>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
+    of Technology">MIT</acronym></a>, <a
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="intro">Introduction</h2>
+
+<p>This document lists the test suite developed by the Web Performance
+Working Group.</p>
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol>
+<li><a href='#navigation_timing'>Navigation Timing</a></li>
+</ol>
+
+<h2 id='#navigation_timing'>Navigation Timing</h2>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_document_open.htm">test_document_open</a></td>
+<td>
+This test validates window.performance.timing remains constant when a document is replaced using document.open.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigate_within_document.htm">test_navigate_within_document</a></td>
+<td>
+This test validates that all of the window.performance.timing attributes remain unchanged after an in document navigation (URL fragment change).</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_attributes_exist.htm">test_navigation_attributes_exist</a></td>
+<td>
+This test validates that all of the window.performance.navigation attributes exist (but does not validate that their values are correct).
+</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_redirectCount_none.htm">test_navigation_redirectCount_none</a></td>
+<td>
+This test validates that the value of the window.performance.navigation.redirectCount attribute, as well as the window.performance.timing.redirectStart and redirectEnd attributes on a non-redirected navigation.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_backforward.htm">test_navigation_type_backforward</a></td>
+<td>
+This test validates the value of window.performance.navigation.type with a forward and back navigation.
+</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_enums.htm">test_navigation_type_enums</a></td>
+<td>
+This test validates that the TYPE_* enumerations of window.performance.navigation exist and their values are correct.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_reload.htm">test_navigation_type_reload</a></td>
+<td>
+This test validates the value of window.performance.navigation.type with a reloaded navigation.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_performance_attributes_exist.htm">test_performance_attributes_exist</a></td>
+<td>
+This test validates that the navigation and timing attributes exist for window.performance (but does not validate that their values are correct).
+</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_readwrite.htm">test_readwrite</a></td>
+<td>
+This test validates that the window.performance object is read/write.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_attributes_exist.htm">test_timing_attributes_exist</a></td>
+<td>
+This test validates that all of the window.performance.timing attributes exist (but does not validate that their values are correct).</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_client_redirect.htm">test_timing_client_redirect</a></td>
+<td>
+This test validates the values of the window.navigation.redirectCount and the window.performance.timing.redirectStart/End times on a client side redirect.</td>
+</tr>
+<tr>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/test_unique_performance_objects.htm">test_unique_performance_objects</a></td>
+<td>
+This test validates that each window has a unique window.performance object.</td>
+</tr>
+</tbody>
+</table>
+
+
+<hr >
+<address>public-web-perf@w3.org</address>
+
+
+</body>
+</html
