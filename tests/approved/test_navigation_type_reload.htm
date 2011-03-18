@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="/resources/testharness.css" />
     
         <script type="text/javascript">
+            setup({explicit_done: true});
+
             var reload_frame;
             function onload_test()
             {
@@ -32,6 +34,7 @@
                     test_equals(reload_frame.contentWindow.performance.navigation.type,
                                 performanceNamespace.navigation.TYPE_RELOAD,
                                 'window.performance.navigation.type == TYPE_RELOAD');
+                    done();
                 }
             }
         </script>
