@@ -8,13 +8,15 @@
 <link rel="stylesheet" href="/resources/testharness.css" />
 
 <script>
+setup({explicit_done: true});
+
 var originalTiming = {};
-var done = false;
+var didOpen = false;
 
 function onload_test() {
-  if (!done) {
+  if (!didOpen) {
     setTimeout(testTimingWithDocumentOpen, 0);
-    done = true;
+    didOpen = true;
   }
 }
 
@@ -46,6 +48,7 @@ function testTimingWithDocumentOpen() {
                   originalTiming[timingAttributes[i]],
                   timingAttributes[i] + " is the same after document open.");
     }
+    done();
   }, 0);
 }
 </script>
