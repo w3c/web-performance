@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/resources/testharness.css" />
 
         <script type="text/javascript">
+            setup({explicit_done: true});
 
             function onload_test()
             {
@@ -51,6 +52,7 @@
                         test_equals(navigation_frame.performance.navigation.type,
                                 performanceNamespace.navigation.TYPE_BACK_FORWARD,
                                 'window.performance.navigation.type == TYPE_BACK_FORWARD');
+                        done();
                         step++;
                         break;
                     }
