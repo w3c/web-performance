@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-feb-23-2011">Editor's Draft February 23, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-march-17-2011">Editor's Draft March 17, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1780071321d7/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1780071321d7/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/e313a5020039/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/e313a5020039/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/423e77acdc61/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/423e77acdc61/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -267,8 +267,7 @@ a new value is assigned to it. </p>
 <a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<p>Unless otherwise specified, in rest of this work, time is measured in
-milliseconds since midnight of January 1, 1970 (UTC).</p>
+<p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
 
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation
 Timing</h2>
@@ -367,11 +366,6 @@ when navigating and all redirects and equivalents are from the
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 
-<div><p class="note">The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
-relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
-across documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
-IP address but on a different port.</p></div>
-
 <h4><code><dfn id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>If the new resource is to be fetched using HTTP GET
@@ -462,8 +456,8 @@ available must set it as undefined. When this attribute is available, if the
 <a href="http://dev.w3.org/html5/spec/urls.html#url-scheme">scheme</a> of the
 current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
 attribute must return the time immediately before the user agent starts the
-handshake process to secure the current connection. If the handshakeStart
-attribute is available but HTTPS is not used, this attribute must return zero.
+handshake process to secure the current connection. If this attribute is
+available but HTTPS is not used, this attribute must return zero.
 </p>
 
 <h4><code><dfn id="nt-request-start">requestStart</dfn></code> attribute</h4>
@@ -602,7 +596,7 @@ such as <a href="#nt-navigation-info-type-navigate">TYPE_NAVIGATE</a>, as if in 
 <p>This attribute must return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the 
-<a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
+<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">
 same origin</a> as the destination document, this attribute must return zero. </p>
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#nt-window-performance">window.performance</a> </code> 
@@ -756,10 +750,10 @@ non-normative intervals between timings.</p>
     carry out these additional steps:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
-        record the time as <a href="#nt-secure-connect-start">handshakeStart</a>
+        record the time as <a href="#nt-secure-connect-start">secureConnectionStart</a>
         immediately before the handshake process to secure the connection.</li>
     <li>If the scheme of the current document is not HTTPS, the user agent must
-        set the value of <a href="#nt-secure-connect-start">handshakeStart</a> to 0.</li>
+        set the value of <a href="#nt-secure-connect-start">secureConnectionStart</a> to 0.</li>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
@@ -836,10 +830,6 @@ non-normative intervals between timings.</p>
     immediately after the user agent completes the load event.</li>
 </ol>
 
-<p>The accuracy of the timing-related attributes in the <a
-href="#nt-navigation-timing-interface">PerformanceTiming</a> interfaces is recommended to
-be one millisecond or finer. </p>
-
 <p>Some user agents maintain the DOM structure of the document in memory
 during navigation operations such as forward and backward. In those cases,
 the window.performance.timing and window.performance.navigation objects must not
@@ -854,7 +844,20 @@ window.performance.timing and window.performance.navigation objects.
 <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
 <p>This section is non-normative.</p>
 
-<h3 id="cross-directory"><span class="secno">5.1 </span>Cross-directory access</h3>
+<h3 id="info_disclosure"><span class="secno">5.1 </span>Information disclosure</h3>
+<p>There is the potential for disclosing an end-user's browsing and activity history by using
+carefully crafted timing attacks. For instance, the unloading time reveals how long the previous
+page takes to execute its unload handler, which could be used to infer the user's login status.
+These attacks have been mitigated by enforcing the
+<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a> policy when
+timing information involving the previous navigation is accessed.</p>
+
+<p>The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
+relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
+across documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
+IP address but on a different port.</p>
+
+<h3 id="cross-directory"><span class="secno">5.2 </span>Cross-directory access</h3>
 <p>Different pages sharing one host name, for example contents from different authors hosted
 on sites with user generated content are considered from the same origin because there is no
 feature to restrict the access by pathname. Navigating between these pages allows a latter page
@@ -877,11 +880,6 @@ all so it's not always feasible to mitigate this attack.</p>
 <p>The window.performance object is replaceable to avoid conflicts with existing pages using the
 same object. By doing that, it is possible for third-party to replace the object and scripts
 relying on the interface described in this work would break.</p>
-
-<h3 id="info_disclosure"><span class="secno">6.3 </span>Information disclosure</h3>
-<p>There is the potential for disclosing an end-user�s browsing and activity history by using
-carefully crafted timing attacks. These attacks have been mitigated by disallowing the timing of
-the root document in cross-origin accesses.</p>
 
 <h2 id="references"><span class="secno">7 </span>References</h2>
 
