@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="/resources/testharness.css" />
     
         <script type="text/javascript">
+            setup({explicit_done: true});
+
             var redirect_frame;
             function onload_test()
             {
@@ -27,6 +29,7 @@
                     test_equals(redirect_frame.contentWindow.performance.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on an client redirected navigation');
                     test_equals(redirect_frame.contentWindow.performance.timing.redirectStart, 0, 'timing.redirectStart == 0 on an client redirected navigation');
                     test_equals(redirect_frame.contentWindow.performance.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on an client redirected navigation');
+                    done();
                 }
             }
         </script>
