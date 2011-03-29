@@ -30,7 +30,7 @@
    table tbody th:first-child { border-left:solid }
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
    div.parameters{ display:block; margin-left: 25px;}
-   div.methods { display:block; margin-top:30px;margin-left :25px;}   
+   div.methods { display:block; margin-top:30px;margin-left :25px;}
 .style1 {
 	font-family: monospace;
 	color: orangered;
@@ -47,7 +47,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-march-07-2011">Working Draft March 7th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-march-28-2011">Working Draft March 28th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -60,12 +60,11 @@
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Inc.</span>, <span
       class="email">jmann@microsoft.com</span> </dd>
-    <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
-      class="org">Microsoft Inc.</span>, <span
-      class="email">aquach@microsoft.com</span> </dd>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
       class="org">Google Inc.</span>, <span
       class="email">zhihengw@google.com</span> </dd>
+    <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
+      class="org">Microsoft Inc. <i>(Until March 2011)</i></span></dd>
 </dl>
 
    <p class=copyright><a
@@ -143,16 +142,14 @@ cite this document as other than work in progress. </p>
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
   <li><a href="#resource-timing-0"><span class="secno">4 </span>Resource
-    Timing</a> 
+    Timing</a>
     <ol class="toc">
-      <li><a href="#introduction-1"><span class="secno">4.1
-        </span>Introduction</a></li>
-      <li><a href="#resourcetiming"><span class="secno">4.2
-        </span>The <code>PerformanceResourceTiming</code> Interface</a></li>
-      <li><a href="#resource-timing-methods"><span
-        class="secno">4.3 </span> The Resource Timing Methods</a></li>
-      <li><a href="#processing-model"><span class="secno">4.4
-        </span>Processing Model</a></li>
+      <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
+      <li><a href="#resources-included"><span class="secno">4.2</span> Resources Included</a></li>
+      <li><a href="#performance-resource-timing"><span class="secno">4.3</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
+      <li><a href="#performance-resource-timing-methods"><span class="secno">4.3 </span> The Resource Timing Methods</a></li>
+      <li><a href="#cross-origin-resources"><span class="secno">4.5 </span> Cross-origin Resources</a></li>
+      <li><a href="#processing-model"><span class="secno">4.6</span> Processing Model</a></li>
 
     </ol>
   </li>
@@ -165,16 +162,16 @@ cite this document as other than work in progress. </p>
 <h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
 
 <p>This section is non-normative.</p>
+<p>
 User latency is an important quality benchmark for Web Applications. While
 JavaScript-based mechanisms can provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
-unable to provide a complete end-to-end latency picture. While <a
-href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">NavigationTiming</a> address
+unable to provide a complete end-to-end latency picture. While <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">NavigationTiming</a> address
 part of the problem by providing timing information associated with a
-navigation, this document introduces the <a
-href="http://pimpmyspec.net/aquarium.py/output?uri=http%3A%2F%2Fkvnwg.com%2FResourceTiming%2FOverview.html&amp;process_filter=on&amp;process_toc=on&amp;process_xref=on&amp;process_sub=on&amp;process_annotate=on&amp;filter=&amp;annotation=&amp;newline_char=LF&amp;tab_char=SPACE&amp;min_depth=2&amp;max_depth=6&amp;w3c_compat_xref_a_placement=on&amp;parser=lxml.html&amp;serializer=html5lib&amp;output_encoding=ascii#resource-timing">ResourceTiming</a>
+navigation, this document introduces the <a href="#resource-timing">ResourceTiming</a>
 interface to allow Javascript mechanisms to collect complete timing
-information related to resources on a document. 
+information related to resources on a document.
+</p>
 
 <div class="XXX">
 <p>Add examples when the interface stabilizes.</p>
@@ -194,8 +191,7 @@ specification is normative. </p>
 <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
 "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
 are to be interpreted as described in RFC2119. For readability, these words
-do not appear in all uppercase letters in this specification. <a
-href="http://pimpmyspec.net/aquarium.py/output?uri=http%3A%2F%2Fkvnwg.com%2FResourceTiming%2FOverview.html&amp;process_filter=on&amp;process_toc=on&amp;process_xref=on&amp;process_sub=on&amp;process_annotate=on&amp;filter=&amp;annotation=&amp;newline_char=LF&amp;tab_char=SPACE&amp;min_depth=2&amp;max_depth=6&amp;w3c_compat_xref_a_placement=on&amp;parser=lxml.html&amp;serializer=html5lib&amp;output_encoding=ascii#references">[RFC2119]</a>
+do not appear in all uppercase letters in this specification. <a href="#rfc2119">[RFC2119]</a>
 </p>
 
 <p>Requirements phrased in the imperative as part of algorithms (such as
@@ -222,8 +218,7 @@ title="">Foo</code>". </p>
 <p>The term DOM is used to refer to the API set made available to scripts in
 Web applications, and does not necessarily imply the existence of an actual
 <code>Document</code> object or of any other <code>Node</code> objects as
-defined in the DOM Core specifications. <a
-href="http://pimpmyspec.net/aquarium.py/output?uri=http%3A%2F%2Fkvnwg.com%2FResourceTiming%2FOverview.html&amp;process_filter=on&amp;process_toc=on&amp;process_xref=on&amp;process_sub=on&amp;process_annotate=on&amp;filter=&amp;annotation=&amp;newline_char=LF&amp;tab_char=SPACE&amp;min_depth=2&amp;max_depth=6&amp;w3c_compat_xref_a_placement=on&amp;parser=lxml.html&amp;serializer=html5lib&amp;output_encoding=ascii#references">[DOM3CORE]</a>
+defined in the DOM Core specifications. <a href="#DOM3Core">[DOM3CORE]</a>
 </p>
 
 <p>A DOM attribute is said to be <em>getting</em> when its value is being
@@ -231,140 +226,138 @@ retrieved (such as by author script), and is said to be <em>setting</em> when
 a new value is assigned to it. </p>
 
 <p>The term "JavaScript" is used to refer to ECMA262, rather than the
-official term ECMAScript, since the term JavaScript is more widely known. <a
-href="http://pimpmyspec.net/aquarium.py/output?uri=http%3A%2F%2Fkvnwg.com%2FResourceTiming%2FOverview.html&amp;process_filter=on&amp;process_toc=on&amp;process_xref=on&amp;process_sub=on&amp;process_annotate=on&amp;filter=&amp;annotation=&amp;newline_char=LF&amp;tab_char=SPACE&amp;min_depth=2&amp;max_depth=6&amp;w3c_compat_xref_a_placement=on&amp;parser=lxml.html&amp;serializer=html5lib&amp;output_encoding=ascii#references">[ECMA262]</a>
+official term ECMAScript, since the term JavaScript is more widely known. <a href="#ECMA262">[ECMA262]</a>
 </p>
 
-<p>Without otherwise specified, in rest of this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+<p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
 
-<h2 id="resource-timing-0"><span class="secno">4 </span>Resource Timing</h2>
+<h2 id="resource-timing"><span class="secno">4 </span>Resource Timing</h2>
 
 <h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
 
-<p>This section is non-normative</p>
+<p>This section is non-normative.</p>
 
-<p>The <a href="#performance-resource-timing">PeformanceResourceTiming</a>
-interface facilitates timing measurement of resources on the root page. It
-represents the timing information related to an <a
-href="http://dev.w3.org/html5/spec/Overview.html#elements">element</a>. 
-This interface is available for
-<a href="http://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest</a> and the following
-HTML elements:
-<a href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>,
-<a href="http://dev.w3.org/html5/spec/Overview.html#the-img-element">img</a>,
-<a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>,
-<a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
-<a href="http://dev.w3.org/html5/spec/video.html#audio">audio</a>,
-<a href="http://dev.w3.org/html5/spec/video.html#video">video</a>,
-<a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>
-and <a
-href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a>
-with the link type of <a
-href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">stylesheet</a>.</p>
+<p>
+    The <a href="#performance-resource-timing">PeformanceResourceTiming</a>
+    interface facilitates timing measurement of downloadable resources on the
+    root page. It represents the timing information related to resources that
+    initiate network downloads. For example, this interface is available for
+    <a href="http://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest</a> and HTML
+    elements such as
+    <a href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>,
+    <a href="http://dev.w3.org/html5/spec/Overview.html#the-img-element">img</a>,
+    <a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>,
+    <a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
+    <a href="http://dev.w3.org/html5/spec/video.html#audio">audio</a>,
+    <a href="http://dev.w3.org/html5/spec/video.html#video">video</a>,
+    <a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>
+    and <a href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a>
+    with the link type of
+    <a href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">
+    stylesheet</a>.
+</p>
 
 <p>The term "resource" is also used to refer to these elements in this work. </p>
-</div>
 
 <div class="note">
 <p>TODO: make availability a normative requirement.</p>
 </div>
 
 <div class="head">
-<h3 id="the-resourcetiming-interface"><span class="secno">4.2 </span>The
-<code><a href="#resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
-<pre class="idl">interface <a href="#resource-timing">PerformanceResourceTiming</a> {
-  readonly attribute DOMString <a href="#rt-allowed-domains">allowedDomains</a>;
+<h3 id="resources-included"><span class="secno">4.2 Resources Included
+in the</span>
+<code><a href="#performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
+<p>
+	The <a href="#performance-resource-timing">PeformanceResourceTiming</a>
+	interface must include all downloadable resources initiated by the current browsing context.
+	A downloadable resource is any resource that the browser initiates a request for retrieval
+	from the networking layer. Downloadable resources that are retrieved from the browser cache must be included in the
+	<a href="#performance-resource-timing">PeformanceResourceTiming</a>
+	interface.
+</p>
+<p>
+    Only the first 1000 resources initiated by the current browsing context are included in the
+    <a href="#performance-resource-timing">PeformanceResourceTiming</a>
+	interface unless <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>
+	or <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> are called.
+</p>
+<h3><span class="secno">4.3 </span>The
+<code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
-  const unsigned short <a href="#resource-type-other">RESOURCE_OTHER</a> = 0;
-  const unsigned short <a href="#resource-type-link-css">RESOURCE_LINK_CSS</a> = 1;
-  const unsigned short <a href="#resource-type-cssimage">RESOURCE_CSSIMAGE</a> = 2;
-  const unsigned short <a href="#resource-type-script">RESOURCE_SCRIPT</a> = 3;
-  const unsigned short <a href="#resource-type-image">RESOURCE_IMAGE</a> = 4;
-  const unsigned short <a href="#resource-type-object">RESOURCE_OBJECT</a> = 5;
-  const unsigned short <a href="#resource-type-frame">RESOURCE_FRAME</a> = 6;
-  const unsigned short <a href="#resource-type-subdocument">RESOURCE_SUBDOCUMENT</a> = 7;
-  const unsigned short <a href="#resource-type-xhr">RESOURCE_XMLHTTPREQUEST</a> = 8;
-  const unsigned short <a href="#resource-type-embed">RESOURCE_EMBED</a> = 9;
-  const unsigned short <a href="#resource-type-audio">RESOURCE_AUDIO</a> = 10;
-  const unsigned short <a href="#resource-type-video">RESOURCE_VIDEO</a> = 11;
-  const unsigned short <a href="#resource-type-reserved">RESOURCE_RESERVED</a> = 255;  
-  
-  readonly attribute unsigned short <a href="#resource-type" title="resourcetype">resourceType</a>;
-  
+<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> {
+
+  const unsigned short <a href="#type-other">RESOURCE_OTHER</a> = 0;
+  const unsigned short <a href="#type-link-css">RESOURCE_LINK_CSS</a> = 1;
+  const unsigned short <a href="#type-cssimage">RESOURCE_CSSIMAGE</a> = 2;
+  const unsigned short <a href="#type-script">RESOURCE_SCRIPT</a> = 3;
+  const unsigned short <a href="#type-image">RESOURCE_IMAGE</a> = 4;
+  const unsigned short <a href="#type-object">RESOURCE_OBJECT</a> = 5;
+  const unsigned short <a href="#type-frame">RESOURCE_FRAME</a> = 6;
+  const unsigned short <a href="#type-subdocument">RESOURCE_SUBDOCUMENT</a> = 7;
+  const unsigned short <a href="#type-xhr">RESOURCE_XMLHTTPREQUEST</a> = 8;
+  const unsigned short <a href="#type-embed">RESOURCE_EMBED</a> = 9;
+  const unsigned short <a href="#type-audio">RESOURCE_AUDIO</a> = 10;
+  const unsigned short <a href="#type-video">RESOURCE_VIDEO</a> = 11;
+  const unsigned short <a href="#type-reserved">RESOURCE_RESERVED</a> = 255;
+
+  readonly attribute unsigned short <a href="#type" title="type">type</a>;
   readonly attribute DOMString <a href="#url" title="url">url</a>;
+  readonly attribute DOMString <a href="#id" title="url">id</a>;
+
   readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
   readonly attribute unsigned long long <a href="#redirect-end" title="redirectend">redirectEnd</a>;
   readonly attribute unsigned long long <a href="#fetch-start" title="fetchstart">fetchStart</a>;
-  readonly attribute unsigned long long <a href="#domain-lookupstart" title="domainlookupstart">domainLookupStart</a>;
-  readonly attribute unsigned long long <a href="#domain-lookupend" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute unsigned long long <a href="#domainlookup-start" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute unsigned long long <a href="#domainlookup-end" title="domainlookupend">domainLookupEnd</a>;
   readonly attribute unsigned long long <a href="#connect-start" title="connectstart">connectStart</a>;
   readonly attribute unsigned long long <a href="#connect-end" title="connectend">connectEnd</a>;
   readonly attribute unsigned long long <a href="#request-start" title="requeststart">requestStart</a>;
-  readonly attribute unsigned long long <a href="#request-end" title="requestend">requestEnd</a>;
   readonly attribute unsigned long long <a href="#response-start" title="responsestart">responseStart</a>;
   readonly attribute unsigned long long <a href="#response-end" title="responseend">responseEnd</a>;
-  readonly attribute unsigned long long <a href="#load-start" title="loadeventstart">loadEventStart</a>;
-  readonly attribute unsigned long long <a href="#load-end" title="loadeventend">loadEventEnd</a>;  
+  readonly attribute unsigned long long <a href="#fetch-end" title="fetchend">fetchEnd</a>;
 };</pre>
 
-<h4 id="alloweddomain-attribute"><code><dfn
-id="rt-allowed-domains">allowDomain</dfn></code> attribute</h4>
+<h4 id="type-attribute"><code><dfn id="type">type</dfn></code> attribute</h4>
 
-<p>This attribute is used to indicate the domains that can access the
-ResourceTiming object. If the current document has a meta element whose name
-attribute is "timing-allowed-domains", this attribute must return its
-corresponding content attribute. It must return an empty string if there is no
-meta element whose name attribute is "timing-allow-domains". </p>
-
-<div class="example">
-<p>To allow any pages from either foo.com or bar.net to access the
-ResourceTiming objects of a resource, the following statement needs to be
-added into the resource's HTML header: </p>
-<pre>&lt;meta name="timing-allowed-domains" content="foo.com,bar.net"&gt;&lt;/pre&gt;</pre>
-</div>
-
-<div class="note">
-<p>TODO: The exact mechanism of the access control is TBD.</p>
-</div>
-
-<h4 id="resourcetype-attribute"><code><dfn id="resource-type">resourceType</dfn></code> attribute</h4>
-
-<p>This attribute must return one of the following <a href="#resource-type">resource types</a>: </p>
+<p>This attribute must return one of the following resource types: </p>
 <dl>
-  <dt><dfn id="resource-type-other">RESOURCE_OTHER</dfn>: the resource is not of any type listed below.</dt>
-  <dt><dfn id="rt-initiator-type-link-css">RESOURCE_LINK_CSS</dfn>: the resource is an external cascading stylesheet.</dt>
-  <dt><dfn id="resource-type-cssimage">RESOURCE_CSSIMAGE</dfn>: the resource is a CSS image.</dt>
-  <dt><dfn id="resource-type-script">RESOURCE_SCRIPT</dfn>: the resource is script.</dt>
-  <dt><dfn id="resource-type-image">RESOURCE_IMAGE</dfn>: the resource is an image.</dt>
-  <dt><dfn id="rt-resource-type-object">RESOURCE_OBJECT</dfn>: the resource is an object.</dt>
-  <dt><dfn id="resource-type-cssimage">RESOURCE_FRAME</dfn>: the resource is a frame.</dt>
-  <dt><dfn id="rt-resource-type-subdocument">RESOURCE_SUBDOCUMENT</dfn>: the resource is a document.</dt>
-  <dt><dfn id="rt-resource-type-xhr">RESOURCE_XMLHTTPREQUEST</dfn>: the resource is an XML HTTP request.</dt>
-  <dt><dfn id="rt-resource-type-embed">RESOURCE_EMBED</dfn>: the resource is an embed.</dt>
-  <dt><dfn id="rt-resource-type-audio">RESOURCE_AUDIO</dfn>: the resource is an audio element.</dt>
-  <dt><dfn id="rt-resource-type-audio">RESOURCE_VIDEO</dfn>: the resource is a video element.</dt>
-  <dt><dfn id="rt-resource-type-audio">RESOURCE_RESERVED</dfn>: this is reserved for future use.</dt>
+  <dt><dfn id="type-other">RESOURCE_OTHER</dfn>: the resource is not of any type listed below.</dt>
+  <dt><dfn id="type-link-css">RESOURCE_LINK_CSS</dfn>: the resource is an external cascading stylesheet.</dt>
+  <dt><dfn id="type-cssimage">RESOURCE_CSSIMAGE</dfn>: the resource is a CSS image.</dt>
+  <dt><dfn id="type-script">RESOURCE_SCRIPT</dfn>: the resource is script.</dt>
+  <dt><dfn id="type-image">RESOURCE_IMAGE</dfn>: the resource is an image.</dt>
+  <dt><dfn id="type-object">RESOURCE_OBJECT</dfn>: the resource is an object.</dt>
+  <dt><dfn id="type-frame">RESOURCE_FRAME</dfn>: the resource is a frame.</dt>
+  <dt><dfn id="type-subdocument">RESOURCE_SUBDOCUMENT</dfn>: the resource is a document
+      (IFRAME).</dt>
+  <dt><dfn id="type-xhr">RESOURCE_XMLHTTPREQUEST</dfn>: the resource is an XML HTTP request.</dt>
+  <dt><dfn id="type-embed">RESOURCE_EMBED</dfn>: the resource is an embed.</dt>
+  <dt><dfn id="type-audio">RESOURCE_AUDIO</dfn>: the resource is an audio element.</dt>
+  <dt><dfn id="type-video">RESOURCE_VIDEO</dfn>: the resource is a video element.</dt>
+  <dt><dfn id="type-reserved">RESOURCE_RESERVED</dfn>: this is reserved for future use.</dt>
 </dl>
 
-<h4 id="url-attribute"><code><dfn id="rt-url">url</dfn></code> attribute</h4>
+<h4 id="url-attribute"><code><dfn id="url">url</dfn></code> attribute</h4>
 
 <p>This attribute must return the <a
 href="http://dev.w3.org/html5/spec/Overview.html#url">URL</a> of the
 associated resource.</p>
 
-<h4 id="fetch-start"><code><dfn
-id="rt-fetch-start">fetchStart</dfn></code> attribute</h4>
+<h4 id="id-attribute"><code><dfn id="id">id</dfn></code> attribute</h4>
+
+<p>This attribute must return the <a
+href="http://dev.w3.org/html5/spec/Overview.html#the-id-attribute">ID</a> attribute of the element that initiated the download
+    request for the resource.</p>
+
+<h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts to <a
-href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a>
-the resource. This time should not be overwritten if the user agent retries
-fetching the same resource due to failures. When a resource is set or changed
-and if it results in a <a
-href="http://dev.w3.org/html5/spec/Overview.html#fetch">fetch</a>, its timing
-attribute must be updated.</p>
+href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a> the
+    resource. This time should not be overwritten if the user agent retries fetching
+    the same resource due to failures.</p>
 
-<h4 id="domain-lookup-start"><code><dfn
-id="domain-lookup-start">domainLookupStart</dfn></code> attribute</h4>
+<h4 id="domainlookup-start-attribute"><code><dfn
+id="domainlookup-start">domainLookupStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts
 the domain name lookup for the resource.
@@ -374,7 +367,13 @@ is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-ap
 application caches</a> or local resources, this attribute must return the same
 value as <a href="#fetch-start">fetchStart</a>. </p>
 
-<h4 id="domain-lookup-end"><code><dfn id="domain-lookup-end">domainLookupEnd</dfn></code> attribute</h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#domainlookup-start">domainLookupStart</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="domainlookup-end-attribute"><code><dfn id="domainlookup-end">domainLookupEnd</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
 the domain name lookup for the resource.
@@ -388,17 +387,29 @@ value as <a href="#fetch-start">fetchStart</a>. </p>
 domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
 
-<h4 id="connect-start"><code><dfn id="connect-start">connectStart</dfn></code> attribute</h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#domainlookup-end">domainLookupEnd</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="connect-start-attribute"><code><dfn id="connect-start">connectStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent start
-establishing the connection to the server to retrieve the resource. 
+establishing the connection to the server to retrieve the resource.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
-application caches</a> or local resources, this attribute must return value of 
-<a href="#domain-lookup-end">domainLookupEnd</a>.</p>
+application caches</a> or local resources, this attribute must return value of
+<a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
-<h4 id="connect-end"><code><dfn
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#connect-start">connectStart</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="connect-end-attribute"><code><dfn
 id="connect-end">connectEnd</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
@@ -407,7 +418,7 @@ If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">pers
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
 href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the value of
-<a href="#nt-domain-lookup-end">domainLookupEnd</a>.</p>
+<a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
 <p>If the transport connection fails and the user agent reopens a connection,
 <a href="#connect-start">connectStart</a> and <a
@@ -418,7 +429,13 @@ values of the new connection. </p>
 establish the transport connection. It must not include other time interval
 such as SSL handshake and SOCKS authentication. </p>
 
-<h4 id="request-start"><code><dfn id="request-start">requestStart</dfn></code> attribute</h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#connect-end">connectEnd</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="request-start-attribute"><code><dfn id="request-start">requestStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent
 starts requesting the resource. It is set prior to checking HTTP cache.</p>
@@ -428,90 +445,52 @@ agent reopens a connection and resend the request, <a
 href="#request-start">requestStart</a> must return the corresponding values
 of the new request.</p>
 
-<h4 id="response-start"><code><dfn id="response-start">responseStart</dfn></code> attribute </h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#request-start">requestStart</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="response-start-attribute"><code><dfn id="response-start">responseStart</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent receives
 the first byte of the response from the server, or from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
-<h4 id="response-end"><code><dfn id="response-end">responseEnd</dfn></code> attribute </h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#response-start">responseStart</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+
+<h4 id="response-end-attribute"><code><dfn id="response-end">responseEnd</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
 receiving the last byte of the resource from from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
-<h4 id="load-event-start"><code><dfn id="rt-load-start">loadEventStart</dfn></code> attribute</h4>
+<p>
+If there are HTTP redirects or equivalent when fetching the resource,
+and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
+as the current document, <a href="#response-end">responseEnd</a> must return
+the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
-<p>This attribute must return the time immediately before the load event of the
-the resource is fired. It must return zero when the load event is not fired
-yet.</p>
+<h4 id="fetch-end-attribute"><code><dfn id="fetch-end">fetchEnd</dfn></code> attribute</h4>
 
-<h4 id="load-event-end"><code><dfn id="load-event-end">loadEventEnd</dfn></code> attribute</h4>
+<p>This attribute must return the time immediately after the user agent receives the last byte of the response of the resource from the server.</p>
 
-<p>This attribute must return the time immediately after the load event of the
-resource is completed. It must return zero when the load event is not fired yet.</p>
-
-<!--
-<h3 id="the-resourcetimingcollector-interface"><span class="secno">4.3
-</span> The <code><dfn
-id="resourcetimingcollector">ResourceTimingCollector</dfn></code>
-interface</h3>
-<pre class="idl">interface ResourceTimingEvent : Event {
- readonly attribute array[ResourceTiming] timing;
-};
-
-interface ResourceTimingCollector {
-  void addEventListener(in EventListener listener);
-  void removeEventListener(in EventListener listener);
-};
-
-[Supplemental]
-interface Performance {
-  ResourceTimingCollector createResourceTimingCollector();
-};</pre>
-
-<p></p>
-
-<p>ResourceTiming objects associated with embedded objects on the root
-document must be saved until the root document completes loading. If a
-ResourceTimingCollector object is created and an event handler is registered
-using addEventListener before the root document completes loading, all
-ResourceTiming objects must be delivered to the handler. If a
-ResourceTimingCollector object is created after the root document finishes
-loading, subsequent events should be delivered to the registered handlers as
-they occur. </p>
-
-<div class="example">
-
-<div class="exampleHeader">
-Example</div>
-
-<p>Any ResourceTiming object created prior to the end of onload will receive
-events for all resources (even if they complete prior to the object's
-creation). If a ResourceTiming object is created after onload, it will only
-receive events about resources completed after the object's creation. This
-allows the browser optimal opportunities to garbage collect. </p>
-</div>
-
-<h3 id="rt-performanceresourcetiming-interface">
-	<span class="secno">4.4 </span>The 
-	<code><dfn id="resourcetimingcollector">PerformanceResourceTiming</dfn></code>
-	 Interface (An alternate approach)
-</h3>
--->
-
-<h3 id="the-resourcetiming-interface"><span class="secno">4.3 </span>The Resource Timing Methods</h3>
+<h3 id="performance-resource-timing-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
 [Supplemental] Performance {
   void clearResourceTimings();
-  PerformanceResourceTimingList getResourceTimings ([optional] in unsigned short initiatorType);
+  PerformanceResourceTimingList getResourceTimings ([optional] in unsigned short type);
   PerformanceResourceTimingList getResourceTimingsByID( in DOMString id );
   PerformanceResourceTimingList getResourceTimingsByLocation( in Location location );
-  void setResourceTimingBufferSize (in unsigned long length);
-  
+  void setResourceTimingBufferSize (in unsigned long maxSize);
+
   attribute Function onbufferfull;
 };</pre>
 <pre class="idl">
@@ -523,7 +502,10 @@ interface PerformanceResourceTimingList{
 
 <div class="methods">
     <h4 id="rt-clearResourceTimings"><code>clearResourceTimings</code> method</h4>
-	<p>The method <code>clearResourceTimings</code> clears the buffered array used to store a list of <code>PerformanceResourceTiming</code>.  Only the first 1000 <code>PerformanceResourceTiming</code> will be stored. Unless otherwise specified by <code>setResourceTimingBufferSize()</code>.</p>
+	<p>The method <code>clearResourceTimings</code> clears the buffer used to store the current
+    list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.
+    Only the first 1000 <a href="#performance-resource-timing">PerformanceResourceTiming</a>
+    resources will be stored, unless otherwise specified by <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>.</p>
 		<div class="parameters">
 			<p><b>No parameters</b></p>
 			<p><b>No return value</b></p>
@@ -533,188 +515,150 @@ interface PerformanceResourceTimingList{
 
 <div class="methods">
 	<h4 id="rt-getResourceTimings"><code>getResourceTimings</code> method</h4>
-	<p>The <code>getResourceTimings</code> interface retrieves a buffered array of <code>PerformanceResourceTiming</code> as stored by the user agent. When supplied with an <code>initiatorType</code>, this will return a filtered list. When the origin of the root document differs from that of the resources, only fetchStart and if available, fetchEnd, loadEventStart and loadEventEnd are available, otherwise all attributes are available.</p>
+	<p>The <code>getResourceTimings</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources. When supplied with an <a href="#type"><code>type</code></a>, this will return a filtered list.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			[optional] in <code>initiatorType</code> type of unsigned short
-			<p>The initiatorType parameter specifies which resource types to retrieve. If no initiatorType is supplied all resource timings are returned.</p>
+			[optional] in <a href="#type"><code>type</code></a> type of unsigned short
+			<p>The type parameter specifies which types to retrieve. If no type is supplied all resource timings are returned.</p>
 			<p><b>Return Value</b></p>
 			<p><code>PerformanceResourceTimingList</code></p>
-			<p>A list of <code>PerformanceResourceTiming</code>.</p>
+			<p>A list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</p>
 			<p><b>No exceptions</b></p>
 		</div>
 </div>
 
 <div class="methods">
 	<h4 id="rt-getResourceTimingsById"><code>getResourceTimingsById</code> method</h4>
-	<p>The <code>getResourceTimingsById</code> interface retrieves a buffered array of <code>PerformanceResourceTiming</code> as as identified by the id and stored by the user agent. This will return a filtered list of Resource Timings as identified by the <code>id</code>.</p>
-	<p>The default number of buffers returned is a MAX of 1000 PerformanceResourceTiming.</p>	
+	<p>The <code>getResourceTimingsById</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources as identified by the specified id.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			in <code>id</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The id parameter specifies which resource timings to retrieve.</p>
+			<p>The id parameter specifies the <a href="http://dev.w3.org/html5/spec/Overview.html#the-id-attribute">ID</A> of which resources to retrieve.</p>
 			<p><b>Return Value</b></p>
 			<p><code>PerformanceResourceTimingList</code></p>
-			<p>A list of <code>PerformanceResourceTiming</code>.</p>
+			<p>A list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</p>
 			<p><b>No exceptions</b></p>
 		</div>
 </div>
 
 <div class="methods">
 	<h4 id="rt-getResourceTimingsByLocation"><code>getResourceTimingsByLocation</code> method</h4>
-	<p>The <code>getResourceTimingsByLocation</code> interface retrieves a buffered array of <code>PerformanceResourceTiming</code> stored by the user agent and identified by a location. This will return a filtered list of Resource Timings as identified by the location.</p>
-	<p>The default number of buffers returned is a MAX of 1000 PerformanceResourceTiming.</p>	
+	<p>The <code>getResourceTimingsByLocation</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources as identified by the location.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			in <span class="style1">location</span> type of 
+			in <span class="style1">location</span> type of
 			<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Interfaces-DOMLocator">
 			<span class="style2">DOMLocator</span></a>
 			<p>The id parameter specifies which resource timings to retrieve.</p>
 			<p><b>Return Value</b></p>
 			<p><code>PerformanceResourceTimingList</code></p>
-			<p>A list of <code>PerformanceResourceTiming</code>.</p>
+			<p>A list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</p>
 			<p><b>No exceptions</b></p>
 		</div>
 </div>
 
 <div class="methods">
 	<h4 id="rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code> method</h4>
-	<p>The method <code>setResourceTimingBufferSize</code> is a setter that expands the buffered array used to store a list of <code>PerformanceResourceTiming</code>.</p>
-	<p>If this method is not called, the default number of buffers stored is a MAX of 1000 PerformanceResourceTiming.</p>	
+	<p>The method <code>setResourceTimingBufferSize</code> updates the maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources that will be stored in the buffer.</p>
+	<p>If this method is not called, the default maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources stored is 1000.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			in <code>length</code> type of unsigned long
-			<p>The length parameter allows the site developer to specify a buffer size that is greater or smaller than the default of 1000 <code>PerformanceResourceTiming</code>.</p>
+			in <code>maxSize</code> type of unsigned long
+			<p>The maxSize parameter sets the maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources that will be stored in the buffer.</p>
 			<p><b>No return value</b></p>
 			<p><b>No exceptions</b></p>
 		</div>
 </div>
-	
+
 <div class="methods">
 	<h4 id="rt-onbufferfull"><code>onbufferfull</code> attribute</h4>
-	<p>The callback onbufferfull is triggered when the buffer used to store a list of <code>PerformanceResourceTiming</code> is full. The callback can be used to package existing <code>PerformanceResourceTiming</code> list and clear the buffered <code>PerformanceResourceTiming</code> list. While executing the onbufferfull callback, <code>PerformanceResourceTiming</code> will continue to be collected beyond the initial restriction of the first 1000 <code>PerformanceResourceTiming</code> until one of the following occurs:
-		<ol>
-		<li><code>clearResourceTimings()</code> is called - The PerformanceResourceTimingList will begin with the 1001th item if it exists and the first 1000 elements are released. If the 1001th item does not exist the buffer is cleared. The max length of the PerformanceResourceTimingList is still 1000 unless otherwise specified by setResourceTimingBufferSize().</li>
-		<li><code>setResourceTimingBufferSize()</code> is called - The PerformanceResourceTimingList will extend and / or truncate to the buffer size specified.</li>
-		<li>Neither <code>clearResourceTimings()</code> or <code>setResourceTimingBufferSize()</code> is called during the execution of the onbufferfull callback 
-		- no updates are made to the PerformanceResourceTimingList.</li>
-		</ol>
-	</p>
+	<p>The callback onbufferfull is triggered when the buffer used to store the list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> is full.
+    The callback can be used to package existing <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources and
+    clear the buffered <a href="#performance-resource-timing">PerformanceResourceTiming</a> list.
+    While executing the onbufferfull callback, <a href="#performance-resource-timing">PerformanceResourceTiming</a> will continue to be collected beyond the initial restriction of the first 1000
+    <a href="#performance-resource-timing">PerformanceResourceTiming</a> until one of the following occurs:
+    <ol>
+		<li>
+            <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> is called - The PerformanceResourceTimingList will begin with the
+            1001th item if it exists and the first 1000 elements are released.
+            If the 1001th item does not exist the buffer is cleared. The max length of the PerformanceResourceTimingList
+            is still 1000 unless otherwise specified by <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>.
+        </li>
+		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The PerformanceResourceTimingList will extend and / or truncate to the buffer size specified.</li>
+		<li>
+            Neither <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> or
+            <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onbufferfull callback
+            - no updates are made to the PerformanceResourceTimingList.</li>
+    </ol>
 </div>
 
-<!--	
-<h4 id="initatortype-attribute"><code><dfn
-id="rt-initatortype">initatorType</dfn></code> attribute</h4>
+<h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>
+    <p>
+        Information from cross-origin resources must be included in the
+        <a href="#performance-resource-timing">PeformanceResourceTiming</a> interface; however,
+        these attributes must be set to zero: <a href="#redirectStart">redirectStart</a>, <a href="#redirectEnd">redirectEnd</a>,
+        <a href="#domainLookupStart">domainLookupStart</a>, <a href="#domainLookupEnd">domainLookupEnd</a>, <a href="#connectStart">connectStart</a>,
+        <a href="#connectEnd">connectEnd</a>, <a href="#requestStart">requestStart</a>, <a href="#responseStart">responseStart</a>,
+        <a href="#responseEnd">responseEnd</a>.
+    </p>
+    <p>
+        The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
+        are defined by The HTTP Origin Header. <a href="#ref-origin">[ORIGIN]</a>
+    </p>
+    <p>
+        The term <dfn id="cross-origin">cross-origin</dfn> is used to mean non
+        <a href="#same-origin">same origin</a>.
+    </p>
+    <p>
+        Server-side applications may return the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header
+        to allow the User Agent to fully expose, to the document origin(s) specified, the
+        values of attributes that would have been zero due to the cross-origin
+        restrictions previously specified in this section. </p>
+    <h4 id="timing-allow-origin"><code>Timing-Allow-Origin</code> Response Header</h4>
+    <div class="parameters">
+        <p>The <dfn id="http-access-control-allow-origin"><code>Timing-Allow-Origin</code></dfn> header indicates whether a resource's timing can be
+            shared based by returning the value of the Origin request header in the
+            response. ABNF:</p>
+        <pre>Timing-Allow-Origin = &quot;Timing-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;</pre>
+        <p>
+            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#ref-origin">
+            [ORIGIN]</a>
+        </p>
+    </div>
 
-<p>This attribute stores the initator of the resource download. For example with a CSS stylesheet, the initator type will be RESOURCE_LINK_CSS.</p>
-
-<dl>
-  <dt><dfn id="rt-initiator-type-other">RESOURCE_OTHER</dfn>: the initator
-  is not a known initator type.</dt>
-  <dt><dfn id="rt-initiator-type-link-css">RESOURCE_LINK_CSS</dfn>: the resource is
-  an external cascading stylesheet.</dt>
-  <dt><dfn id="rt-initiator-type-cssimage">RESOURCE_CSSIMAGE</dfn>: the
-  resource is a CSS image.</dt>
-  <dt><dfn id="rt-initiator-type-script">RESOURCE_SCRIPT</dfn>: the
-  resource is a script.</dt>
-  <dt><dfn id="rt-initiator-type-img">RESOURCE_IMG</dfn>: the resource
-  is an image.</dt>
-  <dt><dfn id="rt-initiator-type-object">RESOURCE_OBJECT</dfn>: the
-  resource is an object.</dt>
-  <dt><dfn id="rt-initiator-type-frame">RESOURCE_FRAME</dfn>: the
-  resource is a sub-document such as a frame or iframe.</dt>
-  <dt><dfn id="rt-initiator-type-xhr">RESOURCE_XMLHTTPREQUEST</dfn>: the
-  resource is a XML HTTP request.</dt>
-  <dt><dfn id="rt-initiator-type-embed">RESOURCE_EMBED</dfn>: the
-  resource is an embed resource.</dt>
-  <dt><dfn id="rt-initiator-type-audio">RESOURCE_AUDIO</dfn>: the
-  resource is an audio resource.</dt>
-  <dt><dfn id="rt-initiator-type-video">RESOURCE_VIDEO</dfn>: the
-  resource is a video resource.</dt>
-  <dt><dfn id="rt-initiator-type-ms-htc">RESOURCE_RESERVED_MS_HTC</dfn>: the
-  resource is a Microsoft HTC resource.</dt>  
-</dl>
-
-<h4 id="fetchend-attribute"><code><dfn
-id="rt-fetchend">fetchEnd</dfn></code> attribute</h4>
-
-<p>This attribute must return the time immediately after the user agent receives the last byte of the response of the resource from the server.</p>
--->
-
-
-<h3 id="processing-model"><span class="secno">4.4 </span>Processing Model</h3>
-
-<div class="XXX">
-TODO: to handle dynamic sources such as those generated by DOM
-manipulation or innerHTML replacement. </div>
+<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
 
 <div class="XXX">
 TODO: Processing model should be similar to that described in the
 <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">
 NavigationTiming</a> draft.</div>
 
-<p>A user agent must allocate space to store all the <a
-href="#resource-timing">ResourceTiming</a> objects generated in the following
+<p>A user agent must allocate space to store all the <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects generated in the following
 process. </p>
 <ol>
   <li>Before a user agent fetches a resource for an element that associates
-    with a ResourceTiming object, the following steps must be run: 
-    <ol>
-      <li>Create a new <a href="#resource-timing">ResourceTiming</a>
-      object.</li>
-      <li>Record the <a href="#rt-resource-type">resourceType</a>
-      attribute.</li>
+    with a <a href="#performance-resource-timing">PerformanceResourceTiming</a> object, the following steps must be run:
+        <ol>
+      <li>Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object.</li>
+      <li>Record the <a href="#type">type</a> attribute.</li>
+      <li>Record the <a href="#url">url</a> attribute.</li>
+      <li>Record the <a href="#id">id</a> attribute, if applicable</li>
       <li>Before a user agent runs the <a
         href="http://dev.w3.org/html5/spec/Overview.html#changesToNetworkingModel">fetching
         algorithm</a>, it must record the current time in the <a
         href="#nt-fetch-start">fetchStart</a> attribute.</li>
-      <li>Record the time as <a href="#rt-load">load</a> attribute
-        immediately after the user agent finishes loading the resource into
-        DOM.</li>
-      <li>If a ResourceTimingCollector object exists, dispatch a
-        ResourceTimingEvent with the ResourceTiming object to all registered
-        event handlers.</li>
-      <li>Save the ResourceTiming object unless the root document has
-        finished loading.</li>
+      <li>Record the time as <a href="#fetch-end">fetchEnd</a> attribute
+        immediately after the user agent finishes fetching the resource.</li>
     </ol>
   </li>
-  <li>When an event handler is added by <a href="">addEventListener</a>, the
-    user agent must check if there is any saved <a
-    href="#resource-timing">ResourceTiming</a> objects. If so, it must
-    dispatch a ResourceTimingEvent to this new event handler and pass it with
-    all the ResourceTiming objects.</li>
-  <li>After the root document is loaded and the <a
-    href="http://dev.w3.org/html5/spec/webappapis.html#handler-window-onload">onload</a>
-    event is handled, a user agent may discard all the <a
-    href="#resource-timing">ResourceTiming</a> objects it saves. All these
-    objects must not be discarded before this time.</li>
-  <li>Saved <a href="#resource-timing">ResourceTiming</a> objects should be
-    cleaned up during the <a
-    href="http://dev.w3.org/html5/spec/history.html#unloading-document-cleanup-steps">unloading
-    document cleanup steps</a>.</li>
 </ol>
-
-<div class="example">
-
-<div class="exampleHeader">
-Example</div>
-
-<p>To avoid maintaining its own data storage while collecting timing
-information of all the resources, a page can create the
-ResourceTimingCollector and register the ResourceTimingEvent handler in the
-body onload handler. </p>
-</div>
-
-<p>The accuracy of the timing-related attributes in the
-<a href="#resource-timing">ResourceTiming</a> interfaces is recommended to be
-one millisecond or finer. </p>
 
 <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
 
 <p>This section is non-normative.</p>
 
 <p>When giving various timing information of how a resource is requested and
-process, the <a href="#resource-timing">ResourceTiming</a> potentially
+process, the <a href="#performance-resource-timing">ResourceTiming</a> interface potentially
 exposes such information to any page that has this resource included. To
 limit the access to the ResourceTiming interface, the <a
 href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>
@@ -731,9 +675,52 @@ domains that are allowed to access the timing information. </p>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-<p>We would like to sincerely thank Annie Sullivan, Darin Fisher, Jason
-Weber, Jonas Sicking, Kyle Scholz, Steve Souders and Tony Gentilcore to
-acknowledge their contributions to this work.</p>
+<p>We would like to sincerely thank Annie Sullivan, Darin Fisher, James Simonsen,
+Jason Weber, Jonas Sicking, Karen Anderson, Kyle Scholz, Nic Jansma,
+Steve Souders and Tony Gentilcore to acknowledge their contributions to this work.</p>
+
+<h2 class="no-num" id=references>References</h2>
+
+<dl>
+   <dt><a name="rfc2119" id="rfc2119">[IETF RFC 2119]</a></dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+   <dt id="ref-origin">[ORIGIN]</dt>
+   <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The
+    HTTP Origin Header</a></cite> (work in progress), A. Barth, C. Jackson,
+    I. Hickson. IETF.
+   </dd>
+
+   <dt><a name="rfc2616" id="rfc2616">[IETF RFC 2616]</a></dt>
+   <dd><cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>,
+    R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at
+    <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>.
+   </dd>
+
+    <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+    <dd>
+     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+     Specification</a></cite>, A. Le Hors, et al., Editors. World
+     Wide Web Consortium, 7 April 2004. This version of the Document
+     Object Model Level 3 Core Recommendation is
+     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
+     DOM Level 3 Core</a> is available at
+     http://www.w3.org/TR/DOM-Level-3-Core.
+    </dd>
+
+    <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
+    <dd>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+     Edition. ECMA International, Standard
+     ECMA-262, December 2009. This version of the ECMAScript
+     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+    </dd>
+</dl>
+
 </div>
 </body>
 </html>
