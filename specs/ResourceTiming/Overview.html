@@ -347,7 +347,21 @@ associated resource.</p>
 
 <p>This attribute must return the <a
 href="http://dev.w3.org/html5/spec/Overview.html#the-id-attribute">ID</a> attribute of the element that initiated the download
-    request for the resource.</p>
+    request for the resource, if applicable and specified.  Otherwise, the attribute must be an empty string.</p>
+
+<h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
+
+<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
+this attribute must return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.
+Otherwise, this attribute must return zero.</p>
+
+<h4 id="redirect-end-attribute"><code><dfn id="redirect-end">redirectEnd</dfn></code> attribute</h4>
+
+<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
+this attribute must return the time immediately after receiving the last byte of the response of the last redirect.
+Otherwise, this attribute must return zero.</p>
 
 <h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
@@ -368,10 +382,9 @@ application caches</a> or local resources, this attribute must return the same
 value as <a href="#fetch-start">fetchStart</a>. </p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#domainlookup-start">domainLookupStart</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#domainlookup-start">domainLookupStart</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="domainlookup-end-attribute"><code><dfn id="domainlookup-end">domainLookupEnd</dfn></code> attribute</h4>
 
@@ -388,10 +401,9 @@ domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#domainlookup-end">domainLookupEnd</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#domainlookup-end">domainLookupEnd</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="connect-start-attribute"><code><dfn id="connect-start">connectStart</dfn></code> attribute</h4>
 
@@ -404,10 +416,9 @@ application caches</a> or local resources, this attribute must return value of
 <a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#connect-start">connectStart</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#connect-start">connectStart</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="connect-end-attribute"><code><dfn
 id="connect-end">connectEnd</dfn></code> attribute </h4>
@@ -430,10 +441,9 @@ establish the transport connection. It must not include other time interval
 such as SSL handshake and SOCKS authentication. </p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#connect-end">connectEnd</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#connect-end">connectEnd</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="request-start-attribute"><code><dfn id="request-start">requestStart</dfn></code> attribute</h4>
 
@@ -446,10 +456,9 @@ href="#request-start">requestStart</a> must return the corresponding values
 of the new request.</p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#request-start">requestStart</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#request-start">requestStart</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="response-start-attribute"><code><dfn id="response-start">responseStart</dfn></code> attribute </h4>
 
@@ -459,10 +468,9 @@ href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-ca
 application caches</a> or from local resources.</p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#response-start">responseStart</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#response-start">responseStart</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="response-end-attribute"><code><dfn id="response-end">responseEnd</dfn></code> attribute </h4>
 
@@ -472,10 +480,9 @@ href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-ca
 application caches</a> or from local resources.</p>
 
 <p>
-If there are HTTP redirects or equivalent when fetching the resource,
-and not all the redirects or equivalent are from the same <a href="#origin">origin</a>
-as the current document, <a href="#response-end">responseEnd</a> must return
-the zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
+If the last non-redirected fetch of the resource is not the same origin as the current document,
+<a href="#response-end">responseEnd</a> must return
+zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
 <h4 id="fetch-end-attribute"><code><dfn id="fetch-end">fetchEnd</dfn></code> attribute</h4>
 
@@ -599,7 +606,7 @@ interface PerformanceResourceTimingList{
         these attributes must be set to zero: <a href="#redirectStart">redirectStart</a>, <a href="#redirectEnd">redirectEnd</a>,
         <a href="#domainLookupStart">domainLookupStart</a>, <a href="#domainLookupEnd">domainLookupEnd</a>, <a href="#connectStart">connectStart</a>,
         <a href="#connectEnd">connectEnd</a>, <a href="#requestStart">requestStart</a>, <a href="#responseStart">responseStart</a>,
-        <a href="#responseEnd">responseEnd</a>.
+        and <a href="#responseEnd">responseEnd</a>.
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
