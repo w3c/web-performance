@@ -49,8 +49,8 @@
                         test_timing_order('requestStart', 'connectEnd');
                         test_timing_order('responseStart', 'requestStart');
                         test_timing_order('responseEnd', 'responseStart');
-                        test_timing_order('domLoading', 'responseEnd');
-                        test_timing_order('domInteractive', 'domLoading');
+                        test_timing_order('domLoading', 'fetchStart');
+                        test_timing_order('domInteractive', 'responseEnd');
                         test_timing_order('domContentLoadedEventStart', 'domInteractive');
                         test_timing_order('domContentLoadedEventEnd', 'domContentLoadedEventStart');
                         test_timing_order('domComplete', 'domContentLoadedEventEnd');
