@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance.timing.redirect attributes on a cross-origin server redirected navigation</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+
+        <script type="text/javascript">
+            function onload_test()
+            {
+                performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
+                test_namespace('navigation');
+                test_equals(performanceNamespace.navigation.type,
+                        performanceNamespace.navigation.TYPE_NAVIGATE,
+                        'timing.navigation.type is TYPE_NAVIGATE');
+                test_equals(performanceNamespace.navigation.redirectCount, 1, 'navigation.redirectCount == 1 on an server redirected navigation');
+                test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart == 0 on a server redirected navigation from another domain');
+                test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on a server redirected navigation from another domain');
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates the values of the window.performance.redirectCount and the
+           window.performance.timing.redirectStart/End times for a cross-origin server side redirect navigation.</p>
+
+        <div id="log"></div>
+        <iframe id="frameContext" onload="onload_test();" src="redirect.php?location=http://www.w3c-test.org/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
+    </body>
+</html>
