@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/resources/testharness.css" />
 
         <script type="text/javascript">
+            setup({ explicit_done: true });
             var step = 1;
             function onload_test() 
             {
@@ -62,6 +63,7 @@
                         test_timing_order('unloadEventEnd', 'unloadEventStart');
 
                         step++;
+                        done();
                         break;
                     }
                     default:

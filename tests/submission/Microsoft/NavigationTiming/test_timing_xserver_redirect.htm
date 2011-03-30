@@ -15,7 +15,7 @@
                 test_equals(performanceNamespace.navigation.type,
                         performanceNamespace.navigation.TYPE_NAVIGATE,
                         'timing.navigation.type is TYPE_NAVIGATE');
-                test_equals(performanceNamespace.navigation.redirectCount, 1, 'navigation.redirectCount == 1 on an server redirected navigation');
+                test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on a cross-origin server redirected navigation');
                 test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart == 0 on a server redirected navigation from another domain');
                 test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on a server redirected navigation from another domain');
             }
