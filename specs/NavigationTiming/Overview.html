@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-march-18-2011">Editor's Draft March 18, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-march-29-2011">Editor's Draft March 29, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/56c1641068e8/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/56c1641068e8/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1780071321d7/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1780071321d7/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/565bce32396d/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -166,8 +166,8 @@ unable to provide a complete end-to-end latency picture.
 </p>
 
 <div class="example">
-<p>For example, the following Javascript shows the time it take to fully load
-a page: </p>
+<p>For example, the following Javascript shows a naive attempt to
+measure the time it takes to fully load a page:</p>
 <pre>&lt;html&gt;
 &lt;head&gt;
 &lt;script type="text/javascript"&gt;
@@ -574,12 +574,15 @@ in the current browsing context. It must have one of the following <a
 href="#nt-navigation-info-type">navigation type</a> values. </p>
 <dl>
   <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn>:
-    navigation started by clicking on a link or entering the URL in the user
-    agent's address bar.</dt>
+    Navigation started by clicking on a link, or entering the URL in the user
+    agent's address bar, or form submission, or initializing through a script operation other than the
+    <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a> method.</dt>
   <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn>: Navigation through
-    the reload operation.</dt>
+    the reload operation or the
+    <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
+    method.</dt>
   <dt><dfn id="nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</dfn>: Navigation
-  through a forward or backward operation.</dt>
+  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</dt>
   <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn>: Any navigation
   types not defined by values above.</dt>
 </dl>
@@ -588,7 +591,7 @@ href="#nt-navigation-info-type">navigation type</a> values. </p>
 <p>Client-side redirects, such as those using <a href="http://dev.w3.org/html5/spec/semantics.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
 are not considered HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
 In those cases, the <a href="#nt-navigation-info-type">type</a> attribute should return appropriate value,
-such as <a href="#nt-navigation-info-type-navigate">TYPE_NAVIGATE</a>, as if in non-redirect navigation.</p>
+such as <a href="#nt-navigation-info-type-navigate">TYPE_RELOAD</a>, as if in non-redirect navigation.</p>
 </div>
 
 <h4><code><dfn id="nt-navigation-info-redirect-count">redirectCount</dfn></code> attribute </h4>
@@ -699,14 +702,30 @@ non-normative intervals between timings.</p>
     to unload</a> the previous <a
     href="http://dev.w3.org/html5/spec/infrastructure.html#document">document</a>,
     record the current time as <a
-    href="#nt-navigation-start">navigationStart</a> and record the current navigation type in
-    <a href="#nt-navigation-info-type">window.performance.navigation.type</a>
-    if it has not been set.</li>
+    href="#nt-navigation-start">navigationStart</a>.</li>
+  <li> Record the current navigation type in <a href="#nt-navigation-info-type">window.performance.navigation.type</a>
+    if it has not been set:
+    <ol style="list-style-type:lower-alpha;">
+    <li>If the navigation was started by clicking on a link, or entering the URL in the user
+        agent's address bar, or form submission, or initializing through a script operation other than the
+        <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a> method,
+        let the navigation type be <a href="#nt-navigation-info-type-navigate">TYPE_NAVIGATE</a>.</li>
+    <li>If the navigation was started either as a result of a
+        <a href="http://dev.w3.org/html5/spec/Overview.html#attr-meta-http-equiv-refresh">meta refresh</a>,
+        or the <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
+        method, or other equivalent actions, let the navigation type
+        be <a href="#nt-navigation-info-type-reload">TYPE_RELOAD</a>.</li>
+    <li>If the navigation was started as a result of
+        <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a>,
+        let the navigation type be <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a>.</li>
+    <li>Otherwise, let the navigation type be <a href="#nt-navigation-info-type-navigate">TYPE_RESERVED</a>.</li>
+    </ol>
+  </li>
   <li>If the current document and the previous document are from different 
     <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>,
     set both <a href="#nt-unload-end">unloadEventStart</a> and 
     <a href="#nt-unload-end">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-fetch-start">5</a>. Otherwise, record <a href="#nt-unload-end">unloadEventStart</a>
+    <a href="#step-fetch-start">6</a>. Otherwise, record <a href="#nt-unload-end">unloadEventStart</a>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#nt-unload-end">unloadEventEnd</a>.</li>
@@ -726,9 +745,9 @@ non-normative intervals between timings.</p>
   <li>If the resource is fetched from the <a
     href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
     application cache</a> or local resources, go to step <a
-    href="#step-request-start">12</a>.</li>
+    href="#step-request-start">13</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">10</a>. Otherwise, immediately before a user
+    href="#step-connect-start">11</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as 
     <a href="#nt-domain-lookup-start">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#nt-domain-lookup-end">domainLookupEnd</a>
@@ -746,7 +765,7 @@ non-normative intervals between timings.</p>
     after the connection to the server or the proxy is established. A user agent may
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
-  <li>In step <a href="#step-connect-start">10</a>, a user agent should also
+  <li>In step <a href="#step-connect-start">11</a>, a user agent should also
     carry out these additional steps:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
@@ -764,7 +783,7 @@ non-normative intervals between timings.</p>
   <li id="step-response-end">Record the time as <a
     href="#nt-response-end">responseEnd</a> immediately after receiving the
     last byte of the response.
-    <p>Return to step <a href="#step-connect-start">10</a> if the user agent
+    <p>Return to step <a href="#step-connect-start">11</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
 
@@ -789,7 +808,7 @@ non-normative intervals between timings.</p>
         <a href="#nt-unload-start">unloadEventStart</a>,
         <a href="#nt-unload-end">unloadEventStart</a> and 
         <a href="#nt-navigation-info-redirect-count">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
+        return to step <a href="#step-fetch-start">6</a> with the new resource.</li>
       <li>Increment window.performance.navigation.redirectCount by 1.</li>
       <li>If the value of window.performance.navigation.redirectStart is
         not set, let it be the value of <a href="#nt-fetch-start">fetchStart</a>.</li>
@@ -801,7 +820,7 @@ non-normative intervals between timings.</p>
         <a href="#nt-redirect-end">redirectEnd</a>, 
         <a href="#nt-unload-start">unloadEventStart</a> and
         <a href="#nt-unload-end">unloadEventEnd</a>.</li>
-      <li>Return to step <a href="#step-fetch-start">5</a> with the new resource.</li>
+      <li>Return to step <a href="#step-fetch-start">6</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a href="#nt-dom-loading">domLoading</a> immediately
