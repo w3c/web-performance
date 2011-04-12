@@ -38,33 +38,33 @@
 
 <body class="draft">
 <div class="head">
-	<h1>User Timing</h1>
-	<h2 class="no-num no-toc" id="working-draft-Mar-08-2011">Working Draft Mar. 08, 2011</h2>
-	<dl>
-	  <dt>This version:</dt>
-	    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
-	    http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
-	  <dt>Latest version:</dt>
-	    <dd><a href=https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
-	    https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
-	    <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
-	    https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>	  
-	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
-	    https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
-	    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
-	    https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
-	  <dt>Editors:</dt>
+    <h1>User Timing</h1>
+    <h2 class="no-num no-toc" id="working-draft-Mar-08-2011">Working Draft Mar. 08, 2011</h2>
+    <dl>
+      <dt>This version:</dt>
+        <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
+        http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
+      <dt>Latest version:</dt>
+        <dd><a href=https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
+        https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
+        <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
+        https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>
+        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
+        https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
+        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
+        https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
+      <dt>Editors:</dt>
         <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
-	      class="org">Microsoft Inc.</span>, <span
-	      class="email">jmann@microsoft.com</span> </dd>
-	    <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
-	      class="org">Microsoft Inc.</span>, <span
-	      class="email">aquach@microsoft.com</span> </dd>
-	    <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
-	      class="org">Google Inc.</span>, <span
-	      class="email">zhihengw@google.com</span> </dd>
-	</dl>
-	
+          class="org">Microsoft Inc.</span>, <span
+          class="email">jmann@microsoft.com</span> </dd>
+        <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
+          class="org">Microsoft Inc.</span>, <span
+          class="email">aquach@microsoft.com</span> </dd>
+        <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
+          class="org">Google Inc.</span>, <span
+          class="email">zhihengw@google.com</span> </dd>
+    </dl>
+
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
     &copy; 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web
@@ -81,14 +81,14 @@
     and <a
     href="http://www.w3.org/Consortium/Legal/copyright-documents">document
     use</a> rules apply.</p>
-	
-	<h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-	<p>This specification defines an interface for web applications to help 
-	developers assess and understand the performance of their application with 
-	the use of a high precession timer.</p>
-	
-	<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
+    <h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+    <p>This specification defines an interface for web applications to help
+    developers assess and understand the performance of their application with
+    the use of a high precession timer.</p>
+
+    <h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
 
   <p><em>This section describes the status of this document at the time of
    its publication. Other documents may supersede this document. A list of
@@ -130,102 +130,102 @@ cite this document as other than work in progress. </p>
    with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
    6 of the W3C Patent Policy</a>.</p>
 
-	<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
-	<ol class="toc">
-	  <li><a href="#introduction"><span class="secno">1
-	  </span>Introduction</a></li>
-	  <li><a href="#conformance-requirements"><span class="secno">2
-	    </span>Conformance requirements</a></li>
-	  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-	  <li><a href="#user-timing-0"><span class="secno">4 </span>User Timing</a> 
-	    <ol class="toc">
-	      <li><a href="#introduction-1"><span class="secno">4.1
-	        </span>Introduction</a></li>
-	      <li><a href="#the-usertiming-interface"><span class="secno">4.2
-	        </span>The <code>UserTiming</code> Interface</a></li>
-	    </ol>
-	  </li>
-	  <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
-	  <li><a href="#security"><span class="secno">6 </span>Security</a></li>
-	  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
-	</ol>
+    <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+    <ol class="toc">
+      <li><a href="#introduction"><span class="secno">1
+      </span>Introduction</a></li>
+      <li><a href="#conformance-requirements"><span class="secno">2
+        </span>Conformance requirements</a></li>
+      <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+      <li><a href="#user-timing-0"><span class="secno">4 </span>User Timing</a>
+        <ol class="toc">
+          <li><a href="#introduction-1"><span class="secno">4.1
+            </span>Introduction</a></li>
+          <li><a href="#the-usertiming-interface"><span class="secno">4.2
+            </span>The <code>UserTiming</code> Interface</a></li>
+        </ol>
+      </li>
+      <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
+      <li><a href="#security"><span class="secno">6 </span>Security</a></li>
+      <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+    </ol>
 
-	<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+    <h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
 
-	<p>This section is non-normative.</p>
-	<p>Web developers need the ability to assess and understand the performance characteristics of their 
-	applications using well-defined interoperable methods. JavaScript mechanisms can provide comprehensive 
-	instrumentation to measure user latency within an application, however the precision of which varies 
-	between user agents. This document introduces the <a href="#user-timing-0">UserTiming</a> interface to allow the buffering and 
-	retrieval of timing information with a web developer supplied name.</p>
+    <p>This section is non-normative.</p>
+    <p>Web developers need the ability to assess and understand the performance characteristics of their
+    applications using well-defined interoperable methods. JavaScript mechanisms can provide comprehensive
+    instrumentation to measure user latency within an application, however the precision of which varies
+    between user agents. This document introduces the <a href="#user-timing-0">UserTiming</a> interface to allow the buffering and
+    retrieval of timing information with a web developer supplied name.</p>
 
-	<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
-	requirements</h2>
-	
-	<p>All diagrams, examples, and notes in this specification are non-normative,
-	as are all sections explicitly marked non-normative. Everything else in this
-	specification is normative. </p>
-	
-	<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
-	"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
-	are to be interpreted as described in RFC2119. For readability, these words
-	do not appear in all uppercase letters in this specification. <a
-	href="http://www.ietf.org/rfc/rfc2119.txt">[RFC2119]</a>
-	</p>
-	
-	<p>Requirements phrased in the imperative as part of algorithms (such as
-	"strip any leading space characters" or "return false and abort these steps")
-	are to be interpreted with the meaning of the key word ("must", "should",
-	"may", etc) used in introducing the algorithm. </p>
-	
-	<p>Some conformance requirements are phrased as requirements on attributes,
-	methods or objects. Such requirements are to be interpreted as requirements
-	on user agents. </p>
-	
-	<p>Conformance requirements phrased as algorithms or specific steps may be
-	implemented in any manner, so long as the end result is equivalent. (In
-	particular, the algorithms defined in this specification are intended to be
-	easy to follow, and not intended to be performant.) </p>
-	
-	<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
-	
-	<p>The construction "a <code title="">Foo</code> object", where <code
-	title="">Foo</code> is actually an interface, is sometimes used instead of
-	the more accurate "an object implementing the interface <code
-	title="">Foo</code>". </p>
-	
-	<p>The term DOM is used to refer to the API set made available to scripts in
-	Web applications, and does not necessarily imply the existence of an actual
-	<code>Document</code> object or of any other <code>Node</code> objects as
-	defined in the DOM Core specifications. <a
-	href="http://www.w3.org/TR/DOM-Level-3-Core/http://www.w3.org/TR/DOM-Level-3-Core/core.html">[DOM3CORE]</a>
-	</p>
-	
-	<p>A DOM attribute is said to be <em>getting</em> when its value is being
-	retrieved (such as by author script), and is said to be <em>setting</em> when
-	a new value is assigned to it. </p>
-	
-	<p>The term "JavaScript" is used to refer to ECMA262, rather than the
-	official term ECMAScript, since the term JavaScript is more widely known. <a
-	href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">[ECMA262]</a>
-	</p>
-	
-	<h2 id="User-timing-0"><span class="secno">4 </span>User Timing</h2>
-	
-	<h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
-	
-	<p>This section is non-normative</p>
-	
-	<p>The <a href="#user-timing-0">User Timing</a> interface facilitates the 
-	ability for developers to assess and understand the performance of their 
-	application by instrumenting their code and custom scenarios with a 
-	high precision timer.</p>
-	
-	<p>The accuracy of the timing-related attributes in the User Timing interfaces must be one millisecond or finer.</p>
+    <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+    requirements</h2>
 
-	<h3 id="the-usertiming-interface"><span class="secno">4.2 
-	</span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
-	
+    <p>All diagrams, examples, and notes in this specification are non-normative,
+    as are all sections explicitly marked non-normative. Everything else in this
+    specification is normative. </p>
+
+    <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+    "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+    are to be interpreted as described in RFC2119. For readability, these words
+    do not appear in all uppercase letters in this specification. <a
+    href="http://www.ietf.org/rfc/rfc2119.txt">[RFC2119]</a>
+    </p>
+
+    <p>Requirements phrased in the imperative as part of algorithms (such as
+    "strip any leading space characters" or "return false and abort these steps")
+    are to be interpreted with the meaning of the key word ("must", "should",
+    "may", etc) used in introducing the algorithm. </p>
+
+    <p>Some conformance requirements are phrased as requirements on attributes,
+    methods or objects. Such requirements are to be interpreted as requirements
+    on user agents. </p>
+
+    <p>Conformance requirements phrased as algorithms or specific steps may be
+    implemented in any manner, so long as the end result is equivalent. (In
+    particular, the algorithms defined in this specification are intended to be
+    easy to follow, and not intended to be performant.) </p>
+
+    <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+    <p>The construction "a <code title="">Foo</code> object", where <code
+    title="">Foo</code> is actually an interface, is sometimes used instead of
+    the more accurate "an object implementing the interface <code
+    title="">Foo</code>". </p>
+
+    <p>The term DOM is used to refer to the API set made available to scripts in
+    Web applications, and does not necessarily imply the existence of an actual
+    <code>Document</code> object or of any other <code>Node</code> objects as
+    defined in the DOM Core specifications. <a
+    href="http://www.w3.org/TR/DOM-Level-3-Core/http://www.w3.org/TR/DOM-Level-3-Core/core.html">[DOM3CORE]</a>
+    </p>
+
+    <p>A DOM attribute is said to be <em>getting</em> when its value is being
+    retrieved (such as by author script), and is said to be <em>setting</em> when
+    a new value is assigned to it. </p>
+
+    <p>The term "JavaScript" is used to refer to ECMA262, rather than the
+    official term ECMAScript, since the term JavaScript is more widely known. <a
+    href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">[ECMA262]</a>
+    </p>
+
+    <h2 id="User-timing-0"><span class="secno">4 </span>User Timing</h2>
+
+    <h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
+
+    <p>This section is non-normative</p>
+
+    <p>The <a href="#user-timing-0">User Timing</a> interface facilitates the
+    ability for developers to assess and understand the performance of their
+    application by instrumenting their code and custom scenarios with a
+    high precision timer.</p>
+
+    <p>The accuracy of the timing-related attributes in the User Timing interfaces must be one millisecond or finer.</p>
+
+    <h3 id="the-usertiming-interface"><span class="secno">4.2
+    </span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
+
   <pre class="idl">
   [Supplemental]
   interface <a href="#Performance">Performance</a> {
@@ -233,172 +233,172 @@ cite this document as other than work in progress. </p>
     const string MARK_FULLY_VISIBLE = "fullyVisible";
     const string MARK_ABOVE_THE_FOLD = "aboveTheFold";
     const string MARK_TIME_TO_USER_ACTION = "timeToUserAction";
-  
+
     void mark(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     Array getMarks(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void clearMarks(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    
+
     void measure(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
     Array getMeasures(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
     void clearMeasures(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
   </pre>
   <div class="methods">
-	<h4 id="ut-mark"><code>mark</code> method</h4>
-	<p>This method stores a timestamp in milliseconds since midnight of January 
-	1, 1970 (UTC) with the associated name.</p>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name associated with the Array of timestamps.</p>
-			<p>Standard mark names, note that the user agent is only reasonsible for storing the 
-			marks denoted by the associated name and not responsible for programmatically determining
-			the time associated with the mark description. The developer uses these marks as appropriate 
-			in their application code</p>
-			<code>MARK_FULLY_LOADED</code>
-			<p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
-			<code>MARK_FULLY_VISIBLE</code>
-			<p>The time when the page is considered completely visible by an end-user as marked by the developer in 
-			their application.</p>			
-			<code>MARK_ABOVE_THE_FOLD</code>
-			<p>The time to when all contents in the visible viewport is present to the end-user.
-			This is a point of interest as end-users would generally consider the page is done 
-			loading given no visible change after this time.</p> 
-			<code>MARK_TIME_TO_USER_ACTION</code>
-			<p>The time of the first user action upon the page during or after a navigation, 
-			such as scroll or click. This could be used as another indication 
-			that the user considers the page ready to operate.</p> 
-			<p><b>No Return Value</b></p>
-			<p><b>Exceptions</b></p>
-			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
-			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
-		</div>
+    <h4 id="ut-mark"><code>mark</code> method</h4>
+    <p>This method stores a timestamp in milliseconds since midnight of January
+    1, 1970 (UTC) with the associated name.</p>
+        <div class="parameters">
+            <p><b>Parameters</b></p>
+            <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>The name associated with the Array of timestamps.</p>
+            <p>Standard mark names, note that the user agent is only reasonsible for storing the
+            marks denoted by the associated name and not responsible for programmatically determining
+            the time associated with the mark description. The developer uses these marks as appropriate
+            in their application code</p>
+            <code>MARK_FULLY_LOADED</code>
+            <p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
+            <code>MARK_FULLY_VISIBLE</code>
+            <p>The time when the page is considered completely visible by an end-user as marked by the developer in
+            their application.</p>
+            <code>MARK_ABOVE_THE_FOLD</code>
+            <p>The time to when all contents in the visible viewport is present to the end-user.
+            This is a point of interest as end-users would generally consider the page is done
+            loading given no visible change after this time.</p>
+            <code>MARK_TIME_TO_USER_ACTION</code>
+            <p>The time of the first user action upon the page during or after a navigation,
+            such as scroll or click. This could be used as another indication
+            that the user considers the page ready to operate.</p>
+            <p><b>No Return Value</b></p>
+            <p><b>Exceptions</b></p>
+            <p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
+                is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
+        </div>
   </div>
-  
+
 
   <div class="methods">
-	<h4 id="ut-getMarks"><code>getMarks</code> method</h4>
-	<p>This method retrieves all the marks, when mark name equals null. Otherwise, retrieve all the marks by 
-	the specified name. Each key in the Array is a 
-	distinct mark name. The value associated with the mark name is an array of 
-	UTC timestamps of unsigned long long. </p>
-	<p>In JSON notation the data structure looks as follows: { "mark1": [0, 1, 2], "mark2": [3] };</p>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the mark to associate the Array of timestamps captured. 
-			Return all marks when markName equals null.</p>
-			<p><b>Return Value</b></p>
-			<code>Array</code>
-			<p><b>Exceptions</b></p>
-			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
-			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
-		</div>
+    <h4 id="ut-getMarks"><code>getMarks</code> method</h4>
+    <p>This method retrieves all the marks, when mark name equals null. Otherwise, retrieve all the marks by
+    the specified name. Each key in the Array is a
+    distinct mark name. The value associated with the mark name is an array of
+    UTC timestamps of unsigned long long. </p>
+    <p>In JSON notation the data structure looks as follows: { "mark1": [0, 1, 2], "mark2": [3] };</p>
+        <div class="parameters">
+            <p><b>Parameters</b></p>
+            <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The name of the mark to associate the Array of timestamps captured.
+            Return all marks when markName equals null.</p>
+            <p><b>Return Value</b></p>
+            <code>Array</code>
+            <p><b>Exceptions</b></p>
+            <p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
+                is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
+        </div>
   </div>
 
-  
+
   <div class="methods">
   <h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
-  <p>This method removes all marks. Otherwise, this interface removes only those 
+  <p>This method removes all marks. Otherwise, this interface removes only those
   marks specified by the mark name.</p>
     <div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the mark to be cleared. Otherwise, clear all marks when 
-			the mark name supplied equals null.</p>
+            <p><b>Parameters</b></p>
+            <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The name of the mark to be cleared. Otherwise, clear all marks when
+            the mark name supplied equals null.</p>
       <p><b>No Return Value</b></p>
       <p><b>No Exceptions</b></p>
     </div>
   </div>
 
-  
+
   <div class="methods">
-	<h4 id="ut-measure"><code>measure</code> method</h4>
-	<p>This method stores the difference between two marks in milliseconds with the associated name. 
-	The intent is to capture a the duration of which&nbsp; a scenario took within an application. </p>
-	<p>When calling measure with no parameters, measure will store the delta in 
-	milliseconds from the time 
-	the code is excuted in the user agent from the fetchStart timestamp in Navigation Timing.
-	</p>
-	<p>
-	If the second parameter is not null, the user agent stores the delta from 
-	the time
-	the code is executed in the user agent to the last mark stored identified by 
-	startMark.</p>
-	<p>
-	If the third paramter is not null, the user agent stores the delta between the 
-	most recent end mark and most recent start mark.
-	</p>
+    <h4 id="ut-measure"><code>measure</code> method</h4>
+    <p>This method stores the difference between two marks in milliseconds with the associated name.
+    The intent is to capture a the duration of which&nbsp; a scenario took within an application. </p>
+    <p>When calling measure with no parameters, measure will store the delta in
+    milliseconds from the time
+    the code is excuted in the user agent from the fetchStart timestamp in Navigation Timing.
+    </p>
+    <p>
+    If the second parameter is not null, the user agent stores the delta from
+    the time
+    the code is executed in the user agent to the last mark stored identified by
+    startMark.</p>
+    <p>
+    If the third paramter is not null, the user agent stores the delta between the
+    most recent end mark and most recent start mark.
+    </p>
 <div class="XXX">
 Setters should communicate to the developer when used wrong. What about throwing an exception
 when incorrect parameters are set?
 </div>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>The name associated with the measure.</p>			
-			<code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the start mark retrieved. The measure 
-			stored will be from the point and time the code is executed to the 
-			last start mark stored.</p>
-			<code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The mark name of the measure to be taken from the last startMark to the last endMark.</p>			
-			<p><b>No Return Value</b></p>
-			<p><b>Exceptions</b></p>
-			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
-			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
-		</div>
+        <div class="parameters">
+            <p><b>Parameters</b></p>
+            <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>The name associated with the measure.</p>
+            <code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The name of the start mark retrieved. The measure
+            stored will be from the point and time the code is executed to the
+            last start mark stored.</p>
+            <code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The mark name of the measure to be taken from the last startMark to the last endMark.</p>
+            <p><b>No Return Value</b></p>
+            <p><b>Exceptions</b></p>
+            <p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
+                is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
+        </div>
   </div>
 
   <div class="methods">
-	<h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
-	<p>This method retrieves all the measures, when mark name equals null. Otherwise, retrieve all the 
-	measures by the specified name. Each key in the Array is a distinct measure name. The value associated 
-	with the measure name is an array timestamp deltas of unsigned long long. </p>		
-	<p>	In JSON notation the data structure looks as follows: { "measure1": [0, 1, 2], "measure2": [3] };</p>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of a measure stored within the user agent. 
-			Retrieve all measures when measure name equals null.</p>
-			<p><b>Return Value</b></p>
-			<code>Array</code>
-			<p><b>Exceptions</b></p>
-			<p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
-			    is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
-		</div>
+    <h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
+    <p>This method retrieves all the measures, when mark name equals null. Otherwise, retrieve all the
+    measures by the specified name. Each key in the Array is a distinct measure name. The value associated
+    with the measure name is an array timestamp deltas of unsigned long long. </p>
+    <p>	In JSON notation the data structure looks as follows: { "measure1": [0, 1, 2], "measure2": [3] };</p>
+        <div class="parameters">
+            <p><b>Parameters</b></p>
+            <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The name of a measure stored within the user agent.
+            Retrieve all measures when measure name equals null.</p>
+            <p><b>Return Value</b></p>
+            <code>Array</code>
+            <p><b>Exceptions</b></p>
+            <p>INVALID_CHARACTER_ERR: Raised if the specified qualified name
+                is not an XML name according to [<cite><a class='noxref normative' href='http://www.w3.org/TR/DOM-Level-3-Core/references.html#XML'>XML 1.0</a></cite>].</p>
+        </div>
   </div>
 
   <div class="methods">
   <h4 id="ut-clearmeasures"><code>clearMeasures</code> method</h4>
   <p>This method remove all measures. Otherwise only those measures associated by that name will be removed.</p>
     <div class="parameters">
-			<p><b>Parameters</b></p>
-			<code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-			<p>[optional] The name of the measure to be cleared. Otherwise, 
-			clear all marks when the mark name supplied equals null.</p>
+            <p><b>Parameters</b></p>
+            <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
+            <p>[optional] The name of the measure to be cleared. Otherwise,
+            clear all marks when the mark name supplied equals null.</p>
       <p><b>No Return Value</b></p>
       <p><b>No Exceptions</b></p>
     </div>
   </div>
-	
-	<h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
-	
-	<p>This section is non-normative.</p>
-	
-	<p>UserTiming potentially exposes information about specific activities on a page. This information must explicitly 
-	not be accessible in cross-domain situations and made available to only the server where the root document originates.</p>
-	
-	<h2 id="security"><span class="secno">6 </span>Security</h2>
-	
-	<p>This section is non-normative.</p>
-	
-	<p>Similar to the discussion in the Privacy section. </p>
-	
-	<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
-	
-	<p>Thanks to Steve Souders, Tony Gentilcore, Jason Weber, and Nic Jansma for 
-	their useful comments that led to changes to this specification and their contributions to this work.</p>
+
+    <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
+
+    <p>This section is non-normative.</p>
+
+    <p>UserTiming potentially exposes information about specific activities on a page. This information must explicitly
+    not be accessible in cross-domain situations and made available to only the server where the root document originates.</p>
+
+    <h2 id="security"><span class="secno">6 </span>Security</h2>
+
+    <p>This section is non-normative.</p>
+
+    <p>Similar to the discussion in the Privacy section. </p>
+
+    <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+    <p>Thanks to Steve Souders, Tony Gentilcore, Jason Weber, and Nic Jansma for
+    their useful comments that led to changes to this specification and their contributions to this work.</p>
 
 </div>
 </body>
