@@ -16,8 +16,10 @@
                         performanceNamespace.navigation.TYPE_NAVIGATE,
                         'timing.navigation.type is TYPE_NAVIGATE');
                 test_equals(performanceNamespace.navigation.redirectCount, 1, 'navigation.redirectCount == 1 on an server redirected navigation');
+
+                test_timing_greater_than('navigationStart', 0);
+
                 test_timing_order('redirectStart', 'navigationStart');
-                test_timing_order('redirectEnd', 'navigationStart');
                 test_timing_order('redirectEnd', 'redirectStart');
                 test_timing_order('fetchStart', 'redirectEnd');
             }
