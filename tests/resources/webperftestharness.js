@@ -77,7 +77,7 @@ function test_timing_order(attribute_name, greater_than_attribute)
 
 function test_timing_greater_than(attribute_name, greater_than)
 {
-    var msg = "window.performance.timing." + attribute_name + " >= " + greater_than;
+    var msg = "window.performance.timing." + attribute_name + " > " + greater_than;
     test_greater_than(performanceNamespace.timing[attribute_name], greater_than, msg);
 }
 
@@ -115,7 +115,7 @@ function test_equals(value, equals, msg)
 
 function test_greater_than(value, greater_than, msg)
 {
-    test(function () { assert_true(value >= greater_than, msg); }, msg);
+    test(function () { assert_true(value > greater_than, msg); }, msg);
 }
 
 function test_not_equals(value, notequals, msg)
