@@ -10,6 +10,9 @@
 <script>
 setup({explicit_done: true});
 
+// explicitly test the namespace before we start testing
+test_namespace();
+
 var originalTiming = {};
 var didOpen = false;
 
@@ -23,6 +26,13 @@ function onload_test() {
 function testTimingWithDocumentOpen() {
   var subcontentWindow = document.getElementById("frameContext").contentWindow;
 
+  if (subcontentWindow.performance === undefined)
+  {
+    // avoid script errors
+    done();
+    return;
+  }
+  
   var timing = subcontentWindow.performance.timing;
   for (i in timingAttributes) {
     originalTiming[timingAttributes[i]] = timing[timingAttributes[i]];

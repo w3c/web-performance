@@ -13,6 +13,8 @@
         <p>This test validates that the window.performance object is read/write.</p>
         <div id="log"></div>
         <script type="text/javascript">
+            test_namespace();
+
             window.performance = 'foo';
             test_equals(window.performance, 'foo', 'window.performance is read/write');
 

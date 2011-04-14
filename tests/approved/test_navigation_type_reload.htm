@@ -7,16 +7,18 @@
         <script src="/resources/testharness.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-    
+
         <script type="text/javascript">
             setup({explicit_done: true});
 
+            // explicitly test the namespace before we start testing
+            test_namespace('navigation');
             var reload_frame;
             function onload_test()
             {
                 reload_frame = document.getElementById("frameContext");
                 reload_frame.onload = do_test;
-                setTimeout("reload_the_frame();", 1000);
+                setTimeout("reload_the_frame();", 100);
             }
 
             function reload_the_frame()
@@ -29,20 +31,19 @@
                 reload_frame.onload = "";
                 if (performanceNamespace)
                 {
-                    test_namespace('navigation');
-
                     test_equals(reload_frame.contentWindow.performance.navigation.type,
                                 performanceNamespace.navigation.TYPE_RELOAD,
                                 'window.performance.navigation.type == TYPE_RELOAD');
-                    done();
                 }
+
+                done();
             }
         </script>
     </head>
     <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the value of window.performance.navigation.type with a reloaded navigation.</p>
-        
+
         <p>This page should be loaded with a green background frame below.  The frame will be automatically reloaded
         and then verified that the window.performance.navigation.type = TYPE_RELOAD.</p>
 
@@ -50,6 +51,6 @@
         <br />
         <iframe id="frameContext" src="/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
 
-        
+
     </body>
 </html>

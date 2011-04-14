@@ -10,8 +10,15 @@
         <script type="text/javascript">
             function onload_test()
             {
-                performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
                 test_namespace('navigation');
+                if (performanceNamespace === undefined)
+                {
+                    // avoid script errors
+                    done();
+                    return;
+                }
+
+                performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
                 test_equals(performanceNamespace.navigation.type,
                         performanceNamespace.navigation.TYPE_NAVIGATE,
                         'timing.navigation.type is TYPE_NAVIGATE');
@@ -29,6 +36,7 @@
            window.performance.timing.redirectStart/End times for a cross-origin server side redirect navigation.</p>
 
         <div id="log"></div>
+        <br />
         <iframe id="frameContext" onload="onload_test();" src="http://www.w3c-test.org/webperf/tests/submission/Microsoft/NavigationTiming/redirect.php?location=http://w3c-test.org/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
