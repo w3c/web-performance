@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-14-2011">Editor's Draft April 14, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-april-19-2011">Editor's Draft April 19, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -148,6 +148,7 @@ cite this document as other than work in progress. </p>
     <ol class="toc">
       <li><a href="#processing-model"><span class="secno">5.1 </span>Processing Model</a></li>
       <li><a href="#garbage-collection"><span class="secno">5.2 </span>Garbage Collection</a></li>
+      <li><a href="#mono-clock"><span class="secno">5.3 </span>The Monotonic Clock</a></li>
     </ol>
   <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
   <li><a href="#security"><span class="secno">7 </span>Security</a></li>
@@ -865,6 +866,17 @@ There are <a href="http://dev.w3.org/html5/spec/common-dom-interfaces.html#impli
 implied strong references</a> from the window object to its
 window.performance.timing and window.performance.navigation objects.
 </p>
+
+<h3 id="mono-clock"><span class="secno">5.3 </span>The Monotonic Clock</h3>
+<p>This section is non-normative.</p>
+<p>The values of the timing attributes should monotonically increasing at the rate time actually passes at. 
+However, wallclock time can be adjusted by system users or other mechanisms such as
+<a href="http://www.ietf.org/rfc/rfc5905.txt">NTP</a>.
+Implementations that is purely based on the wallclock is prone to large jumps forwards and backwards
+as the wallclock is adjusted, so the timing attributes can not guarantee to be monotonic.</p>
+<p>To prevent wallclock adjustment from skewing the timing attributes, user agents are recommended to
+record the wallclock time at the beginning of the navigation and define other timing attributes
+in terms of a monotonic clock measuring time elapsed from the beginning of the navigation. </p>
 
 <h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
 <p>This section is non-normative.</p>
