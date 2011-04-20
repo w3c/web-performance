@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-12-2011">Editor's Draft April 12, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-april-19-2011">Editor's Draft April 19, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html">https://dvcs.w3.org/hg/webperf/raw-file/4c8ea471561f/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/56c1641068e8/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/56c1641068e8/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -136,20 +136,23 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation
-    Timing</a> 
+  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Timing</a> 
     <ol class="toc">
       <li><a href="#sec-navigation-timing-introduction"><span class="secno">4.1 </span>Introduction</a></li>
       <li><a href="#sec-navigation-timing-interface"><span class="secno">4.2 </span>The <code>PerformanceTiming</code> interface</a></li>
       <li><a href="#sec-navigation-info-interface"><span class="secno">4.3 </span>The <code>PerformanceNavigation</code> interface</a></li>
       <li><a href="#sec-window.performance-attribute"><span class="secno">4.4 </span> The <code>window.performance</code> attribute</a></li>
-      <li><a href="#processing-model"><span class="secno">4.5 </span>Processing Model</a></li>
-      <li><a href="#garbage-collection"><span class="secno">4.6 </span>Garbage Collection</a></li>
     </ol>
   </li>
-  <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
-  <li><a href="#security"><span class="secno">6 </span>Security</a></li>
-  <li><a href="#references"><span class="secno">7 </span>References</a></li>
+  <li><a href="#process"><span class="secno">5 </span>Process</a> 
+    <ol class="toc">
+      <li><a href="#processing-model"><span class="secno">5.1 </span>Processing Model</a></li>
+      <li><a href="#garbage-collection"><span class="secno">5.2 </span>Garbage Collection</a></li>
+      <li><a href="#mono-clock"><span class="secno">5.3 </span>The Monotonic Clock</a></li>
+    </ol>
+  <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
+  <li><a href="#security"><span class="secno">7 </span>Security</a></li>
+  <li><a href="#references"><span class="secno">8 </span>References</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -269,8 +272,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
 
-<h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation
-Timing</h2>
+<h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation Timing</h2>
 
 <h3 id="sec-navigation-timing-introduction"><span class="secno">4.1 </span>Introduction</h3>
 
@@ -639,7 +641,9 @@ if (t.loadEventEnd &gt; 0) {
 }</pre>
 </div>
 
-<h3 id="processing-model"><span class="secno">4.5 </span>Processing Model</h3>
+<h2 id="process"><span class="secno">5 </span>Process</h2>
+
+<h3 id="processing-model"><span class="secno">5.1 </span>Processing Model</h3>
 
 <p class="note">All the attributes in window.performance.timing and
 window.performance.navigation should not be written to until <a
@@ -856,16 +860,28 @@ during navigation operations such as forward and backward. In those cases,
 the window.performance.timing and window.performance.navigation objects must not
 be altered during the navigation.</p>
 
-<h3 id="garbage-collection"><span class="secno">4.6 </span>Garbage Collection</h3>
+<h3 id="garbage-collection"><span class="secno">5.2 </span>Garbage Collection</h3>
 <p>
 There are <a href="http://dev.w3.org/html5/spec/common-dom-interfaces.html#implied-strong-reference">
 implied strong references</a> from the window object to its
 window.performance.timing and window.performance.navigation objects.
 </p>
-<h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
+
+<h3 id="mono-clock"><span class="secno">5.3 </span>The Monotonic Clock</h3>
+<p>This section is non-normative.</p>
+<p>The values of the timing attributes should monotonically increasing at the rate time actually passes at. 
+However, wallclock time can be adjusted by system users or other mechanisms such as
+<a href="http://www.ietf.org/rfc/rfc5905.txt">NTP</a>.
+Implementations that is purely based on the wallclock is prone to large jumps forwards and backwards
+as the wallclock is adjusted, so the timing attributes can not guarantee to be monotonic.</p>
+<p>To prevent wallclock adjustment from skewing the timing attributes, user agents are recommended to
+record the wallclock time at the beginning of the navigation and define other timing attributes
+in terms of a monotonic clock measuring time elapsed from the beginning of the navigation. </p>
+
+<h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
 <p>This section is non-normative.</p>
 
-<h3 id="info_disclosure"><span class="secno">5.1 </span>Information disclosure</h3>
+<h3 id="info_disclosure"><span class="secno">6.1 </span>Information disclosure</h3>
 <p>There is the potential for disclosing an end-user's browsing and activity history by using
 carefully crafted timing attacks. For instance, the unloading time reveals how long the previous
 page takes to execute its unload handler, which could be used to infer the user's login status.
@@ -878,16 +894,16 @@ relaxed same origin policy</a> doesn't provide sufficient protection against una
 across documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
 IP address but on a different port.</p>
 
-<h3 id="cross-directory"><span class="secno">5.2 </span>Cross-directory access</h3>
+<h3 id="cross-directory"><span class="secno">6.2 </span>Cross-directory access</h3>
 <p>Different pages sharing one host name, for example contents from different authors hosted
 on sites with user generated content are considered from the same origin because there is no
 feature to restrict the access by pathname. Navigating between these pages allows a latter page
 to access timing information of the previous one, such as timing regarding redirection and unload event.</p>
 
-<h2 id="security"><span class="secno">6 </span>Security</h2>
+<h2 id="security"><span class="secno">7 </span>Security</h2>
 <p>This section is non-normative.</p>
 
-<h3 id="authentication"><span class="secno">6.1 </span>Detecting proxy servers</h3>
+<h3 id="authentication"><span class="secno">7.1 </span>Detecting proxy servers</h3>
 <p>In case a proxy is deployed between the user agent and the web server, the time interval
 between the <a href="#nt-connect-start">connectStart</a> and the
 <a href="#nt-connect-end">connectEnd</a> attributes indicates the delay between the user agent
@@ -897,12 +913,12 @@ time and time the proxy takes to connect to the web server, which obfuscate the 
 In case of an HTTP proxy, the user agent might not have any knowledge about the proxy server at
 all so it's not always feasible to mitigate this attack.</p>
 
-<h3 id="readonly"><span class="secno">6.2 </span>Tampering by replacing timing objects</h3>
+<h3 id="readonly"><span class="secno">7.2 </span>Tampering by replacing timing objects</h3>
 <p>The window.performance object is replaceable to avoid conflicts with existing pages using the
 same object. By doing that, it is possible for third-party to replace the object and scripts
 relying on the interface described in this work would break.</p>
 
-<h2 id="references"><span class="secno">7 </span>References</h2>
+<h2 id="references"><span class="secno">8 </span>References</h2>
 
 <dl id='references-list'>
 <dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>

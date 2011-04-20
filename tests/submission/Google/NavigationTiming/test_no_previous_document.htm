@@ -1,0 +1,39 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance.timing attributes on an initial navigation</title>
+        <link rel="author" title="Google" href="http://www.google.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+    
+        <script type="text/javascript">
+            setup({explicit_done: true});
+
+            var frame;
+            function onload_test()
+            {
+                frame = document.getElementById("frameContext");
+                if (performanceNamespace)
+                {
+console.log('here')
+                    test_true(frame.contentWindow.performance.navigation.type == performanceNamespace.navigation.TYPE_NAVIGATE,
+                              'timing.navigation.type is TYPE_NAVIGATE');
+
+                    test_equals(frame.contentWindow.performance.timing.unloadEventStart, 0, 'timing.unloadEventStart == 0 on navigation with no previous document');
+                    test_equals(frame.contentWindow.performance.timing.unloadEventEnd, 0, 'timing.unloadEventEnd == 0 navigation with no previous document');
+                    done();
+                }
+            }
+        </script>
+        
+    </head>
+    <body onload="onload_test();">
+        <h1>Description</h1>
+        <p>This test validates the unload event times are 0 when there is no previous document.</p>
+
+        <div id="log"></div><br />
+        <iframe id="frameContext" src="/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
+    </body>
+</html>
