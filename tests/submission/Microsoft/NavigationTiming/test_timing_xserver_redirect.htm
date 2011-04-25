@@ -8,6 +8,19 @@
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
 
         <script type="text/javascript">
+            //
+            // Test configuration
+            //
+
+            // the current page's origin
+            var pageOrigin = 'w3c-test.org';
+
+            // the origin to redirect through
+            var redirectOrigin = 'www.w3c-test.org';
+
+            //
+            // Tests
+            //
             function onload_test()
             {
                 test_namespace('navigation');
@@ -23,7 +36,9 @@
                         performanceNamespace.navigation.TYPE_NAVIGATE,
                         'timing.navigation.type is TYPE_NAVIGATE');
                 test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on a cross-origin server redirected navigation');
-                test_equals(performanceNamespace.timing.navigationStart, 0, 'timing.navigationStart == 0 on a cross-origin server redirected navigation');
+
+                test_timing_greater_than('navigationStart', 0);
+
                 test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart == 0 on a server redirected navigation from another domain');
                 test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on a server redirected navigation from another domain');
             }
@@ -37,6 +52,16 @@
 
         <div id="log"></div>
         <br />
-        <iframe id="frameContext" onload="onload_test();" src="http://www.w3c-test.org/webperf/tests/submission/Microsoft/NavigationTiming/redirect.php?location=http://w3c-test.org/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
+        <iframe id="frameContext" onload="onload_test();" src="" style="width: 250px; height: 250px;"></iframe>
+        <script>
+            // ensure we're starting at the right origin
+            test_equals(document.location.host, pageOrigin, 'Starting document.host is correct (' + pageOrigin + ')');
+
+            // combine the page origin and redirect origin into the IFRAME's src URL
+            var destUrl = 'http://' + redirectOrigin + '/webperf/tests/submission/Microsoft/NavigationTiming/redirect.php';
+            destUrl    += '?location=http://' + pageOrigin + '/webperf/tests/resources/blank_page_green.htm';
+
+            document.getElementById("frameContext").src = destUrl;
+        </script>
     </body>
 </html>
