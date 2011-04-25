@@ -8,6 +8,8 @@
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
 
         <script type="text/javascript">
+            setup({explicit_done: true});
+
             //
             // Test configuration
             //
@@ -41,6 +43,8 @@
 
                 test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart == 0 on a server redirected navigation from another domain');
                 test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on a server redirected navigation from another domain');
+
+                done();
             }
         </script>
 
@@ -52,7 +56,7 @@
 
         <div id="log"></div>
         <br />
-        <iframe id="frameContext" onload="onload_test();" src="" style="width: 250px; height: 250px;"></iframe>
+        <iframe id="frameContext" src="" style="width: 250px; height: 250px;"></iframe>
         <script>
             // ensure we're starting at the right origin
             test_equals(document.location.host, pageOrigin, 'Starting document.host is correct (' + pageOrigin + ')');
@@ -61,7 +65,9 @@
             var destUrl = 'http://' + redirectOrigin + '/webperf/tests/submission/Microsoft/NavigationTiming/redirect.php';
             destUrl    += '?location=http://' + pageOrigin + '/webperf/tests/resources/blank_page_green.htm';
 
-            document.getElementById("frameContext").src = destUrl;
+            var frameContext = document.getElementById("frameContext");
+            frameContext.onload = onload_test;
+            frameContext.src = destUrl;
         </script>
     </body>
 </html>
