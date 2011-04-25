@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-19-2011">Editor's Draft April 19, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-april-24-2011">Editor's Draft April 24, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/55eef3ac1a6b/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/55eef3ac1a6b/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/e3bab134ecf6/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/f201169ab507/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -314,12 +314,6 @@ provided information. </p>
 href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompting
 to unload</a> the previous document. If there is no previous document, this attribute
 must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
-
-<p>If there are HTTP redirects
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when navigating and not all the redirects or equivalent are from the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
-this attribute must return the zero.</p>
 
 <h4><code><dfn id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
 

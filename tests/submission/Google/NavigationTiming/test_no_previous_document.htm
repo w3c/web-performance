@@ -15,16 +15,16 @@
             function onload_test()
             {
                 frame = document.getElementById("frameContext");
+                test_namespace('navigation');
                 if (performanceNamespace)
                 {
-console.log('here')
                     test_true(frame.contentWindow.performance.navigation.type == performanceNamespace.navigation.TYPE_NAVIGATE,
                               'timing.navigation.type is TYPE_NAVIGATE');
 
                     test_equals(frame.contentWindow.performance.timing.unloadEventStart, 0, 'timing.unloadEventStart == 0 on navigation with no previous document');
                     test_equals(frame.contentWindow.performance.timing.unloadEventEnd, 0, 'timing.unloadEventEnd == 0 navigation with no previous document');
-                    done();
                 }
+                done();
             }
         </script>
         
