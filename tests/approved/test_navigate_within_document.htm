@@ -15,7 +15,10 @@
         <script>
             setup({explicit_done: true});
 
-            var timing = performanceNamespace.timing;
+            // explicitly test the namespace before we start testing
+            test_namespace('timing');
+
+            var timing;
 
             function check_timing_not_changed()
             {
@@ -42,6 +45,15 @@
 
             function load_handler()
             {
+                if (performanceNamespace === undefined)
+                {
+                    // avoid script errors
+                    done();
+                    return;
+                }
+            
+                timing = performanceNamespace.timing;
+            
                 window.removeEventListener("load", load_handler);
                 setTimeout("save_timing_after_load()", 0);
             }

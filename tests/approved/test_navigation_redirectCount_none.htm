@@ -16,9 +16,12 @@
         <script>
         test_namespace('navigation');
 
-        test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart on an non-redirected navigation');
-        test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd on an non-redirected navigation');
-        test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount on an non-redirected navigation');
+        if (performanceNamespace !== undefined)
+        {
+            test_equals(performanceNamespace.timing.redirectStart, 0, 'timing.redirectStart on an non-redirected navigation');
+            test_equals(performanceNamespace.timing.redirectEnd, 0, 'timing.redirectEnd on an non-redirected navigation');
+            test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount on an non-redirected navigation');
+        }
         </script>
     </body>
 </html>

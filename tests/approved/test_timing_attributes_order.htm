@@ -9,13 +9,23 @@
         <link rel="stylesheet" href="/resources/testharness.css" />
 
         <script type="text/javascript">
-            setup({ explicit_done: true });
+            setup({explicit_done: true});
+
+            test_namespace('timing');
+
             var step = 1;
-            function onload_test() 
+            function onload_test()
             {
+                if (performanceNamespace === undefined)
+                {
+                    // avoid script errors
+                    done();
+                    return;
+                }
+
                 var navigation_frame = document.getElementById("frameContext").contentWindow;
                 performanceNamespace = navigation_frame.performance;
-                switch (step) 
+                switch (step)
                 {
                     case 1:
                     {
@@ -88,6 +98,7 @@
         <h1>Setup</h1>
 
         <div id="log"></div>
-        <iframe id="frameContext" onload="onload_test();" src="blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
+        <br />
+        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>

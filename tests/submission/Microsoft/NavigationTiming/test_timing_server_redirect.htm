@@ -10,14 +10,23 @@
         <script type="text/javascript">
             function onload_test()
             {
-                performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
                 test_namespace('navigation');
+                if (performanceNamespace === undefined)
+                {
+                    // avoid script errors
+                    done();
+                    return;
+                }
+
+                performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
                 test_equals(performanceNamespace.navigation.type,
                         performanceNamespace.navigation.TYPE_NAVIGATE,
                         'timing.navigation.type is TYPE_NAVIGATE');
                 test_equals(performanceNamespace.navigation.redirectCount, 1, 'navigation.redirectCount == 1 on an server redirected navigation');
+
+                test_timing_greater_than('navigationStart', 0);
+
                 test_timing_order('redirectStart', 'navigationStart');
-                test_timing_order('redirectEnd', 'navigationStart');
                 test_timing_order('redirectEnd', 'redirectStart');
                 test_timing_order('fetchStart', 'redirectEnd');
             }
@@ -30,6 +39,7 @@
            window.performance.timing.redirectStart/End times for a same-origin server side redirect navigation.</p>
 
         <div id="log"></div>
+        <br />
         <iframe id="frameContext" onload="onload_test();" src="redirect.php?location=/webperf/tests/resources/blank_page_green.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>

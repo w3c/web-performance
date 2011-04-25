@@ -7,13 +7,23 @@
         <script src="/resources/testharness.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-    
+
         <script type="text/javascript">
             setup({explicit_done: true});
+
+            test_namespace('navigation');
+            test_namespace('timing');
 
             var redirect_frame;
             function onload_test()
             {
+                if (performanceNamespace === undefined)
+                {
+                    // avoid script errors
+                    done();
+                    return;
+                }
+
                 redirect_frame = document.getElementById("frameContext");
                 redirect_frame.onload = do_test;
             }
@@ -21,19 +31,17 @@
             function do_test()
             {
                 redirect_frame.onload = "";
-                if (performanceNamespace)
-                {
-                    test_true(redirect_frame.contentWindow.performance.navigation.type == performanceNamespace.navigation.TYPE_NAVIGATE,
-                              'timing.navigation.type is TYPE_NAVIGATE');
+                test_true(redirect_frame.contentWindow.performance.navigation.type == performanceNamespace.navigation.TYPE_NAVIGATE,
+                          'timing.navigation.type is TYPE_NAVIGATE');
 
-                    test_equals(redirect_frame.contentWindow.performance.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on an client redirected navigation');
-                    test_equals(redirect_frame.contentWindow.performance.timing.redirectStart, 0, 'timing.redirectStart == 0 on an client redirected navigation');
-                    test_equals(redirect_frame.contentWindow.performance.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on an client redirected navigation');
-                    done();
-                }
+                test_equals(redirect_frame.contentWindow.performance.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on an client redirected navigation');
+                test_equals(redirect_frame.contentWindow.performance.timing.redirectStart, 0, 'timing.redirectStart == 0 on an client redirected navigation');
+                test_equals(redirect_frame.contentWindow.performance.timing.redirectEnd, 0, 'timing.redirectEnd == 0 on an client redirected navigation');
+
+                done();
             }
         </script>
-        
+
     </head>
     <body onload="onload_test();">
         <h1>Description</h1>
