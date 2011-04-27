@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <title>Navigation Timing</title>
+<style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Page Visibility</h1>
+
+<h2 class="no-num no-toc" id="working-draft-april-24-2011">Editor's Draft April 27, 2011</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span> (<span
+      class="org">Microsoft Corp.</span>) &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+     <dd class="vcard"><span class="fn">Arvind Jain</span> (<span
+      class="org">Google Inc.</span>) &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
+    of Technology">MIT</acronym></a>, <a
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an interface for web applications to access
+timing information related to navigation and elements. </p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[PageVisibility]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
+   rel="disclosure">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-page-visibility"><span class="secno">4 </span>Page Visibility</a> 
+    <ol class="toc">
+      <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-navigator-visibility-interface"><span class="secno">4.2 </span>The <code>NavigatorVisibility</code> interface</a></li>
+      <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilityChange</code> event</a></li>
+    </ol>
+  </li>
+  <li><a href="#process"><span class="secno">5 </span>Processing Model</a> 
+  <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
+  <li><a href="#security"><span class="secno">7 </span>Security</a></li>
+  <li><a href="#references"><span class="secno">8 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+The Page Visibility specification defines a means for site developers to 
+programmatically determine the current visibility of a document and be notified 
+of visibility changes. Without knowing the visibility state of a page, a web developer 
+must design the webpage as if it is always visible. This not only results in higher 
+machine resource utilization, but it prevents web developers from making runtime
+decisions based on whether the webpage is visible to the user. Designing web pages with knowledge
+of the page visibility will allow for improved user experiences and power efficient sites.</p>
+
+<div class="example">
+<p>For example, the following Javascript shows a typical animation attempt without knowledge of 
+the Page Visibility:</p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+var timer;
+
+function onLoad() {
+  timer = setInterval("draw()", 16);
+}
+
+function draw() { 
+  //drawing 
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="onLoad()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<p>The script will always draw the next animation scene, even if the scene
+is not being painted due to the page not being visible. This will not only 
+use resources unnecessarily, but the animation will not automatically pause
+when the user no longer has the user agent visible.</p>
+
+<p>Using the <a href="#nt-navigator-visibility-interface">NavigatorVisibility</a>
+interface, the page will be able to pause animations when the user agent is no longer
+visible.</p>
+
+<div class="example">
+<p>The following script pauses the animation if the page is not visible:</p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+var timer;
+
+function onLoad() {
+  timer = setInterval("draw()", 16);
+  window.addEventListener("visibilitychange", visibilityChanged);
+}
+
+function visibilityChanged() {
+  if (window.navigator.visibilityState == Navigator.PAGE_VISIBLE){
+    timer = setInterval("draw()", 16);
+  }
+  else clearTimeout(timer);
+}
+
+function draw() { 
+  //drawing 
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="onLoad()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>The term DOM is used to refer to the API set made available to scripts in
+Web applications, and does not necessarily imply the existence of an actual
+<code>Document</code> object or of any other <code>Node</code> objects as
+defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
+
+<p>A DOM attribute is said to be <em>getting</em> when its value is being
+retrieved (such as by author script), and is said to be <em>setting</em> when
+a new value is assigned to it. </p>
+
+<p>The term "JavaScript" is used to refer to
+<a href="#ECMA262">ECMA-262</a>,
+rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
+
+
+<h2 id="sec-page-visibility"><span class="secno">4 <span class="auto-style1">Page Visibility</span></span></h2>
+
+<h3 id="sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</h3>
+
+<p>This section is non-normative</p>
+
+<p>This specification introduces an interface that provides Web applications
+with the means to programmatically determine the current visibility of a page
+and be notified of visibility changes.</p>
+
+<h3 id="sec-navigator-visibility-interface"><span class="secno">4.2 </span>The <code>NavigatorVisibility</code> interface</h3>
+<pre class="idl">
+  [NoInterfaceObject]
+  interface <dfn id="nt-navigator-visibility-interface">NavigatorVisibility</dfn> {
+  const unsigned short <a href="#nt-page-visible" title="pagevisible">PAGE_VISIBLE</a> = 0;
+  const unsigned short <a href="#nt-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = 1;
+  const unsigned short <a href="#nt-page-taskbar-preview" title="pagetaskbarpreview">PAGE_TASKBAR_PREVIEW</a> = 2;
+  const unsigned short <a href="#nt-page-page-preview" title="pagepagepreview">PAGE_PAGE_PREVIEW</a> = 3;
+  const unsigned short <a href="#nt-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = 4;
+  const unsigned short <a href="#nt-page-other" title="pageother">PAGE_OTHER</a> = 255;
+          
+  readonly attribute boolean <a href="#nt-visible" title="visible">visible</a>;
+  readonly attribute unsigned short <a href="#nt-visibility-state" title="visibilitystate">visibilityState</a>;
+};
+Navigator implements NavigatorVisibility;
+</pre>
+
+
+<h4><code><dfn id="nt-visible">visible</dfn></code> attribute</h4>
+
+<p>This attribute returns true when the User Agent is not minimized and the page is on a foreground tab. </p>
+<p>The attribute returns false when: </p>
+	<ul>
+		 <li>The User Agent is minimized,</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab,</li>
+		 <li>The Windows lock screen is shown,</li>
+		 <li>The User Agent is minimized and a Taskbar preview is shown,</li>
+		 <li>The User Agent is minimized and a page preview is shown.</li>
+	</ul> 
+
+
+<h4><code><dfn id="nt-visibility-state">visibilityState</dfn></code> attribute</h4>
+
+<h5><code><dfn id="nt-page-visible">window.navigator.PAGE_VISIBLE</dfn></code></h5>
+<p>This attribute must return <code>window.navigator.PAGE_VISIBLE</code> if the 
+User Agent is not minimized and the page is on a foreground tab. This is the same condition under which <code><dfn id="nt-visible">visible</dfn></code> attribute
+is set to true. </p>
+<p>This constant is not returned if the User Agent is minimized, and a Taskbar 
+preview is shown. If the User Agent is not minimized, the page is in a foreground tab and a Taskbar preview is shown, this constant is not
+returned.</p>
+
+<h5><code><dfn id="nt-page-hidden">window.navigator.PAGE_HIDDEN</dfn></code></h5>
+<p>This attribute must return <code>window.navigator.PAGE_HIDDEN</code> if:</p>
+	<ul>
+		 <li>The User Agent is minimized,</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab,</li>
+		 <li>The Windows lock screen is shown,</li>
+	</ul> 
+
+<h5><code><dfn id="nt-page-taskbar-preview">window.navigator.PAGE_TASKBAR_PREVIEW</dfn></code></h5>
+<p>This attribute must return <code>window.navigator.PAGE_TASKBAR_PREVIEW</code> if the 
+User Agent is minimized and the Taskbar preview is shown. If the User Agent is not minimized and a 
+Taskbar preview is shown, this value is not returned.</p>
+
+<h5><code><dfn id="nt-page-page-preview">window.navigator.PAGE_PAGE_PREVIEW</dfn></code></h5>
+<p>This attribute must return <code>window.navigator.PAGE_PAGE_PREVIEW</code> if the 
+User Agent is minimized and the page preview is shown.</p>
+
+<h5><code><dfn id="nt-page-prerender">window.navigator.PAGE_PRERENDER</dfn></code></h5>
+<p>This attribute must return <code>window.navigator.PAGE_PRERENDER</code> if the 
+the page is prerendered by being loaded off-screen and not visibly shown by the User Agent.</p>
+
+<h5><code><dfn id="nt-page-visible">window.navigator.PAGE_OTHER</dfn></code></h5>
+<p>This return value is reserved for future use.</p>
+
+<h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
+The <code><a href="#nt-visibility-change-event">visibilityChange</a></code> event</h3>
+
+<p>The visibilityChange event is fired any time a change is made to the 
+window.navigator.visibilityState attribute. This event can be registered using 
+addEventListener on window.</p>
+
+<h2 id="process-model"><span class="secno">5 </span>Processing Model</h2>
+<p>This section is non-normative.</p>
+
+<h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
+<p>This section is non-normative.</p>
+
+<h2 id="security"><span class="secno">7 </span>Security</h2>
+<p>This section is non-normative.</p>
+
+<h2 id="references"><span class="secno">8 </span>References</h2>
+
+<dl id='references-list'>
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+<p></p>
+</body>
+</html>
