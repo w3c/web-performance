@@ -61,8 +61,6 @@ W3C Membership. This is a draft document and may be updated, replaced
 or obsoleted by other documents at any time. It is inappropriate to
 cite this document as other than work in progress. </p>
 
-<p>This specification was written based on the <code><a href="https://developer.mozilla.org/en/DOM/window.mozRequestAnimationFrame">mozRequestAnimationFrame</a></code>
-feature implemented in Firefox.</p>
 </div>
 
 <div id="toc">
@@ -176,7 +174,6 @@ specifications:</p>
 <ul>
   <li><code>Document</code> <a href="#ref-DOM3CORE">[DOM3CORE]</a></li>
   <li><code>Window</code> <a href="#ref-HTML5">[HTML5]</a></li>
-  <li><code>ElementTimeControl</code> <a href="#ref-SVG11">[SVG11]</a></li>
   <li><code>DOMTimeStamp</code> <a href="#ref-WEBIDL">[WEBIDL]</a></li>
 </ul>
 </div>
@@ -184,24 +181,10 @@ specifications:</p>
 <div id="definitions" class="section">
 <h2>3. Definitions</h2>
 
-<p>The <dfn id="dfn-native-animation">native animations</dfn> in a
-<code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
-include all of the following, if the user agent implements the relevant specification:</p>
-
-<ul>
-  <li>SVG animations <a href="#ref-SVG11">[SVG11]</a></li>
-  <li>CSS transitions <a href="#ref-CSS3-TRANSITIONS">[CSS3-TRANSITIONS]</a></li>
-  <li>CSS animations <a href="#ref-CSS3-ANIMATIONS">[CSS3-ANIMATIONS]</a></li>
-</ul>
-
-<p>A <a class="dfnref" href="#dfn-native-animation">native animation</a> is considered to
-be <dfn id="dfn-active">active</dfn> if the current time is between the animation’s
-start and end time (inclusive), or if it has ended but has not yet been sampled for
-the frame immediately after its cessation.</p>
-
-<p>As distinct from <a class="dfnref" href="#dfn-native-animation">native animations</a>,
-a <dfn id="dfn-script-based-animation">script-based animation</dfn> is one that is implemented manually
-by an author by continually manipulating the DOM.</p>
+<p>Associated with every <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+is a <dfn id="dfn-animation-frame-request-callback-list">animation frame request callback list</dfn>,
+which is a list of <code><a href="#FrameRequestCallback">FrameRequestCallback</a></code>
+objects and which initially is an empty list.</p>
 
 </div>
 
@@ -215,11 +198,6 @@ object.  In the definition of <code><a href="#requestAnimationFrame">requestAnim
 <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
 object are to be taken to be references to the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
 object’s <a href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>. <a href="#ref-HTML5">[HTML5]</a></p>
-
-<p>Associated with every <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
-is a <dfn id="dfn-animation-frame-request-callback-list">animation frame request callback list</dfn>,
-which is a list of <code><a href="#FrameRequestCallback">FrameRequestCallback</a></code>
-objects and which initially is an empty list.</p>
 
 <p>A <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
 is said to <dfn id="dfn-has-active-animations">have active animations</dfn>
@@ -308,16 +286,6 @@ this specification: <i>some people here</i>.</p>
 <h3>A.1. Normative references</h3>
 
 <dl>
-  <dt id="ref-CSS3-ANIMATIONS">[CSS3-ANIMATIONS]</dt>
-  <dd><cite><a href="http://www.w3.org/TR/2009/WD-css3-animations-20091201">CSS Animations Module Level 3</a></cite>.
-  D. Jackson, D. Hyatt and C. Marrin, Editors.
-  World Wide Web Consortium, March 2009.  <em>Work in progress.</em>
-  Available at http://www.w3.org/TR/2009/WD-css3-animations-20090320.</dd>
-  <dt id="ref-CSS3-TRANSITIONS">[CSS3-TRANSITIONS]</dt>
-  <dd><cite><a href="http://www.w3.org/TR/2009/WD-css3-transitions-20091201">CSS Transitions Module Level 3</a></cite>.
-  D. Jackson, D. Hyatt, C. Marrin and L. D. Baron, Editors.
-  World Wide Web Consortium, December 2009.  <em>Work in progress.</em>
-  Available at http://www.w3.org/TR/2009/WD-css3-transitions-20091201.</dd>
   <dt id="ref-DOM3CORE">[DOM3CORE]</dt>
   <dd><cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model (DOM) Level 3 Core Specification</a></cite>.
   A. Le Hors, et al., Editors.  World Wide Web Consortium, April 2004.  Available at http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/.</dd>
@@ -329,11 +297,6 @@ this specification: <i>some people here</i>.</p>
   <dt id="ref-RFC2119">[RFC2119]</dt>
   <dd><cite><a href="http://www.ietf.org/rfc/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
   S. Bradner.  IETF, March 1997.  Available at http://www.ietf.org/rfc/rfc2119.</dd>
-  <dt id="ref-SVG11">[SVG11]</dt>
-  <dd><cite><a href="http://www.w3.org/TR/2010/WD-SVG11-20100622/">Scalable Vector Graphics (SVG) 1.1 (Second Edition)</a></cite>.
-  E. Dahlström, et al., Editors.
-  World Wide Web Consortium, June 2010.  <em>Work in progress.</em>
-  Available at http://www.w3.org/TR/2010/WD-SVG11-20100622/.</dd>
   <dt id="ref-WEBIDL">[WEBIDL]</dt>
   <dd><cite><a href="http://www.w3.org/TR/2010/WD-WebIDL-20101021/">Web IDL</a></cite>.
   C. McCormack, Editor.
@@ -345,11 +308,10 @@ this specification: <i>some people here</i>.</p>
 <div id="informative-references" class="section">
   <h3>A.2. Informative references</h3>
 
-  <p>There are no informative references.</p>
-  <!--
-  <dl>
-  </dl>
-  -->
+  <ul>
+    <li><p>This specification was written based on the <code><a href="https://developer.mozilla.org/en/DOM/window.mozRequestAnimationFrame">mozRequestAnimationFrame</a></code>
+    feature implemented in Firefox.</p></li>
+  </ul>
 </div>
 
 </div> <!-- references -->
