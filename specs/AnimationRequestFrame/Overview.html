@@ -1,97 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+  Overview.html
+  Timing control for frame-based animation
+
+  Note: This file is generated from Overview.xml.  Run "make" to regenerate it.
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  <title>Animation Request Frame</title>
-<style type="text/css">
-   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
-   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
-   pre code { color:inherit; background:transparent }
-   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
-   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
-   p.note::before { content:"Note: " }
-   .XXX { padding:.5em; border:solid #f00 }
-   p.XXX::before { content:"Issue: " }
-   dl.switch { padding-left:2em }
-   dl.switch > dt { text-indent:-1.5em }
-   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
-   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
-   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
-   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
-   dl.domintro dd p { margin: 0.5em 0; }
-   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
-   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
-   dfn { font-weight:bold; font-style:normal }
-   code { color:orangered }
-   code :link, code :visited { color:inherit }
-   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
-   table { border-collapse:collapse; border-style:hidden hidden none hidden }
-   table thead { border-bottom:solid }
-   table tbody th:first-child { border-left:solid }
-   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-  </style>
-  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Timing control for script-based animations</title>
+  <link rel="stylesheet" href="AnimationRequestFrame.css" type="text/css" />
+  <script src="section-links.js" type="application/ecmascript"></script>
+  <script src="dfn.js" type="application/ecmascript"></script>
 
-<body class="draft">
+  
+<link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
-<div class="head">
-<h1>Animation Request Frame</h1>
+<body>
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>2 May 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/anim-timing/tip/Overview.html">http://dvcs.w3.org/hg/anim-timing/tip/Overview.html</a></dd><dt>Latest Published Version:</dt><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
-<h2 class="no-num no-toc" id="working-draft-feb-23-2011">Editor's Draft March 16, 2011</h2>
-<dl>
-  <dt>This version:</dt>
-    <dd><a
-      href="http://w3c-test.org/webperf/specs/AnimationRequestFrame/">http://w3c-test.org/webperf/specs/AnimationRequestFrame/</a></dd>
-  <dt>Latest version:</dt>
-    <dd><a
-      href="http://w3c-test.org/webperf/specs/AnimationRequestFrame/">http://w3c-test.org/webperf/specs/AnimationRequestFrame/</a></dd>
-  <dt>Latest Editor's Draft:</dt>
-    <dd><a
-      href="http://w3c-test.org/webperf/specs/AnimationRequestFrame/">http://w3c-test.org/webperf/specs/AnimationRequestFrame/</a></dd>
-  <dt>Previous versions:</dt>
-    <dd>None</dd>
-  <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Cameron McCormack</span> (<span
-      class="org">Mozilla Foundation</span>) &lt;<a
-      class="email" href="mailto:cam@mcc.id.au">cam@mcc.id.au</a>&gt; </dd>
-</dl>
+<div class="section">
+<h2>Abstract</h2>
+<p>This document defines an API web page authors can use to write script-based
+animations where the user agent is in control of limiting the update
+rate of the animation.  The user agent is in a better position to determine
+the ideal animation rate based on whether the page is currently in a foreground
+or background tab, what the current load on the CPU is, and so on.  Using this
+API should therefore result in more appropriate utilization of the CPU
+by the browser.</p>
 
-   <p class=copyright><a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
-    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
-    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
-    of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.eu/"><acronym title="European Research Consortium
-    for Informatics and Mathematics">ERCIM</acronym></a>, <a
-    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
-    <a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
 
-    and <a
-    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
-    use</a> rules apply.</p>
-
-   <hr class='top'>
 </div>
 
-<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+<div class="section">
+<h2>Status of this Document</h2>
 
-<p>This specification defines the navigation request frame.</p>
-
-<h2 class="no-num no-toc" id="status-of-this-document">Status of this
-document</h2>
-
-  <p><em>This section describes the status of this document at the time of
+<p><em>This section describes the status of this document at the time of
    its publication. Other documents may supersede this document. A list of
    current W3C publications and the latest revision of this technical report
    can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
    index</a> at http://www.w3.org/TR/.</em></p>
-
-<p>This is a <strong>work in progress</strong> and may change without any
-notices. </p>
 
 <p>Please send comments
    to <a href="mailto:public-web-perf@w3.org?subject=[AnimationRequestFrame]%20">public-web-perf@w3.org</a>
@@ -104,58 +54,326 @@ notices. </p>
    the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
-   Domain</a>.
+   Domain</a>.</p>
 
 <p>Publication as a Working Draft does not imply endorsement by the
 W3C Membership. This is a draft document and may be updated, replaced
 or obsoleted by other documents at any time. It is inappropriate to
 cite this document as other than work in progress. </p>
 
-<p>This document was produced by a group operating under
-   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
-   February 2004 W3C Patent Policy</a>. W3C maintains
-   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
-   rel="disclosure">public list of any patent disclosures</a> made in
-   connection with the deliverables of the group; that page also
-   includes instructions for disclosing a patent. An individual who
-   has actual knowledge of a patent which the individual believes
-   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
-   Claim(s)</a> must disclose the information in accordance
-   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-   6 of the W3C Patent Policy</a>.</p>
+<p>This specification was written based on the <code><a href="https://developer.mozilla.org/en/DOM/window.mozRequestAnimationFrame">mozRequestAnimationFrame</a></code>
+feature implemented in Firefox.</p>
+</div>
 
+<div id="toc">
+<h2>Table of Contents</h2>
+<div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#definitions">3. Definitions</a></li><li><a href="#the-WindowAnimationTiming-interface">4. The WindowAnimationTiming interface</a></li><li><a href="#acknowledgements">5. Acknowledgements</a></li></ul><ul><li><a href="#references">A. References</a><ul><li><a href="#normative-references">A.1. Normative references</a></li><li><a href="#informative-references">A.2. Informative references</a></li></ul></li><li><a href="#changes">B. Changes</a></li></ul></div>
+</div>
 
-<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
-<!--begin-toc-->
-<ol class="toc">
-  <li><a href="#introduction"><span class="secno">1
-  </span>Introduction</a></li>
-  <li><a href="#references"><span class="secno">7 </span>References</a></li>
-  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
-</ol>
-<!--end-toc-->
+<div id="sections">
 
-<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+<div id="introduction" class="section">
+<h2>1. Introduction</h2>
 
-<p>This section is non-normative.</p>
+<p class="norm">This section is informative.</p>
 
+<p>Animations in web browsers come in two forms: native, declarative ones, such
+as the <code>&lt;animate&gt;</code> element in SVG, and those that are implemented
+in script.  These script-based animations are most often performed by scheduling
+a callback using <code>setTimeout</code> or <code>setInterval</code> and making
+changes to the DOM to effect the animation in that callback.</p>
 
-<h2 id="references"><span class="secno">7 </span>References</h2>
+<p>A disadvantage of this approach is that the author of the animation script has
+no idea what the ideal frequency for updating their animation is.  Instead, the
+easiest way forward for the author is to simply call <code>setTimeout</code> with
+a very small value, which in practice will be clamped to some minimum time like
+10ms anyway.  It likely won’t be the case that 100 updates per second are required
+for the animation, especially if the page is in a background tab or the browser
+window is minimized.</p>
 
-<dl id='references-list'>
-<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
-<dd>
- <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
-</dd>
-<dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt><dd>
-	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
-	Edition. ECMA International, Standard
-	ECMA-262, December 2009. This version of the ECMAScript
-	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+<p>The API described in this document allows script authors to request the user
+agent schedule an animation frame update.  The user agent is in a better position
+to determine how many frames per second to allocate to all of the animations running
+in the entire browser.  If there are many animations active, the user agent can
+select a frame rate such that all of the animations will run as smoothly as possible.
+If the page is not currently visible, animations on that page can be throttled
+heavily so that they do not update often and thus consume little CPU power.</p>
+
+<div class="example"><div class="exampleHeader">Example</div>
+  <p>Here is an example of using the API to write a script-based animation.</p>
+  <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HTML</span></div><div class="blockContent"><pre class="code html-code">&lt;!DOCTYPE html&gt;
+    &lt;title&gt;Script-based animation using requestAnimationFrame&lt;/title&gt;
+    &lt;style&gt;
+    div { position: absolute; left: 10px; top: 10px;
+      padding: 50px; background: crimson; color: white }
+    &lt;/style&gt;
+    &lt;script&gt;
+    var requestId = 0;
+
+    function animate(time) {
+      document.getElementById("animated").style.left = (time - animationStartTime)%500 + "px";
+      requestId = window.requestAnimationFrame(animate);
+    }
+    function start() {
+      animationStartTime = Date.now();
+      requestId = window.requestAnimationFrame(animate);
+    }
+    function stop() {
+      if (requestId)
+        window.cancelRequestAnimationFrame(requestId);
+      requestId = 0;
+    }
+    &lt;/script&gt;
+    &lt;div onclick="start()" id="animated"&gt;Click me to start!&lt;/div&gt;
+    &lt;div onclick="stop()" id="animated"&gt;Click me to stop!&lt;/div&gt;</pre></div></div>
+</div>
+
+</div>
+
+<div id="conformance" class="section">
+<h2>2. Conformance</h2>
+
+<p>Everything in this specification is normative except for diagrams, examples,
+notes and sections marked as being informative.</p>
+
+<p>The keywords
+“<span class="rfc2119">MUST</span>”,
+“<span class="rfc2119">MUST NOT</span>”,
+“<span class="rfc2119">REQUIRED</span>”,
+“<span class="rfc2119">SHALL</span>”,
+“<span class="rfc2119">SHALL NOT</span>”,
+“<span class="rfc2119">SHOULD</span>”,
+“<span class="rfc2119">SHOULD NOT</span>”,
+“<span class="rfc2119">RECOMMENDED</span>”,
+“<span class="rfc2119">MAY</span>” and
+“<span class="rfc2119">OPTIONAL</span>” in this document are to be interpreted
+as described in <cite><a href="http://www.ietf.org/rfc/rfc2119">Key words for
+use in RFCs to Indicate Requirement Levels</a></cite>. <a href="#ref-RFC2119">[RFC2119]</a></p>
+
+<p>The IDL fragment in <a href="#the-WindowAnimationTiming-interface">section 4</a>
+of this specification <span class="rfc2119">MUST</span> be interpreted as required for
+<a href="http://www.w3.org/TR/WebIDL/#dfn-conforming-idl-fragment">conforming IDL fragments</a>,
+as described in the <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a> specification. <a href="#ref-WEBIDL">[WEBIDL]</a></p>
+
+<p>This specification defines a single conformance class:</p>
+
+<dl>
+  <dt><dfn>conforming user agent</dfn></dt>
+  <dd>A user agent is considered to be a conforming user agent if it
+  satisfies all of the <span class="rfc2119">MUST</span>-,
+  <span class="rfc2119">REQUIRED</span>- and
+  <span class="rfc2119">SHALL</span>-level criteria in this specification.
+  A conforming user agent <span class="rfc2119">MUST</span> also be a
+  <a href="http://www.w3.org/TR/WebIDL/#dfn-conforming-implementation">conforming implementation</a>
+  of the IDL fragment in <a href="#the-WindowAnimationTiming-interface">section 4</a>
+  of this specification, as described in the
+  <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a> specification. <a href="#ref-WEBIDL">[WEBIDL]</a></dd>
 </dl>
 
-<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+<p>This specification references interfaces and types from a number of other
+specifications:</p>
 
-<p>@@</p>
+<ul>
+  <li><code>Document</code> <a href="#ref-DOM3CORE">[DOM3CORE]</a></li>
+  <li><code>Window</code> <a href="#ref-HTML5">[HTML5]</a></li>
+  <li><code>ElementTimeControl</code> <a href="#ref-SVG11">[SVG11]</a></li>
+  <li><code>DOMTimeStamp</code> <a href="#ref-WEBIDL">[WEBIDL]</a></li>
+</ul>
+</div>
+
+<div id="definitions" class="section">
+<h2>3. Definitions</h2>
+
+<p>The <dfn id="dfn-native-animation">native animations</dfn> in a
+<code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+include all of the following, if the user agent implements the relevant specification:</p>
+
+<ul>
+  <li>SVG animations <a href="#ref-SVG11">[SVG11]</a></li>
+  <li>CSS transitions <a href="#ref-CSS3-TRANSITIONS">[CSS3-TRANSITIONS]</a></li>
+  <li>CSS animations <a href="#ref-CSS3-ANIMATIONS">[CSS3-ANIMATIONS]</a></li>
+</ul>
+
+<p>A <a class="dfnref" href="#dfn-native-animation">native animation</a> is considered to
+be <dfn id="dfn-active">active</dfn> if the current time is between the animation’s
+start and end time (inclusive), or if it has ended but has not yet been sampled for
+the frame immediately after its cessation.</p>
+
+<p>As distinct from <a class="dfnref" href="#dfn-native-animation">native animations</a>,
+a <dfn id="dfn-script-based-animation">script-based animation</dfn> is one that is implemented manually
+by an author by continually manipulating the DOM.</p>
+
+</div>
+
+<div id="the-WindowAnimationTiming-interface" class="section">
+<h2>4. The WindowAnimationTiming interface</h2>
+
+<p>The <code><a href="#WindowAnimationTiming">WindowAnimationTiming</a></code> interface is used to expose the
+<code><a href="#requestAnimationFrame">requestAnimationFrame</a></code>
+operation on the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
+object.  In the definition of <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> below, references to the
+<code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+object are to be taken to be references to the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
+object’s <a href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>. <a href="#ref-HTML5">[HTML5]</a></p>
+
+<p>Associated with every <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+is a <dfn id="dfn-animation-frame-request-callback-list">animation frame request callback list</dfn>,
+which is a list of <code><a href="#FrameRequestCallback">FrameRequestCallback</a></code>
+objects and which initially is an empty list.</p>
+
+<p>A <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+is said to <dfn id="dfn-has-active-animations">have active animations</dfn>
+whenever it has a non-empty <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation
+frame request callback list</a>.</p>
+
+<pre class="idl"><span class="xattr">[Supplemental, NoInterfaceObject]</span>
+interface <dfn id="WindowAnimationTiming">WindowAnimationTiming</dfn> {
+  long <a href="#requestAnimationFrame">requestAnimationFrame</a>(in <a href="#FrameRequestCallback">FrameRequestCallback</a> callback);
+  void <a href="#cancelRequestAnimationFrame">cancelRequestAnimationFrame</a>(in long handle);
+};
+
+<a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a> implements <a href="#WindowAnimationTiming">WindowAnimationTiming</a>;
+
+<span class="xattr">[Callback, NoInterfaceObject]</span>
+interface <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> {
+  void <a href="#sample">sample</a>(in <a href="http://www.w3.org/TR/WebIDL/#DOMTimeStamp">DOMTimeStamp</a> time);
+};</pre>
+
+<p>The <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn> method is
+used to signal to the user agent that a <a class="dfnref" href="#dfn-script-based-animation">script-based animation</a>
+needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code>
+is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
+resampling by appending <var>callback</var> to the end of <var>L</var>. <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn>
+returns a user-agent-defined integer <var>handle</var> greater than zero to identify this callback.</p>
+
+<div class="note"><div class="noteHeader">Note</div>
+  <p><code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> only schedules
+  a single update to the script-based animation.  If subsequent animation frames are needed, then
+  <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> will need to be called
+  again from within the callback.</p>
+</div>
+
+<p>When <dfn id="cancelRequestAnimationFrame"><code>cancelRequestAnimationFrame</code></dfn> method is called,
+the user agent <span class="rfc2119">MUST</span> remove the callback associated with <var>handle</var> from <var>L</var>, if such a callback exists.</p>
+
+<p>While a <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
+<a class="dfnref" href="#dfn-has-active-animations">has active animations</a>, the user agent
+<span class="rfc2119">MUST</span> continually <dfn id="dfn-sample-all-animations">sample all animations</dfn>.
+To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>,
+the following steps are performed:</p>
+
+<ol class="algorithm">
+  <li>Let <var>t</var> be the result of <a class="dfnref" href="#dfn-get-next-sample-time">getting the next sample time</a>
+  of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>.</li>
+  <li>Let <var>time</var> be <var>t</var> expressed as the number of milliseconds since 1970-01-01T00:00:00Z.</li>
+  <li>Let <var>list</var> be a copy of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
+  <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.  <var>list</var> will be empty
+  if no <a class="dfnref" href="#dfn-script-based-animation">script-based animations</a> have been scheduled.</li>
+  <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
+</ol>
+<p>The <dfn id="dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</dfn>:</p>
+<ol class="algorithm">
+  <li>For each entry <var>callback</var> in <var>list</var>, in order:
+    <ol>
+      <li>If the callback has not been cancelled:</li>
+      <ol>
+        <li>Call the <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> operation of
+              <var>callback</var> with <var>time</var> as the argument.</li>
+        <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
+        <li>Return to the beginning of the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a></li>
+      </ol>
+    </ol>
+  </li>
+  <li>If no callbacks were fired in this iteration of the invocation algorithm, terminate these steps.</li>
+</ol>
+</div>
+
+<div id="acknowledgements" class="section">
+<h2>5. Acknowledgements</h2>
+
+<p class="norm">This section is informative.</p>
+
+<p>The editor would like to thank the following people for contributing to
+this specification: <i>some people here</i>.</p>
+</div>
+
+</div> <!-- sections -->
+
+<div id="appendices">
+
+<div id="references" class="section">
+<h2>A. References</h2>
+
+<div id="normative-references" class="section">
+<h3>A.1. Normative references</h3>
+
+<dl>
+  <dt id="ref-CSS3-ANIMATIONS">[CSS3-ANIMATIONS]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2009/WD-css3-animations-20091201">CSS Animations Module Level 3</a></cite>.
+  D. Jackson, D. Hyatt and C. Marrin, Editors.
+  World Wide Web Consortium, March 2009.  <em>Work in progress.</em>
+  Available at http://www.w3.org/TR/2009/WD-css3-animations-20090320.</dd>
+  <dt id="ref-CSS3-TRANSITIONS">[CSS3-TRANSITIONS]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2009/WD-css3-transitions-20091201">CSS Transitions Module Level 3</a></cite>.
+  D. Jackson, D. Hyatt, C. Marrin and L. D. Baron, Editors.
+  World Wide Web Consortium, December 2009.  <em>Work in progress.</em>
+  Available at http://www.w3.org/TR/2009/WD-css3-transitions-20091201.</dd>
+  <dt id="ref-DOM3CORE">[DOM3CORE]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model (DOM) Level 3 Core Specification</a></cite>.
+  A. Le Hors, et al., Editors.  World Wide Web Consortium, April 2004.  Available at http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/.</dd>
+  <dt id="ref-HTML5">[HTML5]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2010/WD-html5-20100624/">HTML5</a></cite>.
+  I. Hickson, Editor.
+  World Wide Web Consortium, June 2010.
+  Available at http://www.w3.org/TR/2010/WD-html5-20100624/.</dd>
+  <dt id="ref-RFC2119">[RFC2119]</dt>
+  <dd><cite><a href="http://www.ietf.org/rfc/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+  S. Bradner.  IETF, March 1997.  Available at http://www.ietf.org/rfc/rfc2119.</dd>
+  <dt id="ref-SVG11">[SVG11]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2010/WD-SVG11-20100622/">Scalable Vector Graphics (SVG) 1.1 (Second Edition)</a></cite>.
+  E. Dahlström, et al., Editors.
+  World Wide Web Consortium, June 2010.  <em>Work in progress.</em>
+  Available at http://www.w3.org/TR/2010/WD-SVG11-20100622/.</dd>
+  <dt id="ref-WEBIDL">[WEBIDL]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2010/WD-WebIDL-20101021/">Web IDL</a></cite>.
+  C. McCormack, Editor.
+  World Wide Web Consortium, October 2010.
+  Available at http://www.w3.org/TR/2010/WD-WebIDL-20101021/.</dd>
+</dl>
+</div>
+
+<div id="informative-references" class="section">
+  <h3>A.2. Informative references</h3>
+
+  <p>There are no informative references.</p>
+  <!--
+  <dl>
+  </dl>
+  -->
+</div>
+
+</div> <!-- references -->
+
+<div id="changes" class="section">
+<h2>B. Changes</h2>
+
+<p>The following is a list of substantial changes to the document on each publication.</p>
+
+<dl class="changes">
+  <!--
+  <dt>Current editor’s draft</dt>
+  <dd>...</dd>
+  -->
+  <dt>1 January 20xx – FPWD</dt>
+  <dd>
+    <ul>
+      <li>Initial publication.</li>
+    </ul>
+  </dd>
+</dl>
+</div>
+
+</div> <!-- appendices -->
+
 </body>
 </html>

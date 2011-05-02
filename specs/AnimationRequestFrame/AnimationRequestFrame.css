@@ -1,0 +1,76 @@
+code, .prop, .idlident, .idlstring, .xattr { font-size: 14px; font-family: monospace !important }
+.ednote, .prop, .idlident, .idlstring, .example, .note, blockquote { background: #d9e8ff }
+code { color: orangered }
+code a:link, code a:visited { color: orangered }
+.example blockquote { background: #f0f6ff }
+.ednote { border-top: 3px solid red; border-bottom: 3px solid red; margin: 1em 2em; padding: 0 1em 0 1em; background: #f8eeee }
+.ednoteHeader { font-weight: bold; display: block; padding-top: 0.5em }
+.toc ul li { list-style-type: none; margin-top: 0; margin-bottom: 0 }
+.toc ul { margin-bottom: 0.5em }
+pre.idl { color: black; background: #d9e8ff; padding: 1em; margin-top: 1em; margin-left: 0; font-size: 1em; overflow: auto; /*white-space: pre-wrap*/ }
+pre.idl a:link, pre.idl a:visited { color: black; }
+pre.idl .xattr { color: #666 }
+
+table.vert { border-collapse: collapse; border-top: 2px solid #005a9c; border-bottom: 2px solid #005a9c; margin-top: 1em auto }
+table.vert td { vertical-align: top; background: #f0f6ff }
+table.vert th { text-align: left; vertical-align: bottom; background: #d9e8ff; color: #005a9c; color: black; border-bottom: 2px solid #005a9c; white-space: nowrap }
+table.vert th, table.vert td { padding: 0.25em 0.75em }
+table.vert td.table-note { background: none; border-left: 1px solid white; border-right: 1px solid white; border-bottom: 1px solid white; font-size: 90% }
+
+.idltype, .idlvalue, .idlop { font-weight: bold }
+
+.example, .note { border-top: 3px solid #005a9c; border-bottom: 3px solid #005a9c; margin: 1em 2em; padding: 0 1em }
+.exampleHeader, .noteHeader { font-weight: bold; display: block; color: #005a9c; color: black; padding-top: 0.5em }
+pre { overflow: auto; margin: 0 }
+pre.code { padding: 0 1em; margin: 0; margin-bottom: 1em }
+.block { border-top: 1px solid #90b8de; border-bottom: 1px solid #90b8de; background: #f0f6ff; margin: 1em 2em; padding: 0 0.5em 0.5em 0.5em }
+.blockTitleDiv { text-align: left }
+.blockTitle { position: relative; top: -0.75em; left: -1.5em; background: #90b8de; color: white; padding: 0.25em 1em 0.25em 1em; font-weight: bold; font-size: 80% }
+
+dfn { font-weight: bold; font-style: normal }
+li { margin-top: 0.5em; margin-bottom: 0.5em }
+ul > li { list-style-type: disc }
+.norm { font-style: italic }
+.rfc2119 { text-transform: lowercase; font-variant: small-caps }
+dfn var { font-style: normal }
+blockquote { padding: 1px 1em; margin-left: 2em; margin-right: 2em }
+dl.changes > dd { margin-left: 0 }
+dd > :first-child { margin-top: 0 }
+caption { caption-side: bottom; margin-top: 1em; font-weight: bold }
+body { line-height: 1.3 }
+
+@media print {
+  .section-link { display: none }
+}
+.section-link { visibility: hidden; width: 1px; height: 1px; overflow: visible; font-size: 10pt; font-style: normal }
+.section-link a { color: #666; font-weight: bold; text-decoration: none }
+.section-link a:hover { color: #c00 }
+.section > *:hover > .section-link { visibility: visible }
+
+div.set { margin-left: 3em; text-indent: -1em }
+ol.algorithm ol { border-left: 1px solid #90b8de; margin-left: 1em }
+dl.switch > dd > ol.only { margin-left: 0 }
+dl.switch { padding-left: 2em }
+dl.switch > dt { text-indent: -1.5em; margin-top: 1em }
+dl.switch > dt + dt { margin-top: 0 }
+dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em }
+.diagram { text-align: center }
+iframe { border: 0 }
+.comment { color: #005a9c }
+
+ul.notes { font-size: 90%; padding-left: 0 }
+ul.notes li { list-style-type: none }
+ul.notes .note-link { vertical-align: super }
+.note-link { font-size: 90% }
+
+.code var { color: #f44; }
+
+sub, sup { font-size: 80% }
+
+/* For dfn.js */
+body.dfnEnabled dfn { cursor: pointer; }
+.dfnPanel { display: inline; position: absolute; height: auto; width: auto; padding: 0.5em 0.75em; font: small sans-serif; background: #DDDDDD; color: black; border: outset 0.2em; cursor: default }
+.dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0 }
+.dfnPanel :link, .dfnPanel :visited { color: black }
+.dfnPanel p { font-weight: bolder }
+.dfnPanel li { list-style-position: inside }
