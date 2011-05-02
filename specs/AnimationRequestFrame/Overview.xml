@@ -5,7 +5,7 @@
   Timing control for script-based animations
 
   This is written in XHTML 1.0 Strict with an inline <options> element that
-  helps the anim-timing.xsl stylesheet process the document (generating a table
+  helps the AnimationRequestFrame.xsl stylesheet process the document (generating a table
   of contents, section numbers, certain processing instructions).
   -->
 
@@ -21,9 +21,9 @@
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <draft href='http://dvcs.w3.org/hg/anim-timing/tip/Overview.html'/>
-      <this href='http://www.w3.org/TR/2010/WD-anim-timing-2010xxxx/'/>
-      <!--latest href='http://www.w3.org/TR/anim-timing/'/-->
+      <this href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html'/>
+      <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html'/>
+      <!--latest href='http://www.w3.org/TR/AnimationRequestFrame/'/-->
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
