@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
 <body>
-<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>2 May 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>3 May 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
 <div class="section">
 <h2>Abstract</h2>
@@ -219,9 +219,9 @@ interface <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> {
 
 <p>The <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn> method is
 used to signal to the user agent that a <a class="dfnref" href="#dfn-script-based-animation">script-based animation</a>
-needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code>
-is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
-resampling by appending <var>callback</var> to the end of <var>L</var>. <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn>
+needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code> is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
+resampling by setting the cancelled flag on <var>callback</var> to false and appending it to the end of <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.
+<dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn>
 returns a user-agent-defined integer <var>handle</var> greater than zero to identify this callback.</p>
 
 <div class="note"><div class="noteHeader">Note</div>
@@ -232,7 +232,16 @@ returns a user-agent-defined integer <var>handle</var> greater than zero to iden
 </div>
 
 <p>When <dfn id="cancelRequestAnimationFrame"><code>cancelRequestAnimationFrame</code></dfn> method is called,
-the user agent <span class="rfc2119">MUST</span> remove the callback associated with <var>handle</var> from <var>L</var>, if such a callback exists.</p>
+the user agent <span class="rfc2119">MUST</span> set the cancelled flag of the callback associated with <var>handle</var> to true.  If there is no callback associated with <var>handle</var> then this function does nothing.</p>
+
+<div class="note"><div class="noteHeader">Note</div>
+  <p><code><a href="#cancelRequestAnimationFrame">cancelRequestAnimationFrame</a></code> might be called for a callback
+  in the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
+  <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a> or in
+  the <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a> operation's temporary <var>list</var>.  In
+  either case the callback's cancelled flag is set to true so that the callback does not run.</p>
+</div>
+
 
 <p>While a <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
 <a class="dfnref" href="#dfn-has-active-animations">has active animations</a>, the user agent
@@ -253,16 +262,14 @@ the following steps are performed:</p>
 <ol class="algorithm">
   <li>For each entry <var>callback</var> in <var>list</var>, in order:
     <ol>
-      <li>If the callback has not been cancelled:</li>
+      <li>If the cancelled flag on <var>callback</var> is not true:</li>
       <ol>
         <li>Call the <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> operation of
               <var>callback</var> with <var>time</var> as the argument.</li>
         <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
-        <li>Return to the beginning of the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a></li>
       </ol>
     </ol>
   </li>
-  <li>If no callbacks were fired in this iteration of the invocation algorithm, terminate these steps.</li>
 </ol>
 </div>
 
@@ -272,7 +279,7 @@ the following steps are performed:</p>
 <p class="norm">This section is informative.</p>
 
 <p>The editor would like to thank the following people for contributing to
-this specification: <i>some people here</i>.</p>
+this specification: Boris Zbarsky, Jonas Sicking, Robert O'Callahan.</p>
 </div>
 
 </div> <!-- sections -->
