@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
   <meta content="text/html; charset=us-ascii" http-equiv="content-type">
@@ -47,7 +47,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-march-28-2011">Working Draft April 6th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-march-28-2011">Working Draft May 3rd, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -293,8 +293,8 @@ in the</span>
         <li>
             If an <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
             in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. Sub-resources requested by the <code>IFRAME</code> document 
-            will be included in the <code>IFRAME</code> document’s <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface and not the parent 
-            document’s <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
+            will be included in the <code>IFRAME</code> document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface and not the parent 
+            document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
     </ul>
 </p>
@@ -329,6 +329,7 @@ in the</span>
   readonly attribute DOMString <a href="#url" title="url">url</a>;
   readonly attribute DOMString <a href="#id" title="url">id</a>;
 
+  readonly attribute unsigned long long <a href="#resource-fetch-start" title="resourceFetchStart">resourceFetchStart</a>;
   readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
   readonly attribute unsigned long long <a href="#redirect-end" title="redirectend">redirectEnd</a>;
   readonly attribute unsigned long long <a href="#fetch-start" title="fetchstart">fetchStart</a>;
@@ -374,6 +375,13 @@ resource. The attribute must not change even if the fetch redirected to a differ
 <p>This attribute must return the <a
 href="http://dev.w3.org/html5/spec/Overview.html#the-id-attribute">ID</a> attribute of the element that initiated the download
     request for the resource, at the time of the request, if applicable and specified.  Otherwise, the attribute must be an empty string.</p>
+
+<h4 id="resource-fetch-start-attribute"><code><dfn id="resource-fetch-start">resourceFetchStart</dfn></code> attribute</h4>
+
+<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
+when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
+document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
+return the same value as <a href="#fetch-start">fetchStart</a>.</p>
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
 
@@ -677,29 +685,104 @@ interface PerformanceResourceTimingList{
 
 <h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
 
-<div class="XXX">
-TODO: Processing model should be similar to that described in the
-<a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">
-NavigationTiming</a> draft.</div>
+<p>Illustration</p>
 
-<p>A user agent must allocate space to store all the <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects generated in the following
-process. </p>
+<p>This section is non-normative.</p>
+
+<p>The following graph illustrates the timing attributes defined by the PerformanceResourceTiming interface. Attributes underlined may not be available when fetching resources from different <a href="#same-origin">origins</a>. User agents may perform internal processing in between timings, which allow for non-normative intervals between timings.</p>
+
+<p><img width="85%" src="resource-timing-overview.png" alt='Resource Timing attributes'></p>
+
+<p>For each resource initiated on the page:</p>
 <ol>
-  <li>Before a user agent fetches a resource for an element that associates
-    with a <a href="#performance-resource-timing">PerformanceResourceTiming</a> object, the following steps must be run:
-        <ol>
-      <li>Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object.</li>
-      <li>Record the <a href="#type">type</a> attribute.</li>
-      <li>Record the <a href="#url">url</a> attribute.</li>
-      <li>Record the <a href="#id">id</a> attribute, if applicable</li>
-      <li>Before a user agent runs the <a
-        href="http://dev.w3.org/html5/spec/Overview.html#changesToNetworkingModel">fetching
-        algorithm</a>, it must record the current time in the <a
-        href="#nt-fetch-start">fetchStart</a> attribute.</li>
-      <li>Record the time as <a href="#fetch-end">fetchEnd</a> attribute
-        immediately after the user agent finishes fetching the resource.</li>
+  <li>If fetching the resource is aborted for any reason, abort these steps without 
+   changing the attributes in <a href="#performance-resource-timing">PerformanceResourceTiming</a>.</li>
+  <li>Immediately after the user agent begins initiating retrieval of the resource, 
+   ecord the current time as <a href="#resource-fetch-start">resourceFetchStart</a>.
+  </li>
+  <li>Record the initiator of the resource in <a href="#type">type</a> if it has not been 
+   set.
+  </li>
+  <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
+   <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, immediately before a user agent    checks with the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant application caches</a>, 
+   record the current time as <a href="#rt-fetch-start">fetchStart</a>. Otherwise, immediately before a user agent starts the 
+   <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources"> fetching process</a>, record the current time as 
+   <a href="#rt-fetch-start"> fetchStart</a>
+  </li>
+  <li>Let <a href="#rt-domain-lookup-start">domainLookupStart</a>, 
+   <a href="#rt-domain-lookup-end">domainLookupEnd</a>, 
+   <a href="#rt-connect-start">connectStart</a> and 
+   <a href="#rt-connect-end">connectEnd</a> be the same value as 
+   <a href="#rt-fetch-start">fetchStart</a>.</li>
+  <li>If the resource is fetched from the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+   relevant application cache</a> or local resources, go to step <a href="#step-request-start">11.</a>
+  </li>
+  <li>If no domain lookup is required, go to step <a href="#step-connect-start">9</a>. Otherwise, immediately before a user agent 
+   starts the domain name lookup, record the time as <a href="#rt-domain-lookup-start">domainLookupStart</a>.</li>
+  <li>Record the time as <a href="#rt-domain-lookup-end">domainLookupEnd</a> immediately after the 
+   domain name lookup is successfully done. A user agent may need multiple retries before that. If 
+   the domain lookup fails, abort the rest of the steps. </li>
+  <li id="step-connect-start">If a persistent transport connection is used to fetch the resource, 
+   let <a href="#rt-connect-start">connectStart</a> and <a href="#rt-connect-end">connectEnd</a> 
+   be the same value of <a href="#rt-domain-lookup-end">domainLookupEnd</a>. Otherwise, record the time as 
+   <a href="#rt-connect-start">connectStart</a> immediately before initiating the connection to the server 
+   and record the time as <a href="#rt-connect-end">connectEnd</a> immediately after the connection to the 
+   server or the proxy is established. A user agent may need multiple retries 
+   before this time. If a connection can not be established, abort the rest of the 
+   steps. 
+  </li>
+  <li>In step <a href="#step-connect-start">9</a>, a user agent should also carry out these additional steps:
+    <ol>
+    <li>If the scheme of the current resource is HTTPS, the user agent must record the 
+     time as <a href="#rt-secure-connect-start">secureConnectionStart</a>
+     immediately before the handshake process to secure the connection.
+    </li>
+    <li>If the scheme of the current resource is not HTTPS, the user agent must set the 
+    value of <a href="#rt-secure-connect-start">secureConnectionStart</a> to 0.
+    </li>
     </ol>
   </li>
+  <li id="step-request-start">Immediately before a user agent starts sending request 
+  for the resource, record the current time as <a href="#rt-request-start">requestStart</a>.
+  </li>
+  <li id="step-response-start">Record the time as <a href="#rt-response-start"> 
+  responseStart</a> immediately after the user agent receives the first byte of the response.
+  </li>
+  <li id="step-response-end">Record the time as <a href="#rt-response-end">responseEnd</a> immediately 
+  and <a href="#rt-fetch-end"> fetchEnd</a> immediately after receiving the last byte of the response.
+    <p>Return to step <a href="#step-connect-start">9</a> if the user agent fails to send the request 
+    or receive the entire response, and needs to reopen the connection.</p>
+
+    <div class="example">
+    <div class="exampleHeader">Example</div>
+    <p>When <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1"> persistent connection</a> 
+    [<a href='#rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open connect to 
+    send the request while the connection can be <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously 
+    closed</a>. In such case, <a href="#rt-connect-start">connectStart</a>, <a href="#rt-connect-end">connectEnd</a> and 
+    <a href="#rt-request-start">requestStart</a> should represent timing information collected over the re-open connection. </p>
+    </div>
+  </li>
+  <li>If the fetched resource results in an HTTP redirect 
+  <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
+  <ol style="list-style-type:lower-alpha;"> 
+        <li>if the current resource and the resource that is redirected to are not from the 
+         <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>, set <a href="#nt-redirect-start">
+         redirectStart</a> and <a href="#nt-redirect-end">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
+         4</a> new resource.
+	</li>
+        <li>If the value of redirectStart is not set, let it be the value of fetchStart.
+        </li>
+        <li>Let redirectEnd by the value of responseEnd.
+        </li>
+        <li>Set all the attributes in the <a href="#performance-resource-timing">
+         PerformanceResourceTiming</a> interface to 0 except 
+         <a href="#rt-resource-fetch-start">resourceFetchStart</a>, 
+         <a href="#rt-redirect-start">redirectStart</a>, and <a href="#rt-redirect-end">
+         redirectEnd</a>.
+        </li>
+        <li>Return to step <a href="#step-fetch-start">4</a> with the new resource.
+        </li>
+    </ol>
 </ol>
 
 <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
