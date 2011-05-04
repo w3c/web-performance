@@ -698,7 +698,7 @@ interface PerformanceResourceTimingList{
   <li>If fetching the resource is aborted for any reason, abort these steps without 
    changing the attributes in <a href="#performance-resource-timing">PerformanceResourceTiming</a>.</li>
   <li>Immediately after the user agent begins initiating retrieval of the resource, 
-   ecord the current time as <a href="#resource-fetch-start">resourceFetchStart</a>.
+   record the current time as <a href="#resource-fetch-start">resourceFetchStart</a>.
   </li>
   <li>Record the initiator of the resource in <a href="#type">type</a> if it has not been 
    set.
@@ -742,13 +742,13 @@ interface PerformanceResourceTimingList{
     </li>
     </ol>
   </li>
-  <li id="step-request-start">Immediately before a user agent starts sending request 
+  <li id="step-request-start">Immediately before a user agent starts sending the request 
   for the resource, record the current time as <a href="#rt-request-start">requestStart</a>.
   </li>
   <li id="step-response-start">Record the time as <a href="#rt-response-start"> 
   responseStart</a> immediately after the user agent receives the first byte of the response.
   </li>
-  <li id="step-response-end">Record the time as <a href="#rt-response-end">responseEnd</a> immediately 
+  <li id="step-response-end">Record the time as <a href="#rt-response-end">responseEnd</a>  
   and <a href="#rt-fetch-end"> fetchEnd</a> immediately after receiving the last byte of the response.
     <p>Return to step <a href="#step-connect-start">9</a> if the user agent fails to send the request 
     or receive the entire response, and needs to reopen the connection.</p>
@@ -765,14 +765,14 @@ interface PerformanceResourceTimingList{
   <li>If the fetched resource results in an HTTP redirect 
   <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
   <ol style="list-style-type:lower-alpha;"> 
-        <li>if the current resource and the resource that is redirected to are not from the 
+        <li>If the current resource and the resource that is redirected to are not from the 
          <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>, set <a href="#nt-redirect-start">
          redirectStart</a> and <a href="#nt-redirect-end">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
-         4</a> new resource.
+         4</a> with the new resource.
 	</li>
         <li>If the value of redirectStart is not set, let it be the value of fetchStart.
         </li>
-        <li>Let redirectEnd by the value of responseEnd.
+        <li>Let redirectEnd be the value of responseEnd.
         </li>
         <li>Set all the attributes in the <a href="#performance-resource-timing">
          PerformanceResourceTiming</a> interface to 0 except 
