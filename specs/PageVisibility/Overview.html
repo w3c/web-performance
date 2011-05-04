@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-24-2011">Editor's Draft April 27, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-april-24-2011">Editor's Draft May 4th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -141,8 +141,8 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-page-visibility"><span class="secno">4 </span>Page Visibility</a> 
     <ol class="toc">
       <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-navigator-visibility-interface"><span class="secno">4.2 </span>The <code>NavigatorVisibility</code> interface</a></li>
-      <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilityChange</code> event</a></li>
+      <li><a href="#sec-window-visibility-interface"><span class="secno">4.2 </span>The <code>WindowVisibility</code> interface</a></li>
+      <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
     </ol>
   </li>
   <li><a href="#process"><span class="secno">5 </span>Processing Model</a> 
@@ -166,65 +166,85 @@ machine resource utilization, but it prevents web developers from making runtime
 decisions based on whether the webpage is visible to the user. Designing web pages with knowledge
 of the page visibility will allow for improved user experiences and power efficient sites.</p>
 
+With this interface, web applications may chose to alter behavior based on whether they are
+visible to the user or not. For example, this interface can be used to scale back work when the page is no
+longer visible. If a web based email client is visible, it may check the server for new mail every few seconds. 
+When hidden it might scale checking email to every few minutes. This interface can also be used to provide better runtime
+user experience decisions not related to power management. For example, a puzzle game could be paused when the user
+no longer has the game visible. Further, this interface can be used by advertisers to not charge for ads that are
+not visible to users.
+
+
 <div class="example">
-<p>For example, the following Javascript shows a typical animation attempt without knowledge of 
+<p>For example, the following Javascript shows a theoretical web based email client checking for new emails every second without knowledge of 
 the Page Visibility:</p>
-<pre>&lt;html&gt;
-&lt;head&gt;
-&lt;script type="text/javascript"&gt;
-var timer;
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   var timer = 0;
+   var PERIOD = 1000;
 
-function onLoad() {
-  timer = setInterval("draw()", 16);
-}
+   function onLoad() {
+       timer = setInterval(checkEmail, PERIOD);
+   }
 
-function draw() { 
-  //drawing 
-}
+   function checkEmail() { 
+       // Check server for new emails
+   }
 
-&lt;/script&gt;
-&lt;/head&gt;
-&lt;body onload="onLoad()"&gt;
-&lt;/body&gt;
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload="onLoad()"&gt;
+ &lt;/body&gt;
 &lt;/html&gt;</pre>
 </div>
 
-<p>The script will always draw the next animation scene, even if the scene
-is not being painted due to the page not being visible. This will not only 
-use resources unnecessarily, but the animation will not automatically pause
-when the user no longer has the user agent visible.</p>
+<p>The script will always check for emails every second, even if the user
+is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
 
-<p>Using the <a href="#nt-navigator-visibility-interface">NavigatorVisibility</a>
-interface, the page will be able to pause animations when the user agent is no longer
-visible.</p>
+<p>Using the <a href="#pv-window-visibility-interface">WindowVisibility</a>
+interface, the page will be able to throttle checking email to every minute when the
+page is no longer visible.</p>
 
 <div class="example">
-<p>The following script pauses the animation if the page is not visible:</p>
-<pre>&lt;html&gt;
-&lt;head&gt;
-&lt;script type="text/javascript"&gt;
-var timer;
+<p>The following script show the theoretical web based email client checking for new emails every second when visible and every minute when not visible:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   var timer = 0;
+   var PERIOD_VISIBLE = 1000;
+   var PERIOD_NOT_VISIBLE = 60000;
 
-function onLoad() {
-  timer = setInterval("draw()", 16);
-  window.addEventListener("visibilitychange", visibilityChanged);
-}
+   function onLoad() {
+       if (window.visible) timer = setInterval(checkEmail, PERIOD_VISIBLE);
+       else timer = setInterval(checkEmail, PERIOD_NOT_VISIBLE);
+      
+       window.addEventListener("visibilitychange", visibilityChanged);
+   }
+ 
+   function visibilityChanged() {
+       if (window.visibilityState == window.PAGE_VISIBLE || window.visibilityState == window.PAGE_PREVIEW) {
+           clearTimeout(timer);
+           timer = setInterval(checkEmail, PERIOD_VISIBLE);
+       }
+       else {
+           clearTimeout(timer);
+           timer = setInterval(checkEmail, PERIOD_NOT_VISIBLE);
+       }
+   }
 
-function visibilityChanged() {
-  if (window.navigator.visibilityState == Navigator.PAGE_VISIBLE){
-    timer = setInterval("draw()", 16);
-  }
-  else clearTimeout(timer);
-}
+   function checkEmail() { 
+       // Check server for new emails
+   }
 
-function draw() { 
-  //drawing 
-}
-
-&lt;/script&gt;
-&lt;/head&gt;
-&lt;body onload="onLoad()"&gt;
-&lt;/body&gt;
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload="onLoad()"&gt;
+ &lt;/body&gt;
 &lt;/html&gt;</pre>
 </div>
 
@@ -285,77 +305,86 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 with the means to programmatically determine the current visibility of a page
 and be notified of visibility changes.</p>
 
-<h3 id="sec-navigator-visibility-interface"><span class="secno">4.2 </span>The <code>NavigatorVisibility</code> interface</h3>
+<h3 id="sec-window-visibility-interface"><span class="secno">4.2 </span>The <code>WindowVisibility</code> interface</h3>
 <pre class="idl">
   [NoInterfaceObject]
-  interface <dfn id="nt-navigator-visibility-interface">NavigatorVisibility</dfn> {
-  const unsigned short <a href="#nt-page-visible" title="pagevisible">PAGE_VISIBLE</a> = 0;
-  const unsigned short <a href="#nt-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = 1;
-  const unsigned short <a href="#nt-page-taskbar-preview" title="pagetaskbarpreview">PAGE_TASKBAR_PREVIEW</a> = 2;
-  const unsigned short <a href="#nt-page-page-preview" title="pagepagepreview">PAGE_PAGE_PREVIEW</a> = 3;
-  const unsigned short <a href="#nt-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = 4;
-  const unsigned short <a href="#nt-page-other" title="pageother">PAGE_OTHER</a> = 255;
+  interface <dfn id="pv-window-visibility-interface">WindowVisibility</dfn> {
+  const unsigned short <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = 0;
+  const unsigned short <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = 1;
+  const unsigned short <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = 2;
+  const unsigned short <a href="#pv-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = 3;
+  const unsigned short <a href="#pv-page-other" title="pageother">PAGE_OTHER</a> = 255;
           
-  readonly attribute boolean <a href="#nt-visible" title="visible">visible</a>;
-  readonly attribute unsigned short <a href="#nt-visibility-state" title="visibilitystate">visibilityState</a>;
+  readonly attribute boolean <a href="#pv-visible" title="visible">visible</a>;
+  readonly attribute unsigned short <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
 };
-Navigator implements NavigatorVisibility;
+Window implements WindowVisibility;
 </pre>
 
 
-<h4><code><dfn id="nt-visible">visible</dfn></code> attribute</h4>
+<h4><code><dfn id="pv-visible">visible</dfn></code> attribute</h4>
 
-<p>This attribute returns true when the User Agent is not minimized and the page is on a foreground tab. </p>
-<p>The attribute returns false when: </p>
+<p>This attribute returns true if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+(root window in the browser's viewport) is at least partially visible on at least one screen.
+This attribute returns false if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
+is not visible at all.</p>
+
+<p>As examples, the attribute returns false when: </p>
 	<ul>
 		 <li>The User Agent is minimized,</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab,</li>
 		 <li>The Operating System lock screen is shown,</li>
-		 <li>The User Agent is minimized and a Taskbar preview is shown,</li>
-		 <li>The User Agent is minimized and a page preview is shown.</li>
+		 <li>The User Agent is minimized and a preview is shown.</li>
 	</ul> 
 
+<h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
 
-<h4><code><dfn id="nt-visibility-state">visibilityState</dfn></code> attribute</h4>
+<h5><code><dfn id="pv-page-hidden">window.PAGE_HIDDEN</dfn></code></h5>
+<p>This attribute must return <code>window.PAGE_HIDDEN</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+ is not visible at all on any screen.</p>
 
-<h5><code><dfn id="nt-page-visible">window.navigator.PAGE_VISIBLE</dfn></code></h5>
-<p>This attribute must return <code>window.navigator.PAGE_VISIBLE</code> if the 
-User Agent is not minimized and the page is on a foreground tab. This is the same condition under which <code><dfn id="nt-visible">visible</dfn></code> attribute
-is set to true. </p>
-<p>This constant is not returned if the User Agent is minimized, and a Taskbar 
-preview is shown. If the User Agent is not minimized, the page is in a foreground tab and a Taskbar preview is shown, this constant is not
-returned.</p>
-
-<h5><code><dfn id="nt-page-hidden">window.navigator.PAGE_HIDDEN</dfn></code></h5>
-<p>This attribute must return <code>window.navigator.PAGE_HIDDEN</code> if:</p>
+<p>For example, the following cases would return <code>window.PAGE_HIDDEN</code>:</p>
 	<ul>
 		 <li>The User Agent is minimized,</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab,</li>
 		 <li>The Operating System lock screen is shown,</li>
 	</ul> 
 
-<h5><code><dfn id="nt-page-taskbar-preview">window.navigator.PAGE_TASKBAR_PREVIEW</dfn></code></h5>
-<p>This attribute must return <code>window.navigator.PAGE_TASKBAR_PREVIEW</code> if the 
-User Agent is minimized and the Taskbar preview is shown. If the User Agent is not minimized and a 
-Taskbar preview is shown, this value is not returned.</p>
+<h5><code><dfn id="pv-page-visible">window.PAGE_VISIBLE</dfn></code></h5>
+<p>This attribute must return <code>window.PAGE_VISIBLE</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+ is at least partially visible at on at least one screen. This is the same condition under which <code><dfn id="Dfn1">visible</dfn></code> attribute
+is set to true.</p>
 
-<h5><code><dfn id="nt-page-page-preview">window.navigator.PAGE_PAGE_PREVIEW</dfn></code></h5>
-<p>This attribute must return <code>window.navigator.PAGE_PAGE_PREVIEW</code> if the 
-User Agent is minimized and the page preview is shown.</p>
+<p>This constant is not returned if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not visible, however,  
+a preview of the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is visible.</p>
 
-<h5><code><dfn id="nt-page-prerender">window.navigator.PAGE_PRERENDER</dfn></code></h5>
-<p>This attribute must return <code>window.navigator.PAGE_PRERENDER</code> if the 
-the page is prerendered by being loaded off-screen and not visibly shown by the User Agent.</p>
+<h5><code><dfn id="pv-page-preview">window.PAGE_PREVIEW</dfn></code></h5>
+<p>This attribute must return <code>window.PAGE_PREVIEW</code> if the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+is not visible at all and a preview of the the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is visible.</p>
 
-<h5><code><dfn id="nt-page-visible">window.navigator.PAGE_OTHER</dfn></code></h5>
+<h5><code><dfn id="pv-page-prerender">window.PAGE_PRERENDER</dfn></code></h5>
+<p>This attribute must return <code>window.PAGE_PRERENDER</code> if the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is prerendered 
+by being loaded off-screen and not visibly shown by the User Agent.</p>
+
+<h5><code><dfn id="pv-page-visible">window.PAGE_OTHER</dfn></code></h5>
 <p>This return value is reserved for future use.</p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
-The <code><a href="#nt-visibility-change-event">visibilityChange</a></code> event</h3>
+The <code><a href="#pv-visibility-change-event">visibilitychange</a></code> event</h3>
 
-<p>The visibilityChange event is fired any time a change is made to the 
-window.navigator.visibilityState attribute. This event can be registered using 
-addEventListener on window.</p>
+<p>The visibilitychange event is fired any time a change is made to the 
+<code>window.visibilityState</code> attribute. This event can only be registered using 
+addEventListener on window. This event will get fired on the first change in 
+<code>window.visibilityState</code> after registration; it will not get fired on 
+registration.</p>
 
 <h2 id="process-model"><span class="secno">5 </span>Processing Model</h2>
 <p>This section is non-normative.</p>
