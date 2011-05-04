@@ -246,8 +246,7 @@ the user agent <span class="rfc2119">MUST</span> set the cancelled flag of the c
 <p>While a <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>
 <a class="dfnref" href="#dfn-has-active-animations">has active animations</a>, the user agent
 <span class="rfc2119">MUST</span> continually <dfn id="dfn-sample-all-animations">sample all animations</dfn>.
-To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>,
-the following steps are performed:</p>
+To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>, the following steps are performed:</p>
 
 <ol class="algorithm">
   <li>Let <var>t</var> be the result of <a class="dfnref" href="#dfn-get-next-sample-time">getting the next sample time</a>
@@ -256,6 +255,8 @@ the following steps are performed:</p>
   <li>Let <var>list</var> be a copy of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.  <var>list</var> will be empty
   if no <a class="dfnref" href="#dfn-script-based-animation">script-based animations</a> have been scheduled.</li>
+  <li>Clear the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
+  <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.</li>
   <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
 </ol>
 <p>The <dfn id="dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</dfn>:</p>
