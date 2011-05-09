@@ -5,25 +5,25 @@
   Timing control for script-based animations
 
   This is written in XHTML 1.0 Strict with an inline <options> element that
-  helps the AnimationRequestFrame.xsl stylesheet process the document (generating a table
+  helps the RequestAnimationFrame.xsl stylesheet process the document (generating a table
   of contents, section numbers, certain processing instructions).
   -->
 
-<?xml-stylesheet href='AnimationRequestFrame.xsl' type='text/xsl'?>
+<?xml-stylesheet href='RequestAnimationFrame.xsl' type='text/xsl'?>
 
 <html xmlns='http://www.w3.org/1999/xhtml' xmlns:x='http://mcc.id.au/ns/local' xml:lang='en'>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
   <title>Timing control for script-based animations</title>
-  <link rel='stylesheet' href='AnimationRequestFrame.css' type='text/css'/>
+  <link rel='stylesheet' href='RequestAnimationFrame.css' type='text/css'/>
   <script src='section-links.js' type='application/ecmascript'/>
   <script src='dfn.js' type='application/ecmascript'/>
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <this href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html'/>
-      <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/AnimationRequestFrame/Overview.html'/>
-      <!--latest href='http://www.w3.org/TR/AnimationRequestFrame/'/-->
+      <this href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
+      <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
+      <!--latest href='http://www.w3.org/TR/RequestAnimationFrame/'/-->
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
@@ -66,9 +66,9 @@ by the browser.</p>
    index</a> at http://www.w3.org/TR/.</em></p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[AnimationRequestFrame]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=[RequestAnimationFrame]%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
-   with <samp>[AnimationRequestFrame]</samp> at the start of the subject line.</p>
+   with <samp>[RequestAnimationFrame]</samp> at the start of the subject line.</p>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
