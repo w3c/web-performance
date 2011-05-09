@@ -149,12 +149,18 @@ cite this document as other than work in progress. </p>
       <li><a href="#performance-resource-timing"><span class="secno">4.3</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
       <li><a href="#performance-resource-timing-methods"><span class="secno">4.3 </span> The Resource Timing Methods</a></li>
       <li><a href="#cross-origin-resources"><span class="secno">4.5 </span> Cross-origin Resources</a></li>
-      <li><a href="#processing-model"><span class="secno">4.6</span> Processing Model</a></li>
+      
 
     </ol>
   </li>
-  <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
-  <li><a href="#security"><span class="secno">6 </span>Security</a></li>
+  <li><a href="#process"><span class="secno">5 </span>Process</a>
+    <ol class="toc">
+        <li><a href="#processing-model"><span class="secno">5.1</span> Processing Model</a></li>
+        <li><a href="#monotonic-clock"><span class="secno">5.2</span> Monotonic Clock</a></li>
+    </ol>
+  </li>
+  <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
+  <li><a href="#security"><span class="secno">7 </span>Security</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -301,7 +307,7 @@ in the</span>
 <p>
     The user agent may choose to limit how many resources are included in the
     <a href="#performance-resource-timing">PerformanceResourceTiming</a>
-    interface.  The recommended maximum number of resources is 1000, though this may be changed by the user agent.
+    interface.  The recommended maximum number of resources is 150, though this may be changed by the user agent.
     <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>
     can be called to request a change to this limit.
 </p>
@@ -340,7 +346,6 @@ in the</span>
   readonly attribute unsigned long long <a href="#request-start" title="requeststart">requestStart</a>;
   readonly attribute unsigned long long <a href="#response-start" title="responsestart">responseStart</a>;
   readonly attribute unsigned long long <a href="#response-end" title="responseend">responseEnd</a>;
-  readonly attribute unsigned long long <a href="#fetch-end" title="fetchend">fetchEnd</a>;
 };</pre>
 
 <h4 id="type-attribute"><code><dfn id="type">type</dfn></code> attribute</h4>
@@ -526,10 +531,6 @@ If the last non-redirected fetch of the resource is not the same origin as the c
 <a href="#response-end">responseEnd</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
-<h4 id="fetch-end-attribute"><code><dfn id="fetch-end">fetchEnd</dfn></code> attribute</h4>
-
-<p>This attribute must return the time immediately after the user agent receives the last byte of the response of the resource from the server.</p>
-
 <h3 id="performance-resource-timing-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
@@ -552,7 +553,7 @@ interface PerformanceResourceTimingList{
     <h4 id="rt-clearResourceTimings"><code>clearResourceTimings</code> method</h4>
 	<p>The method <code>clearResourceTimings</code> clears the buffer used to store the current
     list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.
-    Only the first 1000 <a href="#performance-resource-timing">PerformanceResourceTiming</a>
+    Only the first 150 <a href="#performance-resource-timing">PerformanceResourceTiming</a>
     resources will be stored, unless otherwise specified by the user agent or <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>.</p>
 		<div class="parameters">
 			<p><b>No parameters</b></p>
@@ -594,7 +595,7 @@ interface PerformanceResourceTimingList{
 <div class="methods">
 	<h4 id="rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code> method</h4>
 	<p>The method <code>setResourceTimingBufferSize</code> updates the maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources that will be stored in the buffer.</p>
-	<p>If this method is not called, the default maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources stored is 1000, unless otherwise specified by the user agent.</p>
+	<p>If this method is not called, the default maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources stored is 150, unless otherwise specified by the user agent.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			in <code>maxSize</code> type of unsigned long
@@ -661,7 +662,9 @@ interface PerformanceResourceTimingList{
         </p>
     </div>
 
-<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
+
+<h2 id="process"><span class="secno">5 </span>Process</h3>
+<h3 id="processing-model"><span class="secno">5.1 </span>Processing Model</h3>
 
 <p>Illustration</p>
 
@@ -683,51 +686,52 @@ interface PerformanceResourceTimingList{
   </li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, immediately before a user agent    checks with the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant application caches</a>, 
-   record the current time as <a href="#rt-fetch-start">fetchStart</a>. Otherwise, immediately before a user agent starts the 
+   record the current time as <a href="#fetch-start">fetchStart</a>. Otherwise, immediately before a user agent starts the 
    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources"> fetching process</a>, record the current time as 
-   <a href="#rt-fetch-start"> fetchStart</a>
+   <a href="#fetch-start"> fetchStart</a>
   </li>
-  <li>Let <a href="#rt-domain-lookup-start">domainLookupStart</a>, 
-   <a href="#rt-domain-lookup-end">domainLookupEnd</a>, 
-   <a href="#rt-connect-start">connectStart</a> and 
-   <a href="#rt-connect-end">connectEnd</a> be the same value as 
-   <a href="#rt-fetch-start">fetchStart</a>.</li>
+  <li>Let <a href="#domain-lookup-start">domainLookupStart</a>, 
+   <a href="#domain-lookup-end">domainLookupEnd</a>, 
+   <a href="#connect-start">connectStart</a> and 
+   <a href="#connect-end">connectEnd</a> be the same value as 
+   <a href="#fetch-start">fetchStart</a>.</li>
   <li>If the resource is fetched from the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
    relevant application cache</a> or local resources, go to step <a href="#step-request-start">11.</a>
   </li>
   <li>If no domain lookup is required, go to step <a href="#step-connect-start">9</a>. Otherwise, immediately before a user agent 
-   starts the domain name lookup, record the time as <a href="#rt-domain-lookup-start">domainLookupStart</a>.</li>
-  <li>Record the time as <a href="#rt-domain-lookup-end">domainLookupEnd</a> immediately after the 
+   starts the domain name lookup, record the time as <a href="#domain-lookup-start">domainLookupStart</a>.</li>
+  <li>Record the time as <a href="#domain-lookup-end">domainLookupEnd</a> immediately after the 
    domain name lookup is successfully done. A user agent may need multiple retries before that. If 
    the domain lookup fails, abort the rest of the steps. </li>
   <li id="step-connect-start">If a persistent transport connection is used to fetch the resource, 
-   let <a href="#rt-connect-start">connectStart</a> and <a href="#rt-connect-end">connectEnd</a> 
-   be the same value of <a href="#rt-domain-lookup-end">domainLookupEnd</a>. Otherwise, record the time as 
-   <a href="#rt-connect-start">connectStart</a> immediately before initiating the connection to the server 
-   and record the time as <a href="#rt-connect-end">connectEnd</a> immediately after the connection to the 
+   let <a href="#connect-start">connectStart</a> and <a href="#connect-end">connectEnd</a> 
+   be the same value of <a href="#domain-lookup-end">domainLookupEnd</a>. Otherwise, record the time as 
+   <a href="#connect-start">connectStart</a> immediately before initiating the connection to the server 
+   and record the time as <a href="#connect-end">connectEnd</a> immediately after the connection to the 
    server or the proxy is established. A user agent may need multiple retries 
    before this time. If a connection can not be established, abort the rest of the 
    steps. 
   </li>
-  <li>In step <a href="#step-connect-start">9</a>, a user agent should also carry out these additional steps:
+  <li>If the user agent supports the <a href="#secureconnection-start">secureConnectionStart</a> attribute, 
+  in step <a href="#step-connect-start">9</a>, a user agent should also carry out these additional steps:
     <ol>
     <li>If the scheme of the current resource is HTTPS, the user agent must record the 
-     time as <a href="#rt-secure-connect-start">secureConnectionStart</a>
+     time as <a href="#secureconnection-start">secureConnectionStart</a>
      immediately before the handshake process to secure the connection.
     </li>
     <li>If the scheme of the current resource is not HTTPS, the user agent must set the 
-    value of <a href="#rt-secure-connect-start">secureConnectionStart</a> to 0.
+    value of <a href="#secureconnection-start">secureConnectionStart</a> to 0.
     </li>
     </ol>
   </li>
   <li id="step-request-start">Immediately before a user agent starts sending the request 
-  for the resource, record the current time as <a href="#rt-request-start">requestStart</a>.
+  for the resource, record the current time as <a href="#request-start">requestStart</a>.
   </li>
-  <li id="step-response-start">Record the time as <a href="#rt-response-start"> 
+  <li id="step-response-start">Record the time as <a href="#response-start"> 
   responseStart</a> immediately after the user agent receives the first byte of the response.
   </li>
-  <li id="step-response-end">Record the time as <a href="#rt-response-end">responseEnd</a>  
-  and <a href="#rt-fetch-end"> fetchEnd</a> immediately after receiving the last byte of the response.
+  <li id="step-response-end">Record the time as <a href="#response-end">responseEnd</a>  
+  immediately after receiving the last byte of the response.
     <p>Return to step <a href="#step-connect-start">9</a> if the user agent fails to send the request 
     or receive the entire response, and needs to reopen the connection.</p>
 
@@ -736,8 +740,8 @@ interface PerformanceResourceTimingList{
     <p>When <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1"> persistent connection</a> 
     [<a href='#rfc2616'>RFC 2616</a>] is enabled, a user agent may first try to re-use an open connect to 
     send the request while the connection can be <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously 
-    closed</a>. In such case, <a href="#rt-connect-start">connectStart</a>, <a href="#rt-connect-end">connectEnd</a> and 
-    <a href="#rt-request-start">requestStart</a> should represent timing information collected over the re-open connection. </p>
+    closed</a>. In such case, <a href="#connect-start">connectStart</a>, <a href="#connect-end">connectEnd</a> and 
+    <a href="#request-start">requestStart</a> should represent timing information collected over the re-open connection. </p>
     </div>
   </li>
   <li>If the fetched resource results in an HTTP redirect 
@@ -754,8 +758,8 @@ interface PerformanceResourceTimingList{
         </li>
         <li>Set all the attributes in the <a href="#performance-resource-timing">
          PerformanceResourceTiming</a> interface to 0 except 
-         <a href="#rt-resource-fetch-start">resourceFetchStart</a>, 
-         <a href="#rt-redirect-start">redirectStart</a>, and <a href="#rt-redirect-end">
+         <a href="#resource-fetch-start">resourceFetchStart</a>, 
+         <a href="#redirect-start">redirectStart</a>, and <a href="#redirect-end">
          redirectEnd</a>.
         </li>
         <li>Return to step <a href="#step-fetch-start">4</a> with the new resource.
@@ -763,7 +767,15 @@ interface PerformanceResourceTimingList{
     </ol>
 </ol>
 
-<h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
+<h3 id="monotonic-clock"><span class="secno">5.2 </span>Monotonic Clock</h3>
+<p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
+skewed by adjustments to the system clock during the navigation. The difference between any two chronologically 
+recorded timing attributes must never be negative. The user agent must record the system clock at the beginning 
+of the navigation and define subsequent timing attributes in terms of a monotonic clock measuring time elapsed 
+from the beginning of the navigation.
+</p>
+
+<h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
 
 <p>This section is non-normative.</p>
 
@@ -777,7 +789,7 @@ explicitely allow timing information to be collected over a resource by
 adding the allow-timing meta tag to the HTML header, which specifies the
 domains that are allowed to access the timing information. </p>
 
-<h2 id="security"><span class="secno">6 </span>Security</h2>
+<h2 id="security"><span class="secno">7 </span>Security</h2>
 
 <p>This section is non-normative.</p>
 

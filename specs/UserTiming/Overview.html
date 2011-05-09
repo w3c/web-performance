@@ -141,8 +141,9 @@ cite this document as other than work in progress. </p>
             </span>The <code>UserTiming</code> Interface</a></li>
         </ol>
       </li>
-      <li><a href="#privacy"><span class="secno">5 </span>Privacy</a></li>
-      <li><a href="#security"><span class="secno">6 </span>Security</a></li>
+      <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
+      <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
+      <li><a href="#security"><span class="secno">7 </span>Security</a></li>
       <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
     </ol>
 
@@ -381,14 +382,24 @@ cite this document as other than work in progress. </p>
     </div>
   </div>
 
-    <h2 id="privacy"><span class="secno">5 </span>Privacy</h2>
+
+    <h2 id="monotonic-clock"><span class="secno">5 </span>Monotonic Clock</h2>
+    <p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
+    skewed by adjustments to the system clock during the navigation. The difference between any two chronologically 
+    recorded timing attributes must never be negative. The user agent must record the system clock at the beginning 
+    of the navigation and define subsequent timing attributes in terms of a monotonic clock measuring time elapsed 
+    from the beginning of the navigation.
+    </p>
+
+
+    <h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
 
     <p>This section is non-normative.</p>
 
     <p>UserTiming potentially exposes information about specific activities on a page. This information must explicitly
     not be accessible in cross-domain situations and made available to only the server where the root document originates.</p>
 
-    <h2 id="security"><span class="secno">6 </span>Security</h2>
+    <h2 id="security"><span class="secno">7 </span>Security</h2>
 
     <p>This section is non-normative.</p>
 
