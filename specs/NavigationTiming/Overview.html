@@ -766,7 +766,8 @@ non-normative intervals between timings.</p>
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
   <li>In step <a href="#step-connect-start">11</a>, a user agent should also
-    carry out these additional steps:
+    carry out these additional steps if it supports the
+    <a href="#nt-secure-connect-start">secureConnectionStart</a> attribute:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
         record the time as <a href="#nt-secure-connect-start">secureConnectionStart</a>
