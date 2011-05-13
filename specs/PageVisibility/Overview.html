@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-24-2011">Editor's Draft May 4th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-may-12-2011">Editor's Draft May 12th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -141,7 +141,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-page-visibility"><span class="secno">4 </span>Page Visibility</a> 
     <ol class="toc">
       <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-window-visibility-interface"><span class="secno">4.2 </span>The <code>WindowVisibility</code> interface</a></li>
+      <li><a href="#sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</a></li>
       <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
     </ol>
   </li>
@@ -204,7 +204,7 @@ the Page Visibility:</p>
 <p>The script will always check for emails every second, even if the user
 is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
 
-<p>Using the <a href="#pv-window-visibility-interface">WindowVisibility</a>
+<p>Using the <a href="#pv-document-visibility-interface">DocumentVisibility</a>
 interface, the page will be able to throttle checking email to every minute when the
 page is no longer visible.</p>
 
@@ -220,21 +220,13 @@ page is no longer visible.</p>
    var PERIOD_NOT_VISIBLE = 60000;
 
    function onLoad() {
-       if (window.visible) timer = setInterval(checkEmail, PERIOD_VISIBLE);
-       else timer = setInterval(checkEmail, PERIOD_NOT_VISIBLE);
-      
-       window.addEventListener("visibilitychange", visibilityChanged);
+       timer = setInterval(checkEmail, (document.hidden) ? PERIOD_NOT_VISIBLE : PERIOD_VISIBLE);
+       if(document.addEventListener) document.addEventListener("visibilitychange", visibilityChanged);
    }
- 
+
    function visibilityChanged() {
-       if (window.visibilityState == window.PAGE_VISIBLE || window.visibilityState == window.PAGE_PREVIEW) {
-           clearTimeout(timer);
-           timer = setInterval(checkEmail, PERIOD_VISIBLE);
-       }
-       else {
-           clearTimeout(timer);
-           timer = setInterval(checkEmail, PERIOD_NOT_VISIBLE);
-       }
+       clearTimeout(timer);
+       timer = setInterval(checkEmail, (document.hidden) ? PERIOD_NOT_VISIBLE : PERIOD_VISIBLE);
    }
 
    function checkEmail() { 
@@ -305,85 +297,102 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 with the means to programmatically determine the current visibility of a page
 and be notified of visibility changes.</p>
 
-<h3 id="sec-window-visibility-interface"><span class="secno">4.2 </span>The <code>WindowVisibility</code> interface</h3>
+<h3 id="sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</h3>
 <pre class="idl">
-  [NoInterfaceObject]
-  interface <dfn id="pv-window-visibility-interface">WindowVisibility</dfn> {
-  const unsigned short <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = 0;
-  const unsigned short <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = 1;
-  const unsigned short <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = 2;
-  const unsigned short <a href="#pv-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = 3;
-  const unsigned short <a href="#pv-page-other" title="pageother">PAGE_OTHER</a> = 255;
-          
-  readonly attribute boolean <a href="#pv-visible" title="visible">visible</a>;
+[NoInterfaceObject]
+interface <dfn id="pv-window-visibility-interface">DocumentVisibility</dfn> {
+  const DOMString <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = "hidden";
+  const DOMString <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = "visible";
+  const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
+  const DOMString <a href="#pv-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = "prerender";
+            
+  readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
   readonly attribute unsigned short <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
 };
-Window implements WindowVisibility;
+Document implements DocumentVisibility;
 </pre>
 
 
-<h4><code><dfn id="pv-visible">visible</dfn></code> attribute</h4>
+<h4><code><dfn id="pv-hidden">hidden</dfn></code> attribute</h4>
 
 <p>This attribute returns true if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport)
+is not visible at all. This attribute returns false if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-(root window in the browser's viewport) is at least partially visible on at least one screen.
-This attribute returns false if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
-is not visible at all.</p>
+ is at least partially visible on at least one screen.
+</p>
 
-<p>As examples, the attribute returns false when: </p>
+<p>To accommodate accessibility tools that are typically full screen but still show a 
+view of the page, when applicable, this attribute may return false when the User Agent 
+is not minimized but is fully obscured by other applications.</p>
+
+<p>As examples, the attribute returns true when: </p>
 	<ul>
-		 <li>The User Agent is minimized</li>
-		 <li>The User Agent is not minimized, but the page is on a background tab</li>
-		 <li>The Operating System lock screen is shown</li>
-		 <li>The User Agent is minimized and a preview is shown</li>
+		 <li>The User Agent is minimized.</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
+		 <li>The Operating System lock screen is shown.</li>
+		 <li>The User Agent is minimized and a preview is shown.</li>
+	</ul> 
+	
+ <p>Likewise, as examples, the attribute returns false when:</p>
+ <ul>
+		 <li>The User Agent is not minimized and the page is on a foreground tab.</li>
+		 <li>The User Agent is fully obscured by an Accessibility Tool, like a magnifier, but
+		 a view of the page is shown.</li>
 	</ul> 
 
 <h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
 
-<h5><code><dfn id="pv-page-hidden">window.PAGE_HIDDEN</dfn></code></h5>
-<p>This attribute must return <code>window.PAGE_HIDDEN</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
+<h5><code><dfn id="pv-page-hidden">document.PAGE_HIDDEN</dfn></code></h5>
+<p>This attribute must return <code>document.PAGE_HIDDEN</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
+ 
+ <p>To accommodate accessibility tools that are typically full screen but still 
+ show a view of the page, when applicable, this constant may not be returned 
+ when the User Agent is not minimized but is fully obscured by other applications.<p>
 
-<p>For example, the following cases would return <code>window.PAGE_HIDDEN</code>:</p>
+<p>For example, the following cases would return <code>document.PAGE_HIDDEN</code>:</p>
 	<ul>
-		 <li>The User Agent is minimized</li>
-		 <li>The User Agent is not minimized, but the page is on a background tab</li>
-		 <li>The Operating System lock screen is shown</li>
+		 <li>The User Agent is minimized.</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
+		 <li>The Operating System lock screen is shown.</li>
 	</ul> 
 
-<h5><code><dfn id="pv-page-visible">window.PAGE_VISIBLE</dfn></code></h5>
-<p>This attribute must return <code>window.PAGE_VISIBLE</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
+<h5><code><dfn id="pv-page-visible">document.PAGE_VISIBLE</dfn></code></h5>
+<p>This attribute must return <code>document.PAGE_VISIBLE</code> if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
- is at least partially visible at on at least one screen. This is the same condition under which <code><dfn id="Dfn1">visible</dfn></code> attribute
-is set to true.</p>
+ is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
+is set to false.</p>
 
 <p>This constant is not returned if the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not visible, however,  
-a preview of the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is visible.</p>
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not 
+visible, however, a preview of the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is 
+  visible.</p>
+  
+  <p>To accommodate accessibility tools that are typically full screen but still show a 
+view of the page, when applicable, this constant may be returned when the User Agent 
+is not minimized but is fully obscured by other applications.</p>
 
-<h5><code><dfn id="pv-page-preview">window.PAGE_PREVIEW</dfn></code></h5>
-<p>This attribute must return <code>window.PAGE_PREVIEW</code> if the 
+<h5><code><dfn id="pv-page-preview">document.PAGE_PREVIEW</dfn></code></h5>
+<p>This attribute is optional. This attribute may return <code>document.PAGE_PREVIEW</code> if the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document </a>contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-is not visible at all and a preview of the the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is visible.</p>
+is not visible at all and a preview of the the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is 
+ visible.</p>
 
-<h5><code><dfn id="pv-page-prerender">window.PAGE_PRERENDER</dfn></code></h5>
-<p>This attribute must return <code>window.PAGE_PRERENDER</code> if the 
+<h5><code><dfn id="pv-page-prerender">document.PAGE_PRERENDER</dfn></code></h5>
+<p>This attribute is optional. This attribute may return <code>document.PAGE_PRERENDER</code> if the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is prerendered 
 by being loaded off-screen and not visibly shown by the User Agent.</p>
-
-<h5><code><dfn id="pv-page-visible">window.PAGE_OTHER</dfn></code></h5>
-<p>This return value is reserved for future use.</p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><a href="#pv-visibility-change-event">visibilitychange</a></code> event</h3>
 
 <p>The visibilitychange event is fired any time a change is made to the 
-<code>window.visibilityState</code> attribute. This event can only be registered using 
-addEventListener on window. This event will get fired on the first change in 
-<code>window.visibilityState</code> after registration; it will not get fired on 
+<code>document.visibilityState</code> attribute. This event can only be registered using 
+addEventListener on document. This event will get fired on the first change in 
+<code>document.visibilityState</code> after registration; it will not get fired on 
 registration.</p>
 
 <h2 id="process-model"><span class="secno">5 </span>Processing Model</h2>
