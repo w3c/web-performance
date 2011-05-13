@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-april-27-2011">Editor's Draft April 27, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-may-10-2011">Editor's Draft May 10, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/1162150cfd21/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1162150cfd21/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1abe407a9c5c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1abe407a9c5c/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/55eef3ac1a6b/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/55eef3ac1a6b/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/14beb2b7d1ed/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -766,7 +766,8 @@ non-normative intervals between timings.</p>
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
   <li>In step <a href="#step-connect-start">11</a>, a user agent should also
-    carry out these additional steps:
+    carry out these additional steps if it supports the
+    <a href="#nt-secure-connect-start">secureConnectionStart</a> attribute:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent must
         record the time as <a href="#nt-secure-connect-start">secureConnectionStart</a>
