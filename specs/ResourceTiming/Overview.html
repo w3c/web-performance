@@ -47,7 +47,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-march-28-2011">Working Draft May 11th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-may-16-2011">Working Draft May 16th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -178,12 +178,86 @@ interface to allow Javascript mechanisms to collect complete timing
 information related to resources on a document.
 </p>
 
-<div class="XXX">
-<p>Add examples when the interface stabilizes.</p>
-</div>
 
 <div class="example">
-<p></p>
+<p>For example, the following Javascript shows a simple attempt to 
+measure the time it takes to fetch a resource:</p>
+
+<pre>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body onload="loadResources()"&gt;
+    &lt;script&gt;
+        function loadResources() 
+        {
+           var start = new Date().getTime();
+           var image1 = new Image();
+           image1.src = 'http://w3c-test.org/webperf/image1.png';
+           image1.onload = resourceTiming;
+
+           var resourceTiming = function() {
+               var now = new Date().getTime();
+               var latency = now - start;
+               alert("End to end resource fetch: " + latency);
+           };
+        } 
+    &lt;/script&gt;
+    &lt;img src="http://w3c-test.org/webperf/image0.png"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>Though this script can measure the time it takes to fetch a resource, 
+it cannot break down the time spent in various phases. Further, the script 
+cannot easily measure the time it takes to fetch resources described in markup.</p> 
+
+<p>To address the need for complete information on user experience, this document 
+introduces the <a href="#rt-performance-timing-interface">PerformanceResourceTiming</a> interface. 
+This interface allows JavaScript mechanisms to provide complete client-side latency measurements within applications. 
+With this interface, the previous example can be modified to measure a user's 
+perceived load time of a resource. 
+</p>
+
+<div class="example">
+<p>The following script calculates the amount of time it takes to fetch every resource in the 
+page, even those defined in markup. This example assumes
+that this page is hosted on http://w3c-test.org. 
+One could further measure the amount of time it takes in every phase of fetching a resource
+with the <a href="#rt-performance-timing-interface">PerformanceResourceTiming</a> interface.
+</p>
+<pre>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body onload="loadResources()"&gt;
+    &lt;script&gt;
+       function loadResources() 
+       {
+          var image1 = new Image();
+          image1.src = 'http://w3c-test.org/webperf/image1.png';
+          image1.onload = resourceTiming;
+       }
+       
+       function resourceTiming() 
+       {
+           var resourceList = window.performance.getResourceTimings();
+           for (i = 0; i < resourceList.length; i++)
+           {
+              if (resourceList[i].type == window.performance.INITIATOR_IMAGE) 
+              {
+                 alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].resourceFetchStart);
+              }
+           }
+       }
+    &lt;/script&gt;
+    &lt;img id="image0" src="http://w3c-test.org/webperf/image0.png"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </div>
 
 <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
@@ -255,7 +329,8 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
     <a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
     <a href="http://dev.w3.org/html5/spec/video.html#audio">audio</a>,
     <a href="http://dev.w3.org/html5/spec/video.html#video">video</a>,
-    <a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>
+    <a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>,
+    <a href="http://www.w3.org/TR/2011/WD-SVG11-20110512/">svg</a>,
     and <a href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a>
     with the link type of
     <a href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">
@@ -282,7 +357,7 @@ in the</span>
         <li>If the same canonical URL is used as the <code>src</code> attribute of two <code>IMG</code> elements,
             the fetch of the resource initiated by the first <code>IMG</code> element should be included in the 
             <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.  The user agent might not re-request the 
-            URL from the networking layer for the second <code>IMG</code> element, instead using an in-memory cache. 
+            URL from the networking layer for the second <code>IMG</code> element, instead using an in-memory browser cache. 
             In this case, there is only a single request sent to the networking layer for retrieval, so the fetch of the resource by the first
             <code>IMG</code> element would be the only occurrence in the <a href="#performance-resource-timing">PerformanceResourceTiming</a>
             interface.
@@ -384,15 +459,25 @@ return the same value as <a href="#fetch-start">fetchStart</a>.</p>
 
 <p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
-this attribute must return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.
-Otherwise, this attribute must return zero.</p>
+this attribute must return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.</p>
+
+<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
+and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must
+return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.
+Otherwise, this attribute must return zero. </p>
 
 <h4 id="redirect-end-attribute"><code><dfn id="redirect-end">redirectEnd</dfn></code> attribute</h4>
 
 <p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
-this attribute must return the time immediately after receiving the last byte of the response of the last redirect.
-Otherwise, this attribute must return zero.</p>
+this attribute must return the time immediately after receiving the last byte of the response of the last redirect.</p>
+
+<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
+and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must return the 
+time immediately after receiving the last byte of the response of the last redirect.
+Otherwise, this attribute must return zero. </p>
 
 <h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
@@ -530,7 +615,7 @@ application caches</a> or from local resources.</p>
 <pre class="idl">
 [Supplemental] Performance {
   void clearResourceTimings();
-  PerformanceResourceTimingList getResourceTimings ([optional] in unsigned short type);
+  PerformanceResourceTimingList getResourceTimings();
   PerformanceResourceTimingList getResourceTimingsByLocation( in Location location );
   void setResourceTimingBufferSize (in unsigned long maxSize);
 
@@ -684,7 +769,20 @@ interface PerformanceResourceTimingList{
    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources"> fetching process</a>, record the current time as 
    <a href="#fetch-start"> fetchStart</a>
   </li>
-  <li>Let <a href="#domain-lookup-start">domainLookupStart</a>, 
+  <li>If the last non-redirected fetch of the resource is not the same origin as the current document 
+  and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header does not apply, the user agent
+  must set 
+  <a href="#redirectStart">redirectStart</a>, 
+  <a href="#redirectEnd">redirectEnd</a>,
+  <a href="#domainLookupStart">domainLookupStart</a>, 
+  <a href="#domainLookupEnd">domainLookupEnd</a>, 
+  <a href="#connectStart">connectStart</a>, 
+  <a href="#connectEnd">connectEnd</a>, 
+  <a href="#requestStart">requestStart</a>, 
+  <a href="#responseStart">responseStart</a>,
+  and <a href="#responseEnd">responseEnd</a> to zero and abort the following steps. 
+  </li>
+    <li>Let <a href="#domain-lookup-start">domainLookupStart</a>, 
    <a href="#domain-lookup-end">domainLookupEnd</a>, 
    <a href="#connect-start">connectStart</a> and 
    <a href="#connect-end">connectEnd</a> be the same value as 
