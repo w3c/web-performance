@@ -24,7 +24,6 @@
    dfn { font-weight:bold; font-style:normal }
    code { color:orangered }
    code :link, code :visited { color:inherit }
-   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
    table { border-collapse:collapse; border-style:hidden hidden none hidden }
    table thead { border-bottom:solid }
    table tbody th:first-child { border-left:solid }
@@ -53,6 +52,8 @@
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
       <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+  <dd><a href='http://www.w3c-test.org/webperf/specs/ResourceTiming/'>http://www.w3c-test.org/webperf/specs/ResourceTiming/</a></dd>
   <dt>Previous versions:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
@@ -68,7 +69,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
@@ -82,6 +83,8 @@
     and <a
     href="http://www.w3.org/Consortium/Legal/copyright-documents">document
     use</a> rules apply.</p>
+<hr>
+
 </div>
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
@@ -102,7 +105,7 @@ document</h2>
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=[ResourceTiming]%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
    with <samp>[ResourceTiming]</samp> at the start of the subject line.</p>
 
@@ -113,6 +116,10 @@ notices. </p>
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
    Domain</a>.
+
+<p>
+<strong>You can find the latest <a href="http://www.w3c-test.org/webperf/specs/ResourceTiming/">Editor's Draft</a> of this document in the <a href="http://dvcs.w3.org/webperf/">W3C's Mercurial repository</a>, which is updated on a regular basis.</strong>
+</p>
 
 <p>Publication as a Working Draft does not imply endorsement by the
 W3C Membership. This is a draft document and may be updated, replaced
@@ -131,6 +138,13 @@ cite this document as other than work in progress. </p>
    Claim(s)</a> must disclose the information in accordance
    with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
    6 of the W3C Patent Policy</a>.</p>
+
+<p id="unstable"><strong class="redNote">Implementers should be aware that this document is not
+        stable.</strong> Implementers who are not taking part in the discussions
+        are likely to find the specification changing out from under them in
+        incompatible ways. Vendors interested in implementing this document
+        before it eventually reaches the Candidate Recommendation stage should
+        join the aforementioned mailing lists and take part in the discussions.</p>
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 <!--begin-toc-->
@@ -171,7 +185,7 @@ cite this document as other than work in progress. </p>
 User latency is an important quality benchmark for Web Applications. While
 JavaScript-based mechanisms can provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
-unable to provide a complete end-to-end latency picture. While <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a> address
+unable to provide a complete end-to-end latency picture. While Navigation Timing <a href="#NavigationTiming">[NavigationTiming]</a> address
 part of the problem by providing timing information associated with a
 navigation, this document introduces the <a href="#resource-timing">ResourceTiming</a>
 interface to allow Javascript mechanisms to collect complete timing
@@ -321,20 +335,21 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
     interface facilitates timing measurement of downloadable resources on the
     root page. It represents the timing information related to resources that
     initiate network downloads. For example, this interface is available for
-    <a href="http://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest</a> and HTML
-    elements such as
-    <a href="http://dev.w3.org/html5/spec/Overview.html#the-iframe-element">iframe</a>,
-    <a href="http://dev.w3.org/html5/spec/Overview.html#the-img-element">img</a>,
-    <a href="http://dev.w3.org/html5/spec/Overview.html#script">script</a>,
-    <a href="http://dev.w3.org/html5/spec/Overview.html#the-object-element">object</a>,
-    <a href="http://dev.w3.org/html5/spec/video.html#audio">audio</a>,
-    <a href="http://dev.w3.org/html5/spec/video.html#video">video</a>,
-    <a href="http://dev.w3.org/html5/spec/Overview.html#the-embed-element">embed</a>,
-    <a href="http://www.w3.org/TR/2011/WD-SVG11-20110512/">svg</a>,
-    and <a href="http://dev.w3.org/html5/spec/Overview.html#the-link-element">link</a>
+    <a href="http://www.w3.org/TR/XMLHttpRequest/#the-xmlhttprequest-interface">XMLHttpRequest</a> objects <a href='#XHR'>[XMLHttpRequest]</a>, HTML
+    elements <a href='#HTML5'>[HTML5]</a> such as
+    <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-iframe-element">iframe</a>,
+    <a href="http://www.w3.org/TR/html5/embedded-content-1.html#the-img-element">img</a>,
+    <a href="http://www.w3.org/TR/html5/scripting-1.html#script">script</a>,
+    <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-object-element">object</a>,
+    <a href="http://www.w3.org/TR/html5/video.html#audio">audio</a>,
+    <a href="http://www.w3.org/TR/html5/video.html#video">video</a>,
+    <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-embed-element">embed</a>,
+    and <a href="http://www.w3.org/TR/html5/semantics.html#the-link-element">link</a>
     with the link type of
-    <a href="http://dev.w3.org/html5/spec/Overview.html#link-type-stylesheet">
-    stylesheet</a>.
+    <a href="http://www.w3.org/TR/html5/links.html#link-type-stylesheet">stylesheet</a>,
+    and SVG elements <a href='#SVG'>[SVG]</a> such
+    as <a href="http://www.w3.org/TR/SVG11/struct.html#SVGElement">svg</a>.
+
 </p>
 
 <p>The term "resource" is also used to refer to these elements in this work. </p>
@@ -366,7 +381,7 @@ in the</span>
             as the fetch of the new URL would be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
         <li>
-            If a <code>XmlHttpRequest</code> is generated twice for the same canonical URL, both fetches of the resource would be
+            If a <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both fetches of the resource would be
             included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. This is because the user agent must validate
             both requests from the networking layer, even if the resource is in a disk cache from the first request.
         </li>
@@ -382,7 +397,6 @@ in the</span>
             contains embedded data and does not require access to the networking layer.
         </li>
     </ul>
-</p>
 <p>
     The user agent may choose to limit how many resources are included in the
     <a href="#performance-resource-timing">PerformanceResourceTiming</a>
@@ -439,7 +453,7 @@ in the</span>
   <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: the initiator is an OBJECT element.</dt>
   <dt><dfn id="type-frame">INITIATOR_FRAME</dfn>: the initiator is a FRAME element.</dt>
   <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: the initiator is an IFRAME element.</dt>
-  <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: the initiator is a XmlHttpRequest object.</dt>
+  <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: the initiator is a XMLHttpRequest object.</dt>
   <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: the initiator is an EMBED element.</dt>
   <dt><dfn id="type-audio">INITIATOR_AUDIO</dfn>: the initiator is an AUDIO element.</dt>
   <dt><dfn id="type-video">INITIATOR_VIDEO</dfn>: the initiator is a VIDEO element.</dt>
@@ -745,7 +759,7 @@ interface PerformanceResourceTimingList{
     </div>
 
 
-<h2 id="process"><span class="secno">5 </span>Process</h3>
+<h2 id="process"><span class="secno">5 </span>Process</h2>
 <h3 id="processing-model"><span class="secno">5.1 </span>Processing Model</h3>
 
 <p>Illustration</p>
@@ -953,8 +967,9 @@ Steve Souders and Tony Gentilcore to acknowledge their contributions to this wor
 
    <dt id="ref-origin">[ORIGIN]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The
-    HTTP Origin Header</a></cite> (work in progress), A. Barth, C. Jackson,
-    I. Hickson. IETF.
+   Web Origin Concept</a></cite>, A. Barth, Author. Internet
+   Engineering Task Force, November 2010. Available at
+    <a href="http://tools.ietf.org/html/draft-abarth-origin">http://tools.ietf.org/html/draft-abarth-origin</a>.
    </dd>
 
    <dt><a name="rfc2616" id="rfc2616">[IETF RFC 2616]</a></dt>
@@ -981,6 +996,25 @@ Steve Souders and Tony Gentilcore to acknowledge their contributions to this wor
      ECMA-262, December 2009. This version of the ECMAScript
      Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
     </dd>
+
+    <dt>[<a name="XHR" id="XHR">XMLHttpRequest</a>]</dt>
+    <dd>
+     <cite><a href='http://www.w3.org/TR/2010/CR-XMLHttpRequest-20100803/'>XMLHttpRequest</a></cite>,
+     Anne van Kesteren, Editor. World Wide Web Consortium, August
+     2010. This version of the XMLHttpRequest Candidate Recommendation
+     is
+     http://www.w3.org/TR/2010/CR-XMLHttpRequest-20100803/. The <a class="normative"
+     href="http://www.w3.org/TR/XMLHttpRequest/">latest version of
+     XMLHttpRequest</a> is available at
+     http://www.w3.org/TR/XMLHttpRequest/.
+    </dd>
+   <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   <dt>[<a name="SVG" id="SVG">SVG</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-SVG11-20110512/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, May 2011. This version of the SVG specification is available from <a href='http://www.w3.org/TR/2011/WD-SVG11-20110512/'>http://www.w3.org/TR/2011/WD-SVG11-20110512/</a>. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
+
+   <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2011. This version of the Navigation Timing specification is available from <a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>http://www.w3.org/TR/2011/CR-navigation-timing-20110315/</a>. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 </dl>
 
 </div>
