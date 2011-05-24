@@ -154,7 +154,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#resource-timing-0"><span class="secno">4 </span>Resource
+  <li><a href="#resource-timing"><span class="secno">4 </span>Resource
     Timing</a>
     <ol class="toc">
       <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
@@ -464,7 +464,7 @@ in the</span>
 <h4 id="url-attribute"><code><dfn id="url">url</dfn></code> attribute</h4>
 
 <p>This attribute must return the resolved <a
-href="http://dev.w3.org/html5/spec/Overview.html#resolve-a-url">URL</a> of the
+href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the
 requested resource. The attribute must not change even if the fetch redirected to a different URL.</p>
 
 <h4 id="resource-start-attribute"><code><dfn id="resource-start">resourceStart</dfn></code> attribute</h4>
@@ -502,7 +502,7 @@ Otherwise, this attribute must return zero. </p>
 <h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>This attribute must return the time immediately before the user agent starts to <a
-href="http://dev.w3.org/html5/spec/Overview.html#fetching-resources">fetch</a> the 
+href="http://www.w3.org/TR/html5/fetching-resources.html#fetching-resources">fetch</a> the 
     resource.</p>
 
 <h4 id="domainlookup-start-attribute"><code><dfn
@@ -786,7 +786,7 @@ interface PerformanceResourceTimingList{
       </li>
       <li>Record the initiator of the resource in <a href="#type-attribute">type</a>.
       </li>
-      <li>Record the resolved <a href="http://dev.w3.org/html5/spec/Overview.html#resolve-a-url">URL</a> of the requested resource in <a href="#url-attribute">url</a>.
+      <li>Record the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource in <a href="#url-attribute">url</a>.
       </li>
       <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
        <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, 
