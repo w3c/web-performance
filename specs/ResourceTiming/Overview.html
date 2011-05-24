@@ -73,7 +73,7 @@
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.org/"><acronym title="European Research Consortium
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
     for Informatics and Mathematics">ERCIM</acronym></a>, <a
     href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
@@ -118,7 +118,7 @@ notices. </p>
    Domain</a>.
 
 <p>
-<strong>You can find the latest <a href="http://www.w3c-test.org/webperf/specs/ResourceTiming/">Editor's Draft</a> of this document in the <a href="http://dvcs.w3.org/webperf/">W3C's Mercurial repository</a>, which is updated on a regular basis.</strong>
+<strong>You can find the latest <a href="http://www.w3c-test.org/webperf/specs/ResourceTiming/">Editor's Draft</a> of this document in the <a href="http://dvcs.w3.org/hg/webperf/">W3C's Mercurial repository</a>, which is updated on a regular basis.</strong>
 </p>
 
 <p>Publication as a Working Draft does not imply endorsement by the
@@ -778,7 +778,6 @@ interface PerformanceResourceTimingList{
   by the user agent or set by the <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> method.
   </li>
   <li>For each resource fetched by the current browsing context, perform the following steps:
-  </li>
   <ol>
       <li id="step-create-object">Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object.
       </li>      
@@ -919,6 +918,7 @@ interface PerformanceResourceTimingList{
       <li id="step-collection-end">If there are additional resources, return to step <a href="#step-collection-start">3.1</a>.
       </li>
   </ol>
+  </li>
 </ol>
 
 <h3 id="monotonic-clock"><span class="secno">5.2 </span>Monotonic Clock</h3>
