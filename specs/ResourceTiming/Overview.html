@@ -632,7 +632,8 @@ application caches</a> or from local resources.</p>
 <h3 id="performance-resource-timing-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
-[Supplemental] Performance {
+[Supplemental]
+interface Performance {
   void clearResourceTimings();
   PerformanceResourceTimingList getResourceTimings();
   PerformanceResourceTimingList getResourceTimingsByLocation( in Location location );
