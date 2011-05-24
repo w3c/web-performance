@@ -229,7 +229,7 @@ it cannot break down the time spent in various phases. Further, the script
 cannot easily measure the time it takes to fetch resources described in markup.</p> 
 
 <p>To address the need for complete information on user experience, this document 
-introduces the <a href="#rt-performance-timing-interface">PerformanceResourceTiming</a> interface. 
+introduces the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. 
 This interface allows JavaScript mechanisms to provide complete client-side latency measurements within applications. 
 With this interface, the previous example can be modified to measure a user's 
 perceived load time of a resource. 
@@ -240,7 +240,7 @@ perceived load time of a resource.
 page, even those defined in markup. This example assumes
 that this page is hosted on http://w3c-test.org. 
 One could further measure the amount of time it takes in every phase of fetching a resource
-with the <a href="#rt-performance-timing-interface">PerformanceResourceTiming</a> interface.
+with the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
 </p>
 <pre>
 &lt;!doctype html&gt;
@@ -728,10 +728,10 @@ interface PerformanceResourceTimingList{
         Information from cross-origin resources must be included in the
         <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. In the absence of the
         <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header,
-        these attributes must be set to zero: <a href="#redirectStart">redirectStart</a>, <a href="#redirectEnd">redirectEnd</a>,
-        <a href="#domainLookupStart">domainLookupStart</a>, <a href="#domainLookupEnd">domainLookupEnd</a>, <a href="#connectStart">connectStart</a>,
-        <a href="#connectEnd">connectEnd</a>, <a href="#requestStart">requestStart</a>, <a href="#responseStart">responseStart</a>,
-        and <a href="#responseEnd">responseEnd</a>.
+        these attributes must be set to zero: <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end">redirectEnd</a>,
+        <a href="#domainlookup-start">domainLookupStart</a>, <a href="#domainlookup-end">domainLookupEnd</a>, <a href="#connect-start">connectStart</a>,
+        <a href="#connect-end">connectEnd</a>, <a href="#request-start">requestStart</a>, <a href="#response-start">responseStart</a>,
+        and <a href="#response-end">responseEnd</a>.
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
@@ -803,18 +803,18 @@ interface PerformanceResourceTimingList{
       <li>If the last non-redirected fetch of the resource is not the same origin as the current document 
       and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header does not apply, the user agent
       must set 
-      <a href="#redirectStart">redirectStart</a>, 
-      <a href="#redirectEnd">redirectEnd</a>,
-      <a href="#domainLookupStart">domainLookupStart</a>, 
-      <a href="#domainLookupEnd">domainLookupEnd</a>, 
-      <a href="#connectStart">connectStart</a>, 
-      <a href="#connectEnd">connectEnd</a>, 
-      <a href="#requestStart">requestStart</a>, 
-      <a href="#responseStart">responseStart</a>,
-      and <a href="#responseEnd">responseEnd</a> to zero and abort the following steps. 
+      <a href="#redirect-start">redirectStart</a>, 
+      <a href="#redirect-end">redirectEnd</a>,
+      <a href="#domainlookup-start">domainLookupStart</a>, 
+      <a href="#domainlookup-end">domainLookupEnd</a>, 
+      <a href="#connect-start">connectStart</a>, 
+      <a href="#connect-end">connectEnd</a>, 
+      <a href="#request-start">requestStart</a>, 
+      <a href="#response-start">responseStart</a>,
+      and <a href="#response-end">responseEnd</a> to zero and abort the following steps. 
       </li>
-        <li>Let <a href="#domain-lookup-start">domainLookupStart</a>, 
-       <a href="#domain-lookup-end">domainLookupEnd</a>, 
+        <li>Let <a href="#domainlookup-start">domainLookupStart</a>, 
+       <a href="#domainlookup-end">domainLookupEnd</a>, 
        <a href="#connect-start">connectStart</a> and 
        <a href="#connect-end">connectEnd</a> be the same value as 
        <a href="#fetch-start">fetchStart</a>.</li>
@@ -822,13 +822,13 @@ interface PerformanceResourceTimingList{
        relevant application cache</a>  or local resources, go to step <a href="#step-request-start">3.15</a>.
       </li>
       <li>If no domain lookup is required, go to step <a href="#step-connect-start">3.13</a>. Otherwise, immediately before a user agent 
-       starts the domain name lookup, record the time as <a href="#domain-lookup-start">domainLookupStart</a>.</li>
-      <li>Record the time as <a href="#domain-lookup-end">domainLookupEnd</a> immediately after the 
+       starts the domain name lookup, record the time as <a href="#domainlookup-start">domainLookupStart</a>.</li>
+      <li>Record the time as <a href="#domainlookup-end">domainLookupEnd</a> immediately after the 
        domain name lookup is successfully done. A user agent may need multiple retries before that. If 
        the domain lookup fails, abort the following steps. </li>
       <li id="step-connect-start">If a persistent transport connection is used to fetch the resource, 
        let <a href="#connect-start">connectStart</a> and <a href="#connect-end">connectEnd</a> 
-       be the same value of <a href="#domain-lookup-end">domainLookupEnd</a>. Otherwise, record the time as 
+       be the same value of <a href="#domainlookup-end">domainLookupEnd</a>. Otherwise, record the time as 
        <a href="#connect-start">connectStart</a> immediately before initiating the connection to the server 
        and record the time as <a href="#connect-end">connectEnd</a> immediately after the connection to the 
        server or the proxy is established. A user agent may need multiple retries 
@@ -870,8 +870,8 @@ interface PerformanceResourceTimingList{
       <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
       <ol style="list-style-type:lower-alpha;"> 
             <li>If the current resource and the resource that is redirected to are not from the 
-             <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>, set <a href="#nt-redirect-start">
-             redirectStart</a> and <a href="#nt-redirect-end">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
+             <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>, set <a href="#redirect-start">
+             redirectStart</a> and <a href="#redirect-end">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
              3.5</a> with the new resource.
 	        </li>
             <li>If the value of redirectStart is not set, let it be the value of fetchStart.
