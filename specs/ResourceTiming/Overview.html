@@ -635,15 +635,15 @@ application caches</a> or from local resources.</p>
 [Supplemental] Performance {
   void clearResourceTimings();
   PerformanceResourceTimingList getResourceTimings();
-  PerformanceResourceTimingList getResourceTimingsByLocation( in Location location );
+  PerformanceResourceTimingList getResourceTimingsByURL(in DOMString url);
   void setResourceTimingBufferSize (in unsigned long maxSize);
 
-  attribute Function onbufferfull;
+  attribute Function onresourcetimingbufferfull;
 };</pre>
 <pre class="idl">
 interface PerformanceResourceTimingList{
    readonly attribute unsigned long length;
-   getter ResourcePerformanceTiming(in unsigned long index);
+   PerformanceResourceTiming item(in unsigned long index);
 };
 </pre>
 
@@ -672,13 +672,13 @@ interface PerformanceResourceTimingList{
 </div>
 
 <div class="methods">
-	<h4 id="rt-getResourceTimingsByLocation"><code>getResourceTimingsByLocation</code> method</h4>
-	<p>The <code>getResourceTimingsByLocation</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources as identified by the location.</p>
+	<h4 id="rt-getResourceTimingsByURL"><code>getResourceTimingsByURL</code> method</h4>
+	<p>The <code>getResourceTimingsByURL</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources as identified by the url.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
-			in <span class="style1">location</span> type of
-			<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Interfaces-DOMLocator">
-			<span class="style2">DOMLocator</span></a>
+			in <span class="style1">url</span> type of 
+			<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">
+			<span class="style2">DOMString</span></a>
 			<p>The id parameter specifies which resource timings to retrieve.</p>
 			<p><b>Return Value</b></p>
 			<p><code>PerformanceResourceTimingList</code></p>
@@ -702,11 +702,11 @@ interface PerformanceResourceTimingList{
 </div>
 
 <div class="methods">
-	<h4 id="rt-onbufferfull"><code>onbufferfull</code> attribute</h4>
-	<p>The callback onbufferfull is triggered when the buffer used to store the list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> is full.
+	<h4 id="rt-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code> attribute</h4>
+	<p>The callback onresourcetimingbufferfull is triggered when the buffer used to store the list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> is full.
     The callback can be used to package existing <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources and
     clear the buffered <a href="#performance-resource-timing">PerformanceResourceTiming</a> list.
-    While executing the onbufferfull callback, <a href="#performance-resource-timing">PerformanceResourceTiming</a> will continue to be collected beyond the maximum limit of the resources allowed in the 
+    While executing the onresourcetimingbufferfull callback, <a href="#performance-resource-timing">PerformanceResourceTiming</a> will continue to be collected beyond the maximum limit of the resources allowed in the 
     <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface until one of the following occurs:
     <ol>
 		<li>
@@ -718,7 +718,7 @@ interface PerformanceResourceTimingList{
 		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The PerformanceResourceTimingList will extend and / or truncate to the buffer size specified.</li>
 		<li>
             Neither <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> or
-            <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onbufferfull callback
+            <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onresourcetimingbufferfull callback
             - no updates are made to the PerformanceResourceTimingList.</li>
     </ol>
 </div>
@@ -889,23 +889,23 @@ interface PerformanceResourceTimingList{
             </li>
         </ol>
       </li>
-      <li>If the <i>primary buffer</i> is full, the callback <a href="#rt-onbufferfull"><code>onbufferfull</code></a> 
+      <li>If the <i>primary buffer</i> is full, the callback <a href="#rt-onbufferfull"><code>onresourcetimingbufferfull</code></a> 
           must be triggered.<ol>
             <li>Create a <i>temporary buffer</i> of <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects.
             </li>
             <li>Add the current resource to the <i>temporary buffer</i>.
             </li>
-            <li>If there are additional resources that are collected during the <a href="#rt-onbufferfull"><code>onbufferfull</code></a>
+            <li>If there are additional resources that are collected during the <a href="#rt-onbufferfull"><code>onresourcetimingbufferfull</code></a>
             callback, add them to the <i>temporary buffer</i>.
             </li>
             <li>
-            If the <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> method is called in the <a href="#rt-onbufferfull"><code>onbufferfull</code></a> callback, 
+            If the <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> method is called in the <a href="#rt-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
             clear all <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects in the <i>primary buffer</i>. 
             Copy all <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects in the <i>temporary buffer</i> to the
             <i>primary buffer</i>.
             </li>
             <li>
-            If the <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> method is called in the <a href="#rt-onbufferfull"><code>onbufferfull</code></a> callback, 
+            If the <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> method is called in the <a href="#rt-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
             set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is larger than the previous size of the <i>primary buffer</i>,
             append <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects in the <i>temporary buffer</i> to the <i>primary buffer</i> up to the maxSize parameter.
             </li>
