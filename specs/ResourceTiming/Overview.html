@@ -415,14 +415,12 @@ in the</span>
   const unsigned short <a href="#type-script">INITIATOR_SCRIPT</a> = 3;
   const unsigned short <a href="#type-image">INITIATOR_IMAGE</a> = 4;
   const unsigned short <a href="#type-object">INITIATOR_OBJECT</a> = 5;
-  const unsigned short <a href="#type-frame">INITIATOR_FRAME</a> = 6;
-  const unsigned short <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = 7;
-  const unsigned short <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = 8;
-  const unsigned short <a href="#type-embed">INITIATOR_EMBED</a> = 9;
-  const unsigned short <a href="#type-audio">INITIATOR_AUDIO</a> = 10;
-  const unsigned short <a href="#type-video">INITIATOR_VIDEO</a> = 11;
-  const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 12;
-  const unsigned short <a href="#type-reserved">INITIATOR_RESERVED</a> = 255;
+  const unsigned short <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = 6;
+  const unsigned short <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = 7;
+  const unsigned short <a href="#type-embed">INITIATOR_EMBED</a> = 8;
+  const unsigned short <a href="#type-audio">INITIATOR_AUDIO</a> = 9;
+  const unsigned short <a href="#type-video">INITIATOR_VIDEO</a> = 10;
+  const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 11;
 
   readonly attribute unsigned short <a href="#type" title="type">type</a>;
   readonly attribute DOMString <a href="#url" title="url">url</a>;
@@ -445,20 +443,20 @@ in the</span>
 
 <p>This attribute must return the type of object that initiated the request for the resource: </p>
 <dl>
-  <dt><dfn id="type-other">INITIATOR_OTHER</dfn>: the initiator is not of any type listed below.</dt>
-  <dt><dfn id="type-link">INITIATOR_LINK</dfn>: the initiator is a LINK element.</dt>
-  <dt><dfn id="type-css">INITIATOR_CSS</dfn>: the initiator is a CSS.</dt>
-  <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: the initiator is SCRIPT element.</dt>
-  <dt><dfn id="type-image">INITIATOR_IMAGE</dfn>: the initiator is an IMG element.</dt>
-  <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: the initiator is an OBJECT element.</dt>
-  <dt><dfn id="type-frame">INITIATOR_FRAME</dfn>: the initiator is a FRAME element.</dt>
-  <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: the initiator is an IFRAME element.</dt>
-  <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: the initiator is a XMLHttpRequest object.</dt>
-  <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: the initiator is an EMBED element.</dt>
-  <dt><dfn id="type-audio">INITIATOR_AUDIO</dfn>: the initiator is an AUDIO element.</dt>
-  <dt><dfn id="type-video">INITIATOR_VIDEO</dfn>: the initiator is a VIDEO element.</dt>
-  <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: the initiator is a SVG element.</dt>
-  <dt><dfn id="type-reserved">INITIATOR_RESERVED</dfn>: this is reserved for future use.</dt>
+  <dt><dfn id="type-other">INITIATOR_OTHER</dfn>: The initiator is not of any type listed below.</dt>
+  <dt><dfn id="type-link">INITIATOR_LINK</dfn>: The initiator is the <code>href</code> attribute of the <code>&lt;link&gt;</code> element.</dt>
+  <dt><dfn id="type-css">INITIATOR_CSS</dfn>: The initiator is any CSS resource downloaded via the <a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a> syntax, such as <code>@import url()</code>, <code>background: url()</code>, etc.</dt>
+  <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;script&gt;</code> element.</dt>
+  <dt><dfn id="type-image">INITIATOR_IMAGE</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;img&gt;</code> element.</dt>
+  <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: The initiator is the <code>data</code> attribute of the <code>&lt;object&gt;</code> element.</dt>
+  <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;frame&gt;</code> or <code>&lt;iframe&gt;</code> elements.</dt>
+  <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: The initiator is a XMLHttpRequest object.</dt>
+  <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;embed&gt;</code> element.</dt>
+  <dt><dfn id="type-audio">INITIATOR_AUDIO</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;audio&gt;</code> element 
+  or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with an <code>&lt;audio&gt;</code> element. </dt> 
+  <dt><dfn id="type-video">INITIATOR_VIDEO</dfn>: The initiator is the <code>src</code> or <code>poster</code> attribute of the <code>&lt;video&gt;</code> element 
+  or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with a <code>&lt;video&gt;</code> element. </dt> 
+  <dt><dfn id="Dfn1">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element .</dt>
 </dl>
 
 <h4 id="url-attribute"><code><dfn id="url">url</dfn></code> attribute</h4>
