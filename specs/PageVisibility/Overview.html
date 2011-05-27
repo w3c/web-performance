@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-may-12-2011">Editor's Draft May 12th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-may-25-2011">Editor's Draft May 25th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -145,10 +145,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
     </ol>
   </li>
-  <li><a href="#process"><span class="secno">5 </span>Processing Model</a> 
-  <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
-  <li><a href="#security"><span class="secno">7 </span>Security</a></li>
-  <li><a href="#references"><span class="secno">8 </span>References</a></li>
+  <li><a href="#references"><span class="secno">5 </span>References</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -350,7 +347,7 @@ is not minimized but is fully obscured by other applications.</p>
  
  <p>To accommodate accessibility tools that are typically full screen but still 
  show a view of the page, when applicable, this constant may not be returned 
- when the User Agent is not minimized but is fully obscured by other applications.<p>
+ when the User Agent is not minimized but is fully obscured by other applications.</p>
 
 <p>For example, the following cases would return <code>document.PAGE_HIDDEN</code>:</p>
 	<ul>
@@ -395,22 +392,22 @@ addEventListener on document. This event will get fired on the first change in
 <code>document.visibilityState</code> after registration; it will not get fired on 
 registration.</p>
 
-<h2 id="process-model"><span class="secno">5 </span>Processing Model</h2>
-<p>This section is non-normative.</p>
+<h2 id="references"><span class="secno">5 </span>References</h2>
 
-<h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
-<p>This section is non-normative.</p>
+<dl>
+    <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
+    <dd>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+     Edition. ECMA International, Standard
+     ECMA-262, December 2009. This version of the ECMAScript
+     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+    </dd>
 
-<h2 id="security"><span class="secno">7 </span>Security</h2>
-<p>This section is non-normative.</p>
-
-<h2 id="references"><span class="secno">8 </span>References</h2>
-
-<dl id='references-list'>
+   <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 </dl>
-
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
-
-<p></p>
+<p>We would like to sincerely thank Karen Anderson, Nic Jansma, Alex Komoroske, Cameron McCormack, James Robinson, 
+Jonas Sicking, Kyle Simpson, Jason Weber, and Boris Zbarsky to acknowledge their contributions to this work.</p>
 </body>
 </html>
