@@ -227,7 +227,7 @@ interface <dfn id="WindowAnimationTiming">WindowAnimationTiming</dfn> {
 
 <a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a> implements <a href="#WindowAnimationTiming">WindowAnimationTiming</a>;
 
-<span class="xattr">[Callback, NoInterfaceObject]</span>
+<span class="xattr">[Callback=FunctionOnly, NoInterfaceObject]</span>
 interface <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> {
   void sample(in <a href="http://dev.w3.org/2006/webapi/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a> time);
 };</pre>
@@ -392,7 +392,7 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   <dt>Current editor’s draft</dt>
   <dd>
     <ul>
-      <li>...</li>
+      <li>Made <code>FrameRequestCallback</code> be <span class="xattr">[Callback=FunctionOnly]</span>.</li>
     </ul>
   </dd>
   <dt>2 June 2011 – FPWD</dt>
