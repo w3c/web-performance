@@ -258,6 +258,11 @@ whose <var>callback</var> is <code><var>callback</var></code> and whose <var>can
   a single update to the script-based animation.  If subsequent animation frames are needed, then
   <code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code> will need to be called
   again from within the callback.</p>
+
+  <p>Also note that multiple calls to <code>requestAnimationFrame</code> with the same callback
+  (before <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>callbacks are invoked</a> and
+  the list is cleared) will result in multiple entries being in the list with that same callback,
+  and thus will result in that callback being invoked more than once for the animation frame.</p>
 </div>
 
 <div class='ednote'>
