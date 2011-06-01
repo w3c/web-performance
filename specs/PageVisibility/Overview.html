@@ -298,7 +298,7 @@ and be notified of visibility changes.</p>
 <h3 id="sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</h3>
 <pre class="idl">
 [NoInterfaceObject]
-interface <dfn id="pv-window-visibility-interface">DocumentVisibility</dfn> {
+interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
   const DOMString <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = "hidden";
   const DOMString <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = "visible";
   const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
@@ -385,7 +385,7 @@ is not visible at all and a preview of the the <a href="http://dev.w3.org/html5/
 by being loaded off-screen and not visibly shown by the User Agent.</p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
-The <code><a href="#pv-visibility-change-event">visibilitychange</a></code> event</h3>
+The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
 <p>The visibilitychange event is fired any time a change is made to the 
 <code>document.visibilityState</code> attribute. This event can only be registered using 
@@ -396,6 +396,25 @@ registration.</p>
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
 <dl>
+
+   <dt><a name="rfc2119" id="rfc2119">[IETF RFC 2119]</a></dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+    <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+    <dd>
+     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
+     Specification</a></cite>, A. Le Hors, et al., Editors. World
+     Wide Web Consortium, 7 April 2004. This version of the Document
+     Object Model Level 3 Core Recommendation is
+     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
+     DOM Level 3 Core</a> is available at
+     http://www.w3.org/TR/DOM-Level-3-Core.
+    </dd>
+
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
     <dd>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
