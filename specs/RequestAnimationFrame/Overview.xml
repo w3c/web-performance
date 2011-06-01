@@ -66,7 +66,7 @@ by the browser.</p>
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
      Domain</a>.  Changes made to this document can be found in the
-   <a href='http://dvcs.w3.org/hg/webperf/specs/RequestAnimationFrame/'>W3C
+   <a href='http://dvcs.w3.org/hg/webperf/file/tip/specs/RequestAnimationFrame/'>W3C
      public Mercurial server</a>.</p>
 
 <?sotd-bottom http://www.w3.org/2004/01/pp-impl/45211/status?>
