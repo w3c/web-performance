@@ -222,11 +222,11 @@ interface <dfn id="WindowAnimationTiming">WindowAnimationTiming</dfn> {
 
 <span class="xattr">[Callback, NoInterfaceObject]</span>
 interface <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> {
-  void <a href="#sample">sample</a>(in <a href="http://www.w3.org/TR/WebIDL/#DOMTimeStamp">DOMTimeStamp</a> time);
+  void sample(in <a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a> time);
 };</pre>
 
 <p>The <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn> method is
-used to signal to the user agent that a <a class="dfnref" href="#dfn-script-based-animation">script-based animation</a>
+used to signal to the user agent that a <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animation<!--/a-->
 needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code> is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
 resampling by appending to the end of the <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
 an entry whose <var>handle</var> is a user-agent-defined integer greater than zero that uniquely identifies the entry in the list,
@@ -279,8 +279,8 @@ To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>
   <li>Let <var>t</var> be the result of <a class="dfnref" href="#dfn-get-next-sample-time">getting the next sample time</a>
     of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>.
     <div class="ednote"><div class="ednoteHeader">Editorial note</div>
-      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> Getting the next sample time is currently undefined.
-      This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
+      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> <dfn id="dfn-get-next-sample-time">Getting the next sample time</dfn>
+      is currently undefined.  This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
     </div>
   </li>
   <li>Let <var>time</var> be <var>t</var> expressed as the number of milliseconds since 1970-01-01T00:00:00Z.
@@ -295,7 +295,7 @@ To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>
   </li>
   <li>Let <var>list</var> be a copy of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.  <var>list</var> will be empty
-  if no <a class="dfnref" href="#dfn-script-based-animation">script-based animations</a> have been scheduled.</li>
+  if no <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animations<!--/a--> have been scheduled.</li>
   <li>Clear the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.</li>
   <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
@@ -317,8 +317,7 @@ at exactly once per display refresh.</p>
     <ol>
       <li>If the cancelled flag on <var>callback</var> is not true:
         <ol>
-          <li>Call the <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> operation of
-                <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>Call the <code><a href="#FrameRequestCallback">sample</a></code> operation of <var>callback</var> with <var>time</var> as the argument.</li>
           <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
         </ol>
       </li>
