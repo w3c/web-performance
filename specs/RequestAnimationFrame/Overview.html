@@ -102,14 +102,15 @@ heavily so that they do not update often and thus consume little CPU power.</p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HTML</span></div><div class="blockContent"><pre class="code html-code">&lt;!DOCTYPE html&gt;
 &lt;title&gt;Script-based animation using requestAnimationFrame&lt;/title&gt;
 &lt;style&gt;
-div { position: absolute; left: 10px; top: 10px;
-  padding: 50px; background: crimson; color: white }
+div { position: absolute; left: 10px; padding: 50px;
+  background: crimson; color: white }
 &lt;/style&gt;
 &lt;script&gt;
 var requestId = 0;
 
 function animate(time) {
-  document.getElementById("animated").style.left = (time - animationStartTime) % 500 + "px";
+  document.getElementById("animated").style.left =
+    (time - animationStartTime) % 2000 / 4 + "px";
   requestId = window.requestAnimationFrame(animate);
 }
 function start() {
@@ -122,8 +123,9 @@ function stop() {
   requestId = 0;
 }
 &lt;/script&gt;
-&lt;div onclick="start()" id="animated"&gt;Click me to start!&lt;/div&gt;
-&lt;div onclick="stop()" id="animated"&gt;Click me to stop!&lt;/div&gt;</pre></div></div>
+&lt;button onclick="start()"&gt;Click me to start!&lt;/button&gt;
+&lt;button onclick="stop()"&gt;Click me to stop!&lt;/button&gt;
+&lt;div id="animated"&gt;Hello there.&lt;/div&gt;</pre></div></div>
 </div>
 
 </div>

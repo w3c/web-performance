@@ -124,14 +124,15 @@ heavily so that they do not update often and thus consume little CPU power.</p>
   <x:codeblock language='html'><![CDATA[<!DOCTYPE html>
 <title>Script-based animation using requestAnimationFrame</title>
 <style>
-div { position: absolute; left: 10px; top: 10px;
-  padding: 50px; background: crimson; color: white }
+div { position: absolute; left: 10px; padding: 50px;
+  background: crimson; color: white }
 </style>
 <script>
 var requestId = 0;
 
 function animate(time) {
-  document.getElementById("animated").style.left = (time - animationStartTime) % 500 + "px";
+  document.getElementById("animated").style.left =
+    (time - animationStartTime) % 2000 / 4 + "px";
   requestId = window.requestAnimationFrame(animate);
 }
 function start() {
@@ -144,8 +145,9 @@ function stop() {
   requestId = 0;
 }
 </script>
-<div onclick="start()" id="animated">Click me to start!</div>
-<div onclick="stop()" id="animated">Click me to stop!</div>]]></x:codeblock>
+<button onclick="start()">Click me to start!</button>
+<button onclick="stop()">Click me to stop!</button>
+<div id="animated">Hello there.</div>]]></x:codeblock>
 </div>
 
 </div>
