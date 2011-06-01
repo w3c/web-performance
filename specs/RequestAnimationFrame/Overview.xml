@@ -36,7 +36,7 @@
         <affiliation>Mozilla Corporation</affiliation>
       </person>
     </editors>
-    <maturity>ED</maturity>
+    <maturity>WD</maturity>
   </options>
 </head>
 
@@ -213,6 +213,11 @@ object, and <var>cancelled</var> is a Boolean flag.  Initially, the
 for a <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
 is empty.</p>
 
+<p>A <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+is said to <dfn id='dfn-has-active-animations'>have active animations</dfn>
+whenever it has a non-empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation
+frame request callback list</a>.</p>
+
 </div>
 
 <div id='the-WindowAnimationTiming-interface' class='section'>
@@ -225,11 +230,6 @@ object.  In the definition of <code><a href='#requestAnimationFrame'>requestAnim
 <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
 object are to be taken to be references to the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>.&#x2002;<a href='#ref-HTML5'>[HTML5]</a></p>
-
-<p>A <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
-is said to <dfn id='dfn-has-active-animations'>have active animations</dfn>
-whenever it has a non-empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation
-frame request callback list</a>.</p>
 
 <pre class='idl'><span class='xattr'>[Supplemental, NoInterfaceObject]</span>
 interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
@@ -405,7 +405,7 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   <dt>Current editor’s draft</dt>
   <dd>...</dd>
   -->
-  <dt>1 January 20xx – FPWD</dt>
+  <dt>2 June 2011 – FPWD</dt>
   <dd>
     <ul>
       <li>Initial publication.</li>
