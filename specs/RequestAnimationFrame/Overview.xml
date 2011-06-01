@@ -21,9 +21,9 @@
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <this href='http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/'/>
+      <this href='http://www.w3.org/TR/2011/WD-animation-timing-20110602/'/>
       <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
-      <latest href='http://www.w3.org/TR/RequestAnimationFrame/'/>
+      <latest href='http://www.w3.org/TR/animation-timing/'/>
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
