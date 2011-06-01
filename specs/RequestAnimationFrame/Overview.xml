@@ -66,7 +66,7 @@ by the browser.</p>
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
      Domain</a>.  Changes made to this document can be found in the
-   <a href='http://dvcs.w3.org/hg/webperf/file/tip/specs/RequestAnimationFrame/'>W3C
+   <a href='https://dvcs.w3.org/hg/webperf/file/tip/specs/RequestAnimationFrame/'>W3C
      public Mercurial server</a>.</p>
 
 <?sotd-bottom http://www.w3.org/2004/01/pp-impl/45211/status?>
@@ -230,7 +230,7 @@ interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
 
 <span class='xattr'>[Callback, NoInterfaceObject]</span>
 interface <dfn id='FrameRequestCallback'>FrameRequestCallback</dfn> {
-  void sample(in <a href='http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
+  void sample(in <a href='http://dev.w3.org/2006/webapi/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
 };</pre>
 
 <p>The <dfn id='requestAnimationFrame'><code>requestAnimationFrame</code></dfn> method is
