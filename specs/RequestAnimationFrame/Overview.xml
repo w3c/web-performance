@@ -36,7 +36,7 @@
         <affiliation>Mozilla Corporation</affiliation>
       </person>
     </editors>
-    <maturity>ED</maturity>
+    <maturity>FPWD</maturity>
   </options>
 </head>
 
@@ -57,16 +57,7 @@ by the browser.</p>
 <div class='section'>
 <h2>Status of this Document</h2>
 
-<p><em>This section describes the status of this document at the time of
-   its publication. Other documents may supersede this document. A list of
-   current W3C publications and the latest revision of this technical report
-   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
-   index</a> at http://www.w3.org/TR/.</em></p>
-
-<p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[RequestAnimationFrame]%20">public-web-perf@w3.org</a>
-   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
-   with <samp>[RequestAnimationFrame]</samp> at the start of the subject line.</p>
+<?sotd-top public-web-perf@w3.org http://lists.w3.org/Archives/Public/public-web-perf/ [RequestAnimationFrame]?>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
@@ -74,13 +65,11 @@ by the browser.</p>
    the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
-   Domain</a>.</p>
+     Domain</a>.  Changes made to this document can be found in the
+   <a href='http://dvcs.w3.org/hg/webperf/specs/RequestAnimationFrame/'>W3C
+     public Mercurial server</a>.</p>
 
-<p>Publication as a Working Draft does not imply endorsement by the
-W3C Membership. This is a draft document and may be updated, replaced
-or obsoleted by other documents at any time. It is inappropriate to
-cite this document as other than work in progress. </p>
-
+<?sotd-bottom http://www.w3.org/2004/01/pp-impl/45211/status?>
 </div>
 
 <div id='toc'>
@@ -298,7 +287,7 @@ To <a class='dfnref' href='#dfn-sample-all-animations'>sample all animations</a>
   <li>Let <var>t</var> be the result of <a class='dfnref' href='#dfn-get-next-sample-time'>getting the next sample time</a>
     of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>.
     <div class='ednote'>
-      <p><a href="http://www.w3.org/2010/webperf/track/issues/1">ISSUE-1</a> Getting the next sample time is currently undefined.
+      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> Getting the next sample time is currently undefined.
       This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
     </div>
   </li>

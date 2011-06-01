@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!--
-  Overview.html
-  Timing control for frame-based animation
-
-  Note: This file is generated from Overview.xml.  Run "make" to regenerate it.
-  -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,10 +9,10 @@
   <script src="dfn.js" type="application/ecmascript"></script>
 
   
-<link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
+<link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD" type="text/css" /></head>
 
 <body>
-<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>1 June 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/RequestAnimationFrame/">http://www.w3.org/TR/RequestAnimationFrame/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Working Draft <em>2 June 2011</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/">http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/</a></dd><dt>Latest Version:</dt><dd><a href="http://www.w3.org/TR/RequestAnimationFrame/">http://www.w3.org/TR/RequestAnimationFrame/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
 <div class="section">
 <h2>Abstract</h2>
@@ -35,16 +28,17 @@ by the browser.</p>
 <div class="section">
 <h2>Status of this Document</h2>
 
-<p><em>This section describes the status of this document at the time of
-   its publication. Other documents may supersede this document. A list of
-   current W3C publications and the latest revision of this technical report
-   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
-   index</a> at http://www.w3.org/TR/.</em></p>
+<p><em>This section describes the status of this document at the time of its
+publication.  Other documents may supersede this document. A list of current W3C
+publications and the latest revision of this technical report can be found in
+the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
+http://www.w3.org/TR/.</em></p><p>This document is the 2 June 2011 <b>First Public Working Draft</b> of the
+  <cite>Timing control for script-based animations</cite> specification.
 
-<p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[RequestAnimationFrame]%20">public-web-perf@w3.org</a>
-   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
-   with <samp>[RequestAnimationFrame]</samp> at the start of the subject line.</p>
+Please send comments about this document to
+<a href="mailto:public-web-perf@w3.org?subject=[RequestAnimationFrame]%20">public-web-perf@w3.org</a>
+(<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+with <samp>[RequestAnimationFrame]</samp> at the start of the subject line.</p>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
@@ -52,13 +46,22 @@ by the browser.</p>
    the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
-   Domain</a>.</p>
+     Domain</a>.  Changes made to this document can be found in the
+   <a href="http://dvcs.w3.org/hg/webperf/specs/RequestAnimationFrame/">W3C
+     public Mercurial server</a>.</p>
 
 <p>Publication as a Working Draft does not imply endorsement by the
-W3C Membership. This is a draft document and may be updated, replaced
-or obsoleted by other documents at any time. It is inappropriate to
-cite this document as other than work in progress. </p>
-
+W3C Membership.  This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to cite
+this document as other than work in progress.</p><p>This document was produced by a group operating under the
+<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made
+in connection with the deliverables of the group; that page also includes
+instructions for disclosing a patent.  An individual who has actual knowledge of
+a patent which the individual believes contains
+<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a>
+must disclose the information in accordance with
+<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>.</p>
 </div>
 
 <div id="toc">
@@ -276,7 +279,7 @@ To <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a>
   <li>Let <var>t</var> be the result of <a class="dfnref" href="#dfn-get-next-sample-time">getting the next sample time</a>
     of the <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document">Document</a></code>.
     <div class="ednote"><div class="ednoteHeader">Editorial note</div>
-      <p><a href="http://www.w3.org/2010/webperf/track/issues/1">ISSUE-1</a> Getting the next sample time is currently undefined.
+      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> Getting the next sample time is currently undefined.
       This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
     </div>
   </li>
