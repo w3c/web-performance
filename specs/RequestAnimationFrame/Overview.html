@@ -315,12 +315,13 @@ at exactly once per display refresh.</p>
 <ol class="algorithm">
   <li>For each entry <var>callback</var> in <var>list</var>, in order:
     <ol>
-      <li>If the cancelled flag on <var>callback</var> is not true:</li>
-      <ol>
-        <li>Call the <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> operation of
-              <var>callback</var> with <var>time</var> as the argument.</li>
-        <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
-      </ol>
+      <li>If the cancelled flag on <var>callback</var> is not true:
+        <ol>
+          <li>Call the <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> operation of
+                <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
+        </ol>
+      </li>
     </ol>
   </li>
 </ol>
