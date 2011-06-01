@@ -122,30 +122,30 @@ heavily so that they do not update often and thus consume little CPU power.</p>
 <div class='example'>
   <p>Here is an example of using the API to write a script-based animation.</p>
   <x:codeblock language='html'><![CDATA[<!DOCTYPE html>
-    <title>Script-based animation using requestAnimationFrame</title>
-    <style>
-    div { position: absolute; left: 10px; top: 10px;
-      padding: 50px; background: crimson; color: white }
-    </style>
-    <script>
-    var requestId = 0;
+<title>Script-based animation using requestAnimationFrame</title>
+<style>
+div { position: absolute; left: 10px; top: 10px;
+  padding: 50px; background: crimson; color: white }
+</style>
+<script>
+var requestId = 0;
 
-    function animate(time) {
-      document.getElementById("animated").style.left = (time - animationStartTime)%500 + "px";
-      requestId = window.requestAnimationFrame(animate);
-    }
-    function start() {
-      animationStartTime = Date.now();
-      requestId = window.requestAnimationFrame(animate);
-    }
-    function stop() {
-      if (requestId)
-        window.cancelRequestAnimationFrame(requestId);
-      requestId = 0;
-    }
-    </script>
-    <div onclick="start()" id="animated">Click me to start!</div>
-    <div onclick="stop()" id="animated">Click me to stop!</div>]]></x:codeblock>
+function animate(time) {
+  document.getElementById("animated").style.left = (time - animationStartTime) % 500 + "px";
+  requestId = window.requestAnimationFrame(animate);
+}
+function start() {
+  animationStartTime = Date.now();
+  requestId = window.requestAnimationFrame(animate);
+}
+function stop() {
+  if (requestId)
+    window.cancelRequestAnimationFrame(requestId);
+  requestId = 0;
+}
+</script>
+<div onclick="start()" id="animated">Click me to start!</div>
+<div onclick="stop()" id="animated">Click me to stop!</div>]]></x:codeblock>
 </div>
 
 </div>
