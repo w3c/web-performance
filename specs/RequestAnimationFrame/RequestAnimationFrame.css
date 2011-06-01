@@ -1,17 +1,17 @@
-code, .prop, .idlident, .idlstring, .xattr { font-size: 14px; font-family: monospace !important }
+pre, code, kbd, samp, tt, .prop, .xattr { font-family: monospace, monospace; font-size: 14px }
 .ednote, .prop, .idlident, .idlstring, .example, .note, blockquote { background: #d9e8ff }
-code { color: orangered }
-code a:link, code a:visited { color: orangered }
+code { color: #ff2400 }
+code a:link, code a:visited { color: #ff2400 }
 .example blockquote { background: #f0f6ff }
 .ednote { border-top: 3px solid red; border-bottom: 3px solid red; margin: 1em 2em; padding: 0 1em 0 1em; background: #f8eeee }
 .ednoteHeader { font-weight: bold; display: block; padding-top: 0.5em }
 .toc ul li { list-style-type: none; margin-top: 0; margin-bottom: 0 }
 .toc ul { margin-bottom: 0.5em }
-pre.idl { color: black; background: #d9e8ff; padding: 1em; margin-top: 1em; margin-left: 0; font-size: 1em; overflow: auto; /*white-space: pre-wrap*/ }
+pre.idl { color: black; background: #d9e8ff; padding: 1em; margin-top: 1em; margin-left: 0; overflow: auto; /*white-space: pre-wrap*/ }
 pre.idl a:link, pre.idl a:visited { color: black; }
 pre.idl .xattr { color: #666 }
 
-table.vert { border-collapse: collapse; border-top: 2px solid #005a9c; border-bottom: 2px solid #005a9c; margin-top: 1em auto }
+table.vert { border-collapse: collapse; border-top: 2px solid #005a9c; border-bottom: 2px solid #005a9c; margin: 1em auto }
 table.vert td { vertical-align: top; background: #f0f6ff }
 table.vert th { text-align: left; vertical-align: bottom; background: #d9e8ff; color: #005a9c; color: black; border-bottom: 2px solid #005a9c; white-space: nowrap }
 table.vert th, table.vert td { padding: 0.25em 0.75em }
@@ -42,8 +42,8 @@ body { line-height: 1.3 }
 @media print {
   .section-link { display: none }
 }
-.section-link { visibility: hidden; width: 1px; height: 1px; overflow: visible; font-size: 10pt; font-style: normal }
-.section-link a { color: #666; font-weight: bold; text-decoration: none }
+.section-link { visibility: hidden; width: 1px; height: 1px; overflow: visible; font-size: 10pt; font-style: normal; margin-left: 4px; vertical-align: middle }
+.section-link a { color: #666; font-weight: bold; text-decoration: none; padding: 2px 4px; background: #eee }
 .section-link a:hover { color: #c00 }
 .section > *:hover > .section-link { visibility: visible }
 

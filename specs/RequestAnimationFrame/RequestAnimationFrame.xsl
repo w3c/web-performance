@@ -242,6 +242,15 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name='prefix'><xsl:if test='contains($temp, " ")'><xsl:value-of select='substring-after($temp, " ")'/></xsl:if></xsl:variable>
+    <xsl:variable name='mail-link'>
+      <xsl:text>mailto:</xsl:text>
+      <xsl:value-of select='$mail'/>
+      <xsl:if test='$prefix != ""'>
+        <xsl:text>?subject=</xsl:text>
+        <xsl:value-of select='$prefix'/>
+        <xsl:text>%20</xsl:text>
+      </xsl:if>
+    </xsl:variable>
     <p><em>This section describes the status of this document at the time of its
 publication.  Other documents may supersede this document. A list of current W3C
 publications and the latest revision of this technical report can be found in
@@ -252,9 +261,9 @@ http://www.w3.org/TR/.</em></p>
   <cite><xsl:value-of select='/*/h:head/h:title'/></cite> specification.
 </xsl:if>
 Please send comments about this document to
-<a href='mailto:{$mail}'><xsl:value-of select='$mail'/></a>
+<a href='{$mail-link}'><xsl:value-of select='$mail'/></a>
 (<a href='{$archive}'>archived</a>)<xsl:if test='$prefix != ""'>
-with “<xsl:value-of select='$prefix'/>” at the start of the subject line</xsl:if>.</p>
+with <samp><xsl:value-of select='$prefix'/></samp> at the start of the subject line</xsl:if>.</p>
   </xsl:template>
 
   <xsl:template match='processing-instruction("sotd-bottom")'>

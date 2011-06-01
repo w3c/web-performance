@@ -21,9 +21,9 @@
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <this href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
+      <this href='http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/'/>
       <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
-      <!--latest href='http://www.w3.org/TR/RequestAnimationFrame/'/-->
+      <latest href='http://www.w3.org/TR/RequestAnimationFrame/'/>
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
@@ -36,7 +36,7 @@
         <affiliation>Mozilla Corporation</affiliation>
       </person>
     </editors>
-    <maturity>ED</maturity>
+    <maturity>FPWD</maturity>
   </options>
 </head>
 
@@ -52,23 +52,12 @@ the ideal animation rate based on whether the page is currently in a foreground
 or background tab, what the current load on the CPU is, and so on.  Using this
 API should therefore result in more appropriate utilization of the CPU
 by the browser.</p>
-
-<?revision-note?>
 </div>
 
 <div class='section'>
 <h2>Status of this Document</h2>
 
-<p><em>This section describes the status of this document at the time of
-   its publication. Other documents may supersede this document. A list of
-   current W3C publications and the latest revision of this technical report
-   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
-   index</a> at http://www.w3.org/TR/.</em></p>
-
-<p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[RequestAnimationFrame]%20">public-web-perf@w3.org</a>
-   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
-   with <samp>[RequestAnimationFrame]</samp> at the start of the subject line.</p>
+<?sotd-top public-web-perf@w3.org http://lists.w3.org/Archives/Public/public-web-perf/ [RequestAnimationFrame]?>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
@@ -76,13 +65,11 @@ by the browser.</p>
    the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
-   Domain</a>.</p>
+     Domain</a>.  Changes made to this document can be found in the
+   <a href='https://dvcs.w3.org/hg/webperf/file/tip/specs/RequestAnimationFrame/'>W3C
+     public Mercurial server</a>.</p>
 
-<p>Publication as a Working Draft does not imply endorsement by the
-W3C Membership. This is a draft document and may be updated, replaced
-or obsoleted by other documents at any time. It is inappropriate to
-cite this document as other than work in progress. </p>
-
+<?sotd-bottom http://www.w3.org/2004/01/pp-impl/45211/status?>
 </div>
 
 <div id='toc'>
@@ -122,30 +109,32 @@ heavily so that they do not update often and thus consume little CPU power.</p>
 <div class='example'>
   <p>Here is an example of using the API to write a script-based animation.</p>
   <x:codeblock language='html'><![CDATA[<!DOCTYPE html>
-    <title>Script-based animation using requestAnimationFrame</title>
-    <style>
-    div { position: absolute; left: 10px; top: 10px;
-      padding: 50px; background: crimson; color: white }
-    </style>
-    <script>
-    var requestId = 0;
+<title>Script-based animation using requestAnimationFrame</title>
+<style>
+div { position: absolute; left: 10px; padding: 50px;
+  background: crimson; color: white }
+</style>
+<script>
+var requestId = 0;
 
-    function animate(time) {
-      document.getElementById("animated").style.left = (time - animationStartTime)%500 + "px";
-      requestId = window.requestAnimationFrame(animate);
-    }
-    function start() {
-      animationStartTime = Date.now();
-      requestId = window.requestAnimationFrame(animate);
-    }
-    function stop() {
-      if (requestId)
-        window.cancelRequestAnimationFrame(requestId);
-      requestId = 0;
-    }
-    </script>
-    <div onclick="start()" id="animated">Click me to start!</div>
-    <div onclick="stop()" id="animated">Click me to stop!</div>]]></x:codeblock>
+function animate(time) {
+  document.getElementById("animated").style.left =
+    (time - animationStartTime) % 2000 / 4 + "px";
+  requestId = window.requestAnimationFrame(animate);
+}
+function start() {
+  animationStartTime = Date.now();
+  requestId = window.requestAnimationFrame(animate);
+}
+function stop() {
+  if (requestId)
+    window.cancelRequestAnimationFrame(requestId);
+  requestId = 0;
+}
+</script>
+<button onclick="start()">Click me to start!</button>
+<button onclick="stop()">Click me to stop!</button>
+<div id="animated">Hello there.</div>]]></x:codeblock>
 </div>
 
 </div>
@@ -204,9 +193,19 @@ specifications:</p>
 <h2>Definitions</h2>
 
 <p>Associated with every <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
-is a <dfn id='dfn-animation-frame-request-callback-list'>animation frame request callback list</dfn>,
-which is a list of <code><a href='#FrameRequestCallback'>FrameRequestCallback</a></code>
-objects and which initially is an empty list.</p>
+is an <dfn id='dfn-animation-frame-request-callback-list'>animation frame request callback list</dfn>,
+which is a list of &lt;<var>handle</var>, <var>callback</var>, <var>cancelled</var>> triples.
+<var>handle</var> is an integer that uniquely identifies the entry in the list,
+<var>callback</var> is a <code><a href='#FrameRequestCallback'>FrameRequestCallback</a></code>
+object, and <var>cancelled</var> is a Boolean flag.  Initially, the
+<a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>
+for a <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+is empty.</p>
+
+<p>A <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+is said to <dfn id='dfn-has-active-animations'>have active animations</dfn>
+whenever it has a non-empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation
+frame request callback list</a>.</p>
 
 </div>
 
@@ -221,11 +220,6 @@ object.  In the definition of <code><a href='#requestAnimationFrame'>requestAnim
 object are to be taken to be references to the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>.&#x2002;<a href='#ref-HTML5'>[HTML5]</a></p>
 
-<p>A <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
-is said to <dfn id='dfn-has-active-animations'>have active animations</dfn>
-whenever it has a non-empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation
-frame request callback list</a>.</p>
-
 <pre class='idl'><span class='xattr'>[Supplemental, NoInterfaceObject]</span>
 interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
   long <a href='#requestAnimationFrame'>requestAnimationFrame</a>(in <a href='#FrameRequestCallback'>FrameRequestCallback</a> callback);
@@ -236,32 +230,47 @@ interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
 
 <span class='xattr'>[Callback, NoInterfaceObject]</span>
 interface <dfn id='FrameRequestCallback'>FrameRequestCallback</dfn> {
-  void <a href='#sample'>sample</a>(in <a href='http://www.w3.org/TR/WebIDL/#DOMTimeStamp'>DOMTimeStamp</a> time);
+  void sample(in <a href='http://dev.w3.org/2006/webapi/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
 };</pre>
 
 <p>The <dfn id='requestAnimationFrame'><code>requestAnimationFrame</code></dfn> method is
-used to signal to the user agent that a <a class='dfnref' href='#dfn-script-based-animation'>script-based animation</a>
+used to signal to the user agent that a <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animation<!--/a-->
 needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code> is called, the user agent <span class='rfc2119'>MUST</span> schedule a script-based animation
-resampling by setting the cancelled flag on <var>callback</var> to false and appending it to the end of <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.
-<dfn id='requestAnimationFrame'><code>requestAnimationFrame</code></dfn>
-returns a user-agent-defined integer <var>handle</var> greater than zero to identify this callback.</p>
+resampling by appending to the end of the <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>
+an entry whose <var>handle</var> is a user-agent-defined integer greater than zero that uniquely identifies the entry in the list,
+whose <var>callback</var> is <code><var>callback</var></code> and whose <var>cancelled</var> flag is false.</p>
 
 <div class='note'>
   <p><code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code> only schedules
   a single update to the script-based animation.  If subsequent animation frames are needed, then
   <code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code> will need to be called
   again from within the callback.</p>
+
+  <p>Also note that multiple calls to <code>requestAnimationFrame</code> with the same callback
+  (before <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>callbacks are invoked</a> and
+  the list is cleared) will result in multiple entries being in the list with that same callback,
+  and thus will result in that callback being invoked more than once for the animation frame.</p>
 </div>
 
-<p>When <dfn id='cancelRequestAnimationFrame'><code>cancelRequestAnimationFrame</code></dfn> method is called,
-the user agent <span class='rfc2119'>MUST</span> set the cancelled flag of the callback associated with <var>handle</var> to true.  If there is no callback associated with <var>handle</var> then this function does nothing.</p>
+<div class='ednote'>
+  <p><a href='http://www.w3.org/2010/webperf/track/issues/4'>ISSUE-4</a> Do we want to allow an <code>Element</code> to be passed
+  to <code>requestAnimationFrame</code>, so that animations affecting the given element are throttled or paused when scrolled out
+  of view?</p>
+</div>
+
+<p>The <dfn id='cancelRequestAnimationFrame'><code>cancelRequestAnimationFrame</code></dfn> method is
+used to cancel a previously made request to schedule an animation frame update.  When <code>cancelRequestAnimationFrame(<var>handle</var>)</code> is called,
+the user agent <span class='rfc2119'>MUST</span> set the <var>cancelled</var> flag to true for the entry in the
+<a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>
+whose <var>handle</var> is <code><var>handle</var></code>.  If there is no entry in the list with the given
+handle, then this function does nothing.</p>
 
 <div class='note'>
-  <p><code><a href='#cancelRequestAnimationFrame'>cancelRequestAnimationFrame</a></code> might be called for a callback
+  <p><code><a href='#cancelRequestAnimationFrame'>cancelRequestAnimationFrame</a></code> might be called for an entry
   in the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> or in
-  the <a class='dfnref' href="#dfn-sample-all-animations">sample all animations</a> operation's temporary <var>list</var>.  In
-  either case the callback's cancelled flag is set to true so that the callback does not run.</p>
+  the <a class='dfnref' href="#dfn-sample-all-animations">sample all animations</a> operation’s temporary <var>list</var>.  In
+  either case the entry’s cancelled flag is set to true so that the callback does not run.</p>
 </div>
 
 
@@ -270,27 +279,56 @@ the user agent <span class='rfc2119'>MUST</span> set the cancelled flag of the c
 <span class='rfc2119'>MUST</span> continually <dfn id='dfn-sample-all-animations'>sample all animations</dfn>.
 To <a class='dfnref' href='#dfn-sample-all-animations'>sample all animations</a>, the following steps are performed:</p>
 
+<div class='ednote'>
+  <p><a href="http://www.w3.org/2010/webperf/track/issues/1">ISSUE-1</a> We should define the processing model in terms of an HTML5 task queue, so that animation frame callback scheduling participates in the browser event loop in a well defined manner, rather than just saying that animations are sampled continually.</p>
+</div>
+
 <ol class='algorithm'>
   <li>Let <var>t</var> be the result of <a class='dfnref' href='#dfn-get-next-sample-time'>getting the next sample time</a>
-  of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>.</li>
-  <li>Let <var>time</var> be <var>t</var> expressed as the number of milliseconds since 1970-01-01T00:00:00Z.</li>
+    of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>.
+    <div class='ednote'>
+      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> <dfn id='dfn-get-next-sample-time'>Getting the next sample time</dfn>
+      is currently undefined.  This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
+    </div>
+  </li>
+  <li>Let <var>time</var> be <var>t</var> expressed as the number of milliseconds since 1970-01-01T00:00:00Z.
+    <div class='ednote'>
+      <p><a href="http://www.w3.org/2010/webperf/track/issues/3">ISSUE-3</a> Having animation frame times run off a
+      monotonic clock that increases at a constant rate would be better for authors than using the wallclock time
+      as reported by the system, which might jump backwards or move forwards at varying rates due to clock slew.
+      Doing this argues for the reinclusion of the <code>Window.animationStartTime</code> attribute that was present in an earlier
+      draft, so that scripts can avoid using <code>Date.now()</code> to record the animation start time,
+      which might bear little relation to the monotonic clock values anyway.</p>
+    </div>
+  </li>
   <li>Let <var>list</var> be a copy of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.  <var>list</var> will be empty
-  if no <a class='dfnref' href='#dfn-script-based-animation'>script-based animations</a> have been scheduled.</li>
+  if no <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animations<!--/a--> have been scheduled.</li>
   <li>Clear the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
   <li>Perform the steps defined in the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
 </ol>
+
+<p>The expectation is that the user agent will never run the
+<a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> more than
+once per display refresh, and that when there is no need to throttle down the animation sample rate,
+it will attempt to run the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a>
+at exactly once per display refresh.</p>
+
+<div class='ednote'>
+  <p><a href='http://www.w3.org/2010/webperf/track/issues/5'>ISSUE-5</a> Do we need to set expectations on exactly how rate throttling is done, and if callback invocation can be suspended indefinitely?</p>
+</div>
+
 <p>The <dfn id='dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</dfn>:</p>
 <ol class='algorithm'>
   <li>For each entry <var>callback</var> in <var>list</var>, in order:
     <ol>
-      <li>If the cancelled flag on <var>callback</var> is not true:</li>
-      <ol>
-        <li>Call the <code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code> operation of
-              <var>callback</var> with <var>time</var> as the argument.</li>
-        <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
-      </ol>
+      <li>If the cancelled flag on <var>callback</var> is not true:
+        <ol>
+          <li>Call the <code><a href='#FrameRequestCallback'>sample</a></code> operation of <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
+        </ol>
+      </li>
     </ol>
   </li>
 </ol>
@@ -301,8 +339,8 @@ To <a class='dfnref' href='#dfn-sample-all-animations'>sample all animations</a>
 
 <p class='norm'>This section is informative.</p>
 
-<p>The editor would like to thank the following people for contributing to
-this specification: Boris Zbarsky, Jonas Sicking, Robert O'Callahan.</p>
+<p>The editors would like to thank the following people for contributing to
+this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 </div>
 
 </div> <!-- sections -->
@@ -356,7 +394,7 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O'Callahan.</p>
   <dt>Current editor’s draft</dt>
   <dd>...</dd>
   -->
-  <dt>1 January 20xx – FPWD</dt>
+  <dt>2 June 2011 – FPWD</dt>
   <dd>
     <ul>
       <li>Initial publication.</li>
