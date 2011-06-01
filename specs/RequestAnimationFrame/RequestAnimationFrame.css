@@ -42,8 +42,8 @@ body { line-height: 1.3 }
 @media print {
   .section-link { display: none }
 }
-.section-link { visibility: hidden; width: 1px; height: 1px; overflow: visible; font-size: 10pt; font-style: normal }
-.section-link a { color: #666; font-weight: bold; text-decoration: none }
+.section-link { visibility: hidden; width: 1px; height: 1px; overflow: visible; font-size: 10pt; font-style: normal; margin-left: 4px; vertical-align: middle }
+.section-link a { color: #666; font-weight: bold; text-decoration: none; padding: 2px 4px; background: #eee }
 .section-link a:hover { color: #c00 }
 .section > *:hover > .section-link { visibility: visible }
 

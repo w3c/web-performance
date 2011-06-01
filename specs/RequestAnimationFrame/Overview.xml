@@ -21,9 +21,9 @@
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <this href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
+      <this href='http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/'/>
       <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
-      <!--latest href='http://www.w3.org/TR/RequestAnimationFrame/'/-->
+      <latest href='http://www.w3.org/TR/RequestAnimationFrame/'/>
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
@@ -52,8 +52,6 @@ the ideal animation rate based on whether the page is currently in a foreground
 or background tab, what the current load on the CPU is, and so on.  Using this
 API should therefore result in more appropriate utilization of the CPU
 by the browser.</p>
-
-<?revision-note?>
 </div>
 
 <div class='section'>
