@@ -36,7 +36,7 @@
         <affiliation>Mozilla Corporation</affiliation>
       </person>
     </editors>
-    <maturity>FPWD</maturity>
+    <maturity>ED</maturity>
   </options>
 </head>
 
@@ -390,10 +390,12 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 <p>The following is a list of substantial changes to the document on each publication.</p>
 
 <dl class='changes'>
-  <!--
   <dt>Current editor’s draft</dt>
-  <dd>...</dd>
-  -->
+  <dd>
+    <ul>
+      <li>...</li>
+    </ul>
+  </dd>
   <dt>2 June 2011 – FPWD</dt>
   <dd>
     <ul>
