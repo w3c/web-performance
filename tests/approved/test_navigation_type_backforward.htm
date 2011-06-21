@@ -35,7 +35,7 @@
                 {
                     case 1:
                     {
-                        navigation_frame.location.href = '/webperf/tests/resources/blank_page_green.htm';
+                        navigation_frame.location.href = '/webperf/tests/resources/blank_page_green_with_onunload.htm';
                         step++;
                         break;
                     }
@@ -90,6 +90,6 @@
 
         <div id="log"></div>
         <br />
-        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_yellow.htm" style="width: 250px; height: 250px;"></iframe>
+        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_yellow_with_onunload.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
