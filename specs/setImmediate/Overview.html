@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <title>Efficient Script Yielding</title>
+<style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Efficient Script Yielding</h1>
+
+<h2 class="no-num no-toc" id="working-draft-july-28-2011">Editor's Draft July 28th, 
+    2011</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html">
+        http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html">
+        http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html</a></dd>
+  <dt>Latest Editor&#39;s Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html">
+        http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/EfficientScriptYielding/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span> (<span
+      class="org">Microsoft Corp.</span>) <a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+      <dd class="vcard"><span class="fn">Jason Weber</span> (<span
+      class="org">Microsoft Corp.</span>) <a
+      class="email" href="mailto:jweber@microsoft.com">jweber@microsoft.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+       © 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    Consortium">W3C</acronym></a><sup>®</sup> (<a
+    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
+    of Technology">MIT</acronym></a>, <a
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+       and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> 
+       rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an interface for web applications to flush the browser 
+    event queue and receive an immediate callback.</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
+
+  <p><em>This section describes the status of this document at the time of its 
+      publication. Other documents may supersede this document. A list of current W3C 
+      publications and the latest revision of this technical report can be found in 
+      the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at 
+      http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any notices. </p>
+
+<p>Please send comments to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">
+    public-web-perf@w3.org</a>
+    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>) 
+    with <samp>[ScriptYielding]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by the <a href="http://www.w3.org/2010/webperf/">Web 
+    Performance</a>
+    Working Group. The Web Performance Working Group is part of the <a href="http://www.w3.org/2006/rwc/Activity">
+    Rich Web Clients Activity</a> in the W3C <a href="http://www.w3.org/Interaction/">
+    Interaction Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the W3C Membership. 
+    This is a draft document and may be updated, replaced or obsoleted by other 
+    documents at any time. It is inappropriate to cite this document as other than 
+    work in progress. </p>
+
+<p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">
+    5 February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
+   rel="disclosure">public list of any patent disclosures</a> made in connection 
+    with the deliverables of the group; that page also includes instructions for 
+    disclosing a patent. An individual who has actual knowledge of a patent which 
+    the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
+    Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
+    section 6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-efficient-script-yielding"><span class="secno">4 </span>Efficient 
+      Script Yielding</a> 
+    <ol class="toc">
+      <li><a href="#sec-introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-window-setImmediate-interface"><span class="secno">4.2 </span>The <code>
+          WindowTimersExtension</code> interface</a></li>
+    </ol>
+  </li>
+    <li><a href="#processingmodel"><span class="secno">5 </span>Processing Model</a></li>
+  <li><a href="#references"><span class="secno">6 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+    The Efficient Script Yielding specification defines a means for site developers 
+    to yield control flow to the user agent before running script. Web developers 
+    may want to use this interface to both allow user agent events and display 
+    updates to happen before continuing script execution and to avoid long running 
+    script dialogs in certain user agents. Many web pages use the <code><a href="http://www.w3.org/TR/html5/timers.html#dom-windowtimers-settimeout">
+    setTimeout</a></code>
+    method with a specified period of zero to attempt to do the same thing. However, <code><a href="http://www.w3.org/TR/html5/timers.html#dom-windowtimers-settimeout">
+    setTimeout</a></code>
+    enforces a minimum delay, even with a specified period of zero, that isn&#39;t 
+    uniformly implemented across user agents. Removing this minimum delay from <code><a href="http://www.w3.org/TR/html5/timers.html#dom-windowtimers-settimeout">
+    setTimeout</a></code>
+    runs the risk of causing existing webpages, that have come to rely on the 
+    minimum delay, to break by going into a seemingly hung state while also significantly increasing the power consumption of the browser.
+</p>
+
+<p>
+    This specification defines a new method, <code><a href="#si-setImmediate">
+    setImmediate</a></code>, which will run a callback function immediately after 
+    the user agent events and display updates have occurred. This interface will not 
+    enforce a minimum delay and will attempt to run the callback as soon as it can.
+</p>
+
+<div class="example">
+<p>For example, the following Javascript shows a theoretical web based email client 
+    attempting to do a spellcheck operation after the user agent events and display 
+    updates have been flushed, to ensure that the site remains responsive: 
+</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   function emailClient() {
+       // Do email work
+              
+       // When UI is free, check for spelling
+       setTimeout(checkSpelling, 0);
+   }
+
+   function checkSpelling() { 
+       // Scan email for spelling errors 
+   }
+
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload=&quot;emailClient()&quot;&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<p>The script callback will always be subject to a minimum delay that may not be uniformly defined across user agents. This results in script that is not running in the most performant manner.</p>
+
+<p>Using the <code><a href="#si-setImmediate">setImmediate</a></code>
+    method, the page will be able to efficiently yield control flow without minimum 
+    delays.</p>
+
+<div class="example">
+<p>For example, the following Javascript shows a theoretical web based email client 
+    attempting to do a spellcheck operation with the <code><a href="#si-setImmediate">
+    setImmediate</a></code> method to efficiently yield control flow without minimum 
+    delays: 
+</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   function emailClient() {
+       // Do email work
+            
+       // When UI is free, check for spelling
+       setImmediate(checkSpelling);
+   }
+
+   function checkSpelling() { 
+       // Scan email for spelling errors 
+   }
+
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload=&quot;emailClient()&quot;&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance 
+    requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative, as are 
+    all sections explicitly marked non-normative. Everything else in this 
+    specification is normative. </p>
+
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, 
+    &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in the normative parts of this document are 
+    to be interpreted as described in <a href="#rfc2119">RFC 2119</a>. For 
+    readability, these words do not appear in all uppercase letters in this 
+    specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as &quot;strip any 
+    leading space characters&quot; or &quot;return false and abort these steps&quot;) are to be 
+    interpreted with the meaning of the key word (&quot;must&quot;, &quot;should&quot;, &quot;may&quot;, etc) used 
+    in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes, methods 
+    or objects. Such requirements are to be interpreted as requirements on user 
+    agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be 
+    implemented in any manner, so long as the end result is equivalent. (In 
+    particular, the algorithms defined in this specification are intended to be easy 
+    to follow, and not intended to be performant.) </p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction &quot;a <code title="">Foo</code> object&quot;, where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of the more 
+    accurate &quot;an object implementing the interface <code
+title="">Foo</code>&quot;. </p>
+
+<p>The term DOM is used to refer to the API set made available to scripts in Web 
+    applications, and does not necessarily imply the existence of an actual
+<code>Document</code> object or of any other <code>Node</code> objects as defined in 
+    the <a href="#DOM3Core">DOM Core specifications</a>.</p>
+
+<p>A DOM attribute is said to be <em>getting</em> when its value is being retrieved 
+    (such as by author script), and is said to be <em>setting</em> when a new value 
+    is assigned to it. </p>
+
+<p>The term &quot;JavaScript&quot; is used to refer to
+<a href="#ECMA262">ECMA-262</a>, rather than the official term ECMAScript, since the 
+    term JavaScript is more widely known.</p>
+
+
+<h2 id="sec-efficient-script-yielding"><span class="secno">4 <span class="auto-style1">
+    Efficient Script Yielding</span></span></h2>
+
+<h3 id="sec-page-visibility-introduction"><span class="secno">4.1 </span>
+    Introduction</h3>
+
+<p>This section is non-normative</p>
+
+<p>This specification introduces an interface that allows web applications to 
+    efficiently yield script control without subjecting running the callback to 
+    minimum delays.</p>
+
+<h3 id="sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>
+    WindowTimersExtension</code> interface</h3>
+<pre class="idl">
+[NoInterfaceObject]
+interface <dfn id="si-window-timers-extensions-interface">WindowTimersExtension</dfn> {
+  long <a href="#si-setImmediate">setImmediate</a>(in any handler, in optional any... args);
+  void <a href="#si-clearImmediate">clearImmediate</a>(in long handle);
+};
+Window implements WindowTimersExtension;
+</pre>
+
+<dl  >
+    <dt id="si-setImmediate"><var title="">window</var> . <code title="dom-setImmediate"><a href="#si-setImmediate">
+        setImmediate</a></code>( <var title="">handler</var> [, <var title="">arguments</var> 
+        ] )</dt>
+    <dd>
+    <p>Schedules to run <var title="">handler</var> immediately after user agent events 
+        have been flushed. Any <var title="">arguments</var> are passed straight through 
+        to the <var title="">handler</var>.</p>
+   </dd>
+   
+    <dt id="si-clearImmediate"><var title="">window</var> . <code title="dom-clearImmediate"><a href="#si-clearImmediate">
+        clearImmediate</a></code>( <var title="">handle</var> )</dt>
+    <dd>
+    <p>Cancels the immediate set with <a href="#si-setImmediate">setImmediate()</a> identified
+        by <var title="">handle</var>.</p>
+   </dd>
+
+  </dl><p class="note">This API does not guarantee that the callback will be run 
+        immediately. Delays due to CPU load, other tasks, etc, may occur.</p><div class="impl">
+
+  <p>Each object that implements the <code><a href="#si-window-timers-extensions-interface">
+      WindowTimersExtension</a></code>
+      interface has a <dfn id="list-of-active-immediate">list of active immediates</dfn>. 
+      Each entry in these lists is identified by a number, which must be unique within 
+      its list for the lifetime of the object that implements the <code><a href="#si-window-timers-extensions-interface">
+      WindowTimersExtention</a></code>
+      interface.</p> 
+
+<h2 id="processingmodel"><span class="secno">5 </span>Processing Model</h2>
+
+<p>
+    <code><a href="#si-setImmediate">setImmediate</a></code> method must run the 
+    following steps:
+</p>
+<ol>
+    <li>
+        <p>
+            Let handle be a user-agent-defined integer that is greater than zero that will identify the 
+            immediate to be set by this call.
+        </p>
+    </li>
+    <li>
+        <p>
+            Add an entry to the <a href="#list-of-active-immediates">list of active immediates</a>
+            for <var>handle</var>.
+        </p>
+    </li>
+    <li>
+        <p>Get the <var title="">handle</var> set by this <a href="#si-setImmediate">setImmediate()</a> call from the <a href="#list-of-active-immediates">
+            list of active immediates</a>, and let <var title="">task</var> be the result.
+        </p>
+    </li>
+    <li>
+        <p>Continue running this algorithm asynchronously.
+        </p>
+    </li>
+    <li>
+        <p>Wait until the <code><a href="http://www.w3.org/TR/html5/infrastructure.html#document">
+            Document</a></code> 
+            is <a href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active</a>.
+        </p>
+    </li>
+
+    <li>
+        <p>Wait until any invocations of this algorithm started before this one have 
+            completed.
+        </p>
+    </li>
+    <li>
+        <p><a href="http://www.w3.org/TR/html5/webappapis.html#queue-a-task">Queue</a> the <var title="">
+            task</var> <a href="http://www.w3.org/TR/html5/webappapis.html#concept-task">
+            task</a>.
+        </p>
+    </li>
+</ol>  
+
+
+  <p>When the above method is invoked and tries to get <var title="">immediate</var> 
+      in list <var title="">list</var>, it must run the following steps:</p>
+
+  <ol>
+  <li>
+    <p>If the first argument to the invoked method is an object that has an internal 
+        [[Call]] method, then return a <a href="http://www.w3.org/TR/html5/webappapis.html#concept-task">
+        task</a> 
+        that checks if the entry for handle in list has been cleared, and if it has not,
+        calls the aforementioned [[Call]] method with as its arguments the second 
+        and subsequent arguments to the invoked method (if any) and abort these steps. <a href="ECMA262">
+        [ECMA262]</a></p>
+
+    <p>Otherwise, continue with the remaining steps.</p>
+   </li>
+
+   <li><p>Apply the ToString() abstract operation to the first argument to the method, 
+       and let <var title="">script source</var>
+       be the result. <a href="#ECMA262">[ECMA262]</a></p></li>
+
+   <li><p>Let <var title="">script language</var> be JavaScript.</p></li>
+
+   <li>
+        <p>Return a <a href="http://www.w3.org/TR/html5/webappapis.html#concept-task">task</a> 
+        that checks if the entry for handle in list has been cleared, and if it has not,
+            <a href="http://www.w3.org/TR/html5/webappapis.html#create-a-script">creates a 
+            script</a> using <var title="">script source</var> 
+            as the script source, <var title="">scripting language</var> as the scripting 
+            language.
+        </p>
+   </li>
+  </ol>
+  
+
+<h2 id="references"><span class="secno">6 </span>References</h2>
+
+<dl>
+    <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
+    <dd>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>
+        ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+        Edition. ECMA International, Standard ECMA-262, December 2009. This version of 
+        the ECMAScript Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>
+        http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+    </dd>
+
+   <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, 
+       Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is 
+       available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. 
+       The <a href='http://dev.w3.org/html5/spec/'>latest editor&#39;s draft</a> is 
+       available at http://dev.w3.org/html5/spec/.</dd>
+</dl>
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+</body>
+</html>
