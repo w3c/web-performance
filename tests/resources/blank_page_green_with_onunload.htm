@@ -4,7 +4,8 @@
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <title>Green Test Page</title>
     </head>
-    <body style="background-color:#00FF00;">
+    <!-- use onunload to ensure this does not trigger bfcache -->
+    <body style="background-color:#00FF00;" onunload="1;">
         <h1>Placeholder</h1>
     </body>
 </html>

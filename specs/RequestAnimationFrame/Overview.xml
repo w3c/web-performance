@@ -21,9 +21,9 @@
 
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
-      <this href='http://www.w3.org/TR/2011/WD-RequestAnimationFrame-20110602/'/>
+      <this href='http://www.w3.org/TR/2011/WD-animation-timing-20110602/'/>
       <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
-      <latest href='http://www.w3.org/TR/RequestAnimationFrame/'/>
+      <latest href='http://www.w3.org/TR/animation-timing/'/>
       <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
@@ -36,7 +36,7 @@
         <affiliation>Mozilla Corporation</affiliation>
       </person>
     </editors>
-    <maturity>FPWD</maturity>
+    <maturity>ED</maturity>
   </options>
 </head>
 
@@ -390,10 +390,12 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 <p>The following is a list of substantial changes to the document on each publication.</p>
 
 <dl class='changes'>
-  <!--
   <dt>Current editor’s draft</dt>
-  <dd>...</dd>
-  -->
+  <dd>
+    <ul>
+      ...
+    </ul>
+  </dd>
   <dt>2 June 2011 – FPWD</dt>
   <dd>
     <ul>
