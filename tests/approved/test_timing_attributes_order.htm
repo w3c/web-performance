@@ -16,7 +16,7 @@
             var step = 1;
             function onload_test()
             {
-                if (performanceNamespace === undefined)
+                if (step === 1 && window.performance === undefined)
                 {
                     // avoid script errors
                     done();
