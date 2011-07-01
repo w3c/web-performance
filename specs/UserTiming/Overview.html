@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
-  <meta content="text/html; charset=us-ascii" http-equiv="content-type">
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
   <title>User Timing</title>
 <style type="text/css">
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
@@ -29,17 +29,19 @@
    table thead { border-bottom:solid }
    table tbody th:first-child { border-left:solid }
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-   div.parameters{ display:block; margin-left: 25px;}
-   div.methods { display:block; margin-top:30px;margin-left :25px;}
+   div.parameters { display:block; margin-left: 25px;}
+   div.parameterDefinition { display:block; margin-left: 25px;}
+   div.methods { display:block; margin-top:30px; margin-left :25px;}
 }
 </style>
+<link href="http://www.w3.org/StyleSheets/TR/W3C-TR.css" rel="stylesheet" type="text/css">
 <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="working-draft-Mar-08-2011">Working Draft April 25, 2011</h2>
+    <h2 class="no-num no-toc" id="working-draft-july-1-2011">Working Draft July 1st, 2011</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -54,14 +56,18 @@
         <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
       <dt>Editors:</dt>
-        <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
-          class="org">Microsoft Inc.</span>, <span
-          class="email">jmann@microsoft.com</span> </dd>
-        <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
-          class="org">Google Inc.</span>, <span
-          class="email">zhihengw@google.com</span> </dd>
-        <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
-          class="org">Microsoft Inc. <i>(Until March 2011)</i></span></dd>
+        <dd class="vcard">
+            <span class="fn">Jatinder Mann</span>, <span class="org">Microsoft Inc.</span>,
+            <span class="email">jmann@microsoft.com</span>
+        </dd>
+        <dd class="vcard">
+            <span class="fn">Zhiheng Wang</span>, <span class="org">Google Inc.</span>,
+            <span class="email">zhihengw@google.com</span>
+        </dd>
+        <dd class="vcard">
+            <span class="fn">Anderson Quach</span>,
+            <span class="org">Microsoft Inc. <i>(Until March 2011)</i></span>
+        </dd>
     </dl>
 
     <p class=copyright><a
@@ -80,9 +86,9 @@
 
     <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-    <p>This specification defines an interface for web applications to help
-    developers assess and understand the performance of their application with
-    the use of a high precession timer.</p>
+    <p>This specification defines an interface to help web
+    developers measure the performance of their applications by giving them access
+    to high precision timestamps.</p>
 
     <h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
 
@@ -135,10 +141,10 @@ cite this document as other than work in progress. </p>
       <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
       <li><a href="#user-timing-0"><span class="secno">4 </span>User Timing</a>
         <ol class="toc">
-          <li><a href="#introduction-1"><span class="secno">4.1
-            </span>Introduction</a></li>
-          <li><a href="#the-usertiming-interface"><span class="secno">4.2
-            </span>The <code>UserTiming</code> Interface</a></li>
+          <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
+          <li><a href="#the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</a></li>
+          <li><a href="#the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</a></li>
+          <li><a href="#the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</a></li>
         </ol>
       </li>
       <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
@@ -151,10 +157,11 @@ cite this document as other than work in progress. </p>
 
     <p>This section is non-normative.</p>
     <p>Web developers need the ability to assess and understand the performance characteristics of their
-    applications using well-defined interoperable methods. JavaScript mechanisms can provide comprehensive
-    instrumentation to measure user latency within an application, however the precision of which varies
-    between user agents. This document introduces the <a href="#user-timing-0">UserTiming</a> interface to allow the buffering and
-    retrieval of timing information with a web developer supplied name.</p>
+    applications. While JavaScript provides a mechanism to measure application latency (retrieving the current
+    timestamp from the <code>Date.now()</code> method), the precision of this timestamp varies between user agents.</p>
+    <p>This document introduces the <a href="#user-timing">UserTiming</a> interface, 
+    which exposes a high precision timestamp to developers so they can better measure the performance of their applications.</p>
+    <p class="issue"><strong>TODO:</strong> Show example usage.</p>
 
     <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
     requirements</h2>
@@ -213,19 +220,20 @@ cite this document as other than work in progress. </p>
 
     <p>This section is non-normative</p>
 
-    <p>The <a href="#user-timing-0">User Timing</a> interface facilitates the
-    ability for developers to assess and understand the performance of their
-    application by instrumenting their code and custom scenarios with a
-    high precision timer.</p>
+    <p>The <a href="#user-timing">User Timing</a> interface gives web developers access to a high precision, monotonically 
+       increasing timestamp so they can better measure the performance characteristics of their
+       applications.</p>
 
-    <p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+    <p>Throughout this work, the term "timestamp" refers to the number of milliseconds since midnight of January 1, 1970 (UTC).</p>
 
-    <h3 id="the-usertiming-interface"><span class="secno">4.2
-    </span>The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
+    <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
 
-  <pre class="idl">
+    <pre class="idl">
   [Supplemental]
-  interface <a href="#Performance">Performance</a> {
+  interface <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-window.performance-attribute">Performance</a> {
+    const unsigned short PERF_DEVELOPER_MARK = 2;
+    const unsigned short PERF_DEVELOPER_MEASURE = 3;
+
     const string <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = "fullyLoaded";
     const string <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = "fullyVisible";
     const string <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = "aboveTheFold";
@@ -239,75 +247,96 @@ cite this document as other than work in progress. </p>
     Array <a href="#ut-getMeasures">getMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
     void <a href="#ut-clearMeasures">clearMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
-  </pre>
-  <div class="methods">
+    </pre>
+    <div class="methods">
     <h4 id="ut-mark"><code>mark</code> method</h4>
     <p>This method stores a timestamp with the associated name (a "mark").</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>The name associated with the timestamp.</p>
-        <p>The same name may be used more than once.</p>
-        <p>The name cannot be the same as any of the attributes in the
-        <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-        <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
+        <p>in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>The name associated with the timestamp.</p>
+            <p>Mark names may be re-used within the same document.
+            Each call to the <code>mark()</code> method stores a new timestamp 
+            under the specified mark name.</p>
+            <p>The mark name cannot be the same name as any of the attributes in the 
+            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
+            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
 
-        <p><b>Standard Mark Names</b></p>
-        <p>The name may be any valid <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>, or may be from the following list of predefined standard mark names.</p>
-        <p>Note: If using a standard mark name, the user agent is only reasonsible for storing the
-        mark as it was requested. The user agent is not responsible for determining if the timing of the mark is appropriate.</p>
+            <p><b>Standard Mark Names</b></p>
+            <p>The mark name may be one of the following Standard Mark Names. When using a Standard Mark Name, the user agent is responsible for storing 
+                a new timestamp under the specified mark name.
+                The user agent does not validate that the usage of the Standard Mark Name is appropriate or consistent with its description.</p>
+            <code id="ut-mark-fully-loaded">MARK_FULLY_LOADED</code>
+            <div class="parameterDefinition">
+                <p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
+            </div>
 
-        <code id="ut-mark-fully-loaded">MARK_FULLY_LOADED</code>
-        <p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
+            <code id="ut-mark-fully-visible">MARK_FULLY_VISIBLE</code>
+            <div class="parameterDefinition">
+                <p>The time when the page is considered completely visible to an end-user as marked by the developer in
+                their application.</p>
+            </div>
 
-        <code id="ut-mark-fully-visible">MARK_FULLY_VISIBLE</code>
-        <p>The time when the page is considered completely visible to an end-user as marked by the developer in
-        their application.</p>
+            <code id="ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</code>
+            <div class="parameterDefinition">
+                <p>The time when all of the content in the visible viewport has been presented to the end-user as marked by
+                the developer in their application.</p>
+            </div>
 
-        <code id="ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</code>
-        <p>The time when all of the content in the visible viewport has been presented to the end-user as marked by
-        the developer in their application.</p>
-
-        <code id="ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</code>
-        <p>The time of the first user interaction with the page during or after a navigation, such as scroll or click,
-        as marked by the developer in their application.</p>
+            <code id="ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</code>
+            <div class="parameterDefinition">
+                <p>The time of the first user interaction with the page during or after a navigation, such as scroll or click,
+                as marked by the developer in their application.</p>
+            </div>
+        </div>
 
         <p><b>No Return Value</b></p>
 
         <p><b>Exceptions</b></p>
-        <p>Throws a <code>NOT_SUPPORTED_ERR</code> exception if the name of the mark is the same as an attribute in the 
+        <p>Throws a <code>SYNTAX_ERR</code> exception if the <em>markName</em> argument is the same name as an attribute in the 
         <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
     </div>
   </div>
 
   <div class="methods">
     <h4 id="ut-getMarks"><code>getMarks</code> method</h4>
-    <p>This method returns all of the marks, when the mark name is not specified. Otherwise, this method returns
-    all of the marks of the specified name.</p>
-    <p>The method returns an associative Array.  Each key in the Array is a
-    distinct mark name. The value associated with the mark name is an Array of timestamps.</p>
-    <p>In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0, 1, 2], "mark2": [3] }</code></p>
+    <p>If the <em>markName</em> argument is not specified, this method returns all of the marks and their associated timestamps.</p>
+    <p>If the <em>markName</em> argument is specified, this method returns all of the timestamps for the specified mark name.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of the mark to return.  If not specified, all marks are returned.</p>
-        
+        <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the mark.  If not specified, all marks are returned.</p>
+        </div>
+
         <p><b>Return Value</b></p>
         <code>Array</code>
-        <p>(See notes for the format of the Array)</p>
-        
+        <p>If the <em>markName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
+        mark name. The value associated with the mark name is an Array of timestamps for that mark.  In JSON notation,
+        the data structure will look similar to this: <code>{ "mark1": [0, 1, 3], "mark2": [2] }</code></p>
+        <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of timestamps.  In JSON notation,
+        the data structure will look similar to this: <code>[0, 1, 3]</code></p>
+        <p>If the <em>markName</em> argument is specified, and the mark name does not exist, the method returns an empty Array.  In JSON notation,
+        the data structure will look similar to this: <code>[]</code></p>
+        <p>Timestamps will be listed in the order that the <code>mark()</code> method was called.</p>
+        <p>The returned Array is a copy of data at the time that the <code>getMarks()</code> method was called.</p>
+
         <p><b>No Exceptions</b></p>
     </div>
   </div>
 
   <div class="methods">
     <h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
-    <p>This method removes all marks if the mark name is not specified. Otherwise, this method removes only those
-    marks matching the specified mark name.</p>
+    <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated timestamps.</p>
+    <p>If the <em>markName</em> argument is specified, this method removes all timestamps for the given mark name.</p>
+    <p>If the <em>markName</em> argument is specified but the specified <em>markName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of the mark to be cleared.  If not specified, all marks will be cleared.</p>
+        <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the mark whose timestamps should be cleared.  If not specified, all marks will be cleared.</p>
+        </div>
 
         <p><b>No Return Value</b></p>
 
@@ -317,80 +346,165 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="ut-measure"><code>measure</code> method</h4>
-    <p>This method stores the difference between two marks (measured in milliseconds) along with the associated name (a "measure").</p>
-    <p>If <code>measure</code> is called without specifying the start or end mark, <code>measure</code> will store the delta in
-    milliseconds from <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a> to the current time.
-    </p>
-    <p>If <code>measure</code> is called with a start mark but not specifying the end mark, <code>measure</code> will store the delta in
-    milliseconds from the most recent occurrence of the start mark to the current time.</p>
-    <p>If <code>measure</code> is called with a start mark and end mark, <code>measure</code> will store the delta in
-    milliseconds from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</p>
-    <p>The start mark and end mark names may be the same as attributes in the
-    <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-    <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
+    <p>This method stores the duration between two marks (measured in milliseconds) along with the associated name (a "measure").</p>
+    <p>The behavior of this method depends on which arguments are specified:</p>
+    <ul>
+        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are not specified,
+            <code>measure()</code> will store the duration in milliseconds from 
+            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a>
+            to the current time.</li>
+        <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
+            <code>measure()</code> will store the duration in
+            milliseconds from the most recent occurrence of the start mark to the current time.</li>
+        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are specified, <code>measure()</code> will store the duration in
+            milliseconds from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</li>
+    </ul>
+    <p>The <em>startMark</em> and <em>endMark</em> arguments may be the name of one of the attributes in the
+       <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
+       <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+       In this case, the value of that attribute is used as the timestamp.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>The name associated with the measure.</p>
+        <p>in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>The name associated with the measure.</p>
+            <p>Measure names may be re-used within the same document.
+            Each call to the <code>measure()</code> method stores a new duration
+            under the specified measure name.</p>
+            <p>Measure names live independently from mark names.</p>
+        </div>
 
-        in <code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of the start mark. If not specified,
-        <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a> is used.</p>
+        <p>in <code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the start mark.</p>
+            <p>If specified, the most recent timestamp of the start mark is used.</p>
+            <p>If not specified, <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a> is used.</p>
+            <p>May be the name of one of the attributes in the
+               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
+               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+               In this case, the value of that attribute is used as the start timestamp.</p>
+        </div>
 
-        in <code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of the end mark.  If not specified, the current time is used.</p>
+        <p>in <code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the end mark.</p>
+            <p>If specified, the most recent timestamp of the end mark is used.</p>
+            <p>If not specified, the current time is used.</p>
+            <p>May be the name of one of the attributes in the
+               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
+               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+               In this case, the value of that attribute is used as the end timestamp.</p>
+        </div>
 
         <p><b>No Return Value</b></p>
 
         <p><b>Exceptions</b></p>
-        <p>Throws a <code>NOT_FOUND_ERR</code> exception if the name of a mark doesn't exist.</p>
+        <p>Throws a <code>SYNTAX_ERR</code> exception if the start mark or end mark does not exist.</p>
+        <p>Throws a <code>SYNTAX_ERR</code> exception if the duration (the end mark timestamp minus the start mark timestamp) is negative.</p>
     </div>
   </div>
 
   <div class="methods">
     <h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
-    <p>This method returns all of the measures if the measure name is not specified. Otherwise, this method returns all of the
-    measures of the specified name.
-    <p>The method returns an associative Array.  Each key in the Array is a
-    distinct measure name. The value associated with the mark name is an Array of deltas (in milliseconds).</p>
-    <p>In JSON notation, the data structure will look similar to this: <code>{ "measure1": [0, 1, 2], "measure2": [3] }</code></p>    
+    <p>If the <em>measureName</em> argument is not specified, this method returns all of the measures and their associated durations.</p>
+    <p>If the <em>measureName</em> argument is specified, this method returns all of the durations for the specified measure name.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of a measure to return.  If not specified, all measures are returned.</p>
-        
+        <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the measure to return.  If not specified, all measures are returned.</p>
+        </div>
+
         <p><b>Return Value</b></p>
         <code>Array</code>
-        <p>(See notes for the format of the Array)</p>
-        
+        <p>If the <em>measureName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
+        measure name. The value associated with the measure name is an Array of durations for that measure.  In JSON notation,
+        the data structure will look similar to this: <code>{ "measure1": [0, 5, 1], "measure2": [3] }</code></p>
+        <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of durations.  In JSON notation,
+        the data structure will look similar to this: <code>[0, 5, 1]</code></p>
+        <p>If the <em>measureName</em> argument is specified, and the measure name does not exist, the method returns an empty Array.  In JSON notation,
+        the data structure will look similar to this: <code>[]</code></p>
+        <p>Durations will be listed in the order that the <code>measure()</code> method was called.</p>
+        <p>The returned Array is a copy of data at the time that the <code>getMeasures()</code> method was called.</p>
+
         <p><b>No Exceptions</b></p>
     </div>
   </div>
 
   <div class="methods">
     <h4 id="ut-clearmeasures"><code>clearMeasures</code> method</h4>
-    <p>This method remove all measures if measure name is not specified. Otherwise, this method removes only those
-    measures matching the specified measure name.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated durations.</p>
+    <p>If the <em>measureName</em> argument is specified, this method removes all durations for the given measure name.</p>
+    <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a>
-        <p>[optional] The name of the measure to be cleared.  If not specified, all measures will be cleared.</p>
-        
+        <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <div class="parameterDefinition">
+            <p>[optional] The name of the measure whose durations should be cleared.  If not specified, all measures will be cleared.</p>
+        </div>
+
         <p><b>No Return Value</b></p>
-        
+
         <p><b>No Exceptions</b></p>
     </div>
   </div>
 
+    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code><a href="#performancemark">PerformanceMark</a></code> Interface</h3>
+
+    <pre class="idl">
+  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
+  }
+    </pre>
+
+    <p>
+    	The <a href="#performancemark">PerformanceMark</a> interface also 
+		exposes marks created via the <code><a href="#ut-mark">mark()</a></code> 
+		method to the 
+    	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">
+		Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
+		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntry-interface">
+		PerformanceEntry</a>
+		interface:
+    </p>
+    
+    <div class="parameters">
+        <p>The <code>name</code> attribute will return the mark's name.</p>
+        <p>The <code>entryType</code> attribute will return <code>PERF_DEVELOPER_MARK</code>.</p>
+        <p>The <code>startTime</code> attribute will return the mark's timestamp.</p>
+        <p>The <code>duration</code> attribute will return 0.</p>
+    </div>
+
+    <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code><a href="#performancemeasure">PerformanceMeasure</a></code> Interface</h3>
+
+    <pre class="idl">
+  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
+  }
+    </pre>
+    
+	<p>
+    	The <a href="#performancemeasure">PerformanceMeasure</a> interface also 
+		exposes measures created via the <code><a href="#ut-measure">measure()</a></code> 
+		method to the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">
+		Performance Timeline</a>. The <a href="#performancemeasure">
+		PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntry-interface">
+		PerformanceEntry</a>
+		interface:
+    </p>
+	
+    <div class="parameters">
+        <p>The <code>name</code> attribute will return the measure's name.</p>
+        <p>The <code>entryType</code> attribute will return <code>PERF_DEVELOPER_MEASURE</code>.</p>
+        <p>The <code>startTime</code> attribute will return the timestamp of the measure's start mark.</p>
+        <p>The <code>duration</code> attribute will return the duration of the measure.</p>
+    </div>
 
     <h2 id="monotonic-clock"><span class="secno">5 </span>Monotonic Clock</h2>
-    <p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
-    skewed by adjustments to the system clock during the navigation. The difference between any two chronologically 
-    recorded timing attributes must never be negative. The user agent must record the system clock at the beginning 
-    of the navigation and define subsequent timing attributes in terms of a monotonic clock measuring time elapsed 
+    <p>The timestamps stored within the interface must monotonically increase to ensure they are not 
+    affected by adjustments to the system clock. The difference between any two chronologically 
+    recorded timestamps must never be negative. The user agent must record the system clock at the beginning 
+    of the navigation and define subsequent timestamps in terms of a monotonic clock measuring time elapsed 
     from the beginning of the navigation.
     </p>
-
 
     <h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
 
@@ -407,9 +521,7 @@ cite this document as other than work in progress. </p>
 
     <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-    <p>Thanks to Steve Souders, Tony Gentilcore, Jason Weber, Nic Jansma, and Karen 
-        Anderson for their useful comments that led to changes to this specification and their contributions to this work.</p>
-
+    <p>Thanks to James Simonsen, Jason Weber, Karen Anderson, Nic Jansma, Steve Souders, and Tony Gentilcore for their useful comments that led to changes to this specification and their contributions to this work.</p>
 
 <h2 class="no-num" id=references>References</h2>
 
