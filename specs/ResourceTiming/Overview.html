@@ -30,13 +30,6 @@
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
    div.parameters{ display:block; margin-left: 25px;}
    div.methods { display:block; margin-top:30px;margin-left :25px;}
-.style1 {
-	font-family: monospace;
-	color: orangered;
-}
-.style2 {
-	color: #0000CC;
-}
 </style>
 <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
 </head>
@@ -46,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-june-1-2011">Working Draft June 1st, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-july-30th-2011">Working Draft July 30th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -158,11 +151,12 @@ cite this document as other than work in progress. </p>
     Timing</a>
     <ol class="toc">
       <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
-      <li><a href="#resources-included"><span class="secno">4.2</span> Resources Included</a></li>
-      <li><a href="#performance-resource-timing"><span class="secno">4.3</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
-      <li><a href="#performance-resource-timing-methods"><span class="secno">4.4 </span> The Resource Timing Methods</a></li>
-      <li><a href="#cross-origin-resources"><span class="secno">4.5 </span> Cross-origin Resources</a></li>
-      <li><a href="#vendor-prefixes"><span class="secno">4.6 </span> Vendor Prefixes</a></li>
+      <li><a href="#resources-included"><span class="secno">4.2</span> Resources Included in the <code>PerformanceResourceTiming</code> Interface</a></li>
+	  <li><a href="#sec-window.performance-attribute"><span class="secno">4.3</span> The <code>window.performance</code> Attribute</a></li>
+      <li><a href="#performance-resource-timing"><span class="secno">4.4</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
+      <li><a href="#performance-resource-timing-methods"><span class="secno">4.5 </span> The Resource Timing Methods</a></li>
+      <li><a href="#cross-origin-resources"><span class="secno">4.6 </span> Cross-origin Resources</a></li>
+      <li><a href="#vendor-prefixes"><span class="secno">4.7 </span> Vendor Prefixes</a></li>
     </ol>
   </li>
   <li><a href="#process"><span class="secno">5 </span>Process</a>
@@ -257,10 +251,10 @@ with the <a href="#performance-resource-timing">PerformanceResourceTiming</a> in
        
        function resourceTiming() 
        {
-           var resourceList = window.performance.getResourceTimings();
+           var resourceList = window.performance.getEntriesByType(window.performance.PERF_RESOURCE);
            for (i = 0; i < resourceList.length; i++)
            {
-              if (resourceList[i].type == window.performance.INITIATOR_IMAGE) 
+              if (resourceList[i].initiatorType == window.performance.INITIATOR_IMAGE) 
               {
                  alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].resourceStart);
               }
@@ -403,11 +397,14 @@ in the</span>
     <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>
     can be called to request a change to this limit.
 </p>
-<h3><span class="secno">4.3 </span>The
-<code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
-<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> {
-
+<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code><a href="#rt-window-performance">window.performance</a> </code> 
+Attribute</h3>
+<pre class="idl">
+  [Supplemental]
+  interface <dfn id="nt-performance-interface">Performance</dfn> {
+  const unsigned short <a href="#perf-resource">PERF_RESOURCE</a> = 1;
+  
   const unsigned short <a href="#type-other">INITIATOR_OTHER</a> = 0;
   const unsigned short <a href="#type-link">INITIATOR_LINK</a> = 1;
   const unsigned short <a href="#type-css">INITIATOR_CSS</a> = 2;
@@ -420,9 +417,14 @@ in the</span>
   const unsigned short <a href="#type-audio">INITIATOR_AUDIO</a> = 9;
   const unsigned short <a href="#type-video">INITIATOR_VIDEO</a> = 10;
   const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 11;
+};
+</pre>
 
-  readonly attribute unsigned short <a href="#type" title="type">type</a>;
-  readonly attribute DOMString <a href="#url" title="url">url</a>;
+<h3><span class="secno">4.4 </span>The
+<code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
+
+<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> {
+  readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
   
   readonly attribute unsigned long long <a href="#resource-start" title="resourceStart">resourceStart</a>;
   readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
@@ -438,7 +440,22 @@ in the</span>
   readonly attribute unsigned long long <a href="#response-end" title="responseend">responseEnd</a>;
 };</pre>
 
-<h4 id="type-attribute"><code><dfn id="type">type</dfn></code> attribute</h4>
+<p>
+The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface participates in the 
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
+<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-entry">PerformanceEntry</a> interface:</p>
+
+<div class="parameters">
+    <p>
+    	The <code id="name-attribute">name</code> attribute must return the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the 
+    	requested resource. This attribute must not change even if the fetch redirected to a different URL.
+   	</p>
+    <p>The <code id="entryTye-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
+    <p>The <code id="startTime-attribute">startTime</code> attribute must return a timestamp with the same value as <a href="#resource-start">resourceStart</a>.</p>
+    <p>The <code id="duration-attribute">duration</code> attribute must return a timestamp equal to the difference between <a href="#responseEnd">responseEnd</a> and <a href="#startTime">startTime</a>, respectively.</p>
+</div>
+
+<h4 id="initiatorType-attribute"><code><dfn id="initiatorType">initiatorType</dfn></code> attribute</h4>
 
 <p>This attribute must return the type of object that initiated the request for the resource: </p>
 <dl>
@@ -455,14 +472,8 @@ in the</span>
   or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with an <code>&lt;audio&gt;</code> element. </dt> 
   <dt><dfn id="type-video">INITIATOR_VIDEO</dfn>: The initiator is the <code>src</code> or <code>poster</code> attribute of the <code>&lt;video&gt;</code> element 
   or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with a <code>&lt;video&gt;</code> element. </dt> 
-  <dt><dfn id="Dfn1">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element .</dt>
+  <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element .</dt>
 </dl>
-
-<h4 id="url-attribute"><code><dfn id="url">url</dfn></code> attribute</h4>
-
-<p>This attribute must return the resolved <a
-href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the
-requested resource. The attribute must not change even if the fetch redirected to a different URL.</p>
 
 <h4 id="resource-start-attribute"><code><dfn id="resource-start">resourceStart</dfn></code> attribute</h4>
 
@@ -628,24 +639,16 @@ receiving the last byte of the resource from from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
-<h3 id="performance-resource-timing-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
+<h3 id="performance-resource-timing-methods"><span class="secno">4.5 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
 [Supplemental]
 interface Performance {
   void clearResourceTimings();
-  PerformanceResourceTimingList getResourceTimings();
-  PerformanceResourceTimingList getResourceTimingsByURL(in DOMString url);
   void setResourceTimingBufferSize (in unsigned long maxSize);
 
   attribute Function onresourcetimingbufferfull;
 };</pre>
-<pre class="idl">
-interface PerformanceResourceTimingList{
-   readonly attribute unsigned long length;
-   PerformanceResourceTiming item(in unsigned long index);
-};
-</pre>
 
 <div class="methods">
     <h4 id="rt-clearResourceTimings"><code>clearResourceTimings</code> method</h4>
@@ -655,34 +658,6 @@ interface PerformanceResourceTimingList{
 		<div class="parameters">
 			<p><b>No parameters</b></p>
 			<p><b>No return value</b></p>
-			<p><b>No exceptions</b></p>
-		</div>
-</div>
-
-<div class="methods">
-	<h4 id="rt-getResourceTimings"><code>getResourceTimings</code> method</h4>
-	<p>The <code>getResourceTimings</code> interface retrieves an array of all <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources. 
-		<div class="parameters">
-			<p><b>No Parameters</b></p>
-			<p><b>Return Value</b></p>
-			<p><code>PerformanceResourceTimingList</code></p>
-			<p>A list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</p>
-			<p><b>No exceptions</b></p>
-		</div>
-</div>
-
-<div class="methods">
-	<h4 id="rt-getResourceTimingsByURL"><code>getResourceTimingsByURL</code> method</h4>
-	<p>The <code>getResourceTimingsByURL</code> interface retrieves an array of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources as identified by the url.</p>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			in <span class="style1">url</span> type of 
-			<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">
-			<span class="style2">DOMString</span></a>
-			<p>The id parameter specifies which resource timings to retrieve.</p>
-			<p><b>Return Value</b></p>
-			<p><code>PerformanceResourceTimingList</code></p>
-			<p>A list of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</p>
 			<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -710,20 +685,20 @@ interface PerformanceResourceTimingList{
     <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface until one of the following occurs:
     <ol>
 		<li>
-            <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> is called - The PerformanceResourceTimingList will begin with the
-            n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> 
-            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the PerformanceResourceTimingList
+            <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> is called - The <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
+            will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> 
+            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
             does not change unless otherwise specified by <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>.
         </li>
-		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The PerformanceResourceTimingList will extend and / or truncate to the buffer size specified.</li>
+		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a> will extend and / or truncate to the buffer size specified.</li>
 		<li>
             Neither <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> or
             <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onresourcetimingbufferfull callback
-            - no updates are made to the PerformanceResourceTimingList.</li>
+            - no updates are made to the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>.</li>
     </ol>
 </div>
 
-<h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>
+<h3 id="cross-origin-resources">4.6 Cross-origin Resources</h3>
     <p>
         Information from cross-origin resources must be included in the
         <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. In the absence of the
@@ -758,12 +733,12 @@ interface PerformanceResourceTimingList{
         </p>
     </div>
 
-<h3 id="vendor-prefixes">4.6 Vendor Prefixes</h3>
+<h3 id="vendor-prefixes">4.7 Vendor Prefixes</h3>
 
 <p>Vendor-specific proprietary user agent extensions to this specification are strongly discouraged. 
 If such extensions are needed, e.g. for experimental purposes, vendors must use the following extension mechanisms:</p>
 
-<p>If the extension to be added is an INITIATOR <a href="#type-attribute">type</a>, the INITIATOR <a href="#type-attribute">type</a> must:</p>
+<p>If the extension to be added is an INITIATOR <a href="#initiatorType-attribute">initiatorType</a>, the INITIATOR <a href="#initiatorType-attribute">initiatorType</a> must:</p>
 <ul>
     <li>Follow this naming convention: INITIATOR_[VENDORPREFIX]_[TYPE], where [VENDORPREFIX] is a name that identifies the vendor.</li>
     <li>Have a value in the range of 100 to 200.</li>
@@ -791,21 +766,23 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 
 <ol>
   <li>Once <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
-  the current document is created</a>, the user agent must create a <i>primary buffer</i> to store the list 
+  the current document is created</a>, the user agent must create a <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
+  <i>primary buffer</i> object to store the list 
   of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</li>
   <li>Set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
   by the user agent or set by the <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> method.
   </li>
   <li>For each resource fetched by the current browsing context, perform the following steps:
   <ol>
-      <li id="step-create-object">Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object.
+      <li id="step-create-object">Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object and 
+      set <a href="#entryType-attribute">entryType</a> to <a href="#perf-resource"><code>PERF_RESOURCE</code></a>.
       </li>      
       <li>Immediately before the user agent starts to queue the resource for retrieval,  
-       record the current time as <a href="#resource-start">resourceStart</a>.
+       record the current time in <a href="#resource-start">resourceStart</a> and <a href="#startTime-attribute">startTime</a>. 
       </li>
-      <li>Record the initiator of the resource in <a href="#type-attribute">type</a>.
+      <li>Record the initiator of the resource in <a href="#initiatorType-attribute">initiatorType</a>.
       </li>
-      <li>Record the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource in <a href="#url-attribute">url</a>.
+      <li>Record the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource in <a href="#name-attribute">name</a>.
       </li>
       <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
        <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, 
@@ -836,7 +813,8 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       <a href="#connect-end">connectEnd</a>, 
       <a href="#request-start">requestStart</a>, 
       <a href="#response-start">responseStart</a>,
-      and <a href="#response-end">responseEnd</a> to zero and abort the following steps. 
+      <a href="#response-end">responseEnd</a>,
+      and <a href="#duration-attribute">duration</a> to zero and abort the following steps. 
       </li>
         <li>Let <a href="#domainlookup-start">domainLookupStart</a>, 
        <a href="#domainlookup-end">domainLookupEnd</a>, 
@@ -893,6 +871,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
         <a href="#request-start">requestStart</a> should represent timing information collected over the re-open connection. </p>
         </div>
       </li>
+      <li>Record the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a> in <a href="#duration-attribute">duration</a>.</li>
       <li>If the fetched resource results in an HTTP redirect 
       <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
       <ol style="list-style-type:lower-alpha;"> 
@@ -909,7 +888,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
              PerformanceResourceTiming</a> object to 0 except 
              <a href="#resource-start">resourceStart</a>, 
              <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end">
-             redirectEnd</a>, <a href="#type-attribute">type</a> and <a href="#url-attribute">url</a>.
+             redirectEnd</a>, <a href="#initiatorType-attribute">initiatorType</a> and <a href="#url-attribute">url</a>.
             </li>
             <li>Return to step <a href="#step-fetch-start">3.5</a> with the new resource.
             </li>
