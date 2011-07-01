@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-may-27-2011">Editor's Draft May 27th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-july-1-2011">Editor's Draft July 1st, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -144,6 +144,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
       <li><a href="#sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</a></li>
       <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
+	  <li><a href="#sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -302,7 +303,6 @@ interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
   const DOMString <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = "hidden";
   const DOMString <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = "visible";
   const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
-  const DOMString <a href="#pv-page-prerender" title="pageprerender">PAGE_PRERENDER</a> = "prerender";
             
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
   readonly attribute unsigned short <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
@@ -379,11 +379,6 @@ is not minimized but is fully obscured by other applications.</p>
 is not visible at all and a preview of the the <a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is 
  visible.</p>
 
-<h5><code><dfn id="pv-page-prerender">document.PAGE_PRERENDER</dfn></code></h5>
-<p>This attribute is optional. This attribute may return <code>document.PAGE_PRERENDER</code> if the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#document">Document</a> is prerendered 
-by being loaded off-screen and not visibly shown by the User Agent.</p>
-
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
@@ -392,6 +387,22 @@ The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> eve
 addEventListener on document. This event will get fired on the first change in 
 <code>document.visibilityState</code> after registration; it will not get fired on 
 registration.</p>
+
+<h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
+
+<p>If a vendor-specific proprietary user agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute
+ is needed for an experimental visibility state, vendors must use the following convention:</p>
+ 
+<code>const DOMString [VENDORPREFIX]_PAGE_[NAME] = "[vendorprefix]-[name]";</code>
+
+<p>Where,</p>
+<ul>
+	<li><code>[VENDORPREFIX]</code> is a capitalized name that identifies the vendor,</li>
+	<li><code>[NAME]</code> is a capitalized name given to the visibility state,</li>
+	<li><code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,</li>
+	<li><code>[name]</code> is a non-capitalized name given to the visibility state.</li>
+</ul>
+
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
