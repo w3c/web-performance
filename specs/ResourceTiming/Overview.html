@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-july-30th-2011">Working Draft July 30th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-july-1-2011">Working Draft July 1st, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -423,7 +423,7 @@ Attribute</h3>
 <h3><span class="secno">4.4 </span>The
 <code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
-<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> {
+<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
   readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
   
   readonly attribute unsigned long long <a href="#resource-start" title="resourceStart">resourceStart</a>;
@@ -450,9 +450,9 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
     	The <code id="name-attribute">name</code> attribute must return the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the 
     	requested resource. This attribute must not change even if the fetch redirected to a different URL.
    	</p>
-    <p>The <code id="entryTye-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
+    <p>The <code id="entryType-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
     <p>The <code id="startTime-attribute">startTime</code> attribute must return a timestamp with the same value as <a href="#resource-start">resourceStart</a>.</p>
-    <p>The <code id="duration-attribute">duration</code> attribute must return a timestamp equal to the difference between <a href="#responseEnd">responseEnd</a> and <a href="#startTime">startTime</a>, respectively.</p>
+    <p>The <code id="duration-attribute">duration</code> attribute must return a timestamp equal to the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
 </div>
 
 <h4 id="initiatorType-attribute"><code><dfn id="initiatorType">initiatorType</dfn></code> attribute</h4>
