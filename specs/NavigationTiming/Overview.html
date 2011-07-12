@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-july-1-2011">Editor's Draft July 1st, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-july-12-2011">Editor's Draft July 12th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/1162150cfd21/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1162150cfd21/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1abe407a9c5c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1abe407a9c5c/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -168,7 +168,9 @@ cite this document as other than work in progress. </p>
 
 <p>
 User latency is an important quality benchmark for Web Applications. While
-JavaScript-based mechanisms can provide comprehensive instrumentation for
+JavaScript-based mechanisms, such as the one described in 
+<a href="#JSMeasure">[JSMEASURE]</a>, can
+provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
 unable to provide a complete end-to-end latency picture. 
 </p>
@@ -983,7 +985,7 @@ non-normative intervals between timings.</p>
         set <a href="#nt-redirect-start">redirectStart</a>,
         <a href="#nt-redirect-end">redirectEnd</a>,
         <a href="#nt-unload-start">unloadEventStart</a>,
-        <a href="#nt-unload-end">unloadEventStart</a> and 
+        <a href="#nt-unload-end">unloadEventEnd</a> and 
         <a href="#nt-navigation-info-redirect-count">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">6</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
@@ -1149,6 +1151,8 @@ relying on the interface described in this work would break.</p>
 	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
 <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
 <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, January 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
+<dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
 </dl>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
