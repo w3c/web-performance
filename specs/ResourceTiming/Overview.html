@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-july-1-2011">Working Draft July 1st, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-july-27-2011">Working Draft July 27, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -178,7 +178,7 @@ cite this document as other than work in progress. </p>
 User latency is an important quality benchmark for Web Applications. While
 JavaScript-based mechanisms can provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
-unable to provide a complete end-to-end latency picture. While Navigation Timing <a href="#NavigationTiming">[NavigationTiming]</a> address
+unable to provide a complete end-to-end latency picture. While Navigation Timing <a href="#NavigationTiming">[NavigationTiming]</a> addresses
 part of the problem by providing timing information associated with a
 navigation, this document introduces the <a href="#resource-timing">ResourceTiming</a>
 interface to allow Javascript mechanisms to collect complete timing
@@ -256,7 +256,7 @@ with the <a href="#performance-resource-timing">PerformanceResourceTiming</a> in
            {
               if (resourceList[i].initiatorType == window.performance.INITIATOR_IMAGE) 
               {
-                 alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].resourceStart);
+                 alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].startTime);
               }
            }
        }
@@ -401,8 +401,7 @@ in the</span>
 <h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code><a href="#rt-window-performance">window.performance</a> </code> 
 Attribute</h3>
 <pre class="idl">
-  [Supplemental]
-  interface <dfn id="nt-performance-interface">Performance</dfn> {
+  partial interface <dfn id="nt-performance-interface">Performance</dfn> {
   const unsigned short <a href="#perf-resource">PERF_RESOURCE</a> = 1;
   
   const unsigned short <a href="#type-other">INITIATOR_OTHER</a> = 0;
@@ -423,10 +422,9 @@ Attribute</h3>
 <h3><span class="secno">4.4 </span>The
 <code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
-<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
+<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
   readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
   
-  readonly attribute unsigned long long <a href="#resource-start" title="resourceStart">resourceStart</a>;
   readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
   readonly attribute unsigned long long <a href="#redirect-end" title="redirectend">redirectEnd</a>;
   readonly attribute unsigned long long <a href="#fetch-start" title="fetchstart">fetchStart</a>;
@@ -442,8 +440,8 @@ Attribute</h3>
 
 <p>
 The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface participates in the 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
-<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-entry">PerformanceEntry</a> interface:</p>
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
+<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-entry">PerformanceEntry</a> interface:</p>
 
 <div class="parameters">
     <p>
@@ -451,7 +449,12 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
     	requested resource. This attribute must not change even if the fetch redirected to a different URL.
    	</p>
     <p>The <code id="entryType-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
-    <p>The <code id="startTime-attribute">startTime</code> attribute must return a timestamp with the same value as <a href="#resource-start">resourceStart</a>.</p>
+    <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for fetching.
+       If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
+       when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
+       document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
+       return the same value as <a href="#fetch-start">fetchStart</a>.
+    </p>
     <p>The <code id="duration-attribute">duration</code> attribute must return a timestamp equal to the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
 </div>
 
@@ -474,14 +477,6 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
   or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with a <code>&lt;video&gt;</code> element. </dt> 
   <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element .</dt>
 </dl>
-
-<h4 id="resource-start-attribute"><code><dfn id="resource-start">resourceStart</dfn></code> attribute</h4>
-
-<p>This attribute must return the time immediately before the user agent starts to queue the resource for fetching.
-If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
-when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
-document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
-return the same value as <a href="#fetch-start">fetchStart</a>.</p>
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
 
@@ -642,8 +637,7 @@ application caches</a> or from local resources.</p>
 <h3 id="performance-resource-timing-methods"><span class="secno">4.5 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
-[Supplemental]
-interface Performance {
+partial interface Performance {
   void clearResourceTimings();
   void setResourceTimingBufferSize (in unsigned long maxSize);
 
@@ -778,7 +772,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       set <a href="#entryType-attribute">entryType</a> to <a href="#perf-resource"><code>PERF_RESOURCE</code></a>.
       </li>      
       <li>Immediately before the user agent starts to queue the resource for retrieval,  
-       record the current time in <a href="#resource-start">resourceStart</a> and <a href="#startTime-attribute">startTime</a>. 
+       record the current time in <a href="#startTime-attribute">startTime</a>. 
       </li>
       <li>Record the initiator of the resource in <a href="#initiatorType-attribute">initiatorType</a>.
       </li>
@@ -886,7 +880,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
             </li>
             <li>Set all the attributes in the <a href="#performance-resource-timing">
              PerformanceResourceTiming</a> object to 0 except 
-             <a href="#resource-start">resourceStart</a>, 
+             <a href="#startTime-attribute">startTime</a>, 
              <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end">
              redirectEnd</a>, <a href="#initiatorType-attribute">initiatorType</a> and <a href="#url-attribute">url</a>.
             </li>
@@ -946,7 +940,7 @@ limit the access to the ResourceTiming interface, the <a
 href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>
 policy is enforced by default. Additionally, resource providers can
 explicitely allow timing information to be collected over a resource by
-adding the allow-timing meta tag to the HTML header, which specifies the
+adding the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the
 domains that are allowed to access the timing information. </p>
 
 <h2 id="security"><span class="secno">7 </span>Security</h2>
