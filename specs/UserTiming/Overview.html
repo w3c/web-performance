@@ -41,7 +41,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="working-draft-july-1-2011">Working Draft July 1st, 2011</h2>
+    <h2 class="no-num no-toc" id="working-draft-july271-2011">Working Draft July 27, 2011</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -229,8 +229,7 @@ cite this document as other than work in progress. </p>
     <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
 
     <pre class="idl">
-  [Supplemental]
-  interface <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-window.performance-attribute">Performance</a> {
+  partial interface <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-window.performance-attribute">Performance</a> {
     const unsigned short PERF_DEVELOPER_MARK = 2;
     const unsigned short PERF_DEVELOPER_MEASURE = 3;
 
@@ -401,6 +400,8 @@ cite this document as other than work in progress. </p>
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the start mark or end mark does not exist.</p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the duration (the end mark timestamp minus the start mark timestamp) is negative.</p>
+        <p>Throws a <code>SYNTAX_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
+               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> attribute with a timestamp value of 0.</p>
     </div>
   </div>
 
@@ -452,7 +453,7 @@ cite this document as other than work in progress. </p>
     <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code><a href="#performancemark">PerformanceMark</a></code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
   }
     </pre>
 
@@ -460,9 +461,9 @@ cite this document as other than work in progress. </p>
     	The <a href="#performancemark">PerformanceMark</a> interface also 
 		exposes marks created via the <code><a href="#ut-mark">mark()</a></code> 
 		method to the 
-    	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">
+    	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
 		Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
-		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntry-interface">
+		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
@@ -477,16 +478,16 @@ cite this document as other than work in progress. </p>
     <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code><a href="#performancemeasure">PerformanceMeasure</a></code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
   }
     </pre>
     
 	<p>
     	The <a href="#performancemeasure">PerformanceMeasure</a> interface also 
 		exposes measures created via the <code><a href="#ut-measure">measure()</a></code> 
-		method to the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-performance-timeline">
+		method to the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
 		Performance Timeline</a>. The <a href="#performancemeasure">
-		PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntry-interface">
+		PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
