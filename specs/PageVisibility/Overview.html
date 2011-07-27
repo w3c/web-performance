@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
@@ -305,7 +305,7 @@ interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
   const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
             
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
-  readonly attribute unsigned short <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
+  readonly attribute unsigned DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
 };
 Document implements DocumentVisibility;
 </pre>
