@@ -1,0 +1,463 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <title>Performance Timeline</title>
+<style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Performance Timeline</h1>
+
+<h2 class="no-num no-toc" id="working-draft-july-27-2011">Editor's Draft July 27, 2011</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
+  <dt>Previous versions:</dt>
+    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/PerformanceTimeline/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span> (<span
+      class="org">Microsoft Corp.</span>) &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
+      class="org">Google Inc.</span>) &lt;<a
+      class="email" href="mailto:zhihengw@google.com">zhihengw@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
+    of Technology">MIT</acronym></a>, <a
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an interface for web applications to access
+timing information related to navigation and elements. </p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=[PerformanceTimeline]%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[PerformanceTimeline]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
+   rel="disclosure">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Performance Timeline</a> 
+    <ol class="toc">
+      <li><a href="#sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</a></li>
+      <li><a href="#sec-PerformanceEntry-interface"><span class="secno">4.2 </span>The <code>PerformanceEntry</code> interface</a></li>
+      <li><a href="#sec-PerformanceEntryList-interface"><span class="secno">4.3 </span>The <code>PerformanceEntryList</code> interface</a></li>
+      <li><a href="#sec-window.performance-attribute"><span class="secno">4.4 </span> The <code>window.performance</code> attribute</a></li>
+      <li><a href="#sec-PerformanceTiming"><span class="secno">4.5 </span> The <code>PerformanceTiming</code> interface</a></li>
+    </ol>
+  </li>
+  <li><a href="#references"><span class="secno">5 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+This specification introduces a unified interface to store and retrieve performance metric data.
+This specification does not cover individual performance metric interfaces.
+</p>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>The term DOM is used to refer to the API set made available to scripts in
+Web applications, and does not necessarily imply the existence of an actual
+<code>Document</code> object or of any other <code>Node</code> objects as
+defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
+
+<p>A DOM attribute is said to be <em>getting</em> when its value is being
+retrieved (such as by author script), and is said to be <em>setting</em> when
+a new value is assigned to it. </p>
+
+<p>The term "JavaScript" is used to refer to
+<a href="#ECMA262">ECMA-262</a>,
+rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
+
+<p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+
+<h2 id="sec-navigation-timing"><span class="secno">4 </span>Performance Timeline</h2>
+
+<h3 id="sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</h3>
+<p>
+	All interfaces that participate in the <a href="#sec-performance-timeline">Performance Timeline</a>, such as the 
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html#performance-resource-timing">PerformanceResourceTiming</a>, 
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#the-performancemark-interface">PerformanceMark</a>, and
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#the-performancemeasure-interface">PerformanceMeasure</a> interfaces,
+	must adhere to the following rules:
+</p>
+
+<ul>
+	<li>Must extend the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface</li>
+	<li>Must support the 
+		<a href="#getEntries-method"><code>getEntries</code></a>,
+		<a href="#getEntriesByType-method"><code>getEntriesByType</code></a>, and
+		<a href="#getEntriesByName-method"><code>getEntriesByName</code></a> methods
+	</li>
+
+	<li>
+		Must expose a metric name on <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-window-performance">window.performance</a> 
+		like so: 
+	
+		<p><code>const unsigned short PERF_[METRIC] = [VALUE]</code>,</p>
+		<p>where <code>[METRIC]</code> is the metric name and <code>[VALUE]</code>
+		is a unique unsigned short that has not been already taken by another metric name.</p>
+	</li>
+
+</ul>	
+
+<h3 id="sec-PerformanceEntry-interface"><span class="secno">4.2 </span> The <code><a href="#pt-performanceEntry-interface">PerformanceEntry</a> </code> 
+interface</h3>
+<pre class="idl">interface <dfn id="pt-performanceEntry-interface">PerformanceEntry</dfn> {
+  readonly attribute DOMString name;
+  readonly attribute unsigned long long startTime;
+  readonly attribute unsigned short entryType;
+  readonly attribute unsigned long long duration;
+};
+</pre>
+
+<h4 id="performanceEntry-name"><code>name</code> attribute</h4>
+<p>
+	The <code>name</code> attribute must return the identifier for this <a href="#pt-performanceEntry-interface">PerformanceEntry</a> object. This
+	identifier does not have to be unique. 
+</p>
+
+<h4 id="performanceEntry-startTime"><code>startTime</code> attribute</h4>
+<p>
+	The <code>startTime</code> attribute must return the first recorded timestamp
+	of this performance metric.
+<p>
+
+<h4 id="performanceEntry-entryType"><code>entryType</code> attribute</h4>
+<p>
+	The <code>entryType</code> attribute must return a const unsigned short exposed on <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-window-performance">window.performance</a> 
+    that defines the <i>type</i> of the interface represented by this <a href="#pt-performanceEntry-interface">PerformanceEntry</a> object.
+	
+</p>
+
+<h4 id="performanceEntry-duration"><code>duration</code> attribute</h4>
+<p>
+	The <code>duration</code> attribute must return the duration of the entire event being recorded by this <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a>. Typically, this would be the 
+	time difference between the last recorded timestamp and the first recorded timestamp of this <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a>. A performance metric may choose
+	to return a <code>duration</code> of 0, if the duration concept doesn't apply.
+<p>
+
+
+<h3 id="sec-PerformanceEntryList-interface"><span class="secno">4.3 </span> The <code><a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> </code> 
+interface</h3>
+<pre class="idl">interface <dfn id="pt-performanceEntryList-interface">PerformanceEntryList</dfn> {
+  readonly attribute unsigned long length;
+  PerformanceEntry item(in unsigned long index);
+};
+</pre>
+
+<p>
+	The <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> interface defines an array of <a href="#pt-performanceEntry-interface">PerformanceEntry</a> objects.
+</p>
+
+<h4 id="length-attribute"><code>length</code> attribute</h4>
+<p>
+ The <code>length</code> attribute must return the number of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in the 
+ <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>. 
+<p>
+
+<div class="methods">
+    <h4 id="item-method"><code>item</code> method</h4>
+	<p>The <code>item</code> method retrieves the
+		<a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.  
+    </p>
+	<div class="parameters">
+			<ul>
+				<p><b>Parameter</b></p>
+                <p>in unsigned long <code>index</code></p>
+                <p>This method retrieves the
+		           <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location 
+                   <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.
+                </p>
+				<p><b>Return value</b></p>
+				A <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object.
+				<p><b>Exceptions</b></p>
+                <p>Throws an <code>INDEX_SIZE_ERR</code> exception if the <code>index</code> argument is negative, or greater than <a href="#length-attribute"><code>length</code></a>.</p>
+			</ul>
+		</div>
+</div>
+
+<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#pt-window-performance">window.performance</a> </code> 
+attribute</h3>
+<pre class="idl">interface <dfn id="pt-performance-interface">Performance</dfn> {
+  <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntries-method">getEntries</a>();
+  <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntriesByType-method">getEntriesByType</a>(in unsigned short entryType);
+  <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntriesByName-method">getEntriesByName</a>(in DOMString name, in optional unsigned short entryType);
+};
+
+</pre>
+
+<p>
+	The <a href="#pt-window-performance">window.performance</a> attribute provides a hosting area for performance measurement related attributes and methods. 
+</p>
+
+<div class="methods">
+    <h4 id="getEntries-method"><code>getEntries</code> method</h4>
+	<p>The <code>getEntries</code> method retrieves a 
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order.
+    </p>
+
+		<div class="parameters">
+			<ul>
+				<p><b>No parameters</b></p>
+				<p><b>Return value</b></p>
+				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
+				<p><b>No exceptions</b></p>
+			</ul>
+		</div>
+</div>
+
+
+<div class="methods">
+    <h4 id="getEntriesByType-method"><code>getEntriesByType</code> method</h4>
+	<p>The <code>getEntriesByType</code> method retrieves a 
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order, 
+		that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
+    </p>
+
+		<div class="parameters">
+			<ul>
+				<p><b>Parameter</b></p>
+					<p>in unsigned short <code>entryType</code></p>
+					<p>
+						The <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>
+						must be empty.
+					</p>
+				<p><b>Return value</b></p>
+				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
+				<p><b>No exceptions</b></p>
+			</ul>
+		</div>
+</div>
+
+<div class="methods">
+    <h4 id="getEntriesByName-method"><code>getEntriesByName</code> method</h4>
+	<p>
+		The <code>getEntriesByName</code> method retrieves a
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order, 
+		that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter 
+		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
+    </p>
+		<div class="parameters">
+			<ul>
+				<p><b>Parameter</b></p>
+					<p>in DOMString <code>name</code></p>
+					<p>
+						The <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> must be empty.
+					</p>
+					<p>in optional unsigned short <code>entryType</code></p>
+					<p>
+						The <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> must only contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter 
+						and have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>
+						must be empty.
+					</p>
+				<p><b>Return value</b></p>
+				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
+				<p><b>No exceptions</b></p>
+			</ul>
+		</div>
+</div>
+
+
+<h3 id="sec-PerformanceTiming"><span class="secno">4.5 </span> The <code><a href="#pt-performanceTiming">PerformanceTiming</a> </code> 
+interface</h3>
+
+<p>The <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performance-timing">PerformanceTiming</a> interface does not extend 
+the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface. However, when the <a href="#getEntriesByType-method">getEntriesByType</a> and
+<a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#perf-navigation"><code>PERF_NAVIGATION</code></a>,
+a <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> with a <a href="#sec-performance-entry">PerformanceEntry</a> object with the following values must be returned:
+</p>
+
+<div class="parameters">
+    <p>The <code>name</code> attribute will return the "document" DOMString.</p>
+    <p>The <code>entryType</code> attribute will return <code id="perf-navigation">PERF_NAVIGATION</code>.</p>
+    <p>The <code id="timing-startTime">startTime</code> attribute will return a timestamp with the same value as <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#navigation-start">navigationStart</a>.</p>
+    <p>The <code>duration</code> attribute will return a timestamp equal to the difference between <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-load-end">loadEventEnd</a> and <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#navigation-start">navigationStart</a>, respectively.</p>
+</div>
+
+
+
+<h2 id="references"><span class="secno">5 </span>References</h2>
+
+<dl id='references-list'>
+<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
+<dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
+</dd>
+<dt><a name='rfc2616' id='rfc2616'>[IETF RFC 2616]</a></dt>
+<dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
+</dd>
+<dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+<dd>
+        <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+        Specification</a></cite>, A. Le Hors, et al., Editors. World
+        Wide Web Consortium, 7 April 2004. This version of the Document
+        Object Model Level 3 Core Recommendation is
+        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
+        DOM Level 3 Core</a> is available at
+        http://www.w3.org/TR/DOM-Level-3-Core.
+      </dd>
+<dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt><dd>
+	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+	Edition. ECMA International, Standard
+	ECMA-262, December 2009. This version of the ECMAScript
+	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+<dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, January 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
+<dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+<p>I would like to offer my sincere thanks to all the people that I have been
+in touch with regarding this draft for their reviews and feedback.</p>
+</body>
+</html>
