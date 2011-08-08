@@ -177,7 +177,7 @@ cite this document as other than work in progress. </p>
     "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
     are to be interpreted as described in RFC2119. For readability, these words
     do not appear in all uppercase letters in this specification. <a
-    href="http://www.ietf.org/rfc/rfc2119.txt">[RFC2119]</a>
+    href="#rfc2119">[RFC2119]</a>
     </p>
 
     <p>Requirements phrased in the imperative as part of algorithms (such as
@@ -456,7 +456,7 @@ cite this document as other than work in progress. </p>
     <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">PerformanceEntry</a> {
   }
     </pre>
 
@@ -529,9 +529,13 @@ cite this document as other than work in progress. </p>
 <h2 class="no-num" id=references>References</h2>
 
 <dl>
+<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
+<dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
+</dd>
     <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
     <dd>
-     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
      Specification</a></cite>, A. Le Hors, et al., Editors. World
      Wide Web Consortium, 7 April 2004. This version of the Document
      Object Model Level 3 Core Recommendation is
@@ -545,17 +549,17 @@ cite this document as other than work in progress. </p>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
      Edition. ECMA International, Standard
      ECMA-262, December 2009. This version of the ECMAScript
-     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+     Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
     </dd>
 
    <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from <a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>http://www.w3.org/TR/2011/CR-navigation-timing-20110602/</a>. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a>. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
+   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
 
    <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from <a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>http://www.w3.org/TR/2011/WD-WebIDL-20110712/</a>. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
 </dl>
 
