@@ -322,7 +322,7 @@ interface</h3>
 		</div>
 </div>
 
-<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#pt-window-performance">window.performance</a> </code> 
+<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code id="pt-window-performance">window.performance</code> 
 attribute</h3>
 <pre class="idl">interface <dfn id="pt-performance-interface">Performance</dfn> {
   <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntries-method">getEntries</a>();
@@ -404,13 +404,13 @@ attribute</h3>
 </div>
 
 
-<h3 id="sec-PerformanceTiming"><span class="secno">4.5 </span> The <code><a href="#pt-performanceTiming">PerformanceTiming</a> </code> 
+<h3 id="sec-PerformanceTiming"><span class="secno">4.5 </span> The <code>PerformanceTiming</code> 
 interface</h3>
 
 <p>The <a href="http://www.w3.org/TR/navigation-timing/#performance-timing">PerformanceTiming</a> interface does not extend 
 the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface. However, when the <a href="#getEntriesByType-method">getEntriesByType</a> and
 <a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <a href="http://www.w3.org/TR/navigation-timing/#perf-navigation"><code>PERF_NAVIGATION</code></a>,
-a <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> with a <a href="#sec-performance-entry">PerformanceEntry</a> object with the following values must be returned:
+a <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> with a <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object with the following values must be returned:
 </p>
 
 <div class="parameters">
