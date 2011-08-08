@@ -29,6 +29,9 @@
    table thead { border-bottom:solid }
    table tbody th:first-child { border-left:solid }
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+   div.parameters { display:block; margin-left: 25px;}
+   div.parameterDefinition { display:block; margin-left: 25px;}
+   div.methods { display:block; margin-top:30px; margin-left :25px;}
   </style>
   <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
 </head>
@@ -306,18 +309,16 @@ interface</h3>
 		<a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.  
     </p>
 	<div class="parameters">
-			<ul>
 				<p><b>Parameter</b></p>
-                <p>in unsigned long <code>index</code></p>
+				<p>in unsigned long <code>index</code></p>
                 <p>This method retrieves the
 		           <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location 
                    <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.
                 </p>
 				<p><b>Return value</b></p>
-				A <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object.
+				<p>A <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object.</p>
 				<p><b>Exceptions</b></p>
-                <p>Throws an <code>INDEX_SIZE_ERR</code> exception if the <code>index</code> argument is negative, or greater than <a href="#length-attribute"><code>length</code></a>.</p>
-			</ul>
+				<p>Throws an <code>INDEX_SIZE_ERR</code> exception if the <code>index</code> argument is negative, or greater than <a href="#length-attribute"><code>length</code></a>.</p>
 		</div>
 </div>
 
@@ -342,12 +343,10 @@ attribute</h3>
     </p>
 
 		<div class="parameters">
-			<ul>
 				<p><b>No parameters</b></p>
 				<p><b>Return value</b></p>
 				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
-			</ul>
 		</div>
 </div>
 
@@ -360,7 +359,6 @@ attribute</h3>
     </p>
 
 		<div class="parameters">
-			<ul>
 				<p><b>Parameter</b></p>
 					<p>in unsigned short <code>entryType</code></p>
 					<p>
@@ -372,7 +370,6 @@ attribute</h3>
 				<p><b>Return value</b></p>
 				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
-			</ul>
 		</div>
 </div>
 
@@ -385,7 +382,6 @@ attribute</h3>
 		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
 		<div class="parameters">
-			<ul>
 				<p><b>Parameter</b></p>
 					<p>in DOMString <code>name</code></p>
 					<p>
@@ -404,7 +400,6 @@ attribute</h3>
 				<p><b>Return value</b></p>
 				A <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
-			</ul>
 		</div>
 </div>
 
