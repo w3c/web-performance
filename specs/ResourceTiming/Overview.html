@@ -402,7 +402,7 @@ in the</span>
     can be called to request a change to this limit.
 </p>
 
-<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code><a href="#rt-window-performance">window.performance</a> </code> 
+<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code>window.performance</code> 
 Attribute</h3>
 <pre class="idl">
   partial interface <dfn id="nt-performance-interface">Performance</dfn> {
@@ -885,20 +885,20 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
             <li>Set all the attributes in the <a href="#performance-resource-timing">
              PerformanceResourceTiming</a> object to 0 except 
              <a href="#startTime-attribute">startTime</a>, 
-             <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end">
-             redirectEnd</a>, <a href="#initiatorType-attribute">initiatorType</a> and <a href="#url-attribute">url</a>.
+             <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end"> and
+             redirectEnd</a>, <a href="#initiatorType-attribute">initiatorType</a>.
             </li>
             <li>Return to step <a href="#step-fetch-start">3.5</a> with the new resource.
             </li>
         </ol>
       </li>
-      <li>If the <i>primary buffer</i> is full, the callback <a href="#rt-onbufferfull"><code>onresourcetimingbufferfull</code></a> 
+      <li>If the <i>primary buffer</i> is full, the callback <a href="#rt-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> 
           must be triggered.<ol>
             <li>Create a <i>temporary buffer</i> of <a href="#performance-resource-timing">PerformanceResourceTiming</a> objects.
             </li>
             <li>Add the current resource to the <i>temporary buffer</i>.
             </li>
-            <li>If there are additional resources that are collected during the <a href="#rt-onbufferfull"><code>onresourcetimingbufferfull</code></a>
+            <li>If there are additional resources that are collected during the <a href="#rt-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a>
             callback, add them to the <i>temporary buffer</i>.
             </li>
             <li>
