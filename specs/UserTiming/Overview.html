@@ -48,7 +48,7 @@
       <dt>Latest version:</dt>
         <dd><a href="https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
-        <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
+        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>
         <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
@@ -84,6 +84,7 @@
     rules apply.</p>
 
 </div>
+<div class='body'>
 <hr class='top'>
 
     <h2 class="no-num no-toc" id="abstract">Abstract</h2>
@@ -435,7 +436,7 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-clearmeasures"><code>clearMeasures</code> method</h4>
+    <h4 id="ut-clearMeasures"><code>clearMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated durations.</p>
     <p>If the <em>measureName</em> argument is specified, this method removes all durations for the given measure name.</p>
     <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
@@ -452,7 +453,7 @@ cite this document as other than work in progress. </p>
     </div>
   </div>
 
-    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code><a href="#performancemark">PerformanceMark</a></code> Interface</h3>
+    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</h3>
 
     <pre class="idl">
   interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
@@ -460,12 +461,12 @@ cite this document as other than work in progress. </p>
     </pre>
 
     <p>
-    	The <a href="#performancemark">PerformanceMark</a> interface also 
+    	The <a href="#the-performancemark-interface">PerformanceMark</a> interface also 
 		exposes marks created via the <code><a href="#ut-mark">mark()</a></code> 
 		method to the 
     	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
-		Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
-		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
+		Performance Timeline</a>. The <a href="#the-performancemark-interface">PerformanceMark</a> 
+		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
@@ -480,7 +481,7 @@ cite this document as other than work in progress. </p>
     <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">PerformanceEntry</a> {
   }
     </pre>
     
@@ -488,7 +489,7 @@ cite this document as other than work in progress. </p>
     	The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface also 
 		exposes measures created via the <code><a href="#ut-measure">measure()</a></code> 
 		method to the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
-		Performance Timeline</a>. The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
+		Performance Timeline</a>. The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
