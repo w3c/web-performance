@@ -294,6 +294,10 @@ implemented in any manner, so long as the end result is equivalent. (In
 particular, the algorithms defined in this specification are intended to be
 easy to follow, and not intended to be performant.) </p>
 
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
 <p>The construction "a <code title="">Foo</code> object", where <code
@@ -422,7 +426,7 @@ Attribute</h3>
 <h3><span class="secno">4.4 </span>The
 <code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
-<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
+<pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> {
   readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
   
   readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
@@ -440,8 +444,8 @@ Attribute</h3>
 
 <p>
 The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface participates in the 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
-<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-entry">PerformanceEntry</a> interface:</p>
+	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
+<a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> interface:</p>
 
 <div class="parameters">
     <p>
@@ -450,7 +454,7 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
    	</p>
     <p>The <code id="entryType-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
     <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for fetching.
-       If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
+       If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
        when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
        document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
        return the same value as <a href="#fetch-start">fetchStart</a>.
@@ -480,11 +484,11 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
 
-<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
 this attribute must return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.</p>
 
-<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
 and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must
 return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.
@@ -492,11 +496,11 @@ Otherwise, this attribute must return zero. </p>
 
 <h4 id="redirect-end-attribute"><code><dfn id="redirect-end">redirectEnd</dfn></code> attribute</h4>
 
-<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
 this attribute must return the time immediately after receiving the last byte of the response of the last redirect.</p>
 
-<p>If there are HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
 and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must return the 
 time immediately after receiving the last byte of the response of the last redirect.
@@ -515,7 +519,7 @@ id="domainlookup-start">domainLookupStart</dfn></code> attribute</h4>
 the domain name lookup for the resource.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource
-is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+is retrieved from <a href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the same
 value as <a href="#fetch-start">fetchStart</a>. </p>
 
@@ -530,7 +534,7 @@ zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP resp
 the domain name lookup for the resource.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource
-is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+is retrieved from <a href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the same
 value as <a href="#fetch-start">fetchStart</a>. </p>
 
@@ -549,7 +553,7 @@ zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP resp
 establishing the connection to the server to retrieve the resource.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
-href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return value of
 <a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
@@ -565,7 +569,7 @@ id="connect-end">connectEnd</dfn></code> attribute </h4>
 establishing the connection to the server to retrieve the resource.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the resource is retrieved from <a
-href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or local resources, this attribute must return the value of
 <a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
@@ -602,7 +606,7 @@ zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP resp
 
 <p>This attribute must return the time immediately before the user agent
 starts requesting the resource from the server, or from
-<a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+<a href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">
 relevant application caches</a> or from local resources.</p>
 
 <p>If the transport connection fails after a request is sent and the user
@@ -679,16 +683,16 @@ partial interface Performance {
     <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface until one of the following occurs:
     <ol>
 		<li>
-            <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> is called - The <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
+            <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> is called - The <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a>
             will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> 
-            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
+            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a>
             does not change unless otherwise specified by <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a>.
         </li>
-		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a> will extend and / or truncate to the buffer size specified.</li>
+		<li><a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called - The <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a> will extend and / or truncate to the buffer size specified.</li>
 		<li>
             Neither <a href="#rt-clearResourceTimings"><code>clearResourceTimings</code></a> or
             <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onresourcetimingbufferfull callback
-            - no updates are made to the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>.</li>
+            - no updates are made to the <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a>.</li>
     </ol>
 </div>
 
@@ -760,7 +764,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 
 <ol>
   <li>Once <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
-  the current document is created</a>, the user agent must create a <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-performanceEntryList-interface">PerformanceEntryList</a>
+  the current document is created</a>, the user agent must create a <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a>
   <i>primary buffer</i> object to store the list 
   of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</li>
   <li>Set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
@@ -779,10 +783,10 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       <li>Record the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource in <a href="#name-attribute">name</a>.
       </li>
       <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
-       <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, 
-       immediately before a user agent checks with the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+       <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, 
+       immediately before a user agent checks with the <a href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">
        relevant application caches</a>, record the current time as <a href="#fetch-start">fetchStart</a>. Otherwise, immediately 
-       before a user agent starts the <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources"> 
+       before a user agent starts the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetching-resources"> 
        fetching process</a>, record the current time as <a href="#fetch-start">
        fetchStart</a>. Let 
      <a href="#domainlookup-start">domainLookupStart</a>,
@@ -815,7 +819,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
        <a href="#connect-start">connectStart</a> and 
        <a href="#connect-end">connectEnd</a> be the same value as 
        <a href="#fetch-start">fetchStart</a>.</li>
-      <li>If the resource is fetched from the <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+      <li>If the resource is fetched from the <a href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">
        relevant application cache</a> or local resources, including the <a
        href="http://www.ietf.org/rfc/rfc2616.txt">HTTP</a> cache,
      go to step <a href="#step-request-start">3.15</a>.
@@ -867,10 +871,10 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       </li>
       <li>Record the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a> in <a href="#duration-attribute">duration</a>.</li>
       <li>If the fetched resource results in an HTTP redirect 
-      <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
+      <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
       <ol style="list-style-type:lower-alpha;"> 
             <li>If the current resource and the resource that is redirected to are not from the 
-             <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>, set <a href="#redirect-start">
+             <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>, set <a href="#redirect-start">
              redirectStart</a> and <a href="#redirect-end">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
              3.5</a> with the new resource.
 	        </li>
@@ -937,7 +941,7 @@ from the beginning of the navigation.
 process, the <a href="#performance-resource-timing">ResourceTiming</a> interface potentially
 exposes such information to any page that has this resource included. To
 limit the access to the ResourceTiming interface, the <a
-href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>
+href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>
 policy is enforced by default. Additionally, resource providers can
 explicitely allow timing information to be collected over a resource by
 adding the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the
@@ -962,20 +966,20 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dd>
     <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
     Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
-    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+    http://www.ietf.org/rfc/rfc2119.txt.
    </dd>
 
    <dt id="ref-origin">[ORIGIN]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The
    Web Origin Concept</a></cite>, A. Barth, Author. Internet
    Engineering Task Force, November 2010. Available at
-    <a href="http://tools.ietf.org/html/draft-abarth-origin">http://tools.ietf.org/html/draft-abarth-origin</a>.
+    http://tools.ietf.org/html/draft-abarth-origin.
    </dd>
 
    <dt><a name="rfc2616" id="rfc2616">[IETF RFC 2616]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>,
     R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at
-    <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>.
+    http://www.ietf.org/rfc/rfc2616.txt.
    </dd>
 
     <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
@@ -984,9 +988,9 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      Specification</a></cite>, A. Le Hors, et al., Editors. World
      Wide Web Consortium, 7 April 2004. This version of the Document
      Object Model Level 3 Core Recommendation is
-     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
-     DOM Level 3 Core</a> is available at
-     http://www.w3.org/TR/DOM-Level-3-Core.
+     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
+     DOM Core</a> is available at
+     http://www.w3.org/TR/domcore/.
     </dd>
 
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
@@ -994,7 +998,7 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
      Edition. ECMA International, Standard
      ECMA-262, December 2009. This version of the ECMAScript
-     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+     Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
     </dd>
 
     <dt>[<a name="XHR" id="XHR">XMLHttpRequest</a>]</dt>
@@ -1014,10 +1018,13 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-SVG11-20110512/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, May 2011. This version of the SVG specification is available from <a href='http://www.w3.org/TR/2011/WD-SVG11-20110512/'>http://www.w3.org/TR/2011/WD-SVG11-20110512/</a>. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
 
    <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2011. This version of the Navigation Timing specification is available from <a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>http://www.w3.org/TR/2011/CR-navigation-timing-20110315/</a>. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a>. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>http://www.w3.org/TR/2011/WD-performance-timeline-20110811/</a>. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+
+   <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
 
 </div>
