@@ -167,7 +167,7 @@ of the page visibility will allow for improved user experiences and power effici
 
 <p>With this interface, web applications may chose to alter behavior based on whether they are
 visible to the user or not. For example, this interface can be used to scale back work when the page is no
-longer visible. If a web based email client is visible, it may check the server for new mail every few seconds. 
+longer visible. If a web based email client is visible, it may check the server for new messages every few seconds. 
 When hidden it might scale checking email to every few minutes. This interface can also be used to provide better runtime
 user experience decisions not related to power management. For example, a puzzle game could be paused when the user
 no longer has the game visible. Further, this interface can be used by advertisers to not charge for ads that are
@@ -175,7 +175,7 @@ not visible to users.</p>
 
 
 <div class="example">
-<p>For example, the following Javascript shows a theoretical web based email client checking for new emails every second without knowledge of 
+<p>For example, the following JavaScript shows a theoretical web based email client checking for new messages every second without knowledge of 
 the Page Visibility:</p>
 <pre>
 &lt;!DOCTYPE html&gt;
@@ -190,7 +190,7 @@ the Page Visibility:</p>
    }
 
    function checkEmail() { 
-       // Check server for new emails
+       // Check server for new messages
    }
 
   &lt;/script&gt;
@@ -200,15 +200,15 @@ the Page Visibility:</p>
 &lt;/html&gt;</pre>
 </div>
 
-<p>The script will always check for emails every second, even if the user
+<p>The script will always check for messages every second, even if the user
 is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
 
 <p>Using the <a href="#pv-document-visibility-interface">DocumentVisibility</a>
-interface, the page will be able to throttle checking email to every minute when the
+interface, the page will be able to throttle checking messages to every minute when the
 page is no longer visible.</p>
 
 <div class="example">
-<p>The following script show the theoretical web based email client checking for new emails every second when visible and every minute when not visible:</p>
+<p>The following script show the theoretical web based email client checking for new messages every second when visible and every minute when not visible:</p>
 <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -229,7 +229,7 @@ page is no longer visible.</p>
    }
 
    function checkEmail() { 
-       // Check server for new emails
+       // Check server for new messages
    }
 
   &lt;/script&gt;
@@ -290,7 +290,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</h3>
 
-<p>This section is non-normative</p>
+<p>This section is non-normative.</p>
 
 <p>This specification introduces an interface that provides Web applications
 with the means to programmatically determine the current visibility of a page
@@ -313,9 +313,9 @@ Document implements DocumentVisibility;
 
 <h4><code><dfn id="pv-hidden">hidden</dfn></code> attribute</h4>
 
-<p>This attribute returns true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document </a> contained by the 
+<p>On getting, the <a href="#pv-hidden"><code>hidden</code></a> IDL attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport)
-is not visible at all. This attribute returns false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document </a> contained by the 
+is not visible at all. The IDL attribute MUST return false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible on at least one screen.
 </p>
@@ -324,7 +324,7 @@ is not visible at all. This attribute returns false if the <a href="http://www.w
 view of the page, when applicable, this attribute may return false when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
-<p>As examples, the attribute returns true when: </p>
+<p>As examples, on getting, the IDL attribute returns true when: </p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
@@ -332,7 +332,7 @@ is not minimized but is fully obscured by other applications.</p>
 		 <li>The User Agent is minimized and a preview is shown.</li>
 	</ul> 
 	
- <p>Likewise, as examples, the attribute returns false when:</p>
+ <p>Likewise, as examples, on getting, the IDL attribute returns false when:</p>
  <ul>
 		 <li>The User Agent is not minimized and the page is on a foreground tab.</li>
 		 <li>The User Agent is fully obscured by an Accessibility Tool, like a magnifier, but
@@ -342,7 +342,7 @@ is not minimized but is fully obscured by other applications.</p>
 <h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
 
 <h5><code><dfn id="pv-page-hidden">document.PAGE_HIDDEN</dfn></code></h5>
-<p>This attribute must return <code>document.PAGE_HIDDEN</code> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document </a>contained by the 
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
  
@@ -350,7 +350,7 @@ is not minimized but is fully obscured by other applications.</p>
  show a view of the page, when applicable, this constant may not be returned 
  when the User Agent is not minimized but is fully obscured by other applications.</p>
 
-<p>For example, the following cases would return <code>document.PAGE_HIDDEN</code>:</p>
+<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> IDL attribute would return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a>:</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
@@ -358,7 +358,7 @@ is not minimized but is fully obscured by other applications.</p>
 	</ul> 
 
 <h5><code><dfn id="pv-page-visible">document.PAGE_VISIBLE</dfn></code></h5>
-<p>This attribute must return <code>document.PAGE_VISIBLE</code> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document </a>contained by the 
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-visible"><code>document.PAGE_VISIBLE</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
 is set to false.</p>
@@ -366,32 +366,33 @@ is set to false.</p>
 <p>This constant is not returned if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not 
 visible, however, a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
-  visible.</p>
+ visible.</p>
   
-  <p>To accommodate accessibility tools that are typically full screen but still show a 
+<p>To accommodate accessibility tools that are typically full screen but still show a 
 view of the page, when applicable, this constant may be returned when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
 <h5><code><dfn id="pv-page-preview">document.PAGE_PREVIEW</dfn></code></h5>
-<p>This attribute is optional. This attribute may return <code>document.PAGE_PREVIEW</code> if the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document </a>contained by the 
+<p>Supporting the <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> constant is optional. A User Agent MUST only define the <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> constant if it is supported. </p>
+<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> IDL attribute may return <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> if the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-is not visible at all and a preview of the the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
+is not visible at all and a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
  visible.</p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
-<p>The visibilitychange event is fired any time a change is made to the 
-<code>document.visibilityState</code> attribute. This event can only be registered using 
-addEventListener on document. This event will get fired on the first change in 
-<code>document.visibilityState</code> after registration; it will not get fired on 
+<p>The visibilitychange event MUST be fired any time a change is made to the 
+<a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute. This event can only be registered using 
+addEventListener on document. This event will be fired on the first change in 
+<a href="#pv-visibility-state"><code>visibilityState</code></a> after registration; it will not be fired on 
 registration.</p>
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
 
-<p>If a vendor-specific proprietary user agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute
- is needed for an experimental visibility state, vendors must use the following convention:</p>
+<p>If a vendor-specific proprietary user agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute
+ is needed for an experimental visibility state, vendors MUST use the following convention:</p>
  
 <p><code>const DOMString [VENDORPREFIX]_PAGE_[NAME] = "[vendorprefix]-[name]";</code></p>
 
@@ -400,7 +401,8 @@ registration.</p>
 	<li><code>[VENDORPREFIX]</code> is a capitalized name that identifies the vendor,</li>
 	<li><code>[NAME]</code> is a capitalized name given to the visibility state,</li>
 	<li><code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,</li>
-	<li><code>[name]</code> is a non-capitalized name given to the visibility state.</li>
+	<li><code>[name]</code> is a non-capitalized name given to the visibility state,</li>
+    <li>and the above names are in ASCII.</li>
 </ul>
 
 

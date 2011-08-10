@@ -145,6 +145,7 @@ cite this document as other than work in progress. </p>
           <li><a href="#the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</a></li>
           <li><a href="#the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</a></li>
           <li><a href="#the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</a></li>
+          <li><a href="#vendor-prefixes"><span class="secno">4.5</span> Vendor Prefixes</a></li>
         </ol>
       </li>
       <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
@@ -262,7 +263,7 @@ cite this document as other than work in progress. </p>
             <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
             <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
 
-            <p><b>Standard Mark Names</b></p>
+            <p id="ut-standard-mark-names"><b>Standard Mark Names</b></p>
             <p>The mark name may be one of the following Standard Mark Names. When using a Standard Mark Name, the user agent is responsible for storing 
                 a new timestamp under the specified mark name.
                 The user agent does not validate that the usage of the Standard Mark Name is appropriate or consistent with its description.</p>
@@ -300,8 +301,9 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="ut-getMarks"><code>getMarks</code> method</h4>
-    <p>If the <em>markName</em> argument is not specified, this method returns all of the marks and their associated timestamps.</p>
-    <p>If the <em>markName</em> argument is specified, this method returns all of the timestamps for the specified mark name.</p>
+    <p>If the <em>markName</em> argument is not specified, this method must return all of the marks and their associated timestamps.</p>
+    <p>If the <em>markName</em> argument is specified, this method must return all of the timestamps for the specified mark name.</p>
+    <p>If the <em>markName</em> argument is specified but it does not exist, this method must return an empty array.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
@@ -407,8 +409,9 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
-    <p>If the <em>measureName</em> argument is not specified, this method returns all of the measures and their associated durations.</p>
-    <p>If the <em>measureName</em> argument is specified, this method returns all of the durations for the specified measure name.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated durations.</p>
+    <p>If the <em>measureName</em> argument is specified, this method must return all of the durations for the specified measure name.</p>
+    <p>If the <em>measureName</em> argument is specified but it does not exist, this method must return an empty array.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
@@ -498,6 +501,17 @@ cite this document as other than work in progress. </p>
         <p>The <code>startTime</code> attribute will return the timestamp of the measure's start mark.</p>
         <p>The <code>duration</code> attribute will return the duration of the measure.</p>
     </div>
+
+    <h3 id="vendor-prefixes">4.5 Vendor Prefixes</h3>
+
+    <p>Vendor-specific proprietary user agent extensions to this specification are strongly discouraged. 
+    If such extensions are needed, e.g. for experimental purposes, vendors must use the following extension mechanisms:</p>
+
+    <p>If the extension to be added is a <a href="#ut-standard-mark-names">Standard Mark Name</a>, the Standard Mark Name must:</p>
+    <ul>
+        <li>Follow this naming convention: [VENDORPREFIX]_[STANDARD_MARK_NAME], where [VENDORPREFIX] is a name that identifies the vendor and [STANDARD_MARK_NAME] is the name given to the Standard Mark.</li>
+    </ul>
+
 
     <h2 id="monotonic-clock"><span class="secno">5 </span>Monotonic Clock</h2>
     <p>The timestamps stored within the interface must monotonically increase to ensure they are not 

@@ -181,13 +181,13 @@ user latency measurements within an application, in many cases, they are
 unable to provide a complete end-to-end latency picture. While Navigation Timing <a href="#NavigationTiming">[NavigationTiming]</a> addresses
 part of the problem by providing timing information associated with a
 navigation, this document introduces the <a href="#resource-timing">ResourceTiming</a>
-interface to allow Javascript mechanisms to collect complete timing
+interface to allow JavaScript mechanisms to collect complete timing
 information related to resources on a document.
 </p>
 
 
 <div class="example">
-<p>For example, the following Javascript shows a simple attempt to 
+<p>For example, the following JavaScript shows a simple attempt to 
 measure the time it takes to fetch a resource:</p>
 
 <pre>
@@ -661,6 +661,8 @@ partial interface Performance {
 	<p>The <code>setResourceTimingBufferSize</code> method, when invoked, must set the maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources that may be stored in 
 	the buffer to the value of the maxSize parameter.</p>
 	<p>If this method is not called, the default maximum number of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources stored must be 150, unless otherwise specified by the user agent.</p>
+    <p>if the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#rt-clearResourceTiming">clearResourceTimings</a> 
+    method is called.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			in <code>maxSize</code> type of unsigned long

@@ -143,9 +143,8 @@ cite this document as other than work in progress. </p>
     <ol class="toc">
       <li><a href="#sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</a></li>
       <li><a href="#sec-PerformanceEntry-interface"><span class="secno">4.2 </span>The <code>PerformanceEntry</code> interface</a></li>
-      <li><a href="#sec-PerformanceEntryList-interface"><span class="secno">4.3 </span>The <code>PerformanceEntryList</code> interface</a></li>
-      <li><a href="#sec-window.performance-attribute"><span class="secno">4.4 </span> The <code>window.performance</code> attribute</a></li>
-      <li><a href="#sec-PerformanceTiming"><span class="secno">4.5 </span> The <code>PerformanceTiming</code> interface</a></li>
+      <li><a href="#sec-window.performance-attribute"><span class="secno">4.3 </span> The <code>window.performance</code> attribute</a></li>
+      <li><a href="#sec-PerformanceTiming"><span class="secno">4.4 </span> The <code>PerformanceTiming</code> interface</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -278,52 +277,15 @@ interface</h3>
 <p>
 
 
-<h3 id="sec-PerformanceEntryList-interface"><span class="secno">4.3 </span> The <code><a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> </code> 
-interface</h3>
-<pre class="idl">interface <dfn id="pt-performanceEntryList-interface">PerformanceEntryList</dfn> {
-  readonly attribute unsigned long length;
-  PerformanceEntry item(in unsigned long index);
-};
-</pre>
-
-<p>
-	The <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> interface defines an array of <a href="#pt-performanceEntry-interface">PerformanceEntry</a> objects.
-</p>
-
-<h4 id="length-attribute"><code>length</code> attribute</h4>
-<p>
- The <code>length</code> attribute must return the number of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in the 
- <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>. 
-<p>
-
-<div class="methods">
-    <h4 id="item-method"><code>item</code> method</h4>
-	<p>The <code>item</code> method retrieves the
-		<a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.  
-    </p>
-	<div class="parameters">
-			<ul>
-				<p><b>Parameter</b></p>
-                <p>in unsigned long <code>index</code></p>
-                <p>This method retrieves the
-		           <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object in the location 
-                   <code>index</code> from the <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a>.
-                </p>
-				<p><b>Return value</b></p>
-				A <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object.
-				<p><b>Exceptions</b></p>
-                <p>Throws an <code>INDEX_SIZE_ERR</code> exception if the <code>index</code> argument is negative, or greater than <a href="#length-attribute"><code>length</code></a>.</p>
-			</ul>
-		</div>
-</div>
-
-<h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#pt-window-performance">window.performance</a> </code> 
+<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code><a href="#pt-window-performance">window.performance</a> </code> 
 attribute</h3>
 <pre class="idl">interface <dfn id="pt-performance-interface">Performance</dfn> {
   <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntries-method">getEntries</a>();
   <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntriesByType-method">getEntriesByType</a>(in unsigned short entryType);
   <a href="#pt-performanceEntryList-interface">PerformanceEntryList</a> <a href="#getEntriesByName-method">getEntriesByName</a>(in DOMString name, in optional unsigned short entryType);
 };
+
+  typedef sequence &ltPerformanceEntry&gt <b>PerformanceEntryList</b>;
 
 </pre>
 
@@ -334,7 +296,7 @@ attribute</h3>
 <div class="methods">
     <h4 id="getEntries-method"><code>getEntries</code> method</h4>
 	<p>The <code>getEntries</code> method retrieves a 
-		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order.
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>.
     </p>
 
 		<div class="parameters">
@@ -351,7 +313,7 @@ attribute</h3>
 <div class="methods">
     <h4 id="getEntriesByType-method"><code>getEntriesByType</code> method</h4>
 	<p>The <code>getEntriesByType</code> method retrieves a 
-		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order, 
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
 
@@ -376,7 +338,7 @@ attribute</h3>
     <h4 id="getEntriesByName-method"><code>getEntriesByName</code> method</h4>
 	<p>
 		The <code>getEntriesByName</code> method retrieves a
-		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order, 
+		<a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter 
 		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
@@ -405,7 +367,7 @@ attribute</h3>
 </div>
 
 
-<h3 id="sec-PerformanceTiming"><span class="secno">4.5 </span> The <code><a href="#pt-performanceTiming">PerformanceTiming</a> </code> 
+<h3 id="sec-PerformanceTiming"><span class="secno">4.4 </span> The <code><a href="#pt-performanceTiming">PerformanceTiming</a> </code> 
 interface</h3>
 
 <p>The <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performance-timing">PerformanceTiming</a> interface does not extend 
@@ -453,6 +415,10 @@ a <a href="#sec-PerformanceEntryList-interface">PerformanceEntryList</a> with a 
 <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, January 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 <dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
 <dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
+<dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
+<dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2011. This version of the Navigation Timing specification is available from <a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110315/'>http://www.w3.org/TR/2011/CR-navigation-timing-20110315/</a>. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+<dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
+<dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from <a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>http://www.w3.org/TR/2011/WD-WebIDL-20110712/</a>. The <a href='http://dev.w3.org/2006/webapi/WebIDL/'>latest version of Web IDL</a> is available at http://dev.w3.org/2006/webapi/WebIDL/.</dd>
 </dl>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
