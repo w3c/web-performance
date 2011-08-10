@@ -34,7 +34,6 @@
    div.methods { display:block; margin-top:30px; margin-left :25px;}
 }
 </style>
-<link href="http://www.w3.org/StyleSheets/TR/W3C-TR.css" rel="stylesheet" type="text/css">
 <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -47,9 +46,9 @@
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
         http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
       <dt>Latest version:</dt>
-        <dd><a href=https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
+        <dd><a href="https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
-        <dd><a href=https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
+        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>
         <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
         https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
@@ -72,17 +71,21 @@
 
     <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.org/"><acronym title="European Research Consortium
+    href="http://www.ercim.eu/"><acronym title="European Research Consortium
     for Informatics and Mathematics">ERCIM</acronym></a>, <a
     href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
     <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
     and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>
     rules apply.</p>
+
+</div>
+<div class='body'>
+<hr class='top'>
 
     <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
@@ -102,7 +105,7 @@
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=[UserTiming]%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
    with <samp>[UserTiming]</samp> at the start of the subject line.</p>
 
@@ -160,7 +163,7 @@ cite this document as other than work in progress. </p>
     <p>Web developers need the ability to assess and understand the performance characteristics of their
     applications. While JavaScript provides a mechanism to measure application latency (retrieving the current
     timestamp from the <code>Date.now()</code> method), the precision of this timestamp varies between user agents.</p>
-    <p>This document introduces the <a href="#user-timing">UserTiming</a> interface, 
+    <p>This document introduces the <a href="#the-usertiming-interface">UserTiming</a> interface, 
     which exposes a high precision timestamp to developers so they can better measure the performance of their applications.</p>
     <p class="issue"><strong>TODO:</strong> Show example usage.</p>
 
@@ -175,7 +178,7 @@ cite this document as other than work in progress. </p>
     "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
     are to be interpreted as described in RFC2119. For readability, these words
     do not appear in all uppercase letters in this specification. <a
-    href="http://www.ietf.org/rfc/rfc2119.txt">[RFC2119]</a>
+    href="#rfc2119">[RFC2119]</a>
     </p>
 
     <p>Requirements phrased in the imperative as part of algorithms (such as
@@ -192,6 +195,10 @@ cite this document as other than work in progress. </p>
     particular, the algorithms defined in this specification are intended to be
     easy to follow, and not intended to be performant.) </p>
 
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
     <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
     <p>The construction "a <code title="">Foo</code> object", where <code
@@ -203,7 +210,7 @@ cite this document as other than work in progress. </p>
     Web applications, and does not necessarily imply the existence of an actual
     <code>Document</code> object or of any other <code>Node</code> objects as
     defined in the DOM Core specifications. <a
-    href="http://www.w3.org/TR/DOM-Level-3-Core/http://www.w3.org/TR/DOM-Level-3-Core/core.html">[DOM3CORE]</a>
+    href="#DOM3Core">[DOM Level 3 Core]</a>
     </p>
 
     <p>A DOM attribute is said to be <em>getting</em> when its value is being
@@ -212,25 +219,25 @@ cite this document as other than work in progress. </p>
 
     <p>The term "JavaScript" is used to refer to ECMA262, rather than the
     official term ECMAScript, since the term JavaScript is more widely known. <a
-    href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">[ECMA262]</a>
+    href="#ECMA262">[ECMA262]</a>
     </p>
 
-    <h2 id="User-timing-0"><span class="secno">4 </span>User Timing</h2>
+    <h2 id="user-timing-0"><span class="secno">4 </span>User Timing</h2>
 
     <h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
 
     <p>This section is non-normative</p>
 
-    <p>The <a href="#user-timing">User Timing</a> interface gives web developers access to a high precision, monotonically 
+    <p>The <a href="#the-usertiming-interface">User Timing</a> interface gives web developers access to a high precision, monotonically 
        increasing timestamp so they can better measure the performance characteristics of their
        applications.</p>
 
     <p>Throughout this work, the term "timestamp" refers to the number of milliseconds since midnight of January 1, 1970 (UTC).</p>
 
-    <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code><a href="#user-timing">UserTiming</a></code> Interface</h3>
+    <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</h3>
 
     <pre class="idl">
-  partial interface <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-window.performance-attribute">Performance</a> {
+  partial interface <a href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute">Performance</a> {
     const unsigned short PERF_DEVELOPER_MARK = 2;
     const unsigned short PERF_DEVELOPER_MEASURE = 3;
 
@@ -260,8 +267,7 @@ cite this document as other than work in progress. </p>
             Each call to the <code>mark()</code> method stores a new timestamp 
             under the specified mark name.</p>
             <p>The mark name cannot be the same name as any of the attributes in the 
-            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
+            <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.</p>
 
             <p id="ut-standard-mark-names"><b>Standard Mark Names</b></p>
             <p>The mark name may be one of the following Standard Mark Names. When using a Standard Mark Name, the user agent is responsible for storing 
@@ -295,7 +301,7 @@ cite this document as other than work in progress. </p>
 
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the <em>markName</em> argument is the same name as an attribute in the 
-        <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.</p>
+        <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface.</p>
     </div>
   </div>
 
@@ -328,7 +334,7 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-clearmarks"><code>clearMarks</code> method</h4>
+    <h4 id="ut-clearMarks"><code>clearMarks</code> method</h4>
     <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated timestamps.</p>
     <p>If the <em>markName</em> argument is specified, this method removes all timestamps for the given mark name.</p>
     <p>If the <em>markName</em> argument is specified but the specified <em>markName</em> does not exist, this method will do nothing.</p>
@@ -352,7 +358,7 @@ cite this document as other than work in progress. </p>
     <ul>
         <li>If both the <em>startMark</em> and <em>endMark </em>arguments are not specified,
             <code>measure()</code> will store the duration in milliseconds from 
-            <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a>
+            <a href="http://www.w3.org/TR/navigation-timing/#nt-fetch-start">fetchStart</a>
             to the current time.</li>
         <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
             <code>measure()</code> will store the duration in
@@ -361,8 +367,7 @@ cite this document as other than work in progress. </p>
             milliseconds from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</li>
     </ul>
     <p>The <em>startMark</em> and <em>endMark</em> arguments may be the name of one of the attributes in the
-       <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-       <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+       <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>. 
        In this case, the value of that attribute is used as the timestamp.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
@@ -379,10 +384,9 @@ cite this document as other than work in progress. </p>
         <div class="parameterDefinition">
             <p>[optional] The name of the start mark.</p>
             <p>If specified, the most recent timestamp of the start mark is used.</p>
-            <p>If not specified, <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-fetch-start">fetchStart</a> is used.</p>
+            <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#nt-fetch-start">fetchStart</a> is used.</p>
             <p>May be the name of one of the attributes in the
-               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
                In this case, the value of that attribute is used as the start timestamp.</p>
         </div>
 
@@ -392,8 +396,7 @@ cite this document as other than work in progress. </p>
             <p>If specified, the most recent timestamp of the end mark is used.</p>
             <p>If not specified, the current time is used.</p>
             <p>May be the name of one of the attributes in the
-               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> interface.
+               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
                In this case, the value of that attribute is used as the end timestamp.</p>
         </div>
 
@@ -402,8 +405,8 @@ cite this document as other than work in progress. </p>
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the start mark or end mark does not exist.</p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the duration (the end mark timestamp minus the start mark timestamp) is negative.</p>
-        <p>Throws a <code>SYNTAX_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">NavigationTiming</a>
-               <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#sec-navigation-timing-interface">PerformanceTiming</a> attribute with a timestamp value of 0.</p>
+        <p>Throws a <code>SYNTAX_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a
+               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> attribute with a timestamp value of 0 <a href="#NavigationTiming">[Navigation Timing]</a>.</p>
     </div>
   </div>
 
@@ -436,7 +439,7 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-clearmeasures"><code>clearMeasures</code> method</h4>
+    <h4 id="ut-clearMeasures"><code>clearMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated durations.</p>
     <p>If the <em>measureName</em> argument is specified, this method removes all durations for the given measure name.</p>
     <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
@@ -453,20 +456,20 @@ cite this document as other than work in progress. </p>
     </div>
   </div>
 
-    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code><a href="#performancemark">PerformanceMark</a></code> Interface</h3>
+    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMark : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">PerformanceEntry</a> {
   }
     </pre>
 
     <p>
-    	The <a href="#performancemark">PerformanceMark</a> interface also 
+    	The <a href="#the-performancemark-interface">PerformanceMark</a> interface also 
 		exposes marks created via the <code><a href="#ut-mark">mark()</a></code> 
 		method to the 
     	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
-		Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
-		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
+		Performance Timeline</a>. The <a href="#the-performancemark-interface">PerformanceMark</a> 
+		interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
@@ -478,19 +481,18 @@ cite this document as other than work in progress. </p>
         <p>The <code>duration</code> attribute will return 0.</p>
     </div>
 
-    <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code><a href="#performancemeasure">PerformanceMeasure</a></code> Interface</h3>
+    <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#performanceentry">PerformanceEntry</a> {
+  interface PerformanceMeasure : <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">PerformanceEntry</a> {
   }
     </pre>
     
 	<p>
-    	The <a href="#performancemeasure">PerformanceMeasure</a> interface also 
+    	The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface also 
 		exposes measures created via the <code><a href="#ut-measure">measure()</a></code> 
 		method to the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#sec-performance-timeline">
-		Performance Timeline</a>. The <a href="#performancemeasure">
-		PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#nt-performanceEntry-interface">
+		Performance Timeline</a>. The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface extends the following attributes of the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html#pt-performanceEntry-interface">
 		PerformanceEntry</a>
 		interface:
     </p>
@@ -541,15 +543,19 @@ cite this document as other than work in progress. </p>
 <h2 class="no-num" id=references>References</h2>
 
 <dl>
+<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
+<dd>
+ <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
+</dd>
     <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
     <dd>
-     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
      Specification</a></cite>, A. Le Hors, et al., Editors. World
      Wide Web Consortium, 7 April 2004. This version of the Document
      Object Model Level 3 Core Recommendation is
-     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
-     DOM Level 3 Core</a> is available at
-     http://www.w3.org/TR/DOM-Level-3-Core.
+     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
+     DOM Core</a> is available at
+     http://www.w3.org/TR/domcore/.
     </dd>
 
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
@@ -557,11 +563,17 @@ cite this document as other than work in progress. </p>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
      Edition. ECMA International, Standard
      ECMA-262, December 2009. This version of the ECMAScript
-     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+     Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
     </dd>
 
+   <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a>. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
+   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
+
+   <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
 </dl>
 

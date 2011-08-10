@@ -153,7 +153,12 @@ cite this document as other than work in progress. </p>
     </ol>
   <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
   <li><a href="#security"><span class="secno">7 </span>Security</a></li>
-  <li><a href="#references"><span class="secno">8 </span>References</a></li>
+  <li><a href="#references"><span class="secno">8 </span>References</a>
+    <ol class="toc">
+      <li><a href="#normative-references"><span class="secno">8.1 </span>Normative References</a></li>
+      <li><a href="#informative-references"><span class="secno">8.2 </span>Informative References</a></li>
+    </ol>
+  </li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -253,6 +258,10 @@ on user agents. </p>
 implemented in any manner, so long as the end result is equivalent. (In
 particular, the algorithms defined in this specification are intended to be
 easy to follow, and not intended to be performant.) </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
 
 <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
 
@@ -951,7 +960,9 @@ relying on the interface described in this work would break.</p>
 
 <h2 id="references"><span class="secno">8 </span>References</h2>
 
-<dl id='references-list'>
+<h3 id="normative-references"><span class="secno">8.1 </span>Normative References</h2>
+
+<dl>
 <dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
@@ -966,9 +977,9 @@ relying on the interface described in this work would break.</p>
         Specification</a></cite>, A. Le Hors, et al., Editors. World
         Wide Web Consortium, 7 April 2004. This version of the Document
         Object Model Level 3 Core Recommendation is
-        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/DOM-Level-3-Core/">latest version of
-        DOM Level 3 Core</a> is available at
-        http://www.w3.org/TR/DOM-Level-3-Core.
+        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
+        DOM Core</a> is available at
+        http://www.w3.org/TR/domcore/.
       </dd>
 <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt><dd>
 	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
@@ -977,6 +988,13 @@ relying on the interface described in this work would break.</p>
 	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
 <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
 <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, January 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+</dl>
+
+<h3 id="informative-references"><span class="secno">8.2 </span>Informative References</h2>
+
+<dl id='references-list'>
 <dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
 <dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
 <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>

@@ -24,7 +24,6 @@
       <this href='http://www.w3.org/TR/2011/WD-animation-timing-20110602/'/>
       <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
       <latest href='http://www.w3.org/TR/animation-timing/'/>
-      <!--previous href='http://www.w3.org/TR/2008/WD-WebIDL-20081219/'/-->
     </versions>
     <editors>
       <person homepage='http://webstuff.nfshost.com/' email='jamesr@chromium.org'>
@@ -183,7 +182,7 @@ as described in the <a href='http://www.w3.org/TR/WebIDL/'><cite>Web IDL</cite><
 specifications:</p>
 
 <ul>
-  <li><code>Document</code>&#x2002;<a href='#ref-DOM3CORE'>[DOM3CORE]</a></li>
+  <li><code>Document</code>&#x2002;<a href='#ref-DOMCORE'>[DOMCORE]</a></li>
   <li><code>Window</code>&#x2002;<a href='#ref-HTML5'>[HTML5]</a></li>
   <li><code>DOMTimeStamp</code>&#x2002;<a href='#ref-WEBIDL'>[WEBIDL]</a></li>
 </ul>
@@ -192,17 +191,17 @@ specifications:</p>
 <div id='definitions' class='section'>
 <h2>Definitions</h2>
 
-<p>Associated with every <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+<p>Associated with every <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>
 is an <dfn id='dfn-animation-frame-request-callback-list'>animation frame request callback list</dfn>,
 which is a list of &lt;<var>handle</var>, <var>callback</var>, <var>cancelled</var>> triples.
 <var>handle</var> is an integer that uniquely identifies the entry in the list,
 <var>callback</var> is a <code><a href='#FrameRequestCallback'>FrameRequestCallback</a></code>
 object, and <var>cancelled</var> is a Boolean flag.  Initially, the
 <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>
-for a <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+for a <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>
 is empty.</p>
 
-<p>A <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+<p>A <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>
 is said to <dfn id='dfn-has-active-animations'>have active animations</dfn>
 whenever it has a non-empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation
 frame request callback list</a>.</p>
@@ -216,7 +215,7 @@ frame request callback list</a>.</p>
 <code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code>
 operation on the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object.  In the definition of <code><a href='#requestAnimationFrame'>requestAnimationFrame</a></code> below, references to the
-<code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
+<code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>
 object are to be taken to be references to the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>.&#x2002;<a href='#ref-HTML5'>[HTML5]</a></p>
 
@@ -230,7 +229,7 @@ interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
 
 <span class='xattr'>[Callback, NoInterfaceObject]</span>
 interface <dfn id='FrameRequestCallback'>FrameRequestCallback</dfn> {
-  void sample(in <a href='http://dev.w3.org/2006/webapi/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
+  void sample(in <a href='http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
 };</pre>
 
 <p>The <dfn id='requestAnimationFrame'><code>requestAnimationFrame</code></dfn> method is
@@ -267,25 +266,27 @@ handle, then this function does nothing.</p>
 
 <div class='note'>
   <p><code><a href='#cancelRequestAnimationFrame'>cancelRequestAnimationFrame</a></code> might be called for an entry
-  in the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
+  in the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> or in
   the <a class='dfnref' href="#dfn-sample-all-animations">sample all animations</a> operation’s temporary <var>list</var>.  In
   either case the entry’s cancelled flag is set to true so that the callback does not run.</p>
 </div>
 
-
-<p>While a <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>
-<a class='dfnref' href='#dfn-has-active-animations'>has active animations</a>, the user agent
-<span class='rfc2119'>MUST</span> continually <dfn id='dfn-sample-all-animations'>sample all animations</dfn>.
-To <a class='dfnref' href='#dfn-sample-all-animations'>sample all animations</a>, the following steps are performed:</p>
-
-<div class='ednote'>
-  <p><a href="http://www.w3.org/2010/webperf/track/issues/1">ISSUE-1</a> We should define the processing model in terms of an HTML5 task queue, so that animation frame callback scheduling participates in the browser event loop in a well defined manner, rather than just saying that animations are sampled continually.</p>
 </div>
 
+<div id='processingmodel' class='section'>
+<h2>Processing Model</h2>
+Whenever a <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>'s
+<code><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html#sec-document-visibility-interface'>hidden</a></code> attribute is false
+and the <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> is not empty, the user agent MUST
+regularly <a class='dfnref' href='http://whatwg.org/html#queue-a-task'>queue</a> a <a class='dfnref' href='http://whatwg.org/html#concept-task'>task</a> that
+<a class='dfnref' href='#dfn-sample-all-animations'>samples all animations</a>. The <a class='dfnref' href='http://whatwg.org/html#task-source'>task source</a>
+for these <a class='dfnref' href='http://whatwg.org/html#concept-task'>tasks</a> is the <dfn id='dfn-animation-task-source'>animation task source</dfn>.
+
+To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the following steps are performed:
 <ol class='algorithm'>
   <li>Let <var>t</var> be the result of <a class='dfnref' href='#dfn-get-next-sample-time'>getting the next sample time</a>
-    of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>.
+    of the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>.
     <div class='ednote'>
       <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> <dfn id='dfn-get-next-sample-time'>Getting the next sample time</dfn>
       is currently undefined.  This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
@@ -301,23 +302,13 @@ To <a class='dfnref' href='#dfn-sample-all-animations'>sample all animations</a>
       which might bear little relation to the monotonic clock values anyway.</p>
     </div>
   </li>
-  <li>Let <var>list</var> be a copy of the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
+  <li>Let <var>list</var> be a copy of the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.  <var>list</var> will be empty
   if no <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animations<!--/a--> have been scheduled.</li>
-  <li>Clear the <code><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#i-Document'>Document</a></code>’s
+  <li>Clear the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
   <li>Perform the steps defined in the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
 </ol>
-
-<p>The expectation is that the user agent will never run the
-<a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> more than
-once per display refresh, and that when there is no need to throttle down the animation sample rate,
-it will attempt to run the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a>
-at exactly once per display refresh.</p>
-
-<div class='ednote'>
-  <p><a href='http://www.w3.org/2010/webperf/track/issues/5'>ISSUE-5</a> Do we need to set expectations on exactly how rate throttling is done, and if callback invocation can be suspended indefinitely?</p>
-</div>
 
 <p>The <dfn id='dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</dfn>:</p>
 <ol class='algorithm'>
@@ -332,6 +323,12 @@ at exactly once per display refresh.</p>
     </ol>
   </li>
 </ol>
+
+<p class='note'>
+The expectation is that the user agent will run tasks from the <a class='dfnref' href='#dfn-animation-task-source'>animation task source</a> at
+at a regular interval matching the display's refresh rate. Running tasks at a lower rate can result in animations not appearing smooth. Running tasks
+at a higher rate can cause extra computation to occur without a user-visible benefit.
+</p>
 </div>
 
 <div id='acknowledgements' class='section'>
@@ -354,9 +351,9 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 <h3>Normative references</h3>
 
 <dl>
-  <dt id='ref-DOM3CORE'>[DOM3CORE]</dt>
-  <dd><cite><a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/'>Document Object Model (DOM) Level 3 Core Specification</a></cite>.
-  A. Le Hors, et al., Editors.  World Wide Web Consortium, April 2004.  Available at http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/.</dd>
+  <dt id='ref-DOMCORE'>[DOMCORE]</dt>
+  <dd><cite><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html'>DOM Core</a></cite>.
+  Anne van Kesteren, Ms2ger, Editors.  World Wide Web Consortium, July 2011.  Available at http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html.</dd>
   <dt id='ref-HTML5'>[HTML5]</dt>
   <dd><cite><a href='http://www.w3.org/TR/2010/WD-html5-20100624/'>HTML5</a></cite>.
   I. Hickson, Editor.
@@ -366,10 +363,10 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   <dd><cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
   S. Bradner.  IETF, March 1997.  Available at http://www.ietf.org/rfc/rfc2119.</dd>
   <dt id='ref-WEBIDL'>[WEBIDL]</dt>
-  <dd><cite><a href='http://www.w3.org/TR/2010/WD-WebIDL-20101021/'>Web IDL</a></cite>.
+  <dd><cite><a href='http://www.w3.org/TR/WebIDL/'>Web IDL</a></cite>.
   C. McCormack, Editor.
-  World Wide Web Consortium, October 2010.
-  Available at http://www.w3.org/TR/2010/WD-WebIDL-20101021/.</dd>
+  World Wide Web Consortium, July 2011.
+  Available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
 </div>
 
