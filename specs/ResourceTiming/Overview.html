@@ -929,10 +929,10 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 
 <h3 id="monotonic-clock"><span class="secno">5.2 </span>Monotonic Clock</h3>
 <p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
-skewed by adjustments to the system clock during the navigation. The difference between any two chronologically 
-recorded timing attributes must never be negative. The user agent must record the system clock at the beginning 
-of the navigation and define subsequent timing attributes in terms of a monotonic clock measuring time elapsed 
-from the beginning of the navigation.
+skewed by adjustments to the system clock while fetching the resource. The difference between any two chronologically 
+recorded timing attributes must never be negative. For all resources, including subdocument resources, the user agent must 
+record the system clock at the beginning of the root document navigation and define subsequent timing attributes in 
+terms of a monotonic clock measuring time elapsed from the beginning of the navigation.
 </p>
 
 <h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
