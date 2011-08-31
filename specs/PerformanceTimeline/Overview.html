@@ -302,13 +302,13 @@ attribute</h3>
 <div class="methods">
     <h4 id="getEntries-method"><code>getEntries</code> method</h4>
 	<p>The <code>getEntries</code> method retrieves a 
-		<a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>.
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>.
     </p>
 
 		<div class="parameters">
 				<p><b>No parameters</b></p>
 				<p><b>Return value</b></p>
-				A <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> object.
+				A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -317,7 +317,7 @@ attribute</h3>
 <div class="methods">
     <h4 id="getEntriesByType-method"><code>getEntriesByType</code> method</h4>
 	<p>The <code>getEntriesByType</code> method retrieves a 
-		<a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
 
@@ -325,13 +325,13 @@ attribute</h3>
 				<p><b>Parameter</b></p>
 					<p>in unsigned short <code>entryType</code></p>
 					<p>
-						The <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
 						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
-						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a>
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a>
 						must be empty.
 					</p>
 				<p><b>Return value</b></p>
-				A <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> object.
+				A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -340,7 +340,7 @@ attribute</h3>
     <h4 id="getEntriesByName-method"><code>getEntriesByName</code> method</h4>
 	<p>
 		The <code>getEntriesByName</code> method retrieves a
-		<a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter 
 		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
@@ -348,20 +348,20 @@ attribute</h3>
 				<p><b>Parameter</b></p>
 					<p>in DOMString <code>name</code></p>
 					<p>
-						The <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
 						that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
-						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> must be empty.
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must be empty.
 					</p>
 					<p>in optional unsigned short <code>entryType</code></p>
 					<p>
-						The <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> must only contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must only contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
 						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter 
 						and have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
-						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a>
+						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a>
 						must be empty.
 					</p>
 				<p><b>Return value</b></p>
-				A <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> object.
+				A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -373,7 +373,7 @@ interface</h3>
 <p>The <a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a> interface does not extend 
 the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface. However, when the <a href="#getEntriesByType-method">getEntriesByType</a> and
 <a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <code>PERF_NAVIGATION</code>,
-a <a href="#pt-PerformanceEntryList-type">PerformanceEntryList</a> with a <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object with the following values must be returned:
+a <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> with a <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object with the following values must be returned:
 </p>
 
 <div class="parameters">
