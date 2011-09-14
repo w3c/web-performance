@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-july-27-2011">Working Draft July 27, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Working Draft September 14, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -254,7 +254,7 @@ with the <a href="#performance-resource-timing">PerformanceResourceTiming</a> in
            var resourceList = window.performance.getEntriesByType(window.performance.PERF_RESOURCE);
            for (i = 0; i < resourceList.length; i++)
            {
-              if (resourceList[i].initiatorType == window.performance.INITIATOR_IMAGE) 
+              if (resourceList[i].initiatorType == window.performance.INITIATOR_IMG) 
               {
                  alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].startTime);
               }
@@ -319,7 +319,10 @@ a new value is assigned to it. </p>
 official term ECMAScript, since the term JavaScript is more widely known. <a href="#ECMA262">[ECMA262]</a>
 </p>
 
-<p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+<p>Throughout this work, time is measured in sub-millisecond resolution since the start of the navigation of the root document, as recorded in 
+the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-navigation-start">navigationStart</a> attribute. 
+For example, a timestamp value of 1.5 would be 1.5 milliseconds since the start of the navigation of the root document.
+</p>
 
 <h2 id="resource-timing"><span class="secno">4 </span>Resource Timing</h2>
 
@@ -412,14 +415,12 @@ Attribute</h3>
   const unsigned short <a href="#type-link">INITIATOR_LINK</a> = 1;
   const unsigned short <a href="#type-css">INITIATOR_CSS</a> = 2;
   const unsigned short <a href="#type-script">INITIATOR_SCRIPT</a> = 3;
-  const unsigned short <a href="#type-image">INITIATOR_IMAGE</a> = 4;
+  const unsigned short <a href="#type-img">INITIATOR_IMG</a> = 4;
   const unsigned short <a href="#type-object">INITIATOR_OBJECT</a> = 5;
   const unsigned short <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = 6;
   const unsigned short <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = 7;
   const unsigned short <a href="#type-embed">INITIATOR_EMBED</a> = 8;
-  const unsigned short <a href="#type-audio">INITIATOR_AUDIO</a> = 9;
-  const unsigned short <a href="#type-video">INITIATOR_VIDEO</a> = 10;
-  const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 11;
+  const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 9;
 };
 </pre>
 
@@ -429,17 +430,17 @@ Attribute</h3>
 <pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> {
   readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
   
-  readonly attribute unsigned long long <a href="#redirect-start" title="redirectstart">redirectStart</a>;
-  readonly attribute unsigned long long <a href="#redirect-end" title="redirectend">redirectEnd</a>;
-  readonly attribute unsigned long long <a href="#fetch-start" title="fetchstart">fetchStart</a>;
-  readonly attribute unsigned long long <a href="#domainlookup-start" title="domainlookupstart">domainLookupStart</a>;
-  readonly attribute unsigned long long <a href="#domainlookup-end" title="domainlookupend">domainLookupEnd</a>;
-  readonly attribute unsigned long long <a href="#connect-start" title="connectstart">connectStart</a>;
-  readonly attribute unsigned long long <a href="#connect-end" title="connectend">connectEnd</a>;
-  readonly attribute unsigned long long <a href="#secureconnection-start" title="secureconnectionstart">secureConnectionStart</a>;
-  readonly attribute unsigned long long <a href="#request-start" title="requeststart">requestStart</a>;
-  readonly attribute unsigned long long <a href="#response-start" title="responsestart">responseStart</a>;
-  readonly attribute unsigned long long <a href="#response-end" title="responseend">responseEnd</a>;
+  readonly attribute double <a href="#redirect-start" title="redirectstart">redirectStart</a>;
+  readonly attribute double <a href="#redirect-end" title="redirectend">redirectEnd</a>;
+  readonly attribute double <a href="#fetch-start" title="fetchstart">fetchStart</a>;
+  readonly attribute double <a href="#domainlookup-start" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute double <a href="#domainlookup-end" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute double <a href="#connect-start" title="connectstart">connectStart</a>;
+  readonly attribute double <a href="#connect-end" title="connectend">connectEnd</a>;
+  readonly attribute double <a href="#secureconnection-start" title="secureconnectionstart">secureConnectionStart</a>;
+  readonly attribute double <a href="#request-start" title="requeststart">requestStart</a>;
+  readonly attribute double <a href="#response-start" title="responsestart">responseStart</a>;
+  readonly attribute double <a href="#response-end" title="responseend">responseEnd</a>;
 };</pre>
 
 <p>
@@ -470,16 +471,12 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
   <dt><dfn id="type-link">INITIATOR_LINK</dfn>: The initiator is the <code>href</code> attribute of the <code>&lt;link&gt;</code> element.</dt>
   <dt><dfn id="type-css">INITIATOR_CSS</dfn>: The initiator is any CSS resource downloaded via the <a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a> syntax, such as <code>@import url()</code>, <code>background: url()</code>, etc.</dt>
   <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;script&gt;</code> element.</dt>
-  <dt><dfn id="type-image">INITIATOR_IMAGE</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;img&gt;</code> element.</dt>
+  <dt><dfn id="type-img">INITIATOR_IMG</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;img&gt;</code> element.</dt>
   <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: The initiator is the <code>data</code> attribute of the <code>&lt;object&gt;</code> element.</dt>
   <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;frame&gt;</code> or <code>&lt;iframe&gt;</code> elements.</dt>
   <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: The initiator is a XMLHttpRequest object.</dt>
   <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;embed&gt;</code> element.</dt>
-  <dt><dfn id="type-audio">INITIATOR_AUDIO</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;audio&gt;</code> element 
-  or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with an <code>&lt;audio&gt;</code> element. </dt> 
-  <dt><dfn id="type-video">INITIATOR_VIDEO</dfn>: The initiator is the <code>src</code> or <code>poster</code> attribute of the <code>&lt;video&gt;</code> element 
-  or the <code>src</code> attribute of the <code>&lt;source&gt;</code> element associated with a <code>&lt;video&gt;</code> element. </dt> 
-  <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element .</dt>
+  <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element and all resources downloaded as children of the <code>&lt;svg&gt;</code> element.</dt>
 </dl>
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
@@ -508,9 +505,11 @@ Otherwise, this attribute must return zero. </p>
 
 <h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
-<p>This attribute must return the time immediately before the user agent starts to <a
-href="http://www.w3.org/TR/html5/fetching-resources.html#fetching-resources">fetch</a> the 
-    resource.</p>
+<p>If there are no HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
+this attribute must return the time immediately before the user agent starts to fetch the resource.</p>
+
+<p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
+this attribute must return the time immediately before the user agent starts to fetch the final resource in the redirection.</p>
 
 <h4 id="domainlookup-start-attribute"><code><dfn
 id="domainlookup-start">domainLookupStart</dfn></code> attribute</h4>
@@ -750,7 +749,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
         name that identifies the vendor and TimeName identifies the name given to the 
         timing attribute. </li>
     <li>Use a monotonically increasing clock, as defined in Section 5.2 <a href="#monotonic-clock">Monotonic Clock</a>.</li>
-    <li>Be measured in milliseconds since midnight of January 1, 1970 (UTC), as defined in Section 3 <a href="#terminology">Terminology</a>.
+    <li>Be measured in the timebase defined in Section 3 <a href="#terminology">Terminology</a>.
 </ul>
 
 <h2 id="process"><span class="secno">5 </span>Process</h2>

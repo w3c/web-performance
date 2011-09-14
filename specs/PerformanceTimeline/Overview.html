@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Performance Timeline</h1>
 
-<h2 class="no-num no-toc" id="working-draft-august-10-2011">Editor's Draft August 10, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Editor's Draft September 14, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -215,7 +215,10 @@ a new value is assigned to it. </p>
 <a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<p>Throughout this work, time is measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+<p>Throughout this work, time is measured in sub-millisecond resolution since the start of the navigation of the root document, as recorded in 
+the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-navigation-start">navigationStart</a> attribute. 
+For example, a timestamp value of 1.5 would be 1.5 milliseconds since the start of the navigation of the root document.
+</p>
 
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Performance Timeline</h2>
 
@@ -251,9 +254,9 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 interface</h3>
 <pre class="idl">interface <dfn id="pt-performanceEntry-interface">PerformanceEntry</dfn> {
   readonly attribute DOMString name;
-  readonly attribute unsigned long long startTime;
+  readonly attribute double startTime;
   readonly attribute unsigned short entryType;
-  readonly attribute unsigned long long duration;
+  readonly attribute double duration;
 };
 </pre>
 

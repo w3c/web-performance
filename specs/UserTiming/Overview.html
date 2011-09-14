@@ -39,7 +39,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="working-draft-july271-2011">Working Draft July 27, 2011</h2>
+    <h2 class="no-num no-toc" id="working-draft-sept-14-2011">Working Draft September 14, 2011</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -222,6 +222,11 @@ cite this document as other than work in progress. </p>
     href="#ECMA262">[ECMA262]</a>
     </p>
 
+    <p>Throughout this work, time is measured in sub-millisecond resolution since the start of the navigation of the root document, as recorded in 
+       the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-navigation-start">navigationStart</a> attribute. 
+       For example, a timestamp value of 1.5 would be 1.5 milliseconds since the start of the navigation of the root document.
+    </p>
+
     <h2 id="user-timing-0"><span class="secno">4 </span>User Timing</h2>
 
     <h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
@@ -231,8 +236,6 @@ cite this document as other than work in progress. </p>
     <p>The <a href="#the-usertiming-interface">User Timing</a> interface gives web developers access to a high precision, monotonically 
        increasing timestamp so they can better measure the performance characteristics of their
        applications.</p>
-
-    <p>Throughout this work, the term "timestamp" refers to the number of milliseconds since midnight of January 1, 1970 (UTC).</p>
 
     <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</h3>
 
