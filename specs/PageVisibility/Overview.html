@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-august-10-2011">Editor's Draft August 10, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-september-26-2011">Editor's Draft September 26, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -389,7 +389,7 @@ The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> eve
 
 <p>The visibilitychange event MUST be fired any time a change is made to the 
 <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute. This event can only be registered using 
-addEventListener on document. This event will be fired on the first change in 
+addEventListener on document. This event does not bubble. This event will be fired on the first change in 
 <a href="#pv-visibility-state"><code>visibilityState</code></a> after registration; it will not be fired on 
 registration.</p>
 
