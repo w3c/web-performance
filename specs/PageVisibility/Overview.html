@@ -309,7 +309,7 @@ interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
   const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
             
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
-  readonly attribute unsigned DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
+  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
 };
 Document implements DocumentVisibility;
 </pre>
@@ -389,7 +389,7 @@ The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> eve
 
 <p>The visibilitychange event MUST be fired any time a change is made to the 
 <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute. This event can only be registered using 
-addEventListener on document. This event does not bubble. This event will be fired on the first change in 
+addEventListener on document. This event must bubble. This event will be fired on the first change in 
 <a href="#pv-visibility-state"><code>visibilityState</code></a> after registration; it will not be fired on 
 registration.</p>
 
