@@ -1,0 +1,21 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance attributes</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the navigation and timing attributes exist for window.performance 
+        (but does not validate that their values are correct).</p>
+        <div id="log"></div>
+        <script type="text/javascript">            
+            test_namespace('navigation');
+            test_namespace('timing', true);
+        </script>
+    </body>
+</html>
