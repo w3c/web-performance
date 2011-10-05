@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta charset="utf-8">
   <title>Navigation Timing</title>
-<style type="text/css">
+<style>
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
    pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
    pre code { color:inherit; background:transparent }
@@ -896,13 +896,13 @@ from the beginning of the navigation.
 e.g., for experimental purposes, vendors must use the following extension mechanisms:</p>
 
 <ul>
-<li>If the extension to be added is an navigation type, the new type must</li>
+<li>If the extension to be added is an navigation type, the new type must
   <ul>
   <li>follow the naming convention: TYPE_[VENDORPREFIX]_[TYPE], where [VENDORPREFIX] is a name
   that identifies the vendor.</li>
   <li>have a value in the range of 100 to 200.</li>
   </ul>
-  
+</li>  
 <li>If the extension is a new timing attribute, it must</li>
   <ul>
   <li>follow the naming convention: [vendorPrefix]TimeAttribute, where [vendorPrefix] identifies
