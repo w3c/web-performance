@@ -61,12 +61,12 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
-    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
-    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
-    of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.eu/"><acronym title="European Research Consortium
-    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
     href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
     <a
@@ -582,19 +582,22 @@ href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
 in the current browsing context. It must have one of the following <a
 href="#nt-navigation-info-type">navigation type</a> values. </p>
 <dl>
-  <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn>:
-    Navigation started by clicking on a link, or entering the URL in the user
+  <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn></dt>
+    <dd><p>Navigation started by clicking on a link, or entering the URL in the user
     agent's address bar, or form submission, or initializing through a script operation other than
     the ones used by <a href="#nt-navigation-info-type-navigate">TYPE_RELOAD</a>
-    and <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a> as listed below.
-  <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn>: Navigation through
+    and <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a> as listed below.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn></dt>
+    <dd><p>Navigation through
     the reload operation or the
     <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
-    method.</dt>
-  <dt><dfn id="nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</dfn>: Navigation
-  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</dt>
-  <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn>: Any navigation
-  types not defined by values above.</dt>
+    method.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</dfn></dt>
+   <dd><p>Navigation
+  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn></dt>
+  <dd><p>Any navigation
+  types not defined by values above.</p></dd>
 </dl>
 
 <div class="note">
@@ -682,7 +685,7 @@ available in navigation involving documents from different
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
-<p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
+<p><img style='width: 85%' src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
 <ol>
@@ -903,7 +906,7 @@ e.g., for experimental purposes, vendors must use the following extension mechan
   <li>have a value in the range of 100 to 200.</li>
   </ul>
 </li>  
-<li>If the extension is a new timing attribute, it must</li>
+<li>If the extension is a new timing attribute, it must
   <ul>
   <li>follow the naming convention: [vendorPrefix]TimeAttribute, where [vendorPrefix] identifies
   the vendor name and TimeAttribute identifies the name of the timing attribute.</li>
@@ -911,7 +914,7 @@ e.g., for experimental purposes, vendors must use the following extension mechan
   <li>be measured in milliseconds since midnight of January 1, 1970 (UTC), as
   defined in <a href="#terminology">Section 3 Terminology</a>.</li>
   </ul>
-
+</li>
 <li>If the extension is a new navigation attribute, it must follow the naming
   convention: [vendorPrefix]NavigationAttribute, where [vendorPrefix] identifies
   the vendor name and NavigationAttribute identifies the name of the navigation attribute.</li>
