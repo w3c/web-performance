@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Working Draft September 14, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-oct-18-2011">Working Draft October 18, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -83,7 +83,8 @@
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
 <p>This specification defines an interface for web applications to access
-timing information related to HTML elements. </p>
+the complete timing information for resources in a document.</p>
+
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
 document</h2>
@@ -360,7 +361,7 @@ in the</span>
 <code><a href="#performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 <p>
     The <a href="#performance-resource-timing">PerformanceResourceTiming</a>
-    interface must include all resources fetched from the networking layer by the current browsing context. Resources that are
+    interface must include all resources <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetched</a> from the networking layer by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>. Resources that are
     retrieved from the user agent's networking layer cache must be included in the
     <a href="#performance-resource-timing">PerformanceResourceTiming</a>
     interface.
@@ -369,30 +370,30 @@ in the</span>
 <p>
     Examples:
     <ul>
-        <li>If the same canonical URL is used as the <code>src</code> attribute of two <code>IMG</code> elements,
-            the fetch of the resource initiated by the first <code>IMG</code> element should be included in the 
+        <li>If the same canonical URL is used as the <code>src</code> attribute of two HTML <code>IMG</code> elements,
+            the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource initiated by the first HTML <code>IMG</code> element should be included in the 
             <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.  The user agent might not re-request the 
-            URL from the networking layer for the second <code>IMG</code> element, instead using an in-memory browser cache. 
-            In this case, there is only a single request sent to the networking layer for retrieval, so the fetch of the resource by the first
+            URL from the networking layer for the second HTML <code>IMG</code> element, instead using an in-memory browser cache. 
+            In this case, there is only a single request sent to the networking layer for retrieval, so the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource by the first
             <code>IMG</code> element would be the only occurrence in the <a href="#performance-resource-timing">PerformanceResourceTiming</a>
             interface.
         </li>
-        <li>If the <code>src</code> attribute of an <code>IMG</code> element is changed via script, both the fetch of the original resource as well
-            as the fetch of the new URL would be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
+        <li>If the <code>src</code> attribute of a HTML <code>IMG</code> element is changed via script, both the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the original resource as well
+            as the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the new URL would be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
         <li>
-            If a <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both fetches of the resource would be
+            If a <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetches</a> of the resource would be
             included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. This is because the user agent must validate
             both requests from the networking layer, even if the resource is in a disk cache from the first request.
         </li>
         <li>
-            If an <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
+            If a HTML <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
             in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. Sub-resources requested by the <code>IFRAME</code> document 
             will be included in the <code>IFRAME</code> document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface and not the parent 
             document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
         <li>
-            If an <code>IMG</code> element has a <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> as its source, then this resource will not
+            If a HTML <code>IMG</code> element has a <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> as its source, then this resource will not
             be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. By definition <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code>
             contains embedded data and does not require access to the networking layer.
         </li>
@@ -409,18 +410,18 @@ in the</span>
 Attribute</h3>
 <pre class="idl">
   partial interface <dfn id="nt-performance-interface">Performance</dfn> {
-  const unsigned short <a href="#perf-resource">PERF_RESOURCE</a> = 1;
+  const DOMString <a href="#perf-resource">PERF_RESOURCE</a> = "resource";
   
-  const unsigned short <a href="#type-other">INITIATOR_OTHER</a> = 0;
-  const unsigned short <a href="#type-link">INITIATOR_LINK</a> = 1;
-  const unsigned short <a href="#type-css">INITIATOR_CSS</a> = 2;
-  const unsigned short <a href="#type-script">INITIATOR_SCRIPT</a> = 3;
-  const unsigned short <a href="#type-img">INITIATOR_IMG</a> = 4;
-  const unsigned short <a href="#type-object">INITIATOR_OBJECT</a> = 5;
-  const unsigned short <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = 6;
-  const unsigned short <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = 7;
-  const unsigned short <a href="#type-embed">INITIATOR_EMBED</a> = 8;
-  const unsigned short <a href="#type-svg">INITIATOR_SVG</a> = 9;
+  const DOMString <a href="#type-css">INITIATOR_CSS</a> = "css";
+  const DOMString <a href="#type-embed">INITIATOR_EMBED</a> = "embed";
+  const DOMString <a href="#type-img">INITIATOR_IMG</a> = "img";
+  const DOMString <a href="#type-link">INITIATOR_LINK</a> = "link";
+  const DOMString <a href="#type-object">INITIATOR_OBJECT</a> = "object";
+  const DOMString <a href="#type-other">INITIATOR_OTHER</a> = "other";
+  const DOMString <a href="#type-script">INITIATOR_SCRIPT</a> = "script";
+  const DOMString <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = "subdocument";
+  const DOMString <a href="#type-svg">INITIATOR_SVG</a> = "svg";
+  const DOMString <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = "xmlhttprequest";
 };
 </pre>
 
@@ -451,10 +452,10 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
 <div class="parameters">
     <p>
     	The <code id="name-attribute">name</code> attribute must return the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the 
-    	requested resource. This attribute must not change even if the fetch redirected to a different URL.
+    	requested resource. This attribute must not change even if the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> redirected to a different URL.
    	</p>
     <p>The <code id="entryType-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
-    <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for fetching.
+    <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
        If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
        when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
        document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
@@ -468,25 +469,25 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
 <p>This attribute must return the type of object that initiated the request for the resource: </p>
 <dl>
   <dt><dfn id="type-other">INITIATOR_OTHER</dfn>: The initiator is not of any type listed below.</dt>
-  <dt><dfn id="type-link">INITIATOR_LINK</dfn>: The initiator is the <code>href</code> attribute of the <code>&lt;link&gt;</code> element.</dt>
+  <dt><dfn id="type-link">INITIATOR_LINK</dfn>: The initiator is the <code>href</code> attribute of the HTML <code>&lt;link&gt;</code> element.</dt>
   <dt><dfn id="type-css">INITIATOR_CSS</dfn>: The initiator is any CSS resource downloaded via the <a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a> syntax, such as <code>@import url()</code>, <code>background: url()</code>, etc.</dt>
-  <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;script&gt;</code> element.</dt>
-  <dt><dfn id="type-img">INITIATOR_IMG</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;img&gt;</code> element.</dt>
-  <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: The initiator is the <code>data</code> attribute of the <code>&lt;object&gt;</code> element.</dt>
-  <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;frame&gt;</code> or <code>&lt;iframe&gt;</code> elements.</dt>
+  <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;script&gt;</code> element.</dt>
+  <dt><dfn id="type-img">INITIATOR_IMG</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;img&gt;</code> element.</dt>
+  <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: The initiator is the <code>data</code> attribute of the HTML <code>&lt;object&gt;</code> element.</dt>
+  <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;frame&gt;</code> or HTML <code>&lt;iframe&gt;</code> elements.</dt>
   <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: The initiator is a XMLHttpRequest object.</dt>
-  <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: The initiator is the <code>src</code> attribute of the <code>&lt;embed&gt;</code> element.</dt>
+  <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;embed&gt;</code> element.</dt>
   <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element and all resources downloaded as children of the <code>&lt;svg&gt;</code> element.</dt>
 </dl>
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
-this attribute must return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.</p>
+when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
+this attribute must return the <a href="#fetch-start">starting time of the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a></a> that initiates the redirect.</p>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
+when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
 and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must
 return the <a href="#fetch-start">starting time of the fetch</a> that initiates the redirect.
 Otherwise, this attribute must return zero. </p>
@@ -494,11 +495,11 @@ Otherwise, this attribute must return zero. </p>
 <h4 id="redirect-end-attribute"><code><dfn id="redirect-end">redirectEnd</dfn></code> attribute</h4>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when fetching the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
+when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
 this attribute must return the time immediately after receiving the last byte of the response of the last redirect.</p>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
-when fetching the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
+when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
 and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must return the 
 time immediately after receiving the last byte of the response of the last redirect.
 Otherwise, this attribute must return zero. </p>
@@ -506,10 +507,10 @@ Otherwise, this attribute must return zero. </p>
 <h4 id="fetch-start-attribute"><code><dfn id="fetch-start">fetchStart</dfn></code> attribute</h4>
 
 <p>If there are no HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
-this attribute must return the time immediately before the user agent starts to fetch the resource.</p>
+this attribute must return the time immediately before the user agent starts to <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> the resource.</p>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
-this attribute must return the time immediately before the user agent starts to fetch the final resource in the redirection.</p>
+this attribute must return the time immediately before the user agent starts to <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> the final resource in the redirection.</p>
 
 <h4 id="domainlookup-start-attribute"><code><dfn
 id="domainlookup-start">domainLookupStart</dfn></code> attribute</h4>
@@ -523,7 +524,7 @@ application caches</a> or local resources, this attribute must return the same
 value as <a href="#fetch-start">fetchStart</a>. </p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#domainlookup-start">domainLookupStart</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -542,7 +543,7 @@ domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#domainlookup-end">domainLookupEnd</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -557,7 +558,7 @@ application caches</a> or local resources, this attribute must return value of
 <a href="#domainlookup-end">domainLookupEnd</a>.</p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#connect-start">connectStart</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -582,7 +583,7 @@ establish the transport connection. It must not include other time interval
 such as SSL handshake and SOCKS authentication. </p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#connect-end">connectEnd</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -597,7 +598,7 @@ time immediately before the user agent starts the handshake process to secure th
 secureConnectionStart attribute is available but HTTPS is not used, this attribute must return zero.</p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#secureconnection-start">secureConnectionStart</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -614,7 +615,7 @@ href="#request-start">requestStart</a> must return the corresponding values
 of the new request.</p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#request-start">requestStart</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -626,7 +627,7 @@ href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-ca
 application caches</a> or from local resources.</p>
 
 <p>
-If the last non-redirected fetch of the resource is not the same origin as the current document,
+If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document,
 <a href="#response-start">responseStart</a> must return
 zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules apply.</p>
 
@@ -759,7 +760,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 
 <p>This section is non-normative.</p>
 
-<p>The following graph illustrates the timing attributes defined by the PerformanceResourceTiming interface. Attributes underlined may not be available when fetching resources from different <a href="#same-origin">origins</a>. User agents may perform internal processing in between timings, which allow for non-normative intervals between timings.</p>
+<p>The following graph illustrates the timing attributes defined by the PerformanceResourceTiming interface. Attributes underlined may not be available when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> resources from different <a href="#same-origin">origins</a>. User agents may perform internal processing in between timings, which allow for non-normative intervals between timings.</p>
 
 <p><img width="85%" src="resource-timing-overview.png" alt='Resource Timing attributes'></p>
 
@@ -771,7 +772,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
   <li>Set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
   by the user agent or set by the <a href="#rt-setResourceTimingBufferSize"><code>setResourceTimingBufferSize</code></a> method.
   </li>
-  <li>For each resource fetched by the current browsing context, perform the following steps:
+  <li>For each resource fetched by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
   <ol>
       <li id="step-create-object">Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object and 
       set <a href="#entryType-attribute">entryType</a> to <a href="#perf-resource"><code>PERF_RESOURCE</code></a>.
@@ -800,8 +801,8 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
           networking layer, such as being fetched from an in-memory cache, abort the 
           following steps.
       </li>
-      <li>If fetching the resource is aborted for any reason, abort the following steps.       </li>
-      <li>If the last non-redirected fetch of the resource is not the same origin as the current document 
+      <li>If <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource is aborted for any reason, abort the following steps.       </li>
+      <li>If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document 
       and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header does not apply, the user agent
       must set 
       <a href="#redirect-start">redirectStart</a>, 
@@ -830,7 +831,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       <li>Record the time as <a href="#domainlookup-end">domainLookupEnd</a> immediately after the 
        domain name lookup is successfully done. A user agent may need multiple retries before that. If 
        the domain lookup fails, abort the following steps. </li>
-      <li id="step-connect-start">If a persistent transport connection is used to fetch the resource, 
+      <li id="step-connect-start">If a persistent transport connection is used to <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> the resource, 
        let <a href="#connect-start">connectStart</a> and <a href="#connect-end">connectEnd</a> 
        be the same value of <a href="#domainlookup-end">domainLookupEnd</a>. Otherwise, record the time as 
        <a href="#connect-start">connectStart</a> immediately before initiating the connection to the server 
@@ -928,7 +929,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 
 <h3 id="monotonic-clock"><span class="secno">5.2 </span>Monotonic Clock</h3>
 <p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
-skewed by adjustments to the system clock while fetching the resource. The difference between any two chronologically 
+skewed by adjustments to the system clock while <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource. The difference between any two chronologically 
 recorded timing attributes must never be negative. For all resources, including subdocument resources, the user agent must 
 record the system clock at the beginning of the root document navigation and define subsequent timing attributes in 
 terms of a monotonic clock measuring time elapsed from the beginning of the navigation.

@@ -324,6 +324,12 @@ is not visible at all. The IDL attribute MUST return false if the <a href="http:
  is at least partially visible on at least one screen.
 </p>
 
+<p>
+If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
+the <a href="#pv-hidden"><code>hidden</code></a> IDL attribute MUST return true.
+</p>
+
 <p>To accommodate accessibility tools that are typically full screen but still show a 
 view of the page, when applicable, this attribute may return false when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
@@ -349,6 +355,12 @@ is not minimized but is fully obscured by other applications.</p>
 <p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
+
+<p>
+If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
+the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a>.
+</p>
  
  <p>To accommodate accessibility tools that are typically full screen but still 
  show a view of the page, when applicable, this constant may not be returned 
@@ -387,11 +399,13 @@ is not visible at all and a preview of the <a href="http://www.w3.org/TR/DOM-Lev
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
-<p>The visibilitychange event MUST be fired any time a change is made to the 
-<a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute. This event can only be registered using 
-addEventListener on document. This event must bubble. This event will be fired on the first change in 
-<a href="#pv-visibility-state"><code>visibilityState</code></a> after registration; it will not be fired on 
-registration.</p>
+<p>
+When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+has changed, the User Agent MUST queue a task that when run, synchronously sets the new values for the <a href="#pv-visibility-state"><code>visibilityState</code></a> and
+<a href="#pv-hidden"><code>hidden</code></a> IDL attributes, and then fires a simple event that bubbles, but isn't cancelable, named <code>visiblitychange</code> at the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>. 
+</p>
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
 

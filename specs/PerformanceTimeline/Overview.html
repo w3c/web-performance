@@ -373,15 +373,22 @@ attribute</h3>
 <h3 id="sec-PerformanceTiming"><span class="secno">4.4 </span> The <code>PerformanceTiming</code> 
 interface</h3>
 
+<pre class="idl">
+  partial interface <dfn id="nt-performance-interface">Performance</dfn> {
+  const DOMString <a href="perf-navigation">PERF_NAVIGATION</a> = "navigation";
+};
+</pre>
+
+
 <p>The <a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a> interface does not extend 
 the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface. However, when the <a href="#getEntriesByType-method">getEntriesByType</a> and
-<a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <code>PERF_NAVIGATION</code>,
+<a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <code><a href="#perf-navigation">PERF_NAVIGATION</a></code>,
 a <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> with a <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object with the following values must be returned:
 </p>
 
 <div class="parameters">
     <p>The <code>name</code> attribute will return the "document" DOMString.</p>
-    <p>The <code>entryType</code> attribute will return <code id="perf-navigation">PERF_NAVIGATION</code>.</p>
+    <p>The <code>entryType</code> attribute will return <code><a href="#perf-navigation">PERF_NAVIGATION</a></code>.</p>
     <p>The <code id="timing-startTime">startTime</code> attribute will return a timestamp with the same value as <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start">navigationStart</a>.</p>
     <p>The <code>duration</code> attribute will return a timestamp equal to the difference between <a href="http://www.w3.org/TR/navigation-timing/#nt-load-end">loadEventEnd</a> and <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start">navigationStart</a>, respectively.</p>
 </div>

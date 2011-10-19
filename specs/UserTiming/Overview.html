@@ -241,13 +241,13 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute">Performance</a> {
-    const unsigned short PERF_DEVELOPER_MARK = 2;
-    const unsigned short PERF_DEVELOPER_MEASURE = 3;
+    const DOMString PERF_DEVELOPER_MARK = "mark";
+    const DOMString PERF_DEVELOPER_MEASURE = "measure";
 
-    const string <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = "fullyLoaded";
-    const string <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = "fullyVisible";
-    const string <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = "aboveTheFold";
-    const string <a href="#ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</a> = "timeToUserAction";
+    const DOMString <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = "fullyLoaded";
+    const DOMString <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = "fullyVisible";
+    const DOMString <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = "aboveTheFold";
+    const DOMString <a href="#ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</a> = "timeToUserAction";
 
     void <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     Array <a href="#ut-getMarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
