@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Page Visibility API Read Only Conformance</title>
+        
+        <SCRIPT src="support/testharness.js"></SCRIPT>
+        <SCRIPT src="support/featuredetection.js"></SCRIPT>
+        <SCRIPT src="support/pagevistestharness.js"></SCRIPT>
+        <LINK rel="stylesheet" href="support/testharness.css">
+    </head>
+    <body onload="onload_test()">
+        <h1>Description</h1>
+        <p>This test validates that all of the attributes and enumeration values associated with the Page Visibility API cannot be overwritten.</p>
+
+        <div id="log"></div>
+        
+        <script type="text/javascript">
+            SetupResultTable();
+        
+            if (BrowserHasFeature(document, "hidden") !== undefined)
+            {
+                test_read_only_conformance(document);
+                test_read_only_conformance_enum(document);
+            }
+            else
+            {
+                test_true(false, "Your browser does not support the Page Visibility API");
+            }
+            
+            function onload_test()
+            {
+                setTimeout(VerifyTest, 16);
+            }
+        </script>
+    </body>
+</html>

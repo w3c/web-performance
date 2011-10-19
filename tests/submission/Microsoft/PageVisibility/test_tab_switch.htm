@@ -1,0 +1,51 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Page Visibility API Operation While Switching Tabs</title>
+        
+        <SCRIPT src="support/testharness.js"></SCRIPT>
+        <SCRIPT src="support/featuredetection.js"></SCRIPT>
+        <SCRIPT src="support/pagevistestharness.js"></SCRIPT>
+        <LINK rel="stylesheet" href="support/testharness.css">
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the page properly becomes hidden and visible due to the selection of tabs.</p>
+        
+        <p>
+            Note: This test will use window.open() to open a new tab and place the current page in the background. 
+            Before running this test, the browser should be configured to open new links in tabs and not new pages.
+            The page should also be in the foreground when the test starts such that it starts with a "visible" state.
+        </p>
+
+        <div id="log"></div>
+        
+        <br />
+        IFrame with default style:
+        <br />
+        <iframe id="childDocShown" src="support/blank_page_green.htm">
+            iframes unsupported
+        </iframe>
+        <hr />
+        IFrame with "display:none" style:
+        <br />
+        <iframe id="childDocHidden" src="support/blank_page_green.htm" style="display:none">
+            iframes unsupported
+        </iframe>
+
+        <script type="text/javascript" >
+            SetupResultTable({timeout:60*1000, explicit_done:true});
+            
+            if (BrowserHasFeature(document, "hidden") !== undefined)
+            {
+                test_transition_init(document, TRANSITION_MODE_TAB_SWITCH);
+            }
+            else
+            {
+                test_true(false, "Your browser does not support the Page Visibility API");
+                setTimeout(VerifyTest, 16);
+            }
+        </script>
+    </body>
+</html>

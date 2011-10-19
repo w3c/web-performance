@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Page Visibility API Operation While Minimizing Browser Window</title>
+        
+        <SCRIPT src="support/testharness.js"></SCRIPT>
+        <SCRIPT src="support/featuredetection.js"></SCRIPT>
+        <SCRIPT src="support/pagevistestharness.js"></SCRIPT>
+        <LINK rel="stylesheet" href="support/testharness.css">
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the page properly becomes hidden and visible due to minimizing, maximizing, and restoring the browser window.</p>
+        
+        <h1>Manual Test Steps:</h1>
+        <p>
+            <ol>
+                <li> Ensure this page is the foreground and click the "Start Test"</li>
+                <li> Minimize the browser</li>
+                <li> Restore or maximize the browser</li>
+            </ol>
+            Note: This test will automatically timeout and fail if not completed within 60 seconds.
+        </p>
+        
+        <button onclick="start_test();">Start Test</button>
+
+        <div id="log"></div>
+        
+        <br />
+        IFrame with default style:
+        <br />
+        <iframe id="childDocShown" src="support/blank_page_green.htm">
+            iframes unsupported
+        </iframe>
+        <hr />
+        IFrame with "display:none" style:
+        <br />
+        <iframe id="childDocHidden" src="support/blank_page_green.htm" style="display:none">
+            iframes unsupported
+        </iframe>
+
+        <script type="text/javascript" >
+            SetupResultTable({timeout:60*1000, explicit_done:true});
+            
+            function start_test()
+            {
+                if (BrowserHasFeature(document, "hidden") !== undefined)
+                {
+                    test_transition_init(document, TRANSITION_MODE_MIN_MAX);
+                }
+                else
+                {
+                    test_true(false, "Your browser does not support the Page Visibility API");
+                    VerifyTest();
+                }
+            }
+        </script>
+    </body>
+</html>

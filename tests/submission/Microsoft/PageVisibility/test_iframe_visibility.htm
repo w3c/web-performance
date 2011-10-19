@@ -1,0 +1,73 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Page Visibility API Attributes IFrame Test</title>
+        
+        <SCRIPT src="support/testharness.js"></SCRIPT>
+        <SCRIPT src="support/featuredetection.js"></SCRIPT>
+        <SCRIPT src="support/pagevistestharness.js"></SCRIPT>
+        <LINK rel="stylesheet" href="support/testharness.css">
+    </head>
+    <body onload="onload_test()">
+        <h1>Description</h1>
+        <p>This test validates that all of the Page Visibility attributes inside both visible IFrames and IFrames hidden with 
+           style attributes match the value of the PageVisibility attributes inside the root document.</p>
+
+        <div id="log"></div>
+        
+        <table border='1'>
+            <tr>
+                <th>
+                    IFrame with no style attribute
+                </th>
+                <th>
+                    IFrame with "display:none" style
+                </th>
+                <th>
+                    IFrame with "visibility:hidden" style
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <iframe id="childDocShown" src="support/blank_page_green.htm">
+                        iframes unsupported
+                    </iframe>
+                </td>
+                <td>
+                    <iframe id="childDocDisplayNone" src="support/blank_page_green.htm" style="display:none">
+                        iframes unsupported
+                    </iframe>
+                </td>
+                <td>
+                     <iframe id="childDocVisibilityHidden" src="support/blank_page_green.htm" style="visibility:hidden">
+                        iframes unsupported
+                    </iframe>
+                </td>
+            </tr>
+        <table>
+
+        <script type="text/javascript" >
+            SetupResultTable();
+        
+            if (BrowserHasFeature(document, "hidden") !== undefined)
+            {
+                test_api_match(document, document.getElementById('childDocShown').contentDocument,
+                               "document", "document.getElementById('childDocShown').contentDocument");
+                test_api_match(document, document.getElementById('childDocDisplayNone').contentDocument,
+                               "document", "document.getElementById('childDocDisplayNone').contentDocument");
+                test_api_match(document, document.getElementById('childDocVisibilityHidden').contentDocument,
+                               "document", "document.getElementById('childDocVisibilityHidden').contentDocument");
+            }
+            else
+            {
+                test_true(false, "Your browser does not support the Page Visibility API");
+            }
+            
+            function onload_test()
+            {
+                setTimeout(VerifyTest, 16);
+            }
+        </script>
+    </body>
+</html>
