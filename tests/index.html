@@ -19,30 +19,14 @@ td:nth-of-type(4), th:nth-of-type(4) { display: none; }
 
 <h1>Web Performance Tests</h1>
 
-   <p class=copyright><a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
-    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
-    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
-    of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.eu/"><acronym title="European Research Consortium
-    for Informatics and Mathematics">ERCIM</acronym></a>, <a
-    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
-    <a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
-
-    and <a
-    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
-    use</a> rules apply.</p>
-
    <hr class='top'>
 </div>
 
 <h2 class="no-num no-toc" id="intro">Introduction</h2>
 
 <p>This document lists the test suite developed by the Web Performance
-Working Group.</p>
+Working Group. For questions or bug reports, please
+contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 <!--begin-toc-->
@@ -50,7 +34,9 @@ Working Group.</p>
 <li><a href='#navigation_timing'>Navigation Timing</a></li>
 </ol>
 
-<h2 id='#navigation_timing'>Navigation Timing</h2>
+<p>Looking to run the tests and see test results? check the <a href='http://w3c-test.org/framework/'>test framework</a> instead.</p>
+
+<h2 id='navigation_timing'>Navigation Timing</h2>
 
 <table>
 <colgroup>
@@ -69,7 +55,7 @@ Working Group.</p>
 </thead>
 <tbody>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_document_open.htm">test_document_open</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_document_open.html">test_document_open</a></td>
 <td>
 This test validates window.performance.timing remains constant when a document is replaced using document.open.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-window.performance-attribute'>4.4 The window.performance attribute</a></td>
@@ -78,7 +64,7 @@ This test validates window.performance.timing remains constant when a document i
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigate_within_document.htm">test_navigate_within_document</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigate_within_document.html">test_navigate_within_document</a></td>
 <td>
 This test validates that all of the window.performance.timing attributes remain unchanged after an in document navigation (URL fragment change).</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-window.performance-attribute'>4.4 The window.performance attribute</a></td>
@@ -87,7 +73,7 @@ This test validates that all of the window.performance.timing attributes remain 
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_attributes_exist.htm">test_navigation_attributes_exist</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigation_attributes_exist.html">test_navigation_attributes_exist</a></td>
 <td>
 This test validates that all of the window.performance.navigation attributes exist (but does not validate that their values are correct).
 </td>
@@ -97,7 +83,7 @@ This test validates that all of the window.performance.navigation attributes exi
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_redirectCount_none.htm">test_navigation_redirectCount_none</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigation_redirectCount_none.html">test_navigation_redirectCount_none</a></td>
 <td>
 This test validates that the value of the window.performance.navigation.redirectCount attribute, as well as the window.performance.timing.redirectStart and redirectEnd attributes on a non-redirected navigation.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-navigation-info-interface'>4.3 The PerformanceNavigation interface</a></td>
@@ -106,7 +92,7 @@ This test validates that the value of the window.performance.navigation.redirect
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_backforward.htm">test_navigation_type_backforward</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigation_type_backforward.html">test_navigation_type_backforward</a></td>
 <td>
 This test validates the value of window.performance.navigation.type with a forward and back navigation.
 </td>
@@ -116,7 +102,7 @@ This test validates the value of window.performance.navigation.type with a forwa
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_enums.htm">test_navigation_type_enums</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigation_type_enums.html">test_navigation_type_enums</a></td>
 <td>
 This test validates that the TYPE_* enumerations of window.performance.navigation exist and their values are correct.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-navigation-info-interface'>4.3 The PerformanceNavigation interface</a></td>
@@ -125,7 +111,7 @@ This test validates that the TYPE_* enumerations of window.performance.navigatio
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_navigation_type_reload.htm">test_navigation_type_reload</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_navigation_type_reload.html">test_navigation_type_reload</a></td>
 <td>
 This test validates the value of window.performance.navigation.type with a reloaded navigation.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-navigation-info-interface'>4.3 The PerformanceNavigation interface</a></td>
@@ -134,7 +120,7 @@ This test validates the value of window.performance.navigation.type with a reloa
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_no_previous_document.htm">test_no_previous_document</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_no_previous_document.html">test_no_previous_document</a></td>
 <td>
 This test validates the value of window.performance.timing attributes on an initial navigation.</td>
 <td>
@@ -144,7 +130,7 @@ This test validates the value of window.performance.timing attributes on an init
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_performance_attributes_exist.htm">test_performance_attributes_exist</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_performance_attributes_exist.html">test_performance_attributes_exist</a></td>
 <td>
 This test validates that the navigation and timing attributes exist for window.performance (but does not validate that their values are correct).
 </td>
@@ -154,7 +140,7 @@ This test validates that the navigation and timing attributes exist for window.p
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_readwrite.htm">test_readwrite</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_readwrite.html">test_readwrite</a></td>
 <td>
 This test validates that the window.performance object is read/write.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-window.performance-attribute'>4.4 The window.performance attribute</a></td>
@@ -163,7 +149,7 @@ This test validates that the window.performance object is read/write.</td>
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_attributes_order.htm">test_timing_attributes_order</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_attributes_order.html">test_timing_attributes_order</a></td>
 <td>
 This test validates the ordering of the window.performance.timing attributes.</td>
 <td>
@@ -173,7 +159,7 @@ This test validates the ordering of the window.performance.timing attributes.</t
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_attributes_exist.htm">test_timing_attributes_exist</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_attributes_exist.html">test_timing_attributes_exist</a></td>
 <td>
 This test validates that all of the window.performance.timing attributes exist (but does not validate that their values are correct).</td>
 <td>
@@ -183,7 +169,7 @@ This test validates that all of the window.performance.timing attributes exist (
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_client_redirect.htm">test_timing_client_redirect</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_client_redirect.html">test_timing_client_redirect</a></td>
 <td>
 This test validates the values of the window.navigation.redirectCount and the window.performance.timing.redirectStart/End times on a client side redirect.</td>
 <td>
@@ -193,7 +179,7 @@ This test validates the values of the window.navigation.redirectCount and the wi
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_reload.htm">test_timing_reload</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_reload.html">test_timing_reload</a></td>
 <td>
 This test validates the values of the window.performance.timing attributes after a reloaded navigation.</td>
 <td>
@@ -203,7 +189,7 @@ This test validates the values of the window.performance.timing attributes after
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_server_redirect.htm">test_timing_server_redirect</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_server_redirect.html">test_timing_server_redirect</a></td>
 <td>
 This test validates the values of the window.performance.timing.redirect attributes on a same-origin server redirected navigation.</td>
 <td>
@@ -213,7 +199,7 @@ This test validates the values of the window.performance.timing.redirect attribu
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_timing_xserver_redirect.htm">test_timing_xserver_redirect</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_timing_xserver_redirect.html">test_timing_xserver_redirect</a></td>
 <td>
 This test validates the values of the window.performance.timing.redirect attributes on a cross-origin server redirected navigation.</td>
 <td>
@@ -223,7 +209,7 @@ This test validates the values of the window.performance.timing.redirect attribu
 </td>
 </tr>
 <tr>
-<td><a  href="http://w3c-test.org/webperf/tests/approved/test_unique_performance_objects.htm">test_unique_performance_objects</a></td>
+<td><a  href="http://w3c-test.org/webperf/tests/approved/navigation-timing/html5/test_unique_performance_objects.html">test_unique_performance_objects</a></td>
 <td>
 This test validates that each window has a unique window.performance object.</td>
 <td><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#sec-window.performance-attribute'>4.4 The window.performance attribute</a></td>

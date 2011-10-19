@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta charset="utf-8">
   <title>Navigation Timing</title>
-<style type="text/css">
+<style>
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
    pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
    pre code { color:inherit; background:transparent }
@@ -61,12 +61,12 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
-    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
-    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
-    of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.eu/"><acronym title="European Research Consortium
-    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
     href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
     <a
@@ -97,7 +97,7 @@ document</h2>
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[NavigationTiming]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BNavigationTiming%5D%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
    with <samp>[NavigationTiming]</samp> at the start of the subject line.</p>
 
@@ -117,8 +117,7 @@ cite this document as other than work in progress. </p>
 <p>This document was produced by a group operating under
    the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
    February 2004 W3C Patent Policy</a>. W3C maintains
-   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
-   rel="disclosure">public list of any patent disclosures</a> made in
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
    connection with the deliverables of the group; that page also
    includes instructions for disclosing a patent. An individual who
    has actual knowledge of a patent which the individual believes
@@ -582,19 +581,22 @@ href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
 in the current browsing context. It must have one of the following <a
 href="#nt-navigation-info-type">navigation type</a> values. </p>
 <dl>
-  <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn>:
-    Navigation started by clicking on a link, or entering the URL in the user
+  <dt><dfn id="nt-navigation-info-type-navigate">TYPE_NAVIGATE</dfn></dt>
+    <dd><p>Navigation started by clicking on a link, or entering the URL in the user
     agent's address bar, or form submission, or initializing through a script operation other than
     the ones used by <a href="#nt-navigation-info-type-navigate">TYPE_RELOAD</a>
-    and <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a> as listed below.
-  <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn>: Navigation through
+    and <a href="#nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</a> as listed below.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-reload">TYPE_RELOAD</dfn></dt>
+    <dd><p>Navigation through
     the reload operation or the
     <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
-    method.</dt>
-  <dt><dfn id="nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</dfn>: Navigation
-  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</dt>
-  <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn>: Any navigation
-  types not defined by values above.</dt>
+    method.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-back-forward">TYPE_BACK_FORWARD</dfn></dt>
+   <dd><p>Navigation
+  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</p></dd>
+  <dt><dfn id="nt-navigation-info-type-reserved">TYPE_RESERVED</dfn></dt>
+  <dd><p>Any navigation
+  types not defined by values above.</p></dd>
 </dl>
 
 <div class="note">
@@ -682,7 +684,7 @@ available in navigation involving documents from different
 <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
-<p><img width="85%" src="timing-overview.png" alt='Timing attributes'></p>
+<p><img style='width: 85%' src="timing-overview.png" alt='Timing attributes'></p>
 </div>
 
 <ol>
@@ -896,14 +898,14 @@ from the beginning of the navigation.
 e.g., for experimental purposes, vendors must use the following extension mechanisms:</p>
 
 <ul>
-<li>If the extension to be added is an navigation type, the new type must</li>
+<li>If the extension to be added is an navigation type, the new type must
   <ul>
   <li>follow the naming convention: TYPE_[VENDORPREFIX]_[TYPE], where [VENDORPREFIX] is a name
   that identifies the vendor.</li>
   <li>have a value in the range of 100 to 200.</li>
   </ul>
-  
-<li>If the extension is a new timing attribute, it must</li>
+</li>  
+<li>If the extension is a new timing attribute, it must
   <ul>
   <li>follow the naming convention: [vendorPrefix]TimeAttribute, where [vendorPrefix] identifies
   the vendor name and TimeAttribute identifies the name of the timing attribute.</li>
@@ -911,7 +913,7 @@ e.g., for experimental purposes, vendors must use the following extension mechan
   <li>be measured in milliseconds since midnight of January 1, 1970 (UTC), as
   defined in <a href="#terminology">Section 3 Terminology</a>.</li>
   </ul>
-
+</li>
 <li>If the extension is a new navigation attribute, it must follow the naming
   convention: [vendorPrefix]NavigationAttribute, where [vendorPrefix] identifies
   the vendor name and NavigationAttribute identifies the name of the navigation attribute.</li>
@@ -960,18 +962,18 @@ relying on the interface described in this work would break.</p>
 
 <h2 id="references"><span class="secno">8 </span>References</h2>
 
-<h3 id="normative-references"><span class="secno">8.1 </span>Normative References</h2>
+<h3 id="normative-references"><span class="secno">8.1 </span>Normative References</h3>
 
 <dl>
-<dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
+<dt><a id='rfc2119'>[IETF RFC 2119]</a></dt>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
 </dd>
-<dt><a name='rfc2616' id='rfc2616'>[IETF RFC 2616]</a></dt>
+<dt><a id='rfc2616'>[IETF RFC 2616]</a></dt>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
 </dd>
-<dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+<dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
 <dd>
         <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
         Specification</a></cite>, A. Le Hors, et al., Editors. World
@@ -981,23 +983,23 @@ relying on the interface described in this work would break.</p>
         DOM Core</a> is available at
         http://www.w3.org/TR/domcore/.
       </dd>
-<dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt><dd>
+<dt>[<a id="ECMA262">ECMA-262</a>]</dt><dd>
 	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
 	Edition. ECMA International, Standard
 	ECMA-262, December 2009. This version of the ECMAScript
 	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
-<dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+<dt>[<a id="HTML5">HTML5</a>]</dt>
 <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, January 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
-   <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
 
-<h3 id="informative-references"><span class="secno">8.2 </span>Informative References</h2>
+<h3 id="informative-references"><span class="secno">8.2 </span>Informative References</h3>
 
 <dl id='references-list'>
-<dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
-<dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
-<dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
+<dt>[<a id="JSMeasure">JSMEASURE</a>]</dt>
+<dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&amp;rep=rep1&amp;type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
+<dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
 <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a>. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html'>latest version of Performance Timeline</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html.</dd>
 </dl>
 

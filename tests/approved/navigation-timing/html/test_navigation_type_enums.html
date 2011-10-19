@@ -1,0 +1,25 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>window.performance.navigation enums</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+    </head>
+    <body>
+        <h1>Description</h1>
+        <p>This test validates that the TYPE_* enumerations of window.performance.navigation exist and their values are correct.</p>
+
+        <div id="log"></div>
+
+        <script>
+        test_namespace('navigation');
+
+        test_enum('navigation', 'TYPE_NAVIGATE', 0);
+        test_enum('navigation', 'TYPE_RELOAD', 1);
+        test_enum('navigation', 'TYPE_BACK_FORWARD', 2);
+        test_enum('navigation', 'TYPE_RESERVED', 255);
+        </script>
+    </body>
+</html>
