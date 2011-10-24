@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Editor's Draft September 14, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Editor's Draft October 18th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/aaabbd9ec8ec/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/aaabbd9ec8ec/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -386,12 +386,14 @@ the response of the last redirect. Otherwise, this attribute must return zero.</
 
 <h4><code><dfn id="nt-fetch-start">fetchStart</dfn></code> attribute</h4>
 
-<p>If the new resource is to be fetched using HTTP GET
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or 
+<p>If the new resource is to be
+<a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetched</a> using HTTP GET
+<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or 
 equivalent</a>, fetchStart must return the time immediately before the user agent starts
 checking <a href="http://dev.w3.org/html5/spec/Overview.html#relevant-application-cache">
 any relevant application caches</a>. Otherwise, it must return the time when the
-user agent starts fetching the resource.</p>
+user agent starts 
+<a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetching</a> the resource.</p>
 
 <h4><code><dfn id="nt-domain-lookup-start">domainLookupStart</dfn></code> attribute</h4>
 
@@ -753,7 +755,7 @@ non-normative intervals between timings.</p>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#nt-unload-end">unloadEventEnd</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
-    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
+    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
     href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
     relevant application caches</a>, record the current time as
@@ -1019,7 +1021,7 @@ relying on the interface described in this work would break.</p>
 in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
 Lawrence, James Simonsen, Jatinder Mann, Jason Sobel, Jason Weber, Jonas Sicking, Kyle Scholz,
-Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjørn Vik,
+Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbj�rn Vik,
 Steve Souders, Tony Gentilcore for their reviews and feedback.</p>
 </body>
 </html>
