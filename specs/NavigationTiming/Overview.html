@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Editor's Draft October 18th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-nov-14-2011">Editor's Draft November 14th, 2011</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -50,9 +50,9 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/6c820a644db0/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/6c820a644db0/specs/NavigationTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/aaabbd9ec8ec/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/aaabbd9ec8ec/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/NavigationTiming/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/NavigationTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
@@ -339,30 +339,30 @@ must return the same value as <a href="#nt-fetch-start">fetchStart</a>.</p>
 
 <h4><code><dfn id="nt-unload-start">unloadEventStart</dfn></code> attribute</h4>
 
-<p>If the previous document and the current document have the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+<p>If the previous document and the current document have the same
+<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
 this attribute must return the time immediately before the user agent starts
 the <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload</a>
 event of the previous document. 
 
 If there is no previous document or the previous document has a
-different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
+different <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> than the
 current document, this attribute must return zero.</p>
 
 <h4><code><dfn id="nt-unload-end">unloadEventEnd</dfn></code> attribute</h4>
 
 <p>If the previous document and the current document have the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">same origin</a>,
 this attribute must return the time immediately after the user agent finishes the
 <a href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unload</a>
 event of the previous document. If there is no previous document or the previous document has
-a different <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> than the
+a different <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and not all the redirects or equivalent are from the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
 both <a href="#nt-unload-start">unloadEventStart</a> and
 <a href="#nt-unload-end">unloadEventEnd</a> must return the zero.</p>
 
@@ -371,7 +371,7 @@ both <a href="#nt-unload-start">unloadEventStart</a> and
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if all the redirects or equivalent are from the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
 this attribute must return the <a href="#nt-fetch-start">starting time
 of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
 
@@ -380,7 +380,7 @@ of the fetch</a> that initiates the redirect. Otherwise, this attribute must ret
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and all redirects and equivalents are from the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 
@@ -623,9 +623,9 @@ such as <a href="#nt-navigation-info-type-navigate">TYPE_RELOAD</a> if reloading
 
 <p>This attribute must return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
-redirect or there is any redirect that is not from the 
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">
-same origin</a> as the destination document, this attribute must return zero. </p>
+redirect or there is any redirect that is not from the same
+<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">
+origin</a> as the destination document, this attribute must return zero. </p>
 
 
 <h3 id="sec-window.performance-attribute"><span class="secno">4.4 </span> The <code><a href="#nt-window-performance">window.performance</a> </code> 
@@ -693,7 +693,7 @@ window.performance.navigation are replaced with these instances.</p>
 <a href="#nt-navigation-info-interface">PerformanceNavigation</a> interface
 with or without redirect, respectively. Attributes underlined may not be
 available in navigation involving documents from different 
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>. User
+<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
 <p><img style='width: 85%' src="timing-overview.png" alt='Timing attributes'></p>
@@ -747,7 +747,7 @@ non-normative intervals between timings.</p>
     </ol>
   </li>
   <li>If the current document and the previous document are from different 
-    <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origins</a>,
+    <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origins</a>,
     set both <a href="#nt-unload-end">unloadEventStart</a> and 
     <a href="#nt-unload-end">unloadEventEnd</a> to 0 then go to step
     <a href="#step-fetch-start">6</a>. Otherwise, record <a href="#nt-unload-end">unloadEventStart</a>
@@ -829,7 +829,7 @@ non-normative intervals between timings.</p>
     then
     <ol style="list-style-type:lower-alpha;">
       <li>if the current document and the document that is redirected to are not from the
-        <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+        same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
         set <a href="#nt-redirect-start">redirectStart</a>,
         <a href="#nt-redirect-end">redirectEnd</a>,
         <a href="#nt-unload-start">unloadEventStart</a>,
@@ -837,7 +837,7 @@ non-normative intervals between timings.</p>
         <a href="#nt-navigation-info-redirect-count">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">6</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
-        <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a>,
+        same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
         set <a href="#nt-redirect-start">redirectStart</a>,
         <a href="#nt-redirect-end">redirectEnd</a>,
         <a href="#nt-unload-start">unloadEventStart</a>,
@@ -939,8 +939,8 @@ e.g., for experimental purposes, vendors must use the following extension mechan
 <p>There is the potential for disclosing an end-user's browsing and activity history by using
 carefully crafted timing attacks. For instance, the unloading time reveals how long the previous
 page takes to execute its unload handler, which could be used to infer the user's login status.
-These attacks have been mitigated by enforcing the
-<a href="http://dev.w3.org/html5/spec/origin-0.html#origin">same origin</a> policy when
+These attacks have been mitigated by enforcing the same
+<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> policy when
 timing information involving the previous navigation is accessed.</p>
 
 <p>The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
@@ -985,6 +985,10 @@ relying on the interface described in this work would break.</p>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
 </dd>
+<dt>[<a id='rfc2616'>ORIGIN</a>]</dt>
+<dd>
+ <cite><a href='http://tools.ietf.org/html/draft-ietf-websec-origin-06'>The Web Origin Concept</a></cite>, A. Barth. IETF. 
+</dd>
 <dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
 <dd>
         <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
@@ -1021,7 +1025,7 @@ relying on the interface described in this work would break.</p>
 in touch with regarding this draft, including Anderson Quach, Alex Russell,
 Alois Reitbauer, Annie Sullivan, Christian Biesinger, Darin Fisher, Eric
 Lawrence, James Simonsen, Jatinder Mann, Jason Sobel, Jason Weber, Jonas Sicking, Kyle Scholz,
-Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjørn Vik,
+Lenny Rachitsky, Nic Jansma, Richard Rabbat, Sergey Novikov, Sigbjï¿½rn Vik,
 Steve Souders, Tony Gentilcore for their reviews and feedback.</p>
 </body>
 </html>
