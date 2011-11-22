@@ -53,12 +53,12 @@ function wp_test(func, msg)
     {
         namespace_check = true;
 
-        if (performanceNamespace === undefined)
+        if (performanceNamespace === undefined || performanceNamespace == null)
         {
             skip_all_tests = true;
 
             // show a single error that window.performance is undefined
-            test(function() { assert_true(performanceNamespace !== undefined, "window.performance is defined"); }, "window.performance is defined");
+            test(function() { assert_true(performanceNamespace !== undefined && performanceNamespace != null, "window.performance is defined and not null"); }, "window.performance is defined and not null.");
         }
     }
 
