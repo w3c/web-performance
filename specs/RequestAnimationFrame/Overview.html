@@ -193,10 +193,10 @@ specifications:</p>
 
 <p>Associated with every <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document">Document</a></code>
 is an <dfn id="dfn-animation-frame-request-callback-list">animation frame request callback list</dfn>,
-which is a list of &lt;<var>handle</var>, <var>callback</var>, <var>cancelled</var>&gt; triples.
-<var>handle</var> is an integer that uniquely identifies the entry in the list,
+which is a list of &lt;<var>handle</var>, <var>callback</var>&gt; tuples.
+<var>handle</var> is an integer that uniquely identifies the entry in the list.
 <var>callback</var> is a <code><a href="#FrameRequestCallback">FrameRequestCallback</a></code>
-object, and <var>cancelled</var> is a Boolean flag.  Initially, the
+object.  Initially, the
 <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
 for a <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document">Document</a></code>
 is empty.</p>
@@ -217,7 +217,7 @@ operation on the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-win
 object.  In the definition of <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> below, references to the
 <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document">Document</a></code>
 object are to be taken to be references to the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
-object’s <a href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>. <a href="#ref-HTML5">[HTML5]</a></p>
+object’s <a href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>. <a href="#ref-HTML5">[HTML5]</a></p>
 
 <pre class="idl"><span class="xattr">[Supplemental, NoInterfaceObject]</span>
 interface <dfn id="WindowAnimationTiming">WindowAnimationTiming</dfn> {
@@ -233,11 +233,14 @@ interface <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> {
 };</pre>
 
 <p>The <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn> method is
-used to signal to the user agent that a <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animation<!--/a-->
+used to signal to the user agent that a script-based animation
 needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code> is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
 resampling by appending to the end of the <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
-an entry whose <var>handle</var> is a user-agent-defined integer greater than zero that uniquely identifies the entry in the list,
-whose <var>callback</var> is <code><var>callback</var></code> and whose <var>cancelled</var> flag is false.</p>
+an entry whose <var>handle</var> is a user-agent-defined integer greater than zero that uniquely identifies the entry in the list and
+whose <var>callback</var> is <code><var>callback</var></code>.</p>
+
+<p>Each <a class="dfnref" href="#dfn-animation-frame-request-callback">FrameRequestCallback</a> object has a <dfn id="callbackCancelledFlag">cancelled</dfn> boolean flag. This
+flag is initially false and is not exposed by any interface.</p>
 
 <div class="note"><div class="noteHeader">Note</div>
   <p><code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> only schedules
@@ -259,10 +262,10 @@ whose <var>callback</var> is <code><var>callback</var></code> and whose <var>can
 
 <p>The <dfn id="cancelAnimationFrame"><code>cancelAnimationFrame</code></dfn> method is
 used to cancel a previously made request to schedule an animation frame update.  When <code>cancelAnimationFrame(<var>handle</var>)</code> is called,
-the user agent <span class="rfc2119">MUST</span> set the <var>cancelled</var> flag to true for the entry in the
-<a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
-whose <var>handle</var> is <code><var>handle</var></code>.  If there is no entry in the list with the given
-handle, then this function does nothing.</p>
+the user agent <span class="rfc2119">MUST</span> set the <a class="dfnref" href="#dfn-callback-cancelled-flag">cancelled</a> flag to true for the
+<a class="dfnref" href="#dfn-animation-frame-request-callback">callback</a> whose <var>handle</var> is <code><var>handle</var></code>. The cancelled
+flag is set whether the callback is in a <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a> or not.
+If there is callback with the given handle, then this function does nothing.</p>
 
 <div class="note"><div class="noteHeader">Note</div>
   <p><code><a href="#cancelAnimationFrame">cancelAnimationFrame</a></code> might be called for an entry
@@ -304,7 +307,7 @@ To <dfn id="dfn-sample-all-animations">samples all animations</dfn> , the follow
   </li>
   <li>Let <var>list</var> be a copy of the <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.  <var>list</var> will be empty
-  if no <!--a class='dfnref' href='#dfn-script-based-animation'-->script-based animations<!--/a--> have been scheduled.</li>
+  if no script-based animations have been scheduled.</li>
   <li>Clear the <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.</li>
   <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
