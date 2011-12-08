@@ -279,17 +279,23 @@ If there is callback with the given handle, then this function does nothing.</p>
 
 <div id='processingmodel' class='section'>
 <h2>Processing Model</h2>
-Whenever a <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>'s
-<code><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html#sec-document-visibility-interface'>hidden</a></code> attribute is false
+Whenever a <a class='dfnref' href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a>'s
+<a class='dfnref' href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html#sec-document-visibility-interface'>hidden</a> attribute is false
 and the <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> is not empty, the user agent MUST
 regularly <a class='dfnref' href='http://whatwg.org/html#queue-a-task'>queue</a> a <a class='dfnref' href='http://whatwg.org/html#concept-task'>task</a> that
-<a class='dfnref' href='#dfn-sample-all-animations'>samples all animations</a>. The <a class='dfnref' href='http://whatwg.org/html#task-source'>task source</a>
-for these <a class='dfnref' href='http://whatwg.org/html#concept-task'>tasks</a> is the <dfn id='dfn-animation-task-source'>animation task source</dfn>.
+<a class='dfnref' href='#dfn-sample-all-animations'>samples all animations</a> for that
+<a class='dfnref' href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a>'s
+<a class='dfnref' href='http://whatwg.org/html#top-level-browsing-context'>top-level browsing context</a>.
+The <a class='dfnref' href='http://whatwg.org/html#task-source'>task source</a>
+for these <a class='dfnref' href='http://whatwg.org/html#concept-task'>tasks</a> is the <dfn id='dfn-animation-task-source'>animation task source</dfn>. Only one
+task should be generated per <a class='dfnref' href='http://whatwg.org/html#top-level-browsing-context'>top-level browsing context</a>, even if multiple
+<a class='dfnref' href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a>s within the same
+<a class='dfnref' href='http://whatwg.org/html#top-level-browsing-context'>top-level browsing context</a> are not hidden and contain callbacks.
 
 To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the following steps are performed:
 <ol class='algorithm'>
   <li>Let <var>t</var> be the result of <a class='dfnref' href='#dfn-get-next-sample-time'>getting the next sample time</a>
-    of the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>.
+    of the <a class='dfnref' href='http://whatwg.org/html#top-level-browsing-context'>top-level browsing context</a>.
     <div class='ednote'>
       <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> <dfn id='dfn-get-next-sample-time'>Getting the next sample time</dfn>
       is currently undefined.  This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
@@ -305,11 +311,18 @@ To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the follow
       which might bear little relation to the monotonic clock values anyway.</p>
     </div>
   </li>
-  <li>Let <var>list</var> be a copy of the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
-  <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.  <var>list</var> will be empty
-  if no script-based animations have been scheduled.</li>
-  <li>Clear the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
-  <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
+  <li>Let <var>list</var> be an empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
+  <li>Let <var>contexts</var> be the results of <a class='dfnref' href='http://whatwg.org/html#list-of-the-descendant-browsing-contexts'>list of the descendant browsing contexts</a> algorithm for this task's top-level browsing context.</li>
+  <li>For every <var>context</var> in <var>contexts</var>, in any order, perform the following steps:
+    <ol>
+      <li>Let <var>d</var> be <var>context</var>'s <a class='dfnref' href='http://www.whatwg.org/html#active-document'>active document</a>.</li>
+      <li>If <var>d</var>'s <a class='dfnref' href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html#sec-document-visibility-interface'>hidden</a>
+        attribute is true, continue to the next entry in the <var>contexts</var> list. Otherwise proceed with these steps.</li>
+      <li>Let <var>doclist</var> be <var>d</var>'s <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
+      <li>Append all entries from <var>doclist</var> into <var>list</var> preserving order.</li>
+      <li>Clear <var>doclist</var>.</li>
+    </ol>
+  </li>
   <li>Perform the steps defined in the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
 </ol>
 
