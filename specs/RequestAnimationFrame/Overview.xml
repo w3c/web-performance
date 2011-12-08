@@ -127,7 +127,7 @@ function start() {
 }
 function stop() {
   if (requestId)
-    window.cancelRequestAnimationFrame(requestId);
+    window.cancelAnimationFrame(requestId);
   requestId = 0;
 }
 </script>
@@ -222,7 +222,7 @@ object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>ac
 <pre class='idl'><span class='xattr'>[Supplemental, NoInterfaceObject]</span>
 interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
   long <a href='#requestAnimationFrame'>requestAnimationFrame</a>(in <a href='#FrameRequestCallback'>FrameRequestCallback</a> callback);
-  void <a href='#cancelRequestAnimationFrame'>cancelRequestAnimationFrame</a>(in long handle);
+  void <a href='#cancelAnimationFrame'>cancelAnimationFrame</a>(in long handle);
 };
 
 <a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a> implements <a href='#WindowAnimationTiming'>WindowAnimationTiming</a>;
@@ -257,15 +257,15 @@ whose <var>callback</var> is <code><var>callback</var></code> and whose <var>can
   of view?</p>
 </div>
 
-<p>The <dfn id='cancelRequestAnimationFrame'><code>cancelRequestAnimationFrame</code></dfn> method is
-used to cancel a previously made request to schedule an animation frame update.  When <code>cancelRequestAnimationFrame(<var>handle</var>)</code> is called,
+<p>The <dfn id='cancelAnimationFrame'><code>cancelAnimationFrame</code></dfn> method is
+used to cancel a previously made request to schedule an animation frame update.  When <code>cancelAnimationFrame(<var>handle</var>)</code> is called,
 the user agent <span class='rfc2119'>MUST</span> set the <var>cancelled</var> flag to true for the entry in the
 <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>
 whose <var>handle</var> is <code><var>handle</var></code>.  If there is no entry in the list with the given
 handle, then this function does nothing.</p>
 
 <div class='note'>
-  <p><code><a href='#cancelRequestAnimationFrame'>cancelRequestAnimationFrame</a></code> might be called for an entry
+  <p><code><a href='#cancelAnimationFrame'>cancelAnimationFrame</a></code> might be called for an entry
   in the <code><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a></code>’s
   <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> or in
   the <a class='dfnref' href="#dfn-sample-all-animations">sample all animations</a> operation’s temporary <var>list</var>.  In
