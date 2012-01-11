@@ -195,8 +195,10 @@ cite this document as other than work in progress. </p>
                var perfEntries = performance.getEntries("marks");
                for (i = 0; i < perfEntries.length; i++)
                {
-                     if (window.console) console.log("Name: "+ perfEntries[i].name + " Entry Type: " + perfEntries[i].entryType +
-                                                     " Start Time: " + perfEntries[i].startTime + " Duration: " + perfEntries[i].duration + "\n");
+                     if (window.console) console.log("Name: "        + perfEntries[i].name      + 
+                                                     " Entry Type: " + perfEntries[i].entryType +
+                                                     " Start Time: " + perfEntries[i].startTime + 
+                                                     " Duration: "   + perfEntries[i].duration  + "\n");
                }
            }
         &lt;/script&gt;
@@ -279,12 +281,6 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute">Performance</a> {
-    
-    const short <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = 0;
-    const short <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = 1;
-    const short <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = 2;
-    const short <a href="#ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</a> = 3;
-
     void <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     Array <a href="#ut-getMarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void <a href="#ut-clearMarks">clearMarks</a>(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
@@ -308,28 +304,28 @@ cite this document as other than work in progress. </p>
             <p>The mark name cannot be the same name as any of the attributes in the 
             <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.</p>
 
-            <p id="ut-standard-mark-names"><b>Standard Mark Names</b></p>
-            <p>The mark name may be one of the following Standard Mark Names. When using a Standard Mark Name, the user agent is responsible for storing 
-                a new timestamp under the specified mark name.
-                The user agent does not validate that the usage of the Standard Mark Name is appropriate or consistent with its description.</p>
-            <code id="ut-mark-fully-loaded">MARK_FULLY_LOADED</code>
+            <p id="ut-standard-mark-names"><b>Recommended Mark Names</b></p>
+            <p>Developers are encouraged to use the following Recommended Mark Names to mark common interactions. The user agent is responsible for storing 
+                a new timestamp under the specified mark name for Recommended Mark Names, just like any user specified mark name.
+                The user agent does not validate that the usage of the Recommended Mark Name is appropriate or consistent with its description.</p>
+            <code id="ut-mark-fully-loaded">"mark_fully_loaded"</code>
             <div class="parameterDefinition">
                 <p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
             </div>
 
-            <code id="ut-mark-fully-visible">MARK_FULLY_VISIBLE</code>
+            <code id="ut-mark-fully-visible">"mark_fully_visible"</code>
             <div class="parameterDefinition">
                 <p>The time when the page is considered completely visible to an end-user as marked by the developer in
                 their application.</p>
             </div>
 
-            <code id="ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</code>
+            <code id="ut-mark-above-the-fold">"mark_above_the_fold"</code>
             <div class="parameterDefinition">
                 <p>The time when all of the content in the visible viewport has been presented to the end-user as marked by
                 the developer in their application.</p>
             </div>
 
-            <code id="ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</code>
+            <code id="ut-mark-time-to-user-action">"mark_time_to_user_action"</code>
             <div class="parameterDefinition">
                 <p>The time of the first user interaction with the page during or after a navigation, such as scroll or click,
                 as marked by the developer in their application.</p>

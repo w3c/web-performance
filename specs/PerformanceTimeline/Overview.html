@@ -203,8 +203,10 @@ to obtain timing data related to the navigation of the document, resources on th
            var perfEntries = performance.getEntries();
            for (i = 0; i < perfEntries.length; i++)
            {
-                 if (window.console) console.log("Name: "+ perfEntries[i].name + " Entry Type: " + perfEntries[i].entryType +
-                                                 " Start Time: " + perfEntries[i].startTime + " Duration: " + perfEntries[i].duration + "\n");
+                 if (window.console) console.log("Name: "        + perfEntries[i].name      + 
+                                                 " Entry Type: " + perfEntries[i].entryType +
+                                                 " Start Time: " + perfEntries[i].startTime + 
+                                                 " Duration: "   + perfEntries[i].duration  + "\n");
            }
        }
     &lt;/script&gt;
