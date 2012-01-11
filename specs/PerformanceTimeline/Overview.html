@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Performance Timeline</h1>
 
-<h2 class="no-num no-toc" id="working-draft-sept-14-2011">Editor's Draft September 14, 2011</h2>
+<h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -57,11 +57,11 @@
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html</a></dd>
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Jatinder Mann</span> (<span
-      class="org">Microsoft Corp.</span>) &lt;<a
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
-    <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
-      class="org">Google Inc.</span>) &lt;<a
+    <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:zhihengw@google.com">zhihengw@google.com</a>&gt; </dd>
 </dl>
 
@@ -87,8 +87,8 @@
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-<p>This specification defines an interface for web applications to access
-timing information related to navigation and elements. </p>
+<p>This specification defines an unified interface to store and retrieve performance metric data. 
+This specification does not cover individual performance metric interfaces.</p>
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
 document</h2>
@@ -161,9 +161,57 @@ cite this document as other than work in progress. </p>
 <p>This section is non-normative.</p>
 
 <p>
-This specification introduces a unified interface to store and retrieve performance metric data.
-This specification does not cover individual performance metric interfaces.
+Accurately measuring performance characteristics of web applications is an important
+aspect of making web applications faster. 
+<a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/">Navigation Timing</a>, 
+<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">Resource Timing</a>,
+and <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">User Timing</a> 
+are examples of specifications that define timing information related to the navigation of the document, 
+resources on the page, and developer scripts, respectively.
 </p>
+<p>
+Together these interfaces, and potentially others created in the future, define performance metrics
+that describe the performance timeline of a web application. The 
+<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> 
+specification provides an unifying interface to access and retrieve these various performance metrics from the performance timeline of a
+web application.  
+</p>
+
+<div class="example">
+<p>The following script shows how a developer can use the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> interface
+to obtain timing data related to the navigation of the document, resources on the page and developer scripts.
+</p>
+<pre>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body onload="init()"&gt;
+    &lt;img id="image0" src="http://w3c-test.org/webperf/image0.png" /&gt;
+    &lt;script&gt;
+       function init() 
+       {
+            performance.mark("startWork");
+            doWork(); // Some developer code
+            performance.mark("endWork");
+            
+            measurePerf();
+       }
+
+       function measurePerf() 
+       {
+           var perfEntries = performance.getEntries();
+           for (i = 0; i < perfEntries.length; i++)
+           {
+                 if (window.console) console.log("Name: "+ perfEntries[i].name + " Entry Type: " + perfEntries[i].entryType +
+                                                 " Start Time: " + perfEntries[i].startTime + " Duration: " + perfEntries[i].duration + "\n");
+           }
+       }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
 
 <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
 requirements</h2>
@@ -238,24 +286,14 @@ For example, a timestamp value of 1.5 would be 1.5 milliseconds since the start 
 		<a href="#getEntriesByType-method"><code>getEntriesByType</code></a>, and
 		<a href="#getEntriesByName-method"><code>getEntriesByName</code></a> methods
 	</li>
-
-	<li>
-		Must expose a metric name on <a href="http://www.w3.org/TR/navigation-timing/#nt-window-performance">window.performance</a> 
-		like so: 
-	
-		<p><code>const unsigned short PERF_[METRIC] = [VALUE]</code>,</p>
-		<p>where <code>[METRIC]</code> is the metric name and <code>[VALUE]</code>
-		is a unique unsigned short that has not been already taken by another metric name.</p>
-	</li>
-
 </ul>	
 
 <h3 id="sec-PerformanceEntry-interface"><span class="secno">4.2 </span> The <code><a href="#pt-performanceEntry-interface">PerformanceEntry</a> </code> 
 interface</h3>
 <pre class="idl">interface <dfn id="pt-performanceEntry-interface">PerformanceEntry</dfn> {
   readonly attribute DOMString name;
+  readonly attribute DOMString entryType;
   readonly attribute double startTime;
-  readonly attribute unsigned short entryType;
   readonly attribute double duration;
 };
 </pre>
@@ -266,18 +304,17 @@ interface</h3>
 	identifier does not have to be unique. 
 </p>
 
+<h4 id="performanceEntry-entryType"><code>entryType</code> attribute</h4>
+<p>
+	The <code>entryType</code> attribute must return a DOMString that describes the <i>type</i> of the interface represented by this <a href="#pt-performanceEntry-interface">PerformanceEntry</a> object.
+	
+</p>
+
 <h4 id="performanceEntry-startTime"><code>startTime</code> attribute</h4>
 <p>
 	The <code>startTime</code> attribute must return the first recorded timestamp
 	of this performance metric.
 <p>
-
-<h4 id="performanceEntry-entryType"><code>entryType</code> attribute</h4>
-<p>
-	The <code>entryType</code> attribute must return a const unsigned short exposed on <a href="http://www.w3.org/TR/navigation-timing/#nt-window-performance">window.performance</a> 
-    that defines the <i>type</i> of the interface represented by this <a href="#pt-performanceEntry-interface">PerformanceEntry</a> object.
-	
-</p>
 
 <h4 id="performanceEntry-duration"><code>duration</code> attribute</h4>
 <p>
@@ -290,8 +327,8 @@ interface</h3>
 attribute</h3>
 <pre class="idl">interface <dfn id="pt-performance-interface">Performance</dfn> {
   <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> <a href="#getEntries-method">getEntries</a>();
-  <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> <a href="#getEntriesByType-method">getEntriesByType</a>(in unsigned short entryType);
-  <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> <a href="#getEntriesByName-method">getEntriesByName</a>(in DOMString name, in optional unsigned short entryType);
+  <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> <a href="#getEntriesByType-method">getEntriesByType</a>(in DOMString entryType);
+  <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> <a href="#getEntriesByName-method">getEntriesByName</a>(in DOMString name, in optional DOMString entryType);
 };
 
   typedef sequence &lt;PerformanceEntry&gt; <b><dfn id='pt-performanceEntryList-type'>PerformanceEntryList</dfn></b>;
@@ -304,8 +341,8 @@ attribute</h3>
 
 <div class="methods">
     <h4 id="getEntries-method"><code>getEntries</code> method</h4>
-	<p>The <code>getEntries</code> method retrieves a 
-		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>.
+	<p>The <code>getEntries</code> method returns a 
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that contains a copy of all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>.
     </p>
 
 		<div class="parameters">
@@ -319,22 +356,22 @@ attribute</h3>
 
 <div class="methods">
     <h4 id="getEntriesByType-method"><code>getEntriesByType</code> method</h4>
-	<p>The <code>getEntriesByType</code> method retrieves a 
-		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
+	<p>The <code>getEntriesByType</code> method returns a 
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that contains a copy of all <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
 
 		<div class="parameters">
 				<p><b>Parameter</b></p>
-					<p>in unsigned short <code>entryType</code></p>
-					<p>
-						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
-						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
-						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a>
-						must be empty.
-					</p>
+					<p>in DOMString <code>entryType</code></p>
+                    <p>		
+                        A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that contains a copy of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+				        that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
+				        If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a>
+				        must be empty.
+		            </p>
 				<p><b>Return value</b></p>
-				A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object.
+		        A <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -342,8 +379,8 @@ attribute</h3>
 <div class="methods">
     <h4 id="getEntriesByName-method"><code>getEntriesByName</code> method</h4>
 	<p>
-		The <code>getEntriesByName</code> method retrieves a
-		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> that contains <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
+		The <code>getEntriesByName</code> method returns a
+		<a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that contains a copy of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects, in chronological order with respect to <a href="#performanceEntry-startTime">startTime</a>, 
 		that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter 
 		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter.
     </p>
@@ -351,13 +388,13 @@ attribute</h3>
 				<p><b>Parameter</b></p>
 					<p>in DOMString <code>name</code></p>
 					<p>
-						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that contains a copy of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
 						that have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
 						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must be empty.
 					</p>
-					<p>in optional unsigned short <code>entryType</code></p>
+					<p>in DOMString <code>entryType</code></p>
 					<p>
-						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> must only contain <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
+						The <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> object that only contains a copy of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects
 						that have the same value for the <code>entryType</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>entryType</code> parameter 
 						and have the same value for the <code>name</code> attribute of <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> as the <code>name</code> parameter. 
 						If no such <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> objects exist, the <a href="#pt-performanceEntryList-type">PerformanceEntryList</a>
@@ -373,22 +410,15 @@ attribute</h3>
 <h3 id="sec-PerformanceTiming"><span class="secno">4.4 </span> The <code>PerformanceTiming</code> 
 interface</h3>
 
-<pre class="idl">
-  partial interface <dfn id="nt-performance-interface">Performance</dfn> {
-  const DOMString <a href="perf-navigation">PERF_NAVIGATION</a> = "navigation";
-};
-</pre>
-
-
 <p>The <a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a> interface does not extend 
 the <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> interface. However, when the <a href="#getEntriesByType-method">getEntriesByType</a> and
-<a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of <code><a href="#perf-navigation">PERF_NAVIGATION</a></code>,
+<a href="#getEntriesByName-method">getEntriesByName</a> methods are called with the <code>entryType</code> argument of the DOMString <code>navigation</code>,
 a <a href="#pt-performanceEntryList-type">PerformanceEntryList</a> with a <a href="#sec-PerformanceEntry-interface">PerformanceEntry</a> object with the following values must be returned:
 </p>
 
 <div class="parameters">
-    <p>The <code>name</code> attribute will return the "document" DOMString.</p>
-    <p>The <code>entryType</code> attribute will return <code><a href="#perf-navigation">PERF_NAVIGATION</a></code>.</p>
+    <p>The <code>name</code> attribute will return the DOMString <code>document</code>.</p>
+    <p>The <code>entryType</code> attribute will return the DOMString <code>navigation</code>.</p>
     <p>The <code id="timing-startTime">startTime</code> attribute will return a timestamp with the same value as <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start">navigationStart</a>.</p>
     <p>The <code>duration</code> attribute will return a timestamp equal to the difference between <a href="http://www.w3.org/TR/navigation-timing/#nt-load-end">loadEventEnd</a> and <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start">navigationStart</a>, respectively.</p>
 </div>

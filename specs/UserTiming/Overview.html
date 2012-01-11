@@ -39,7 +39,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="working-draft-sept-14-2011">Working Draft September 14, 2011</h2>
+    <h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -55,7 +55,7 @@
         https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
       <dt>Editors:</dt>
         <dd class="vcard">
-            <span class="fn">Jatinder Mann</span>, <span class="org">Microsoft Inc.</span>,
+            <span class="fn">Jatinder Mann</span>, <span class="org">Microsoft Corp.</span>,
             <span class="email">jmann@microsoft.com</span>
         </dd>
         <dd class="vcard">
@@ -64,7 +64,7 @@
         </dd>
         <dd class="vcard">
             <span class="fn">Anderson Quach</span>,
-            <span class="org">Microsoft Inc. <i>(Until March 2011)</i></span>
+            <span class="org">Microsoft Corp. <i>(Until March 2011)</i></span>
         </dd>
     </dl>
 
@@ -163,9 +163,47 @@ cite this document as other than work in progress. </p>
     <p>Web developers need the ability to assess and understand the performance characteristics of their
     applications. While JavaScript provides a mechanism to measure application latency (retrieving the current
     timestamp from the <code>Date.now()</code> method), the precision of this timestamp varies between user agents.</p>
-    <p>This document introduces the <a href="#the-usertiming-interface">UserTiming</a> interface, 
+    <p>This document defines the <a href="#the-usertiming-interface">UserTiming</a> interface, 
     which exposes a high precision timestamp to developers so they can better measure the performance of their applications.</p>
-    <p class="issue"><strong>TODO:</strong> Show example usage.</p>
+    
+    <div class="example">
+    <p>The following script shows how a developer can use the <a href="#the-usertiming-interface">UserTiming</a> interface
+    to obtain timing data related to developer scripts.
+    </p>
+    <pre>
+    &lt;!doctype html&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+      &lt;/head&gt;
+      &lt;body onload="init()"&gt;
+        &lt;script&gt;
+           function init() 
+           {
+                performance.mark("startTask1");
+                doTask1(); // Some developer code
+                performance.mark("endTask1");
+                
+                performance.mark("startTask2");
+                doTask2(); // Some developer code
+                performance.mark("endTask2");
+
+                measurePerf();
+           }
+
+           function measurePerf() 
+           {
+               var perfEntries = performance.getEntries("marks");
+               for (i = 0; i < perfEntries.length; i++)
+               {
+                     if (window.console) console.log("Name: "+ perfEntries[i].name + " Entry Type: " + perfEntries[i].entryType +
+                                                     " Start Time: " + perfEntries[i].startTime + " Duration: " + perfEntries[i].duration + "\n");
+               }
+           }
+        &lt;/script&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+    </pre>
+    </div>
 
     <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
     requirements</h2>
@@ -241,13 +279,11 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute">Performance</a> {
-    const DOMString PERF_DEVELOPER_MARK = "mark";
-    const DOMString PERF_DEVELOPER_MEASURE = "measure";
-
-    const DOMString <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = "fullyLoaded";
-    const DOMString <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = "fullyVisible";
-    const DOMString <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = "aboveTheFold";
-    const DOMString <a href="#ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</a> = "timeToUserAction";
+    
+    const short <a href="#ut-mark-fully-loaded">MARK_FULLY_LOADED</a> = 0;
+    const short <a href="#ut-mark-fully-visible">MARK_FULLY_VISIBLE</a> = 1;
+    const short <a href="#ut-mark-above-the-fold">MARK_ABOVE_THE_FOLD</a> = 2;
+    const short <a href="#ut-mark-time-to-user-action">MARK_TIME_TO_USER_ACTION</a> = 3;
 
     void <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     Array <a href="#ut-getMarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
@@ -478,7 +514,7 @@ cite this document as other than work in progress. </p>
     
     <div class="parameters">
         <p>The <code>name</code> attribute will return the mark's name.</p>
-        <p>The <code>entryType</code> attribute will return <code>PERF_DEVELOPER_MARK</code>.</p>
+        <p>The <code>entryType</code> attribute will return the DOMString <code>mark</code>.</p>
         <p>The <code>startTime</code> attribute will return the mark's timestamp.</p>
         <p>The <code>duration</code> attribute will return 0.</p>
     </div>
@@ -498,14 +534,14 @@ cite this document as other than work in progress. </p>
 	
     <div class="parameters">
         <p>The <code>name</code> attribute will return the measure's name.</p>
-        <p>The <code>entryType</code> attribute will return <code>PERF_DEVELOPER_MEASURE</code>.</p>
+        <p>The <code>entryType</code> attribute will return the DOMString <code>measure</code>.</p>
         <p>The <code>startTime</code> attribute will return the timestamp of the measure's start mark.</p>
         <p>The <code>duration</code> attribute will return the duration of the measure.</p>
     </div>
 
     <h3 id="vendor-prefixes">4.5 Vendor Prefixes</h3>
 
-    <p>Vendor-specific proprietary user agent extensions to this specification are strongly discouraged. 
+    <p>Vendor-specific proprietary user agent extensions to this specification are discouraged. 
     If such extensions are needed, e.g. for experimental purposes, vendors must use the following extension mechanisms:</p>
 
     <p>If the extension to be added is a <a href="#ut-standard-mark-names">Standard Mark Name</a>, the Standard Mark Name must:</p>

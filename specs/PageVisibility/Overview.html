@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="working-draft-september-26-2011">Editor's Draft September 26, 2011</h2>
+<h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -53,11 +53,11 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html</a></dd>
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Jatinder Mann</span> (<span
-      class="org">Microsoft Corp.</span>) &lt;<a
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
-     <dd class="vcard"><span class="fn">Arvind Jain</span> (<span
-      class="org">Google Inc.</span>) &lt;<a
+     <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
 </dl>
 
@@ -303,12 +303,9 @@ and be notified of visibility changes.</p>
 <pre class="idl">
 [NoInterfaceObject]
 interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
-  const DOMString <a href="#pv-page-hidden" title="pagehidden">PAGE_HIDDEN</a> = "hidden";
-  const DOMString <a href="#pv-page-visible" title="pagevisible">PAGE_VISIBLE</a> = "visible";
-  const DOMString <a href="#pv-page-preview" title="pagepreview">PAGE_PREVIEW</a> = "preview";
             
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
-  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>;
+  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>; // "hidden", "visible", "preview"
 };
 Document implements DocumentVisibility;
 </pre>
@@ -350,50 +347,60 @@ is not minimized but is fully obscured by other applications.</p>
 
 <h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
 
-<h5><code><dfn id="pv-page-hidden">document.PAGE_HIDDEN</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return 
+one of the following DOMStrings or a vendor prefixed DOMString as defined in <a href="#sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</a>:
+
+<ul>
+	<li><code>hidden</code>,</li>
+	<li><code>visible</code>,</li>
+	<li><code>preview</code>.</li>
+</ul> 
+
+
+<h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
 
 <p>
 If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a>.
+the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
 </p>
  
  <p>To accommodate accessibility tools that are typically full screen but still 
- show a view of the page, when applicable, this constant may not be returned 
+ show a view of the page, when applicable, the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> may not be returned 
  when the User Agent is not minimized but is fully obscured by other applications.</p>
 
-<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> IDL attribute would return <a href="#pv-page-hidden"><code>document.PAGE_HIDDEN</code></a>:</p>
+<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> IDL attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
 		 <li>The Operating System lock screen is shown.</li>
 	</ul> 
 
-<h5><code><dfn id="pv-page-visible">document.PAGE_VISIBLE</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return <a href="#pv-page-visible"><code>document.PAGE_VISIBLE</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<h5><code><dfn id="pv-page-visible">visible</dfn></code></h5>
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
 is set to false.</p>
 
-<p>This constant is not returned if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>The DOMString <a href="#pv-page-visible"><code>visible</code></a> is not returned if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not 
 visible, however, a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
  visible.</p>
   
 <p>To accommodate accessibility tools that are typically full screen but still show a 
-view of the page, when applicable, this constant may be returned when the User Agent 
+view of the page, when applicable, the DOMString <a href="#pv-page-visible"><code>visible</code></a> may be returned when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
-<h5><code><dfn id="pv-page-preview">document.PAGE_PREVIEW</dfn></code></h5>
-<p>Supporting the <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> constant is optional. A User Agent MUST only define the <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> constant if it is supported. </p>
-<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> IDL attribute may return <a href="#pv-page-preview"><code>document.PAGE_PREVIEW</code></a> if the 
+<h5><code><dfn id="pv-page-preview">preview</dfn></code></h5>
+<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> IDL attribute may return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
 is not visible at all and a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
- visible.</p>
+ visible. User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> IDL attribute is optional.
+ </p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
@@ -408,15 +415,14 @@ has changed, the User Agent MUST queue a task that when run, synchronously sets 
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
 
-<p>If a vendor-specific proprietary user agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute
- is needed for an experimental visibility state, vendors MUST use the following convention:</p>
+<p>If a vendor-specific proprietary User Agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute return value
+ is needed for an experimental visibility state, on getting the <a href="#pv-visibility-state">visibilityState</a> IDL attribute, 
+  vendors MUST return a DOMString that uses the following convention:</p>
  
-<p><code>const DOMString [VENDORPREFIX]_PAGE_[NAME] = "[vendorprefix]-[name]";</code></p>
+<p><code>[vendorprefix]-[name]</code></p>
 
 <p>Where,</p>
 <ul>
-	<li><code>[VENDORPREFIX]</code> is a capitalized name that identifies the vendor,</li>
-	<li><code>[NAME]</code> is a capitalized name given to the visibility state,</li>
 	<li><code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,</li>
 	<li><code>[name]</code> is a non-capitalized name given to the visibility state,</li>
     <li>and the above names are in ASCII.</li>

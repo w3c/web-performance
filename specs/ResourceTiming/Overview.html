@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-oct-18-2011">Working Draft October 18, 2011</h2>
+<h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -51,13 +51,13 @@
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/bd09cf5e4db1/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/bd09cf5e4db1/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
-      class="org">Microsoft Inc.</span>, <span
+      class="org">Microsoft Corp.</span>, <span
       class="email">jmann@microsoft.com</span> </dd>
     <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
       class="org">Google Inc.</span>, <span
       class="email">zhihengw@google.com</span> </dd>
     <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
-      class="org">Microsoft Inc. <i>(Until March 2011)</i></span></dd>
+      class="org">Microsoft Corp. <i>(Until March 2011)</i></span></dd>
 </dl>
 
    <p class=copyright><a
@@ -153,11 +153,10 @@ cite this document as other than work in progress. </p>
     <ol class="toc">
       <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
       <li><a href="#resources-included"><span class="secno">4.2</span> Resources Included in the <code>PerformanceResourceTiming</code> Interface</a></li>
-	  <li><a href="#sec-window.performance-attribute"><span class="secno">4.3</span> The <code>window.performance</code> Attribute</a></li>
-      <li><a href="#performance-resource-timing"><span class="secno">4.4</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
-      <li><a href="#performance-resource-timing-methods"><span class="secno">4.5 </span> The Resource Timing Methods</a></li>
-      <li><a href="#cross-origin-resources"><span class="secno">4.6 </span> Cross-origin Resources</a></li>
-      <li><a href="#vendor-prefixes"><span class="secno">4.7 </span> Vendor Prefixes</a></li>
+      <li><a href="#performance-resource-timing"><span class="secno">4.3</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
+      <li><a href="#performance-resource-timing-methods"><span class="secno">4.4 </span> The Resource Timing Methods</a></li>
+      <li><a href="#cross-origin-resources"><span class="secno">4.5 </span> Cross-origin Resources</a></li>
+      <li><a href="#vendor-prefixes"><span class="secno">4.6 </span> Vendor Prefixes</a></li>
     </ol>
   </li>
   <li><a href="#process"><span class="secno">5 </span>Process</a>
@@ -252,10 +251,10 @@ with the <a href="#performance-resource-timing">PerformanceResourceTiming</a> in
        
        function resourceTiming() 
        {
-           var resourceList = window.performance.getEntriesByType(window.performance.PERF_RESOURCE);
+           var resourceList = window.performance.getEntriesByType("resource");
            for (i = 0; i < resourceList.length; i++)
            {
-              if (resourceList[i].initiatorType == window.performance.INITIATOR_IMG) 
+              if (resourceList[i].initiatorType == "img") 
               {
                  alert("End to end resource fetch: "+ resourceList[i].responseEnd - resourceList[i].startTime);
               }
@@ -382,18 +381,18 @@ in the</span>
             as the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the new URL would be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
         <li>
-            If a <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetches</a> of the resource would be
+            If an <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetches</a> of the resource would be
             included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. This is because the user agent must validate
             both requests from the networking layer, even if the resource is in a disk cache from the first request.
         </li>
         <li>
-            If a HTML <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
+            If an HTML <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
             in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. Sub-resources requested by the <code>IFRAME</code> document 
             will be included in the <code>IFRAME</code> document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface and not the parent 
             document's <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface.
         </li>
         <li>
-            If a HTML <code>IMG</code> element has a <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> as its source, then this resource will not
+            If an HTML <code>IMG</code> element has a <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> as its source, then this resource will not
             be included in the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. By definition <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code>
             contains embedded data and does not require access to the networking layer.
         </li>
@@ -406,30 +405,12 @@ in the</span>
     can be called to request a change to this limit.
 </p>
 
-<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code>window.performance</code> 
-Attribute</h3>
-<pre class="idl">
-  partial interface <dfn id="nt-performance-interface">Performance</dfn> {
-  const DOMString <a href="#perf-resource">PERF_RESOURCE</a> = "resource";
-  
-  const DOMString <a href="#type-css">INITIATOR_CSS</a> = "css";
-  const DOMString <a href="#type-embed">INITIATOR_EMBED</a> = "embed";
-  const DOMString <a href="#type-img">INITIATOR_IMG</a> = "img";
-  const DOMString <a href="#type-link">INITIATOR_LINK</a> = "link";
-  const DOMString <a href="#type-object">INITIATOR_OBJECT</a> = "object";
-  const DOMString <a href="#type-other">INITIATOR_OTHER</a> = "other";
-  const DOMString <a href="#type-script">INITIATOR_SCRIPT</a> = "script";
-  const DOMString <a href="#type-subdocument">INITIATOR_SUBDOCUMENT</a> = "subdocument";
-  const DOMString <a href="#type-svg">INITIATOR_SVG</a> = "svg";
-  const DOMString <a href="#type-xhr">INITIATOR_XMLHTTPREQUEST</a> = "xmlhttprequest";
-};
-</pre>
-
-<h3><span class="secno">4.4 </span>The
+<h3><span class="secno">4.3 </span>The
 <code><a id="performance-resource-timing">PerformanceResourceTiming</a></code> Interface</h3>
 
 <pre class="idl">interface <a href="#performance-resource-timing">PerformanceResourceTiming</a> : <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> {
-  readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>;
+  readonly attribute unsigned short <a href="#initiatorType" title="initiatorType">initiatorType</a>; 
+  // "css", "embed", "img", "link", "object", "script", "subdocument", "svg", "xmlhttprequest", "other"
   
   readonly attribute double <a href="#redirect-start" title="redirectstart">redirectStart</a>;
   readonly attribute double <a href="#redirect-end" title="redirectend">redirectEnd</a>;
@@ -454,7 +435,7 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
     	The <code id="name-attribute">name</code> attribute must return the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the 
     	requested resource. This attribute must not change even if the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> redirected to a different URL.
    	</p>
-    <p>The <code id="entryType-attribute">entryType</code> attribute must return <code id="perf-resource">PERF_RESOURCE</code>.</p>
+    <p>The <code id="entryType-attribute">entryType</code> attribute must return the DOMString <code id="perf-resource">resource</code>.</p>
     <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
        If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
        when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
@@ -466,19 +447,21 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
 
 <h4 id="initiatorType-attribute"><code><dfn id="initiatorType">initiatorType</dfn></code> attribute</h4>
 
-<p>This attribute must return the type of object that initiated the request for the resource: </p>
-<dl>
-  <dt><dfn id="type-other">INITIATOR_OTHER</dfn>: The initiator is not of any type listed below.</dt>
-  <dt><dfn id="type-link">INITIATOR_LINK</dfn>: The initiator is the <code>href</code> attribute of the HTML <code>&lt;link&gt;</code> element.</dt>
-  <dt><dfn id="type-css">INITIATOR_CSS</dfn>: The initiator is any CSS resource downloaded via the <a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a> syntax, such as <code>@import url()</code>, <code>background: url()</code>, etc.</dt>
-  <dt><dfn id="type-script">INITIATOR_SCRIPT</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;script&gt;</code> element.</dt>
-  <dt><dfn id="type-img">INITIATOR_IMG</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;img&gt;</code> element.</dt>
-  <dt><dfn id="type-object">INITIATOR_OBJECT</dfn>: The initiator is the <code>data</code> attribute of the HTML <code>&lt;object&gt;</code> element.</dt>
-  <dt><dfn id="type-subdocument">INITIATOR_SUBDOCUMENT</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;frame&gt;</code> or HTML <code>&lt;iframe&gt;</code> elements.</dt>
-  <dt><dfn id="type-xhr">INITIATOR_XMLHTTPREQUEST</dfn>: The initiator is a XMLHttpRequest object.</dt>
-  <dt><dfn id="type-embed">INITIATOR_EMBED</dfn>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;embed&gt;</code> element.</dt>
-  <dt><dfn id="type-svg">INITIATOR_SVG</dfn>: The initiator is the <code>&lt;svg&gt;</code> element and all resources downloaded as children of the <code>&lt;svg&gt;</code> element.</dt>
-</dl>
+<p>On getting, the <code><dfn id="Dfn1">initiatorType</dfn></code> IDL attribute must one of the following DOMStrings representing
+the type of object that initiated the request for the resource: </p>
+
+<ul>
+  <li><code>css</code>: The initiator is any CSS resource downloaded via the <a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a> syntax, such as <code>@import url()</code>, <code>background: url()</code>, etc.</li>
+  <li><code>embed</code>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;embed&gt;</code> element.</li>
+  <li><code>img</code>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;img&gt;</code> element.</li>
+  <li><code>link</code>: The initiator is the <code>href</code> attribute of the HTML <code>&lt;link&gt;</code> element.</li>
+  <li><code>object</code>: The initiator is the <code>data</code> attribute of the HTML <code>&lt;object&gt;</code> element.</li>
+  <li><code>script</code>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;script&gt;</code> element.</li>
+  <li><code>subdocument</code>: The initiator is the <code>src</code> attribute of the HTML <code>&lt;frame&gt;</code> or HTML <code>&lt;iframe&gt;</code> elements.</li>
+  <li><code>svg</code>: The initiator is the <code>&lt;svg&gt;</code> element and all resources downloaded as children of the <code>&lt;svg&gt;</code> element.</li>
+  <li><code>xmlhttprequest</code>: The initiator is a XMLHttpRequest object.</li>
+  <li><code>other</code>: The initiator is not of any type listed above.</li>
+</ul>
 
 <h4 id="redirect-start-attribute"><code><dfn id="redirect-start">redirectStart</dfn></code> attribute</h4>
 
@@ -638,7 +621,7 @@ receiving the last byte of the resource from from <a
 href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
-<h3 id="performance-resource-timing-methods"><span class="secno">4.5 </span>The Resource Timing Methods</h3>
+<h3 id="performance-resource-timing-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
 
 <pre class="idl">
 partial interface Performance {
@@ -698,7 +681,7 @@ partial interface Performance {
     </ol>
 </div>
 
-<h3 id="cross-origin-resources">4.6 Cross-origin Resources</h3>
+<h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>
     <p>
         Information from cross-origin resources must be included in the
         <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface. In the absence of the
@@ -733,15 +716,22 @@ partial interface Performance {
         </p>
     </div>
 
-<h3 id="vendor-prefixes">4.7 Vendor Prefixes</h3>
+<h3 id="vendor-prefixes">4.6 Vendor Prefixes</h3>
 
-<p>Vendor-specific proprietary user agent extensions to this specification are strongly discouraged. 
-If such extensions are needed, e.g. for experimental purposes, vendors must use the following extension mechanisms:</p>
+<p>Vendor-specific proprietary user agent extensions are discouraged. 
+If such extensions are needed, e.g., for experimental purposes, vendors must use the following extension mechanisms:</p>
 
-<p>If the extension to be added is an INITIATOR <a href="#initiatorType-attribute">initiatorType</a>, the INITIATOR <a href="#initiatorType-attribute">initiatorType</a> must:</p>
+<p>If an extension to the <a href="#initiatorType-attribute">initiatorType</a> IDL attribute return value
+ is needed for an experimental initiator type, on getting the <a href="#initiatorType-attribute">initiatorType</a> IDL attribute, 
+  vendors MUST return a DOMString that uses the following convention:</p>
+ 
+<p><code>[vendorprefix]-[name]</code></p>
+
+<p>Where,</p>
 <ul>
-    <li>Follow this naming convention: INITIATOR_[VENDORPREFIX]_[TYPE], where [VENDORPREFIX] is a name that identifies the vendor.</li>
-    <li>Have a value in the range of 100 to 200.</li>
+	<li><code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,</li>
+	<li><code>[name]</code> is a non-capitalized name given to the initiator type,</li>
+    <li>and the above names are in ASCII.</li>
 </ul>
 
 <p>If the extension is a new timing attribute, it must:</p>
@@ -765,7 +755,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
 <p><img width="85%" src="resource-timing-overview.png" alt='Resource Timing attributes'></p>
 
 <ol>
-  <li>Once <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
+  <li>Once the <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
   the current document is created</a>, the user agent must create a <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntryList-interface">PerformanceEntryList</a>
   <i>primary buffer</i> object to store the list 
   of <a href="#performance-resource-timing">PerformanceResourceTiming</a> resources.</li>
@@ -775,7 +765,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
   <li>For each resource fetched by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
   <ol>
       <li id="step-create-object">Create a new <a href="#performance-resource-timing">PerformanceResourceTiming</a> object and 
-      set <a href="#entryType-attribute">entryType</a> to <a href="#perf-resource"><code>PERF_RESOURCE</code></a>.
+      set <a href="#entryType-attribute">entryType</a> to the DOMString <code>resource</code></a>.
       </li>      
       <li>Immediately before the user agent starts to queue the resource for retrieval,  
        record the current time in <a href="#startTime-attribute">startTime</a>. 
@@ -799,9 +789,9 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       </li>
       <li id="step-collection-start">If the resource is not to be fetched from the 
           networking layer, such as being fetched from an in-memory cache, abort the 
-          following steps.
+          remaining steps.
       </li>
-      <li>If <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource is aborted for any reason, abort the following steps.       </li>
+      <li>If <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource is aborted for any reason, abort the remaining steps.       </li>
       <li>If the last non-redirected <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource is not the same origin as the current document 
       and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header does not apply, the user agent
       must set 
@@ -814,7 +804,7 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
       <a href="#request-start">requestStart</a>, 
       <a href="#response-start">responseStart</a>,
       <a href="#response-end">responseEnd</a>,
-      and <a href="#duration-attribute">duration</a> to zero and abort the following steps. 
+      and <a href="#duration-attribute">duration</a> to zero and abort the remaining steps. 
       </li>
         <li>Let <a href="#domainlookup-start">domainLookupStart</a>, 
        <a href="#domainlookup-end">domainLookupEnd</a>, 
@@ -830,14 +820,14 @@ If such extensions are needed, e.g. for experimental purposes, vendors must use 
        starts the domain name lookup, record the time as <a href="#domainlookup-start">domainLookupStart</a>.</li>
       <li>Record the time as <a href="#domainlookup-end">domainLookupEnd</a> immediately after the 
        domain name lookup is successfully done. A user agent may need multiple retries before that. If 
-       the domain lookup fails, abort the following steps. </li>
+       the domain lookup fails, abort the remaining steps. </li>
       <li id="step-connect-start">If a persistent transport connection is used to <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> the resource, 
        let <a href="#connect-start">connectStart</a> and <a href="#connect-end">connectEnd</a> 
        be the same value of <a href="#domainlookup-end">domainLookupEnd</a>. Otherwise, record the time as 
        <a href="#connect-start">connectStart</a> immediately before initiating the connection to the server 
        and record the time as <a href="#connect-end">connectEnd</a> immediately after the connection to the 
        server or the proxy is established. A user agent may need multiple retries 
-       before this time. If a connection can not be established, abort the following steps. 
+       before this time. If a connection can not be established, abort the remaining steps. 
       </li>
       <li>If the user agent supports the <a href="#secureconnection-start">secureConnectionStart</a> attribute, 
       in step <a href="#step-connect-start">3.13</a>, a user agent should also carry out these additional steps:

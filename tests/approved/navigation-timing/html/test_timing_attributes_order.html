@@ -4,9 +4,16 @@
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <title>window.performance.timing attribute ordering on a simple navigation</title>
         <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        
+        <!-- change src 
         <script src="/resources/testharness.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
+        -->
+        
+        <script type="text/javascript" src="../resources/testharness.js"></script>
+        <script type="text/javascript" src="../resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="../resources/testharness.css" />
 
         <script type="text/javascript">
             setup({explicit_done: true});
@@ -29,11 +36,12 @@
                 {
                     case 1:
                     {
-                        navigation_frame.location.href = '/webperf/tests/resources/blank_page_green.htm';
+                        //Change src to '/webperf/tests/resources/blank_page_green.htm'
+                        navigation_frame.location.href = '../resources/blank_page_green.htm';
                         step++;
                         break;
                     }
-                    case 2:
+                case 2:
                     {
                         test_namespace('navigation');
 
@@ -72,6 +80,18 @@
                         test_timing_order('unloadEventStart', 'navigationStart');
                         test_timing_order('unloadEventEnd', 'unloadEventStart');
 
+                        test_true(true, "unloadEventStart = " + performanceNamespace.timing.unloadEventStart);
+                        test_true(true, "unloadEventEnd = " + performanceNamespace.timing.unloadEventEnd);
+                        test_true(true, "delta = " + (performanceNamespace.timing.unloadEventEnd -
+                                                     performanceNamespace.timing.unloadEventStart));
+                        test_true(((performanceNamespace.timing.unloadEventEnd >=
+                                    performanceNamespace.timing.unloadEventStart + 20) &&
+                                    (performanceNamespace.timing.unloadEventEnd <
+                                    performanceNamespace.timing.unloadEventStart + 50)),
+                                  'window.performance.timing.unloadEventStart/End only ' +
+                                  'captures only the time spent in onunload and not the ' +
+                                  'onbeforeunload event');
+
                         step++;
                         done();
                         break;
@@ -99,6 +119,7 @@
 
         <div id="log"></div>
         <br />
-        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
+        <!-- Change src= "/webperf/tests/resources/blank_page_unload.htm" -->
+        <iframe id="frameContext" onload="onload_test();" src="../resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
