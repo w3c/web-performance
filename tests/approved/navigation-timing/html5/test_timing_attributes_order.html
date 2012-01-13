@@ -5,16 +5,10 @@
         <title>window.performance.timing attribute ordering on a simple navigation</title>
         <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
         
-        <!-- change src 
         <script src="/resources/testharness.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-        -->
         
-        <script type="text/javascript" src="../resources/testharness.js"></script>
-        <script type="text/javascript" src="../resources/webperftestharness.js"></script>
-        <link rel="stylesheet" href="../resources/testharness.css" />
-
         <script type="text/javascript">
             setup({explicit_done: true});
 
@@ -36,8 +30,7 @@
                 {
                     case 1:
                     {
-                        //Change src to '/webperf/tests/resources/blank_page_green.htm'
-                        navigation_frame.location.href = '../resources/blank_page_green.htm';
+                        navigation_frame.location.href = '/webperf/tests/resources/blank_page_green.htm';
                         step++;
                         break;
                     }
@@ -119,7 +112,7 @@
 
         <div id="log"></div>
         <br />
-        <!-- Change src= "/webperf/tests/resources/blank_page_unload.htm" -->
-        <iframe id="frameContext" onload="onload_test();" src="../resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
+        
+        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
