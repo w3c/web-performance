@@ -263,9 +263,9 @@ flag is initially false and is not exposed by any interface.</p>
 <p>The <dfn id='cancelAnimationFrame'><code>cancelAnimationFrame</code></dfn> method is
 used to cancel a previously made request to schedule an animation frame update.  When <code>cancelAnimationFrame(<var>handle</var>)</code> is called,
 the user agent <span class='rfc2119'>MUST</span> set the <a class='dfnref' href='#dfn-callback-cancelled-flag'>cancelled</a> flag to true for the
-<a class='dfnref' href='#dfn-animation-frame-request-callback'>callback</a> whose <var>handle</var> is <code><var>handle</var></code>. The cancelled
+<a class='dfnref' href='#dfn-animation-frame-request-callback'>callback</a> registered on this <a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#interface-document'>Document</a> whose <var>handle</var> is <code><var>handle</var></code>. The cancelled
 flag is set whether the callback is in a <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a> or not.
-If there is callback with the given handle, then this function does nothing.</p>
+If there is no callback with the given handle, then this function does nothing.</p>
 
 <div class='note'>
   <p><code><a href='#cancelAnimationFrame'>cancelAnimationFrame</a></code> might be called for an entry
