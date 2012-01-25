@@ -1,0 +1,45 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>document.readyState values exist during a navigation</title>
+        <link rel="author" title="Google" href="http://www.google.com/" />
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+        <script type="text/javascript">
+          setup({explicit_done: true});
+
+          var has_loading = (document.readyState == "loading");
+          var has_interactive = false;
+          var has_complete = false;
+
+          document.onreadystatechange = function() {
+            if (document.readyState == "interactive") {
+              has_interactive = true;
+            }
+            if (document.readyState = "complete") {
+              has_complete = true;
+            }
+          };
+
+          function onload_test() {
+            test_true(has_loading, "Document readiness has loading state.");
+            test_true(has_interactive, "Document readiness has interactive state.");
+            test_true(has_complete, "Document readiness has complete state.");
+            done();
+          }
+        </script>
+    </head>
+    <body onload="onload_test();">
+        <h1>Description</h1>
+        <p>This test validates that the following document ready state values
+        are available during a navigation: loading, interactive and complete.</p>
+
+        <p>As of 1/25/2012, IE has not implemented the loading and interactive
+        state in document ready state. However, it does not affect the timing
+        attributes implementation in Navigation Timing.</p>
+
+        <div id="log"></div>
+    </body>
+</html>
