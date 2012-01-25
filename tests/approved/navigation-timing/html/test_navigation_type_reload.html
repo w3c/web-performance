@@ -58,9 +58,18 @@
 
                     //Verify that the timing data has been updated into the future
                     var reloadTime = reload_frame.contentWindow.performance.timing;
-                    for (time in reloadTime)
+                    for (attribute in timingAttributes)
                     {
-                        if (time !== "toJSON")
+                        var time = timingAttributes[attribute];
+                        if (reloadTime[time] === 0)
+                        {
+                            test_equals(reloadTime[time],
+                                        startingTime[time],
+                                        "Reload " + time + "(" + reloadTime[time] + ")" +
+                                        " == " +
+                                        "Original " + time + "(" + startingTime[time] + ")");
+                        }
+                        else
                         {
                             test_greater_than(reloadTime[time],
                                               startingTime[time],
