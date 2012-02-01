@@ -41,8 +41,8 @@
         </iframe>
 
         <script type="text/javascript" >
-            SetupResultTable({timeout:60*1000, explicit_done:true});
-            
+            setup({ explicit_done: true });
+
             function start_test()
             {
                 if (BrowserHasFeature(document, "hidden") !== undefined)
