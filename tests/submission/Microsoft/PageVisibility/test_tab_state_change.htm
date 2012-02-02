@@ -1,0 +1,100 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Page Visibility API Operation While Switching Tabs</title>
+        
+        <script type="text/javascript" src="/resources/testharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+        <script type="text/javascript" src="/webperf/tests/resources/pagevistestharness.js"></script>
+          
+                
+        <script type="text/javascript" >
+            setup({timeout:60*1000, explicit_done:true});
+            var tab_open = true;
+            var open_link;
+            
+            function onload_test()
+            {
+                document.addEventListener("visibilitychange", callback);
+
+                test_true((document.hidden == false),
+                           "document.hidden == false for active tab before tab switch.");
+
+                test_equals(document.visibilityState,
+                            VISIBILITY_STATES.VISIBLE,
+                            "document.visibilityState == '" + VISIBILITY_STATES.VISIBLE + 
+                            "' for active tab before tab switch.");
+                try
+                {
+                    if (window.external)
+                    {
+                        //Open a new tab.  This should trigger the visibilitychange event
+                        //in this document to hidden.
+                        open_link = window.open("", "_blank");
+
+                        //Queue to close the new tab.  This should trigger the visibilitychange
+                        //event in this document to visible.
+                        setTimeout(function() { open_link.close(); }, 2000);
+                    }
+                    else
+                    {
+                        test_true(false, "Could not open new tab.  Test aborted early.");
+                        setTimeout(done, 0);
+                    }
+                }
+                catch (ex)
+                {
+                    test_true(false, "Could not open new tab.  Test aborted early.");
+                    setTimeout(done, 0);
+                }
+            }
+
+            function callback()
+            {
+                //New tab has focus. Document should be hidden.
+                if (tab_open)
+                {
+                    tab_open = false;
+                    test_true((document.hidden == true),
+                               "document.hidden == true when another tab has focus.");
+
+                    test_equals(document.visibilityState,
+                                VISIBILITY_STATES.HIDDEN,
+                                "document.visibilityState == '" + VISIBILITY_STATES.HIDDEN +
+                                "' when another tab has focus.");
+                }
+                //New tab has been closed.  Document should be visibile.
+                else
+                {
+                    test_true((document.hidden == false),
+                               "document.hidden == false when restoring tab focus.");
+
+                    test_equals(document.visibilityState,
+                                VISIBILITY_STATES.VISIBLE,
+                                "document.visibilityState == '" + VISIBILITY_STATES.VISIBLE +
+                                "' when restoring tab focus.");
+
+                    //Transition is done, finalize.
+                    //If the callback does not occur, the setup timeout will
+                    //finalize the test.
+                    done();
+                }
+            }
+        </script>
+    </head>
+    
+    <body onload="onload_test();">
+        <h1>Description</h1>
+        <p>This test validates the values of document.hidden and document.visibilityState when
+        changing the active tab.</p>
+        
+        <p>
+            Note: This test will use window.open() to open a new tab and force the current tab to the background. 
+            Before running this test, the browser should be configured to open new links in tabs and not new pages.
+            The page should also be in the foreground when the test starts such that it starts with a "visible" state.
+        </p>
+
+        <div id="log"></div>
+    </body>
+</html>

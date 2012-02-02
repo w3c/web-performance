@@ -219,18 +219,15 @@ object.  In the definition of <code><a href='#requestAnimationFrame'>requestAnim
 object are to be taken to be references to the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>. <a href='#ref-HTML5'>[HTML5]</a></p>
 
-<pre class='idl'><span class='xattr'>[Supplemental, NoInterfaceObject]</span>
+<pre class='idl'><span class='xattr'>[NoInterfaceObject]</span>
 interface <dfn id='WindowAnimationTiming'>WindowAnimationTiming</dfn> {
-  long <a href='#requestAnimationFrame'>requestAnimationFrame</a>(in <a href='#FrameRequestCallback'>FrameRequestCallback</a> callback);
-  void <a href='#cancelAnimationFrame'>cancelAnimationFrame</a>(in long handle);
+  long <a href='#requestAnimationFrame'>requestAnimationFrame</a>(<a href='#FrameRequestCallback'>FrameRequestCallback</a> callback);
+  void <a href='#cancelAnimationFrame'>cancelAnimationFrame</a>(long handle);
 };
 
 <a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a> implements <a href='#WindowAnimationTiming'>WindowAnimationTiming</a>;
 
-<span class='xattr'>[Callback, NoInterfaceObject]</span>
-interface <dfn id='FrameRequestCallback'>FrameRequestCallback</dfn> {
-  void sample(in <a href='http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);
-};</pre>
+callback <dfn id='FrameRequestCallback'>FrameRequestCallback</dfn> = void (<a href='http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);</pre>
 
 <p>The <dfn id='requestAnimationFrame'><code>requestAnimationFrame</code></dfn> method is
 used to signal to the user agent that a script-based animation
@@ -332,7 +329,7 @@ To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the follow
     <ol>
       <li>If the cancelled flag on <var>callback</var> is not true:
         <ol>
-          <li>Call the <code><a href='#FrameRequestCallback'>sample</a></code> operation of <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>Call <var>callback</var> with <var>time</var> as the argument.</li>
           <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
         </ol>
       </li>
@@ -340,11 +337,14 @@ To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the follow
   </li>
 </ol>
 
-<p class='note'>
+<div class='note'>
+<p>
 The expectation is that the user agent will run tasks from the <a class='dfnref' href='#dfn-animation-task-source'>animation task source</a> at
 at a regular interval matching the display's refresh rate. Running tasks at a lower rate can result in animations not appearing smooth. Running tasks
 at a higher rate can cause extra computation to occur without a user-visible benefit.
 </p>
+</div>
+
 </div>
 
 <div id='acknowledgements' class='section'>

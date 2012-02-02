@@ -4,10 +4,10 @@
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <title>Page Visibility API Operation While Minimizing Browser Window</title>
         
-        <SCRIPT src="support/testharness.js"></SCRIPT>
-        <SCRIPT src="support/featuredetection.js"></SCRIPT>
-        <SCRIPT src="support/pagevistestharness.js"></SCRIPT>
-        <LINK rel="stylesheet" href="support/testharness.css">
+        <script type="text/javascript" src="/resources/testharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+        <script type="text/javascript" src="/webperf/tests/resources/pagevistestharness.js"></script>
+          
     </head>
     <body>
         <h1>Description</h1>
@@ -30,19 +30,19 @@
         <br />
         IFrame with default style:
         <br />
-        <iframe id="childDocShown" src="support/blank_page_green.htm">
+        <iframe id="childDocShown" src="/webperf/tests/resources/blank_page_green.htm">
             iframes unsupported
         </iframe>
         <hr />
         IFrame with "display:none" style:
         <br />
-        <iframe id="childDocHidden" src="support/blank_page_green.htm" style="display:none">
+        <iframe id="childDocHidden" src="/webperf/tests/resources/blank_page_green.htm" style="display:none">
             iframes unsupported
         </iframe>
 
         <script type="text/javascript" >
-            SetupResultTable({timeout:60*1000, explicit_done:true});
-            
+            setup({ explicit_done: true });
+
             function start_test()
             {
                 if (BrowserHasFeature(document, "hidden") !== undefined)
