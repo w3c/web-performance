@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-february-2-2012">Editor's Draft February 2, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -141,7 +141,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-page-visibility"><span class="secno">4 </span>Page Visibility</a> 
     <ol class="toc">
       <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</a></li>
+      <li><a href="#sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</a></li>
       <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
 	  <li><a href="#sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
     </ol>
@@ -202,8 +202,9 @@ the Page Visibility:</p>
 <p>The script will always check for messages every second, even if the user
 is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
 
-<p>Using the <a href="#pv-document-visibility-interface">DocumentVisibility</a>
-interface, the page will be able to throttle checking messages to every minute when the
+<p>Using the <a href="#pv-hidden"><code>hidden</code></a> attribute of the <a href="#pv-document-interface">Document</a> 
+interface and the <a href="#pv-visibility-change-event"><code>visibilitychange</code></a> event, 
+the page will be able to throttle checking messages to every minute when the
 page is no longer visible.</p>
 
 <div class="example">
@@ -299,15 +300,12 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 with the means to programmatically determine the current visibility of a page
 and be notified of visibility changes.</p>
 
-<h3 id="sec-document-visibility-interface"><span class="secno">4.2 </span>The <code>DocumentVisibility</code> interface</h3>
+<h3 id="sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</h3>
 <pre class="idl">
-[NoInterfaceObject]
-interface <dfn id="pv-document-visibility-interface">DocumentVisibility</dfn> {
-            
+partial interface <dfn id="pv-document-interface">Document</dfn> {
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
   readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>; // "hidden", "visible", "preview"
 };
-Document implements DocumentVisibility;
 </pre>
 
 
@@ -415,7 +413,11 @@ has changed, the User Agent MUST queue a task that when run, synchronously sets 
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
 
-<p>If a vendor-specific proprietary User Agent extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute return value
+<p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
+e.g., for experimental purposes, vendors must use the following extension mechanisms:
+</p>
+
+<p>If an extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute return value
  is needed for an experimental visibility state, on getting the <a href="#pv-visibility-state">visibilityState</a> IDL attribute, 
   vendors MUST return a DOMString that uses the following convention:</p>
  
