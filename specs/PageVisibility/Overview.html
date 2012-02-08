@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-2-2012">Editor's Draft February 2, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-february-8-2012">Editor's Draft February 8, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -143,7 +143,8 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
       <li><a href="#sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</a></li>
       <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
-	  <li><a href="#sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
+	  <li><a href="#sec-processing-model"><span class="secno">4.4 </span>Processing Model</a></li>
+      <li><a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -304,16 +305,17 @@ and be notified of visibility changes.</p>
 <pre class="idl">
 partial interface <dfn id="pv-document-interface">Document</dfn> {
   readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
-  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>; // "hidden", "visible", "preview"
+  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>; 
+  // "hidden", "visible", "preview", "suspended", "unloaded"
 };
 </pre>
 
 
 <h4><code><dfn id="pv-hidden">hidden</dfn></code> attribute</h4>
 
-<p>On getting, the <a href="#pv-hidden"><code>hidden</code></a> IDL attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#pv-hidden"><code>hidden</code></a> attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport)
-is not visible at all. The IDL attribute MUST return false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+is not visible at all. The attribute MUST return false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible on at least one screen.
 </p>
@@ -321,22 +323,25 @@ is not visible at all. The IDL attribute MUST return false if the <a href="http:
 <p>
 If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#pv-hidden"><code>hidden</code></a> IDL attribute MUST return true.
+the <a href="#pv-hidden"><code>hidden</code></a> attribute MUST return true.
 </p>
 
 <p>To accommodate accessibility tools that are typically full screen but still show a 
 view of the page, when applicable, this attribute may return false when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
-<p>As examples, on getting, the IDL attribute returns true when: </p>
+<p>As examples, on getting, the attribute returns true when: </p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
-		 <li>The Operating System lock screen is shown.</li>
-		 <li>The User Agent is minimized and a preview is shown.</li>
+         <li>The User Agent is minimized and a preview is shown.</li>
+         <li>The User Agent is about to unload the page.</li>
+         <li>The User Agent is about to traverse to a session history entry.</li>
+         <li>The User Agent is about to enter a suspended state where JavaScript timers and events are not fired.</li>
+         <li>The Operating System lock screen is shown.</li>
 	</ul> 
 	
- <p>Likewise, as examples, on getting, the IDL attribute returns false when:</p>
+ <p>Likewise, as examples, on getting, the attribute returns false when:</p>
  <ul>
 		 <li>The User Agent is not minimized and the page is on a foreground tab.</li>
 		 <li>The User Agent is fully obscured by an Accessibility Tool, like a magnifier, but
@@ -345,32 +350,34 @@ is not minimized but is fully obscured by other applications.</p>
 
 <h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
 
-<p>On getting, <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return 
-one of the following DOMStrings or a vendor prefixed DOMString as defined in <a href="#sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</a>:
+<p>On getting, <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return 
+one of the following DOMStrings or a vendor prefixed DOMString as defined in <a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a>:
 
 <ul>
 	<li><code>hidden</code>,</li>
 	<li><code>visible</code>,</li>
-	<li><code>preview</code>.</li>
+	<li><code>preview</code>,</li>
+    <li><code>suspended</code>,</li>
+    <li><code>unloaded</code>.</li>
 </ul> 
 
 
 <h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
 
 <p>
 If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
+the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
 </p>
  
  <p>To accommodate accessibility tools that are typically full screen but still 
  show a view of the page, when applicable, the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> may not be returned 
  when the User Agent is not minimized but is fully obscured by other applications.</p>
 
-<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> IDL attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
+<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
@@ -378,7 +385,7 @@ the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribut
 	</ul> 
 
 <h5><code><dfn id="pv-page-visible">visible</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
 is set to false.</p>
@@ -392,33 +399,125 @@ visible, however, a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Cor
 view of the page, when applicable, the DOMString <a href="#pv-page-visible"><code>visible</code></a> may be returned when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
+<h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
+<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute MUST return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
+<a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>.
+</p>
+
 <h5><code><dfn id="pv-page-preview">preview</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> IDL attribute may return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
+<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute may return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
 is not visible at all and a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
- visible. User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> IDL attribute is optional.
+ visible. User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> attribute is optional.
  </p>
+
+<h5><code><dfn id="pv-suspended">suspended</dfn></code></h5>
+<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute may return the DOMString <a href="#pv-suspended"><code>suspended</code></a> if the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+is not visible at all and the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired. 
+User Agent support of the <a href="#pv-page-preview"><code>suspended</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> attribute is optional.
+</p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
 <p>
-When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+The User Agent MUST fire the <code>visiblitychange</code> event at the 
+<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> when the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-has changed, the User Agent MUST queue a task that when run, synchronously sets the new values for the <a href="#pv-visibility-state"><code>visibilityState</code></a> and
-<a href="#pv-hidden"><code>hidden</code></a> IDL attributes, and then fires a simple event that bubbles, but isn't cancelable, named <code>visiblitychange</code> at the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>. 
+has changed.
 </p>
 
-<h3 id="sec-vendor-prefix"><span class="secno">4.4 </span>Vendor Prefixes</h3>
+<h3 id="sec-processing-model"><span class="secno">4.4 </span>Processing Model</h3>
+
+<p>
+    When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+    has changed, the User Agent MUST run the following steps. 
+</p>
+
+<p>
+    If the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
+    is now visible, 
+</p>
+    <ol>
+        <li>
+            Queue a task that runs the following steps synchronously:
+        </li>
+        <ol style="list-style-type:lower-alpha;"> 
+            <li>
+                Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>false</code>.
+            </li>
+            <li>
+                Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>visible</code>.
+            </li>
+            <li>
+                Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+                at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+            </li>
+        </ol>
+        <li>
+            If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+            fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event at the 
+            <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
+            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.
+        </li>
+    </ol>
+<p>
+    However, if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
+    is now no longer visible, 
+</p>
+<ol>
+    <li>
+        If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+        fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at the 
+        <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
+        but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.
+    </li>
+    <li>
+        Queue a task that runs the following steps synchronously:
+    </li>
+    <ol style="list-style-type:lower-alpha;"> 
+        <li>
+            If a preview of the page is visible, set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute 
+            to <code>preview</code> and skip to step 2d.
+        </li>
+        <li>
+            If the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+            or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired,
+            set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>suspended</code>
+            and skip to step 2d.
+        </li>
+        <li>
+            If the User Agent is to <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload the document</a>,
+            set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>unloaded</code>
+            and skip to step 2d.
+        </li>
+        <li>
+            Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.
+        </li>
+        <li>
+            Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+            at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+        </li>
+    </ol>
+</ol>
+
+
+<h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
 e.g., for experimental purposes, vendors must use the following extension mechanisms:
 </p>
 
-<p>If an extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> IDL attribute return value
- is needed for an experimental visibility state, on getting the <a href="#pv-visibility-state">visibilityState</a> IDL attribute, 
+<p>If an extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute return value
+ is needed for an experimental visibility state, on getting the <a href="#pv-visibility-state">visibilityState</a> attribute, 
   vendors MUST return a DOMString that uses the following convention:</p>
  
 <p><code>[vendorprefix]-[name]</code></p>
