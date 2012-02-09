@@ -147,7 +147,8 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a></li>
     </ol>
   </li>
-  <li><a href="#references"><span class="secno">5 </span>References</a></li>
+  <li><a href="#sec-privacy"><span class="secno">5 </span>Privacy</a></li>
+  <li><a href="#references"><span class="secno">6 </span>References</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -530,7 +531,15 @@ e.g., for experimental purposes, vendors must use the following extension mechan
 </ul>
 
 
-<h2 id="references"><span class="secno">5 </span>References</h2>
+<h3 id="sec-privacy"><span class="secno">5 </span>Privacy</h3>
+
+<p>
+The <a href="#sec-document-interface">Page Visibility</a> API enables third party content on a web page to determine the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> with higher precision compared to existing mechanisms, like <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">focus</a> or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. A User Agent may provide a setting to disable the <a href="#sec-document-interface">Page Visibility</a> API that when set will ensure the <a href="#pv-hidden"><code>hidden</code></a> attribute is set to <code>false</code> and the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute is set to <code>visible</code>.
+</p>
+
+
+<h2 id="references"><span class="secno">6 </span>References</h2>
 
 <dl>
 
