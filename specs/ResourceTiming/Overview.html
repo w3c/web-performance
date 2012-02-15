@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-january-10-2012">Editor's Draft January 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-february-15-2012">Editor's Draft February 15, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -165,8 +165,7 @@ cite this document as other than work in progress. </p>
         <li><a href="#monotonic-clock"><span class="secno">5.2</span> Monotonic Clock</a></li>
     </ol>
   </li>
-  <li><a href="#privacy"><span class="secno">6 </span>Privacy</a></li>
-  <li><a href="#security"><span class="secno">7 </span>Security</a></li>
+  <li><a href="#privacy-security"><span class="secno">6 </span>Privacy and Security</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 <!--end-toc-->
@@ -925,25 +924,21 @@ record the system clock at the beginning of the root document navigation and def
 terms of a monotonic clock measuring time elapsed from the beginning of the navigation.
 </p>
 
-<h2 id="privacy"><span class="secno">6 </span>Privacy</h2>
+<h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
 
 <p>This section is non-normative.</p>
 
-<p>When giving various timing information of how a resource is requested and
-process, the <a href="#performance-resource-timing">ResourceTiming</a> interface potentially
-exposes such information to any page that has this resource included. To
-limit the access to the ResourceTiming interface, the <a
-href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>
-policy is enforced by default. Additionally, resource providers can
-explicitely allow timing information to be collected over a resource by
+<p>The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface 
+exposes timing information for a resource to any web page that has included that
+resource. To limit the access to the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface, the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>
+policy is enforced by default and certain attributes are set to zero, as described in Section 4.5 <a href="cross-origin-resources">Cross-origin Resources</a>. Resource providers can
+explicitly allow all timing information to be collected for a resource by
 adding the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the
 domains that are allowed to access the timing information. </p>
 
-<h2 id="security"><span class="secno">7 </span>Security</h2>
-
-<p>This section is non-normative.</p>
-
-<p>Similar to the discussion in the Privacy section. </p>
+<p>
+Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. Though the <a href="#performance-resource-timing">PerformanceResourceTiming</a> interface gives timing information for resources in a document, the <a href="cross-origin-resources">cross-origin restrictions</a> prevent making this privacy concern any worse than it is today using the load event on resources to measure timing to determine cache hits and misses. 
+</p>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
