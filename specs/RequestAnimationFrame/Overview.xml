@@ -374,11 +374,8 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   <dt id='ref-DOM4'>[DOM4]</dt>
   <dd><cite><a href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html'>DOM4</a></cite>.
   Anne van Kesteren, Aryeh Gregor, and Ms2ger, Editors.  World Wide Web Consortium, January 2012.  Available at http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html.</dd>
-  <dt id='ref-HTML5'>[HTML5]</dt>
-  <dd><cite><a href='http://www.w3.org/TR/2010/WD-html5-20100624/'>HTML5</a></cite>.
-  I. Hickson, Editor.
-  World Wide Web Consortium, June 2010.
-  Available at http://www.w3.org/TR/2010/WD-html5-20100624/.</dd>
+  <dt>[<a id="ref-HTML5">HTML5</a>]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/html5/">HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>. The <a href="http://dev.w3.org/html5/spec/">latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
   <dt id='ref-RFC2119'>[RFC2119]</dt>
   <dd><cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
   S. Bradner.  IETF, March 1997.  Available at http://www.ietf.org/rfc/rfc2119.</dd>
@@ -388,10 +385,6 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   World Wide Web Consortium, July 2011.
   Available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
-</div>
-
-<div id='informative-references' class='section'>
-  <h3>Informative references</h3>
 </div>
 
 </div> <!-- references -->
