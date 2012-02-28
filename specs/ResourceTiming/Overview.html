@@ -48,7 +48,8 @@
   <dt>Latest Editor's Draft:</dt>
   <dd><a href='http://www.w3c-test.org/webperf/specs/ResourceTiming/'>http://www.w3c-test.org/webperf/specs/ResourceTiming/</a></dd>
   <dt>Previous versions:</dt>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/bd09cf5e4db1/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/bd09cf5e4db1/specs/ResourceTiming/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html</a></dd>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/440ab84e0b40/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/440ab84e0b40/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, <span
@@ -684,8 +685,7 @@ partial interface Performance {
         <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header,
         these attributes must be set to zero: <a href="#redirect-start">redirectStart</a>, <a href="#redirect-end">redirectEnd</a>,
         <a href="#domainlookup-start">domainLookupStart</a>, <a href="#domainlookup-end">domainLookupEnd</a>, <a href="#connect-start">connectStart</a>,
-        <a href="#connect-end">connectEnd</a>, <a href="#request-start">requestStart</a>, <a href="#response-start">responseStart</a>,
-        and <a href="#response-end">responseEnd</a>.
+        <a href="#connect-end">connectEnd</a>, <a href="#request-start">requestStart</a> and <a href="#response-start">responseStart</a>.
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
@@ -797,10 +797,8 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
       <a href="#domainlookup-end">domainLookupEnd</a>, 
       <a href="#connect-start">connectStart</a>, 
       <a href="#connect-end">connectEnd</a>, 
-      <a href="#request-start">requestStart</a>, 
-      <a href="#response-start">responseStart</a>,
-      <a href="#response-end">responseEnd</a>,
-      and <a href="#duration-attribute">duration</a> to zero and abort the remaining steps. 
+      <a href="#request-start">requestStart</a> and  
+      <a href="#response-start">responseStart</a> to zero and go to Step <a href="step-response-end">3.17</a>.
       </li>
         <li>Let <a href="#domainlookup-start">domainLookupStart</a>, 
        <a href="#domainlookup-end">domainLookupEnd</a>, 
@@ -972,9 +970,9 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      Specification</a></cite>, A. Le Hors, et al., Editors. World
      Wide Web Consortium, 7 April 2004. This version of the Document
      Object Model Level 3 Core Recommendation is
-     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
-     DOM Core</a> is available at
-     http://www.w3.org/TR/domcore/.
+     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/dom/">latest version of
+     DOM4</a> is available at
+     http://www.w3.org/TR/dom/.
     </dd>
 
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
