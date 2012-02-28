@@ -160,8 +160,8 @@ cite this document as other than work in progress. </p>
 <p>
 The Page Visibility specification defines a means for site developers to 
 programmatically determine the current visibility of a document and be notified 
-of visibility changes. Without knowing the visibility state of a page, a web developer 
-must design the webpage as if it is always visible. This not only results in higher 
+of visibility changes. Without knowing the visibility state of a page, web developers 
+have been designing webpages as if they are always visible. This not only results in higher 
 machine resource utilization, but it prevents web developers from making runtime
 decisions based on whether the webpage is visible to the user. Designing web pages with knowledge
 of the page visibility will allow for improved user experiences and power efficient sites.</p>
@@ -483,7 +483,7 @@ has changed.
 		   <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object), using the
 		   <code><a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, 
 		   with the <code title="dom-PageTransitionEvent-persisted"><a href="http://dev.w3.org/html5/spec/history.html#dom-pagetransitionevent-persisted">persisted</a></code>
-		   attribute initialized to true. This event must not bubble, must not
+		   attribute initialized to true. This event MUST not bubble, MUST not
 		   be cancelable, and has no default action.</p>
     </li>
     <li>
@@ -529,7 +529,7 @@ has changed.
 		   <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object), using the
 		   <code><a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, 
 		   with the <code title="dom-PageTransitionEvent-persisted"><a href="http://dev.w3.org/html5/spec/history.html#dom-pagetransitionevent-persisted">persisted</a></code>
-		   attribute initialized to true. This event must not bubble, must not
+		   attribute initialized to true. This event MUST not bubble, MUST not
 		   be cancelable, and has no default action.
 	   </p>
    </li>
@@ -560,7 +560,7 @@ has changed.
 <h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
-e.g., for experimental purposes, vendors must use the following extension mechanisms:
+e.g., for experimental purposes, vendors MUST use the following extension mechanisms:
 </p>
 
 <p>If an extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute return value
