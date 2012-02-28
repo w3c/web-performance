@@ -440,74 +440,120 @@ has changed.
     <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
     has changed, the User Agent MUST run the following steps. 
 </p>
-
 <p>
     If the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
     <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
-    is now visible, 
+    <b>is now visible</b>, 
 </p>
     <ol>
         <li>
-            Queue a task that runs the following steps synchronously:
+            <p>Queue a task that runs the following steps synchronously:</p>
         </li>
         <ol style="list-style-type:lower-alpha;"> 
             <li>
-                Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>false</code>.
+                <p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
             </li>
             <li>
-                Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>visible</code>.
+                <p>Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>visible</code>.</p>
             </li>
             <li>
-                Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-                at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+                <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+                at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.</p>
             </li>
         </ol>
         <li>
-            If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+            <p>If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
             fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event at the 
             <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
-            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.
+            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
         </li>
     </ol>
 <p>
-    However, if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+    Else if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
     <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
-    is now no longer visible, 
+    <b>is now no longer visible</b>, 
 </p>
 <ol>
     <li>
-        If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-        fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at the 
-        <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
-        but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.
+        <p>If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+		   fire a <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at
+		   the <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object of the <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code>, but
+		   with its <code title="dom-event-target"><a href="http://dev.w3.org/html5/spec/infrastructure.html#dom-event-target">target</a></code> set to the
+		   <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+		   <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object), using the
+		   <code><a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, 
+		   with the <code title="dom-PageTransitionEvent-persisted"><a href="http://dev.w3.org/html5/spec/history.html#dom-pagetransitionevent-persisted">persisted</a></code>
+		   attribute initialized to true. This event must not bubble, must not
+		   be cancelable, and has no default action.</p>
     </li>
     <li>
-        Queue a task that runs the following steps synchronously:
+        <p>Queue a task that runs the following steps synchronously:</p>
     </li>
     <ol style="list-style-type:lower-alpha;"> 
         <li>
-            If a preview of the page is visible, set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute 
-            to <code>preview</code> and skip to step 2d.
+            <p>If a preview of the page is visible, set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute 
+            to <code>preview</code> and skip to step 2c.</p>
         </li>
         <li>
-            If the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+            <p>If the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
             or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired,
             set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>suspended</code>
-            and skip to step 2d.
+            and skip to step 2c.</p>
         </li>
         <li>
-            If the User Agent is to <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload the document</a>,
-            set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>unloaded</code>
-            and skip to step 2d.
+            <p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
         </li>
         <li>
-            Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.
-        </li>
-        <li>
-            Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-            at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+            <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+            at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.</p>
         </li>
     </ol>
+</ol>
+<p>
+    Else if the user agent is to <b><a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
+	<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a></b> contained by the 
+    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>, 
+	follow these steps,
+</p>
+<ol>
+    <li>
+		<p>Increase the <a href="http://dev.w3.org/html5/spec/webappapis.html#event-loop">event loop</a>'s <a href="http://dev.w3.org/html5/spec/history.html#termination-nesting-level">termination
+		nesting level</a> by one.</p>
+	</li>
+	<li>
+		<p>
+		   Fire a <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at
+		   the <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object of the <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code>, but
+		   with its <code title="dom-event-target"><a href="http://dev.w3.org/html5/spec/infrastructure.html#dom-event-target">target</a></code> set to the
+		   <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+		   <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object), using the
+		   <code><a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, 
+		   with the <code title="dom-PageTransitionEvent-persisted"><a href="http://dev.w3.org/html5/spec/history.html#dom-pagetransitionevent-persisted">persisted</a></code>
+		   attribute initialized to true. This event must not bubble, must not
+		   be cancelable, and has no default action.
+	   </p>
+   </li>
+   <li>
+        <p>Queue a task that runs the following steps synchronously:</p>
+		<ol style="list-style-type:lower-alpha;"> 
+			<li>
+				<p>Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>unloaded</code>.
+			</li>
+			<li>
+				<p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.
+			</li>
+			<li>
+				<p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+				at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+			</li>
+		</ol>
+    </li>
+   <li>
+		<p><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">Fire a simple event</a> named
+		<code title="event-unload">unload</code> at the
+		<code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code>'s <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object
+		and follow the remaining steps in the <a href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unload a document</a> processing model.</p>
+   </li>
 </ol>
 
 
@@ -534,8 +580,11 @@ e.g., for experimental purposes, vendors must use the following extension mechan
 <h3 id="sec-privacy"><span class="secno">5 </span>Privacy</h3>
 
 <p>
-The <a href="#sec-document-interface">Page Visibility</a> API enables third party content on a web page to determine the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> with higher precision compared to existing mechanisms, like <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">focus</a> or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. A User Agent may provide a setting to disable the <a href="#sec-document-interface">Page Visibility</a> API that when set will ensure the <a href="#pv-hidden"><code>hidden</code></a> attribute is set to <code>false</code> and the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute is set to <code>visible</code>.
+The <a href="#sec-document-interface">Page Visibility</a> API enables third party content on a web page to determine the 
+visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> with higher 
+precision compared to existing mechanisms, like <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">focus</a> 
+or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. 
 </p>
 
 
