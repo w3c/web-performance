@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-15-2012">Editor's Draft February 15, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-february-29-2012">Editor's Draft February 29, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -318,11 +318,6 @@ a new value is assigned to it. </p>
 official term ECMAScript, since the term JavaScript is more widely known. <a href="#ECMA262">[ECMA262]</a>
 </p>
 
-<p>Throughout this work, time is measured in sub-millisecond resolution since the start of the navigation of the root document, as recorded in 
-the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#nt-navigation-start">navigationStart</a> attribute. 
-For example, a timestamp value of 1.5 would be 1.5 milliseconds since the start of the navigation of the root document.
-</p>
-
 <h2 id="resource-timing"><span class="secno">4 </span>Resource Timing</h2>
 
 <h3 id="introduction-1"><span class="secno">4.1 </span>Introduction</h3>
@@ -411,17 +406,17 @@ in the</span>
   readonly attribute DOMString <a href="#initiatorType" title="initiatorType">initiatorType</a>; 
   // "css", "embed", "img", "link", "object", "script", "subdocument", "svg", "xmlhttprequest", "other"
   
-  readonly attribute double <a href="#redirect-start" title="redirectstart">redirectStart</a>;
-  readonly attribute double <a href="#redirect-end" title="redirectend">redirectEnd</a>;
-  readonly attribute double <a href="#fetch-start" title="fetchstart">fetchStart</a>;
-  readonly attribute double <a href="#domainlookup-start" title="domainlookupstart">domainLookupStart</a>;
-  readonly attribute double <a href="#domainlookup-end" title="domainlookupend">domainLookupEnd</a>;
-  readonly attribute double <a href="#connect-start" title="connectstart">connectStart</a>;
-  readonly attribute double <a href="#connect-end" title="connectend">connectEnd</a>;
-  readonly attribute double <a href="#secureconnection-start" title="secureconnectionstart">secureConnectionStart</a>;
-  readonly attribute double <a href="#request-start" title="requeststart">requestStart</a>;
-  readonly attribute double <a href="#response-start" title="responsestart">responseStart</a>;
-  readonly attribute double <a href="#response-end" title="responseend">responseEnd</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#redirect-start" title="redirectstart">redirectStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#redirect-end" title="redirectend">redirectEnd</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#fetch-start" title="fetchstart">fetchStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#domainlookup-start" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#domainlookup-end" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#connect-start" title="connectstart">connectStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#connect-end" title="connectend">connectEnd</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#secureconnection-start" title="secureconnectionstart">secureConnectionStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#request-start" title="requeststart">requestStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#response-start" title="responsestart">responseStart</a>;
+  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#response-end" title="responseend">responseEnd</a>;
 };</pre>
 
 <p>
@@ -435,13 +430,15 @@ The <a href="#performance-resource-timing">PerformanceResourceTiming</a> interfa
     	requested resource. This attribute must not change even if the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> redirected to a different URL.
    	</p>
     <p>The <code id="entryType-attribute">entryType</code> attribute must return the DOMString <code id="perf-resource">resource</code>.</p>
-    <p>The <code id="startTime-attribute">startTime</code> attribute must return the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
+    <p>The <code id="startTime-attribute">startTime</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+	with the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
        If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
        when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
        document, this attribute must return the same value as <a href="#redirect-start">redirectStart</a>. Otherwise, this attribute must 
        return the same value as <a href="#fetch-start">fetchStart</a>.
     </p>
-    <p>The <code id="duration-attribute">duration</code> attribute must return a timestamp equal to the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
+    <p>The <code id="duration-attribute">duration</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+	equal to the difference between <a href="#response-end">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
 </div>
 
 <h4 id="initiatorType-attribute"><code><dfn id="initiatorType">initiatorType</dfn></code> attribute</h4>
@@ -739,7 +736,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
         name that identifies the vendor and TimeName identifies the name given to the 
         timing attribute. </li>
     <li>Use a monotonically increasing clock, as defined in Section 5.2 <a href="#monotonic-clock">Monotonic Clock</a>.</li>
-    <li>Be measured in the timebase defined in Section 3 <a href="#terminology">Terminology</a>.
+    <li>Return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>.
 </ul>
 
 <h2 id="process"><span class="secno">5 </span>Process</h2>
@@ -1012,6 +1009,9 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>http://www.w3.org/TR/2011/WD-performance-timeline-20110811/</a>. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
 
+   <dt>[<a name="HighResolutionTime" id="HighResolutionTime">High Resolution Time</a>]</dt>
+   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, February 2012. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>latest version of High Resolution Time</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+   
    <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110927/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, September 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110927/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
