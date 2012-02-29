@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
 <body>
-<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>22 February 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>29 February 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
 <div class="section">
 <h2>Abstract</h2>
@@ -39,7 +39,7 @@ by the browser.</p>
 publication.  Other documents may supersede this document. A list of current W3C
 publications and the latest revision of this technical report can be found in
 the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
-http://www.w3.org/TR/.</em></p><p>This document is the 22 February 2012 <b>Editor’s Draft</b> of the
+http://www.w3.org/TR/.</em></p><p>This document is the 29 February 2012 <b>Editor’s Draft</b> of the
   <cite>Timing control for script-based animations</cite> specification.
 
 Please send comments about this document to
@@ -195,7 +195,7 @@ specifications:</p>
 is an <dfn id="dfn-animation-frame-request-callback-list">animation frame request callback list</dfn>,
 which is a list of &lt;<var>handle</var>, <var>callback</var>&gt; tuples.
 <var>handle</var> is an integer that uniquely identifies the entry in the list.
-<var>callback</var> is a <code><a href="#FrameRequestCallback">FrameRequestCallback</a></code>
+<var>callback</var> is a <code><a href="#framerequestcallback">FrameRequestCallback</a></code>
 object.  Initially, the
 <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
 for a <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
@@ -211,38 +211,38 @@ frame request callback list</a>.</p>
 <div id="the-WindowAnimationTiming-interface" class="section">
 <h2>4. The WindowAnimationTiming interface</h2>
 
-<p>The <code><a href="#WindowAnimationTiming">WindowAnimationTiming</a></code> interface is used to expose the
-<code><a href="#requestAnimationFrame">requestAnimationFrame</a></code>
+<p>The <code><a href="#windowanimationtiming">WindowAnimationTiming</a></code> interface is used to expose the
+<code><a href="#dom-windowanimationtiming-requestanimationframe">requestAnimationFrame</a></code>
 operation on the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
-object.  In the definition of <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> below, references to the
+object.  In the definition of <code><a href="#dom-windowanimationtiming-requestanimationframe">requestAnimationFrame</a></code> below, references to the
 <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
 object are to be taken to be references to the <code><a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a></code>
 object’s <a href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>. <a href="#ref-HTML5">[HTML5]</a></p>
 
 <pre class="idl"><span class="xattr">[NoInterfaceObject]</span>
-interface <dfn id="WindowAnimationTiming">WindowAnimationTiming</dfn> {
-  long <a href="#requestAnimationFrame">requestAnimationFrame</a>(<a href="#FrameRequestCallback">FrameRequestCallback</a> callback);
-  void <a href="#cancelAnimationFrame">cancelAnimationFrame</a>(long handle);
+interface <dfn id="windowanimationtiming">WindowAnimationTiming</dfn> {
+  long <a href="#dom-windowanimationtiming-requestanimationframe">requestAnimationFrame</a>(<a href="#framerequestcallback">FrameRequestCallback</a> callback);
+  void <a href="#dom-windowanimationtiming-cancelanimationframe">cancelAnimationFrame</a>(long handle);
 };
 
-<a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a> implements <a href="#WindowAnimationTiming">WindowAnimationTiming</a>;
+<a href="http://www.w3.org/TR/html5/browsers.html#the-window-object">Window</a> implements <a href="#windowanimationtiming">WindowAnimationTiming</a>;
 
-callback <dfn id="FrameRequestCallback">FrameRequestCallback</dfn> = void (<a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a> time);</pre>
+callback <dfn id="framerequestcallback">FrameRequestCallback</dfn> = void (<a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a> time);</pre>
 
-<p>The <dfn id="requestAnimationFrame"><code>requestAnimationFrame</code></dfn> method is
+<p>The <dfn id="dom-windowanimationtiming-requestanimationframe"><code>requestAnimationFrame</code></dfn> method is
 used to signal to the user agent that a script-based animation
 needs to be resampled.  When <code>requestAnimationFrame(<var>callback</var>)</code> is called, the user agent <span class="rfc2119">MUST</span> schedule a script-based animation
 resampling by appending to the end of the <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>
 an entry whose <var>handle</var> is a user-agent-defined integer greater than zero that uniquely identifies the entry in the list and
 whose <var>callback</var> is <code><var>callback</var></code>.</p>
 
-<p>Each <a class="dfnref" href="#FrameRequestCallback">FrameRequestCallback</a> object has a <dfn id="callbackCancelledFlag">cancelled</dfn> boolean flag. This
+<p>Each <a class="dfnref" href="#framerequestcallback">FrameRequestCallback</a> object has a <dfn id="dom-framerequestcallback-cancelled">cancelled</dfn> boolean flag. This
 flag is initially false and is not exposed by any interface.</p>
 
 <div class="note"><div class="noteHeader">Note</div>
-  <p><code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> only schedules
+  <p><code><a href="#dom-windowanimationtiming-requestanimationframe">requestAnimationFrame</a></code> only schedules
   a single update to the script-based animation.  If subsequent animation frames are needed, then
-  <code><a href="#requestAnimationFrame">requestAnimationFrame</a></code> will need to be called
+  <code><a href="#dom-windowanimationtiming-requestanimationframe">requestAnimationFrame</a></code> will need to be called
   again from within the callback.</p>
 
   <p>Also note that multiple calls to <code>requestAnimationFrame</code> with the same callback
@@ -257,15 +257,15 @@ flag is initially false and is not exposed by any interface.</p>
   of view?</p>
 </div>
 
-<p>The <dfn id="cancelAnimationFrame"><code>cancelAnimationFrame</code></dfn> method is
+<p>The <dfn id="dom-windowanimationtiming-cancelanimationframe"><code>cancelAnimationFrame</code></dfn> method is
 used to cancel a previously made request to schedule an animation frame update.  When <code>cancelAnimationFrame(<var>handle</var>)</code> is called,
-the user agent <span class="rfc2119">MUST</span> set the <a class="dfnref" href="#callbackCancelledFlag">cancelled</a> flag to true for the
-<a class="dfnref" href="#dfn-animation-frame-request-callback">callback</a> registered on this <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> whose <var>handle</var> is <code><var>handle</var></code>. The cancelled
+the user agent <span class="rfc2119">MUST</span> set the <a class="dfnref" href="#dom-framerequestcallback-cancelled">cancelled</a> flag to true for the
+<a class="dfnref" href="#framerequestcallback">callback</a> registered on this <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> whose <var>handle</var> is <code><var>handle</var></code>. The cancelled
 flag is set whether the callback is in a <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a> or not.
 If there is no callback with the given handle, then this function does nothing.</p>
 
 <div class="note"><div class="noteHeader">Note</div>
-  <p><code><a href="#cancelAnimationFrame">cancelAnimationFrame</a></code> might be called for an entry
+  <p><code><a href="#dom-windowanimationtiming-cancelanimationframe">cancelAnimationFrame</a></code> might be called for an entry
   in the <code><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>’s
   <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a> or in
   the <a class="dfnref" href="#dfn-sample-all-animations">sample all animations</a> operation’s temporary <var>list</var>.  In

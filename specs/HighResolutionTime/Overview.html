@@ -198,8 +198,8 @@ For certain tasks this definition of time may not be sufficient as it does not a
 
 <p>
 This specification does not propose changing the behavior of <code>Date.now()</code> as it is genuinely useful in determining the current value of the calendar time and has a long history of
-usage. The <a href="#DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#now-attribute"><code>now</code></a> attribute of the 
-<a href="#performance-interface"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
+usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#dom-performance-now"><code>now</code></a> attribute of the 
+<a href="#performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
 </p>
 
 
@@ -273,15 +273,15 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
       
 <dl>
 	<dt>
-		<b>Type Definition <i><a name='DOMHighResTimeStamp'>DOMHighResTimeStamp</a></i></b>
+		<b>Type Definition <i><a name='domhighrestimestamp'>DOMHighResTimeStamp</a></i></b>
 	</dt>
 	<dd>
-		<p>A <a href="sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> represents a number of milliseconds accurate to at least a tenth of a millisecond.</p>
+		<p>A <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> represents a number of milliseconds accurate to at least a tenth of a millisecond.</p>
 		<dl>
 			<dt><br><b>IDL Definition</b></dt>
 			<dd>
 				<pre class="idl">
-typedef double <a href='#DOMHighResTimeStamp'>DOMHighResTimeStamp</a>;
+typedef double <a href='#domhighrestimestamp'>DOMHighResTimeStamp</a>;
 				</pre>
 				<br>
 			</dd>
@@ -289,35 +289,35 @@ typedef double <a href='#DOMHighResTimeStamp'>DOMHighResTimeStamp</a>;
 	</dd>
 </dl>
 <p>
-	The <a href='#DOMHighResTimeStamp'><code>DOMHighResTimeStamp</code></a>
+	The <a href='#domhighrestimestamp'><code>DOMHighResTimeStamp</code></a>
 	is a double-precision floating-point number and is bound to the <code>double</code> type of ECMAScript.
 </p>
 
 <h3 id="sec-extenstions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> interface</h3>
 <pre class="idl">
-partial interface <dfn id="performance-interface">Performance</dfn> {
-  readonly attribute DOMHighResTimeStamp <a href="#now" title="now">now</a>;
+partial interface <dfn id="performance">Performance</dfn> {
+  readonly attribute DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now</a>;
 };
 </pre>
 
-<h4><code><dfn id="now-attribute">now</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-performance-now">now</dfn></code> attribute</h4>
 
-<p>On getting, the <a href="#now-attribute"><code>now</code></a> attribute MUST return the number of milliseconds 
-from the start of the navigation of the root document to the occurrence of the call to the <a href="#now-attribute"><code>now</code></a> attribute.
+<p>On getting, the <a href="#dom-performance-now"><code>now</code></a> attribute MUST return the number of milliseconds 
+from the start of the navigation of the root document to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> attribute.
 </p>
 
 <h3 id="sec-monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
 <p>
-The time values provided when getting the <a href="#now-attribute"><code>now</code></a> attribute MUST be monotonically increasing and not subject to system clock
+The time values provided when getting the <a href="#dom-performance-now"><code>now</code></a> attribute MUST be monotonically increasing and not subject to system clock
 adjustments or system clock skew. The difference between any two chronologically recorded time values of the 
-<a href="#now-attribute"><code>now</code></a> attribute MUST never be negative or zero. 
+<a href="#dom-performance-now"><code>now</code></a> attribute MUST never be negative or zero. 
 </p>
 
 <h3 id="sec-privacy-security"><span class="secno">4.5 </span>Privacy and Security</h3>
 <p>
 Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a 
 third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. 
-Though the <a href="#now-attribute"><code>now</code></a> attribute of the <a href="#performance-interface"><code>Performance</code></a> interface
+Though the <a href="#dom-performance-now"><code>now</code></a> attribute of the <a href="#performance"><code>Performance</code></a> interface
 gives time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
 </p>
  
@@ -346,14 +346,11 @@ gives time data to a greater accuracy than before, it does not make this privacy
 
     <dt id="ECMA262">[ECMA-262]</dt>
     <dd>
-     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
      Edition. ECMA International, Standard
-     ECMA-262, December 2009. This version of the ECMAScript
+     ECMA-262, June 2011. This version of the ECMAScript
      Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
     </dd>
-
-   <dt id="HTML5">[HTML5]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 
    <dt id="WebIDL">[Web IDL]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110927/'>Web
