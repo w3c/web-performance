@@ -41,7 +41,7 @@
 <div class="head">
 <h1>High Resolution Time</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-29-2012">Editor's Draft February 29, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-march-01-2012">Editor's Draft March 1st, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -267,8 +267,10 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-DOMHighResTimeStamp"><span class="secno">4.2 </span>The <code>DOMHighResTimeStamp</code> Type</h3>
 <p>
-	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store an absolute or relative time measured from the start of the navigation 
-	of the root document.
+	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store an absolute or relative time measured from 
+	the <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start"><code>navigationStart</code></a> attribute of the 
+	<a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performancetiming"><code>PerformanceTiming</code></a>
+	interface, the start of navigation of the document.
 </p>
       
 <dl>
@@ -288,10 +290,6 @@ typedef double <a href='#DOMHighResTimeStamp'>DOMHighResTimeStamp</a>;
 		</dl>
 	</dd>
 </dl>
-<p>
-	The <a href='#DOMHighResTimeStamp'><code>DOMHighResTimeStamp</code></a>
-	is a double-precision floating-point number and is bound to the <code>double</code> type of ECMAScript.
-</p>
 
 <h3 id="sec-extenstions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> interface</h3>
 <pre class="idl">
@@ -303,14 +301,16 @@ partial interface <dfn id="performance-interface">Performance</dfn> {
 <h4><code><dfn id="now-attribute">now</dfn></code> attribute</h4>
 
 <p>On getting, the <a href="#now-attribute"><code>now</code></a> attribute MUST return the number of milliseconds 
-from the start of the navigation of the root document to the occurrence of the call to the <a href="#now-attribute"><code>now</code></a> attribute.
+	from the <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start"><code>navigationStart</code></a> attribute of the 
+	<a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performancetiming"><code>PerformanceTiming</code></a>
+	interface, the start of navigation of the document, to the occurrence of the call to the <a href="#now-attribute"><code>now</code></a> attribute.
 </p>
 
 <h3 id="sec-monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
 <p>
 The time values provided when getting the <a href="#now-attribute"><code>now</code></a> attribute MUST be monotonically increasing and not subject to system clock
 adjustments or system clock skew. The difference between any two chronologically recorded time values of the 
-<a href="#now-attribute"><code>now</code></a> attribute MUST never be negative or zero. 
+<a href="#now-attribute"><code>now</code></a> attribute MUST never be negative. 
 </p>
 
 <h3 id="sec-privacy-security"><span class="secno">4.5 </span>Privacy and Security</h3>
@@ -354,6 +354,9 @@ gives time data to a greater accuracy than before, it does not make this privacy
 
    <dt id="HTML5">[HTML5]</dt>
    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   
+   <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt id="WebIDL">[Web IDL]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110927/'>Web
