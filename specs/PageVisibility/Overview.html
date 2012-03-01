@@ -204,7 +204,7 @@ the Page Visibility:</p>
 <p>The script will always check for messages every second, even if the user
 is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
 
-<p>Using the <a href="#pv-hidden"><code>hidden</code></a> attribute of the <a href="#pv-document-interface">Document</a> 
+<p>Using the <a href="#dom-document-hidden"><code>hidden</code></a> attribute of the <a href="#document">Document</a> 
 interface and the <a href="#pv-visibility-change-event"><code>visibilitychange</code></a> event, 
 the page will be able to throttle checking messages to every minute when the
 page is no longer visible.</p>
@@ -304,17 +304,17 @@ and be notified of visibility changes.</p>
 
 <h3 id="sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</h3>
 <pre class="idl">
-partial interface <dfn id="pv-document-interface">Document</dfn> {
-  readonly attribute boolean <a href="#pv-hidden" title="isHidden">hidden</a>;
-  readonly attribute DOMString <a href="#pv-visibility-state" title="visibilitystate">visibilityState</a>; 
+partial interface <dfn id="document">Document</dfn> {
+  readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
+  readonly attribute DOMString <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
   // "hidden", "visible", "preview", "suspended", "unloaded"
 };
 </pre>
 
 
-<h4><code><dfn id="pv-hidden">hidden</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-document-hidden">hidden</dfn></code> attribute</h4>
 
-<p>On getting, the <a href="#pv-hidden"><code>hidden</code></a> attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport)
 is not visible at all. The attribute MUST return false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
@@ -324,7 +324,7 @@ is not visible at all. The attribute MUST return false if the <a href="http://ww
 <p>
 If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#pv-hidden"><code>hidden</code></a> attribute MUST return true.
+the <a href="#dom-document-hidden"><code>hidden</code></a> attribute MUST return true.
 </p>
 
 <p>To accommodate accessibility tools that are typically full screen but still show a 
@@ -349,9 +349,9 @@ is not minimized but is fully obscured by other applications.</p>
 		 a view of the page is shown.</li>
 	</ul> 
 
-<h4><code><dfn id="pv-visibility-state">visibilityState</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-document-visibilitystate">visibilityState</dfn></code> attribute</h4>
 
-<p>On getting, <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return 
+<p>On getting, <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return 
 one of the following DOMStrings or a vendor prefixed DOMString as defined in <a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a>:
 
 <ul>
@@ -364,21 +364,21 @@ one of the following DOMStrings or a vendor prefixed DOMString as defined in <a 
 
 
 <h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
 
 <p>
 If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
+the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
 </p>
  
  <p>To accommodate accessibility tools that are typically full screen but still 
  show a view of the page, when applicable, the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> may not be returned 
  when the User Agent is not minimized but is fully obscured by other applications.</p>
 
-<p>For example, in the following cases the <a href="#pv-visibility-state">visibilityState</a> attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
+<p>For example, in the following cases the <a href="#dom-document-visibilitystate">visibilityState</a> attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
@@ -386,7 +386,7 @@ the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MU
 	</ul> 
 
 <h5><code><dfn id="pv-page-visible">visible</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
 is set to false.</p>
@@ -401,26 +401,26 @@ view of the page, when applicable, the DOMString <a href="#pv-page-visible"><cod
 is not minimized but is fully obscured by other applications.</p>
 
 <h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute MUST return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MUST return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
 <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>.
 </p>
 
 <h5><code><dfn id="pv-page-preview">preview</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute may return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute may return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
 is not visible at all and a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
- visible. User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> attribute is optional.
+ visible. User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
  </p>
 
 <h5><code><dfn id="pv-suspended">suspended</dfn></code></h5>
-<p>On getting, the <a href="#pv-visibility-state">visibilityState</a> attribute may return the DOMString <a href="#pv-suspended"><code>suspended</code></a> if the 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute may return the DOMString <a href="#pv-suspended"><code>suspended</code></a> if the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
 is not visible at all and the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
 or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired. 
-User Agent support of the <a href="#pv-page-preview"><code>suspended</code></a> return value of the <a href="#pv-visibility-state">visibilityState</a> attribute is optional.
+User Agent support of the <a href="#pv-page-preview"><code>suspended</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
@@ -451,10 +451,10 @@ has changed.
         </li>
         <ol style="list-style-type:lower-alpha;"> 
             <li>
-                <p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
+                <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
             </li>
             <li>
-                <p>Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>visible</code>.</p>
+                <p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>visible</code>.</p>
             </li>
             <li>
                 <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
@@ -491,17 +491,17 @@ has changed.
     </li>
     <ol style="list-style-type:lower-alpha;"> 
         <li>
-            <p>If a preview of the page is visible, set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute 
+            <p>If a preview of the page is visible, set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute 
             to <code>preview</code> and skip to step 2c.</p>
         </li>
         <li>
             <p>If the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
             or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired,
-            set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>suspended</code>
+            set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>suspended</code>
             and skip to step 2c.</p>
         </li>
         <li>
-            <p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
+            <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
         </li>
         <li>
             <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
@@ -537,10 +537,10 @@ has changed.
         <p>Queue a task that runs the following steps synchronously:</p>
 		<ol style="list-style-type:lower-alpha;"> 
 			<li>
-				<p>Set the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute to <code>unloaded</code>.
+				<p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>.
 			</li>
 			<li>
-				<p>Set the <a href="#pv-hidden"><code>hidden</code></a> attribute to <code>true</code>.
+				<p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.
 			</li>
 			<li>
 				<p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
@@ -563,8 +563,8 @@ has changed.
 e.g., for experimental purposes, vendors MUST use the following extension mechanisms:
 </p>
 
-<p>If an extension to the <a href="#pv-visibility-state"><code>visibilityState</code></a> attribute return value
- is needed for an experimental visibility state, on getting the <a href="#pv-visibility-state">visibilityState</a> attribute, 
+<p>If an extension to the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute return value
+ is needed for an experimental visibility state, on getting the <a href="#dom-document-visibilitystate">visibilityState</a> attribute, 
   vendors MUST return a DOMString that uses the following convention:</p>
  
 <p><code>[vendorprefix]-[name]</code></p>
@@ -612,9 +612,9 @@ or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a
 
     <dt id="ECMA262">[ECMA-262]</dt>
     <dd>
-     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
      Edition. ECMA International, Standard
-     ECMA-262, December 2009. This version of the ECMAScript
+     ECMA-262, June 2011. This version of the ECMAScript
      Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
     </dd>
 

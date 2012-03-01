@@ -146,8 +146,8 @@ cite this document as other than work in progress. </p>
         <ol class="toc">
           <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
           <li><a href="#the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</a></li>
-          <li><a href="#the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</a></li>
-          <li><a href="#the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</a></li>
+          <li><a href="#performancemark"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</a></li>
+          <li><a href="#performancemeasure"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</a></li>
           <li><a href="#vendor-prefixes"><span class="secno">4.5</span> Vendor Prefixes</a></li>
         </ol>
       </li>
@@ -275,18 +275,18 @@ cite this document as other than work in progress. </p>
     <h3 id="the-usertiming-interface"><span class="secno">4.2</span> The <code>UserTiming</code> Interface</h3>
 
     <pre class="idl">
-  partial interface <a href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute">Performance</a> {
-    void <a href="#ut-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    Array <a href="#ut-getMarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    void <a href="#ut-clearMarks">clearMarks</a>(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+  partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+    void <a href="#dom-performance-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    Array <a href="#dom-performance-getmarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void <a href="#dom-performance-clearmarks">clearMarks</a>(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
 
-    void <a href="#ut-measure">measure</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
-    Array <a href="#ut-getMeasures">getMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
-    void <a href="#ut-clearMeasures">clearMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    void <a href="#dom-performance-measure">measure</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
+    Array <a href="#dom-performance-getmeasures">getMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    void <a href="#dom-performance-clearmeasures">clearMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
     </pre>
     <div class="methods">
-    <h4 id="ut-mark"><code>mark</code> method</h4>
+    <h4 id="dom-performance-mark"><code>mark</code> method</h4>
     <p>This method stores a timestamp with the associated name (a "mark").</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
@@ -297,30 +297,30 @@ cite this document as other than work in progress. </p>
             Each call to the <code>mark()</code> method stores a new timestamp 
             under the specified mark name.</p>
             <p>The mark name cannot be the same name as any of the attributes in the 
-            <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.</p>
+            <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.</p>
 
             <p id="ut-standard-mark-names"><b>Recommended Mark Names</b></p>
             <p>Developers are encouraged to use the following Recommended Mark Names to mark common interactions. The user agent is responsible for storing 
                 a new timestamp under the specified mark name for Recommended Mark Names, just like any user specified mark name.
                 The user agent does not validate that the usage of the Recommended Mark Name is appropriate or consistent with its description.</p>
-            <code id="ut-mark-fully-loaded">"mark_fully_loaded"</code>
+            <code id="dom-performance-mark-fully-loaded">"mark_fully_loaded"</code>
             <div class="parameterDefinition">
                 <p>The time when the page is considered fully loaded as marked by the developer in their application.</p>
             </div>
 
-            <code id="ut-mark-fully-visible">"mark_fully_visible"</code>
+            <code id="dom-performance-mark-fully-visible">"mark_fully_visible"</code>
             <div class="parameterDefinition">
                 <p>The time when the page is considered completely visible to an end-user as marked by the developer in
                 their application.</p>
             </div>
 
-            <code id="ut-mark-above-the-fold">"mark_above_the_fold"</code>
+            <code id="dom-performance-mark-above-the-fold">"mark_above_the_fold"</code>
             <div class="parameterDefinition">
                 <p>The time when all of the content in the visible viewport has been presented to the end-user as marked by
                 the developer in their application.</p>
             </div>
 
-            <code id="ut-mark-time-to-user-action">"mark_time_to_user_action"</code>
+            <code id="dom-performance-mark-time-to-user-action">"mark_time_to_user_action"</code>
             <div class="parameterDefinition">
                 <p>The time of the first user interaction with the page during or after a navigation, such as scroll or click,
                 as marked by the developer in their application.</p>
@@ -331,12 +331,12 @@ cite this document as other than work in progress. </p>
 
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the <em>markName</em> argument is the same name as an attribute in the 
-        <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface.</p>
+        <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface.</p>
     </div>
   </div>
 
   <div class="methods">
-    <h4 id="ut-getMarks"><code>getMarks</code> method</h4>
+    <h4 id="dom-performance-getmarks"><code>getMarks</code> method</h4>
     <p>If the <em>markName</em> argument is not specified, this method must return all of the marks and their associated 
 	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values.</p>
     <p>If the <em>markName</em> argument is specified, this method must return all of the 
@@ -366,7 +366,7 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-clearMarks"><code>clearMarks</code> method</h4>
+    <h4 id="dom-performance-clearmarks"><code>clearMarks</code> method</h4>
     <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values.</p>
     <p>If the <em>markName</em> argument is specified, this method removes all <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values for the given mark name.</p>
     <p>If the <em>markName</em> argument is specified but the specified <em>markName</em> does not exist, this method will do nothing.</p>
@@ -385,14 +385,14 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-measure"><code>measure</code> method</h4>
+    <h4 id="dom-performance-measure"><code>measure</code> method</h4>
     <p>This method stores the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> duration between two marks 
 	along with the associated name (a "measure").</p>
     <p>The behavior of this method depends on which arguments are specified:</p>
     <ul>
         <li>If both the <em>startMark</em> and <em>endMark </em>arguments are not specified,
             <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> from 
-            <a href="http://www.w3.org/TR/navigation-timing/#nt-fetch-start">fetchStart</a>
+            <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a>
             to the current time.</li>
         <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
             <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
@@ -401,7 +401,7 @@ cite this document as other than work in progress. </p>
              from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</li>
     </ul>
     <p>The <em>startMark</em> and <em>endMark</em> arguments may be the name of one of the attributes in the
-       <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>. 
+       <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>. 
        In this case, the value of that attribute is used as the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
@@ -418,9 +418,9 @@ cite this document as other than work in progress. </p>
         <div class="parameterDefinition">
             <p>[optional] The name of the start mark.</p>
             <p>If specified, the most recent <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value of the start mark is used.</p>
-            <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#nt-fetch-start">fetchStart</a> is used.</p>
+            <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a> is used.</p>
             <p>May be the name of one of the attributes in the
-               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
+               <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
                In this case, the value of that attribute is used as the start <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
         </div>
 
@@ -430,7 +430,7 @@ cite this document as other than work in progress. </p>
             <p>If specified, the most recent <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value of the end mark is used.</p>
             <p>If not specified, the current time as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> is used.</p>
             <p>May be the name of one of the attributes in the
-               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
+               <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
                In this case, the value of that attribute is used as the end <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
         </div>
 
@@ -441,13 +441,13 @@ cite this document as other than work in progress. </p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the duration (the end mark <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value
 		minus the start mark <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value) is negative.</p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a
-               <code><a href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming</a></code> attribute with a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+               <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> attribute with a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
 				time value of 0.</p>
     </div>
   </div>
 
   <div class="methods">
-    <h4 id="ut-getMeasures"><code>getMeasures</code> method</h4>
+    <h4 id="dom-performance-getmeasures"><code>getMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is specified, this method must return all of the durations for the specified measure name.</p>
     <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.</p>
     <p>If the <em>measureName</em> argument is specified but it does not exist, this method must return an empty array.</p>
@@ -475,7 +475,7 @@ cite this document as other than work in progress. </p>
   </div>
 
   <div class="methods">
-    <h4 id="ut-clearMeasures"><code>clearMeasures</code> method</h4>
+    <h4 id="dom-performance-clearmeasures"><code>clearMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.</p>
     <p>If the <em>measureName</em> argument is specified, this method removes all <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations for the given measure name.</p>
     <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
@@ -493,19 +493,19 @@ cite this document as other than work in progress. </p>
     </div>
   </div>
 
-    <h3 id="the-performancemark-interface"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</h3>
+    <h3 id="performancemark"><span class="secno">4.3</span> The <code>PerformanceMark</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMark : <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> {
+  interface PerformanceMark : <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> {
   }
     </pre>
 
     <p>
-    	The <a href="#the-performancemark-interface">PerformanceMark</a> interface also 
-		exposes marks created via the <code><a href="#ut-mark">mark()</a></code> 
+    	The <a href="#performancemark">PerformanceMark</a> interface also 
+		exposes marks created via the <code><a href="#dom-performance-mark">mark()</a></code> 
 		method to the 
-    	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#the-performancemark-interface">PerformanceMark</a> 
-		interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">
+    	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
+		interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">
 		PerformanceEntry</a>
 		interface:
     </p>
@@ -519,17 +519,17 @@ cite this document as other than work in progress. </p>
 		of value 0.</p>
     </div>
 
-    <h3 id="the-performancemeasure-interface"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</h3>
+    <h3 id="performancemeasure"><span class="secno">4.4</span> The <code>PerformanceMeasure</code> Interface</h3>
 
     <pre class="idl">
-  interface PerformanceMeasure : <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> {
+  interface PerformanceMeasure : <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> {
   }
     </pre>
     
 	<p>
-    	The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface also 
-		exposes measures created via the <code><a href="#ut-measure">measure()</a></code> 
-		method to the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#the-performancemeasure-interface">PerformanceMeasure</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#pt-performanceEntry-interface">PerformanceEntry</a> interface:
+    	The <a href="#performancemeasure">PerformanceMeasure</a> interface also 
+		exposes measures created via the <code><a href="#dom-performance-measure">measure()</a></code> 
+		method to the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#performancemeasure">PerformanceMeasure</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:
     </p>
 	
     <div class="parameters">
@@ -597,9 +597,9 @@ cite this document as other than work in progress. </p>
 
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
     <dd>
-     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5<sup>th</sup>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
      Edition. ECMA International, Standard
-     ECMA-262, December 2009. This version of the ECMAScript
+     ECMA-262, June 2011. This version of the ECMAScript
      Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
     </dd>
 
