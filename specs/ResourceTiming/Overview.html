@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-29-2012">Editor's Draft February 29, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-March-07-2012">Editor's Draft March 7, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -638,7 +638,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 		<div class="parameters">
 			<p><b>No parameters</b></p>
 			<p><b>No return value</b></p>
-			<p><b>No exceptions</b></p>
+			<p><b>No additional exceptions</b></p>
 		</div>
 </div>
 
@@ -654,7 +654,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 			in <code>maxSize</code> type of unsigned long
 			<p>The maxSize parameter sets the maximum number of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources that will be stored in the buffer.</p>
 			<p><b>No return value</b></p>
-			<p><b>No exceptions</b></p>
+			<p><b>No additional exceptions</b></p>
 		</div>
 </div>
 
@@ -906,8 +906,6 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
       </li>
       <li>If the <i>primary buffer</i> is not full, add the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object, 
       created in step <a href="#step-create-object">3.1</a>, to the <i>primary buffer</i>.
-      </li>
-      <li id="step-collection-end">If there are additional resources, return to step <a href="#step-collection-start">3.1</a>.
       </li>
   </ol>
   </li>
