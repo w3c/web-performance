@@ -302,9 +302,10 @@ partial interface <dfn id="performance">Performance</dfn> {
 
 <p>The <a href="#dom-performance-now"><code>now</code></a> method MUST 
 	return a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> representing the number of milliseconds 
-	from the <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start"><code>navigationStart</code></a> attribute of the 
-	<a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performancetiming"><code>PerformanceTiming</code></a>
-	interface, the start of navigation of the document, to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
+	from the <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
+	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
+	interface <a href='#NavigationTiming'>[NavigationTiming]</a>, 
+	the start of navigation of the document, to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
 </p>
 
 <h3 id="sec-monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
