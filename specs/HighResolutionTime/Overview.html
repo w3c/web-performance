@@ -41,7 +41,7 @@
 <div class="head">
 <h1>High Resolution Time</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-march-01-2012">Editor's Draft March 1st, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-march-09-2012">Editor's Draft March 9th, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -198,7 +198,7 @@ For certain tasks this definition of time may not be sufficient as it does not a
 
 <p>
 This specification does not propose changing the behavior of <code>Date.now()</code> as it is genuinely useful in determining the current value of the calendar time and has a long history of
-usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#dom-performance-now"><code>now</code></a> attribute of the 
+usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#dom-performance-now"><code>now</code></a> method of the 
 <a href="#performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
 </p>
 
@@ -294,31 +294,32 @@ typedef double <a href='#domhighrestimestamp'>DOMHighResTimeStamp</a>;
 <h3 id="sec-extenstions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> interface</h3>
 <pre class="idl">
 partial interface <dfn id="performance">Performance</dfn> {
-  readonly attribute DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now</a>;
+  DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now()</a>;
 };
 </pre>
 
-<h4><code><dfn id="dom-performance-now">now</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-performance-now">now</dfn></code> method</h4>
 
-<p>On getting, the <a href="#dom-performance-now"><code>now</code></a> attribute MUST return the number of milliseconds 
+<p>The <a href="#dom-performance-now"><code>now</code></a> method MUST 
+	return a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> representing the number of milliseconds 
 	from the <a href="http://www.w3.org/TR/navigation-timing/#nt-navigation-start"><code>navigationStart</code></a> attribute of the 
 	<a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html#performancetiming"><code>PerformanceTiming</code></a>
-	interface, the start of navigation of the document, to the occurrence of the call to the <a href="#now-attribute"><code>now</code></a> attribute.
+	interface, the start of navigation of the document, to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
 </p>
 
 <h3 id="sec-monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
 <p>
-The time values provided when getting the <a href="#dom-performance-now"><code>now</code></a> attribute MUST be monotonically increasing and not subject to system clock
-adjustments or system clock skew. The difference between any two chronologically recorded time values of the 
-<a href="#dom-performance-now"><code>now</code></a> attribute MUST never be negative. 
+The time values returned when calling the <a href="#dom-performance-now"><code>now</code></a> method MUST be monotonically increasing and not subject to system clock
+adjustments or system clock skew. The difference between any two chronologically recorded time values returned from the 
+<a href="#dom-performance-now"><code>now</code></a> method MUST never be negative. 
 </p>
 
 <h3 id="sec-privacy-security"><span class="secno">4.5 </span>Privacy and Security</h3>
 <p>
 Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a 
 third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. 
-Though the <a href="#dom-performance-now"><code>now</code></a> attribute of the <a href="#performance"><code>Performance</code></a> interface
-gives time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
+Though the <a href="#dom-performance-now"><code>now</code></a> method of the <a href="#performance"><code>Performance</code></a> interface
+returns time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
 </p>
  
 
