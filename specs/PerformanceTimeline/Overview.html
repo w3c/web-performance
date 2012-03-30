@@ -67,7 +67,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    &copy; 2012 <a href="http://www.w3.org/"><acronym title="World Wide Web
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
@@ -270,9 +270,9 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 <h3 id="sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</h3>
 <p>
 	All interfaces that participate in the <a href="#sec-performance-timeline">Performance Timeline</a>, such as the 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html#performance-resource-timing">PerformanceResourceTiming</a>, 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#the-performancemark-interface">PerformanceMark</a>, and
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#the-performancemeasure-interface">PerformanceMeasure</a> interfaces,
+	<a href="http://w3c-test.org/webperf/specs/ResourceTiming/#performanceresourcetiming">PerformanceResourceTiming</a>, 
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#performancemark">PerformanceMark</a>, and
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#performancemeasure">PerformanceMeasure</a> interfaces,
 	must adhere to the following rules:
 </p>
 
@@ -290,8 +290,8 @@ interface</h3>
 <pre class="idl">interface <dfn id="performanceentry">PerformanceEntry</dfn> {
   readonly attribute DOMString <a href='#dom-performanceentry-name' title='name'>name</a>;
   readonly attribute DOMString <a href='#dom-performanceentry-entrytype' title='entryType'>entryType</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-starttime' title='startTime'>startTime</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-duration' title='duration'>duration</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-starttime' title='startTime'>startTime</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-duration' title='duration'>duration</a>;
 };
 </pre>
 
@@ -309,13 +309,13 @@ interface</h3>
 
 <h4 id="dom-performanceentry-starttime"><code>startTime</code> attribute</h4>
 <p>
-	The <code>startTime</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+	The <code>startTime</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	that contains the time value of the first recorded timestamp of this performance metric.
 <p>
 
 <h4 id="dom-performanceentry-duration"><code>duration</code> attribute</h4>
 <p>
-	The <code>duration</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+	The <code>duration</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	that contains the time value of the duration of the entire event being recorded by this <a href="#performanceentry">PerformanceEntry</a>. Typically, this would be the 
 	time difference between the last recorded timestamp and the first recorded timestamp of this <a href="#performanceentry">PerformanceEntry</a>. A performance metric may choose
 	to return a <code>duration</code> of 0, if the duration concept doesn't apply.
@@ -417,13 +417,11 @@ a <a href="#performanceentrylist">PerformanceEntryList</a> with a <a href="#perf
 <div class="parameters">
     <p>The <code>name</code> attribute will return the DOMString <code>document</code>.</p>
     <p>The <code>entryType</code> attribute will return the DOMString <code>navigation</code>.</p>
-    <p>The <code id="timing-startTime">startTime</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> 
+    <p>The <code id="timing-startTime">startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 	with the time immediately after the user agent finishes <a href="http://www.w3.org/TR/html5/history.html#prompt-to-unload-a-document">prompting to unload</a> the previous document.</p>
-    <p>The <code>duration</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
-	 equal to the difference between <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadeventend">loadEventEnd</a> and <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>, respectively.</p>
+    <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+	 equal to the difference between <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadend">loadEventEnd</a> and <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>, respectively.</p>
 </div>
-
-
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
@@ -451,20 +449,21 @@ a <a href="#performanceentrylist">PerformanceEntryList</a> with a <a href="#perf
 	Edition. ECMA International, Standard
 	ECMA-262, June 2011. This version of the ECMAScript
 	Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
+
 <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2013. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 
 <dt>[<a name="JSMeasure" id="JSMeasure">JSMEASURE</a>]</dt>
 <dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&amp;rep=rep1&amp;type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
 
    <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
-   
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+
    <dt>[<a name="HighResolutionTime" id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, February 2012. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>latest version of High Resolution Time</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-WebIDL-20120207/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, February 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/WD-WebIDL-20120207/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
 </dl>
 
