@@ -70,7 +70,7 @@
 
     <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    &copy; 2012 <a href="http://www.w3.org/"><acronym title="World Wide Web
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
@@ -154,6 +154,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
       <li><a href="#privacy-security"><span class="secno">6 </span>Privacy</a></li>
       <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+      <li><a class="no-num" href="#references">References</a></li>
     </ol>
 
     <h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
@@ -341,9 +342,9 @@ cite this document as other than work in progress. </p>
   <div class="methods">
     <h4 id="dom-performance-getmarks"><code>getMarks</code> method</h4>
     <p>If the <em>markName</em> argument is not specified, this method must return all of the marks and their associated 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values.</p>
+	<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values.</p>
     <p>If the <em>markName</em> argument is specified, this method must return all of the 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>	time values for the specified mark name.</p>
+	<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>	time values for the specified mark name.</p>
     <p>If the <em>markName</em> argument is specified but it does not exist, this method must return an empty array.</p>
 	<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
 		rules are not met, this method must return an empty array.
@@ -359,9 +360,9 @@ cite this document as other than work in progress. </p>
         <p><b>Return Value</b></p>
         <code>Array</code>
         <p>If the <em>markName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
-        mark name. The value associated with the mark name is an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values
+        mark name. The value associated with the mark name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values
 		for that mark.  In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0.0, 1.0, 3.0], "mark2": [2.0] }</code>.</p>
-        <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		time values.  In JSON notation, the data structure will look similar to this: <code>[0.0, 1.0, 3.0]</code>.</p>
         <p>If the <em>markName</em> argument is specified, and the mark name does not exist, the method returns an empty Array.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
@@ -378,14 +379,14 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-clearmarks"><code>clearMarks</code> method</h4>
-    <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values.</p>
-    <p>If the <em>markName</em> argument is specified, this method removes all <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values for the given mark name.</p>
+    <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values.</p>
+    <p>If the <em>markName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values for the given mark name.</p>
     <p>If the <em>markName</em> argument is specified but the specified <em>markName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
         <div class="parameterDefinition">
-            <p>[optional] The name of the mark whose <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values should be cleared.  
+            <p>[optional] The name of the mark whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values should be cleared.  
 			If not specified, all marks will be cleared.</p>
         </div>
 
@@ -397,23 +398,23 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-measure"><code>measure</code> method</h4>
-    <p>This method stores the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> duration between two marks 
+    <p>This method stores the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> duration between two marks 
 	along with the associated name (a "measure").</p>
     <p>The behavior of this method depends on which arguments are specified:</p>
     <ul>
         <li>If neither the <em>startMark</em> nor the <em>endMark </em>argument is specified,
-            <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> from 
+            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> from 
             <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a>
             to the current time.</li>
         <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
-            <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
              from the most recent occurrence of the start mark to the current time.</li>
-        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are specified, <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are specified, <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
              from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</li>
     </ul>
     <p>The <em>startMark</em> and <em>endMark</em> arguments may be the name of one of the attributes in the
        <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>. 
-       In this case, the value of that attribute is used as the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
+       In this case, the value of that attribute is used as the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
@@ -428,21 +429,21 @@ cite this document as other than work in progress. </p>
         <p>in <code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
         <div class="parameterDefinition">
             <p>[optional] The name of the start mark.</p>
-            <p>If specified, the most recent <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value of the start mark is used.</p>
+            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value of the start mark is used.</p>
             <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a> is used.</p>
             <p>May be the name of one of the attributes in the
                <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
-               In this case, the value of that attribute is used as the start <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
+               In this case, the value of that attribute is used as the start <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
         </div>
 
         <p>in <code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
         <div class="parameterDefinition">
             <p>[optional] The name of the end mark.</p>
-            <p>If specified, the most recent <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value of the end mark is used.</p>
-            <p>If not specified, the current time as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> is used.</p>
+            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value of the end mark is used.</p>
+            <p>If not specified, the current time as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> is used.</p>
             <p>May be the name of one of the attributes in the
                <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
-               In this case, the value of that attribute is used as the end <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
+               In this case, the value of that attribute is used as the end <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
         </div>
 
         <p><b>No Return Value</b></p>
@@ -450,7 +451,7 @@ cite this document as other than work in progress. </p>
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the start mark or end mark does not exist.</p>
 		<p>Throws a <code>INVALID_ACCESS_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a
-		   <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> attribute with a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+		   <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> attribute with a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 			time value of 0.</p>
     </div>
   </div>
@@ -458,7 +459,7 @@ cite this document as other than work in progress. </p>
   <div class="methods">
     <h4 id="dom-performance-getmeasures"><code>getMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is specified, this method must return all of the durations for the specified measure name.</p>
-    <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
     <p>If the <em>measureName</em> argument is specified but it does not exist, this method must return an empty array.</p>
 	<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
 		rules are not met, this method must return an empty array.
@@ -474,9 +475,9 @@ cite this document as other than work in progress. </p>
         <p><b>Return Value</b></p>
         <code>Array</code>
         <p>If the <em>measureName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
-        measure name. The value associated with the measure name is an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
+        measure name. The value associated with the measure name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
         the data structure will look similar to this: <code>{ "measure1": [0.0, 5.0, 1.0], "measure2": [3.0] }</code>.</p>
-        <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
+        <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
         the data structure will look similar to this: <code>[0.0, 5.0, 1.0].</code></p>
         <p>If the <em>measureName</em> argument is specified, and the measure name does not exist, the method returns an empty Array.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
@@ -493,14 +494,14 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-clearmeasures"><code>clearMeasures</code> method</h4>
-    <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.</p>
-    <p>If the <em>measureName</em> argument is specified, this method removes all <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations for the given measure name.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
+    <p>If the <em>measureName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for the given measure name.</p>
     <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
         <div class="parameterDefinition">
-            <p>[optional] The name of the measure whose <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations should be cleared.  
+            <p>[optional] The name of the measure whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations should be cleared.  
 			If not specified, all measures will be cleared.</p>
         </div>
 
@@ -530,11 +531,11 @@ cite this document as other than work in progress. </p>
     <div class="parameters">
         <p>The <code>name</code> attribute will return the mark's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>mark</code>.</p>
-        <p>The <code>startTime</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		with the the mark's time value. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
 		rules are not met, this attribute must be set to zero.
     	</p>
-        <p>The <code>duration</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		of value 0.</p>
     </div>
 
@@ -554,10 +555,10 @@ cite this document as other than work in progress. </p>
     <div class="parameters">
         <p>The <code>name</code> attribute will return the measure's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>measure</code>.</p>
-        <p>The <code>startTime</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		with the measure's start mark. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
 		rules are not met, this attribute must be set to zero.</p>
-        <p>The <code>duration</code> attribute will return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		with the duration of the measure. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
 		rules are not met, this attribute must be set to zero.</p>
     </div>
@@ -600,7 +601,7 @@ cite this document as other than work in progress. </p>
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
-        are defined by The HTTP Origin Header. <a href="#ref-origin">[ORIGIN]</a>
+        are defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
     </p>
     <p>
         The term <dfn id="cross-origin">cross-origin</dfn> is used to mean non
@@ -618,8 +619,7 @@ cite this document as other than work in progress. </p>
             response. ABNF:</p>
         <pre>Timing-Allow-Origin = &quot;Timing-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;</pre>
         <p>
-            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#ref-origin">
-            [ORIGIN]</a>
+            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
         </p>
 	</div>
 	
@@ -628,13 +628,18 @@ cite this document as other than work in progress. </p>
 
     <p>Thanks to Karen Anderson, Tony Gentilcore, Nic Jansma, James Simonsen, Steve Souders, Sigbjorn Vik, and Jason Weber for their useful comments that led to changes to this specification and their contributions to this work.</p>
 
-<h2 class="no-num" id=references>References</h2>
+<h2 class="no-num" id="references">References</h2>
 
 <dl>
 <dt><a name='rfc2119' id='rfc2119'>[IETF RFC 2119]</a></dt>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
 </dd>
+<dt>[<a id='rfc6454'>IETF RFC 6454</a>]</dt>
+<dd>
+ <cite><a href='http://tools.ietf.org/html/rfc6454'>The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href='http://www.ietf.org/rfc/rfc6454.txt'>http://www.ietf.org/rfc/rfc6454.txt</a>. 
+</dd>
+
     <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
     <dd>
      <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
@@ -646,13 +651,6 @@ cite this document as other than work in progress. </p>
      http://www.w3.org/TR/dom/.
     </dd>
 	
-    <dt id="ref-origin">[ORIGIN]</dt>
-    <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The
-    Web Origin Concept</a></cite>, A. Barth, Author. Internet
-    Engineering Task Force, November 2010. Available at
-     http://tools.ietf.org/html/draft-abarth-origin.
-    </dd>
-
     <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
     <dd>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
@@ -662,16 +660,16 @@ cite this document as other than work in progress. </p>
     </dd>
 
    <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/performance-timeline/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, September 2011. This version of the Performance Timeline specification is available from http://www.w3.org/TR/performance-timeline/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110901/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, September 2011. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2011/WD-performance-timeline-20110901/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
    <dt>[<a name="HighResolutionTime" id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, February 2012. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>latest version of High Resolution Time</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110712/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, July 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110712/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-WebIDL-20120207/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, February 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/WD-WebIDL-20120207/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
 </dl>
 
