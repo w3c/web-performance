@@ -63,7 +63,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><acronym title="World Wide Web
+    &copy; 2012 <a href="http://www.w3.org/"><acronym title="World Wide Web
     Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
     of Technology">MIT</acronym></a>, <a
@@ -168,6 +168,7 @@ cite this document as other than work in progress. </p>
   </li>
   <li><a href="#privacy-security"><span class="secno">6 </span>Privacy and Security</a></li>
   <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+  <li><a class="no-num" href="#references">References</a></li>
 </ol>
 <!--end-toc-->
 
@@ -330,16 +331,16 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
     interface facilitates timing measurement of downloadable resources on the
     root page. It represents the timing information related to resources that
     initiate network downloads. For example, this interface is available for
-    <a href="http://www.w3.org/TR/XMLHttpRequest/#the-xmlhttprequest-interface">XMLHttpRequest</a> objects <a href='#XHR'>[XMLHttpRequest]</a>, HTML
+    <a href="http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest">XMLHttpRequest</a> objects <a href='#XHR'>[XMLHttpRequest]</a>, HTML
     elements <a href='#HTML5'>[HTML5]</a> such as
     <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-iframe-element">iframe</a>,
-    <a href="http://www.w3.org/TR/html5/embedded-content-1.html#the-img-element">img</a>,
-    <a href="http://www.w3.org/TR/html5/scripting-1.html#script">script</a>,
-    <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-object-element">object</a>,
-    <a href="http://www.w3.org/TR/html5/video.html#audio">audio</a>,
-    <a href="http://www.w3.org/TR/html5/video.html#video">video</a>,
-    <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-embed-element">embed</a>,
-    and <a href="http://www.w3.org/TR/html5/semantics.html#the-link-element">link</a>
+    <a href="http://www.w3.org/TR/html5/the-img-element.html#the-img-element">img</a>,
+    <a href="http://www.w3.org/TR/html5/the-script-element.html#script">script</a>,
+    <a href="http://www.w3.org/TR/html5/the-object-element.html#the-object-element">object</a>,
+    <a href="http://www.w3.org/TR/html5/the-audio-element.html#audio">audio</a>,
+    <a href="http://www.w3.org/TR/html5/the-video-element.html#video">video</a>,
+    <a href="http://www.w3.org/TR/html5/the-embed-element.html#the-embed-element">embed</a>,
+    and <a href="http://www.w3.org/TR/html5/the-link-element.html#the-link-element">link</a>
     with the link type of
     <a href="http://www.w3.org/TR/html5/links.html#link-type-stylesheet">stylesheet</a>,
     and SVG elements <a href='#SVG'>[SVG]</a> such
@@ -407,17 +408,17 @@ in the</span>
   readonly attribute DOMString <a href="#dom-performanceresourcetiming-initiatortype" title="initiatorType">initiatorType</a>; 
   // "css", "embed", "img", "link", "object", "script", "subdocument", "svg", "xmlhttprequest", "other"
   
-  readonly attribute<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-redirectstart" title="redirectstart">redirectStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-redirectend" title="redirectend">redirectEnd</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-fetchstart" title="fetchstart">fetchStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-domainlookupstart" title="domainlookupstart">domainLookupStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-domainlookupend" title="domainlookupend">domainLookupEnd</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-connectstart" title="connectstart">connectStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-connectend" title="connectend">connectEnd</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-secureconnectionstart" title="secureconnectionstart">secureConnectionStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-requeststart" title="requeststart">requestStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-responsestart" title="responsestart">responseStart</a>;
-  readonly attribute <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-responseend" title="responseend">responseEnd</a>;
+  readonly attribute<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-redirectstart" title="redirectstart">redirectStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-redirectend" title="redirectend">redirectEnd</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-fetchstart" title="fetchstart">fetchStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-domainlookupstart" title="domainlookupstart">domainLookupStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-domainlookupend" title="domainlookupend">domainLookupEnd</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-connectstart" title="connectstart">connectStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-connectend" title="connectend">connectEnd</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-secureconnectionstart" title="secureconnectionstart">secureConnectionStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-requeststart" title="requeststart">requestStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-responsestart" title="responsestart">responseStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performanceresourcetiming-responseend" title="responseend">responseEnd</a>;
 };</pre>
 
 <p>
@@ -432,14 +433,14 @@ The <a href="#performanceresourcetiming">PerformanceResourceTiming</a> interface
     	requested resource. This attribute must not change even if the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> redirected to a different URL.
    	</p>
     <p>The <code id="entryType-attribute">entryType</code> attribute must return the DOMString <code id="perf-resource">resource</code>.</p>
-    <p>The <code id="startTime-attribute">startTime</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+    <p>The <code id="startTime-attribute">startTime</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	with the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
        If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
        when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
        document, this attribute must return the same value as <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>. Otherwise, this attribute must 
        return the same value as <a href="#dom-performanceresourcetiming-fetchstart">fetchStart</a>.
     </p>
-    <p>The <code id="duration-attribute">duration</code> attribute must return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
+    <p>The <code id="duration-attribute">duration</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a href="#dom-performanceresourcetiming-responseend">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
 </div>
 
@@ -605,7 +606,7 @@ zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP resp
 
 <p>This attribute must return the time immediately after the user agent receives
 the first byte of the response from the server, or from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
 <p>
@@ -617,7 +618,7 @@ zero unless the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP resp
 
 <p>This attribute must return the time immediately after the user agent finishes
 receiving the last byte of the resource from from <a
-href="http://www.whatwg.org/specs/web-apps/current-work/#relevant-application-cache">relevant
+href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
 <h3 id="performanceresourcetiming-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
@@ -691,7 +692,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
-        are defined by The HTTP Origin Header. <a href="#ref-origin">[ORIGIN]</a>
+        are defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
     </p>
     <p>
         The term <dfn id="cross-origin">cross-origin</dfn> is used to mean non
@@ -709,8 +710,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
             response. ABNF:</p>
         <pre>Timing-Allow-Origin = &quot;Timing-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;</pre>
         <p>
-            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#ref-origin">
-            [ORIGIN]</a>
+            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
         </p>
     </div>
 
@@ -738,7 +738,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
         name that identifies the vendor and TimeName identifies the name given to the 
         timing attribute. </li>
     <li>Use a monotonically increasing clock, as defined in Section 5.2 <a href="#monotonic-clock">Monotonic Clock</a>.</li>
-    <li>Return a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>.
+    <li>Return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>.
 </ul>
 
 <h2 id="process"><span class="secno">5 </span>Process</h2>
@@ -950,19 +950,15 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
     Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
     http://www.ietf.org/rfc/rfc2119.txt.
    </dd>
-
-   <dt id="ref-origin">[ORIGIN]</dt>
-   <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The
-   Web Origin Concept</a></cite>, A. Barth, Author. Internet
-   Engineering Task Force, November 2010. Available at
-    http://tools.ietf.org/html/draft-abarth-origin.
-   </dd>
-
    <dt><a name="rfc2616" id="rfc2616">[IETF RFC 2616]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>,
     R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at
     http://www.ietf.org/rfc/rfc2616.txt.
    </dd>
+<dt>[<a id='rfc6454'>IETF RFC 6454</a>]</dt>
+<dd>
+ <cite><a href='http://tools.ietf.org/html/rfc6454'>The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href='http://www.ietf.org/rfc/rfc6454.txt'>http://www.ietf.org/rfc/rfc6454.txt</a>. 
+</dd>
 
     <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
     <dd>
@@ -985,30 +981,31 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
 
     <dt>[<a name="XHR" id="XHR">XMLHttpRequest</a>]</dt>
     <dd>
-     <cite><a href='http://www.w3.org/TR/2010/CR-XMLHttpRequest-20100803/'>XMLHttpRequest</a></cite>,
-     Anne van Kesteren, Editor. World Wide Web Consortium, August
-     2010. This version of the XMLHttpRequest Candidate Recommendation
+     <cite><a href='http://www.w3.org/TR/2012/WD-XMLHttpRequest-20120117/'>XMLHttpRequest</a></cite>,
+     Anne van Kesteren, Editor. World Wide Web Consortium, January
+     2012. This version of the XMLHttpRequest specification
      is
-     http://www.w3.org/TR/2010/CR-XMLHttpRequest-20100803/. The <a class="normative"
+     http://www.w3.org/TR/2012/WD-XMLHttpRequest-20120117/. The <a class="normative"
      href="http://www.w3.org/TR/XMLHttpRequest/">latest version of
      XMLHttpRequest</a> is available at
      http://www.w3.org/TR/XMLHttpRequest/.
     </dd>
 
    <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 
    <dt>[<a name="SVG" id="SVG">SVG</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, May 2011. This version of the SVG specification is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, August 2011. This version of the SVG specification Recommendation is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
 
    <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/CR-navigation-timing-20110602/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, June 2011. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2011/CR-navigation-timing-20110602/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+
 
    <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2011. This version of the Performance Timline specification is available from <a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110811/'>http://www.w3.org/TR/2011/WD-performance-timeline-20110811/</a>. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
-
+   <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110901/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, September 2011. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2011/WD-performance-timeline-20110901/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   
    <dt>[<a name="HighResolutionTime" id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, February 2012. The <a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>latest version of High Resolution Time</a> is available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110927/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, September 2011. This version of the Web IDL specification is available from http://www.w3.org/TR/2011/WD-WebIDL-20110927/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
