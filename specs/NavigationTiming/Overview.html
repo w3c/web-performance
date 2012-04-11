@@ -38,7 +38,7 @@
 <div class="head">
 <h1>Navigation Timing</h1>
 
-<h2 class="no-num no-toc" id="working-draft-nov-14-2011">Editor's Draft November 14th, 2011</h2>
+<h2 class="no-num no-toc" id="working-draft-nov-14-2011">Editor's Draft March 30th, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -60,7 +60,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
     Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
     of Technology">MIT</abbr></a>, <a
@@ -339,30 +339,30 @@ must return the same value as <a href="#dom-performancetiming-fetchstart">fetchS
 <h4><code><dfn id="dom-performancetiming-unloadeventstart">unloadEventStart</dfn></code> attribute</h4>
 
 <p>If the previous document and the current document have the same
-<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>
-[<a href='#websec-origin'>ORIGIN</a>],
+<a href="http://tools.ietf.org/html/rfc6454">origin</a>
+[<a href='#rfc6454'>IETF RFC 6454</a>],
 this attribute must return the time immediately before the user agent starts
 the <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload</a>
 event of the previous document. 
 
 If there is no previous document or the previous document has a
-different <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> than the
+different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document, this attribute must return zero.</p>
 
 <h4><code><dfn id="dom-performancetiming-unloadeventend">unloadEventEnd</dfn></code> attribute</h4>
 
 <p>If the previous document and the current document have the
-same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">same origin</a>,
+same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
 this attribute must return the time immediately after the user agent finishes the
 <a href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unload</a>
 event of the previous document. If there is no previous document or the previous document has
-a different <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> than the
+a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and not all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 both <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
 <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> must return the zero.</p>
 
@@ -371,7 +371,7 @@ both <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute must return the <a href="#dom-performancetiming-fetchstart">starting time
 of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
 
@@ -380,7 +380,7 @@ of the fetch</a> that initiates the redirect. Otherwise, this attribute must ret
 <p>If there are HTTP redirects
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and all redirects and equivalents are from the
-same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 
@@ -390,7 +390,7 @@ the response of the last redirect. Otherwise, this attribute must return zero.</
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetched</a> using HTTP GET
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or 
 equivalent</a>, fetchStart must return the time immediately before the user agent starts
-checking <a href="http://dev.w3.org/html5/spec/Overview.html#relevant-application-cache">
+checking <a href="http://dev.w3.org/html5/spec/single-page.html#relevant-application-cache">
 any relevant application caches</a>. Otherwise, it must return the time when the
 user agent starts 
 <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetching</a> the resource.</p>
@@ -601,18 +601,18 @@ href="#dom-performancenavigation-type">navigation type</a> values. </p>
   <dt><dfn id="dom-performancenavigation-typereload">TYPE_RELOAD</dfn></dt>
     <dd><p>Navigation through
     the reload operation or the
-    <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
+    <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a>
     method.</p></dd>
   <dt><dfn id="dom-performancenavigation-typebackforward">TYPE_BACK_FORWARD</dfn></dt>
    <dd><p>Navigation
-  through a <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a> operation.</p></dd>
+  through a <a href="http://dev.w3.org/html5/spec/single-page.html#traverse-the-history">history traversal</a> operation.</p></dd>
   <dt><dfn id="dom-performancenavigation-typereserved">TYPE_RESERVED</dfn></dt>
   <dd><p>Any navigation
   types not defined by values above.</p></dd>
 </dl>
 
 <div class="note">
-<p>Client-side redirects, such as those using <a href="http://dev.w3.org/html5/spec/semantics.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
+<p>Client-side redirects, such as those using <a href="hhttp://dev.w3.org/html5/spec/the-meta-element.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
 are not considered HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
 In those cases, the <a href="#dom-performancenavigation-type">type</a> attribute should return appropriate value,
 such as <a href="#dom-performancenavigation-typenavigate">TYPE_RELOAD</a> if reloading the current page, or
@@ -624,7 +624,7 @@ such as <a href="#dom-performancenavigation-typenavigate">TYPE_RELOAD</a> if rel
 <p>This attribute must return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the same
-<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">
+<a href="http://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute must return zero. </p>
 
 
@@ -691,7 +691,7 @@ window.performance.navigation are replaced with these instances.</p>
 <a href="#performancenavigation">PerformanceNavigation</a> interface
 with or without redirect, respectively. Attributes underlined may not be
 available in navigation involving documents from different 
-<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origins</a>. User
+<a href="http://tools.ietf.org/html/rfc6454">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
 <p><img style='width: 85%' src="timing-overview.png" alt='Timing attributes'></p>
@@ -723,7 +723,7 @@ non-normative intervals between timings.</p>
   <li>Immediately after the user agent <a
     href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
     to unload</a> the previous <a
-    href="http://dev.w3.org/html5/spec/infrastructure.html#document">document</a>,
+    href="http://dev.w3.org/html5/spec/dom.html#document">document</a>,
     record the current time as <a
     href="#dom-performancetiming-navigationstart">navigationStart</a>.</li>
   <li> Record the current navigation type in <a href="#dom-performancenavigation-type">window.performance.navigation.type</a>
@@ -731,21 +731,21 @@ non-normative intervals between timings.</p>
     <ol style="list-style-type:lower-alpha;">
     <li>If the navigation was started by clicking on a link, or entering the URL in the user
         agent's address bar, or form submission, or initializing through a script operation other than the
-        <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a> method,
+        <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a> method,
         let the navigation type be <a href="#dom-performancenavigation-typenavigate">TYPE_NAVIGATE</a>.</li>
     <li>If the navigation was started either as a result of a
-        <a href="http://dev.w3.org/html5/spec/Overview.html#attr-meta-http-equiv-refresh">meta refresh</a>,
-        or the <a href="http://dev.w3.org/html5/spec/Overview.html#dom-location-reload">location.reload()</a>
+        <a href="http://dev.w3.org/html5/spec/single-page.html#attr-meta-http-equiv-refresh">meta refresh</a>,
+        or the <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a>
         method, or other equivalent actions, let the navigation type
         be <a href="#dom-performancenavigation-typereload">TYPE_RELOAD</a>.</li>
     <li>If the navigation was started as a result of
-        <a href="http://dev.w3.org/html5/spec/Overview.html#traverse-the-history">history traversal</a>,
+        <a href="http://dev.w3.org/html5/spec/single-page.html#traverse-the-history">history traversal</a>,
         let the navigation type be <a href="#dom-performancenavigation-typebackforward">TYPE_BACK_FORWARD</a>.</li>
     <li>Otherwise, let the navigation type be <a href="#dom-performancenavigation-typenavigate">TYPE_RESERVED</a>.</li>
     </ol>
   </li>
   <li>If the current document and the previous document are from different 
-    <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origins</a>,
+    <a href="http://tools.ietf.org/html/rfc6454">origins</a>,
     set both <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a> and 
     <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> to 0 then go to step
     <a href="#step-fetch-start">6</a>. Otherwise, record <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a>
@@ -827,7 +827,7 @@ non-normative intervals between timings.</p>
     then
     <ol style="list-style-type:lower-alpha;">
       <li>if the current document and the document that is redirected to are not from the
-        same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
+        same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
         set <a href="#dom-performancetiming-redirectstart">redirectStart</a>,
         <a href="#dom-performancetiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a>,
@@ -835,7 +835,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigation-redirectcount">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">6</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
-        same <a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a>,
+        same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
         set <a href="#dom-performancetiming-redirectstart">redirectStart</a>,
         <a href="#dom-performancetiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a>,
@@ -938,7 +938,7 @@ e.g., for experimental purposes, vendors must use the following extension mechan
 carefully crafted timing attacks. For instance, the unloading time reveals how long the previous
 page takes to execute its unload handler, which could be used to infer the user's login status.
 These attacks have been mitigated by enforcing the same
-<a href="http://tools.ietf.org/html/draft-ietf-websec-origin-06">origin</a> policy when
+<a href="http://tools.ietf.org/html/rfc6454">origin</a> policy when
 timing information involving the previous navigation is accessed.</p>
 
 <p>The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
@@ -983,17 +983,17 @@ relying on the interface described in this work would break.</p>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
 </dd>
-<dt>[<a id='websec-origin'>ORIGIN</a>]</dt>
+<dt>[<a id='rfc6454'>IETF RFC 6454</a>]</dt>
 <dd>
- <cite><a href='http://tools.ietf.org/html/draft-ietf-websec-origin-06'>The Web Origin Concept</a></cite>, A. Barth. IETF. 
+ <cite><a href='http://tools.ietf.org/html/rfc6454'>The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href='http://www.ietf.org/rfc/rfc6454.txt'>http://www.ietf.org/rfc/rfc6454.txt</a>. 
 </dd>
 <dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
 <dd>
-        <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407">Document Object Model Level 3 Core
+        <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
         Specification</a></cite>, A. Le Hors, et al., Editors. World
         Wide Web Consortium, 7 April 2004. This version of the Document
         Object Model Level 3 Core Recommendation is
-        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/dom/">latest version of
+        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/. The <a class="normative" href="http://www.w3.org/TR/dom/">latest version of
         DOM4</a> is available at
         http://www.w3.org/TR/dom/.
       </dd>
@@ -1003,7 +1003,7 @@ relying on the interface described in this work would break.</p>
 	ECMA-262, June 2011. This version of the ECMAScript
 	Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
 <dt>[<a id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/WD-WebIDL-20120207/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, February 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/WD-WebIDL-20120207/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
