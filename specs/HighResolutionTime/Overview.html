@@ -41,7 +41,7 @@
 <div class="head">
 <h1>High Resolution Time</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-march-09-2012">Editor's Draft March 9th, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -267,10 +267,11 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-DOMHighResTimeStamp"><span class="secno">4.2 </span>The <code>DOMHighResTimeStamp</code> Type</h3>
 <p>
-	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store an absolute or relative time measured from 
-	the <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
+	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store a time value measured relative to the 
+	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
 	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
-	interface <a href='#NavigationTiming'>[NavigationTiming]</a>, the start of navigation of the document.
+	interface <a href='#NavigationTiming'>[NavigationTiming]</a>, the start of navigation of the document, or a time value that represents a duration
+	between two  <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamps</code></a>.
 </p>
       
 <dl>
@@ -278,7 +279,13 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 		<b>Type Definition <i id='domhighrestimestamp'>DOMHighResTimeStamp</i></b>
 	</dt>
 	<dd>
-		<p>A <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> represents a number of milliseconds accurate to at least a tenth of a millisecond.</p>
+		<p>A <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> SHOULD represent a number of milliseconds accurate to a thousandth of a millisecond.</p>
+<div class="note"><div class="noteHeader">Note</div>
+<p>
+If the User Agent is unable to provide a time value accurate to a thousandth of a millisecond due to hardware or software constraints, the User Agent
+should represent a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> as a number of milliseconds accurate to a millisecond.
+</p>
+</div>
 		<dl>
 			<dt><br><b>IDL Definition</b></dt>
 			<dd>
@@ -290,6 +297,7 @@ typedef double <a href='#domhighrestimestamp'>DOMHighResTimeStamp</a>;
 		</dl>
 	</dd>
 </dl>
+
 
 <h3 id="sec-extenstions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> interface</h3>
 <pre class="idl">
@@ -307,6 +315,15 @@ partial interface <dfn id="performance">Performance</dfn> {
 	interface <a href='#NavigationTiming'>[NavigationTiming]</a>, 
 	the start of navigation of the document, to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
 </p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>
+As the now() method returns the current time, time spent when the User Agent is not fully active after
+the start of the navigation will not be excluded from the time value returned.
+</p>
+</div>
+
 
 <h3 id="sec-monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
 <p>

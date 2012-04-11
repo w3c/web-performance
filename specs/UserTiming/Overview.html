@@ -39,7 +39,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="editors-draft-march-27-2012">Editor's Draft March 27, 2012</h2>
+    <h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -360,9 +360,9 @@ cite this document as other than work in progress. </p>
         <code>Array</code>
         <p>If the <em>markName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
         mark name. The value associated with the mark name is an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time values
-		for that mark.  In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0.0, 1.0, 3.0], "mark2": [2.0] }</code>.</p>
+		for that mark.  In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0.750, 1.125, 3.333], "mark2": [2.125] }</code>.</p>
         <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
-		time values.  In JSON notation, the data structure will look similar to this: <code>[0.0, 1.0, 3.0]</code>.</p>
+		time values.  In JSON notation, the data structure will look similar to this: <code>[0.500, 1.125, 3.750]</code>.</p>
         <p>If the <em>markName</em> argument is specified, and the mark name does not exist, the method returns an empty Array.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Timestamps will be listed in the order that the <code>mark()</code> method was called.</p>
@@ -403,7 +403,7 @@ cite this document as other than work in progress. </p>
     <ul>
         <li>If neither the <em>startMark</em> nor the <em>endMark </em>argument is specified,
             <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> from 
-            <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a>
+            <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>
             to the current time.</li>
         <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
             <code>measure()</code> will store the duration as a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
@@ -429,7 +429,7 @@ cite this document as other than work in progress. </p>
         <div class="parameterDefinition">
             <p>[optional] The name of the start mark.</p>
             <p>If specified, the most recent <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value of the start mark is used.</p>
-            <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a> is used.</p>
+            <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a> is used.</p>
             <p>May be the name of one of the attributes in the
                <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
                In this case, the value of that attribute is used as the start <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> time value.</p>
@@ -449,9 +449,8 @@ cite this document as other than work in progress. </p>
 
         <p><b>Exceptions</b></p>
         <p>Throws a <code>SYNTAX_ERR</code> exception if the start mark or end mark does not exist.</p>
-		<p>Throws a <code>INVALID_ACCESS_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a
-		   <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> attribute with a <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a>
-			time value of 0.</p>
+		<p>Throws an <code>INVALID_ACCESS_ERR</code> exception if either <code>startMark</code> or <code>endMark</code> argument, or both, have the same name as a
+		   <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> attribute with a time value of 0.</p>
     </div>
   </div>
 
@@ -475,9 +474,9 @@ cite this document as other than work in progress. </p>
         <code>Array</code>
         <p>If the <em>measureName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
         measure name. The value associated with the measure name is an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
-        the data structure will look similar to this: <code>{ "measure1": [0.0, 5.0, 1.0], "measure2": [3.0] }</code>.</p>
+        the data structure will look similar to this: <code>{ "measure1": [0.525, 5.125, 1.125], "measure2": [3.251] }</code>.</p>
         <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#DOMHighResTimeStamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
-        the data structure will look similar to this: <code>[0.0, 5.0, 1.0].</code></p>
+        the data structure will look similar to this: <code>[0.250, 5.125, 1.750].</code></p>
         <p>If the <em>measureName</em> argument is specified, and the measure name does not exist, the method returns an empty Array.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Durations will be listed in the order that the <code>measure()</code> method was called.</p>
