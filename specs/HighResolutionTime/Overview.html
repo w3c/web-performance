@@ -41,7 +41,7 @@
 <div class="head">
 <h1>High Resolution Time</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 25, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -283,7 +283,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 <div class="note"><div class="noteHeader">Note</div>
 <p>
 If the User Agent is unable to provide a time value accurate to a thousandth of a millisecond due to hardware or software constraints, the User Agent
-should represent a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> as a number of milliseconds accurate to a millisecond.
+can represent a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> as a number of milliseconds accurate to a millisecond.
 </p>
 </div>
 		<dl>
@@ -319,8 +319,9 @@ partial interface <dfn id="performance">Performance</dfn> {
 <div class="note">
 <div class="noteHeader">Note</div>
 <p>
-As the now() method returns the current time, time spent when the User Agent is not fully active after
-the start of the navigation will not be excluded from the time value returned.
+As the now method returns the current time, time spent while a document is not 
+<a href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active<a> is 
+included for the purpose of this method.
 </p>
 </div>
 
