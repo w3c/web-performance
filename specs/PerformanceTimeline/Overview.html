@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Performance Timeline</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 25, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -147,7 +147,6 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</a></li>
       <li><a href="#sec-PerformanceEntry-interface"><span class="secno">4.2 </span>The <code>PerformanceEntry</code> interface</a></li>
       <li><a href="#sec-window.performance-attribute"><span class="secno">4.3 </span> The <code>window.performance</code> attribute</a></li>
-      <li><a href="#sec-PerformanceTiming"><span class="secno">4.4 </span> The <code>PerformanceTiming</code> interface</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -402,25 +401,6 @@ attribute</h3>
 				A <a href="#performanceentrylist">PerformanceEntryList</a> object.
 				<p><b>No exceptions</b></p>
 		</div>
-</div>
-
-
-<h3 id="sec-PerformanceTiming"><span class="secno">4.4 </span> The <code>PerformanceTiming</code> 
-interface</h3>
-
-<p>The <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> interface does not extend 
-the <a href="#performanceentry">PerformanceEntry</a> interface. However, when the <a href="#dom-performance-getentriesbytype">getEntriesByType</a> and
-<a href="#dom-performance-getentriesbyname">getEntriesByName</a> methods are called with the <code>entryType</code> argument of the DOMString <code>navigation</code>,
-a <a href="#performanceentrylist">PerformanceEntryList</a> with a <a href="#performanceentry">PerformanceEntry</a> object with the following values must be returned:
-</p>
-
-<div class="parameters">
-    <p>The <code>name</code> attribute will return the DOMString <code>document</code>.</p>
-    <p>The <code>entryType</code> attribute will return the DOMString <code>navigation</code>.</p>
-    <p>The <code id="timing-startTime">startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
-	with a time value of 0.</p>
-    <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	 equal to the difference between <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadend">loadEventEnd</a> and <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>, respectively.</p>
 </div>
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
