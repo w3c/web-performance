@@ -324,8 +324,8 @@ interface</h3>
 attribute</h3>
 <pre class="idl">partial interface <dfn id="performance">Performance</dfn> {
   <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentries">getEntries</a>();
-  <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbytype">getEntriesByType</a>(in DOMString entryType);
-  <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbyname">getEntriesByName</a>(in DOMString name, in optional DOMString entryType);
+  <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbytype">getEntriesByType</a>(DOMString entryType);
+  <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbyname">getEntriesByName</a>(DOMString name, optional DOMString entryType);
 };
 
   typedef sequence &lt;PerformanceEntry&gt; <b><dfn id='performanceentrylist'>PerformanceEntryList</dfn></b>;
