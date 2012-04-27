@@ -280,13 +280,13 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
-    void <a href="#dom-performance-mark">mark</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    Array <a href="#dom-performance-getmarks">getMarks</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    void <a href="#dom-performance-clearmarks">clearMarks</a>(in optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void <a href="#dom-performance-mark">mark</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    Array <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
 
     void <a href="#dom-performance-measure">measure</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
-    Array <a href="#dom-performance-getmeasures">getMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
-    void <a href="#dom-performance-clearmeasures">clearMeasures</a>(in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    Array <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
     </pre>
     <div class="methods">
