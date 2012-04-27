@@ -284,7 +284,7 @@ cite this document as other than work in progress. </p>
     Array <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
 
-    void <a href="#dom-performance-measure">measure</a>(in <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, in optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
+    void <a href="#dom-performance-measure">measure</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
     Array <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
     void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
@@ -514,7 +514,7 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   interface PerformanceMark : <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> {
-  }
+  };
     </pre>
 
     <p>
@@ -542,7 +542,7 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   interface PerformanceMeasure : <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> {
-  }
+  };
     </pre>
     
 	<p>
