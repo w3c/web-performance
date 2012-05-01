@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>document.readyState values exist during a navigation</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+
+        <script src="/resources/testharness.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <link rel="stylesheet" href="/resources/testharness.css" />
+        
+        <script type="text/javascript">
+            setup({ explicit_done: true });
+            BailEarly = false;  //Navigation Timing is not necessary to run this test.
+            function onload_test()
+            {
+                var frame = document.getElementById("test_frame").contentDocument;
+                test_true(frame.WebPerf_hasloading, "Document readiness has loading state.");
+                test_true(frame.WebPerf_hasinteractive, "Document readiness has interactive state.");
+                test_true(frame.WebPerf_hascomplete, "Document readiness has complete state.");
+                done();                
+            }
+        </script>
+
+    </head>
+    <body onload="onload_test();">
+        <div id="log"></div>
+        <br />
+        
+        <script type="text/javascript">
+            var frame = document.createElement("iframe");
+            frame.style.display = "none";
+            frame.src = "test_document_readiness_subframe.html";
+            frame.id = "test_frame";
+            document.body.appendChild(frame);
+        </script>
+    </body>
+</html>

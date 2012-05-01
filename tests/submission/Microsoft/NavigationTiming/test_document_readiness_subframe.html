@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Doc States</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+      
+        <script type="text/javascript">
+
+        var bHasLoading = false;
+        var bHasInteractive = false;
+        var bHasComplete = false;
+        document.addEventListener("DOMContentLoaded", SetState, false);
+        
+        SetState();
+        
+        function SetState()
+        { 
+            switch (document.readyState)
+            {
+                case "loading":
+                    bHasLoading = true;
+                    document.WebPerf_hasloading = true;
+                    break;
+                case "interactive":
+                    bHasInteractive = true;
+                    document.WebPerf_hasinteractive = true;
+                    break;
+                case "complete":
+                    bHasComplete = true;
+                    document.WebPerf_hascomplete = true;
+                    break;
+            }
+        }
+
+        function onloadHandler()
+        {
+            SetState();
+            var textbox = document.getElementById('docstates');
+            textbox.innerHTML += "Loading: " + bHasLoading + "<br/>" +
+                                 "Interactive: " + bHasInteractive +"<br/>" +
+                                 "Complete: " + bHasComplete + "<br/>";  
+        }
+        </script>
+    </head>
+    
+    <body onload="onloadHandler();">
+        <h3 id='docstates'></h3>
+    </body>
+</html>
