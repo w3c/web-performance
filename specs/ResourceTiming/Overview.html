@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-March-27-2012">Editor's Draft March 27, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-May-4-2012">Editor's Draft May 4, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -396,7 +396,7 @@ in the</span>
 <p>
     The user agent may choose to limit how many resources are included in the
     <a href="#performanceresourcetiming">PerformanceResourceTiming</a>
-    interface.  The recommended maximum number of resources is 150, though this may be changed by the user agent.
+    interface.  The recommended minimum number of resources is 150, though this may be changed by the user agent.
     <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a>
     can be called to request a change to this limit.
 </p>
@@ -424,7 +424,6 @@ in the</span>
 <p>
 The <a href="#performanceresourcetiming">PerformanceResourceTiming</a> interface participates in the 
 	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
-	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
 <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:</p>
 
 <div class="parameters">
@@ -436,9 +435,9 @@ The <a href="#performanceresourcetiming">PerformanceResourceTiming</a> interface
     <p>The <code id="startTime-attribute">startTime</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	with the time immediately before the user agent starts to queue the resource for <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a>.
        If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a> 
-       when fetching the resource and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
-       document, this attribute must return the same value as <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>. Otherwise, this attribute must 
-       return the same value as <a href="#dom-performanceresourcetiming-fetchstart">fetchStart</a>.
+       when fetching the resource, and if all the redirects or equivalent are from the <a href="#origin"> same origin</a> as the current 
+       document or the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header rules are met, this attribute must return the same value as <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>. 
+	   Otherwise, this attribute must return the same value as <a href="#dom-performanceresourcetiming-fetchstart">fetchStart</a>.
     </p>
     <p>The <code id="duration-attribute">duration</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a href="#dom-performanceresourcetiming-responseend">responseEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.</p>
@@ -647,7 +646,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 	<h4 id="dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code> method</h4>
 	<p>The <code>setResourceTimingBufferSize</code> method, when invoked, must set the maximum number of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources that may be stored in 
 	the buffer to the value of the maxSize parameter.</p>
-	<p>If this method is not called, the default maximum number of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources stored must be 150, unless otherwise specified by the user agent.</p>
+	<p>If this method is not called, the user agent should store at least 150 <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources in the buffer, unless otherwise specified by the user agent.</p>
     <p>if the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#dom-performance-clearresourcetimings">clearResourceTimings</a> 
     method is called.</p>
 		<div class="parameters">
@@ -688,7 +687,8 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
         <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header,
         these attributes must be set to zero: <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>, <a href="#dom-performanceresourcetiming-redirectend">redirectEnd</a>,
         <a href="#dom-performanceresourcetiming-domainlookupstart">domainLookupStart</a>, <a href="#dom-performanceresourcetiming-domainlookupend">domainLookupEnd</a>, <a href="#dom-performanceresourcetiming-connectstart">connectStart</a>,
-        <a href="#dom-performanceresourcetiming-connectend">connectEnd</a>, <a href="#dom-performanceresourcetiming-requeststart">requestStart</a> and <a href="#dom-performanceresourcetiming-responsestart">responseStart</a>.
+        <a href="#dom-performanceresourcetiming-connectend">connectEnd</a>, <a href="#dom-performanceresourcetiming-requeststart">requestStart</a>, <a href="#dom-performanceresourcetiming-responsestart">responseStart</a>
+		and <a href="#dom-performanceresourcetiming-secureconnectionstart">secureConnectionStart</a>, if supported by the user agent.
     </p>
     <p>
         The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
@@ -799,8 +799,10 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
       <a href="#dom-performanceresourcetiming-domainlookupend">domainLookupEnd</a>, 
       <a href="#dom-performanceresourcetiming-connectstart">connectStart</a>, 
       <a href="#dom-performanceresourcetiming-connectend">connectEnd</a>, 
-      <a href="#dom-performanceresourcetiming-requeststart">requestStart</a> and  
-      <a href="#dom-performanceresourcetiming-responsestart">responseStart</a> to zero and go to Step <a href="#step-response-end">3.17</a>.
+      <a href="#dom-performanceresourcetiming-requeststart">requestStart</a>, 
+      <a href="#dom-performanceresourcetiming-responsestart">responseStart</a> and
+	  <a href="#dom-performanceresourcetiming-secureconnectionstart">secureConnectionStart</a>, if supported by the user agent,
+	  to zero and go to Step <a href="#step-response-end">3.17</a>.
       </li>
         <li>Let <a href="#dom-performanceresourcetiming-domainlookupstart">domainLookupStart</a>, 
        <a href="#dom-performanceresourcetiming-domainlookupend">domainLookupEnd</a>, 
