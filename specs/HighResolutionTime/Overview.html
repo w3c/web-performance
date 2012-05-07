@@ -81,7 +81,7 @@
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
 <p>
-	This specification defines a Javascript interface that provides the current time 
+	This specification defines a JavaScript interface that provides the current time 
 	in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments.
 </p>
 
@@ -319,8 +319,8 @@ partial interface <dfn id="performance">Performance</dfn> {
 <div class="note">
 <div class="noteHeader">Note</div>
 <p>
-As the now method returns the current time, time spent while a document is not 
-<a href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active<a> is 
+As the now method returns the current time, time spent while a document is <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html#pv-page-hidden">hidden</a> or 
+not <a href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active<a> is 
 included for the purpose of this method.
 </p>
 </div>
