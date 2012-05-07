@@ -39,20 +39,14 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
+    <h2 class="no-num no-toc" id="editors-draft-may-7-2012">Editor's Draft May 7, 2012</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
         http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
       <dt>Latest version:</dt>
-        <dd><a href="https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html">
-        https://dvcs.w3.org/hg/webperf/file/9d9a437808a8/specs/UserTiming/Overview.html</a></dd>
-        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html">
-        https://dvcs.w3.org/hg/webperf/raw-file/de5f7a665349/specs/UserTiming/Overview.html</a></dd>
-        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html">
-        https://dvcs.w3.org/hg/webperf/raw-file/a5c0cda79e78/specs/UserTiming/Overview.html</a></dd>
-        <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html">
-        https://dvcs.w3.org/hg/webperf/raw-file/d1498d8e0e5e/specs/UserTiming/Overview.html</a></dd>
+		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
+        http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html</a></dd>
       <dt>Editors:</dt>
         <dd class="vcard">
             <span class="fn">Jatinder Mann</span>, <span class="org">Microsoft Corp.</span>,
@@ -152,7 +146,6 @@ cite this document as other than work in progress. </p>
         </ol>
       </li>
       <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
-      <li><a href="#privacy-security"><span class="secno">6 </span>Privacy</a></li>
       <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
       <li><a class="no-num" href="#references">References</a></li>
     </ol>
@@ -346,9 +339,6 @@ cite this document as other than work in progress. </p>
     <p>If the <em>markName</em> argument is specified, this method must return all of the 
 	<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>	time values for the specified mark name.</p>
     <p>If the <em>markName</em> argument is specified but it does not exist, this method must return an empty array.</p>
-	<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this method must return an empty array.
-    </p>
 	
     <div class="parameters">
         <p><b>Parameters</b></p>
@@ -368,10 +358,6 @@ cite this document as other than work in progress. </p>
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Timestamps will be listed in the order that the <code>mark()</code> method was called.</p>
         <p>The returned Array is a copy of data at the time that the <code>getMarks()</code> method was called.</p>
-		
-		<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this method must return an empty array.
-		</p>
 
         <p><b>No Exceptions</b></p>
     </div>
@@ -460,10 +446,7 @@ cite this document as other than work in progress. </p>
     <p>If the <em>measureName</em> argument is specified, this method must return all of the durations for the specified measure name.</p>
     <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
     <p>If the <em>measureName</em> argument is specified but it does not exist, this method must return an empty array.</p>
-	<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this method must return an empty array.
-    </p>
-	
+		
     <div class="parameters">
         <p><b>Parameters</b></p>
         <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
@@ -482,10 +465,7 @@ cite this document as other than work in progress. </p>
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Durations will be listed in the order that the <code>measure()</code> method was called.</p>
         <p>The returned Array is a copy of data at the time that the <code>getMeasures()</code> method was called.</p>
-		
-		<p>	If this method is invoked from a cross-origin script and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this method must return an empty array.
-		</p>
+			
 
         <p><b>No Exceptions</b></p>
     </div>
@@ -531,8 +511,7 @@ cite this document as other than work in progress. </p>
         <p>The <code>name</code> attribute will return the mark's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>mark</code>.</p>
         <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-		with the the mark's time value. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this attribute must be set to zero.
+		with the the mark's time value. 
     	</p>
         <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		of value 0.</p>
@@ -555,11 +534,9 @@ cite this document as other than work in progress. </p>
         <p>The <code>name</code> attribute will return the measure's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>measure</code>.</p>
         <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-		with the measure's start mark. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this attribute must be set to zero.</p>
+		with the measure's start mark. </p>
         <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-		with the duration of the measure. If a cross-origin script gets this attribute and the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header 
-		rules are not met, this attribute must be set to zero.</p>
+		with the duration of the measure. </p>
     </div>
 
     <h3 id="vendor-prefixes">4.5 Vendor Prefixes</h3>
@@ -580,48 +557,6 @@ cite this document as other than work in progress. </p>
     of the navigation and define subsequent time values in terms of a monotonic clock measuring time elapsed 
     from the beginning of the navigation.
     </p>
-
-    <h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
-	
-	<p>
-		The <a href="#performancemark"><code>PerformanceMark</code></a> and <a href="#performancemeasure"><code>PerformanceMeasure</code></a> interfaces, 
-		and extensions to the <a href="#extensions-performance-interface"><code>Performance</code></a> interface expose high precision timing information
-		of the performance characteristics of application scripts. To limit access to these interfaces, the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">
-		same origin</a> policy is enforced by default with the <a href="#dom-performance-getmarks"><code>getMarks</code></a> and 
-		<a href="#dom-performance-getmeasures"><code>getMeasures</code></a> methods returning empty Arrays when invoked from cross-origin scripts
-		and the <code>startTime</code> and <code>duration</code> attributes of the <a href="#performancemark"><code>PerformanceMark</code></a> and 
-		<a href="#performancemeasure"><code>PerformanceMeasure</code></a> interfaces being set to zero when the attributes are queried from cross-origin scripts.
-	</p>
-	
-	<p>
-		Developers can explicitly allow timing information to be accessed from cross-origin scripts by adding the
-        <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the domains that are allowed to access
-		the timing information.
-    </p>
-    <p>
-        The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
-        are defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
-    </p>
-    <p>
-        The term <dfn id="cross-origin">cross-origin</dfn> is used to mean non
-        <a href="#same-origin">same origin</a>.
-    </p>
-    <p>
-        Server-side applications may return the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header
-        to allow the User Agent to fully expose, to the document origin(s) specified, the
-        values of attributes that would have been set to zero and return values of methods that would have been empty Arrays
-		due to the cross-origin restrictions previously specified in this section. </p>
-    <h4 id="timing-allow-origin"><code>Timing-Allow-Origin</code> Response Header</h4>
-    <div class="parameters">
-        <p>The <dfn id="http-access-control-allow-origin"><code>Timing-Allow-Origin</code></dfn> header indicates whether a resource's timing can be
-            shared based by returning the value of the Origin request header in the
-            response. ABNF:</p>
-        <pre>Timing-Allow-Origin = &quot;Timing-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;</pre>
-        <p>
-            <code>origin-list-or-null</code> is defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
-        </p>
-	</div>
-	
 
     <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
