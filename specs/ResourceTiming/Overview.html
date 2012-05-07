@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta charset="utf-8">
   <title>Resource Timing</title>
 <style type="text/css">
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
@@ -100,7 +100,7 @@ document</h2>
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=[ResourceTiming]%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BResourceTiming%5D%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
    with <samp>[ResourceTiming]</samp> at the start of the subject line.</p>
 
@@ -253,7 +253,7 @@ with the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> inte
        function resourceTiming() 
        {
            var resourceList = window.performance.getEntriesByType("resource");
-           for (i = 0; i < resourceList.length; i++)
+           for (i = 0; i &lt; resourceList.length; i++)
            {
               if (resourceList[i].initiatorType == "img") 
               {
@@ -946,13 +946,13 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
 <h2 class="no-num" id=references>References</h2>
 
 <dl>
-   <dt><a name="rfc2119" id="rfc2119">[IETF RFC 2119]</a></dt>
+   <dt><a id="rfc2119">[IETF RFC 2119]</a></dt>
    <dd>
     <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
     Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
     http://www.ietf.org/rfc/rfc2119.txt.
    </dd>
-   <dt><a name="rfc2616" id="rfc2616">[IETF RFC 2616]</a></dt>
+   <dt><a id="rfc2616">[IETF RFC 2616]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>,
     R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at
     http://www.ietf.org/rfc/rfc2616.txt.
@@ -962,7 +962,7 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
  <cite><a href='http://tools.ietf.org/html/rfc6454'>The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href='http://www.ietf.org/rfc/rfc6454.txt'>http://www.ietf.org/rfc/rfc6454.txt</a>. 
 </dd>
 
-    <dt>[<a name="DOM3Core" id='DOM3Core'>DOM Level 3 Core</a>]</dt>
+    <dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
     <dd>
      <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
      Specification</a></cite>, A. Le Hors, et al., Editors. World
@@ -973,7 +973,7 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      http://www.w3.org/TR/dom/.
     </dd>
 
-    <dt>[<a name="ECMA262" id="ECMA262">ECMA-262</a>]</dt>
+    <dt>[<a id="ECMA262">ECMA-262</a>]</dt>
     <dd>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
      Edition. ECMA International, Standard
@@ -981,7 +981,7 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
     </dd>
 
-    <dt>[<a name="XHR" id="XHR">XMLHttpRequest</a>]</dt>
+    <dt>[<a id="XHR">XMLHttpRequest</a>]</dt>
     <dd>
      <cite><a href='http://www.w3.org/TR/2012/WD-XMLHttpRequest-20120117/'>XMLHttpRequest</a></cite>,
      Anne van Kesteren, Editor. World Wide Web Consortium, January
@@ -993,24 +993,25 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
      http://www.w3.org/TR/XMLHttpRequest/.
     </dd>
 
-   <dt>[<a name="HTML5" id="HTML5">HTML5</a>]</dt>
+   <dt>[<a id="HTML5">HTML5</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 
-   <dt>[<a name="SVG" id="SVG">SVG</a>]</dt>
+   <dt>[<a id="SVG">SVG</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, August 2011. This version of the SVG specification Recommendation is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
 
-   <dt>[<a name="NavigationTiming" id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
 
-   <dt>[<a name="PerformanceTimeline" id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2011/WD-performance-timeline-20110901/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, September 2011. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2011/WD-performance-timeline-20110901/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
-   <dt>[<a name="HighResolutionTime" id="HighResolutionTime">High Resolution Time</a>]</dt>
+   <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
-   <dt>[<a name="WebIDL" id="WebIDL">Web IDL</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-WebIDL-20120207/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, February 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/WD-WebIDL-20120207/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+
 </dl>
 
 </div>
