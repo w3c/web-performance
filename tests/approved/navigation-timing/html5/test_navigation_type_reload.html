@@ -35,7 +35,11 @@
             function onload_test()
             {
                 reload_frame = document.getElementById("frameContext");
-                reload_frame.onload = do_test;
+                reload_frame.onload = function() {
+                  /* Need to make sure we don't examine loadEventEnd
+                     until after the load event has finished firing */
+		    setTimeout(do_test, 0);
+		}
                 setTimeout("reload_the_frame();", 100);
             }
 
