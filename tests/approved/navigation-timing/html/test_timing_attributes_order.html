@@ -100,6 +100,11 @@
 
         <div id="log"></div>
         <br />
-        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
+        <iframe id="frameContext"
+                onload="/* Need to make sure we don't examine loadEventEnd
+                           until after the load event has finished firing */
+                        setTimeout(onload_test, 0);"
+                src="/webperf/tests/resources/blank_page_unload.htm"
+                style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
