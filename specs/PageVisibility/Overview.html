@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-May-18-2012">Editor's Draft May 18, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -307,7 +307,7 @@ and be notified of visibility changes.</p>
 partial interface <dfn id="document">Document</dfn> {
   readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
   readonly attribute DOMString <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
-  // "hidden", "visible", "preview", "suspended", "unloaded"
+  // "hidden", "visible", "prerender", "unloaded"
 };
 </pre>
 
@@ -337,10 +337,8 @@ is not minimized but is fully obscured by other applications.</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
-         <li>The User Agent is minimized and a preview is shown.</li>
          <li>The User Agent is about to unload the page.</li>
          <li>The User Agent is about to traverse to a session history entry.</li>
-         <li>The User Agent is about to enter a suspended state where JavaScript timers and events are not fired.</li>
          <li>The Operating System lock screen is shown.</li>
 	</ul> 
 	
@@ -360,9 +358,7 @@ one of the following DOMStrings or a vendor prefixed DOMString as defined in <a 
 <ul>
 	<li><code>hidden</code>,</li>
 	<li><code>visible</code>,</li>
-	<li><code>preview</code>,</li>
 	<li><code>prerender</code>,</li>
-	<li><code>suspended</code>,</li>
     <li><code>unloaded</code>.</li>
 </ul> 
 
@@ -404,55 +400,18 @@ view of the page, when applicable, on getting, the <a href="#dom-document-visibi
 the DOMString <a href="#pv-page-visible"><code>visible</code></a> when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
-<p>The DOMString <a href="#pv-page-visible"><code>visible</code></a> MUST not be returned if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is not 
-visible and a preview, a visual representation of the content of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, is 
- visible.</p>
-
-<h5><code><dfn id="pv-page-preview">preview</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the DOMString <a href="#pv-page-preview"><code>preview</code></a> if the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-is not visible at all and a preview, a visual representation of the content of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, is visible. 
-User Agent support of the <a href="#pv-page-preview"><code>preview</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
- </p>
- 
-<p>
-If the User Agent supports the <a href="#pv-page-preview"><code>preview</code></a> return value, and if the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> is  
-visible and a preview of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is 
- visible, on getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute SHOULD return the DOMString <a href="#pv-page-visible"><code>visible</code></a>.
-</p>
-
 <h5><code><dfn id="pv-prerender">prerender</dfn></code></h5>
 <p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the DOMString <a href="#pv-prerender"><code>prerender</code></a> if the 
 <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
 <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-is loaded off-screen and is not visible. User Agent support of the <a href="#pv-page-prerender"><code>prerender</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
+is loaded off-screen and is not visible. User Agent support of the <a href="#pv-prerender"><code>prerender</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
-
-
-<div class="note">
-  <p class="XXX"><a href="http://www.w3.org/2010/webperf/track/issues/8">ISSUE-8</a> is tracking the open issue on whether the Page Visibility API
-  should support the scenarios when the page is unloading or traversing the session history. The following two states have been added to show
-  how supporting those scenarios would look like.</p>
-</div>
-
 
 <h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MUST return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
 <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>.
-</p>
- 
-<h5><code><dfn id="pv-suspended">suspended</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the DOMString <a href="#pv-suspended"><code>suspended</code></a> if the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-is not visible at all and the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired. 
-User Agent support of the <a href="#pv-page-preview"><code>suspended</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
+<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>. User Agent support of the <a href="#pv-unloaded"><code>unloaded</code></a> 
+return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
 
 <h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
@@ -466,12 +425,6 @@ has changed.
 </p>
 
 <h3 id="sec-processing-model"><span class="secno">4.4 </span>Processing Model</h3>
-
-<div class="note">
-  <p class="XXX"><a href="http://www.w3.org/2010/webperf/track/issues/8">ISSUE-8</a> is tracking the open issue on whether the Page Visibility API
-  should support the scenarios when the page is unloading or traversing the session history. The processing model currently has included steps
-  for those scenarios to show how supporting those scenarios would look like.</p>
-</div>
 
 <p>
     When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
@@ -514,30 +467,15 @@ has changed.
 <ol>
     <li>
         <p>If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-		   fire a <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at
-		   the <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object of the <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code>, but
-		   with its <code title="dom-event-target"><a href="http://dev.w3.org/html5/spec/infrastructure.html#dom-event-target">target</a></code> set to the
-		   <code><a href="http://dev.w3.org/html5/spec/dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
-		   <code><a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a></code> object), using the
-		   <code><a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, 
-		   with the <code title="dom-PageTransitionEvent-persisted"><a href="http://dev.w3.org/html5/spec/history.html#dom-pagetransitionevent-persisted">persisted</a></code>
-		   attribute initialized to true. This event MUST not bubble, MUST not
-		   be cancelable, and has no default action.</p>
+		   fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at
+		   at the 
+            <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
+            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
     </li>
     <li>
         <p>Queue a task that runs the following steps synchronously:</p>
     </li>
     <ol style="list-style-type:lower-alpha;"> 
-        <li>
-            <p>If a preview of the page is visible, set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute 
-            to <code>preview</code> and skip to step 2c.</p>
-        </li>
-        <li>
-            <p>If the User Agent is to traverse to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-            or the User Agent will be going into a suspended state where JavaScript timers and events will not be fired,
-            set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>suspended</code>
-            and skip to step 2c.</p>
-        </li>
         <li>
             <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
         </li>
@@ -559,7 +497,7 @@ has changed.
         <p>Queue a task that runs the following steps synchronously:</p>
 		<ol style="list-style-type:lower-alpha;"> 
 			<li>
-				<p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>.
+				<p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>. This step is optional.
 			</li>
 			<li>
 				<p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.
