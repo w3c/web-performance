@@ -122,7 +122,7 @@ function animate(time) {
   requestId = window.requestAnimationFrame(animate);
 }
 function start() {
-  animationStartTime = Date.now();
+  animationStartTime = window.performance.now();
   requestId = window.requestAnimationFrame(animate);
 }
 function stop() {
@@ -184,7 +184,7 @@ specifications:</p>
 <ul>
   <li><code>Document</code>&#x2002;<a href='#ref-DOM4'>[DOM4]</a></li>
   <li><code>Window</code>&#x2002;<a href='#ref-HTML5'>[HTML5]</a></li>
-  <li><code>DOMTimeStamp</code>&#x2002;<a href='#ref-WEBIDL'>[WEBIDL]</a></li>
+  <li><code>DOMHighResTimeStamp</code>&#x2002;<a href='#ref-HighResolutionTime'>[HighResolutionTime]</a></li>
 </ul>
 </div>
 
@@ -227,7 +227,7 @@ interface <dfn id='windowanimationtiming'>WindowAnimationTiming</dfn> {
 
 <a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a> implements <a href='#windowanimationtiming'>WindowAnimationTiming</a>;
 
-callback <dfn id='framerequestcallback'>FrameRequestCallback</dfn> = void (<a href='http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp'>DOMTimeStamp</a> time);</pre>
+callback <dfn id='framerequestcallback'>FrameRequestCallback</dfn> = void (<a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#sec-DOMHighResTimeStamp'>DOMHighResTimeStamp</a> time);</pre>
 
 <p>The <dfn id='dom-windowanimationtiming-requestanimationframe'><code>requestAnimationFrame</code></dfn> method is
 used to signal to the user agent that a script-based animation
@@ -291,22 +291,9 @@ task should be generated per <a class='dfnref' href='http://www.w3.org/TR/html5/
 
 To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the following steps are performed:
 <ol class='algorithm'>
-  <li>Let <var>t</var> be the result of <a class='dfnref' href='#dfn-get-next-sample-time'>getting the next sample time</a>
-    of the <a class='dfnref' href='http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context'>top-level browsing context</a>.
-    <div class='ednote'>
-      <p><a href="http://www.w3.org/2010/webperf/track/issues/2">ISSUE-2</a> <dfn id='dfn-get-next-sample-time'>Getting the next sample time</dfn>
-      is currently undefined.  This time should be the same as the time that contemporaneous native animations have been sampled at.</p>
-    </div>
-  </li>
-  <li>Let <var>time</var> be <var>t</var> expressed as the number of milliseconds since 1970-01-01T00:00:00Z.
-    <div class='ednote'>
-      <p><a href="http://www.w3.org/2010/webperf/track/issues/3">ISSUE-3</a> Having animation frame times run off a
-      monotonic clock that increases at a constant rate would be better for authors than using the wallclock time
-      as reported by the system, which might jump backwards or move forwards at varying rates due to clock slew.
-      Doing this argues for the reinclusion of the <code>Window.animationStartTime</code> attribute that was present in an earlier
-      draft, so that scripts can avoid using <code>Date.now()</code> to record the animation start time,
-      which might bear little relation to the monotonic clock values anyway.</p>
-    </div>
+  <li>Let <var>time</var> be the result of invoking the <a class='dfnref'
+        href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now'>now
+        method of the Performance interface</a>.
   </li>
   <li>Let <var>list</var> be an empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
   <li>Let <var>contexts</var> be the results of <a class='dfnref' href='http://www.w3.org/TR/html5/browsers.html#list-of-the-descendant-browsing-contexts'>list of the descendant browsing contexts</a> algorithm for this task's top-level browsing context.</li>
@@ -384,6 +371,11 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
   C. McCormack, Editor.
   World Wide Web Consortium, July 2011.
   Available at http://www.w3.org/TR/WebIDL/.</dd>
+  <dt id='ref-HighResolutionTime'>[HighResolutionTime]</dt>
+  <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>.
+  Jatinder Mann, Microsoft Corp.
+  World Wide Web Consortium, April 2012.
+  Available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
 </dl>
 </div>
 

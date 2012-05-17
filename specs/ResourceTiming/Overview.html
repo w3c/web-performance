@@ -63,12 +63,12 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2012 <a href="http://www.w3.org/"><acronym title="World Wide Web
-    Consortium">W3C</acronym></a><sup>&reg;</sup> (<a
-    href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute
-    of Technology">MIT</acronym></a>, <a
-    href="http://www.ercim.eu/"><acronym title="European Research Consortium
-    for Informatics and Mathematics">ERCIM</acronym></a>, <a
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
     href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
     <a
@@ -466,7 +466,7 @@ the type of object that initiated the request for the resource: </p>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if all the redirects or equivalent are from the <a href="#origin">same origin</a> as the current document,
-this attribute must return the <a href="#dom-performanceresourcetiming-fetchstart">starting time of the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a></a> that initiates the redirect.</p>
+this attribute must return the <a href="#dom-performanceresourcetiming-fetchstart">starting time</a> of the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> that initiates the redirect.</p>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
@@ -750,7 +750,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
 
 <p>The following graph illustrates the timing attributes defined by the PerformanceResourceTiming interface. Attributes underlined may not be available when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> resources from different <a href="#same-origin">origins</a>. User agents may perform internal processing in between timings, which allow for non-normative intervals between timings.</p>
 
-<p><img width="85%" src="resource-timing-overview.png" alt='Resource Timing attributes'></p>
+<p><img style="width:85%" src="resource-timing-overview.png" alt='Resource Timing attributes'></p>
 
 <ol>
   <li>Once the <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
@@ -763,7 +763,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
   <li>For each resource fetched by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
   <ol>
       <li id="step-create-object">Create a new <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object and 
-      set <a href="#entryType-attribute">entryType</a> to the DOMString <code>resource</code></a>.
+      set <a href="#entryType-attribute">entryType</a> to the DOMString <code>resource</code>.
       </li>      
       <li>Immediately before the user agent starts to queue the resource for retrieval,  
        record the current time in <a href="#startTime-attribute">startTime</a>. 
@@ -1007,7 +1007,7 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
    <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120522/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, May 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120522/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>

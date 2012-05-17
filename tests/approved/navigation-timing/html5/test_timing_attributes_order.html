@@ -73,18 +73,6 @@
                         test_timing_order('unloadEventStart', 'navigationStart');
                         test_timing_order('unloadEventEnd', 'unloadEventStart');
 
-                        test_true(true, "unloadEventStart = " + performanceNamespace.timing.unloadEventStart);
-                        test_true(true, "unloadEventEnd = " + performanceNamespace.timing.unloadEventEnd);
-                        test_true(true, "delta = " + (performanceNamespace.timing.unloadEventEnd -
-                                                     performanceNamespace.timing.unloadEventStart));
-                        test_true(((performanceNamespace.timing.unloadEventEnd >=
-                                    performanceNamespace.timing.unloadEventStart + 20) &&
-                                    (performanceNamespace.timing.unloadEventEnd <
-                                    performanceNamespace.timing.unloadEventStart + 50)),
-                                  'window.performance.timing.unloadEventStart/End only ' +
-                                  'captures only the time spent in onunload and not the ' +
-                                  'onbeforeunload event');
-
                         step++;
                         done();
                         break;
@@ -112,7 +100,11 @@
 
         <div id="log"></div>
         <br />
-        
-        <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/blank_page_unload.htm" style="width: 250px; height: 250px;"></iframe>
+        <iframe id="frameContext"
+                onload="/* Need to make sure we don't examine loadEventEnd
+                           until after the load event has finished firing */
+                        setTimeout(onload_test, 0);"
+                src="/webperf/tests/resources/blank_page_unload.htm"
+                style="width: 250px; height: 250px;"></iframe>
     </body>
 </html>
