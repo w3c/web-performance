@@ -291,14 +291,14 @@ task should be generated per <a class='dfnref' href='http://www.w3.org/TR/html5/
 
 To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the following steps are performed:
 <ol class='algorithm'>
-  <li>Let <var>time</var> be the result of invoking the <a class='dfnref'
-        href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now'>now
-        method of the Performance interface</a>.
-  </li>
   <li>Let <var>list</var> be an empty <a class='dfnref' href='#dfn-animation-frame-request-callback-list'>animation frame request callback list</a>.</li>
   <li>Let <var>contexts</var> be the results of <a class='dfnref' href='http://www.w3.org/TR/html5/browsers.html#list-of-the-descendant-browsing-contexts'>list of the descendant browsing contexts</a> algorithm for this task's top-level browsing context.</li>
   <li>For every <var>context</var> in <var>contexts</var>, in any order, perform the following steps:
     <ol>
+      <li>Let <var>time</var> be the result of invoking the <a class='dfnref'
+            href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now'>now
+            method of the Performance interface</a> within this <var>context</var>.
+      </li>
       <li>Let <var>d</var> be <var>context</var>'s <a class='dfnref' href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>.</li>
       <li>If <var>d</var>'s <a class='dfnref' href='http://www.w3.org/TR/page-visibility/#pv-hidden'>hidden</a>
         attribute is true, continue to the next entry in the <var>contexts</var> list. Otherwise proceed with these steps.</li>
@@ -307,7 +307,7 @@ To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the follow
       <li>Clear <var>doclist</var>.</li>
     </ol>
   </li>
-  <li>Perform the steps defined in the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
+  <li>Perform the steps defined in the <a class='dfnref' href='#dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</a> with parameter <var>list</var>.</li>
 </ol>
 
 <p>The <dfn id='dfn-invoke-callbacks-algorithm'>invoke callbacks algorithm</dfn>:</p>
@@ -316,7 +316,7 @@ To <dfn id='dfn-sample-all-animations'>samples all animations</dfn> , the follow
     <ol>
       <li>If the cancelled flag on <var>callback</var> is not true:
         <ol>
-          <li>Call <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>Call <var>callback</var> with the callback's context's <var>time</var> as the argument.</li>
           <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
         </ol>
       </li>
