@@ -1,12 +1,43 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta charset="utf-8" />
 <title>window.performance.timing for dynamically created documents</title>
+<link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface"/>
 <script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
 <script src="/webperf/tests/resources/webperftestharness.js"></script>
 <link rel="stylesheet" href="/resources/testharness.css" />
-
+<script id="metadata_cache">/*
+{
+  "window.performance is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "connectEnd is the same after document open.": {},
+  "connectStart is the same after document open.": {},
+  "domComplete is the same after document open.": {},
+  "domContentLoadedEventEnd is the same after document open.": {},
+  "domContentLoadedEventStart is the same after document open.": {},
+  "domInteractive is the same after document open.": {},
+  "domLoading is the same after document open.": {},
+  "domainLookupEnd is the same after document open.": {},
+  "domainLookupStart is the same after document open.": {},
+  "fetchStart is the same after document open.": {},
+  "loadEventEnd is the same after document open.": {},
+  "loadEventStart is the same after document open.": {},
+  "navigationStart is the same after document open.": {},
+  "redirectEnd is the same after document open.": {},
+  "redirectStart is the same after document open.": {},
+  "requestStart is the same after document open.": {},
+  "responseEnd is the same after document open.": {},
+  "responseStart is the same after document open.": {},
+  "unloadEventEnd is the same after document open.": {},
+  "unloadEventStart is the same after document open.": {}
+}
+*/</script>
 <script>
 setup({explicit_done: true});
 
@@ -43,7 +74,7 @@ function testTimingWithDocumentOpen() {
   subdocument.write('<!DOCTYPE HTML>');
   subdocument.write('<html>');
   subdocument.write('<head>');
-  subdocument.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />');
+  subdocument.write('<meta charset="utf-8" />');
   subdocument.write('<title><Green Test Page</title>');
   subdocument.write('</head>');
   subdocument.write('<body style="background-color:#00FF00;">');

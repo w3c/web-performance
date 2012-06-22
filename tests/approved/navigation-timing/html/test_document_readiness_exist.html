@@ -1,14 +1,22 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta charset="utf-8" />
     <title>document.readyState values exist during a navigation</title>
     <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
-    <script type="text/javascript" src="/resources/testharness.js"></script>
-    <script type="text/javascript" src="/webperf/tests/resources/webperftestharness.js"></script>
+    <link rel="help" href="http://www.w3.org/TR/html5/dom.html#resource-metadata-management"/>
+    <script src="/resources/testharness.js"></script>
+    <script src="/resources/testharnessreport.js"></script>
+    <script src="/webperf/tests/resources/webperftestharness.js"></script>
     <link rel="stylesheet" href="/resources/testharness.css" />
-    
-    <script type="text/javascript">
+ <script id="metadata_cache">/*
+{
+  "Document readiness has loading state.": {},
+  "Document readiness has interactive state.": {},
+  "Document readiness has complete state.": {}
+}
+*/</script>   
+    <script>
         setup({ explicit_done: true });
         var has_loading = (document.readyState == "loading");
         var has_interactive = (document.readyState == "interactive");

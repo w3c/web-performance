@@ -1,14 +1,32 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
     <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta charset="utf-8" />
         <title>window.navigation.type for back and forward navigations</title>
         <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+	<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-navigation-info-interface"/>
         <script src="/resources/testharness.js"></script>
+        <script src="/resources/testharnessreport.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-
-        <script type="text/javascript">
+<script id="metadata_cache">/*
+{
+  "window.performance is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "window.performance.navigation is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "window.performance.navigation.type == TYPE_NAVIGATE": {},
+  "window.performance.navigation.type == TYPE_BACK_FORWARD after history.back()": {},
+  "window.performance.navigation.type == TYPE_BACK_FORWARD after history.forward()": {}
+}
+*/</script>
+        <script>
             setup({explicit_done: true});
 
             // explicitly test the namespace before we start testing
@@ -52,7 +70,7 @@
                     {
                         test_equals(navigation_frame.performance.navigation.type,
                                 performanceNamespace.navigation.TYPE_BACK_FORWARD,
-                                'window.performance.navigation.type == TYPE_BACK_FORWARD');
+                                'window.performance.navigation.type == TYPE_BACK_FORWARD after history.back()');
                         step++;
                         navigation_frame.history.forward();
                         break;
@@ -61,7 +79,7 @@
                     {
                         test_equals(navigation_frame.performance.navigation.type,
                                 performanceNamespace.navigation.TYPE_BACK_FORWARD,
-                                'window.performance.navigation.type == TYPE_BACK_FORWARD');
+                                'window.performance.navigation.type == TYPE_BACK_FORWARD after history.forward()');
                         done();
                         step++;
                         break;

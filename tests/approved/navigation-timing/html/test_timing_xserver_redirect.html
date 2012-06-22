@@ -1,13 +1,29 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
     <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta charset="utf-8" />
         <title>window.performance.timing.redirect attributes on a cross-origin server redirected navigation</title>
         <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+	<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface"/>
         <script src="/resources/testharness.js"></script>
+        <script src="/resources/testharnessreport.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
-
-        <script type="text/javascript">
+<script id="metadata_cache">/*
+{
+  "Starting document.location.hostname is correct (w3c-test.org)": {},
+  "window.performance is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "window.performance.navigation is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  }
+}
+*/</script>
+        <script>
             setup({explicit_done: true});
 
             //
@@ -36,8 +52,8 @@
                 performanceNamespace = document.getElementById("frameContext").contentWindow.performance;
                 test_equals(performanceNamespace.navigation.type,
                         performanceNamespace.navigation.TYPE_NAVIGATE,
-                        'timing.navigation.type is TYPE_NAVIGATE');
-                test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on a cross-origin server redirected navigation');
+                        'timing.navigation.type is TYPE_NAVIGATE',{help:"http://www.w3.org/TR/navigation-timing/#sec-navigation-info-interface"});
+                test_equals(performanceNamespace.navigation.redirectCount, 0, 'navigation.redirectCount == 0 on a cross-origin server redirected navigation', {help:"http://www.w3.org/TR/navigation-timing/#sec-navigation-info-interface"});
 
                 test_timing_greater_than('navigationStart', 0);
 

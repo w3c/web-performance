@@ -1,13 +1,15 @@
 ﻿<!DOCTYPE HTML>
 <html>
     <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta charset="utf-8" />
         <title>window.performance.timing.redirect attributes on a same-origin server redirected navigation</title>
         <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+	<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface"/>
         <script src="/resources/testharness.js"></script>
+        <script src="/resources/testharnessreport.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
 
-        <script type="text/javascript">
+        <script>
             function onload_test()
             {
                 test_namespace('navigation');
