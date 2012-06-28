@@ -377,9 +377,11 @@ in the</span>
 			the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>.
         </li>
 		<li>
-			If an HTML <code>IFRAME</code> element is added via markup and its <code>src</code> attribute is changed dynamically via script, both the 
-			<a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the <code>about:blank</code> resource, as well
-            as the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the new URL would be included 
+			If an HTML <code>IFRAME</code> element is added via markup without specifying a <code>src</code> attribute, the user agent may <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a>
+			an <code>about:blank</code> resource for the <code>IFRAME</code>. If at a later time the <code>src</code> attribute is changed dynamically via script, the user agent may
+			<a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> the new URL resource for the <code>IFRAME</code>. In this case, both the 
+			<a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the <code>about:blank</code> resource, as well as the 
+            <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the new URL would be included 
 			as <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>.
 		</li>
         <li>
@@ -455,10 +457,7 @@ must return a DOMString with the same value as the <code><a href="http://www.w3.
 <code><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/glossary.html#dt-element">element</a></code>.</p>
 
 <p>If the initiator is a CSS resource downloaded by the <code><a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a></code> syntax, such as <code>@import url()</code> or <code>background: url()</code>, 
-on getting, the <code><a href="#initiatorType-attribut">initiatorType</a></code> attribute must return the DOMString <code>"style"</code> if the style information was embedded using a 
-<code><a href="http://dev.w3.org/html5/spec/single-page.html#the-style-element">style</a></code> element or the DOMString <code>"link"</code> if the style information was linked using a
-<code><a href="http://dev.w3.org/html5/spec/single-page.html#the-link-element">link</a></code> element.</p>
-
+on getting, the <code><a href="#initiatorType-attribut">initiatorType</a></code> attribute must return the DOMString <code>"css"</code>.</p>
 	
 <h4 id="redirect-start-attribute"><code><dfn id="dom-performanceresourcetiming-redirectstart">redirectStart</dfn></code> attribute</h4>
 

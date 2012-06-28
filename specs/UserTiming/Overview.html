@@ -188,7 +188,7 @@ cite this document as other than work in progress. </p>
 
            function measurePerf() 
            {
-               var perfEntries = performance.getEntries("marks");
+               var perfEntries = performance.getEntriesByType("marks");
                for (var i = 0; i &lt; perfEntries.length; i++)
                {
                      if (window.console) console.log("Name: "        + perfEntries[i].name      + 
