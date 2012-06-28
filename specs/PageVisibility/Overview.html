@@ -454,7 +454,7 @@ has changed.
         </ol>
         <li>
             <p>If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-            fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event at the 
+            fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at the 
             <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
             but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
         </li>
@@ -467,9 +467,8 @@ has changed.
 <ol>
     <li>
         <p>If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-		   fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at
-		   at the 
-            <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
+		   fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event at
+		   at the <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
             but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
     </li>
     <li>

@@ -39,7 +39,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="editors-draft-may-7-2012">Editor's Draft May 7, 2012</h2>
+    <h2 class="no-num no-toc" id="editors-draft-june-27-2012">Editor's Draft June 27, 2012</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -146,6 +146,7 @@ cite this document as other than work in progress. </p>
         </ol>
       </li>
       <li><a href="#monotonic-clock"><span class="secno">5 </span>Monotonic Clock</a></li>
+	  <li><a href="#privacy-security"><span class="secno">6 </span>Privacy and Security</a></li>
       <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
       <li><a class="no-num" href="#references">References</a></li>
     </ol>
@@ -188,7 +189,7 @@ cite this document as other than work in progress. </p>
            function measurePerf() 
            {
                var perfEntries = performance.getEntries("marks");
-               for (i = 0; i &lt; perfEntries.length; i++)
+               for (var i = 0; i &lt; perfEntries.length; i++)
                {
                      if (window.console) console.log("Name: "        + perfEntries[i].name      + 
                                                      " Entry Type: " + perfEntries[i].entryType +
@@ -274,11 +275,11 @@ cite this document as other than work in progress. </p>
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
     void <a href="#dom-performance-mark">mark</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    Array <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    (object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]) <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
 
     void <a href="#dom-performance-measure">measure</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
-    Array <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    (object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]) <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
     void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
     </pre>
@@ -336,7 +337,7 @@ cite this document as other than work in progress. </p>
     <h4 id="dom-performance-getmarks"><code>getMarks</code> method</h4>
     <p>If the <em>markName</em> argument is not specified, this method must return all of the marks and their associated 
 	<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values.</p>
-    <p>If the <em>markName</em> argument is specified, this method must return all of the 
+    <p>If the <em>markName</em> argument is specified, this method must return a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> with all of the 
 	<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>	time values for the specified mark name.</p>
     <p>If the <em>markName</em> argument is specified but it does not exist, this method must return an empty array.</p>
 	
@@ -348,8 +349,9 @@ cite this document as other than work in progress. </p>
         </div>
 
         <p><b>Return Value</b></p>
-        <code>Array</code>
-        <p>If the <em>markName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
+        <code>object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]</code>
+        <p>If the <em>markName</em> argument is not specified, the method returns a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a>. 
+		Each key in the <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> is a
         mark name. The value associated with the mark name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values
 		for that mark.  In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0.750, 1.125, 3.333], "mark2": [2.125] }</code>.</p>
         <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -444,7 +446,8 @@ cite this document as other than work in progress. </p>
   <div class="methods">
     <h4 id="dom-performance-getmeasures"><code>getMeasures</code> method</h4>
     <p>If the <em>measureName</em> argument is specified, this method must return all of the durations for the specified measure name.</p>
-    <p>If the <em>measureName</em> argument is not specified, this method must return all of the measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method must return a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> of 
+	all the measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
     <p>If the <em>measureName</em> argument is specified but it does not exist, this method must return an empty array.</p>
 		
     <div class="parameters">
@@ -455,8 +458,9 @@ cite this document as other than work in progress. </p>
         </div>
 
         <p><b>Return Value</b></p>
-        <code>Array</code>
-        <p>If the <em>measureName</em> argument is not specified, the method returns an associative Array.  Each key in the Array is a
+        <code>object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]</code>
+        <p>If the <em>measureName</em> argument is not specified, the method returns a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a>.  
+		Each key in the <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> is a
         measure name. The value associated with the measure name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
         the data structure will look similar to this: <code>{ "measure1": [0.525, 5.125, 1.125], "measure2": [3.251] }</code>.</p>
         <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
@@ -557,6 +561,15 @@ cite this document as other than work in progress. </p>
     of the navigation and define subsequent time values in terms of a monotonic clock measuring time elapsed 
     from the beginning of the navigation.
     </p>
+	
+	<h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
+
+	<p>This section is non-normative.</p>
+
+	<p>The interfaces defined in this specification	expose potentially sensitive timing information on specific JavaScript activity of a page. 
+	However, unlike other interfaces defined in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>,
+	the interfaces defined in this specification do not have any restrictions on sharing timing information through script. This is because the web platform has been designed with the invariant that 
+	any script included on a page has the same access as any other script included on that page regardless of the origin of the script. </p>
 
     <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 

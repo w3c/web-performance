@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Performance Timeline</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-10-2012">Editor's Draft April 25, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-june-27-2012">Editor's Draft June 27, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -200,7 +200,7 @@ to obtain timing data related to the navigation of the document, resources on th
        function measurePerf() 
        {
            var perfEntries = performance.getEntries();
-           for (i = 0; i &lt; perfEntries.length; i++)
+           for (var i = 0; i &lt; perfEntries.length; i++)
            {
                  if (window.console) console.log("Name: "        + perfEntries[i].name      + 
                                                  " Entry Type: " + perfEntries[i].entryType +
@@ -277,7 +277,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <ul>
 	<li>Must extend the <a href="#performanceentry">PerformanceEntry</a> interface</li>
-	<li>Must support the 
+	<li>Must be supported by the 
 		<a href="#dom-performance-getentries"><code>getEntries</code></a>,
 		<a href="#dom-performance-getentriesbytype"><code>getEntriesByType</code></a>, and
 		<a href="#dom-performance-getentriesbyname"><code>getEntriesByName</code></a> methods
