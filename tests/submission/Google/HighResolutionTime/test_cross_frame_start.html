@@ -1,0 +1,77 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>window.performance.now across frames</title>
+        <link rel="author" title="Google" href="http://www.google.com/" />
+
+        <script src="http://w3c-test.org/resources/testharness.js"></script>
+        <script src="http://w3c-test.org/webperf/tests/resources/webperftestharness.js"></script>
+
+        <script type="text/javascript">
+            setup({explicit_done: true});
+
+            function test_attribute_exists(parent_name, attribute_name)
+            {
+              var msg = 'window.' + parent_name + '.' + attribute_name + ' is defined.';
+              wp_test(function() { assert_true(window[parent_name][attribute_name] !== undefined, msg); }, msg);
+            }
+
+            // Test for unprefixed interface only.
+            test_namespace('now');
+
+            // Run remainder of tests on prefixed interface if available.
+            performanceNamespace.now = (function()  {
+              return performanceNamespace.now ||
+                     performanceNamespace.mozNow ||
+                     performanceNamespace.msNow ||
+                     performanceNamespace.oNow ||
+                     performanceNamespace.webkitNow;
+            })();
+
+            function start_test() {
+              setTimeout(function() {
+                var iframe = document.createElement('iframe');
+                iframe.id = 'frameContext';
+                iframe.onload = finish_test;
+                iframe.src = "resources/now_frame.html";
+                document.body.appendChild(iframe);
+              }, 1000);
+            }
+
+            function finish_test() {
+              if (performanceNamespace.now) {
+                var childWindow = document.getElementById('frameContext').contentWindow;
+
+                // Verify a positive number is returned for both the frame and parent.
+                test_greater_than(performanceNamespace.now(), 0, 'parent performance.now() > 0');
+                test_greater_than(childWindow.performanceNamespace.now(), 0, 'child performance.now() > 0');
+
+                // Verify that the test properly created the child at least a second after the parent.
+                test_greater_than(childWindow.performanceNamespace.timing.navigationStart, performanceNamespace.timing.navigationStart + 1000,
+                                  'Child created at least 1 second after parent');
+
+                // TODO(tonyg): (A) and (B) conflict. Which do we spec?
+
+                // (A) Verify that the child and parent's now() are skewed by less than a second.
+                var parentNow = performanceNamespace.now();
+                var childNow = childWindow.performanceNamespace.now();
+                var childParentSkew = childNow - parentNow;
+                test_greater_than(1000, childParentSkew, 'Child and parent are skewed less than 1 second');
+
+                // (B) Verify that the child's now() is comparable to its timeline.
+                var childLoadTime = childWindow.performanceNamespace.timing.loadEventStart - childWindow.performanceNamespace.timing.navigationStart;
+                test_greater_than(1000, childNow - childLoadTime, 'Child\'s now matches its timeline');
+              }
+              done();
+            }
+        </script>
+
+    </head>
+    <body onload="start_test()">
+        <h1>Description</h1>
+        <p>This test validates the values of the window.performance.now() are comparable across frames.</p>
+        <div id="log"></div>
+        <br />
+    </body>
+</html>

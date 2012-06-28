@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
 <body>
-<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>10 May 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>25 May 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
 <div class="section">
 <h2>Abstract</h2>
@@ -39,7 +39,7 @@ by the browser.</p>
 publication.  Other documents may supersede this document. A list of current W3C
 publications and the latest revision of this technical report can be found in
 the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
-http://www.w3.org/TR/.</em></p><p>This document is the 10 May 2012 <b>Editor’s Draft</b> of the
+http://www.w3.org/TR/.</em></p><p>This document is the 25 May 2012 <b>Editor’s Draft</b> of the
   <cite>Timing control for script-based animations</cite> specification.
 
 Please send comments about this document to
@@ -122,7 +122,7 @@ function animate(time) {
   requestId = window.requestAnimationFrame(animate);
 }
 function start() {
-  animationStartTime = Date.now();
+  animationStartTime = window.performance.now();
   requestId = window.requestAnimationFrame(animate);
 }
 function stop() {
@@ -291,13 +291,13 @@ task should be generated per <a class="dfnref" href="http://www.w3.org/TR/html5/
 
 To <dfn id="dfn-sample-all-animations">samples all animations</dfn> , the following steps are performed:
 <ol class="algorithm">
-  <li>Let <var>time</var> be the result of invoking the <a class="dfnref" href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now">now
-        method of the Performance interface</a>.
-  </li>
   <li>Let <var>list</var> be an empty <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a>.</li>
   <li>Let <var>contexts</var> be the results of <a class="dfnref" href="http://www.w3.org/TR/html5/browsers.html#list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</a> algorithm for this task's top-level browsing context.</li>
   <li>For every <var>context</var> in <var>contexts</var>, in any order, perform the following steps:
     <ol>
+      <li>Let <var>time</var> be the result of invoking the <a class="dfnref" href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#dom-performance-now">now
+            method of the Performance interface</a> within this <var>context</var>.
+      </li>
       <li>Let <var>d</var> be <var>context</var>'s <a class="dfnref" href="http://www.w3.org/TR/html5/browsers.html#active-document">active document</a>.</li>
       <li>If <var>d</var>'s <a class="dfnref" href="http://www.w3.org/TR/page-visibility/#pv-hidden">hidden</a>
         attribute is true, continue to the next entry in the <var>contexts</var> list. Otherwise proceed with these steps.</li>
@@ -306,7 +306,7 @@ To <dfn id="dfn-sample-all-animations">samples all animations</dfn> , the follow
       <li>Clear <var>doclist</var>.</li>
     </ol>
   </li>
-  <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameters <var>list</var> and <var>time</var></li>
+  <li>Perform the steps defined in the <a class="dfnref" href="#dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</a> with parameter <var>list</var>.</li>
 </ol>
 
 <p>The <dfn id="dfn-invoke-callbacks-algorithm">invoke callbacks algorithm</dfn>:</p>
@@ -315,7 +315,7 @@ To <dfn id="dfn-sample-all-animations">samples all animations</dfn> , the follow
     <ol>
       <li>If the cancelled flag on <var>callback</var> is not true:
         <ol>
-          <li>Call <var>callback</var> with <var>time</var> as the argument.</li>
+          <li>Call <var>callback</var> with the callback's context's <var>time</var> as the argument.</li>
           <li>If calling the operation resulted in an exception being thrown, then catch that exception and ignore it.</li>
         </ol>
       </li>

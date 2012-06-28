@@ -1,13 +1,34 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
     <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta charset="utf-8" />
         <title>window.performance attribute exists in an object</title>
         <link rel="author" title="Google" href="http://www.google.com/" />
+	<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute"/>
         <script src="/resources/testharness.js"></script>
+        <script src="/resources/testharnessreport.js"></script>
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
+<script id="metadata_cache">/*
+{
+  "window.performance is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "window.performance.timing is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  },
+  "window.performance.navigation is defined": {
+    "help": "http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute",
+    "assert": "The window.performance attribute provides a hosting area for performance related attributes. ",
+    "author": "W3C http://www.w3.org/"
+  }
+}
+*/</script>
         <link rel="stylesheet" href="/resources/testharness.css" />
-        <script type="text/javascript">
+        <script>
           function onload_test() {
             var objWindow =
                 document.getElementById("objectContext").contentDocument.defaultView;
