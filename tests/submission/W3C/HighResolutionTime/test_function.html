@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>window.performance.now exists</title>
+<link rel="author" title="W3C" href="http://www.w3.org/" />
+<link rel="help" href="http://www.w3.org/TR/hr-time/#sec-extenstions-performance-interface"/>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/webperf/tests/resources/webperftestharness.js"></script>
+<link rel="stylesheet" href="/resources/testharness.css" />
+<script>
+test_namespace();
+
+wp_test(function() {
+  assert_true(performanceNamespace['now'] !== undefined, 'window.performance.now is defined'); 
+}, "High Resolution Time extension to the Performance interface", {assert: "window.performance.now exists"});
+
+// Run remainder of tests on prefixed interface if available.
+performanceNamespace.now = (function()  {
+  return performanceNamespace.now ||
+         performanceNamespace.mozNow ||
+         performanceNamespace.msNow ||
+         performanceNamespace.oNow ||
+         performanceNamespace.webkitNow;
+})();
+
+wp_test(function() {
+  assert_true(performanceNamespace['now'].toString().indexOf("function") == 0, "window.performance.now is a function");
+}, "window.performance.now() function", {assert: "window.performance.now is a function"});
+
+wp_test(function() {
+  assert_true(performanceNamespace.now() > 0, "window.performance.now() returns positive numbers");
+}, "window.performance.now() returns a positive number", {assert: "window.performance.now() returns positive numbers"});
+
+wp_test(function() {
+    var now1 = performanceNamespace.now();
+    var now2 = performanceNamespace.now();
+    assert_true((now2-now1) >= 0, "window.performance.now() difference is not negative");
+  },
+  "window.performance.now() differences",
+  {
+    help: "http://www.w3.org/TR/hr-time/#sec-monotonic-clock",
+    assert: "The difference between any two chronologically recorded time values returned from the now method MUST never be negative."
+  }
+);
+
+</script>
+</head>
+<body>
+<h1>Description</h1>
+<p>This test validates that window.performance.now() exist.</p>
+
+<div id="log"></div>
+
+</body>
+</html>
