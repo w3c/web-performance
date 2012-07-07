@@ -459,6 +459,10 @@ must return a DOMString with the same value as the <code><a href="http://www.w3.
 <p>If the initiator is a CSS resource downloaded by the <code><a href="http://www.w3.org/TR/CSS21/syndata.html#uri">url()</a></code> syntax, such as <code>@import url()</code> or <code>background: url()</code>, 
 on getting, the <code><a href="#initiatorType-attribut">initiatorType</a></code> attribute must return the DOMString <code>"css"</code>.</p>
 	
+<p>If the initiator is an XMLHttpRequest object, on getting, the <code><a href="#initiatorType-attribut">initiatorType</a></code> attribute must 
+return the DOMString <code>"xmlhttprequest"</code>.</p>
+
+	
 <h4 id="redirect-start-attribute"><code><dfn id="dom-performanceresourcetiming-redirectstart">redirectStart</dfn></code> attribute</h4>
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
