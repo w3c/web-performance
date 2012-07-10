@@ -39,7 +39,7 @@
 <body class="draft">
 <div class="head">
     <h1>User Timing</h1>
-    <h2 class="no-num no-toc" id="editors-draft-june-27-2012">Editor's Draft June 27, 2012</h2>
+    <h2 class="no-num no-toc" id="editors-draft-july-10-2012">Editor's Draft July 10, 2012</h2>
     <dl>
       <dt>This version:</dt>
         <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">
@@ -275,11 +275,11 @@ cite this document as other than work in progress. </p>
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
     void <a href="#dom-performance-mark">mark</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    (object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]) <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    (object or sequence<<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>>) <a href="#dom-performance-getmarks">getMarks</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
     void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
 
     void <a href="#dom-performance-measure">measure</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
-    (object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]) <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    (object or sequence<<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>>) <a href="#dom-performance-getmeasures">getMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
     void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
   };
     </pre>
@@ -349,17 +349,17 @@ cite this document as other than work in progress. </p>
         </div>
 
         <p><b>Return Value</b></p>
-        <code>object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]</code>
+        <code>object or sequence<<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>></code>
         <p>If the <em>markName</em> argument is not specified, the method returns a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a>. 
 		Each key in the <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> is a
-        mark name. The value associated with the mark name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values
+        mark name. The value associated with the mark name is a sequence of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values
 		for that mark.  In JSON notation, the data structure will look similar to this: <code>{ "mark1": [0.750, 1.125, 3.333], "mark2": [2.125] }</code>.</p>
-        <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <p>If the <em>markName</em> argument is specified, and the mark name exists, the method returns a sequence of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		time values.  In JSON notation, the data structure will look similar to this: <code>[0.500, 1.125, 3.750]</code>.</p>
-        <p>If the <em>markName</em> argument is specified, and the mark name does not exist, the method returns an empty Array.  In JSON notation,
+        <p>If the <em>markName</em> argument is specified, and the mark name does not exist, the method returns an empty sequence.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Timestamps will be listed in the order that the <code>mark()</code> method was called.</p>
-        <p>The returned Array is a copy of data at the time that the <code>getMarks()</code> method was called.</p>
+        <p>The returned sequence is a copy of data at the time that the <code>getMarks()</code> method was called.</p>
 
         <p><b>No Exceptions</b></p>
     </div>
@@ -458,17 +458,17 @@ cite this document as other than work in progress. </p>
         </div>
 
         <p><b>Return Value</b></p>
-        <code>object or <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>[]</code>
+        <code>object or sequence<<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>></code>
         <p>If the <em>measureName</em> argument is not specified, the method returns a <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a>.  
 		Each key in the <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/#es-dictionary">dictionary</a> is a
-        measure name. The value associated with the measure name is an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
+        measure name. The value associated with the measure name is a sequence of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for that measure.  In JSON notation,
         the data structure will look similar to this: <code>{ "measure1": [0.525, 5.125, 1.125], "measure2": [3.251] }</code>.</p>
-        <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns an Array of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
+        <p>If the <em>measureName</em> argument is specified, and the measure name exists, the method returns a sequence of <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.  In JSON notation,
         the data structure will look similar to this: <code>[0.250, 5.125, 1.750].</code></p>
-        <p>If the <em>measureName</em> argument is specified, and the measure name does not exist, the method returns an empty Array.  In JSON notation,
+        <p>If the <em>measureName</em> argument is specified, and the measure name does not exist, the method returns an empty sequence.  In JSON notation,
         the data structure will look similar to this: <code>[]</code>.</p>
         <p>Durations will be listed in the order that the <code>measure()</code> method was called.</p>
-        <p>The returned Array is a copy of data at the time that the <code>getMeasures()</code> method was called.</p>
+        <p>The returned sequence is a copy of data at the time that the <code>getMeasures()</code> method was called.</p>
 			
 
         <p><b>No Exceptions</b></p>

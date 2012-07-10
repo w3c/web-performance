@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-May-18-2012">Editor's Draft May 18, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-July-10-2012">Editor's Draft July 10, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -438,8 +438,14 @@ has changed.
 </p>
     <ol>
         <li>
-            <p>Queue a task that runs the following steps synchronously:</p>
+			<p>
+			If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+		   run the following steps before running the step to fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event.
+			</p>
         </li>
+		<li>
+			<p>Queue a task that runs the following steps synchronously. </p>
+		</li>
         <ol style="list-style-type:lower-alpha;"> 
             <li>
                 <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
@@ -452,63 +458,54 @@ has changed.
                 at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.</p>
             </li>
         </ol>
-        <li>
-            <p>If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-            fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event at the 
-            <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
-            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
-        </li>
     </ol>
 <p>
     Else if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
     <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
-    is now not visible, 
+    is now not visible
+	or if the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
+	<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
 </p>
 <ol>
     <li>
-        <p>If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-		   fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event at
-		   at the <a href="http://dev.w3.org/html5/spec/browsers.html#window">Window</a> object of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>,
-            but with its target set to the Document object, using the <a href="http://dev.w3.org/html5/spec/history.html#pagetransitionevent">PageTransitionEvent</a> interface.</p>
+        <p>
+		   If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
+			run the following steps after running the steps to fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event.
+		</p>
     </li>
-    <li>
-        <p>Queue a task that runs the following steps synchronously:</p>
-    </li>
-    <ol style="list-style-type:lower-alpha;"> 
-        <li>
-            <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
-        </li>
-        <li>
-            <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-            at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.</p>
-        </li>
-    </ol>
-</ol>
-<p>
-    Else if the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
-	<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>, 
-	run the following steps during the <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-document-visibility-change-steps">
-	unloading document visibility change steps</a>,
-</p>
-<ol>
-   <li>
-        <p>Queue a task that runs the following steps synchronously:</p>
-		<ol style="list-style-type:lower-alpha;"> 
-			<li>
-				<p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>. This step is optional.
-			</li>
-			<li>
-				<p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.
-			</li>
-			<li>
-				<p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-				at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
-			</li>
-		</ol>
-    </li>
-</ol>
+	<li>
+		<p>
+		If the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
+		<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
+		run the following steps during the <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-document-visibility-change-steps">
+		unloading document visibility change steps</a>,
+		</p>
+	   <li>
+			<p>Queue a task that runs the following steps synchronously:</p>
+			<ol style="list-style-type:lower-alpha;"> 
+				<li>
+					<p>
+					Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.
+					</p>
+				</li>
+				<li>
+					<p>
+					If the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
+					<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
+					set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>. This step is optional.
+					</p>
+				</li>
+				<li>
+					<p>
+					Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+					at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+					</p>
+				</li>
+			</ol>
+		</li>
 
+	</li>
+</ol>
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
