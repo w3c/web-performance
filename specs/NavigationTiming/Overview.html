@@ -283,6 +283,9 @@ Web applications, and does not necessarily imply the existence of an actual
 <code>Document</code> object or of any other <code>Node</code> objects as
 defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
 
+<p>The term "navigation" refers to the act of
+<a href="http://www.w3.org/TR/html5/history.html#navigate">navigating</a>.</p>
+
 <p>A DOM attribute is said to be <em>getting</em> when its value is being
 retrieved (such as by author script), and is said to be <em>setting</em> when
 a new value is assigned to it. </p>
@@ -696,7 +699,8 @@ non-normative intervals between timings.</p>
 </div>
 
 <ol>
-  <li>If the navigation is aborted for any of the following reasons, abort
+  <li>If the <a href="http://www.w3.org/TR/html5/history.html#navigate">navigation</a>
+    is aborted for any of the following reasons, abort
     these steps without changing the attributes in window.performance.timing
     and window.performance.navigation.
     <ol style="list-style-type:lower-alpha;">
