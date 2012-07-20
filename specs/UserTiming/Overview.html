@@ -170,6 +170,7 @@ cite this document as other than work in progress. </p>
     &lt;!doctype html&gt;
     &lt;html&gt;
       &lt;head&gt;
+        &lt;title&gt;User Timing example&lt;/title&gt;
       &lt;/head&gt;
       &lt;body onload="init()"&gt;
         &lt;script&gt;
@@ -286,7 +287,7 @@ cite this document as other than work in progress. </p>
     <p>This method stores a timestamp with the associated name (a "mark").</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        <p>in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
         <div class="parameterDefinition">
             <p>The name associated with the timestamp.</p>
             <p>Mark names may be re-used within the same document.
@@ -439,9 +440,8 @@ cite this document as other than work in progress. </p>
     	The <a href="#performancemark">PerformanceMark</a> interface also 
 		exposes marks created via the <code><a href="#dom-performance-mark">mark()</a></code> 
 		method to the 
-    	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#performancemark">PerformanceMark</a> 
-		interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">
-		PerformanceEntry</a>
+    	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> <a href="#PerformanceTimeline">[Performance Timeline]</a>. The <a href="#performancemark">PerformanceMark</a> 
+		interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a>
 		interface:
     </p>
     
@@ -449,7 +449,7 @@ cite this document as other than work in progress. </p>
         <p>The <code>name</code> attribute will return the mark's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>mark</code>.</p>
         <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-		with the the mark's time value. 
+		with the mark's time value <a href='#HighResolutionTime'>[High Resolution Time]</a>.
     	</p>
         <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		of value 0.</p>
@@ -465,14 +465,14 @@ cite this document as other than work in progress. </p>
 	<p>
     	The <a href="#performancemeasure">PerformanceMeasure</a> interface also 
 		exposes measures created via the <code><a href="#dom-performance-measure">measure()</a></code> 
-		method to the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. The <a href="#performancemeasure">PerformanceMeasure</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:
+		method to the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> <a href="#PerformanceTimeline">[Performance Timeline]</a>. The <a href="#performancemeasure">PerformanceMeasure</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:
     </p>
 	
     <div class="parameters">
         <p>The <code>name</code> attribute will return the measure's name.</p>
         <p>The <code>entryType</code> attribute will return the DOMString <code>measure</code>.</p>
         <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-		with the measure's start mark. </p>
+		with the measure's start mark <a href='#HighResolutionTime'>[High Resolution Time]</a>.</p>
         <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 		with the duration of the measure. </p>
     </div>
@@ -541,13 +541,13 @@ cite this document as other than work in progress. </p>
     </dd>
 
    <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/PR-navigation-timing-20120726/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, July 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/PR-navigation-timing-20120726/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-performance-timeline-20120726/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120726/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
    <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-hr-time-20120522/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, May 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/CR-hr-time-20120522/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
