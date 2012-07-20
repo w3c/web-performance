@@ -63,7 +63,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
     Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
     of Technology">MIT</abbr></a>, <a
@@ -176,7 +176,7 @@ not visible to users.</p>
 
 
 <div class="example">
-<p>For example, the following JavaScript shows a theoretical web based email client checking for new messages every second without knowledge of 
+<p>For example, the following script shows a theoretical web based email client checking for new messages every second without knowledge of 
 the Page Visibility:</p>
 <pre>
 &lt;!DOCTYPE html&gt;
@@ -278,20 +278,6 @@ title="">Foo</code> is actually an interface, is sometimes used instead of
 the more accurate "an object implementing the interface <code
 title="">Foo</code>". </p>
 
-<p>The term DOM is used to refer to the API set made available to scripts in
-Web applications, and does not necessarily imply the existence of an actual
-<code>Document</code> object or of any other <code>Node</code> objects as
-defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
-
-<p>A DOM attribute is said to be <em>getting</em> when its value is being
-retrieved (such as by author script), and is said to be <em>setting</em> when
-a new value is assigned to it. </p>
-
-<p>The term "JavaScript" is used to refer to
-<a href="#ECMA262">ECMA-262</a>,
-rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
-
-
 <h2 id="sec-page-visibility"><span class="secno">4 <span class="auto-style1">Page Visibility</span></span></h2>
 
 <h3 id="sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</h3>
@@ -303,10 +289,17 @@ with the means to programmatically determine the current visibility of a page
 and be notified of visibility changes.</p>
 
 <h3 id="sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</h3>
+
+<p>
+The HTML5 specification defines a
+partial <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+interface <a href='#HTML5'>[HTML5]</a>, which this specification
+extends:
+</p>
 <pre class="idl">
 partial interface <dfn id="document">Document</dfn> {
   readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
-  readonly attribute DOMString <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
+  readonly attribute <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'>DOMString</a> <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
   // "hidden", "visible", "prerender", "unloaded"
 };
 </pre>
@@ -314,17 +307,17 @@ partial interface <dfn id="document">Document</dfn> {
 
 <h4><code><dfn id="dom-document-hidden">hidden</dfn></code> attribute</h4>
 
-<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute MUST return true if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport)
-is not visible at all. The attribute MUST return false if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return true if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> (root window in the browser's viewport) <a href='#HTML5'>[HTML5]</a>
+is not visible at all. The attribute <span class='rfc2119'>MUST</span> return false if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible on at least one screen.
 </p>
 
 <p>
-If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#dom-document-hidden"><code>hidden</code></a> attribute MUST return true.
+If the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is null, on getting, 
+the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return true.
 </p>
 
 <p>To accommodate accessibility tools that are typically full screen but still show a 
@@ -352,8 +345,8 @@ is not minimized but is fully obscured by other applications.</p>
 	
 <h4><code><dfn id="dom-document-visibilitystate">visibilityState</dfn></code> attribute</h4>
 
-<p>On getting, <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return 
-one of the following DOMStrings or a vendor prefixed DOMString as defined in <a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a>:
+<p>On getting, <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return 
+one of the following <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a>s or a vendor prefixed <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> as defined in <a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a>:
 
 <ul>
 	<li><code>hidden</code>,</li>
@@ -364,24 +357,24 @@ one of the following DOMStrings or a vendor prefixed DOMString as defined in <a 
 
 
 <h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
  is not visible at all on any screen.</p>
 
 <p>
-If the <a href="http://dev.w3.org/html5/spec/browsers.html#dom-document-defaultview">defaultView</a> of the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> is null, on getting, 
-the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>.
+If the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is null, on getting, 
+the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a>.
 </p>
  
  <p>To accommodate accessibility tools that are typically full screen but still show a 
 view of the page, when applicable, on getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MAY return 
-the DOMString <a href="#pv-page-visible"><code>visible</code></a>, instead of <a href="#pv-page-hidden"><code>hidden</code></a>, when the User Agent 
+the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a>, instead of <a href="#pv-page-hidden"><code>hidden</code></a>, when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
  <div class="note">
 <div class="noteHeader">Note</div>
-<p>For example, in the following cases the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute would return the DOMString <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
+<p>For example, in the following cases the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute would return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
 	<ul>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
@@ -390,27 +383,27 @@ is not minimized but is fully obscured by other applications.</p>
 </div>
 
 <h5><code><dfn id="pv-page-visible">visible</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MUST return the DOMString <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
  is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
 is set to false.</p>
   
 <p>To accommodate accessibility tools that are typically full screen but still show a 
 view of the page, when applicable, on getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MAY return 
-the DOMString <a href="#pv-page-visible"><code>visible</code></a> when the User Agent 
+the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a> when the User Agent 
 is not minimized but is fully obscured by other applications.</p>
 
 <h5><code><dfn id="pv-prerender">prerender</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the DOMString <a href="#pv-prerender"><code>prerender</code></a> if the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-prerender"><code>prerender</code></a> if the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
 is loaded off-screen and is not visible. User Agent support of the <a href="#pv-prerender"><code>prerender</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
 
 <h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute SHOULD return the DOMString <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
-<a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>. User Agent support of the <a href="#pv-unloaded"><code>unloaded</code></a> 
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute <span class='rfc2119'>SHOULD</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
+<a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>. User Agent support of the <a href="#pv-unloaded"><code>unloaded</code></a> 
 return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
 
@@ -418,29 +411,29 @@ return value of the <a href="#dom-document-visibilitystate">visibilityState</a> 
 The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
 
 <p>
-The User Agent MUST fire the <code>visiblitychange</code> event at the 
-<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> when the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
+The User Agent <span class='rfc2119'>MUST</span> fire the <code>visiblitychange</code> event at the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> when the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
 has changed.
 </p>
 
 <h3 id="sec-processing-model"><span class="secno">4.4 </span>Processing Model</h3>
 
 <p>
-    When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> 
-    has changed, the User Agent MUST run the following steps. 
+    When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+    <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> 
+    has changed, the User Agent <span class='rfc2119'>MUST</span> run the following steps. 
 </p>
 <p>
-    If the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
+    If the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+    <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>
     is now at least partially visible on at least one screen, 
 </p>
     <ol>
         <li>
 			<p>
-			If traversing to a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-		   run the following steps before running the step to fire the <code><a href="http://dev.w3.org/html5/spec/history.html#event-pageshow">pageshow</a></code> event.
+			If traversing to a <a href="http://www.w3.org/TR/html5/history.html#session-history-entry">session history entry</a>,
+		   run the following steps before running the step to fire the <code><a href="http://www.w3.org/TR/html5/history.html#event-pageshow">pageshow</a></code> event.
 			</p>
         </li>
 		<li>
@@ -455,30 +448,29 @@ has changed.
             </li>
             <li>
                 <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-                at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.</p>
+                at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
             </li>
         </ol>
     </ol>
 <p>
-    Else if the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-    <a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a>
+    Else if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+    <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>
     is now not visible
-	or if the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
-	<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
+	or if the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
+	<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
 </p>
 <ol>
     <li>
         <p>
-		   If traversing from a <a href="http://dev.w3.org/html5/spec/history.html#session-history-entry">session history entry</a>,
-			run the following steps after running the steps to fire the <code title="event-pagehide"><a href="http://dev.w3.org/html5/spec/history.html#event-pagehide">pagehide</a></code> event.
+		   If traversing from a <a href="http://www.w3.org/TR/html5/history.html#session-history-entry">session history entry</a>,
+			run the following steps after running the steps to fire the <code title="event-pagehide"><a href="http://www.w3.org/TR/html5/history.html#event-pagehide">pagehide</a></code> event.
 		</p>
     </li>
 	<li>
 		<p>
-		If the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
-		<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
-		run the following steps during the <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-document-visibility-change-steps">
-		unloading document visibility change steps</a>,
+		If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
+		<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
+		run the following steps during the <a href="http://www.w3.org/TR/html5/history.html#unloading-document-visibility-change-steps">unloading document visibility change steps</a>,
 		</p>
 	   <li>
 			<p>Queue a task that runs the following steps synchronously:</p>
@@ -490,15 +482,15 @@ has changed.
 				</li>
 				<li>
 					<p>
-					If the user agent is to <a href="http://dev.w3.org/html5/spec/Overview.html#unloading-documents">unload</a> the
-					<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>, 
+					If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
+					<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
 					set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>. This step is optional.
 					</p>
 				</li>
 				<li>
 					<p>
 					Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-					at the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a>.
+					at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.
 					</p>
 				</li>
 			</ol>
@@ -510,12 +502,12 @@ has changed.
 <h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
-e.g., for experimental purposes, vendors MUST use the following extension mechanisms:
+e.g., for experimental purposes, vendors <span class='rfc2119'>MUST</span> use the following extension mechanisms:
 </p>
 
 <p>If an extension to the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute return value
  is needed for an experimental visibility state, on getting the <a href="#dom-document-visibilitystate">visibilityState</a> attribute, 
-  vendors MUST return a DOMString that uses the following convention:</p>
+  vendors <span class='rfc2119'>MUST</span> return a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that uses the following convention:</p>
  
 <p><code>[vendorprefix]-[name]</code></p>
 
@@ -531,10 +523,10 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 
 <p>
 The <a href="#sec-document-interface">Page Visibility</a> API enables third party content on a web page to determine the 
-visibility of the <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#i-Document">Document</a> contained by the 
-<a href="http://dev.w3.org/html5/spec/Overview.html#top-level-browsing-context">top level browsing context</a> with higher 
-precision compared to existing mechanisms, like <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">focus</a> 
-or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. 
+visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a> with higher 
+precision compared to existing mechanisms, like <a href="http://www.w3.org/TR/html5/editing.html#focus-management">focus</a> 
+or <a href="http://www.w3.org/TR/html5/editing.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. 
 </p>
 
 
@@ -549,27 +541,8 @@ or <a href="http://dev.w3.org/html5/spec/Overview.html#focus-management">blur</a
     <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
    </dd>
 
-    <dt id='DOM3Core'>[DOM Level 3 Core]</dt>
-    <dd>
-     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
-     Specification</a></cite>, A. Le Hors, et al., Editors. World
-     Wide Web Consortium, 7 April 2004. This version of the Document
-     Object Model Level 3 Core Recommendation is
-     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
-     DOM Core</a> is available at
-     http://www.w3.org/TR/domcore/.
-    </dd>
-
-    <dt id="ECMA262">[ECMA-262]</dt>
-    <dd>
-     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
-     Edition. ECMA International, Standard
-     ECMA-262, June 2011. This version of the ECMAScript
-     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
-    </dd>
-
    <dt id="HTML5">[HTML5]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2011. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
 
    <dt id="WebIDL">[Web IDL]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/WD-WebIDL-20110927/'>Web
