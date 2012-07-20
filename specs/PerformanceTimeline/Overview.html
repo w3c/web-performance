@@ -146,7 +146,7 @@ cite this document as other than work in progress. </p>
     <ol class="toc">
       <li><a href="#sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</a></li>
       <li><a href="#sec-PerformanceEntry-interface"><span class="secno">4.2 </span>The <code>PerformanceEntry</code> interface</a></li>
-      <li><a href="#sec-window.performance-attribute"><span class="secno">4.3 </span> The <code>window.performance</code> attribute</a></li>
+      <li><a href="#sec-window.performance-attribute"><span class="secno">4.3 </span> Extensions to the <code>Performance</code> interface</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -160,24 +160,24 @@ cite this document as other than work in progress. </p>
 <p>This section is non-normative.</p>
 
 <p>
-Accurately measuring performance characteristics of web applications is an important
-aspect of making web applications faster. 
-<a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/">Navigation Timing</a>, 
-<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">Resource Timing</a>,
-and <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html">User Timing</a> 
-are examples of specifications that define timing information related to the navigation of the document, 
-resources on the page, and developer scripts, respectively.
+Accurately measuring performance characteristics of web applications
+is an important aspect of making web applications
+faster. <a href='#NavigationTiming'>[Navigation
+Timing]</a>, <a href='#ResourceTiming'>[Resource Timing]</a>,
+and <a href='#UserTiming'>[User Timing]</a> are examples of
+specifications that define timing information related to the
+navigation of the document, resources on the page, and developer
+scripts, respectively.
 </p>
 <p>
 Together these interfaces, and potentially others created in the future, define performance metrics
-that describe the performance timeline of a web application. The 
-<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> 
+that describe the performance timeline of a web application. This
 specification provides an unifying interface to access and retrieve these various performance metrics from the performance timeline of a
 web application.  
 </p>
 
 <div class="example">
-<p>The following script shows how a developer can use the <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> interface
+<p>The following script shows how a developer can use the <a href="#performanceentry"><code>PerformanceEntry</code></a> interface
 to obtain timing data related to the navigation of the document, resources on the page and developer scripts.
 </p>
 <pre>
@@ -190,7 +190,7 @@ to obtain timing data related to the navigation of the document, resources on th
     &lt;script&gt;
        function init() 
        {
-            performance.mark("startWork");
+            performance.mark("startWork"); // see <a href='#UserTiming'>[User Timing]</a>
             doWork(); // Some developer code
             performance.mark("endWork");
             
@@ -251,44 +251,31 @@ title="">Foo</code> is actually an interface, is sometimes used instead of
 the more accurate "an object implementing the interface <code
 title="">Foo</code>". </p>
 
-<p>The term DOM is used to refer to the API set made available to scripts in
-Web applications, and does not necessarily imply the existence of an actual
-<code>Document</code> object or of any other <code>Node</code> objects as
-defined in the <a href="#DOM3Core">DOM Core specifications</a>.</p>
-
-<p>A DOM attribute is said to be <em>getting</em> when its value is being
-retrieved (such as by author script), and is said to be <em>setting</em> when
-a new value is assigned to it. </p>
-
-<p>The term "JavaScript" is used to refer to
-<a href="#ECMA262">ECMA-262</a>,
-rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
-
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Performance Timeline</h2>
 
 <h3 id="sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</h3>
 <p>
 	All interfaces that participate in the <a href="#sec-performance-timeline">Performance Timeline</a>, such as the 
-	<a href="http://w3c-test.org/webperf/specs/ResourceTiming/#performanceresourcetiming">PerformanceResourceTiming</a>, 
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#performancemark">PerformanceMark</a>, and
-	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html#performancemeasure">PerformanceMeasure</a> interfaces,
-	must adhere to the following rules:
+	<a href="http://www.w3.org/TR/resource-timing/#performanceresourcetiming"><code>PerformanceResourceTiming</code></a> <a href='#ResourceTiming'>[Resource Timing]</a>, 
+	<a href="http://www.w3.org/TR/user-timing/#performancemark"><code>PerformanceMark</code></a>, and
+	<a href="http://www.w3.org/TR/user-timing/#performancemeasure"><code>PerformanceMeasure</code></a>  <a href='#UserTiming'>[User Timing]</a> interfaces,
+	<span class='rfc2119'>must</span> adhere to the following rules:
 </p>
 
 <ul>
-	<li>Must extend the <a href="#performanceentry">PerformanceEntry</a> interface</li>
-	<li>Must be supported by the 
+	<li><Span Class='Rfc2119'>Must</Span> extend the <a href="#performanceentry"><code>PerformanceEntry</code></a> interface</li>
+	<li><Span Class='Rfc2119'>Must</Span> be supported by the 
 		<a href="#dom-performance-getentries"><code>getEntries</code></a>,
 		<a href="#dom-performance-getentriesbytype"><code>getEntriesByType</code></a>, and
 		<a href="#dom-performance-getentriesbyname"><code>getEntriesByName</code></a> methods
 	</li>
 </ul>	
 
-<h3 id="sec-PerformanceEntry-interface"><span class="secno">4.2 </span> The <code><a href="#performanceentry">PerformanceEntry</a> </code> 
+<h3 id="sec-PerformanceEntry-interface"><span class="secno">4.2 </span> The <a href="#performanceentry"><code>PerformanceEntry</code></a>
 interface</h3>
 <pre class="idl">interface <dfn id="performanceentry">PerformanceEntry</dfn> {
-  readonly attribute DOMString <a href='#dom-performanceentry-name' title='name'>name</a>;
-  readonly attribute DOMString <a href='#dom-performanceentry-entrytype' title='entryType'>entryType</a>;
+  readonly attribute <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'>DOMString</a> <a href='#dom-performanceentry-name' title='name'>name</a>;
+  readonly attribute <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'>DOMString</a> <a href='#dom-performanceentry-entrytype' title='entryType'>entryType</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-starttime' title='startTime'>startTime</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href='#dom-performanceentry-duration' title='duration'>duration</a>;
 };
@@ -296,56 +283,55 @@ interface</h3>
 
 <h4 id="dom-performanceentry-name"><code>name</code> attribute</h4>
 <p>
-	The <code>name</code> attribute must return the identifier for this <a href="#performanceentry">PerformanceEntry</a> object. This
+	The <code>name</code> attribute <span class='rfc2119'>must</span> return the identifier for this <a href="#performanceentry"><code>PerformanceEntry</code></a> object. This
 	identifier does not have to be unique. 
 </p>
 
 <h4 id="dom-performanceentry-entrytype"><code>entryType</code> attribute</h4>
 <p>
-	The <code>entryType</code> attribute must return a DOMString that describes the <i>type</i> of the interface represented by this <a href="#performanceentry">PerformanceEntry</a> object.
+	The <code>entryType</code> attribute <span class='rfc2119'>must</span> return a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that describes the <i>type</i> of the interface represented by this <a href="#performanceentry"><code>PerformanceEntry</code></a> object.
 	
 </p>
 
 <h4 id="dom-performanceentry-starttime"><code>startTime</code> attribute</h4>
 <p>
-	The <code>startTime</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+	The <code>startTime</code> attribute <span class='rfc2119'>must</span> return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
 	that contains the time value of the first recorded timestamp of this performance metric.
 <p>
 
 <h4 id="dom-performanceentry-duration"><code>duration</code> attribute</h4>
 <p>
-	The <code>duration</code> attribute must return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	that contains the time value of the duration of the entire event being recorded by this <a href="#performanceentry">PerformanceEntry</a>. Typically, this would be the 
-	time difference between the last recorded timestamp and the first recorded timestamp of this <a href="#performanceentry">PerformanceEntry</a>. A performance metric may choose
+	The <code>duration</code> attribute <span class='rfc2119'>must</span> return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
+	that contains the time value of the duration of the entire event being recorded by this <a href="#performanceentry"><code>PerformanceEntry</code></a>. Typically, this would be the 
+	time difference between the last recorded timestamp and the first recorded timestamp of this <a href="#performanceentry"><code>PerformanceEntry</code></a>. A performance metric may choose
 	to return a <code>duration</code> of 0, if the duration concept doesn't apply.
 <p>
 
-<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> The <code id="dom-window-performance">window.performance</code> 
-attribute</h3>
+<h3 id="sec-window.performance-attribute"><span class="secno">4.3 </span> Extensions to the <code id="dom-window-performance">Performance</code> interface</h3>
 <pre class="idl">partial interface <dfn id="performance">Performance</dfn> {
   <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentries">getEntries</a>();
   <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbytype">getEntriesByType</a>(DOMString entryType);
   <a href="#performanceentrylist">PerformanceEntryList</a> <a href="#dom-performance-getentriesbyname">getEntriesByName</a>(DOMString name, optional DOMString entryType);
 };
 
-  typedef sequence &lt;PerformanceEntry&gt; <b><dfn id='performanceentrylist'>PerformanceEntryList</dfn></b>;
+typedef sequence &lt;PerformanceEntry&gt; <b><dfn id='performanceentrylist'>PerformanceEntryList</dfn></b>;
 
 </pre>
 
 <p>
-	The <a href="#dom-window-performance">window.performance</a> attribute provides a hosting area for performance measurement related attributes and methods. 
+The <a href="http://www.w3.org/TR/navigation-timing/#dom-window-performance"><code>window.performance</code></a> attribute provides a hosting area for performance measurement related attributes and methods using the <a href='http://www.w3.org/TR/navigation-timing/#performance'><code>Performance</code></a> interface <a href='#NavigationTiming'>[Navigation Timing]</a>. 
 </p>
 
 <div class="methods">
     <h4 id="dom-performance-getentries"><code>getEntries</code> method</h4>
 	<p>The <code>getEntries</code> method returns a 
-		<a href="#performanceentrylist">PerformanceEntryList</a> object that contains a copy of all <a href="#performanceentry">PerformanceEntry</a> objects in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>.
+		<a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that contains a copy of all <a href="#performanceentry"><code>PerformanceEntry</code></a> objects in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>.
     </p>
 
 		<div class="parameters">
 				<p><b>No parameters</b></p>
 				<p><b>Return value</b></p>
-				A <a href="#performanceentrylist">PerformanceEntryList</a> object.
+				A <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -354,21 +340,21 @@ attribute</h3>
 <div class="methods">
     <h4 id="dom-performance-getentriesbytype"><code>getEntriesByType</code> method</h4>
 	<p>The <code>getEntriesByType</code> method returns a 
-		<a href="#performanceentrylist">PerformanceEntryList</a> object that contains a copy of all <a href="#performanceentry">PerformanceEntry</a> objects, in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>, 
-		that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>entryType</code> parameter.
+		<a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that contains a copy of all <a href="#performanceentry"><code>PerformanceEntry</code></a> objects, in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>, 
+		that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>entryType</code> parameter.
     </p>
 
 		<div class="parameters">
 				<p><b>Parameter</b></p>
-					<p>in DOMString <code>entryType</code></p>
+					<p><a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <code>entryType</code></p>
                     <p>		
-                        A <a href="#performanceentrylist">PerformanceEntryList</a> object that contains a copy of <a href="#performanceentry">PerformanceEntry</a> objects
-				        that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>entryType</code> parameter.
-				        If no such <a href="#performanceentry">PerformanceEntry</a> objects exist, the <a href="#performanceentrylist">PerformanceEntryList</a>
-				        must be empty.
+                        A <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that contains a copy of <a href="#performanceentry"><code>PerformanceEntry</code></a> objects
+				        that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>entryType</code> parameter.
+				        If no such <a href="#performanceentry"><code>PerformanceEntry</code></a> objects exist, the <a href="#performanceentrylist"><code>PerformanceEntryList</code></a>
+				        <span class='rfc2119'>must</span> be empty.
 		            </p>
 				<p><b>Return value</b></p>
-		        A <a href="#performanceentrylist">PerformanceEntryList</a> object.
+		        A <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
@@ -377,79 +363,67 @@ attribute</h3>
     <h4 id="dom-performance-getentriesbyname"><code>getEntriesByName</code> method</h4>
 	<p>
 		The <code>getEntriesByName</code> method returns a
-		<a href="#performanceentrylist">PerformanceEntryList</a> object that contains a copy of <a href="#performanceentry">PerformanceEntry</a> objects, in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>, 
-		that have the same value for the <code>name</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>name</code> parameter 
-		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>entryType</code> parameter.
+		<a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that contains a copy of <a href="#performanceentry"><code>PerformanceEntry</code></a> objects, in chronological order with respect to <a href="#dom-performanceentry-starttime">startTime</a>, 
+		that have the same value for the <code>name</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>name</code> parameter 
+		and, if specified, have the same value for the <code>entryType</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>entryType</code> parameter.
     </p>
 		<div class="parameters">
 				<p><b>Parameter</b></p>
-					<p>in DOMString <code>name</code></p>
+					<p><a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <code>name</code></p>
 					<p>
-						The <a href="#performanceentrylist">PerformanceEntryList</a> object that contains a copy of <a href="#performanceentry">PerformanceEntry</a> objects
-						that have the same value for the <code>name</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>name</code> parameter. 
-						If no such <a href="#performanceentry">PerformanceEntry</a> objects exist, the <a href="#performanceentrylist">PerformanceEntryList</a> must be empty.
+						The <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that contains a copy of <a href="#performanceentry"><code>PerformanceEntry</code></a> objects
+						that have the same value for the <code>name</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>name</code> parameter. 
+						If no such <a href="#performanceentry"><code>PerformanceEntry</code></a> objects exist, the <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> <span class='rfc2119'>must</span> be empty.
 					</p>
-					<p>in DOMString <code>entryType</code></p>
+					<p><a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <code>entryType</code></p>
 					<p>
-						The <a href="#performanceentrylist">PerformanceEntryList</a> object that only contains a copy of <a href="#performanceentry">PerformanceEntry</a> objects
-						that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>entryType</code> parameter 
-						and have the same value for the <code>name</code> attribute of <a href="#performanceentry">PerformanceEntry</a> as the <code>name</code> parameter. 
-						If no such <a href="#performanceentry">PerformanceEntry</a> objects exist, the <a href="#performanceentrylist">PerformanceEntryList</a>
-						must be empty.
+						The <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object that only contains a copy of <a href="#performanceentry"><code>PerformanceEntry</code></a> objects
+						that have the same value for the <code>entryType</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>entryType</code> parameter 
+						and have the same value for the <code>name</code> attribute of <a href="#performanceentry"><code>PerformanceEntry</code></a> as the <code>name</code> parameter. 
+						If no such <a href="#performanceentry"><code>PerformanceEntry</code></a> objects exist, the <a href="#performanceentrylist"><code>PerformanceEntryList</code></a>
+						<span class='rfc2119'>must</span> be empty.
 					</p>
 				<p><b>Return value</b></p>
-				A <a href="#performanceentrylist">PerformanceEntryList</a> object.
+				A <a href="#performanceentrylist"><code>PerformanceEntryList</code></a> object.
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
+<h2 id="normative-references"><span class="secno">5.1 </span>Normative References</h2>
+
 <dl id='references-list'>
 <dt><a id='rfc2119'>[IETF RFC 2119]</a></dt>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at http://www.ietf.org/rfc/rfc2119.txt. 
 </dd>
-<dt><a id='rfc2616'>[IETF RFC 2616]</a></dt>
-<dd>
- <cite><a href='http://www.ietf.org/rfc/rfc2616.txt'>Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>. 
-</dd>
-<dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
-<dd>
-        <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
-        Specification</a></cite>, A. Le Hors, et al., Editors. World
-        Wide Web Consortium, 7 April 2004. This version of the Document
-        Object Model Level 3 Core Recommendation is
-        http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/domcore/">latest version of
-        DOM Core</a> is available at
-        http://www.w3.org/TR/domcore/.
-      </dd>
-<dt>[<a id="ECMA262">ECMA-262</a>]</dt><dd>
-	<cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
-	Edition. ECMA International, Standard
-	ECMA-262, June 2011. This version of the ECMAScript
-	Language is available from http://www.ecma-international.org/publications/standards/Ecma-262.htm.
-
-<dt>[<a id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
-
-<dt>[<a id="JSMeasure">JSMEASURE</a>]</dt>
-<dd><cite><a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&amp;rep=rep1&amp;type=pdf'>Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
-
    <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/PR-navigation-timing-20120726/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, July 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/PR-navigation-timing-20120726/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
    <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-hr-time-20120313/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, March 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/WD-hr-time-20120313/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-hr-time-20120522/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, May 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/CR-hr-time-20120522/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
 </dl>
 
+<h2 id="informative-references"><span class="secno">5.1 </span>Informative References</h2>
+
+<dl id='references-list'>
+   <dt>[<a id="UserTiming">User Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-user-timing-20120726/'>User Timing</a></cite>, J. Mann, Z. Wang, et al. Editors. World Wide Web Consortium, July 2012. This version of the User Timing specification is available from http://www.w3.org/TR/2012/CR-user-timing-20120726/. The <a href='http://www.w3.org/TR/user-timing/'>latest version of User Timing</a> is available at http://www.w3.org/TR/user-timing/.</dd>
+   <dt>[<a id="ResourceTiming">Resource Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-resource-timing-20120522/'>Resource Timing</a></cite>, J. Mann, Z. Wang, et al. Editors. World Wide Web Consortium, May 2012. This version of the Resource Timing specification is available from http://www.w3.org/TR/2012/CR-resource-timing-20120522/. The <a href='http://www.w3.org/TR/user-timing/'>latest version of Resource Timing</a> is available at http://www.w3.org/TR/user-timing/.</dd>
+
+</dl>
+
+
+
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-<p>I would like to offer my sincere thanks to all the people that I have been
+<p>We would like to offer our sincere thanks to all the people that we have been
 in touch with regarding this draft for their reviews and feedback.</p>
 </body>
 </html>

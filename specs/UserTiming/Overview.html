@@ -155,7 +155,7 @@ cite this document as other than work in progress. </p>
 
     <p>This section is non-normative.</p>
     <p>Web developers need the ability to assess and understand the performance characteristics of their
-    applications. While JavaScript provides a mechanism to measure application latency (retrieving the current
+    applications. While JavaScript <a href='#ECMA262'>[ECMA262]</a> provides a mechanism to measure application latency (retrieving the current
     timestamp from the <code>Date.now()</code> method), the precision of this timestamp varies between user agents.</p>
     <p>This document defines the <a href="#performancemark"><code>PerformanceMark</code></a> and 
 	<a href="#performancemeasure"><code>PerformanceMeasure</code></a> interfaces, and extensions to the
@@ -243,20 +243,9 @@ cite this document as other than work in progress. </p>
     the more accurate "an object implementing the interface <code
     title="">Foo</code>". </p>
 
-    <p>The term DOM is used to refer to the API set made available to scripts in
-    Web applications, and does not necessarily imply the existence of an actual
-    <code>Document</code> object or of any other <code>Node</code> objects as
-    defined in the DOM Core specifications. <a
-    href="#DOM3Core">[DOM Level 3 Core]</a>
-    </p>
-
-    <p>A DOM attribute is said to be <em>getting</em> when its value is being
-    retrieved (such as by author script), and is said to be <em>setting</em> when
-    a new value is assigned to it. </p>
-
-    <p>The term "JavaScript" is used to refer to ECMA262, rather than the
-    official term ECMAScript, since the term JavaScript is more widely known. <a
-    href="#ECMA262">[ECMA262]</a>
+    <p>The term "JavaScript" is used to refer to ECMAScript <a
+    href="#ECMA262">[ECMA262]</a>, rather than the
+    official term ECMAScript, since the term JavaScript is more widely known. 
     </p>
 
     <h2 id="user-timing-0"><span class="secno">4 </span>User Timing</h2>
@@ -275,11 +264,11 @@ cite this document as other than work in progress. </p>
 
     <pre class="idl">
   partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
-    void <a href="#dom-performance-mark">mark</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
-    void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> markName);
+    void <a href="#dom-performance-mark">mark</a>(<a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> markName);
+    void <a href="#dom-performance-clearmarks">clearMarks</a>(optional  <a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> markName);
 
-    void <a href="#dom-performance-measure">measure</a>(<a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> startMark, optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> endMark);
-    void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a> measureName);
+    void <a href="#dom-performance-measure">measure</a>(<a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> measureName, optional <a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> startMark, optional <a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> endMark);
+    void <a href="#dom-performance-clearmeasures">clearMeasures</a>(optional <a class="noxref" href="http://www.w3.org/TR/WebIDL/#idl-DOMString">DOMString</a> measureName);
   };
     </pre>
     <div class="methods">
@@ -287,7 +276,7 @@ cite this document as other than work in progress. </p>
     <p>This method stores a timestamp with the associated name (a "mark").</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>markName</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
             <p>The name associated with the timestamp.</p>
             <p>Mark names may be re-used within the same document.
@@ -334,14 +323,14 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-clearmarks"><code>clearMarks</code> method</h4>
-    <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values.</p>
-    <p>If the <em>markName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values for the given mark name.</p>
+    <p>If the <em>markName</em> argument is not specified, this method removes all marks and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time values.</p>
+    <p>If the <em>markName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time values for the given mark name.</p>
     <p>If the <em>markName</em> argument is specified but the specified <em>markName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        <p>in <code>markName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>markName</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
-            <p>[optional] The name of the mark whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time values should be cleared.  
+            <p>[optional] The name of the mark whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time values should be cleared.  
 			If not specified, all marks will be cleared.</p>
         </div>
 
@@ -353,26 +342,26 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-measure"><code>measure</code> method</h4>
-    <p>This method stores the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> duration between two marks 
+    <p>This method stores the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> duration between two marks 
 	along with the associated name (a "measure").</p>
     <p>The behavior of this method depends on which arguments are specified:</p>
     <ul>
         <li>If neither the <em>startMark</em> nor the <em>endMark </em>argument is specified,
-            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> from 
+            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> from 
             <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>
             to the current time.</li>
         <li>If the <em>startMark</em> argument is specified, but the <em>endMark </em>argument is not specified,
-            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+            <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
              from the most recent occurrence of the start mark to the current time.</li>
-        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are specified, <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <li>If both the <em>startMark</em> and <em>endMark </em>arguments are specified, <code>measure()</code> will store the duration as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
              from the most recent occurrence of the start mark to the most recent occurrence of the end mark.</li>
     </ul>
     <p>The <em>startMark</em> and <em>endMark</em> arguments may be the name of one of the attributes in the
        <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>. 
-       In this case, the value of that attribute is used as the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
+       In this case, the value of that attribute is used as the <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time value.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        <p>in <code>name</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>name</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
             <p>The name associated with the measure.</p>
             <p>Measure names may be re-used within the same document.
@@ -381,24 +370,24 @@ cite this document as other than work in progress. </p>
             <p>Measure names live independently from mark names.</p>
         </div>
 
-        <p>in <code>startMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>startMark</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
             <p>[optional] The name of the start mark.</p>
-            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value of the start mark is used.</p>
+            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time value of the start mark is used.</p>
             <p>If not specified, <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a> is used.</p>
             <p>May be the name of one of the attributes in the
                <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
-               In this case, the value of that attribute is used as the start <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
+               In this case, the value of that attribute is used as the start <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time value.</p>
         </div>
 
-        <p>in <code>endMark</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>endMark</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
             <p>[optional] The name of the end mark.</p>
-            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value of the end mark is used.</p>
-            <p>If not specified, the current time as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> is used.</p>
+            <p>If specified, the most recent <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time value of the end mark is used.</p>
+            <p>If not specified, the current time as a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> is used.</p>
             <p>May be the name of one of the attributes in the
                <code><a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a></code> interface <a href="#NavigationTiming">[Navigation Timing]</a>.
-               In this case, the value of that attribute is used as the end <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> time value.</p>
+               In this case, the value of that attribute is used as the end <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> time value.</p>
         </div>
 
         <p><b>No Return Value</b></p>
@@ -412,14 +401,14 @@ cite this document as other than work in progress. </p>
 
   <div class="methods">
     <h4 id="dom-performance-clearmeasures"><code>clearMeasures</code> method</h4>
-    <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations.</p>
-    <p>If the <em>measureName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations for the given measure name.</p>
+    <p>If the <em>measureName</em> argument is not specified, this method removes all measures and their associated <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> durations.</p>
+    <p>If the <em>measureName</em> argument is specified, this method removes all <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> durations for the given measure name.</p>
     <p>If the <em>measureName</em> argument is specified but the specified <em>measureName</em> does not exist, this method will do nothing.</p>
     <div class="parameters">
         <p><b>Parameters</b></p>
-        <p>in <code>measureName</code> type of <a class="noxref" href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMString">DOMString</a></p>
+        <p>in <code>measureName</code> type of <a href="http://www.w3.org/TR/WebIDL/#idl-DOMString"><code>DOMString</code></a></p>
         <div class="parameterDefinition">
-            <p>[optional] The name of the measure whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> durations should be cleared.  
+            <p>[optional] The name of the measure whose <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> durations should be cleared.  
 			If not specified, all measures will be cleared.</p>
         </div>
 
@@ -447,11 +436,11 @@ cite this document as other than work in progress. </p>
     
     <div class="parameters">
         <p>The <code>name</code> attribute will return the mark's name.</p>
-        <p>The <code>entryType</code> attribute will return the DOMString <code>mark</code>.</p>
-        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <p>The <code>entryType</code> attribute will return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <code>mark</code>.</p>
+        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
 		with the mark's time value <a href='#HighResolutionTime'>[High Resolution Time]</a>.
     	</p>
-        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
 		of value 0.</p>
     </div>
 
@@ -470,10 +459,10 @@ cite this document as other than work in progress. </p>
 	
     <div class="parameters">
         <p>The <code>name</code> attribute will return the measure's name.</p>
-        <p>The <code>entryType</code> attribute will return the DOMString <code>measure</code>.</p>
-        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <p>The <code>entryType</code> attribute will return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <code>measure</code>.</p>
+        <p>The <code>startTime</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
 		with the measure's start mark <a href='#HighResolutionTime'>[High Resolution Time]</a>.</p>
-        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+        <p>The <code>duration</code> attribute will return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a>
 		with the duration of the measure. </p>
     </div>
 
@@ -489,9 +478,9 @@ cite this document as other than work in progress. </p>
 
 
     <h2 id="monotonic-clock"><span class="secno">5 </span>Monotonic Clock</h2>
-    <p>The time values stored within the interface must monotonically increase to ensure they are not 
+    <p>The time values stored within the interface <span class='rfc2119'>must</span> monotonically increase to ensure they are not 
     affected by adjustments to the system clock. The difference between any two chronologically 
-    recorded time values must never be negative. The user agent must record the system clock at the beginning 
+    recorded time values <span class='rfc2119'>must</span> never be negative. The user agent <span class='rfc2119'>must</span> record the system clock at the beginning 
     of the navigation and define subsequent time values in terms of a monotonic clock measuring time elapsed 
     from the beginning of the navigation.
     </p>
@@ -516,22 +505,6 @@ cite this document as other than work in progress. </p>
 <dd>
  <cite><a href='http://www.ietf.org/rfc/rfc2119.txt'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href='http://www.ietf.org/rfc/rfc2119.txt'>http://www.ietf.org/rfc/rfc2119.txt</a>. 
 </dd>
-<dt>[<a id='rfc6454'>IETF RFC 6454</a>]</dt>
-<dd>
- <cite><a href='http://tools.ietf.org/html/rfc6454'>The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href='http://www.ietf.org/rfc/rfc6454.txt'>http://www.ietf.org/rfc/rfc6454.txt</a>. 
-</dd>
-
-    <dt>[<a id='DOM3Core'>DOM Level 3 Core</a>]</dt>
-    <dd>
-     <cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/">Document Object Model Level 3 Core
-     Specification</a></cite>, A. Le Hors, et al., Editors. World
-     Wide Web Consortium, 7 April 2004. This version of the Document
-     Object Model Level 3 Core Recommendation is
-     http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407. The <a class="normative" href="http://www.w3.org/TR/dom/">latest version of
-     DOM4</a> is available at
-     http://www.w3.org/TR/dom/.
-    </dd>
-	
     <dt>[<a id="ECMA262">ECMA-262</a>]</dt>
     <dd>
      <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
