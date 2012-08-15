@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HTTP Archive (HAR) format</title>
+<style>
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>HTTP Archive (HAR) format</h1>
+
+<h2 class="no-num no-toc" id="editors-draft-Aug-14-2012">Editor's Draft August 14, 2012</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jan Odvarko</span>, &lt;<a
+      class="email" href="mailto:honza@softwareishard.com">honza@softwareishard.com</a>&gt; </dd>
+     <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an archival format for HTTP transactions that can be used by a web browser to export detailed performance data about web pages it loads.
+</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BHAR%5D%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[HAR]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-har"><span class="secno">4 </span>The HAR format</a> 
+  </li>
+  <li><a href="#sec-privacy"><span class="secno">5 </span>Privacy</a></li>
+  <li><a href="#references"><span class="secno">6 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+This specification defines an archival format for HTTP transactions that can be used by a web browser to export detailed performance data about web pages it loads. The format is intended to be flexible so that it can be adopted by various tools. The information that can be represented in this archival format includes both information about the web pages themselves e.g. the size of individual resources on the page as well as performance data e.g. how long did it take to download a particular resource on the page.
+A standard format to represent this information would allow various performance tools to interoperate with each other.
+</p>
+
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<h2 id="sec-har"><span class="secno">4 <span class="auto-style1">The HAR format</span></span></h2>
+<pre>
+The format is based on <a href="http://www.ietf.org/rfc/rfc4627.txt">JSON</a>.
+<p>
+
+<p>HAR files are required to be saved in UTF-8 encoding and other encodings are forbidden. The specification requires that tools support and ignore a BOM and allow them to emit one if they like.</p>
+<p>Summary of HAR object types:</p>
+<ul>
+<li><a href="#log">log</a></li>
+<li><a href="#creator">creator</a></li>
+<li><a href="#browser">browser</a></li>
+<li><a href="#pages">pages</a></li>
+<li><a href="#pageTimings">pageTimings</a></li>
+<li><a href="#entries">entries</a></li>
+<li><a href="#request">request</a></li>
+<li><a href="#response">response</a></li>
+<li><a href="#cookies">cookies</a></li>
+<li><a href="#headers">headers</a></li>
+<li><a href="#queryString">queryString</a></li>
+<li><a href="#postData">postData</a></li>
+<li><a href="#params">params</a></li>
+<li><a href="#content">content</a></li>
+<li><a href="#cache">cache</a></li>
+<li><a href="#timings">timings</a></li>
+</ul>
+<p id="log" class="harType">log</p>
+<p>This object represents the root of exported data.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;log&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;version&quot;</span> : <span class="st0">&quot;1.2&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;creator&quot;</span> : <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;browser&quot;</span> : <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;pages&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;entries&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>version [string]</em> - Version number of the format. If empty, string "1.1" is assumed by default.</li>
+<li><em>creator [object]</em> - Name and version info of the log creator application.</li>
+<li><em>browser [object, optional]</em> - Name and version info of used browser.</li>
+<li><em>pages [array, optional]</em> - List of all exported (tracked) pages. Leave out this field if the application does not support grouping by pages.</li>
+<li><em>entries [array]</em> - List of all exported (tracked) requests.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>There is one &lt;page&gt; object for every exported web page and one &lt;entry&gt; object for every HTTP request. In case when an HTTP trace tool isn't able to group requests by a page, the &lt;pages&gt; object is empty and individual requests doesn't have a parent page.</p>
+<p id="creator" class="harType">creator</p>
+<p><em>Creator</em> and <em>browser</em> objects share the same structure.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;creator&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Firebug&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;version&quot;</span>: <span class="st0">&quot;1.6&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<p id="browser" class="harType">browser</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;browser&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Firefox&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;version&quot;</span>: <span class="st0">&quot;3.6&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>name [string]</em> - Name of the application/browser used to export the log.</li>
+<li><em>version [string]</em> - Version of the application/browser used to export the log.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p id="pages" class="harType">pages</p>
+<p>This object represents list of exported pages.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;pages&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;startedDateTime&quot;</span>: <span class="st0">&quot;2009-04-16T12:07:25.123+01:00&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;id&quot;</span>: <span class="st0">&quot;page_0&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;title&quot;</span>: <span class="st0">&quot;Test Page&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;pageTimings&quot;</span>: <span class="br0">&#123;</span>...<span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<ul>
+<li><em>startedDateTime [string]</em> - Date and time stamp for the beginning of the page load (<a href="http://www.w3.org/TR/NOTE-datetime">ISO 8601</a> - YYYY-MM-DDThh:mm:ss.sTZD, e.g. 2009-07-24T19:20:30.45+01:00).</li>
+<li><em>id [string]</em> - Unique identifier of a page within the <log>. Entries use it to refer the parent page.</log></li>
+<li><em>title [string]</em> - Page title.</li>
+<li><em>pageTimings[object]</em> - Detailed timing info about page load.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p id="pageTimings" class="harType">pageTimings</p>
+<p>This object describes timings for various events (states) fired during the page load. All times are specified in milliseconds. If a time info is not available appropriate field is set to -1.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;pageTimings&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;onContentLoad&quot;</span>: <span class="nu0">1720</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;onLoad&quot;</span>: <span class="nu0">2500</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>onContentLoad [number, optional]</em> - Content of the page loaded. Number of milliseconds since page load started (page.startedDateTime). Use -1 if the timing does not apply to the current request.</li>
+<li><em>onLoad [number,optional]</em> - Page is loaded (onLoad event fired). Number of milliseconds since page load started (page.startedDateTime). Use -1 if the timing does not apply to the current request.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>Depeding on the browser, <em>onContentLoad</em> property represents <strong>DOMContentLoad</strong> event or <strong>document.readyState == interactive</strong>.</p>
+<p id="entries" class="harType">entries</p>
+<p>This object represents an array with all exported HTTP requests. Sorting entries by <em>startedDateTime</em> (starting from the oldest) is preferred way how to export data since it can make importing faster. However the reader application should always make sure the array is sorted (if required for the import).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;entries&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;pageref&quot;</span>: <span class="st0">&quot;page_0&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;startedDateTime&quot;</span>: <span class="st0">&quot;2009-04-16T12:07:23.596Z&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;time&quot;</span>: <span class="nu0">50</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;request&quot;</span>: <span class="br0">&#123;</span>...<span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;response&quot;</span>: <span class="br0">&#123;</span>...<span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span>...<span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;timings&quot;</span>: <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;serverIPAddress&quot;</span>: <span class="st0">&quot;10.0.0.1&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;connection&quot;</span>: <span class="st0">&quot;52492&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<ul>
+<li><em>pageref [string, unique, optional]</em> - Reference to the parent page. Leave out this field if the application does not support grouping by pages.</li>
+<li><em>startedDateTime [string]</em> - Date and time stamp of the request start (<a href="http://www.w3.org/TR/NOTE-datetime">ISO 8601</a> - YYYY-MM-DDThh:mm:ss.sTZD).</li>
+<li><em>time [number]</em> - Total elapsed time of the request in milliseconds. This is the sum of all timings available in the timings object (i.e. not including -1 values) .</li>
+<li><em>request [object]</em> - Detailed info about the request.</li>
+<li><em>response [object]</em> - Detailed info about the response.</li>
+<li><em>cache [object]</em> - Info about cache usage.</li>
+<li><em>timings [object]</em> - Detailed timing info about request/response round trip.</li>
+<li><em>serverIPAddress [string, optional]</em> (new in 1.2) - IP address of the server that was connected (result of DNS resolution).</li>
+<li><em>connection [string, optional]</em> (new in 1.2) - Unique ID of the parent TCP/IP connection, can be the client port number. Note that a port number doesn't have to be unique identifier in cases where the port is shared for more connections. If the port isn't available for the application, any other unique connection ID can be used instead (e.g. connection index). Leave out this field if the application doesn't support this info.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p id="request" class="harType">request</p>
+<p>This object contains detailed info about performed request.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;request&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;method&quot;</span>: <span class="st0">&quot;GET&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;url&quot;</span>: <span class="st0">&quot;http://www.example.com/path/?param=value&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;httpVersion&quot;</span>: <span class="st0">&quot;HTTP/1.1&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;cookies&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;headers&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;queryString&quot;</span> : <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;postData&quot;</span> : <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;headersSize&quot;</span> : <span class="nu0">150</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;bodySize&quot;</span> : <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span> : <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>method [string]</em> - Request method (GET, POST, ...).</li>
+<li><em>url [string]</em> - Absolute URL of the request (fragments are not included).</li>
+<li><em>httpVersion [string]</em> - Request HTTP Version.</li>
+<li><em>cookies [array]</em> - List of cookie objects.</li>
+<li><em>headers [array]</em> - List of header objects.</li>
+<li><em>queryString [array]</em> - List of query parameter objects.</li>
+<li><em>postData [object, optional]</em> - Posted data info.</li>
+<li><em>headersSize [number]</em> - Total number of bytes from the start of the HTTP request message until (and including) the double CRLF before the body. Set to -1 if the info is not available.</li>
+<li><em>bodySize [number]</em> - Size of the request body (POST data payload) in bytes. Set to -1 if the info is not available.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>The total request size sent can be computed as follows (if both values are available):</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="kw2">var</span> totalSize = entry.<span class="me1">request</span>.<span class="me1">headersSize</span> + entry.<span class="me1">request</span>.<span class="me1">bodySize</span>;</div>
+<p id="response" class="harType">response</p>
+<p>This object contains detailed info about the response.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;response&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;status&quot;</span>: <span class="nu0">200</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;statusText&quot;</span>: <span class="st0">&quot;OK&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;httpVersion&quot;</span>: <span class="st0">&quot;HTTP/1.1&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;cookies&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;headers&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;content&quot;</span>: <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;redirectURL&quot;</span>: <span class="st0">&quot;&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;headersSize&quot;</span> : <span class="nu0">160</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;bodySize&quot;</span> : <span class="nu0">850</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span> : <span class="st0">&quot;&quot;</span><br />
+&nbsp;<span class="br0">&#125;</span></div>
+<ul>
+<li><em>status [number]</em> - Response status.</li>
+<li><em>statusText [string]</em> - Response status description.</li>
+<li><em>httpVersion [string]</em> - Response HTTP Version.</li>
+<li><em>cookies [array]</em> - List of cookie objects.</li>
+<li><em>headers [array]</em> - List of header objects.</li>
+<li><em>content [object]</em> - Details about the response body.</li>
+<li><em>redirectURL [string]</em> - Redirection target URL from the Location response header.</li>
+<li><em>headersSize [number]*</em> - Total number of bytes from the start of the HTTP response message until (and including) the double CRLF before the body. Set to -1 if the info is not available.</li>
+<li><em>bodySize [number]</em> - Size of the received response body in bytes. Set to zero in case of responses coming from the cache (304). Set to -1 if the info is not available.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p><em>*headersSize</em> - The size of received response-headers is computed only from headers that are really received from the server. Additional headers appended by the browser are not included in this number, but they appear  in the list of header objects.</p>
+<p>The total response size received can be computed as follows (if both values are available):</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="kw2">var</span> totalSize = entry.<span class="me1">response</span>.<span class="me1">headersSize</span> + entry.<span class="me1">response</span>.<span class="me1">bodySize</span>;</div>
+<p id="cookies" class="harType">cookies</p>
+<p>This object contains list of all cookies (used in &lt;request&gt; and &lt;response&gt; objects).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cookies&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;TestCookie&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;Cookie Value&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;path&quot;</span>: <span class="st0">&quot;/&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;domain&quot;</span>: <span class="st0">&quot;www.janodvarko.cz&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;expires&quot;</span>: <span class="st0">&quot;2009-07-24T19:20:30.123+02:00&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;httpOnly&quot;</span>: <span class="kw2">false</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;secure&quot;</span>: <span class="kw2">false</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<ul>
+<li><em>name [string]</em> - The name of the cookie.</li>
+<li><em>value [string]</em> - The cookie value.</li>
+<li><em>path [string, optional]</em> - The path pertaining to the cookie.</li>
+<li><em>domain [string, optional]</em> - The host of the cookie.</li>
+<li><em>expires [string, optional]</em> - Cookie expiration time. (<a href="http://www.w3.org/TR/NOTE-datetime">ISO 8601</a> - YYYY-MM-DDThh:mm:ss.sTZD, e.g. 2009-07-24T19:20:30.123+02:00).</li>
+<li><em>httpOnly [boolean, optional]</em> - Set to true if the cookie is HTTP only, false otherwise.</li>
+<li><em>secure [boolean, optional]</em> (new in 1.2) - True if the cookie was transmitted over ssl, false otherwise.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p id="headers" class="harType">headers</p>
+<p>This object contains list of all headers (used in &lt;request&gt; and &lt;response&gt; objects).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;headers&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Accept-Encoding&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;gzip,deflate&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Accept-Language&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;en-us,en;q=0.5&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<p id="queryString" class="harType">queryString</p>
+<p>This object contains list of all parameters &amp; values parsed from a query string, if any (embedded in &lt;request&gt; object).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;queryString&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;param1&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;value1&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;param1&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;value1&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<p>HAR format expects NVP (name-value pairs) formatting of the query string.</p>
+<p id="postData" class="harType">postData</p>
+<p>This object describes posted data, if any (embedded in &lt;request&gt; object).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;postData&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;mimeType&quot;</span>: <span class="st0">&quot;multipart/form-data&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;params&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;text&quot;</span> : <span class="st0">&quot;plain posted data&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>mimeType [string]</em> - Mime type of posted data.</li>
+<li><em>params [array]</em> - List of posted parameters (in case of URL encoded parameters).</li>
+<li><em>text [string]</em> - Plain text posted data</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>Note that <em>text</em> and <em>params</em> fields are mutually exclusive.</p>
+<p id="params" class="harType">params</p>
+<p>List of posted parameters, if any (embedded in &lt;postData&gt; object).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;params&quot;</span>: <span class="br0">&#91;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;paramName&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;value&quot;</span>: <span class="st0">&quot;paramValue&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;fileName&quot;</span>: <span class="st0">&quot;example.pdf&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;contentType&quot;</span>: <span class="st0">&quot;application/pdf&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#93;</span></div>
+<ul>
+<li><em>name [string]</em> - name of a posted parameter.</li>
+<li><em>value [string, optional]</em> - value of a posted parameter or content of a posted file.</li>
+<li><em>fileName [string, optional]</em> - name of a posted file.</li>
+<li><em>contentType [string, optional]</em> - content type of a posted file.</li>
+<li><em>comment [string, optional] (new in 1.2)</em> - A comment provided by the user or the application.</li>
+</ul>
+<p id="content" class="harType">content</p>
+<p>This object describes details about response content (embedded in &lt;response&gt; object).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;content&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;size&quot;</span>: <span class="nu0">33</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;compression&quot;</span>: <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;mimeType&quot;</span>: <span class="st0">&quot;text/html; charset=utf-8&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;text&quot;</span>: <span class="st0">&quot;<span class="es0">\n</span>&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>size [number]</em> - Length of the returned content in bytes. Should be equal to response.bodySize if there is no compression and bigger when the content has been compressed.</li>
+<li><em>compression [number, optional]</em> - Number of bytes saved. Leave out this field if the information is not available.</li>
+<li><em>mimeType [string]</em> - MIME type of the response text (value of the Content-Type response header). The charset attribute of the MIME type is included (if available).</li>
+<li><em>text [string, optional]</em> - Response body sent from the server or loaded from the browser cache. This field is populated with textual content only. The text field is either HTTP decoded text or a encoded (e.g. "base64") representation of the response body. Leave out this field if the information is not available.</li>
+<li><em>encoding [string, optional]</em> (new in 1.2) - Encoding used for response text field e.g "base64". Leave out this field if the text field is HTTP decoded (decompressed &amp; unchunked), than trans-coded from its original character set into UTF-8.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>Before setting the text field, the HTTP response is decoded (decompressed &amp; unchunked), than trans-coded from its original character set into UTF-8. Additionally, it can be encoded using e.g. base64. Ideally, the application should be able to unencode a base64 blob and get a byte-for-byte identical resource to what the browser operated on.<br />
+<em><br />
+Encoding field is useful for including binary responses (e.g. images) into the HAR file.<br />
+</em><br />
+Here is another example with encoded response. The original response is:</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="sc3"><span class="re1">&lt;html<span class="re2">&gt;</span></span></span><span class="sc3"><span class="re1">&lt;head<span class="re2">&gt;</span></span></span><span class="sc3"><span class="re1">&lt;/head<span class="re2">&gt;</span></span></span><span class="sc3"><span class="re1">&lt;body</span><span class="re2">/&gt;</span></span><span class="sc3"><span class="re1">&lt;/html<span class="re2">&gt;</span></span></span>\n</div>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;content&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;size&quot;</span>: <span class="nu0">33</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;compression&quot;</span>: <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;mimeType&quot;</span>: <span class="st0">&quot;text/html; charset=utf-8&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;text&quot;</span>: <span class="st0">&quot;PGh0bWw+PGhlYWQ+PC9oZWFkPjxib2R5Lz48L2h0bWw+XG4=&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;encoding&quot;</span>: <span class="st0">&quot;base64&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<p id="cache" class="harType">cache</p>
+<p>This objects contains info about a request coming from browser cache.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;beforeRequest&quot;</span>: <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;afterRequest&quot;</span>: <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>beforeRequest [object, optional]</em> - State of a cache entry before the request. Leave out this field if the information is not available.</li>
+<li><em>afterRequest [object, optional]</em> - State of a cache entry after the request. Leave out this field if the information is not available.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>This is how the object should look like if no cache information are available (or you can just leave out the entire field).</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span><span class="br0">&#125;</span></div>
+<p>This is how the object should look like if the the info about the cache entry before request is not available and there is no cache entry after the request.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;afterRequest&quot;</span>: <span class="kw2">null</span><br />
+<span class="br0">&#125;</span></div>
+<p>This is how the object should look like if there in no cache entry before nor after the request.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;beforeRequest&quot;</span>: <span class="kw2">null</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;afterRequest&quot;</span>: <span class="kw2">null</span><br />
+<span class="br0">&#125;</span></div>
+<p>This is how the object should look like to indicate that the entry was not in the cache but was store after the content was downloaded by the request.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;cache&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;beforeRequest&quot;</span>: <span class="kw2">null</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;afterRequest&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;expires&quot;</span>: <span class="st0">&quot;2009-04-16T15:50:36&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;lastAccess&quot;</span>: <span class="st0">&quot;2009-16-02T15:50:34&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;eTag&quot;</span>: <span class="st0">&quot;&quot;</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;hitCount&quot;</span>: <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span></div>
+<p>Both <em>beforeRequest</em> and <em>afterRequest</em> object share the following structure.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;beforeRequest&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;expires&quot;</span>: <span class="st0">&quot;2009-04-16T15:50:36&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;lastAccess&quot;</span>: <span class="st0">&quot;2009-16-02T15:50:34&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;eTag&quot;</span>: <span class="st0">&quot;&quot;</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;hitCount&quot;</span>: <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li><em>expires [string, optional]</em> - Expiration time of the cache entry.</li>
+<li><em>lastAccess [string]</em> - The last time the cache entry was opened.</li>
+<li><em>eTag [string]</em> - Etag</li>
+<li><em>hitCount [number]</em> - The number of times the cache entry has been opened.</li>
+<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p id="timings" class="harType">timings</p>
+<p>This object describes various phases within request-response round trip. All times are specified in milliseconds.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;timings&quot;</span>: <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="st0">&quot;blocked&quot;</span>: <span class="nu0">0</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;dns&quot;</span>: <span class="nu0">-1</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;connect&quot;</span>: <span class="nu0">15</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;send&quot;</span>: <span class="nu0">20</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;wait&quot;</span>: <span class="nu0">38</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;receive&quot;</span>: <span class="nu0">12</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;ssl&quot;</span>: <span class="nu0">-1</span>,<br />
+&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
+<span class="br0">&#125;</span></div>
+<ul>
+<li>blocked [number, optional] - Time spent in a queue waiting for a network connection. Use -1 if the timing does not apply to the current request.</li>
+<li>dns [number, optional] - DNS resolution time. The time required to resolve a host name. Use -1 if the timing does not apply to the current request.</li>
+<li>connect [number, optional] - Time required to create TCP connection. Use -1 if the timing does not apply to the current request.</li>
+<li>send [number] - Time required to send HTTP request to the server.</li>
+<li>wait [number] - Waiting for a response from the server.</li>
+<li>receive [number] - Time required to read entire response from the server (or cache).</li>
+<li>ssl [number, optional] (new in 1.2) - Time required for SSL/TLS negotiation. If this field is defined then the time is also included in the connect field (to ensure backward compatibility with HAR 1.1). Use -1 if the timing does not apply to the current request.</li>
+<li>comment [string, optional] (new in 1.2) - A comment provided by the user or the application.</li>
+</ul>
+<p>The <em>send</em>, <em>wait</em> and <em>receive</em> timings are not optional and must have non-negative values.</p>
+<p>An exporting tool can omit the <em>blocked</em>, <em>dns</em>, <em>connect</em> and <em>ssl</em>, timings on every request if it is unable to provide them. Tools that can provide these timings can set their values to -1 if they don’t apply. For example, <em>connect</em> would be -1 for requests which re-use an existing connection.</p>
+<p>The <em>time</em> value for the request must be equal to the sum of the timings supplied in this section (excluding any -1 values).</p>
+<p>Following must be true in case there are no -1 values (<em>entry</em> is an object in <em>log.entries</em>) :</p>
+<div class="dean_ch" style="white-space: wrap;">entry.<span class="me1">time</span> == entry.<span class="me1">timings</span>.<span class="me1">blocked</span> + entry.<span class="me1">timings</span>.<span class="me1">dns</span> +<br />
+&nbsp; &nbsp; entry.<span class="me1">timings</span>.<span class="me1">connect</span> + entry.<span class="me1">timings</span>.<span class="me1">send</span> + entry.<span class="me1">timings</span>.<span class="me1">wait</span> +<br />
+&nbsp; &nbsp; entry.<span class="me1">timings</span>.<span class="me1">receive</span>;</div>
+<h3>Custom Fields</h3>
+<p>The specification allows adding new custom fields into the output format. Following rules must be applied:</p>
+<ul>
+<li>Custom fields and elements MUST start with an underscore (spec fields should never start with an underscore.</li>
+<li>Parsers MUST ignore all custom fields and elements if the file was not written by the same tool loading the file.</li>
+<li>Parsers MUST ignore all non-custom fields that they don't know how to parse because the minor version number is greater that the maximum minor version for which they were written.</li>
+<li>Parsers can reject files that contain non-custom fields that they know were not present in a specific version of the spec.</li>
+</ul>
+<h3>Versioning Scheme</h3>
+<p>The spec number has following syntax:</p>
+<div class="dean_ch" style="white-space: wrap;">&lt;major-version-number&gt;.&lt;minor-version-number&gt;</div>
+<p>Where the major version indicates overall backwards compatibility and the minor version indicates incremental changes. So, any backwardly compatible changes to the spec will result in an increase of the minor version. If an existing fields had to be broken then major version would increase (e.g. 2.0).</p>
+<p>Examples:<br />
+<code>1.2 -&gt; 1.3<br />
+1.111 -&gt; 1.112 (in case of 111 more changes)<br />
+1.5 -&gt; 2.0 (2.0 is not compatible with 1.5)<br />
+</code></p>
+<p>So following construct can be used to detect incompatible version if a tool supports HAR since 1.1.</p>
+<div class="dean_ch" style="white-space: wrap;"><span class="kw1">if</span> <span class="br0">&#40;</span>majorVersion != <span class="nu0">1</span> || minorVersion &lt; <span class="nu0">1</span><span class="br0">&#41;</span><br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw1">throw</span> <span class="st0">&quot;Incompatible version&quot;</span>;<br />
+<span class="br0">&#125;</span></div>
+<p>In this example a tool throws an exception if the version is e.g.: 0.8, 0.9, 1.0, but works with 1.1, 1.2, 1.112 etc. Version 2.x would be rejected.</p>
+
+
+</pre>
+
+<h2 id="sec-privacy"><span class="secno">5 </span>Privacy</h2>
+
+<p>
+The HAR format may contain privacy & security sensitive data and the user agent should find some way to notify the user of this fact before it  transfers the file to anyone else.
+
+</p>
+
+
+<h2 id="references"><span class="secno">6 </span>References</h2>
+
+<dl>
+
+   <dt id="rfc2119">[IETF RFC 2119]</dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+   <dt id="HTML5">[HTML5]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+<p>We would like to sincerely thank XXX to acknowledge their contributions to this work.</p>
+</body>
+</html>
