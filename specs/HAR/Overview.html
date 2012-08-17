@@ -137,6 +137,30 @@ cite this document as other than work in progress. </p>
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
   <li><a href="#sec-har"><span class="secno">4 </span>The HAR format</a> 
+    <ol class="toc">
+      <li><a href="#sec-har-encoding"><span class="secno">4.1 </span>Encoding</a></li>
+      <li><a href="#sec-object-types"><span class="secno">4.2 </span>List of allowed objects</a></li>
+        <ol class="toc">
+      <li><a href="#sec-object-types-log"><span class="secno">4.2.1 </span> log</a></li>
+      <li><a href="#sec-object-types-creator"><span class="secno">4.2.2 </span> creator</a></li>
+      <li><a href="#sec-object-types-browser"><span class="secno">4.2.3 </span> browser</a></li>
+      <li><a href="#sec-object-types-pages"><span class="secno">4.2.4 </span> pages</a></li>
+      <li><a href="#sec-object-types-pageTimings"><span class="secno">4.2.5 </span> pageTimings</a></li>
+      <li><a href="#sec-object-types-entries"><span class="secno">4.2.6 </span> entries</a></li>
+      <li><a href="#sec-object-types-request"><span class="secno">4.2.7 </span> request</a></li>
+      <li><a href="#sec-object-types-response"><span class="secno">4.2.8 </span> response</a></li>
+      <li><a href="#sec-object-types-cookies"><span class="secno">4.2.9 </span> cookies</a></li>
+      <li><a href="#sec-object-types-headers"><span class="secno">4.2.10 </span> headers</a></li>
+      <li><a href="#sec-object-types-queryString"><span class="secno">4.2.11 </span> queryString</a></li>
+      <li><a href="#sec-object-types-postData"><span class="secno">4.2.12 </span> postData</a></li>
+      <li><a href="#sec-object-types-params"><span class="secno">4.2.13 </span> params</a></li>
+      <li><a href="#sec-object-types-content"><span class="secno">4.2.14 </span> content</a></li>
+      <li><a href="#sec-object-types-cache"><span class="secno">4.2.15 </span> cache</a></li>
+      <li><a href="#sec-object-types-timings"><span class="secno">4.2.16 </span> timings</a></li>
+        </ol>
+	  <li><a href="#sec-processing-model"><span class="secno">4.3 </span>Processing Model</a></li>
+      <li><a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a></li>
+    </ol>
   </li>
   <li><a href="#sec-privacy"><span class="secno">5 </span>Privacy</a></li>
   <li><a href="#references"><span class="secno">6 </span>References</a></li>
@@ -150,7 +174,7 @@ cite this document as other than work in progress. </p>
 
 <p>
 This specification defines an archival format for HTTP transactions that can be used by a web browser to export detailed performance data about web pages it loads. The format is intended to be flexible so that it can be adopted by various tools. The information that can be represented in this archival format includes both information about the web pages themselves e.g. the size of individual resources on the page as well as performance data e.g. how long did it take to download a particular resource on the page.
-A standard format to represent this information would allow various performance tools to interoperate with each other.
+A standard format to represent this information will allow various performance tools to interoperate with each other.
 </p>
 
 
@@ -192,30 +216,17 @@ the more accurate "an object implementing the interface <code
 title="">Foo</code>". </p>
 
 <h2 id="sec-har"><span class="secno">4 <span class="auto-style1">The HAR format</span></span></h2>
-<pre>
-The format is based on <a href="http://www.ietf.org/rfc/rfc4627.txt">JSON</a>.
-<p>
+The HAR format is based on JSON, as described in <a href="#rfc4627">RFC 4627</a>.
 
-<p>HAR files are required to be saved in UTF-8 encoding and other encodings are forbidden. The specification requires that tools support and ignore a BOM and allow them to emit one if they like.</p>
-<p>Summary of HAR object types:</p>
-<ul>
-<li><a href="#log">log</a></li>
-<li><a href="#creator">creator</a></li>
-<li><a href="#browser">browser</a></li>
-<li><a href="#pages">pages</a></li>
-<li><a href="#pageTimings">pageTimings</a></li>
-<li><a href="#entries">entries</a></li>
-<li><a href="#request">request</a></li>
-<li><a href="#response">response</a></li>
-<li><a href="#cookies">cookies</a></li>
-<li><a href="#headers">headers</a></li>
-<li><a href="#queryString">queryString</a></li>
-<li><a href="#postData">postData</a></li>
-<li><a href="#params">params</a></li>
-<li><a href="#content">content</a></li>
-<li><a href="#cache">cache</a></li>
-<li><a href="#timings">timings</a></li>
-</ul>
+<h3 id="sec-har-encoding"><span class="secno">4.1 </span>Encoding</h3>
+<p>
+A HAR file is <span class='rfc2119'>REQUIRED</span> to be saved in UTF-8 encoding. Other encodings are forbidden. A reader <span class='rfc2119'>MUST</span> ignore a byte-order mark if it exists in the file, and a writer <span class='rfc2119'>MAY</span> emit a byte-order mark in the file.</p>
+
+<h3 id="sec-har-object-types"><span class="secno">4.2 </span>List of allowed objects</h3>
+
+<h4 id="sec-har-object-types-log"><span class="secno">4.2.1 </span> log</h4>
+
+<pre>
 <p id="log" class="harType">log</p>
 <p>This object represents the root of exported data.</p>
 <div class="dean_ch" style="white-space: wrap;"><span class="br0">&#123;</span><br />
@@ -610,6 +621,13 @@ The HAR format may contain privacy & security sensitive data and the user agent 
     <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
     Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
     <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+   <dt id="rfc4627">[IETF RFC 4627]</dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc4627.txt">The application/json Media Type for JavaScript Object Notation (JSON)</a></cite>,
+    D. Crockford, Author. Internet Engineering Task Force, July 2006. Available at
+    <a href="http://www.ietf.org/rfc/rfc4627.txt">http://www.ietf.org/rfc/rfc4627.txt</a>.
    </dd>
 
    <dt id="HTML5">[HTML5]</dt>
