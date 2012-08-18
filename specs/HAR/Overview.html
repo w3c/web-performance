@@ -139,7 +139,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-har"><span class="secno">4 </span>The HAR format</a> 
     <ol class="toc">
       <li><a href="#sec-har-encoding"><span class="secno">4.1 </span>Encoding</a></li>
-      <li><a href="#sec-object-types"><span class="secno">4.2 </span>List of allowed objects</a></li>
+      <li><a href="#sec-object-types"><span class="secno">4.2 </span>List of objects</a></li>
         <ol class="toc">
       <li><a href="#sec-object-types-log"><span class="secno">4.2.1 </span> log</a></li>
       <li><a href="#sec-object-types-creator"><span class="secno">4.2.2 </span> creator</a></li>
@@ -222,50 +222,42 @@ The HAR format is based on JSON, as described in <a href="#rfc4627">RFC 4627</a>
 <p>
 A HAR file is <span class='rfc2119'>REQUIRED</span> to be saved in UTF-8 encoding. Other encodings are forbidden. A reader <span class='rfc2119'>MUST</span> ignore a byte-order mark if it exists in the file, and a writer <span class='rfc2119'>MAY</span> emit a byte-order mark in the file.</p>
 
-<h3 id="sec-har-object-types"><span class="secno">4.2 </span>List of allowed objects</h3>
+<h3 id="sec-har-object-types"><span class="secno">4.2 </span>List of objects</h3>
 
 <h4 id="sec-har-object-types-log"><span class="secno">4.2.1 </span> log</h4>
+<p>This object represents the root of the exported data. This object MUST be present and its name MUST be "log". The object contains the following name/value pairs:</p>
+<table>
+<tr><td>JSON Name</td><td>JSON Type</td><td>Description</td></tr>
+<tr><td>"version"</td><td>string</td><td>Required. Version number of the format.</td></tr>
+<tr><td>"creator"</td><td>object</td><td>Required. An object of type <a href="#sec-har-object-types-creator">creator</a> that contains the name and version information of the log creator application.</td></tr>
+<tr><td>"browser"</td><td>object</td><td>Optional. An object of type <a href="#sec-har-object-types-browser">browser</a> that contains the name and version information of the user agent.</td></tr>
+<tr><td>"pages"</td><td>array</td><td>Optional. An array of objects of type <a href="#sec-har-object-types-page">page</a>, each representing one exported (tracked) page. Leave out this field if the application does not support grouping by pages.</td></tr>
+<tr><td>"entries"</td><td>array</td><td>Required. An array of objects of type <a href="#sec-har-object-types-entry">entry</a>, each representing one exported (tracked) HTTP request.</td></tr>
+<tr><td>"comment"</td><td>string</td><td>Optional. A comment provided by the user or the application.</td></tr>
+</table>
 
-<pre>
-<p id="log" class="harType">log</p>
-<p>This object represents the root of exported data.</p>
-<div class="dean_ch" style="white-space: wrap;"><span class="br0">&#123;</span><br />
-&nbsp; &nbsp; <span class="st0">&quot;log&quot;</span>: <span class="br0">&#123;</span><br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;version&quot;</span> : <span class="st0">&quot;1.2&quot;</span>,<br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;creator&quot;</span> : <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;browser&quot;</span> : <span class="br0">&#123;</span><span class="br0">&#125;</span>,<br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;pages&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;entries&quot;</span>: <span class="br0">&#91;</span><span class="br0">&#93;</span>,<br />
-&nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
-&nbsp; &nbsp; <span class="br0">&#125;</span><br />
-<span class="br0">&#125;</span></div>
-<ul>
-<li><em>version [string]</em> - Version number of the format. If empty, string "1.1" is assumed by default.</li>
-<li><em>creator [object]</em> - Name and version info of the log creator application.</li>
-<li><em>browser [object, optional]</em> - Name and version info of used browser.</li>
-<li><em>pages [array, optional]</em> - List of all exported (tracked) pages. Leave out this field if the application does not support grouping by pages.</li>
-<li><em>entries [array]</em> - List of all exported (tracked) requests.</li>
-<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
-</ul>
+<h4 id="sec-har-object-types-creator"><span class="secno">4.2.2 </span> creator</h4>
+<p>This object contains information about the log creator application and contains the following name/value pairs:</p>
+<table>
+<tr><td>JSON Name</td><td>JSON Type</td><td>Description</td></tr>
+<tr><td>"name"</td><td>string</td><td>Required. The name of the application that created the log.</td></tr>
+<tr><td>"version"</td><td>string</td><td>Required. The version number of the application that created the log.</td></tr>
+<tr><td>"comment"</td><td>string</td><td>Optional. A comment provided by the user or the application.</td></tr>
+</table>
+
+<h4 id="sec-har-object-types-browser"><span class="secno">4.2.3 </span> browser</h4>
+<p>This object contains information about the browser that created the log and contains the following name/value pairs:</p>
+<table>
+<tr><td>JSON Name</td><td>JSON Type</td><td>Description</td></tr>
+<tr><td>"name"</td><td>string</td><td>Required. The name of the browser that created the log.</td></tr>
+<tr><td>"version"</td><td>string</td><td>Required. The version number of the browser that created the log.</td></tr>
+<tr><td>"comment"</td><td>string</td><td>Optional. A comment provided by the user or the browser.</td></tr>
+</table>
+
+
+
+
 <p>There is one &lt;page&gt; object for every exported web page and one &lt;entry&gt; object for every HTTP request. In case when an HTTP trace tool isn't able to group requests by a page, the &lt;pages&gt; object is empty and individual requests doesn't have a parent page.</p>
-<p id="creator" class="harType">creator</p>
-<p><em>Creator</em> and <em>browser</em> objects share the same structure.</p>
-<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;creator&quot;</span>: <span class="br0">&#123;</span><br />
-&nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Firebug&quot;</span>,<br />
-&nbsp; &nbsp; <span class="st0">&quot;version&quot;</span>: <span class="st0">&quot;1.6&quot;</span>,<br />
-&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
-<span class="br0">&#125;</span></div>
-<p id="browser" class="harType">browser</p>
-<div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;browser&quot;</span>: <span class="br0">&#123;</span><br />
-&nbsp; &nbsp; <span class="st0">&quot;name&quot;</span>: <span class="st0">&quot;Firefox&quot;</span>,<br />
-&nbsp; &nbsp; <span class="st0">&quot;version&quot;</span>: <span class="st0">&quot;3.6&quot;</span>,<br />
-&nbsp; &nbsp; <span class="st0">&quot;comment&quot;</span>: <span class="st0">&quot;&quot;</span><br />
-<span class="br0">&#125;</span></div>
-<ul>
-<li><em>name [string]</em> - Name of the application/browser used to export the log.</li>
-<li><em>version [string]</em> - Version of the application/browser used to export the log.</li>
-<li><em>comment [string, optional]</em> (new in 1.2) - A comment provided by the user or the application.</li>
-</ul>
 <p id="pages" class="harType">pages</p>
 <p>This object represents list of exported pages.</p>
 <div class="dean_ch" style="white-space: wrap;"><span class="st0">&quot;pages&quot;</span>: <span class="br0">&#91;</span><br />
