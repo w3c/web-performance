@@ -359,6 +359,8 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-navigationstart" title="navigationstart">navigationStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventstart" title="unloadeventstart">unloadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventend" title="unloadeventend">unloadEventEnd</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-linknegotiationstart" title="linknegotiationstart">linkNegotiationStart</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-linknegotiationend" title="linknegotiationend">linkNegotiationEnd</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-redirectstart" title="redirectstart">redirectStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-redirectend" title="redirectend">redirectEnd</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-fetchstart" title="fetchstart">fetchStart</a>;
@@ -452,6 +454,19 @@ same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 both <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
 <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to zero.</p>
+
+<h4><code><dfn id="dom-performancetiming-linknegotiationstart">linkNegotiationStart</dfn></code> attribute</h4>
+
+<p>This attribute is optional. User agents that don't have this attribute
+available MUST set it as undefined. If the network interface is not immediately available and must be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+ with a time value equal to the time immediately before starting that process. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>. </p>
+
+
+<h4><code><dfn id="dom-performancetiming-linknegotiationend">linkNegotiationEnd</dfn></code> attribute</h4>
+
+<p>This attribute is optional. User agents that don't have this attribute
+available MUST set it as undefined.  If the network interface is not immediately available and must be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+ with a time value equal to the time immediately after the network interface is available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>. </p>
 
 <h4><code><dfn id="dom-performancetiming-redirectstart">redirectStart</dfn></code> attribute </h4>
 
