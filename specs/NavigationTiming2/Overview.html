@@ -466,7 +466,7 @@ available MUST set it as undefined. If the network interface is not immediately 
 
 <p>This attribute is optional. User agents that don't have this attribute
 available MUST set it as undefined.  If the network interface is not immediately available and must be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
- with a time value equal to the time immediately after the network interface is available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>. </p>
+ with a time value equal to the time immediately after the network interface becomes available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>. </p>
 
 <h4><code><dfn id="dom-performancetiming-redirectstart">redirectStart</dfn></code> attribute </h4>
 
@@ -812,7 +812,7 @@ non-normative intervals between timings.</p>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a>.</li>
-  <li>If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface is available as <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a>.</li>
+  <li>If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
