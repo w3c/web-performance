@@ -812,6 +812,7 @@ non-normative intervals between timings.</p>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a>.</li>
+  <li>If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface is available as <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
