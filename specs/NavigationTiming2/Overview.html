@@ -808,11 +808,11 @@ non-normative intervals between timings.</p>
     <a href="http://tools.ietf.org/html/rfc6454">origins</a>,
     set both <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a> and 
     <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-fetch-start">10</a>. Otherwise, record <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a>
+    <a href="#step-linknegotiation-start">10</a>. Otherwise, record <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a>.</li>
-  <li>If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>.</li>
+  <li id="step-linknegotiation-start">If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancetiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancetiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#dom-performancetiming-navigationstart">navigationStart</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
@@ -830,9 +830,9 @@ non-normative intervals between timings.</p>
     href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
     application cache</a> or local resources, including the
     <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP cache</a>,
-    go to step <a href="#step-request-start">17</a>.</li>
+    go to step <a href="#step-request-start">18</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">15</a>. Otherwise, immediately before a user
+    href="#step-connect-start">16</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as 
     <a href="#dom-performancetiming-domainlookupstart">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#dom-performancetiming-domainlookupend">domainLookupEnd</a>
@@ -850,7 +850,7 @@ non-normative intervals between timings.</p>
     after the connection to the server or the proxy is established. A user agent may
     need multiple retries before this time. If a connection can not be
     established, abort the rest of the steps. </li>
-  <li>In step <a href="#step-connect-start">15</a>, a user agent should also
+  <li>In step <a href="#step-connect-start">16</a>, a user agent should also
     carry out these additional steps if it supports the
     <a href="#dom-performancetiming-secureconnectstart">secureConnectionStart</a> attribute:
     <ol>
@@ -869,7 +869,7 @@ non-normative intervals between timings.</p>
   <li id="step-response-end">Record the time as <a
     href="#dom-performancetiming-responseend">responseEnd</a> immediately after receiving the
     last byte of the response.
-    <p>Return to step <a href="#step-connect-start">15</a> if the user agent
+    <p>Return to step <a href="#step-connect-start">16</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
 
@@ -894,7 +894,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> and 
         <a href="#dom-performancenavigation-redirectcount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">10</a> with the new resource.</li>
+        return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
         set <a href="#dom-performancetiming-redirectstart">redirectStart</a>,
@@ -902,7 +902,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancetiming-unloadeventend">unloadEventStart</a> and 
         <a href="#dom-performancenavigation-redirectcount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">10</a> with the new resource.</li>
+        return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
       <li>Increment <a href="#dom-performancenavigation-redirectcount">redirectCount</a> by 1.</li>
       <li>If the value of <a href="#dom-performancetiming-redirectstart">redirectStart</a> is 0,
         let it be the value of <a href="#dom-performancetiming-fetchstart">fetchStart</a>.</li>
@@ -914,7 +914,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancetiming-redirectend">redirectEnd</a>, 
         <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
         <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a>.</li>
-      <li>Return to step <a href="#step-fetch-start">10</a> with the new resource.</li>
+      <li>Return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a href="#dom-performancetiming-domloading">domLoading</a> immediately
@@ -950,7 +950,7 @@ non-normative intervals between timings.</p>
 <p>Some user agents maintain the DOM structure of the document in memory
 during navigation operations such as forward and backward. In those cases,
 the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> object must not
-be altered during the navigation.</p>
+be altered during the navigation. Also note that the while the graph above suggests that link negotiation happens before handling a redirect or checking the local caches, in some situations, it may happen after those steps. For example, if the current navigation results in a redirect which is present in the local cache, but the target of the redirect is not present in the local cache, the user agent may turn on the network interface after processing the redirect and just before it starts to fetch the redirect target from the network.</p>
 
 <h3 id="vendor-prefixes"><span class="secno">5.3 </span>Vendor Prefixes</h3>
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
@@ -1056,6 +1056,6 @@ all so it's not always feasible to mitigate this attack.</p>
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-<p>I would like to offer my sincere thanks to James Simonsen, Tony Gentilcore, Zhiheng Wang, Karen Anderson and Jason Weber for all their contributions to this work.</p>
+<p>We would like to offer my sincere thanks to James Simonsen, Tony Gentilcore, Zhiheng Wang, Karen Anderson and Jason Weber for all their contributions to this work.</p>
 </body>
 </html>
