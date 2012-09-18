@@ -13,20 +13,20 @@
 test_namespace();
 
 wp_test(function() {
-  assert_true(performanceNamespace['now'] !== undefined, 'window.performance.now is defined'); 
+  assert_true(window.performance.now !== undefined, 'window.performance.now is defined'); 
 }, "High Resolution Time extension to the Performance interface", {assert: "window.performance.now exists"});
 
 wp_test(function() {
-  assert_true(performanceNamespace['now'].toString().indexOf("function") == 0, "window.performance.now is a function");
+  assert_true(window.performance.now.toString().indexOf("function") == 0, "window.performance.now is a function");
 }, "window.performance.now() function", {assert: "window.performance.now is a function"});
 
 wp_test(function() {
-  assert_true(performanceNamespace.now() > 0, "window.performance.now() returns positive numbers");
+  assert_true(window.performance.now() > 0, "window.performance.now() returns positive numbers");
 }, "window.performance.now() returns a positive number", {assert: "window.performance.now() returns positive numbers"});
 
 wp_test(function() {
-    var now1 = performanceNamespace.now();
-    var now2 = performanceNamespace.now();
+    var now1 = window.performance.now();
+    var now2 = window.performance.now();
     assert_true((now2-now1) >= 0, "window.performance.now() difference is not negative");
   },
   "window.performance.now() difference is not negative",
