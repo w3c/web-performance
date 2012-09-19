@@ -39,16 +39,6 @@ partial interface Performance {
 
 <script>
 
-// Run remainder of tests on prefixed interface if available.
-performanceNamespace.now = (function()  {
-  return performanceNamespace.now ||
-         performanceNamespace.mozNow ||
-         performanceNamespace.msNow ||
-         performanceNamespace.oNow ||
-         performanceNamespace.webkitNow;
-})();
-
-
 (function() {
   var idl_array = new IdlArray();
 
