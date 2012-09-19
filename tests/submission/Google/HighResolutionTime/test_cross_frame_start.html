@@ -56,7 +56,7 @@
                 // (A) Verify that the child and parent's now() are skewed by less than a second.
                 var parentNow = performanceNamespace.now();
                 var childNow = childWindow.performanceNamespace.now();
-                var childParentSkew = childNow - parentNow;
+                var childParentSkew = Math.abs(childNow - parentNow);
                 test_greater_than(1000, childParentSkew, 'Child and parent are skewed less than 1 second');
 
                 // (B) Verify that the child's now() is comparable to its timeline.
