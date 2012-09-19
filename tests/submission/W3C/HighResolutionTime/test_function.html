@@ -7,24 +7,25 @@
 <link rel="help" href="http://www.w3.org/TR/hr-time/#sec-extenstions-performance-interface"/>
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/webperf/tests/resources/webperftestharness.js"></script>
 <link rel="stylesheet" href="/resources/testharness.css" />
 <script>
-test_namespace();
+test(function() {
+  assert_equals(window.performance.toString(), "[object Performance]");
+}, "window.performance is defined", {assert: "The window.performance attribute provides a hosting area for performance related attributes."});
 
-wp_test(function() {
-  assert_true(window.performance.now !== undefined, 'window.performance.now is defined'); 
+test(function() {
+  assert_not_equals(window.performance.now, undefined, 'window.performance.now is defined'); 
 }, "High Resolution Time extension to the Performance interface", {assert: "window.performance.now exists"});
 
-wp_test(function() {
-  assert_true(window.performance.now.toString().indexOf("function") == 0, "window.performance.now is a function");
+test(function() {
+  assert_equals(window.performance.now.toString().indexOf("function"), 0, "window.performance.now is a function");
 }, "window.performance.now() function", {assert: "window.performance.now is a function"});
 
-wp_test(function() {
+test(function() {
   assert_true(window.performance.now() > 0, "window.performance.now() returns positive numbers");
 }, "window.performance.now() returns a positive number", {assert: "window.performance.now() returns positive numbers"});
 
-wp_test(function() {
+test(function() {
     var now1 = window.performance.now();
     var now2 = window.performance.now();
     assert_true((now2-now1) >= 0, "window.performance.now() difference is not negative");
