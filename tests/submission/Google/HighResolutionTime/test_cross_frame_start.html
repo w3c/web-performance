@@ -58,9 +58,6 @@
 
                 var childLoadTime = childWindow.performanceNamespace.timing.loadEventStart - childWindow.performanceNamespace.timing.navigationStart;
                 test_greater_than(1000, childNow - childLoadTime, 'Child\'s now() is based on its document\'s navigationStart');
-
-                var parentLoadTime = performanceNamespace.timing.loadEventStart - performanceNamespace.timing.navigationStart;
-                test_greater_than(1000, parentNow - parentLoadTime, 'Parent\'s now() is based on its document\'s navigationStart');
               }
               done();
             }
