@@ -51,17 +51,16 @@
                 test_greater_than(childWindow.performanceNamespace.timing.navigationStart, performanceNamespace.timing.navigationStart + 1000,
                                   'Child created at least 1 second after parent');
 
-                // TODO(tonyg): (A) and (B) conflict. Which do we spec?
-
-                // (A) Verify that the child and parent's now() are skewed by less than a second.
                 var parentNow = performanceNamespace.now();
                 var childNow = childWindow.performanceNamespace.now();
                 var childParentSkew = Math.abs(childNow - parentNow);
-                test_greater_than(1000, childParentSkew, 'Child and parent are skewed less than 1 second');
+                test_greater_than(childParentSkew, 1000, 'Child and parent\'s now()s have different bases (skewed more than 1 second)');
 
-                // (B) Verify that the child's now() is comparable to its timeline.
                 var childLoadTime = childWindow.performanceNamespace.timing.loadEventStart - childWindow.performanceNamespace.timing.navigationStart;
-                test_greater_than(1000, childNow - childLoadTime, 'Child\'s now matches its timeline');
+                test_greater_than(1000, childNow - childLoadTime, 'Child\'s now() is based on its document\'s navigationStart');
+
+                var parentLoadTime = performanceNamespace.timing.loadEventStart - performanceNamespace.timing.navigationStart;
+                test_greater_than(1000, parentNow - parentLoadTime, 'Parent\'s now() is based on its document\'s navigationStart');
               }
               done();
             }
@@ -70,7 +69,7 @@
     </head>
     <body onload="start_test()">
         <h1>Description</h1>
-        <p>This test validates the values of the window.performance.now() are comparable across frames.</p>
+        <p>This test validates the values of the window.performance.now() are based on the current document's navigationStart.</p>
         <div id="log"></div>
         <br />
     </body>
