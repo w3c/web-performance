@@ -20,6 +20,10 @@ test(function() {
 test(function() {
   assert_equals(typeof window.performance.now, "function", "window.performance.now is a function");
 }, "window.performance.now() function", {assert: "window.performance.now is a function"});
+
+test(function() {
+  assert_equals(typeof window.performance.now(), "number", "window.performance.now() returns a number");
+}, "window.performance.now() returns a number", {assert: "The now method MUST return a DOMHighResTimeStamp"});
 </script>
 </head>
 <body>
