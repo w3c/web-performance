@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/resources/testharness.css" />
 <script>
 test(function() {
-  assert_equals(window.performance.toString(), "[object Performance]");
+  assert_equals(typeof window.performance, "object");
 }, "window.performance is defined", {assert: "The window.performance attribute provides a hosting area for performance related attributes."});
 
 test(function() {
