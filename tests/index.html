@@ -32,6 +32,7 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <!--begin-toc-->
 <ol>
 <li><a href='#navigation_timing'>Navigation Timing</a></li>
+<li><a href='#hrt'>High Resolution Time</a></li>
 </ol>
 
 <p>Looking to run the tests and see test results? check the <a href='http://w3c-test.org/framework/'>test framework</a> instead.</p>
@@ -239,6 +240,51 @@ This test validates that each window has a unique window.performance object.</td
 </tbody>
 </table>
 
+
+<h2 id='hrt'>High Resolution Time</h2>
+
+<table>
+<colgroup>
+ <col class='test'>
+ <col class='description'>
+ <col class='spec_link'>
+ <col class='contact'>
+</colgroup>
+<thead>
+<tr>
+<th>Test</th>
+<th>Section</th>
+<th>Description</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/HighResolutionTime/basic.html">basic</a></td>
+<td>This test validates that window.performance.now() exist and is a function.</td>
+<td><a href='http://www.w3.org/TR/hr-time/#sec-extenstions-performance-interface'>4.3 Extensions to the Performance interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/HighResolutionTime/monotonic-clock.html">monotonic-clock</a></td>
+<td>This test validates that window.performance.now() follows the monotonic clock requirements.</td>
+<td><a href='http://www.w3.org/TR/hr-time/#sec-monotonic-clock'>4.4 Monotonic Clock</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/HighResolutionTime/test_cross_frame_start.html">test_cross_frame_start</a></td>
+<td>This test validates the values of the window.performance.now() are based on the current document's navigationStart.</td>
+<td><a href='http://www.w3.org/TR/hr-time/#sec-extenstions-performance-interface'>4.3 Extensions to the Performance interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id='others'>Working area</h2>
 
