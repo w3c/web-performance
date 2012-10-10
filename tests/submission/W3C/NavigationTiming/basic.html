@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Basic tests for Navigation Timing</title>
+<link rel="author" title="W3C" href="http://www.w3.org/" />
+<script src="http://www.w3c-test.org/resources/testharness.js"></script>
+<script src="http://www.w3c-test.org/resources/testharnessreport.js"></script>
+<link rel="stylesheet" href="http://www.w3c-test.org/resources/testharness.css" />
+<script>
+
+function FunctionObject(objName, extAttrs) {
+  var obj = undefined;
+  try {
+    obj = eval(interfaceName);
+  } catch(e) {};
+
+  test(function() {
+      assert_equals(typeof Object.getPrototypeOf(obj), "function");
+    },
+    objName + " [[Prototype]] is a Function object",
+    {assert: "If an object is defined to be a function object, its [[Prototype]] internal property is the Function prototype object.",
+     help: "http://www.w3.org/TR/WebIDL/#dfn-function-object"}
+   );
+}
+
+// ArrayClass, Constructor, ImplicitThis, NamedConstructor, NoInterfaceObject, OverrideBuiltins, NamedPropertiesObject
+function InterfaceObject(interfaceName, extAttrs) {
+  var NoInterfaceObject = !!extAttrs && extAttrs.NoInterfaceObject;
+
+  var obj = undefined;
+  try {
+    obj = eval(interfaceName);
+  } catch(e) {};
+
+  if (!NoInterfaceObject) {
+    test(function() {
+        assert_equals(typeof obj, "object");
+      }, 
+      interfaceName + " has an interface object",
+      {
+        assert: "For every non-callback interface [...], a corresponding property MUST exist on the ECMAScript global object. The name of the property is the identifier of the interface, and its value is an object called the interface object.",
+        help: "http://www.w3.org/TR/WebIDL/#es-interfaces"
+      }
+    );
+    InterfaceObjectPrototype(interfaceName, extAttrs);
+    FunctionObject(interfaceName, extAttrs);
+  } else {
+    test(function() {
+        assert_equals(typeof obj, "undefined");
+      }, 
+      interfaceName + " interface object does not exist",
+      {
+        assert: "If the [NoInterfaceObject] extended attribute appears on an interface, it indicates that an interface object will not exist for the interface.",
+        help: "http://www.w3.org/TR/WebIDL/#NoInterfaceObject"
+      }
+    );
+  }
+}
+
+function InterfaceObjectPrototype(interfaceName, extAttrs) {
+  var obj = undefined;
+  try {
+    eval(interfaceName);
+  } catch(e) {};
+
+  test(function() {
+      assert_equals(typeof obj.prototype, "object");
+    },
+    interfaceName + " needs an interface prototype object",
+    {assert: "The value of the “prototype” property of an interface object for a non-callback interface MUST be an object called the interface prototype object.",
+     help: "http://www.w3.org/TR/WebIDL/#interface-prototype-object"});
+
+  test(function() {
+      assert_equals(obj.prototype.toString(), interfaceName + "Prototype");
+    },
+    interfaceName + " prototype has the class string",
+    {assert: "The class string of an interface prototype object is the concatenation of the interface’s identifier and the string “Prototype”.",
+     help: "http://www.w3.org/TR/WebIDL/#interface-prototype-object"});
+}
+
+InterfaceObject("Performance");
+InterfaceObject("PerformanceTiming");
+InterfaceObject("PerformanceNavigation");
+
+test(function() {
+  assert_not_equals(window.performance, "undefined");
+}, "window.performance exists", {assert: "The Navigator object has a performance attribute"});
+
+test(function() {
+  assert_readonly(navigator, "performance");
+}, "window.performance is readonly", {assert: "The gelocation property on the Navigator object must be readonly"});
+
+test(function() {
+  assert_not_equals(window.performance.getCurrentPosition, undefined, 'window.performance.getCurrentPosition is defined'); 
+}, "performance.getCurrentPosition exists", {assert: "performance.getCurrentPosition exists"});
+
+test(function() {
+  assert_equals(typeof window.performance.getCurrentPosition, "function", "performance.getCurrentPosition is a function");
+}, "performance.getCurrentPosition() function", {assert: "performance.getCurrentPosition is a function"});
+
+</script>
+</head>
+<body>
+<h1>Description</h1>
+<p>This test validates the window.performance interface.</p>
+
+<div id="log"></div>
+
+</body>
+</html>
