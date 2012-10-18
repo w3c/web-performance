@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-June-27-2012">Editor's Draft June 27, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-Oct-18-2012">Editor's Draft Oct. 18th, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -48,8 +48,8 @@
   <dt>Latest Editor's Draft:</dt>
   <dd><a href='http://www.w3c-test.org/webperf/specs/ResourceTiming/'>http://www.w3c-test.org/webperf/specs/ResourceTiming/</a></dd>
   <dt>Previous versions:</dt>
+    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html</a></dd>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/440ab84e0b40/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/440ab84e0b40/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, <span
@@ -202,8 +202,8 @@ measure the time it takes to fetch a resource:</p>
         {
            var start = new Date().getTime();
            var image1 = new Image();
-           image1.src = 'http://w3c-test.org/webperf/image1.png';
            image1.onload = resourceTiming;
+           image1.src = 'http://w3c-test.org/webperf/image1.png';
 
            var resourceTiming = function() {
                var now = new Date().getTime();
@@ -246,8 +246,8 @@ with the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> inte
        function loadResources() 
        {
           var image1 = new Image();
-          image1.src = 'http://w3c-test.org/webperf/image1.png';
           image1.onload = resourceTiming;
+          image1.src = 'http://w3c-test.org/webperf/image1.png';
        }
        
        function resourceTiming() 
