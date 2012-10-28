@@ -13,7 +13,7 @@
 function FunctionObject(objName, extAttrs) {
   var obj = undefined;
   try {
-    obj = eval(interfaceName);
+    obj = window[interfaceName];
   } catch(e) {};
 
   test(function() {
@@ -31,7 +31,7 @@ function InterfaceObject(interfaceName, extAttrs) {
 
   var obj = undefined;
   try {
-    obj = eval(interfaceName);
+    obj = window[interfaceName];
   } catch(e) {};
 
   if (!NoInterfaceObject) {
