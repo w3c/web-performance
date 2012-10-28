@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <title>Basic tests for Navigation Timing</title>
 <link rel="author" title="W3C" href="http://www.w3.org/" />
+<link rel="help" href="http://www.w3.org/TR/navigation-timing/#sec-window.performance-attribute" />
 <script src="http://www.w3c-test.org/resources/testharness.js"></script>
 <script src="http://www.w3c-test.org/resources/testharnessreport.js"></script>
 <link rel="stylesheet" href="http://www.w3c-test.org/resources/testharness.css" />
@@ -85,19 +86,25 @@ InterfaceObject("PerformanceNavigation");
 
 test(function() {
   assert_not_equals(window.performance, "undefined");
-}, "window.performance exists", {assert: "The Navigator object has a performance attribute"});
+}, "window.performance exists", {assert: "[Replaceable] readonly attribute Performance performance"});
 
 test(function() {
-  assert_readonly(navigator, "performance");
-}, "window.performance is readonly", {assert: "The gelocation property on the Navigator object must be readonly"});
+  var saved = window.performance;
 
-test(function() {
-  assert_not_equals(window.performance.getCurrentPosition, undefined, 'window.performance.getCurrentPosition is defined'); 
-}, "performance.getCurrentPosition exists", {assert: "performance.getCurrentPosition exists"});
+  assert_false(window.hasOwnProperty("performance"), "The accessor property corresponding to the attribute only exists on the interface prototype object");
+  assert_true(Object.getPrototypeOf(window).hasOwnProperty("performance"), "The accessor property corresponding to the attribute only exists on the interface prototype object");
 
-test(function() {
-  assert_equals(typeof window.performance.getCurrentPosition, "function", "performance.getCurrentPosition is a function");
-}, "performance.getCurrentPosition() function", {assert: "performance.getCurrentPosition is a function"});
+  window.performance = 2;
+  assert_true(window.hasOwnProperty("performance"), "setting the corresponding property on the platform object will result in an own property with the same name being created on the object which has the value being assigned");
+  assert_equals(window.performance, 2, "performance is replaceable");
+
+  delete window.performance;
+
+  assert_equals(window.performance, saved, "original value performance is restaured");
+}, "window.performance is readonly but replaceable", {
+  assert: "[Replaceable] readonly attribute Performance performance",
+  help: "http://dev.w3.org/2006/webapi/WebIDL/#Replaceable"
+});
 
 </script>
 </head>
