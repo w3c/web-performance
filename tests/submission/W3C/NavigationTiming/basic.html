@@ -62,18 +62,18 @@ function InterfaceObject(interfaceName, extAttrs) {
 function InterfaceObjectPrototype(interfaceName, extAttrs) {
   var obj = undefined;
   try {
-    eval(interfaceName);
+    obj = window[interfaceName];
   } catch(e) {};
 
   test(function() {
-      assert_equals(typeof obj.prototype, "object");
+      assert_equals(typeof obj.prototype , "object");
     },
     interfaceName + " needs an interface prototype object",
     {assert: "The value of the “prototype” property of an interface object for a non-callback interface MUST be an object called the interface prototype object.",
      help: "http://www.w3.org/TR/WebIDL/#interface-prototype-object"});
 
   test(function() {
-      assert_equals(obj.prototype.toString(), interfaceName + "Prototype");
+      assert_equals(obj.prototype.toString(), "[object " + interfaceName + "Prototype]");
     },
     interfaceName + " prototype has the class string",
     {assert: "The class string of an interface prototype object is the concatenation of the interface’s identifier and the string “Prototype”.",
