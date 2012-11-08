@@ -2,38 +2,28 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>window.performance.now IDL testing</title>
+<title>idlharness test</title>
 <link rel="author" title="W3C" href="http://www.w3.org/" />
-<link rel="help" href="http://www.w3.org/TR/hr-time/#sec-extenstions-performance-interface"/>
+<link rel="help" href="http://www.w3.org/TR/page-visibility/#sec-document-interface"/>
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/webperf/tests/resources/webperftestharness.js"></script>
 <script src="/resources/WebIDLParser.js"></script>
 <script src="/resources/idlharness.js"></script>
-<link rel="stylesheet" href="/resources/testharness.css" />
 </head>
 <body>
 <h1>idlharness test</h1>
-<p>This test validates the WebIDL included in the High Resolution Time specification.</p>
+<p>This test validates the WebIDL included in the Page Visibility specification.</p>
 
 <pre id='untested_idl' style='display:none'>
-
-interface Window {
-};
-
-interface Performance {
-};
-
-partial interface Window {
-  [Replaceable] readonly attribute Performance performance;
+interface Document {
 };
 </pre>
 
 <pre id='idl'>
-typedef double DOMHighResTimeStamp;
-
-partial interface Performance {
-  DOMHighResTimeStamp now();
+partial interface Document {
+  readonly attribute boolean hidden;
+  readonly attribute DOMString visibilityState; 
+  // "hidden", "visible", "prerender", "unloaded"
 };
 </pre>
 
@@ -45,7 +35,7 @@ partial interface Performance {
   idl_array.add_untested_idls(document.getElementById("untested_idl").textContent);
   idl_array.add_idls(document.getElementById("idl").textContent);
 
-  idl_array.add_objects({Performance: ["performance"]});
+  idl_array.add_objects({Document: ["window.document"]});
 
   idl_array.test();
 })();
