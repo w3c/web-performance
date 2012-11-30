@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Monolitic Clock</title>
+<link rel="author" title="W3C" href="http://www.w3.org/" />
+<link rel="help" href="http://www.w3.org/TR/navigation-timing/#mono-clock" />
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script>
+
+
+</script>
+</head>
+<body>
+<h1>Description</h1>
+<p>The difference between any two chronologically recorded timing attributes must never be negative.</p>
+
+<script>
+function assert_positive(property1, property2, use_strict) {
+    test(function() {
+	    var timing = window.performance.timing;
+	    if (use_strict) {
+		assert_true( (timing[property1] - timing[property2]) > 0 );
+	    } else {
+		assert_true( (timing[property1] - timing[property2]) >= 0 );
+	    }
+	}, property1 + "-" + property2 );
+}
+
+var props = [
+"navigationStart",
+"redirectStart",
+"unloadStart",
+"unloadEnd",
+"redirectEnd",
+"fetchStart",
+"domainLookupStart",
+"domainLookupEnd",
+"connectStart",
+"connectEnd",
+"requestStart",
+"responseStart",
+"responseEnd",
+"domLoading",
+"domInteractive",
+"domContentLoaded",
+"domComplete",
+"loadEventStart",
+"loadEventEnd"
+];
+setup({ explicit_done: true });
+
+// "secureConnectionStart",
+
+function nav_timing() {
+    assert_positive("unloadEventEnd", "unloadEventStart", false);
+    assert_positive("redirectEnd", "redirectStart", false);
+    assert_positive("fetchStart", "navigationStart", false);
+    assert_positive("domainLookupStart", "fetchStart", false);
+    assert_positive("domainLookupEnd", "domainLookupStart", false);
+    assert_positive("connectStart", "domainLookupEnd", false);
+    assert_positive("connectEnd", "connectStart", false);
+    assert_positive("requestStart", "connectEnd", false);
+    assert_positive("responseStart", "requestStart", false);
+    assert_positive("responseEnd", "responseStart", false);
+    assert_positive("domLoading", "responseEnd", false);
+    assert_positive("domInteractive", "domLoading", false);
+    assert_positive("domContentLoadedEventStart", "domInteractive", false);
+    assert_positive("domContentLoadedEventEnd", "domContentLoadedEventStart", false);
+    assert_positive("domComplete", "domContentLoadedEventEnd", false);
+    assert_positive("loadEventStart", "domComplete", false);
+    assert_positive("loadEventEnd", "loadEventStart", false);
+    done();
+}
+function onload() {
+  setTimeout(nav_timing, 100);
+}
+
+on_event(window, "load", onload);
+
+</script>
+
+<div id="log"></div>
+
+</body>
+</html>
