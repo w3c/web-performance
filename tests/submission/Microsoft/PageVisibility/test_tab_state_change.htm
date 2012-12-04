@@ -2,99 +2,204 @@
 <html>
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Page Visibility API Operation While Switching Tabs</title>
+        <title>Page Visibility API Operation While Changing Tabs</title>
         
         <script type="text/javascript" src="/resources/testharness.js"></script>
         <link rel="stylesheet" href="/resources/testharness.css" />
         <script type="text/javascript" src="/webperf/tests/resources/pagevistestharness.js"></script>
           
-                
-        <script type="text/javascript" >
-            setup({timeout:60*1000, explicit_done:true});
-            var tab_open = true;
-            var open_link;
-            
-            function onload_test()
-            {
-                document.addEventListener("visibilitychange", callback);
-
-                test_true((document.hidden == false),
-                           "document.hidden == false for active tab before tab switch.");
-
-                test_equals(document.visibilityState,
-                            VISIBILITY_STATES.VISIBLE,
-                            "document.visibilityState == '" + VISIBILITY_STATES.VISIBLE + 
-                            "' for active tab before tab switch.");
-                try
-                {
-                    if (window.external)
-                    {
-                        //Open a new tab.  This should trigger the visibilitychange event
-                        //in this document to hidden.
-                        open_link = window.open("", "_blank");
-
-                        //Queue to close the new tab.  This should trigger the visibilitychange
-                        //event in this document to visible.
-                        setTimeout(function() { open_link.close(); }, 2000);
-                    }
-                    else
-                    {
-                        test_true(false, "Could not open new tab.  Test aborted early.");
-                        setTimeout(done, 0);
-                    }
-                }
-                catch (ex)
-                {
-                    test_true(false, "Could not open new tab.  Test aborted early.");
-                    setTimeout(done, 0);
-                }
-            }
-
-            function callback()
-            {
-                //New tab has focus. Document should be hidden.
-                if (tab_open)
-                {
-                    tab_open = false;
-                    test_true((document.hidden == true),
-                               "document.hidden == true when another tab has focus.");
-
-                    test_equals(document.visibilityState,
-                                VISIBILITY_STATES.HIDDEN,
-                                "document.visibilityState == '" + VISIBILITY_STATES.HIDDEN +
-                                "' when another tab has focus.");
-                }
-                //New tab has been closed.  Document should be visibile.
-                else
-                {
-                    test_true((document.hidden == false),
-                               "document.hidden == false when restoring tab focus.");
-
-                    test_equals(document.visibilityState,
-                                VISIBILITY_STATES.VISIBLE,
-                                "document.visibilityState == '" + VISIBILITY_STATES.VISIBLE +
-                                "' when restoring tab focus.");
-
-                    //Transition is done, finalize.
-                    //If the callback does not occur, the setup timeout will
-                    //finalize the test.
-                    done();
-                }
-            }
-        </script>
     </head>
-    
-    <body onload="onload_test();">
+    <body>
         <h1>Description</h1>
-        <p>This test validates the values of document.hidden and document.visibilityState when
-        changing the active tab.</p>
+        <p>This test validates that the page properly becomes hidden and visible due to switching tabs.</p>
         
+        <h1>Manual Test Steps:</h1>
         <p>
-            Note: This test will use window.open() to open a new tab and force the current tab to the background. 
-            Before running this test, the browser should be configured to open new links in tabs and not new pages.
-            The page should also be in the foreground when the test starts such that it starts with a "visible" state.
+            <ol>
+                <li> Ensure this page is the foreground and click the "Start Test"</li>
+                <li> Switch to another tab</li>
+                <li> Return to the current tab containing this test page</li>
+            </ol>
+            Note: This test will automatically timeout and fail if not completed within 60 seconds.
         </p>
+        
+        <button onclick="start_test();">Start Test</button>
 
         <div id="log"></div>
+        
+        <br />
+        IFrame with default style:
+        <br />
+        <iframe id="childDocShown" src="/webperf/tests/resources/blank_page_green.htm">
+            iframes unsupported
+        </iframe>
+        <hr />
+        IFrame with "display:none" style:
+        <br />
+        <iframe id="childDocHidden" src="/webperf/tests/resources/blank_page_green.htm" style="display:none">
+            iframes unsupported
+        </iframe>
+
+        <script type="text/javascript" >
+            var notification_step = null;
+            var child_doc_shown = null;
+            var child_doc_hidden = null;
+            var transition_mode;
+            var manual_test = null;
+
+            var expected_notification_count = 2;
+            var expected_frame_notification_count = 4;
+            var notification_count = 0;
+            var frame_notification_count = 0;
+            var two_notifications = false;
+            
+            var PAGE_HIDDEN_VAL = "hidden";
+            var PAGE_VISIBLE_VAL = "visible";
+        
+            setup({ explicit_done: true });
+            
+            function test_transition_init()
+            {
+                child_doc_shown = document.getElementById("childDocShown").contentDocument;
+                child_doc_hidden = document.getElementById("childDocHidden").contentDocument;
+                test_true(!document.hidden, "Page is visible on load.");
+                test_true((!child_doc_shown.hidden) && (!child_doc_hidden.hidden), 
+                          "All IFrame child documents are visible on load.");
+                
+                var verifyToken1 = document.addEventListener("visibilitychange", VerifyNotification);
+                var verifyToken2 = document.addEventListener("visibilitychange", VerifyNotification);
+                var verifyToken3 = document.addEventListener("visibilitychange", VerifyTwoNotifications);
+                var verifyToken4 = child_doc_shown.addEventListener("visibilitychange", VerifyFrameNotification);
+                var verifyToken5 = child_doc_hidden.addEventListener("visibilitychange", VerifyFrameNotification);
+                notification_step = 1;
+                
+                manual_test = AddManual("Browser tab switch has occurred.");
+            }
+
+            function VerifyFrameNotification()
+            {
+                frame_notification_count++;
+                if (frame_notification_count > expected_frame_notification_count)
+                {
+                    test_true(false, "An event fired inside a frame after its listener was removed.");
+                }
+            }
+
+            function VerifyNotification()
+            {
+                notification_count++;
+                if (notification_step)
+                {
+                    switch (notification_step)
+                    {
+                        case 1:
+                            // First step, check page visibility after tab deselection / minimization.  
+                            // hidden should change to true; visibilityState should change to "hidden"
+                            test_true(document.hidden, "Page is not visible on tab switch.");
+                            test_true(document.visibilityState == PAGE_HIDDEN_VAL, 
+                                      "Page visibility state should now be hidden.");
+                                      
+                            // Check to make sure child IFrame documents had the visibility change event bubble
+                            // down to them. The child documents should also become hidden.
+                            test_true(child_doc_shown.hidden && child_doc_hidden.hidden, 
+                                      "The visibilityChange event should bubble: all IFrame child documents should " + 
+                                      "become hidden.");
+                            test_true(child_doc_shown.visibilityState == PAGE_HIDDEN_VAL && 
+                                      child_doc_hidden.visibilityState == PAGE_HIDDEN_VAL, 
+                                      "All IFrame child documents' visibility states should now be hidden.");
+                                      
+                            notification_step = 2;
+                            break;
+
+                        case 2:
+                            //Second step, check page visibility after tab reselection / maximization / restoration.  
+                            // hidden should change to false; visibilityState should change to "visible"
+                            test_true(!document.hidden, "Page is visible again on return to tab.");
+                            test_true(document.visibilityState == PAGE_VISIBLE_VAL, 
+                                      "Page visibility state should now be visible.");
+                                      
+                            // check to make sure child IFrame documents have remained visible
+                            test_true((!child_doc_shown.hidden) && (!child_doc_hidden.hidden), 
+                                      "All IFrame child documents are now visible.");
+                            test_true(child_doc_shown.visibilityState == PAGE_VISIBLE_VAL && 
+                                      child_doc_hidden.visibilityState == PAGE_VISIBLE_VAL, 
+                                      "All IFrame child documents' visibility states should now be visible.");
+
+                            //Verify that a second registration to a different callback also occurred
+                            test_true(two_notifications, "Two registrations (different callbacks) occurred.");
+
+                            //Verify that a second registration to the same callback did not occur
+                            test_equals(notification_count,
+                                        expected_notification_count,
+                                        "Two registrations (same callback) did not occur.");
+                                        
+                            //Remove all event listeners and verify that the event does not fire
+                            document.removeEventListener("visibilitychange", VerifyNotification);
+                            document.removeEventListener("visibilitychange", VerifyTwoNotifications);
+                            
+                            // remove listeners from the child frames
+                            child_doc_shown.removeEventListener("visibilitychange", VerifyFrameNotification);
+                            child_doc_hidden.removeEventListener("visibilitychange", VerifyFrameNotification);
+                            
+                            // pass the manual item associated with these tests
+                            AddManualResult(manual_test, true);
+
+                            notification_step = 3;
+                            
+                            // schedule the rollup
+                            setTimeout(VerifyAllNotifications, 200);
+                            break;
+                        case 3:
+                            //This step should not have occurred since the event handlers were cleared
+                            test_true(false, "Event did not fire when event listener is removed.");
+
+                            //No more tests to run  
+                            notification_step = null;
+
+                            //On final step, schedule the rollup
+                            setTimeout(done, 2000);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            function VerifyAllNotifications()
+            {
+                //On final step, schedule the rollup
+                setTimeout(done, 1000);
+            }
+
+            function VerifyTwoNotifications()
+            {
+                //This is a duplicate registration on visibilitychange and
+                //should never get fired.  Check that duplicate_notification
+                //is false to verify that this never occurred.
+                two_notifications = true;
+            }
+            
+            // Manual Test helper functions
+            function AddManual(test)
+            {
+                // add asynchronous test for manual tests 
+                return async_test(test);
+            }
+
+            function AddManualResult(oManualTest, passState)
+            {
+                // add assertion to manual test for the pass state
+                oManualTest.step(function() {assert_true(passState)});
+                
+                // end manual test
+                oManualTest.done();
+            }
+
+            function start_test()
+            {
+                test_transition_init();
+            }
+        </script>
     </body>
 </html>

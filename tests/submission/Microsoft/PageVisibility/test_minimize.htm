@@ -11,7 +11,8 @@
     </head>
     <body>
         <h1>Description</h1>
-        <p>This test validates that the page properly becomes hidden and visible due to minimizing, maximizing, and restoring the browser window.</p>
+        <p>This test validates that the page properly becomes hidden and visible due to minimizing, maximizing, and 
+           restoring the browser window.</p>
         
         <h1>Manual Test Steps:</h1>
         <p>
@@ -41,19 +42,164 @@
         </iframe>
 
         <script type="text/javascript" >
+            var notification_step = null;
+            var child_doc_shown = null;
+            var child_doc_hidden = null;
+            var transition_mode;
+            var manual_test = null;
+
+            var expected_notification_count = 2;
+            var expected_frame_notification_count = 4;
+            var notification_count = 0;
+            var frame_notification_count = 0;
+            var two_notifications = false;
+            
+            var PAGE_HIDDEN_VAL = "hidden";
+            var PAGE_VISIBLE_VAL = "visible";
+        
             setup({ explicit_done: true });
+            
+            function test_transition_init()
+            {
+                child_doc_shown = document.getElementById("childDocShown").contentDocument;
+                child_doc_hidden = document.getElementById("childDocHidden").contentDocument;
+                test_true(!document.hidden, "Page is visible on load.");
+                test_true((!child_doc_shown.hidden) && (!child_doc_hidden.hidden), 
+                          "All IFrame child documents are visible on load.");
+                
+                var verifyToken1 = document.addEventListener("visibilitychange", VerifyNotification);
+                var verifyToken2 = document.addEventListener("visibilitychange", VerifyNotification);
+                var verifyToken3 = document.addEventListener("visibilitychange", VerifyTwoNotifications);
+                var verifyToken4 = child_doc_shown.addEventListener("visibilitychange", VerifyFrameNotification);
+                var verifyToken5 = child_doc_hidden.addEventListener("visibilitychange", VerifyFrameNotification);
+                notification_step = 1;
+                
+                manual_test = AddManual("Browser minimization has occurred.");
+            }
+
+            function VerifyFrameNotification()
+            {
+                frame_notification_count++;
+                if (frame_notification_count > expected_frame_notification_count)
+                {
+                    test_true(false, "An event fired inside a frame after its listener was removed.");
+                }
+            }
+
+            function VerifyNotification()
+            {
+                notification_count++;
+                if (notification_step)
+                {
+                    switch (notification_step)
+                    {
+                        case 1:
+                            // First step, check page visibility after tab deselection / minimization.  
+                            // hidden should change to true; visibilityState should change to "hidden"
+                            test_true(document.hidden, "Page is not visible on minimization.");
+                            test_true(document.visibilityState == PAGE_HIDDEN_VAL, 
+                                      "Page visibility state should now be hidden.");
+                                      
+                            // Check to make sure child IFrame documents had the visibility change event bubble
+                            // down to them. The child documents should also become hidden.
+                            test_true(child_doc_shown.hidden && child_doc_hidden.hidden, 
+                                      "The visibilityChange event should bubble: all IFrame child documents should " + 
+                                      "become hidden.");
+                            test_true(child_doc_shown.visibilityState == PAGE_HIDDEN_VAL && 
+                                      child_doc_hidden.visibilityState == PAGE_HIDDEN_VAL, 
+                                      "All IFrame child documents' visibility states should now be hidden.");
+                                      
+                            notification_step = 2;
+                            break;
+
+                        case 2:
+                            //Second step, check page visibility after tab reselection / maximization / restoration.  
+                            // hidden should change to false; visibilityState should change to "visible"
+                            test_true(!document.hidden, "Page is visible again on maximization / restoration.");
+                            test_true(document.visibilityState == PAGE_VISIBLE_VAL, 
+                                      "Page visibility state should now be visible.");
+                                      
+                            // check to make sure child IFrame documents have remained visible
+                            test_true((!child_doc_shown.hidden) && (!child_doc_hidden.hidden), 
+                                      "All IFrame child documents are now visible.");
+                            test_true(child_doc_shown.visibilityState == PAGE_VISIBLE_VAL && 
+                                      child_doc_hidden.visibilityState == PAGE_VISIBLE_VAL, 
+                                      "All IFrame child documents' visibility states should now be visible.");
+
+                            //Verify that a second registration to a different callback also occurred
+                            test_true(two_notifications, "Two registrations (different callbacks) occurred.");
+
+                            //Verify that a second registration to the same callback did not occur
+                            test_equals(notification_count,
+                                        expected_notification_count,
+                                        "Two registrations (same callback) did not occur.");
+                                        
+                            //Remove all event listeners and verify that the event does not fire
+                            document.removeEventListener("visibilitychange", VerifyNotification);
+                            document.removeEventListener("visibilitychange", VerifyTwoNotifications);
+                            
+                            // remove listeners from the child frames
+                            child_doc_shown.removeEventListener("visibilitychange", VerifyFrameNotification);
+                            child_doc_hidden.removeEventListener("visibilitychange", VerifyFrameNotification);
+                            
+                            // pass the manual item associated with these tests
+                            AddManualResult(manual_test, true);
+
+                            notification_step = 3;
+                            
+                            // schedule the rollup
+                            setTimeout(VerifyAllNotifications, 200);
+                            break;
+                        case 3:
+                            //This step should not have occurred since the event handlers were cleared
+                            test_true(false, "Event did not fire when event listener is removed.");
+
+                            //No more tests to run  
+                            notification_step = null;
+
+                            //On final step, schedule the rollup
+                            setTimeout(done, 2000);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            function VerifyAllNotifications()
+            {
+                //On final step, schedule the rollup
+                setTimeout(done, 1000);
+            }
+
+            function VerifyTwoNotifications()
+            {
+                //This is a duplicate registration on visibilitychange and
+                //should never get fired.  Check that duplicate_notification
+                //is false to verify that this never occurred.
+                two_notifications = true;
+            }
+            
+            // Manual Test helper functions
+            function AddManual(test)
+            {
+                // add asynchronous test for manual tests 
+                return async_test(test);
+            }
+
+            function AddManualResult(oManualTest, passState)
+            {
+                // add assertion to manual test for the pass state
+                oManualTest.step(function() {assert_true(passState)});
+                
+                // end manual test
+                oManualTest.done();
+            }
 
             function start_test()
             {
-                if (BrowserHasFeature(document, "hidden") !== undefined)
-                {
-                    test_transition_init(document, TRANSITION_MODE_MIN_MAX);
-                }
-                else
-                {
-                    test_true(false, "Your browser does not support the Page Visibility API");
-                    VerifyTest();
-                }
+                test_transition_init();
             }
         </script>
     </body>
