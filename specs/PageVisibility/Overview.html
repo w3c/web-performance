@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-July-10-2012">Editor's Draft July 10, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-5-2012">Editor's Draft December 5, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -297,10 +297,11 @@ interface <a href='#HTML5'>[HTML5]</a>, which this specification
 extends:
 </p>
 <pre class="idl">
+enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "unloaded" };
+
 partial interface <dfn id="document">Document</dfn> {
   readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
-  readonly attribute <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'>DOMString</a> <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
-  // "hidden", "visible", "prerender", "unloaded"
+  readonly attribute <a href="#VisibilityState" title="VisibilityState">VisibilityState</a> <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
 };
 </pre>
 
@@ -505,8 +506,8 @@ e.g., for experimental purposes, vendors <span class='rfc2119'>MUST</span> use t
 </p>
 
 <p>If an extension to the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute return value
- is needed for an experimental visibility state, on getting the <a href="#dom-document-visibilitystate">visibilityState</a> attribute, 
-  vendors <span class='rfc2119'>MUST</span> return a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that uses the following convention:</p>
+ is needed for an experimental visibility state, User Agents MUST update the <a href="#VisibilityState" title="VisibilityState">VisibilityState</a> enum with
+ a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that uses the following convention:</p>
  
 <p><code>[vendorprefix]-[name]</code></p>
 
