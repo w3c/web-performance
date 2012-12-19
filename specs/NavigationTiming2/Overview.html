@@ -211,28 +211,28 @@ first bit of JavaScript in the head is executed, but it does not give any
 information about the time it takes to get the page from the server. </p>
 
 <p>To address the need for complete and detailed information on the navigation of the
-document, the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/">Navigation Timing</a> 
-specification defines the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#performancetiming">PerformanceTiming</a>
+document, the <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a> 
+specification defines the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
 interface. This interface allows JavaScript mechanisms to provide complete client-side latency
 measurements within applications. </p>
 
 <p>
-However, the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#performancetiming">PerformanceTiming</a>
+However, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
 interface was not defined to provide data in sub-millisecond resolution, which can be useful for analysis purposes.
-Further, the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#performancetiming">PerformanceTiming</a> interface
+Further, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> interface
 does not participate in the 
 <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">Performance Timeline</a>, a unifying 
 interface to access and retrieve performance metrics from the performance timeline of a web application.  
 </p>
 
 <p>
-Additionally, the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#performancetiming">PerformanceTiming</a>
+Additionally, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
 interface measures the time of its attributes from January 01 1970, leading to very large numbers representing the time values.
 </p>
 
 <div class="example">
 <p>For example, if we know that the response end occurs 100ms after the start of navigation, we may find data that the
-the <a href="http://www.w3.org/TR/2011/CR-navigation-timing-20110602/#performancetiming">PerformanceTiming</a> data looks like so:
+the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> data looks like so:
 </p>
 <pre>
 navigationStart:   1314223489190
@@ -332,7 +332,7 @@ the more accurate "an object implementing the interface <code
 title="">Foo</code>". </p>
 
 <p>The term "navigation" refers to the act of
-<a href="http://www.w3.org/TR/html5/history.html#navigate">navigating</a>.</p>
+<a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigating</a>.</p>
 
 <p>The term "JavaScript" is used to refer to
 <a href="#ECMA262">ECMA-262</a>,
@@ -410,7 +410,7 @@ The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> inter
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately after the user agent finishes <a
-href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompting
+href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#prompt-to-unload-a-document">prompting
 to unload</a> the previous document. If there is no previous document, this attribute
 MUST return the same value as <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</p>
 
@@ -421,7 +421,7 @@ MUST return the same value as <a href="#dom-performancenavigationtiming-fetchsta
 [<a href='#rfc6454'>IETF RFC 6454</a>],
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent starts
-the <a href="http://dev.w3.org/html5/spec/history.html#unloading-documents">unload</a>
+the <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#unloading-documents">unload</a>
 event of the previous document. 
 
 If there is no previous document or the previous document has a
@@ -435,14 +435,14 @@ with a time value equal to zero.</p>
 same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately after the user agent finishes the
-<a href="http://dev.w3.org/html5/spec/history.html#unload-a-document">unload</a>
+<a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#unload-a-document">unload</a>
 event of the previous document. If there is no previous document or the previous document has
 a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to zero.</p>
 
 <p>If there are HTTP redirects
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and not all the redirects or equivalent are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 both <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a> and
@@ -465,7 +465,7 @@ available MUST set it as undefined.  If the network interface is not immediately
 <h4><code><dfn id="dom-performancenavigationtiming-redirectstart">redirectStart</dfn></code> attribute </h4>
 
 <p>If there are HTTP redirects
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if all the redirects or equivalent are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
@@ -476,7 +476,7 @@ with a time value equal to zero.</p>
 <h4><code><dfn id="dom-performancenavigationtiming-redirectend">redirectEnd</dfn></code> attribute </h4>
 
 <p>If there are HTTP redirects
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and all redirects and equivalents are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
@@ -487,14 +487,14 @@ with a time value equal to zero.</p>
 <h4><code><dfn id="dom-performancenavigationtiming-fetchstart">fetchStart</dfn></code> attribute</h4>
 
 <p>If the new resource is to be
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetched</a> using HTTP GET
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or 
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">fetched</a> using HTTP GET
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-get">or 
 equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent starts
-checking <a href="http://dev.w3.org/html5/spec/single-page.html#relevant-application-cache">
+checking <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#relevant-application-cache">
 any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time when the user agent starts 
-<a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">fetching</a> the resource.</p>
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">fetching</a> the resource.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domainlookupstart">domainLookupStart</dfn></code> attribute</h4>
 
@@ -503,7 +503,7 @@ with a time value equal to the time immediately before the user agent starts the
 lookup for the current document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document
-is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+is retrieved from <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or local resources,
 this attribute MUST return the same value as <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>. </p>
 
@@ -514,7 +514,7 @@ with a time value equal to the time immediately after the user agent
 finishes the domain name lookup for the current document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document
-is retrieved from <a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+is retrieved from <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or local resources,
 this attribute MUST return the same value as <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>. </p>
 
@@ -522,7 +522,7 @@ this attribute MUST return the same value as <a href="#dom-performancenavigation
 <p>This section is non-normative.</p>
 <p>Checking and retrieving contents from the
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a> [<a href='#rfc2616'>RFC 2616</a>]
-is part of the <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">
+is part of the <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">
 fetching process</a>. It's covered by the
 <a href="#dom-performancenavigationtiming-requeststart">requestStart</a>, 
 <a href="#dom-performancenavigationtiming-responsestart">responseStart</a> and
@@ -545,7 +545,7 @@ with a time value equal to the time immediately before the user agent start
 establishing the connection to the server to retrieve the document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
-href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or local resources,
 this attribute MUST return value of <a href="#dom-performancenavigationtiming-domainlookupend">domainLookupEnd</a>.</p>
 
@@ -557,7 +557,7 @@ finishes establishing the connection to the server to retrieve the current docum
 If a <a
 href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
 connection</a> [<a href='#rfc2616'>RFC 2616</a>] is used or the current document is retrieved from <a
-href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or local resources,
 this attribute MUST return the value of <a href="#dom-performancenavigationtiming-domainlookupend">domainLookupEnd</a>
 </p>
@@ -576,7 +576,7 @@ such as SSL handshake and SOCKS authentication.
 
 <p>This attribute is optional. User agents that don't have this attribute
 available MUST set it as undefined. When this attribute is available, if the
-<a href="http://dev.w3.org/html5/spec/urls.html#url-scheme">scheme</a> of the
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#url-scheme">scheme</a> of the
 current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
 attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent starts the
@@ -589,7 +589,7 @@ available but HTTPS is not used, this attribute MUST return zero.
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent
 starts requesting the current document from the server, or from
-<a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+<a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">
 relevant application caches</a> or from local resources.</p>
 
 <p>If the transport connection fails after a request is sent and the user
@@ -614,7 +614,7 @@ sending the request due to the HTTP layer encapsulation.</li>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately after the user agent receives the first
 byte of the response from the server, or from
-<a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+<a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or from local resources. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-responseend">responseEnd</dfn></code> attribute</h4>
@@ -624,48 +624,48 @@ with a time value equal to the time immediately after the user agent
 receives the last byte of the current document or immediately before the
 transport connection is closed, whichever comes first. The document here
 can be received either from the server,
-<a href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+<a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domloading">domLoading</dfn></code> attribute</h4>
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent sets the
-<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
 document readiness</a> to 
-<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">"loading"</a>.</p>
+<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">"loading"</a>.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-dominteractive">domInteractive</dfn></code> attribute</h4>
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent sets the
-<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
 document readiness</a> to
-<a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"interactive"</a>.</p>
+<a href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">"interactive"</a>.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcontenteventstart">domContentLoadedEventStart</dfn></code> attribute</h4>
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent fires <a
-href="http://dev.w3.org/html5/spec/the-end.html#the-end">the DOMContentLoaded
+href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">the DOMContentLoaded
 event</a> at the Document.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcontenteventend">domContentLoadedEventEnd</dfn></code> attribute</h4>
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately after the document's <a
-href="http://dev.w3.org/html5/spec/the-end.html#the-end">DOMContentLoaded
+href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcomplete">domComplete</dfn></code> attribute</h4>
 
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent sets the
-<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
 document readiness</a> to 
-<a href="http://dev.w3.org/html5/spec/the-end.html#the-end">"complete"</a>.</p>
+<a href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">"complete"</a>.</p>
 
-<p>If the <a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">
+<p>If the <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">
 current document readiness</a> changes to the same state multiple times,
 <a href="#dom-performancenavigationtiming-domloading">domLoading</a>,
 <a href="#dom-performancenavigationtiming-dominteractive">domInteractive</a>,
@@ -674,7 +674,7 @@ current document readiness</a> changes to the same state multiple times,
 <a href="#dom-performancenavigationtiming-domcomplete">domComplete</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time of the first
 occurrence of the corresponding
-<a href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">document readiness</a>
+<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">document readiness</a>
 change.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-loadstart">loadEventStart</dfn></code> attribute </h4>
@@ -693,10 +693,10 @@ document is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#d
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 
-<h4><code><dfn id="dom-performancenavigation-type">type</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-performancenavigationtiming-type">type</dfn></code> attribute</h4>
 
 <p>This attribute MUST return the a DOMString describing the type of the last non-redirect <a
-href="http://dev.w3.org/html5/spec/history.html#navigate">navigation</a>
+href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#navigate">navigation</a>
 in the current browsing context. It MUST have one of the following DOMString <a
 href="#dom-performancenavigation-type">navigation type</a> values. </p>
 <dl>
@@ -707,22 +707,22 @@ href="#dom-performancenavigation-type">navigation type</a> values. </p>
     and <a href="#dom-performancenavigation-typebackforward">back_forward</a> as listed below.</p></dd>
   <dt><dfn id="dom-performancenavigation-typereload">reload</dfn></dt>
     <dd><p>Navigation through the reload operation or the
-    <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a>
+    <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a>
     method.</p></dd>
   <dt><dfn id="dom-performancenavigation-typebackforward">back_forward</dfn></dt>
    <dd><p>Navigation
-  through a <a href="http://dev.w3.org/html5/spec/single-page.html#traverse-the-history">history traversal</a> operation.</p></dd>
+  through a <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#traverse-the-history">history traversal</a> operation.</p></dd>
 </dl>
 
 <div class="note">
-<p>Client-side redirects, such as those using <a href="hhttp://dev.w3.org/html5/spec/the-meta-element.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
-are not considered HTTP redirects <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
+<p>Client-side redirects, such as those using <a href="http://www.w3.org/html/wg/drafts/html/master/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
+are not considered HTTP redirects <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
 In those cases, the <a href="#dom-performancenavigation-type">type</a> attribute should return appropriate value,
 such as <a href="#dom-performancenavigation-typenavigate">reload</a> if reloading the current page, or
 <a href="#dom-performancenavigation-typenavigate">navigate</a> if navigating to a new URL.</p>
 </div>
 
-<h4><code><dfn id="dom-performancenavigation-redirectcount">redirectCount</dfn></code> attribute </h4>
+<h4><code><dfn id="dom-performancenavigationtiming-redirectcount">redirectCount</dfn></code> attribute </h4>
 
 <p>This attribute MUST return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
@@ -752,20 +752,20 @@ non-normative intervals between timings.</p>
     these steps.
     <ol style="list-style-type:lower-alpha;">
       <li>The navigation is aborted due to the
-        <a href="http://dev.w3.org/html5/spec/the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed
+        <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#sandboxed-navigation-browsing-context-flag">sandboxed
         navigation browsing context flag</a> or the
-        <a href="http://dev.w3.org/html5/spec/the-iframe-element.html#sandboxed-top-level-navigation-browsing-context-flag">sandboxed
+        <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#sandboxed-top-level-navigation-browsing-context-flag">sandboxed
         top-level navigation browsing context flag</a>, or a preexist attempt
-        to navigate the <a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">browsing context</a>.</li>
+        to navigate the <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#browsing-context">browsing context</a>.</li>
       <li>The navigation is caused by <a
-        href="http://dev.w3.org/html5/spec/history.html#navigate-fragid-step"><em>fragment
+        href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#navigate-fragid-step"><em>fragment
         identifiers</em></a> within the page.</li>
       <li>The new resource is to be handled by some sort of inline
       content.</li>
       <li>The new resource is to be handled using a mechanism that does not
         affect the browsing context.</li>
       <li>The user <a
-        href="http://dev.w3.org/html5/spec/history.html#refused-to-allow-the-document-to-be-unloaded">refuses
+        href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#refused-to-allow-the-document-to-be-unloaded">refuses
         to allow the document to be unloaded</a>.</li>
     </ol>
   </li>
@@ -775,9 +775,9 @@ non-normative intervals between timings.</p>
   <li>Set <a href="#entryType-attribute">entryType</a> to the DOMString <code>navigation</code>.</li>
   <li>Set <a href="#startTime-attribute">startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero.</li>
   <li>Immediately after the user agent <a
-    href="http://dev.w3.org/html5/spec/history.html#prompt-to-unload-a-document">prompts
+    href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#prompt-to-unload-a-document">prompts
     to unload</a> the previous <a
-    href="http://dev.w3.org/html5/spec/dom.html#document">document</a>,
+    href="http://www.w3.org/html/wg/drafts/html/master/dom.html#document">document</a>,
     record the current time as <a
     href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>.</li>
   <li> Record the current navigation type in <a href="#dom-performancenavigation-type">type</a>
@@ -785,15 +785,15 @@ non-normative intervals between timings.</p>
     <ol style="list-style-type:lower-alpha;">
     <li>If the navigation was started by clicking on a link, or entering the URL in the user
         agent's address bar, or form submission, or initializing through a script operation other than the
-        <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a> method,
+        <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a> method,
         let the navigation type be the DOMSTring <a href="#dom-performancenavigation-typenavigate">navigate</a>.</li>
     <li>If the navigation was started either as a result of a
-        <a href="http://dev.w3.org/html5/spec/single-page.html#attr-meta-http-equiv-refresh">meta refresh</a>,
-        or the <a href="http://dev.w3.org/html5/spec/single-page.html#dom-location-reload">location.reload()</a>
+        <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#attr-meta-http-equiv-refresh">meta refresh</a>,
+        or the <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a>
         method, or other equivalent actions, let the navigation type
         be the DOMString <a href="#dom-performancenavigation-typereload">reload</a>.</li>
     <li>If the navigation was started as a result of
-        <a href="http://dev.w3.org/html5/spec/single-page.html#traverse-the-history">history traversal</a>,
+        <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#traverse-the-history">history traversal</a>,
         let the navigation type be the DOMString <a href="#dom-performancenavigation-typebackforward">back_forward</a>.</li>
     </ol>
   </li>
@@ -807,12 +807,12 @@ non-normative intervals between timings.</p>
     record the current time as <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a>.</li>
   <li id="step-linknegotiation-start">If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
-    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-get">or equivalent</a>,
+    <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
-    href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">
+    href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">
     relevant application caches</a>, record the current time as
     <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>. Otherwise, immediately before a user agent starts the
-    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#fetching-resources">
+    <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">
     fetching process</a>, record the current time as <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</li>
   <li>Let <a href="#dom-performancenavigationtiming-domainlookupstart">domainLookupStart</a>, <a
     href="#dom-performancenavigationtiming-domainlookupend">domainLookupEnd</a>, <a
@@ -820,7 +820,7 @@ non-normative intervals between timings.</p>
     href="#dom-performancenavigationtiming-connectend">connectEnd</a> be the same value as <a
     href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</li>
   <li>If the resource is fetched from the <a
-    href="http://dev.w3.org/html5/spec/offline.html#relevant-application-cache">relevant
+    href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
     application cache</a> or local resources, including the
     <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP cache</a>,
     go to step <a href="#step-request-start">18</a>.</li>
@@ -877,7 +877,7 @@ non-normative intervals between timings.</p>
     </div>
   </li>
   <li>If the fetched resource results in an HTTP redirect
-    <a href="http://dev.w3.org/html5/spec/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>,
+    <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>,
     then
     <ol style="list-style-type:lower-alpha;">
       <li>if the current document and the document that is redirected to are not from the
@@ -912,23 +912,23 @@ non-normative intervals between timings.</p>
   </li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-domloading">domLoading</a> immediately
     before the user agent sets the <a
-    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
     document readiness</a> to "loading".</li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-dominteractive">domInteractive</a>
     immediately before the user agent sets the <a
-    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
     document readiness</a> to "interactive".</li>
   <li>Record the time as <a
     href="#dom-performancenavigationtiming-domcontenteventstart">domContentLoadedEventStart</a> immediately before the
-    user agent fires <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
+    user agent fires <a href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">the
     DOMContentLoaded event</a> at the document.</li>
   <li>Record the time as <a
     href="#dom-performancenavigationtiming-domcontenteventend">domContentLoadedEventEnd</a> immediately after
-    <a href="http://dev.w3.org/html5/spec/the-end.html#the-end">the
+    <a href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">the
     DOMContentLoaded event</a> completes.</li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-domcomplete">domComplete</a>
     immediately before the user agent sets the <a
-    href="http://dev.w3.org/html5/spec/dom.html#current-document-readiness">current
+    href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
     document readiness</a> to "complete".</li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-loadstart">loadEventStart</a>
     immediately before the user agent fires the load event.</li>
@@ -976,7 +976,7 @@ These attacks have been mitigated by enforcing the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a> policy when
 timing information involving the previous navigation is accessed.</p>
 
-<p>The <a href="http://dev.w3.org/html5/spec/origin-0.html#relaxing-the-same-origin-restriction">
+<p>The <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relaxing-the-same-origin-restriction">
 relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
 across documents. In shared hosting, an untrusted third party is able to host an HTTP server at the same
 IP address but on a different port.</p>
@@ -1023,7 +1023,7 @@ all so it's not always feasible to mitigate this attack.</p>
 	ECMA-262, June 2011. This version of the ECMAScript
 	Language is available from <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
 </dd><dt>[<a id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href="http://www.w3.org/TR/html5/">HTML5</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, March 2012. This version of the HTML5 is available from <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>. The <a href="http://dev.w3.org/html5/spec/">latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
