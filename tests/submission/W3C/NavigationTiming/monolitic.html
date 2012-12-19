@@ -7,70 +7,41 @@
 <link rel="help" href="http://www.w3.org/TR/navigation-timing/#mono-clock" />
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script>
-
-
-</script>
 </head>
 <body>
 <h1>Description</h1>
 <p>The difference between any two chronologically recorded timing attributes must never be negative.</p>
 
 <script>
-function assert_positive(property1, property2, use_strict) {
+function assert_greater_than(property1, property2) {
     test(function() {
 	    var timing = window.performance.timing;
-	    if (use_strict) {
-		assert_true( (timing[property1] - timing[property2]) > 0 );
-	    } else {
-		assert_true( (timing[property1] - timing[property2]) >= 0 );
-	    }
-	}, property1 + "-" + property2 );
+            assert_true( (timing[property1] >= timing[property2]) );
+	}, property1 + ">=" + property2 );
 }
 
-var props = [
-"navigationStart",
-"redirectStart",
-"unloadStart",
-"unloadEnd",
-"redirectEnd",
-"fetchStart",
-"domainLookupStart",
-"domainLookupEnd",
-"connectStart",
-"connectEnd",
-"requestStart",
-"responseStart",
-"responseEnd",
-"domLoading",
-"domInteractive",
-"domContentLoaded",
-"domComplete",
-"loadEventStart",
-"loadEventEnd"
-];
 setup({ explicit_done: true });
 
 // "secureConnectionStart",
 
 function nav_timing() {
-    assert_positive("unloadEventEnd", "unloadEventStart", false);
-    assert_positive("redirectEnd", "redirectStart", false);
-    assert_positive("fetchStart", "navigationStart", false);
-    assert_positive("domainLookupStart", "fetchStart", false);
-    assert_positive("domainLookupEnd", "domainLookupStart", false);
-    assert_positive("connectStart", "domainLookupEnd", false);
-    assert_positive("connectEnd", "connectStart", false);
-    assert_positive("requestStart", "connectEnd", false);
-    assert_positive("responseStart", "requestStart", false);
-    assert_positive("responseEnd", "responseStart", false);
-    assert_positive("domLoading", "responseEnd", false);
-    assert_positive("domInteractive", "domLoading", false);
-    assert_positive("domContentLoadedEventStart", "domInteractive", false);
-    assert_positive("domContentLoadedEventEnd", "domContentLoadedEventStart", false);
-    assert_positive("domComplete", "domContentLoadedEventEnd", false);
-    assert_positive("loadEventStart", "domComplete", false);
-    assert_positive("loadEventEnd", "loadEventStart", false);
+    assert_greater_than("unloadEventEnd", "unloadEventStart");
+    assert_greater_than("redirectEnd", "redirectStart");
+    assert_greater_than("fetchStart", "navigationStart");
+    assert_greater_than("domainLookupStart", "fetchStart");
+    assert_greater_than("domainLookupEnd", "domainLookupStart");
+    assert_greater_than("connectStart", "domainLookupEnd");
+    assert_greater_than("connectEnd", "connectStart");
+    assert_greater_than("requestStart", "connectEnd");
+    assert_greater_than("responseStart", "requestStart");
+    assert_greater_than("responseEnd", "responseStart");
+    assert_greater_than("domLoading", "responseEnd");
+    assert_greater_than("domInteractive", "domLoading");
+    assert_greater_than("domContentLoadedEventStart", "domInteractive");
+    assert_greater_than("domContentLoadedEventEnd", "domContentLoadedEventStart");
+    assert_greater_than("domComplete", "domContentLoadedEventEnd");
+    assert_greater_than("loadEventStart", "domComplete");
+    assert_greater_than("loadEventEnd", "loadEventStart");
     done();
 }
 function onload() {
