@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Page Visibility</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-december-5-2012">Editor's Draft December 5, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-18-2012">Editor's Draft December 18, 2012</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -433,13 +433,36 @@ has changed.
     <ol>
         <li>
 			<p>
-			If traversing to a <a href="http://www.w3.org/TR/html5/history.html#session-history-entry">session history entry</a>,
-		   run the following steps before running the step to fire the <code><a href="http://www.w3.org/TR/html5/history.html#event-pageshow">pageshow</a></code> event.
+			If traversing to a <a href="http://www.w3.org/TR/html5/browsers.html#session-history-entry">session history entry</a>,
+		   run the <a href="#now-visible-algorithm">now visible algorithm</a> before running the step to fire the <code><a href="http://www.w3.org/TR/html5/browsers.html#event-pageshow">pageshow</a></code> event.
 			</p>
         </li>
 		<li>
-			<p>Queue a task that runs the following steps synchronously. </p>
-        <ol style="list-style-type:lower-alpha;"> 
+			<p>Otherwise, queue a task that runs the <a href="#now-visible-algorithm">now visible algorithm</a>.</p>
+		</li>
+    </ol>
+<p>
+    Else if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+    <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>
+    is now not visible or if the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the
+	<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
+</p>
+<ol>
+	<li>
+		<p>
+		    If the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the
+		    <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, run the <a href="#now-hidden-algorithm">now hidden algorithm</a> 
+            during the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-document-visibility-change-steps">unloading document visibility change steps</a>,
+		</p>
+	   <li>
+			<p>
+                Otherwise, queue a task that runs the <a href="#now-hidden-algorithm">now hidden algorithm</a>.
+			</p>
+		</li>
+</ol>
+<p>
+        The <b><dfd id="now-visible-algorithm">now visible algorithm</dfd></b> runs the following steps synchronously:
+        <ol> 
             <li>
                 <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
             </li>
@@ -451,53 +474,27 @@ has changed.
                 at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
             </li>
         </ol>
-		</li>
-    </ol>
+    </p>
 <p>
-    Else if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
-    <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>
-    is now not visible
-	or if the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
-	<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
-</p>
-<ol>
+The <b><dfd id="now-hidden-algorithm">now hidden algorithm</dfd></b> runs the following steps synchronously:
+<ol> 
     <li>
-        <p>
-		   If traversing from a <a href="http://www.w3.org/TR/html5/history.html#session-history-entry">session history entry</a>,
-			run the following steps after running the steps to fire the <code title="event-pagehide"><a href="http://www.w3.org/TR/html5/history.html#event-pagehide">pagehide</a></code> event.
-		</p>
+        <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
     </li>
-	<li>
-		<p>
-		If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
-		<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
-		run the following steps during the <a href="http://www.w3.org/TR/html5/history.html#unloading-document-visibility-change-steps">unloading document visibility change steps</a>,
-		</p>
-	   <li>
-			<p>Queue a task that runs the following steps synchronously:</p>
-			<ol style="list-style-type:lower-alpha;"> 
-				<li>
-					<p>
-					Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.
-					</p>
-				</li>
-				<li>
-					<p>
-					If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the
-					<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
-					set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>. This step is optional.
-					</p>
-				</li>
-				<li>
-					<p>
-					Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
-					at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.
-					</p>
-				</li>
-			</ol>
-		</li>
-
+    <li>
+        <p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>hidden</code>.
+           If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the 
+           <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> 
+           attribute to <code>unloaded</code>. Setting <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>
+           instead of <code>hidden</code> is optional.
+        </p>
+    </li>
+    <li>
+        <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+        at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
+    </li>
 </ol>
+</p>
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
