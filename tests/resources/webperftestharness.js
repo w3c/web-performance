@@ -150,6 +150,11 @@ function test_greater_than(value, greater_than, msg, properties)
     wp_test(function () { assert_true(value > greater_than, msg); }, msg, properties);
 }
 
+function test_greater_or_equals(value, greater_than, msg, properties)
+{
+    wp_test(function () { assert_true(value >= greater_than, msg); }, msg, properties);
+}
+
 function test_not_equals(value, notequals, msg, properties)
 {
     wp_test(function() { assert_true(value !== notequals, msg); }, msg, properties);
