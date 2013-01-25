@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta charset="utf-8">
   <title>Navigation Timing 2</title>
 <style type="text/css">
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
@@ -41,7 +41,7 @@
 <div class="head">
 <hgroup>
 <h1>Navigation Timing 2</h1>
-<h2 class="no-num no-toc" id="editors-draft-june-27-2012">Editor's Draft June 27, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-january-25-2013">Editor's Draft January 25, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -64,7 +64,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web
     Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
     of Technology">MIT</abbr></a>, <a
@@ -111,6 +111,15 @@ notices. </p>
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
    Domain</a>.
+
+<p>
+ Navigation Timing 2 builds on the first version of <a href='#NavigationTiming'>Navigation Timing</a> and includes:
+</p>
+<ul>
+<li>support for <a href="#PerformanceTimeline">Performance Timeline</a>;</li>
+<li>support for <a href="#HighResolutionTime">High Resolution Time</a>;</li>
+<li>timing information for <a href='#dom-performancenavigationtiming-linknegotiationstart'>link negotiation</a>.</li>
+</ul>
 
 <p>Publication as a Working Draft does not imply endorsement by the
 W3C Membership. This is a draft document and may be updated, replaced
@@ -744,7 +753,7 @@ available in navigation involving documents from different
 <a href="http://tools.ietf.org/html/rfc6454">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
-<p><img style='width: 85%' src="timing-overview.png" alt='Timing attributes'></p>
+<img style='display:block;margin:auto' src="timing-overview.png" alt='Timing attributes'>
 </div>
 
 <ol>
@@ -1022,10 +1031,19 @@ all so it's not always feasible to mitigate this attack.</p>
 	Edition. ECMA International, Standard
 	ECMA-262, June 2011. This version of the ECMAScript
 	Language is available from <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
-</dd><dt>[<a id="HTML5">HTML5</a>]</dt>
+</dd>
+   <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, December 2012. This version of the High Resolution Time Recommendation is available from http://www.w3.org/TR/2012/REC-hr-time-20121217/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+
+<dt>[<a id="HTML5">HTML5</a>]</dt>
 <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+
+   <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-performance-timeline-20120726/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/CR-performance-timeline-20120726/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+
 </dl>
 
 <h3 id="informative-references"><span class="secno">8.2 </span>Informative References</h3>
@@ -1033,6 +1051,9 @@ all so it's not always feasible to mitigate this attack.</p>
 <dl>
 <dt>[<a id="JSMeasure">JSMEASURE</a>]</dt>
 <dd><cite><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&amp;rep=rep1&amp;type=pdf">Measuring Client-Perceived Response Times on the WWW</a></cite>, R. Rajamony and M. Elnozahy, The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS), March 2001.</dd>
+
+   <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-navigation-timing-20121217/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, December 2012. This edition of the Navigation Timing Recommendation is available from http://www.w3.org/TR/2012/REC-navigation-timing-20121217/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
 
 </dl>
 
