@@ -49,7 +49,7 @@
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html</a></dd>
   <dt>Latest version:</dt>
     <dd><a
-      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html</a></dd>
+      href="http://www.w3.org/TR/navigation-timing-2/">http://www.w3.org/TR/navigation-timing-2/</a></dd>
   <dt>Latest Editor's Draft:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming2/Overview.html</a></dd>
@@ -707,18 +707,18 @@ or is not completed.</p>
 <p>This attribute MUST return the a DOMString describing the type of the last non-redirect <a
 href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#navigate">navigation</a>
 in the current browsing context. It MUST have one of the following DOMString <a
-href="#dom-performancenavigation-type">navigation type</a> values. </p>
+href="#dom-performancenavigationtiming-type">navigation type</a> values. </p>
 <dl>
-  <dt><dfn id="dom-performancenavigation-typenavigate">navigate</dfn></dt>
+  <dt><dfn id="dom-performancenavigationtiming-typenavigate">navigate</dfn></dt>
     <dd><p>Navigation started by clicking on a link, or entering the URL in the user
     agent's address bar, or form submission, or initializing through a script operation other than
-    the ones used by <a href="#dom-performancenavigation-typenavigate">reload</a>
-    and <a href="#dom-performancenavigation-typebackforward">back_forward</a> as listed below.</p></dd>
-  <dt><dfn id="dom-performancenavigation-typereload">reload</dfn></dt>
+    the ones used by <a href="#dom-performancenavigationtiming-typenavigate">reload</a>
+    and <a href="#dom-performancenavigationtiming-typebackforward">back_forward</a> as listed below.</p></dd>
+  <dt><dfn id="dom-performancenavigationtiming-typereload">reload</dfn></dt>
     <dd><p>Navigation through the reload operation or the
     <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a>
     method.</p></dd>
-  <dt><dfn id="dom-performancenavigation-typebackforward">back_forward</dfn></dt>
+  <dt><dfn id="dom-performancenavigationtiming-typebackforward">back_forward</dfn></dt>
    <dd><p>Navigation
   through a <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#traverse-the-history">history traversal</a> operation.</p></dd>
 </dl>
@@ -726,9 +726,9 @@ href="#dom-performancenavigation-type">navigation type</a> values. </p>
 <div class="note">
 <p>Client-side redirects, such as those using <a href="http://www.w3.org/html/wg/drafts/html/master/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
 are not considered HTTP redirects <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
-In those cases, the <a href="#dom-performancenavigation-type">type</a> attribute should return appropriate value,
-such as <a href="#dom-performancenavigation-typenavigate">reload</a> if reloading the current page, or
-<a href="#dom-performancenavigation-typenavigate">navigate</a> if navigating to a new URL.</p>
+In those cases, the <a href="#dom-performancenavigationtiming-type">type</a> attribute should return appropriate value,
+such as <a href="#dom-performancenavigationtiming-typenavigate">reload</a> if reloading the current page, or
+<a href="#dom-performancenavigationtiming-typenavigate">navigate</a> if navigating to a new URL.</p>
 </div>
 
 <h4><code><dfn id="dom-performancenavigationtiming-redirectcount">redirectCount</dfn></code> attribute </h4>
@@ -753,7 +753,95 @@ available in navigation involving documents from different
 <a href="http://tools.ietf.org/html/rfc6454">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
-<img style='display:block;margin:auto' src="timing-overview.png" alt='Timing attributes'>
+<svg xmlns="http://www.w3.org/2000/svg" width="942" height="501" style='display:block;margin:auto' >
+  <defs>
+    <marker refX="0" refY="0" orient="auto" id="Arrow2Mend" style="overflow:visible">
+      <path d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z" transform="scale(-0.6,-0.6)" id="path4234" style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"/>
+    </marker>
+  </defs>
+  <style>
+   path { fill:none;stroke:#000080;stroke-width:1.5;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend); }
+   rect { fill:#00ffff;fill-opacity:1;stroke:#0000ff;stroke-width:2; }
+   text { font-size:12px;font-weight: bold;text-align:center;fill:#000000;fill-opacity:1;stroke:none;font-family:monospace; }
+   .middle { text-anchor:middle; }
+   .end { text-anchor:end; }
+   .highlight { font-style: italic; }
+  </style>
+  <g transform="translate(-4.3,-477.125)">
+    <rect width="80" height="80" x="10" y="702"/>
+    <rect width="70" height="80" x="100" y="702"/>
+    <rect width="59.999966" height="79.999962" x="880" y="702"/>
+    <rect width="210" height="80" x="660" y="702"/>
+    <rect width="90" height="80" x="560" y="702"/>
+    <rect width="90" height="80" x="470" y="702"/>
+    <rect width="60" height="80" x="400" y="702"/>
+    <rect width="50" height="80" x="340" y="702"/>
+    <rect width="60" height="80" x="270" y="702"/>
+    <rect width="80" height="80" x="180" y="702"/>
+    <rect width="160" height="50" x="690" y="762"/>
+    <rect width="80" height="50" x="200" y="762"/>
+    <text class="middle"><tspan x="50" y="729">Prompt</tspan><tspan x="50" y="747">for</tspan><tspan x="50" y="764">unload</tspan></text>
+    <text class="middle"><tspan x="135.28711" y="738">Negotiate</tspan><tspan x="135" y="756">link</tspan></text>
+    <text x="219.94189" y="747.12683" class="middle"><tspan>redirect</tspan></text>
+    <text class="middle"><tspan x="299.95557" y="738">App</tspan><tspan x="300" y="755.7572">cache</tspan></text>
+    <text x="365.25977" y="745" class="middle"><tspan>DNS</tspan></text>
+    <text x="430.0376" y="745" class="middle"><tspan>TCP</tspan></text>
+    <text x="514.8667" y="745" class="middle"><tspan>Request</tspan></text>
+    <text x="605.0752" y="745" class="middle"><tspan>Response</tspan></text>
+    <text x="765.01025" y="745" class="middle"><tspan>Processing</tspan></text>
+    <text x="909.77441" y="745" class="middle"><tspan>load</tspan></text>
+    <text x="769.86328" y="792" class="middle"><tspan>DOMContentLoaded</tspan></text>
+    <text x="239.97607" y="792.12683" class="middle"><tspan>unload</tspan></text>
+    <text x="490" y="512.12122"><tspan>(linkNegotiationStart)</tspan></text>
+    <text x="490.49219" y="491.88022" class='highlight'><tspan>navigationStart</tspan></text>
+    <text x="490" y="532"><tspan>(linkNegotiationEnd)</tspan></text>
+    <text x="490" y="552.60315"  class='highlight'><tspan>redirectStart</tspan></text>
+    <text x="490" y="593.08502"><tspan>fetchStart</tspan></text>
+    <text x="490" y="572.84412"  class='highlight'><tspan>redirectEnd</tspan></text>
+    <text x="490" y="613.32599"><tspan>domainLookupStart</tspan></text>
+    <text x="490" y="633.56696"><tspan>domainLookupEnd</tspan></text>
+    <text x="490" y="653.56866"><tspan>connectStart</tspan></text>
+    <text x="490" y="674.04889"><tspan>(secureConnectionStart)</tspan></text>
+    <text x="490" y="694.28986"><tspan>connectEnd</tspan></text>
+    <text x="440.20801" y="812" class="end"><tspan>requestStart</tspan></text>
+    <text x="440.20801" y="838.98895" class="end"><tspan>responseStart</tspan></text>
+    <text x="440.20801" y="865.85504" class="end"><tspan>responseEnd</tspan></text>
+    <text x="858.44238" y="952" class="end"><tspan>domComplete</tspan></text>
+    <text x="852.79004" y="612" class="end"><tspan>loadEventEnd</tspan></text>
+    <text x="852.79004" y="644.65131" class="end"><tspan>loadEventStart</tspan></text>
+    <text x="439.83203" y="892.48181" class="end"><tspan>domLoading</tspan></text>
+    <text x="439.83203" y="919.10858" class="end"><tspan>domInteractive</tspan></text>
+    <text x="439.83203" y="945.73541" class="end"><tspan>domContentLoadedEventStart</tspan></text>
+    <text x="439.83203" y="972" class="end"><tspan>domContentLoadedEventEnd</tspan></text>
+    <path d="M 480,40 150,40 90,250" transform="translate(0,452)"/>
+    <text x="144.81705" y="846" class="end highlight"><tspan>unloadEventStart</tspan></text>
+    <text x="143.46094" y="872" class="end highlight"><tspan>unloadEventEnd</tspan></text>
+    <path d="m 480,512 -310,0 -70,190"/>
+    <path d="m 480,532 -280,0 -30,170"/>
+    <path d="m 480,552 -270,0 -30,150"/>
+    <path d="m 480,572 -200,0 -20,130"/>
+    <path d="m 480,592 -180,0 -30,110"/>
+    <path d="m 480,612 -110,0 -30,90"/>
+    <path d="m 480,632 -70,0 -20,70"/>
+    <path d="m 480,652 -50,0 -30,50"/>
+    <path d="m 480,672 -40,0 -20,30"/>
+    <path d="m 480,692 -10,0 -10,10"/>
+    <path d="m 450,812 10,0 10,-30"/>
+    <path d="m 450,832 50,0 60,-50"/>
+    <path d="m 450,862 100,0 100,-80"/>
+    <path d="m 450,892 140,0 80,-110"/>
+    <path d="m 450,922 150,0 80,-120"/>
+    <path d="m 450,942 190,0 50,-130"/>
+    <path d="m 450,972 220,0 180,-160"/>
+    <path d="m 870,952 50,0 -60,-160"/>
+    <path d="m 860,642 10,0 10,60"/>
+    <path d="m 860,612 40,0 40,90"/>
+    <path d="m 150,842 30,0 20,-30"/>
+    <path d="m 150,872 80,0 50,-60"/>
+  </g>
+</svg>
+
+
 </div>
 
 <ol>
@@ -789,21 +877,21 @@ non-normative intervals between timings.</p>
     href="http://www.w3.org/html/wg/drafts/html/master/dom.html#document">document</a>,
     record the current time as <a
     href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>.</li>
-  <li> Record the current navigation type in <a href="#dom-performancenavigation-type">type</a>
+  <li> Record the current navigation type in <a href="#dom-performancenavigationtiming-type">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
     <li>If the navigation was started by clicking on a link, or entering the URL in the user
         agent's address bar, or form submission, or initializing through a script operation other than the
         <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a> method,
-        let the navigation type be the DOMSTring <a href="#dom-performancenavigation-typenavigate">navigate</a>.</li>
+        let the navigation type be the DOMSTring <a href="#dom-performancenavigationtiming-typenavigate">navigate</a>.</li>
     <li>If the navigation was started either as a result of a
         <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#attr-meta-http-equiv-refresh">meta refresh</a>,
         or the <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#dom-location-reload">location.reload()</a>
         method, or other equivalent actions, let the navigation type
-        be the DOMString <a href="#dom-performancenavigation-typereload">reload</a>.</li>
+        be the DOMString <a href="#dom-performancenavigationtiming-typereload">reload</a>.</li>
     <li>If the navigation was started as a result of
         <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#traverse-the-history">history traversal</a>,
-        let the navigation type be the DOMString <a href="#dom-performancenavigation-typebackforward">back_forward</a>.</li>
+        let the navigation type be the DOMString <a href="#dom-performancenavigationtiming-typebackforward">back_forward</a>.</li>
     </ol>
   </li>
   <li>If the current document and the previous document are from different 
@@ -895,7 +983,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> and 
-        <a href="#dom-performancenavigation-redirectcount">redirectCount</a> to 0. Then,
+        <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
         return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
@@ -903,9 +991,9 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and 
-        <a href="#dom-performancenavigation-redirectcount">redirectCount</a> to 0. Then,
+        <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
         return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
-      <li>Increment <a href="#dom-performancenavigation-redirectcount">redirectCount</a> by 1.</li>
+      <li>Increment <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> by 1.</li>
       <li>If the value of <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a> is 0,
         let it be the value of <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</li>
       <li>Let <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a> be the value of
