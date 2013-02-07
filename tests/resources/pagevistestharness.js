@@ -17,7 +17,6 @@ var VISIBILITY_STATES =
     VISIBLE: "visible"
 };
 
-var skip_all_tests = false;
 var feature_check = false;
 
 //
@@ -56,15 +55,9 @@ function pv_test(func, msg, doc)
                         "document.visibilityState is defined and not null.");},
                         "document.visibilityState is defined and not null.");
     
-        //Skip only if both are undefined
-
-        if (hiddenVal === undefined || visStateVal === undefined)
-        {
-            skip_all_tests = true;
-        }
     }
 
-    if (!skip_all_tests && func)
+    if (func)
     {
         test(func, msg);
     }
