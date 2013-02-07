@@ -31,12 +31,104 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 <!--begin-toc-->
 <ol>
+<li><a href='#pv'>Page Visibility</a></li>
 <li><a href='#navigation_timing'>Navigation Timing</a></li>
 <li><a href='#hrt'>High Resolution Time</a></li>
 </ol>
 <!--
 <p>Looking to run the tests and see test results? check the <a href='http://w3c-test.org/framework/'>test framework</a> instead.</p>
 -->
+
+<h2 id='pv'>Page Visibility</h2>
+
+<table>
+<colgroup>
+ <col class='test'>
+ <col class='description'>
+ <col class='spec_link'>
+ <col class='contact'>
+</colgroup>
+<thead>
+<tr>
+<th>Test</th>
+<th>Description</th>
+<th>Section</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_attributes_exist.htm">test_attributes_exist</a></td>
+<td>
+This test validates that all of the attributes associated with the Page Visibility feature exist (but does not validate that their values are correct).</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#document'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_default_view.htm">test_default_view</a></td>
+<td>
+This test validates that document.hidden == false and document.visibilityState == "visible" for windowless subdocuments.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#dom-document-hidden'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_child_document.htm">test_child_document</a></td>
+<td>
+This test validates that, within child documents, all of the Page Visibility API attributes exist, are read-only, and match the value of the attributes within the parent document.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#document'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_minimize.htm">test_minimize</a></td>
+<td>
+This test validates that the page properly becomes hidden and visible due to minimizing, maximizing, and restoring the browser window.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#dom-document-hidden'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_read_only.htm">test_read_only</a></td>
+<td>
+This test validates that the Page Visibility attributes are read only.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#document'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/test_tab_state_change.htm">test_tab_state_change</a></td>
+<td>
+This test validates that the page properly becomes hidden and visible due to switching tabs.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#dom-document-hidden'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/PageVisibility/idlharness.html">idlharness</a></td>
+<td>
+This test validates the WebIDL included in the Page Visibility specification.
+</td>
+<td><a href='http://www.w3.org/TR/page-visibility/#document'>4.2 Extensions to the Document interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 <h2 id='navigation_timing'>Navigation Timing</h2>
 
