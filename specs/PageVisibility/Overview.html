@@ -63,7 +63,7 @@
 
    <p class=copyright><a
     href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web
     Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
     href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
     of Technology">MIT</abbr></a>, <a
@@ -403,7 +403,7 @@ is loaded off-screen and is not visible. User Agent support of the <a href="#pv-
 
 <h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
 <p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute <span class='rfc2119'>SHOULD</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
-<a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
+<a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> contained by the 
 <a href="http://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">top level browsing context</a>. User Agent support of the <a href="#pv-unloaded"><code>unloaded</code></a> 
 return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
@@ -461,7 +461,8 @@ has changed.
 		</li>
 </ol>
 <p>
-        The <b><dfd id="now-visible-algorithm">now visible algorithm</dfd></b> runs the following steps synchronously:
+        The <b><dfn id="now-visible-algorithm">now visible algorithm</dfn></b> runs the following steps synchronously:
+</p>
         <ol> 
             <li>
                 <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
@@ -474,16 +475,16 @@ has changed.
                 at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
             </li>
         </ol>
-    </p>
 <p>
-The <b><dfd id="now-hidden-algorithm">now hidden algorithm</dfd></b> runs the following steps synchronously:
+The <b><dfn id="now-hidden-algorithm">now hidden algorithm</dfn></b> runs the following steps synchronously:
+</p>
 <ol> 
     <li>
         <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
     </li>
     <li>
         <p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>hidden</code>.
-           If the user agent is to <a href="http://www.w3.org/TR/html5/history.html#unloading-documents">unload</a> the 
+           If the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the 
            <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> 
            attribute to <code>unloaded</code>. Setting <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>
            instead of <code>hidden</code> is optional.
@@ -494,7 +495,6 @@ The <b><dfd id="now-hidden-algorithm">now hidden algorithm</dfd></b> runs the fo
         at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
     </li>
 </ol>
-</p>
 
 <h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
 
