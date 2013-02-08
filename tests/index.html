@@ -31,6 +31,7 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 <!--begin-toc-->
 <ol>
+<li><a href='#ut'>User Timing</a></li>
 <li><a href='#pv'>Page Visibility</a></li>
 <li><a href='#navigation_timing'>Navigation Timing</a></li>
 <li><a href='#hrt'>High Resolution Time</a></li>
@@ -38,6 +39,122 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <!--
 <p>Looking to run the tests and see test results? check the <a href='http://w3c-test.org/framework/'>test framework</a> instead.</p>
 -->
+
+<h2 id='ut'>User Timing</h2>
+
+<table>
+<colgroup>
+ <col class='test'>
+ <col class='description'>
+ <col class='spec_link'>
+ <col class='contact'>
+</colgroup>
+<thead>
+<tr>
+<th>Test</th>
+<th>Description</th>
+<th>Section</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_clear_marks.htm">test_user_timing_clear_marks</a></td>
+<td>
+This test validates that the performance.clearMarks() method is working properly. 
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-clearmarks'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_clear_measures.htm">test_user_timing_clear_measures</a></td>
+<td>
+This test validates that the performance.clearMeasures() method is working properly.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-clearmeasures'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_exists.htm">test_user_timing_exists</a></td>
+<td>
+This test validates that all of the methods used to interact with the User Timing API are defined.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#performance'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_mark.htm">test_user_timing_mark</a></td>
+<td>
+This test validates that the performance.mark() method is working properly.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-mark'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_mark_exceptions.htm">test_user_timing_mark_exceptions</a></td>
+<td>
+This test validates that the performance.mark() method throws a SYNTAX_ERR exception whenever a navigation timing attribute is provided for the name parameter.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-mark'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure.htm">test_user_timing_measure</a></td>
+<td>
+This test validates that the performance.measure() method is working properly.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-measure'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure_exceptions.htm">test_user_timing_measure_exceptions</a></td>
+<td>
+This test validates that the performance.measure() method throws a
+SYNTAX_ERR exception whenever a non-existent mark is provided as the
+startMark or endMark, and the method also throws a INVALID_ACCESS_ERR
+whenever a navigation timing attribute with a value of zero is
+provided as the startMark or endMark.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-measure'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure_navigation_timing.htm">test_user_timing_measure_navigation_timing</a></td>
+<td>
+This test validates that the performance.measure() method is working properly when navigation timing attributes are used in place of mark names.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#dom-performance-measure'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/idlharness.html">idlharness</a></td>
+<td>
+This test validates the WebIDL included in the user Timing specification.
+</td>
+<td><a href='http://www.w3.org/TR/user-timing/#performance'>4.2 Extensions to the Performance Interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 <h2 id='pv'>Page Visibility</h2>
 
