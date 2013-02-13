@@ -158,7 +158,7 @@ notes and sections marked as being informative.</p>
 as described in <cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for
 use in RFCs to Indicate Requirement Levels</a></cite>.&#x2002;<a href='#ref-RFC2119'>[RFC2119]</a></p>
 
-<p>The IDL fragment in <a href='#the-WindowAnimationTiming-interface'>section <?sref the-WindowAnimationTiming-interface?></a>
+<p>The IDL fragment in <a href='#Window-interface-extensions'>section <?sref Window-interface-extensions?></a>
 of this specification <span class='rfc2119'>MUST</span> be interpreted as required for
 <a href='http://www.w3.org/TR/WebIDL/#dfn-conforming-idl-fragment'>conforming IDL fragments</a>,
 as described in the <a href='http://www.w3.org/TR/WebIDL/'><cite>Web IDL</cite></a> specification.&#x2002;<a href='#ref-WEBIDL'>[WEBIDL]</a></p>
@@ -173,7 +173,7 @@ as described in the <a href='http://www.w3.org/TR/WebIDL/'><cite>Web IDL</cite><
   <span class='rfc2119'>SHALL</span>-level criteria in this specification.
   A conforming user agent <span class='rfc2119'>MUST</span> also be a
   <a href='http://www.w3.org/TR/WebIDL/#dfn-conforming-implementation'>conforming implementation</a>
-  of the IDL fragment in <a href='#the-WindowAnimationTiming-interface'>section <?sref the-WindowAnimationTiming-interface?></a>
+  of the IDL fragment in <a href='#Window-interface-extensions'>section <?sref Window-interface-extensions?></a>
   of this specification, as described in the
   <a href='http://www.w3.org/TR/WebIDL/'><cite>Web IDL</cite></a> specification.&#x2002;<a href='#ref-WEBIDL'>[WEBIDL]</a></dd>
 </dl>
@@ -208,10 +208,10 @@ frame request callback list</a>.</p>
 
 </div>
 
-<div id='the-WindowAnimationTiming-interface' class='section'>
-<h2>The WindowAnimationTiming interface</h2>
+<div id='Window-interface-extensions' class='section'>
+<h2>Window interface extensions</h2>
 
-<p>The <code><a href='#windowanimationtiming'>WindowAnimationTiming</a></code> interface is used to expose the
+<p>The partial interface in the IDL fragment below is used to expose the
 <code><a href='#dom-windowanimationtiming-requestanimationframe'>requestAnimationFrame</a></code>
 operation on the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object.  In the definition of <code><a href='#dom-windowanimationtiming-requestanimationframe'>requestAnimationFrame</a></code> below, references to the
@@ -219,13 +219,10 @@ object.  In the definition of <code><a href='#dom-windowanimationtiming-requesta
 object are to be taken to be references to the <code><a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a></code>
 object’s <a href='http://www.w3.org/TR/html5/browsers.html#active-document'>active document</a>. <a href='#ref-HTML5'>[HTML5]</a></p>
 
-<pre class='idl'><span class='xattr'>[NoInterfaceObject]</span>
-interface <dfn id='windowanimationtiming'>WindowAnimationTiming</dfn> {
+<pre class='idl'>partial interface <dfn id='partial-window'>Window</dfn> {
   long <a href='#dom-windowanimationtiming-requestanimationframe'>requestAnimationFrame</a>(<a href='#framerequestcallback'>FrameRequestCallback</a> callback);
   void <a href='#dom-windowanimationtiming-cancelanimationframe'>cancelAnimationFrame</a>(long handle);
 };
-
-<a href='http://www.w3.org/TR/html5/browsers.html#the-window-object'>Window</a> implements <a href='#windowanimationtiming'>WindowAnimationTiming</a>;
 
 callback <dfn id='framerequestcallback'>FrameRequestCallback</dfn> = void (<a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html#sec-DOMHighResTimeStamp'>DOMHighResTimeStamp</a> time);</pre>
 
