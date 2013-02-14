@@ -248,12 +248,6 @@ flag is initially false and is not exposed by any interface.</p>
   and thus will result in that callback being invoked more than once for the animation frame.</p>
 </div>
 
-<div class='ednote'>
-  <p><a href='http://www.w3.org/2010/webperf/track/issues/4'>ISSUE-4</a> Do we want to allow an <code>Element</code> to be passed
-  to <code>requestAnimationFrame</code>, so that animations affecting the given element are throttled or paused when scrolled out
-  of view?</p>
-</div>
-
 <p>The <dfn id='dom-windowanimationtiming-cancelanimationframe'><code>cancelAnimationFrame</code></dfn> method is
 used to cancel a previously made request to schedule an animation frame update.  When <code>cancelAnimationFrame(<var>handle</var>)</code> is called,
 the user agent <span class='rfc2119'>MUST</span> set the <a class='dfnref' href='#dom-framerequestcallback-cancelled'>cancelled</a> flag to true for the
