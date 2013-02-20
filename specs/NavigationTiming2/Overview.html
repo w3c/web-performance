@@ -382,10 +382,13 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-domcomplete" title="domcomplete">domComplete</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadstart" title="loadeventstart">loadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadend" title="loadeventend">loadEventEnd</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-prerenderSwitch" title="prerenderswitch">prerenderSwitch</a>;
   
-  readonly attribute DOMString <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>; // "navigate", "reload", "back_forward"
+  readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>; 
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
 };
+
+enum <dfn id="NavigationType">NavigationType</dfn> { "navigate", "reload", "back_forward", "prerender" };
 </pre>
 
 <p>
@@ -702,6 +705,14 @@ document is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#d
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 
+<h4><code><dfn id="dom-performancenavigationtiming-prerenderswitch">prerenderSwitch</dfn></code> attribute</h4>
+
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/2013/PR-page-visibility-20130219/#dom-document-visibilitystate">visibilityState</a>
+from <code>prerender</code> to <code>visible</code>. If the document has not been prerendered by the User Agent, this attribute MUST return a 
+<a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value equal to zero.
+</p>
+
 <h4><code><dfn id="dom-performancenavigationtiming-type">type</dfn></code> attribute</h4>
 
 <p>This attribute MUST return the a DOMString describing the type of the last non-redirect <a
@@ -721,6 +732,8 @@ href="#dom-performancenavigationtiming-type">navigation type</a> values. </p>
   <dt><dfn id="dom-performancenavigationtiming-typebackforward">back_forward</dfn></dt>
    <dd><p>Navigation
   through a <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#traverse-the-history">history traversal</a> operation.</p></dd>
+    <dt><dfn id="dom-performancenavigationtiming-typeprerender">prerender</dfn></dt>
+   <dd><p>Navigation initiated by a prerender hint.</p></dd>
 </dl>
 
 <div class="note">
@@ -1031,6 +1044,9 @@ non-normative intervals between timings.</p>
     immediately before the user agent fires the load event.</li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a>
     immediately after the user agent completes the load event.</li>
+  <li>Record the time as <a href="#dom-performancenavigationtiming-prerenderswitch">prerenderSwitch</a>
+    immediately after the user agent changes the <a href="http://www.w3.org/TR/2013/PR-page-visibility-20130219/#dom-document-visibilitystate">visibilityState</a>
+    from <code>prerender</code> to <code>visible</code>. Otherwise, set this attribute to 0.</li>
   <li>
     Set the <a href="#duration-attribute">duration</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a> and <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>, respectively.
@@ -1123,9 +1139,12 @@ all so it's not always feasible to mitigate this attack.</p>
    <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, December 2012. This version of the High Resolution Time Recommendation is available from http://www.w3.org/TR/2012/REC-hr-time-20121217/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
 
-<dt>[<a id="HTML5">HTML5</a>]</dt>
-<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+   <dt>[<a id="HTML5">HTML5</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
 
+   <dt>[<a id="A1">Page Visibility</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2013/PR-page-visibility-20130219/'>Page Visibility</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, February 2013. This version of the Page Visibility specification is available from http://www.w3.org/TR/2013/PR-page-visibility-20130219/. The <a href='http://www.w3.org/TR/page-visibility/'>latest version of Page Visibility</a> is available at http://www.w3.org/TR/page-visibility/.</dd>
+    
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-performance-timeline-20120726/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/CR-performance-timeline-20120726/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
