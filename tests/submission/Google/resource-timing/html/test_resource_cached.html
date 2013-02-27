@@ -15,25 +15,26 @@ var d;
 var iframe;
 var iframeBody;
 var image;
+var random = Math.random();
 function setup_iframe() {
     iframe = document.getElementById('frameContext');
     d = iframe.contentWindow.document;
     iframeBody = d.createElement('body');
 
     image = d.createElement('img');
-    image.src = '/webperf/tests/resources/generate_resource.php?type=image&id=cached';
+    image.src = '/webperf/tests/resources/generate_resource.php?type=image&cacheable&id=' + random;
     iframeBody.appendChild(image);
 }
 function reload_image() {
     iframeBody.removeChild(image);
     image = d.createElement('img');
-    image.src = '/webperf/tests/resources/generate_resource.php?type=image&id=cached';
-    image.addEventListener('load', onload_test, false);
+    image.src = '/webperf/tests/resources/generate_resource.php?type=image&cacheable&id=' + random;
+    image.onload = onload_test;
     iframeBody.appendChild(image);
 }
 function onload_test() {
     var context = new PerformanceContext(iframe.contentWindow.performance);
-    var entries = context.getEntries();
+    var entries = context.getEntriesByType('resource');
     test_equals(entries.length, 2, "There should be two entries");
     if (entries.length >= 2) {
         test_equals(entries[0].name, entries[1].name, "Both entries should have the same name");

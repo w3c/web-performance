@@ -51,7 +51,7 @@ function onload_test() {
 
     var image = document.createElement('img');
     image.src = '/webperf/tests/resources/generate_resource.php?type=image&id=n1';
-    background_loaded = image.completed;
+    background_loaded = image.complete;
     if (!background_loaded) {
         image.onload = function() {
             background_loaded = true;
@@ -63,11 +63,11 @@ function onload_test() {
 
 function perform_test() {
     var context = new PerformanceContext(document.getElementById('frameContext').contentWindow.performance);
-    var entries = context.getEntries();
+    var entries = context.getEntriesByType('resource');
 
     var expected_entries = {
         '/webperf/tests/resources/Ahem.ttf': 'css',
-        '/webperf/tests/resources/blank_image.png': 'img',
+        '/webperf/tests/resources/1x1-blue.png': 'img',
         '/webperf/tests/resources/blank_page_green.htm': 'iframe',
         '/webperf/tests/resources/empty_script.js': 'script',
         '/webperf/tests/resources/generate_resource.php?type=css&id=embed': 'embed',

@@ -18,7 +18,7 @@ function setup_iframe() {
 }
 function onload_test() {
     var context = new PerformanceContext(iframe.contentWindow.performance);
-    var entries = context.getEntries();
+    var entries = context.getEntriesByType('resource');
     test_true(entries.length == 0, "entries.length == 0");
 }
 window.setup_iframe = setup_iframe;

@@ -10,6 +10,7 @@
 <script src="/webperf/tests/resources/webperftestharness.js"></script>
 <script src="/webperf/tests/resources/webperftestharnessextension.js"></script>
 <script>
+setup({explicit_done: true});
 var iframe;
 function setup_iframe() {
     var iframe_content =
@@ -40,7 +41,7 @@ function setup_iframe() {
 }
 function onload_test() {
     var context = new PerformanceContext(iframe.contentWindow.performance);
-    var entries = context.getEntries();
+    var entries = context.getEntriesByType('resource');
 
     var expected_entries = {
         '/webperf/tests/resources/generate_resource.php?type=script&id=1': 'script',
@@ -55,13 +56,14 @@ function onload_test() {
     };
 
     test_resource_entries(entries, expected_entries);
+    done();
 }
 window.setup_iframe = setup_iframe;
 </script>
 </head>
 <body>
 <h1>Description</h1>
-<p>This test validates that all of the different types of script loads are reported with the correct initiator.</p
+<p>This test validates that all of the different types of script loads are reported with the correct initiator.</p>
 <div id="log"></div>
 <iframe id="frameContext" onload="onload_test();" src="/webperf/tests/resources/inject_resource_test.html"></iframe>
 </body>
