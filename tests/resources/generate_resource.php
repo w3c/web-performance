@@ -32,7 +32,7 @@
       break;
 
   case "image":
-      $body = file_get_contents("blank_image.png");
+      $body = file_get_contents("1x1-blue.png");
       $content_type = "image/png";
       break;
 
@@ -48,7 +48,11 @@
 
   header("HTTP/1.1 $response_code");
   header("Content-type: $content_type");
-  header("Etag: 7");
+  if (isset($_GET["cacheable"])) {
+    header("Etag: 7");
+  } else {
+    header("Cache-control: no-cache");
+  }
   print($body);
   exit;
 ?>

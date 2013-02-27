@@ -13,7 +13,7 @@ var mark_names = [
     '1',
     'abc',
 ];
-   
+
 var measures = [
     [''],
     ['2', 1],
@@ -51,12 +51,13 @@ function test_resource_entries(entries, expected_entries)
 {
     // This is slightly convoluted so that we can sort the output.
     var actual_entries = {};
+    var origin = window.location.protocol + "//" + window.location.host;
 
     for (var i = 0; i < entries.length; ++i) {
         var entry = entries[i];
         var found = false;
         for (var expected_entry in expected_entries) {
-            if (entry.name == window.location.origin + expected_entry) {
+            if (entry.name == origin + expected_entry) {
                 found = true;
                 if (expected_entry in actual_entries) {
                     test_fail(expected_entry + ' is not expected to have duplicate entries');
@@ -79,11 +80,11 @@ function test_resource_entries(entries, expected_entries)
         var url = sorted_urls[i];
         test_equals(actual_entries[url].initiatorType,
                     expected_entries[url],
-                    url + ' is expected to have initiatorType ' + expected_entries[url]);
+                    origin + url + ' is expected to have initiatorType ' + expected_entries[url]);
     }
     for (var j in expected_entries) {
         if (!(j in actual_entries)) {
-            test_fail(j + ' is expected to be in the Resource Timing buffer');
+            test_fail(origin + j + ' is expected to be in the Resource Timing buffer');
         }
     }
 }
