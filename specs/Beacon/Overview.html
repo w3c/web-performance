@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Beacon</title>
+<style>
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Beacon</h1>
+
+<h2 class="no-num no-toc" id="editors-draft-february-26-2013">Editor's Draft February 26, 2013</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/Beacon/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/Beacon/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
+      class="org">Compuware Corp.</span>, &lt;<a
+      class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>
+    This specification defines an interoperable means for site developers to asynchronously transfer 
+    data from the user agent to a web server, with a guarantee from the user agent that the data will 
+    be eventually sent. 
+</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BResourcePriorities%5D%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[Beacon]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-beacon"><span class="secno">4 </span>Beacon</a> 
+    <ol class="toc">
+      <li><a href="#sec-beacon-introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</li>
+      <li><a href="#sec-processing-model"><span class="secno">4.3 </span>Processing Model</li>
+    </ol>
+  </li>
+  <li><a href="#references"><span class="secno">6 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+    The Beacon specification defines an interface that web developers can use to asynchronously transfer 
+    data from the user agent to a web server, with a guarantee from the user agent that the data will 
+    be eventually sent.
+</p>
+
+<p>
+    Analytics and diagnostics code will typically attempt to send data to a web server prior to the unloading
+    of the document. Sending the data any sooner may result in a missed opportunity to gather data. However,
+    guaranteeing that the data has been sent during the unloading of a document is something that has 
+    traditionally been difficult.
+</p>
+<p>
+    User Agents will typically ignore asynchronous XMLHttpRequests made in an unload handler. To solve this problem,
+    analytics and diagnostics code will typically make a synchronous XMLHttpRequest in an unload or beforeunload handler to submit
+    the data. The synchronous XMLHttpRequest forces the User Agent to delay unloading the document, and makes the 
+    next navigation appear to be slower. There is little the next page can do to avoid this perception of poor page 
+    load performance.
+</p>
+
+<p> 
+    In addition, there are other poor patterns used to guarantee that data is submitted. One such pattern to delay
+    the unload in order to submit data is to create an Image element and set its <code>src</code> attribute within 
+    the unload handler. As most User Agents will delay the unload to complete the pending image load, data can be 
+    submitted during the unload. 
+    Another technique is to create a no-op loop for several seconds within the unload handler to delay the unload 
+    and submit data to a server.
+</p>
+
+<p>
+    Not only do these techniques represent poor coding patterns, some of them are unreliable and also result in the 
+    perception of poor page load performance for the next navigation.
+</p>
+
+<div class="example">
+    <p>
+        The following example shows a theoretical analytics code that attempts to submit data to a server by
+        using a synchronous XMLHttpRequest in an unload handler. This results in the unload of the page to be delayed.
+    </p>
+<pre>
+window.addEventListener('unload', logData, false);
+
+function logData() {
+    var client = new XMLHttpRequest();
+    client.open("POST", "/log", false); // third paramater indicates sync xhr
+    client.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    client.send(analyticsData);
+}
+</pre>
+</div>
+<p>
+    Using the <a href="#beacon"><code>beacon</code></a> method, the data will be guaranteed to be transmitted asynchronously 
+    to the web server, without delaying the unload or affecting the performance of the next navigation.
+</p>
+ 
+<div class="example">
+<p>
+    The following example shows a theoretical analytics code that submits data to a server using the by
+    using the <a href="#beacon"><code>beacon</code></a> interface.
+</p>
+<pre>
+window.addEventListener('unload', logData, false);
+
+function logData() {
+    return beacon("POST", "/log", analyticsData);
+}
+</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>
+    The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn>
+    are defined by The HTTP Origin Header. <a href="#rfc6454">[IETF RFC 6454]</a>
+</p>
+
+
+<h2 id="sec-beacon"><span class="secno">4 <span class="auto-style1">Beacon</span></span></h2>
+
+<h3 id="sec-beacon-introduction"><span class="secno">4.1 </span>Introduction</h3>
+
+<p>This section is non-normative.</p>
+
+<p>
+    This specification defines an interoperable means for site developers to asynchronously transfer 
+    data from the user agent to a web server, with a guarantee from the user agent that the data will 
+    be eventually sent. 
+</p>
+
+<h3 id="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</h3>
+  
+
+<pre class="idl">
+partial interface <dfn id="Window">Window</dfn> {
+void <a href="#dom-beacon">beacon</a>(DOMString <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+};
+</pre>
+
+<h4 id="method-parameter"><code>method</code> parameter</h4>
+<p>
+    The <code>method</code> parameter indicates the desired 
+    <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> used to transmit the data. 
+    The User Agent may throw
+    the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
+    if the <code>method</code> parameter is not one of the following DOMStrings:
+    <code>POST</code> and <code>PUT</code>.
+</p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>
+    As this interface can only be used to transmit data, only the <code>POST</code> and <code>PUT</code> 
+    <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP methods</a> are supported by this interface. 
+</p>
+
+<p>
+    Throwing the SyntaxError exception for a unsupported method of transmission may not always be possible
+    as the User Agent may not yet have received the Access-Control-Allow-Methods CORS header.
+</p>
+</div>
+    
+<h4 id="url-parameter"><code>url</code> parameter</h4>
+<p>
+    The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
+    where the data is to be transmitted. The User Agent must throw the 
+    <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
+    if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
+</p>
+
+<h4 id="data-parameter"><code>data</code> parameter</h4>
+<p>
+    The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
+    <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
+    <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a>,
+    DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
+</p>
+
+<h3 id="sec-processing-model"><span class="secno">4.3 </span>Processing Model</h3>
+
+  <p>
+      On calling the <a href="#beacon">beacon</a> interface, the following steps must be run:
+  </p>
+
+  <ol>
+    <li>
+        Let the User Agent queue an asynchronous task that runs the following steps, even after the document has unloaded. Return control flow back to script.
+    </li>
+    
+    <li><p>Let <var title="">base</var> be null.</li>
+
+   <li>
+    <p>If the
+    <a class="external" href="http://dev.w3.org/html5/spec/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#document-environment">document environment</a>, run these steps:
+
+    <ol>
+     <li><p>If <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>
+     is not <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#fully-active">fully active</a>,
+     <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> an
+     "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#invalidstateerror">InvalidStateError</a></code>" exception and
+     terminate the overall set of steps.
+
+     <li><p>Set <var title="">base</var> to the
+     <a class="external" href="http://dev.w3.org/html5/spec/urls.html#document-base-url">document base URL</a> of
+     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
+
+     <li><p>Set <a href="#source-origin">source origin</a> to the
+     <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a> of
+     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
+
+     <li><p>Set <a href="#referrer-source">referrer source</a> to
+     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
+    </ol>
+
+   <li>
+    <p>If the
+    <a class="external" href="http://dev.w3.org/html5/spec/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#worker-environment">worker environment</a>, run these steps:
+
+    <ol>
+     <li><p>Set <var title="">base</var> to the
+     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#script's-base-url">script's base URL</a>.
+
+     <li><p>Set <a href="#source-origin">source origin</a> to the
+     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#concept-script" title="concept-script">script</a>'s
+     <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a>.
+
+     <li><p>Set <a href="#referrer-source">referrer source</a> to the
+     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#script's-referrer-source">script's referrer source</a>.
+    </ol>
+
+   <li><p>If <var>method</var> does not match the <code>POST</code> or <code>PUT</code>
+   <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token,
+   <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   these steps.
+
+
+   <li><p>Let <var title="">url</var> be a
+   <a class="external" href="http://dev.w3.org/html5/spec/urls.html#url">URL</a> with character encoding UTF-8.
+
+   <li><p><a class="external" href="http://dev.w3.org/html5/spec/urls.html#resolve-a-url" title="Resolve a URL">Resolve</a>
+   <var title="">url</var> relative to <var title="">base</var>. If the algorithm
+   returns an error,
+   <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   these steps.
+
+   <li>If <var title="">data</var> is null, <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   these steps.
+    
+   <li>
+    <p>Otherwise, create the following temporary variable and then follow the rules below: let <var>encoding</var> be null, <var>mime type</var> be
+    null, and <var>transmittedData</var> be null.</p>
+
+    <dl class="switch">
+
+     <dt>If <var>data</var> is a <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code></dt>
+     <dd><p>Let the <var>transmittedData</var> be the raw data
+     represented by <var>data</var>.</dd>
+
+     <dt>If <var>data</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code></dt>
+
+     <dd>
+      <p>If the object's
+      <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code>
+      attribute is not the empty string let <var>mime type</var> be its
+      value.</p>
+
+      <p>Let <var>transmittedData</var> be the raw data represented by <var>data</var>.</p>
+     </dd>
+
+
+     <dt>If <var>data</var> is a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
+
+     <dd>
+      <p>Let <var>encoding</var> be the
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#preferred-mime-name">preferred MIME name</a> of the
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">character encoding</a>
+      of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
+      UTF-8.</p>
+
+      <p>Let <var>mime type</var> be "<code>application/xml</code>" or
+      "<code>text/html</code>" if
+      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> is an
+      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, followed by
+      "<code>;charset=</code>", followed by <var>encoding</var>.</p>
+
+      <p>Let the <var>transmittedData</var> be the result of getting
+      the <code>innerHTML</code>
+      attribute on <var>data</var>
+      <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
+      and encoded as <var>encoding</var>. Re-throw any exception this
+      throws.</p> 
+
+      <p class="note">In particular, if the document cannot be serialized an
+      "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception is
+      thrown.</p>
+
+      <p class="note">Subsequent changes to the
+      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> have no effect on what
+      is transferred.</p>
+     </dd>
+
+     <dt>If <var>data</var> is a string</dt>
+
+     <dd>
+      <p>Let <var>encoding</var> be UTF-8.</p>
+
+      <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
+
+      <p>Let the <var>transmittedData</var>  be <var>data</var>
+      <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
+      and encoded as UTF-8.</p>
+     </dd>
+
+
+     <dt>If <var>data</var> is a <code><a href="#formdata">FormData</a></code></dt>
+
+     <dd>
+      <p>Let <var>transmittedData</var> be the result of running
+      the
+      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
+      with <var>data</var> as <var>form data set</var> and with UTF-8 as the
+      explicit character encoding.</p>
+
+      <p>Let <var>mime type</var> be the concatenation of
+      "<code title="">multipart/form-data;</code>",
+      a U+0020 SPACE character,
+      "<code title="">boundary=</code>", and the
+      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-boundary-string"><code>multipart/form-data</code> boundary string</a>
+      generated by the
+      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>.
+     </dd>
+
+    </dl>
+
+   <li>
+       <p>
+           If <var>URL</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
+            <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> <var>URL</var>
+            from the <var>base origin</var> using the <var>method</var> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
+            with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
+        </p>
+        <p>
+            Otherwise, make a <a class="external" href="http://www.w3.org/TR/cors/#cross-origin-request">cross-origin request</a> to <var>URL</var>,
+            using the <var>method</var> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
+            with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
+      </p>
+   </li>
+</ol>
+<h2 id="references"><span class="secno">6 </span>References</h2>
+
+<dl>
+    <dt id="refsCORS">[CORS]
+    <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. W3C.
+
+   <dt id="rfc2119">[IETF RFC 2119]</dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+   <dt id="HTML5">[HTML5]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon, et al, Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+    <dt id="refsTYPEDARRAY">[TYPEDARRAY]
+    <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array</a></cite>, David Herman and Kenneth Russell. Khronos.
+
+</dl>
+
+
+</body>
+</html>
