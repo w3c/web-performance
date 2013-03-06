@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-26-2013">Editor's Draft February 26, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-march-06-2013">Editor's Draft March 6, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -79,8 +79,8 @@
 
 <p>
     This specification defines an interoperable means for site developers to asynchronously transfer 
-    data from the user agent to a web server, with a guarantee from the user agent that the data will 
-    be eventually sent. 
+    data from the user agent to a web server, with the user agent taking the responsibility to 
+    eventually send the data. 
 </p>
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
@@ -152,31 +152,29 @@ cite this document as other than work in progress. </p>
 
 <p>
     The Beacon specification defines an interface that web developers can use to asynchronously transfer 
-    data from the user agent to a web server, with a guarantee from the user agent that the data will 
-    be eventually sent.
+    data from the user agent to a web server, with the user agent taking the responsibility to eventually send the data.
 </p>
 
 <p>
     Analytics and diagnostics code will typically attempt to send data to a web server prior to the unloading
     of the document. Sending the data any sooner may result in a missed opportunity to gather data. However,
-    guaranteeing that the data has been sent during the unloading of a document is something that has 
-    traditionally been difficult.
+    ensuring that the data has been sent during the unloading of a document is something that has 
+    traditionally been difficult for developers.
 </p>
 <p>
-    User Agents will typically ignore asynchronous XMLHttpRequests made in an unload handler. To solve this problem,
+    User agents will typically ignore asynchronous XMLHttpRequests made in an unload handler. To solve this problem,
     analytics and diagnostics code will typically make a synchronous XMLHttpRequest in an unload or beforeunload handler to submit
-    the data. The synchronous XMLHttpRequest forces the User Agent to delay unloading the document, and makes the 
+    the data. The synchronous XMLHttpRequest forces the user agent to delay unloading the document, and makes the 
     next navigation appear to be slower. There is little the next page can do to avoid this perception of poor page 
     load performance.
 </p>
 
 <p> 
-    In addition, there are other poor patterns used to guarantee that data is submitted. One such pattern to delay
+    In addition, there are other poor patterns used to ensure that data is submitted. One such pattern to delay
     the unload in order to submit data is to create an Image element and set its <code>src</code> attribute within 
-    the unload handler. As most User Agents will delay the unload to complete the pending image load, data can be 
-    submitted during the unload. 
-    Another technique is to create a no-op loop for several seconds within the unload handler to delay the unload 
-    and submit data to a server.
+    the unload handler. As most user agents will delay the unload to complete the pending image load, data can be 
+    submitted during the unload. Another technique is to create a no-op loop for several seconds within the 
+    unload handler to delay the unload and submit data to a server.
 </p>
 
 <p>
@@ -201,14 +199,16 @@ function logData() {
 </pre>
 </div>
 <p>
-    Using the <a href="#beacon"><code>beacon</code></a> method, the data will be guaranteed to be transmitted asynchronously 
-    to the web server, without delaying the unload or affecting the performance of the next navigation.
+    Using the <a href="#beacon"><code>beacon</code></a> method, the data will be transmitted asynchronously 
+    to the web server when the user agent has had an opportunity to do so, without delaying the unload or 
+    affecting the performance of the next navigation. As the user agent takes the responsibility to transmit the 
+    data, the <a href="#beacon"><code>beacon</code></a> method does not provide any return values indicating whether or not the transfer has succeeded.
 </p>
  
 <div class="example">
 <p>
     The following example shows a theoretical analytics code that submits data to a server using the by
-    using the <a href="#beacon"><code>beacon</code></a> interface.
+    using the <a href="#beacon"><code>beacon</code></a> method.
 </p>
 <pre>
 window.addEventListener('unload', logData, false);
@@ -218,6 +218,11 @@ function logData() {
 }
 </pre>
 </div>
+
+<p>
+    The <a href="#beacon"><code>beacon</code></a> method does not necessarily have to be used during the unload of the page. This method can be used
+    at any time to asynchronously transfer data to a web server, without the need to check whether the data transfer has succeeded or not.
+</p>
 
 <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
 requirements</h2>
@@ -270,24 +275,39 @@ title="">Foo</code>". </p>
 
 <p>
     This specification defines an interoperable means for site developers to asynchronously transfer 
-    data from the user agent to a web server, with a guarantee from the user agent that the data will 
-    be eventually sent. 
+    data from the user agent to a web server, with the user agent taking the responsibility to eventually
+    send the data.
 </p>
 
 <h3 id="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</h3>
   
 
 <pre class="idl">
+enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT" };
+
 partial interface <dfn id="Window">Window</dfn> {
-void <a href="#dom-beacon">beacon</a>(DOMString <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+void <a href="#dom-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
+
+<p>
+    The <a href="#beacon"><code>beacon</code></a> method does not provide a return value indicating whether the data transfer has succeeded. 
+</p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>
+    This method does not provide any information whether the data transfer has succeeded or not, 
+    as the data transfer may occur after the page has unloaded. Developers should assume that any data
+    transmitted using this method will eventually be sent.
+</p>
+</div>
 
 <h4 id="method-parameter"><code>method</code> parameter</h4>
 <p>
     The <code>method</code> parameter indicates the desired 
     <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> used to transmit the data. 
-    The User Agent may throw
+    The user agent may throw
     the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
     if the <code>method</code> parameter is not one of the following DOMStrings:
     <code>POST</code> and <code>PUT</code>.
@@ -301,15 +321,15 @@ void <a href="#dom-beacon">beacon</a>(DOMString <var>method</var>, DOMString <va
 </p>
 
 <p>
-    Throwing the SyntaxError exception for a unsupported method of transmission may not always be possible
-    as the User Agent may not yet have received the Access-Control-Allow-Methods CORS header.
+    Throwing the SyntaxError exception for a unsupported method of transmission may not always be possible,
+    as the user agent may not yet have received the Access-Control-Allow-Methods CORS header.
 </p>
 </div>
     
 <h4 id="url-parameter"><code>url</code> parameter</h4>
 <p>
     The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
-    where the data is to be transmitted. The User Agent must throw the 
+    where the data is to be transmitted. The user agent must throw the 
     <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
     if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
 </p>
@@ -330,7 +350,8 @@ void <a href="#dom-beacon">beacon</a>(DOMString <var>method</var>, DOMString <va
 
   <ol>
     <li>
-        Let the User Agent queue an asynchronous task that runs the following steps, even after the document has unloaded. Return control flow back to script.
+        Let the user agent queue an asynchronous task that runs the following steps. These steps may be run
+        even after the document has unloaded. Return control flow back to script.
     </li>
     
     <li><p>Let <var title="">base</var> be null.</li>
