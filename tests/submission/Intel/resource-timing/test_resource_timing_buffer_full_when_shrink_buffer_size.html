@@ -1,37 +1,46 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>onresourcetimingbufferfull callback of resource timing</title>
-        <script src="/webperf/tests/resources/webperftestharnessextension.js"></script>
-        <script>
-            var context = new PerformanceContext(performance);
-            var count = 0;
-            function buffer_full_call_back()
-            {
-                count++;
-            }
-
-            context.registerResourceTimingBufferFullCallback(buffer_full_call_back);
-        </script>
-        <link rel="author" title="Intel" href="http://www.intel.com/" />
-        <link rel="help" href="http://www.w3.org/TR/resource-timing/#performanceresourcetiming"/>
-        <script src="/resources/testharness.js"></script>
-        <script src="/resources/testharnessreport.js"></script>
-        <script src="/webperf/tests/resources/webperftestharness.js"></script>
-        <script>
-            setup({ explicit_done: true });            
-            function onload_test()
-            {
-                context.setResourceTimingBufferSize(3);
-                context.setResourceTimingBufferSize(2);
-                test_equals(count, 2, "onresourcetimingbufferfull should be invoked once the buffer is shrunk to size which is less than or equal to current entry number!");
-                done();                
-            }
-        </script>
-    </head>
-    <body onload=onload_test()>
-        <h1>Description</h1>
-        <p>This test validates the functionality of onresourcetimingbufferfull in resource timing.</p>
-    </body>
-</html>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>onresourcetimingbufferfull callback of resource timing</title>
+        <script>
+            var count = 0;
+            var supportBufferControlInterface = false;
+            if (performance && performance.setResourceTimingBufferSize)
+                supportBufferControlInterface = true;
+
+            function buffer_full_call_back()
+            {
+                count++;
+            }
+
+            performance.onresourcetimingbufferfull = buffer_full_call_back;
+        </script>
+        <link rel="author" title="Intel" href="http://www.intel.com/" />
+        <link rel="help" href="http://www.w3.org/TR/resource-timing/#performanceresourcetiming"/>
+        <script src="/resources/testharness.js"></script>
+        <script src="/resources/testharnessreport.js"></script>
+        <script src="/webperf/tests/resources/webperftestharness.js"></script>
+        <script>
+            setup({ explicit_done: true });            
+            test_namespace();
+            function onload_test()
+            {
+                if (!supportBufferControlInterface) {
+                    test_true(false, "performance.setResourceTimingBufferSize() interface is supported!");
+                    done();                
+                    return;
+                }  
+ 
+                performance.setResourceTimingBufferSize(3);
+                performance.setResourceTimingBufferSize(2);
+                test_equals(count, 2, "onresourcetimingbufferfull should be invoked once the buffer is shrunk to size which is less than or equal to current entry number!");
+                done();                
+            }
+        </script>
+    </head>
+    <body onload=onload_test()>
+        <h1>Description</h1>
+        <p>This test validates the functionality of onresourcetimingbufferfull in resource timing.</p>
+    </body>
+</html>
