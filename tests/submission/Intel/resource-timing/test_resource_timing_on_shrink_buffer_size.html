@@ -17,7 +17,7 @@
                 {
                     test_true(false, "Resource Timing and Performance Timeline interface required by this test are supported!");
                     done();
-                    return;                    
+                    return;                    
                 }
 
                 var entry_list_before_shrink = performance.getEntriesByType('resource');
@@ -33,8 +33,9 @@
             }
         </script>
     </head>
-    <body onload=onload_test()>
+    <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the behavior of shrink resource timing buffer size.</p>
+        <div id="log"></div>
     </body>
 </html>

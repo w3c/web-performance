@@ -36,7 +36,7 @@
                 {
                     test_true(false, "Resource Timing and Performance Timeline interface required by this test are supported!");
                     done();
-                    return;    
+                    return;    
                 }
 
                 test_equals(performance.getEntriesByType('resource').length, 0, "No entry should be stored in resource timing buffer since it's cleared once an item arrived!");
@@ -45,8 +45,9 @@
             }
         </script>
     </head>
-    <body onload=onload_test()>
+    <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the behavior of read and clear operation in onresourcetimingbufferfull callback of resource timing.</p>
+        <div id="log"></div>
     </body>
 </html>

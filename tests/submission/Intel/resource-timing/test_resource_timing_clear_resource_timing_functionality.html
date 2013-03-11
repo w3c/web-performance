@@ -17,7 +17,7 @@
                 {
                     test_true(false, "Resource Timing and Performance Timeline interface required by this test are supported!");
                     done();
-                    return;                    
+                    return;                    
                 }
                 test_equals(performance.getEntriesByType("resource").length, 3, 3 + " resource timing entries should be stored in this page!");
                 performance.clearResourceTimings();
@@ -26,8 +26,9 @@
             }
         </script>
     </head>
-    <body onload=onload_test()>
+    <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the functionality of clearResourceTimings method in resource timing.</p>
+        <div id="log"></div>
     </body>
 </html>
