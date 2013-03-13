@@ -11,7 +11,7 @@
         <script>
             
             setup({explicit_done: true});
-          test_namespace();
+            test_namespace();
             var pageOrigin = "w3c-test.org";
             var crossOrigin = "www.w3c-test.org";
 
@@ -21,7 +21,7 @@
                 {
                     test_true(false, "Performance Timeline interface required by this test is supported!");
                     done();
-                    return;                    
+                    return;                    
                 }
 
                 var entry = performance.getEntriesByName(document.getElementById("frameContext").src, "resource")[0];
@@ -60,5 +60,6 @@
             frameContext.onload = onload_test;
             frameContext.src = requestUrl;
         </script>
+        <div id="log"></div>
     </body>
 </html>

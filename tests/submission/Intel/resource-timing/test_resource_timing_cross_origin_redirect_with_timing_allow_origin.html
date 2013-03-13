@@ -21,7 +21,7 @@
                 {
                     test_true(false, "Performance Timeline interface required by this test is supported!");
                     done();
-                    return;                    
+                    return;                    
                 }
 
                 var entry = performance.getEntriesByName(document.getElementById("frameContext").src, "resource")[0];
@@ -50,5 +50,6 @@
             frameContext.onload = onload_test;
             frameContext.src = destUrl;
         </script>
+        <div id="log"></div>
     </body>
 </html>
