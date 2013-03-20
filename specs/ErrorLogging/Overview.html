@@ -1,0 +1,591 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <title>Error Logging</title>
+<style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+   div.parameters { display:block; margin-left: 25px;}
+   div.parameterDefinition { display:block; margin-left: 25px;}
+   div.methods { display:block; margin-top:30px; margin-left :25px;}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<hgroup>
+<h1>Error Logging</h1>
+<h2 class="no-num no-toc" id="editors-draft-march-19-2012">Editor's Draft March 19, 2013</h2>
+</hgroup>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ErrorLogging/Overview.html</a></dd>
+  <dt>Editors:</dt>
+        <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
+      class="org">Compuware Corp.</span>, &lt;<a
+      class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines an interface to store and retrieve error data
+related to the previous and current navigations of a document and fetching of resources.</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BNavigationTiming2%5D%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[ErrorLogging]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status"
+   rel="disclosure">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Error Logging</a> 
+    <ol class="toc">
+      <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
+	  <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>ErrorLogging</code> interface</a></li>
+      <li><a href="#performanceresourcetiming-methods"><span class="secno">4.3 </span> The Error Logging Methods</a></li>
+      <li><a href="#vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
+      <li><a href="#processing-model"><span class="secno">4.5 </span>Monotonic Clock</a></li>
+      <li><a href="#processing-model"><span class="secno">4.6 </span>Processing Model</a></li>
+    </ol>
+   </li>
+  <li><a href="#privacy"><span class="secno">5 </span>Privacy and Security</a>
+  </li>
+  <li><a href="#references"><span class="secno">6 </span>References</a>
+  </li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>
+    This section is non-normative.
+</p>
+
+<p>
+    Accurately measuring performance characteristics of web applications is an important aspect in helping 
+    site developers understand how to make their web applications faster. Likewise, measuring and understanding
+    when web applications are not properly loading for end users due to network errors is an example of the worst case 
+    web browsing performance.
+</p>
+
+<p>
+    Today, site developers do not have real time web application availability data from their end users.
+    Synthetic testing cannot truly provide global or near real-time availability data for real end users.  
+</p>
+
+
+<div class="example">
+    <p>
+        For example, a user visits <a href="http://example.com">http://example.com</a>, causing the User Agent to
+        send a HTTP request to the server. The server has a memory bug that causes a random
+        set of responses to have a space in the middle of the HTTP response header, like so:
+    </p>
+    <pre>
+        HTTP/1. 1 200 OK
+        Date: Thu, 24 Jan 2013 05:46:54 GMT
+        Content-Length: 2291
+        Content-Type: text/html
+    </pre>
+    <p>
+        In this example, the seventh character of the first response, incorrectly has a space
+        (e.g., HTTP/1. 1 should be HTTP/1.1). When the server sends this response, this causes
+        strict format validation issues at the CDN near the user to fail to process the 
+        request. So while the server sees a 200 OK HTTP response, the end user actually sees
+        a 500 Server Error HTTP response. 
+    </p>
+</div>
+
+<p>
+    The previous example described a case where the site developers may
+    not actually know that end users are hitting this problem for quite some time. 
+    As the issue is random, it may not be caught by synthetic testing.
+</p>
+
+<p>
+    To address the need for complete and detailed information on the errors resulting from
+    the navigation of the document and fetching of resources, the <a href="http://www.w3.org/TR/error-logging/">Error Logging</a> 
+    specification defines the <a href="http://www.w3.org/TR/error-logging/#errorlogging">ErrorLogging</a>
+    interface. This interface allows JavaScript mechanisms to provide complete client-side error data on the navigation of the document
+    and fetching of resources within the applications. As it is typically impossible to obtain error data through JavaScript mechanisms
+    during an aborted navigation due to the error, this data is persisted across sessions.
+</p>
+
+<p>
+    The following script shows how a developer can use the <a href="#errorlogging">ErrorLogging</a> interface 
+    to obtain accurate error timing data related to the previous and current navigations of the document.
+</p>
+
+<div class="example">
+<pre>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body onload="init()"&gt;
+    &lt;script&gt;
+       function init() 
+       {
+           var errorList = window.performance.getEntriesByType("error");
+           for (i = 0; i < errorList.length; i++)
+           {
+              if (window.console) console.log("Resource: "                + errorList[i].name + "\n" +
+                                              "Error Type: "              + errorList[i].errorType + "\n" +
+                                              "HTTP Code: "               + errorList[i].httpResponseCode + "\n" +
+                                              "Time (UTC): "              + new Date(errorList[i].startTimeUTC) + "\n" +
+                                              "Time since navigation: "   + errorList[i].startTime);
+           }
+       }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>The term "navigation" refers to the act of
+<a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigating</a>.</p>
+
+<p>The term "JavaScript" is used to refer to
+<a href="#ECMA262">ECMA-262</a>,
+rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
+
+<h2 id="sec-navigation-timing"><span class="secno">4 </span>Error Logging</h2>
+
+<h3 id="sec-Introduction"><span class="secno">4.1 </span> Introduction</h3>
+<p>This section is non-normative.</p>
+
+<p>
+	This specification defines the <a href="#errorlogging">ErrorLogging</a>
+    interface to store and retrieve error data related to previous and current navigations of a document.
+</p>
+
+<h3 id="sec-ErrorLogging"><span class="secno">4.2 </span> The <code>ErrorLogging</code> interface</h3>
+<pre class="idl">interface <dfn id="errorlogging">ErrorLogging</dfn> : <dfn><a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a></dfn> {
+  readonly attribute DOMString <a href="#dom-errorlogging-resourcename">resourceName</a>; 
+  readonly attribute DOMString <a href="#dom-errorlogging-errortype">errorType</a>; 
+  readonly attribute unsigned short <a href="#dom-errorlogging-httpresponsecode">httpResponseCode</a>; 
+  readonly attribute DOMTimeStamp <a href="#dom-errorlogging-starttimeutc">startTimeUTC</a>; 
+};
+</pre>
+
+<p>
+The <a href="#errorlogging">ErrorLogging</a> interface participates in the 
+	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the 
+    <a href="dom-errorlogging-name"><code>name</code></a>, <a href="dom-errorlogging-entryType"><code>entryType</code></a>, 
+    <a href="dom-errorlogging-starttime"><code>startTime</code></a>, and <a href="dom-errorlogging-duration"><code>duration</code></a>
+    attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+</p>
+
+
+<h4><code><dfn id="dom-errorlogging-name">name</dfn></code> attribute</h4>
+<p>
+    The <code id="name-attribute">name</code> attribute MUST return the <a href="http://www.w3.org/TR/2011/WD-html5-20110525/dom.html#the-document-s-current-address">current address</a>
+    of the document where the error occurred, as an <a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">absolute URL</a>.
+    This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+</p>
+    
+<h4><code><dfn id="dom-errorlogging-resourcename">resourceName</dfn></code> attribute</h4>
+<p>
+    If the error is caused due to the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> of a resource, the <code id="resourceName">resourceName</code> 
+    attribute MUST return the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource. This attribute must not change 
+    even if the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> redirected to a different URL.
+    If the error is caused due to the navigation of the document, the <code>resourceName</code> attribute MUST return the string <code>null</code>.
+</p>
+        
+   	
+<h4><code><dfn id="dom-errorlogging-entryType">entryType</dfn></code> attribute</h4>
+<p>
+    The <code id="entryType-attribute">entryType</code> attribute MUST return the DOMString <code id="perf-navigation">error</code>.
+    This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+</p>
+
+<h4><code><dfn id="dom-errorlogging-type">errorType</dfn></code> attribute</h4>
+
+<p>
+    This attribute MUST return one of the following strings describing the type of the error or a <a href="#vendor-prefixes">vendor prefixed</a> string:
+</p>
+<dl>
+  <dt><dfn id="dom-errorlogging-error1">Error1</dfn></dt>
+    <dd><p>Insert description of error here.</p></dd>
+  <dt><dfn id="dom-errorlogging-error2">Error2</dfn></dt>
+    <dd><p>Insert description of error here.</p></dd>
+  <dt><dfn id="dom-errorlogging-error3">Error3</dfn></dt>
+   <dd><p>Insert description of error here.</p></dd>
+</dl>
+
+<h4><code><dfn id="dom-errorlogging-navigationstart">httpResponseCode</dfn></code> attribute</h4>
+
+<p>
+    If this error is caused due to the navigation of the document or <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> of a resource,
+    this attribute MUST return a short with the <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP Response code</a> number
+    that the User Agent recieved for the resource that caused this error. Otherwise, this attribute MUST be equal to <code>0</code>.
+</p>
+
+<h4><code><dfn id="dom-errorlogging-startTime">startTime</dfn></code> attribute</h4>
+<p>
+    The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+	with the time immediately after the User Agent logs the occurrence of the error, measured relative from the 
+    <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>, the start of navigation of the document
+    where the error occurred.
+
+    This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+</p>
+
+<h4><code><dfn id="dom-errorlogging-starttimeutc">startTimeUTC</dfn></code> attribute</h4>
+<p>
+    The <code id="startTimeUTC-attribute">startTimeUTC</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a> 
+	with the time immediately after the User Agent logs the occurrence of the error.
+</p>
+    
+
+<h4><code><dfn id="dom-errorlogging-duration">duration</dfn></code> attribute</h4>
+<p>
+    The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+	equal to 0.0. This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+</p>
+
+<h3 id="performanceerrorlogging-methods"><span class="secno">4.3 </span>The Error Logging Methods</h3>
+
+<pre class="idl">
+partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+  void <a href='#dom-performance-clearerrordata' title='clearErrorData'>clearErrorData</a>();
+  void <a href='#dom-performance-seterrordatabuffersize' title='setErrorDataBufferSize'>setErrorDataBufferSize</a>(unsigned long maxSize);
+
+  attribute Function <a href='#dom-performance-onerrordatabufferfull' title='onerrordatabufferfull'>onerrordatabufferfull</a>;
+};</pre>
+
+<div class="methods">
+    <h4 id="dom-performance-clearresourcetimings"><code>clearErrorData</code> method</h4>
+	<p>The method <code>clearErrorData</code> clears the buffer used to store the current
+    list of <a href="#errorlogging">ErrorLogging</a> objects.
+    </p>
+		<div class="parameters">
+			<p><b>No parameters</b></p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
+
+<div class="methods">
+	<h4 id="dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code> method</h4>
+	<p>The <code>setErrorDataBufferSize</code> method, when invoked, must set the maximum number of <a href="#errorlogging">ErrorLogging</a> objects that may be stored in 
+	the buffer to the value of the maxSize parameter.</p>
+	<p>If this method is not called, the User Agent should store at least 150 <a href="#errorlogging">ErrorLogging</a> objects in the buffer, unless otherwise specified by the User Agent.</p>
+    <p>if the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the 
+        <a href="#dom-performance-clearerrordata">clearErrorData</a> method is called.</p>
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+			in <code>maxSize</code> type of unsigned long
+			<p>The maxSize parameter sets the maximum number of <a href="#errorlogging">ErrorLogging</a> objects that will be stored in the buffer.</p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
+
+<div class="methods">
+	<h4 id="dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code> attribute</h4>
+	<p>The callback <code>onerrordatabufferfull</code> is triggered when the buffer used to store the list of <a href="#errorlogging">ErrorLogging</a> objects is full.
+    The callback can be used to package existing <a href="#errorlogging">ErrorLogging</a> objects and clear the buffered <a href="#errorlogging">ErrorLogging</a> objects list.
+    While executing the <code>onerrordatabufferfull</code> callback, <a href="#errorlogging">ErrorLogging</a> objects will continue to be collected beyond the maximum limit of the resources allowed in the 
+    <a href="#errorlogging">ErrorLogging</a> objects interface until one of the following occurs:
+    <ol>
+		<li>
+            <a href="#dom-performance-clearerrordata"><code>clearErrorData</code></a> method is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
+            will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#errorlogging">ErrorLogging</a> 
+            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
+            does not change unless otherwise specified by <a href="#dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code></a>.
+        </li>
+		<li><a href="#dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code></a> is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a> 
+            will extend and / or truncate to the buffer size specified.</li>
+		<li>
+            Neither <a href="#dom-performance-clearerrordata"><code>clearErrorData</code></a> or
+            <a href="#dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code></a> is called during the execution of the <code>onerrordatabufferfull</code> callback:
+            no updates are made to the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>.</li>
+    </ol>
+    <p>
+        If the <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> callback is not defined and the buffer used to store the 
+        <a href="#performanceError">ErrorLogging</a> objects is full, 
+	    the first <a href="#performanceError">ErrorLogging</a> object in the buffer will be discarded and the new 
+        <a href="#performanceError">ErrorLogging</a> object will be appended to the end of the buffer, like a FIFO queue.
+    </p>
+</div>
+
+<h3 id="vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</h3>
+<p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
+e.g., for experimental purposes, vendors MUST use the following extension mechanisms:</p>
+
+<ul>
+    <li>
+        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[errorType], where [vendorprefix] is a name
+        that identifies the vendor and [errorType] is the name of the error.
+    </li>
+</ul>
+
+<h3 id="monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</h3>
+<p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
+skewed by adjustments to the system clock while <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource. The difference between any two chronologically 
+recorded timing attributes must never be negative. For all resources, including subdocument resources, the user agent must 
+record the system clock at the beginning of the root document navigation and define subsequent timing attributes in 
+terms of a monotonic clock measuring time elapsed from the beginning of the navigation.
+</p>
+
+<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
+
+<ol>
+  <li>If the User Agent has not already created a <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
+  <i>primary buffer</i> object from a previous browsing session, once the <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
+  the current document is created</a>, the User Agent must create a <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
+  <i>primary buffer</i> object to store the list of <a href="#errorlogging">ErrorLogging</a> resources.</li>
+  <li>If the <i>primary buffer</i> size has not been set, set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
+  by the user agent or set by the <a href="#dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code></a> method.
+  </li>
+  <li>For each error occurred within the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
+  <ol>
+      <li id="step-create-object">Create a new <a href="#errorlogging">ErrorLogging</a> object and 
+      set <a href="#entryType-attribute">entryType</a> to the DOMString <code>error</code>.
+      </li>      
+      <li>
+          Set <a href="#name-attribute">name</a> to the <a href="http://www.w3.org/TR/2011/WD-html5-20110525/dom.html#the-document-s-current-address">current address</a>
+           as an <a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">absolute URL</a>.
+      </li>
+      <li>
+          If the error is caused due to the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> of a resource,
+          set <a href="#resourceName-attribute">resourceName</a> to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>. Otherwise,
+          set <a href="#resourceName-attribute">resourceName</a> to the string <code>null</code>.
+      </li>
+      
+      <li>Immediately after the User Agent logs the occurrence of the error, record the current time in <a href="#startTime-attribute">startTime</a> and
+          <a href="#dom-errorlogging-starttimeutc">startTimeUTC</a>.
+      </li>
+      <li>Record the HTTP Response code of the resource in <a href="#httpResponseCode-attribute">httpResponseCode</a>.
+      <li>Record the error type of the resource in <a href="#errorType-attribute">errorType</a>.
+      </li>
+      <li>
+          Set <a href="#duration-attribute">duration</a> to the double <code>0.0</code>.  
+      </li>
+      <li>If the <i>primary buffer</i> is full, and the callback <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> is defined,
+	  the following steps must be followed.<ol>
+            <li>
+                Trigger the <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> callback.
+            </li>
+            <li>Create a <i>temporary buffer</i> of <a href="#errorlogging">ErrorLogging</a> objects.
+            </li>
+            <li>Add the current error to the <i>temporary buffer</i>.
+            </li>
+            <li>If there are additional errors that are collected during the <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a>
+            callback, add them to the <i>temporary buffer</i>.
+            </li>
+            <li>
+            If the <a href="#dom-performance-clearErrorData"><code>clearErrorData</code></a> method is called in the <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> callback, 
+            clear all <a href="#errorlogging">ErrorLogging</a> objects in the <i>primary buffer</i>. 
+            Copy all <a href="#errorlogging">ErrorLogging</a> objects in the <i>temporary buffer</i> to the
+            <i>primary buffer</i>.
+            </li>
+            <li>
+            If the <a href="#dom-performance-seterrordatabuffersize"><code>setErrorDataBufferSize</code></a> method is called in the <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> callback, 
+            set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is larger than the previous size of the <i>primary buffer</i>,
+            append <a href="#errorlogging">ErrorLogging</a> objects in the <i>temporary buffer</i> to the <i>primary buffer</i> up to the maxSize parameter.
+            </li>
+		    <li>Discard the <i>temporary buffer</i>.
+		    </li>
+        </ol>
+      <li>
+          If the <i>primary buffer</i> is full, and the callback <a href="#dom-performance-onerrordatabufferfull"><code>onerrordatabufferfull</code></a> is not defined,
+	      remove the first <a href="#performanceError">ErrorLogging</a> object in the <i>primary buffer</i> and append this new 
+          <a href="#performanceError">ErrorLogging</a> object to the end of the <i>primary buffer</i>.
+      </li>
+      <li>If the <i>primary buffer</i> is not full, add the <a href="#performanceError">ErrorLogging</a> object to the <i>primary buffer</i>.
+      </li>
+  </ol>
+  </li>
+</ol>
+
+<h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
+
+<p>This section is non-normative.</p>
+
+<p>The <a href="#errorlogging">ErrorLogging</a> interface 
+exposes timing and other information for an error that has occurred in the current and previous navigations to the web page.
+Access to the <a href="#errorlogging">ErrorLogging</a> interface is limited to the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>.
+</p>
+
+
+<h2 id="references"><span class="secno">8 </span>References</h2>
+
+<h3 id="normative-references"><span class="secno">8.1 </span>Normative References</h3>
+
+<dl>
+<dt><a id="rfc2119">[IETF RFC 2119]</a></dt>
+<dd>
+ <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>. 
+</dd>
+<dt><a id="rfc2616">[IETF RFC 2616]</a></dt>
+<dd>
+ <cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>. 
+</dd>
+<dt>[<a id="rfc6454">IETF RFC 6454</a>]</dt>
+<dd>
+ <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>. 
+</dd>
+<dt>[<a id="ECMA262">ECMA-262</a>]</dt><dd>
+	<cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>, 5.1
+	Edition. ECMA International, Standard
+	ECMA-262, June 2011. This version of the ECMAScript
+	Language is available from <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+    </dd><dt>[<a id="HTML5">HTML5</a>]</dt>
+    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, December 2012. This version of the High Resolution Time Recommendation is available from http://www.w3.org/TR/2012/REC-hr-time-20121217/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+   <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-performance-timeline-20120726/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/CR-performance-timeline-20120726/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+    <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-navigation-timing-20121217/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, December 2012. This edition of the Navigation Timing Recommendation is available from http://www.w3.org/TR/2012/REC-navigation-timing-20121217/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+<p>I would like to offer my sincere thanks to Aaron Heady for his contributions to this work.</p>
+
+
+</body>
+</html>
