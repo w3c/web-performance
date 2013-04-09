@@ -39,17 +39,17 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-Oct-18-2012">Editor's Draft Oct. 18th, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-09-2013">Editor's Draft April 9, 2013</h2>
 <dl>
   <dt>This version:</dt>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
+		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Latest version:</dt>
-      <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
+		<dd><a href="http://www.w3.org/TR/resource-timing/">http://www.w3.org/TR/resource-timing/</a></dd>
   <dt>Latest Editor's Draft:</dt>
-  <dd><a href='http://www.w3c-test.org/webperf/specs/ResourceTiming/'>http://www.w3c-test.org/webperf/specs/ResourceTiming/</a></dd>
+		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html</a></dd>
+		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html</a></dd>
+		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, <span
@@ -337,16 +337,23 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
     <a href="http://www.w3.org/TR/html5/the-img-element.html#the-img-element">img</a>,
     <a href="http://www.w3.org/TR/html5/the-script-element.html#script">script</a>,
     <a href="http://www.w3.org/TR/html5/the-object-element.html#the-object-element">object</a>,
-    <a href="http://www.w3.org/TR/html5/the-audio-element.html#audio">audio</a>,
-    <a href="http://www.w3.org/TR/html5/the-video-element.html#video">video</a>,
     <a href="http://www.w3.org/TR/html5/the-embed-element.html#the-embed-element">embed</a>,
     and <a href="http://www.w3.org/TR/html5/the-link-element.html#the-link-element">link</a>
     with the link type of
     <a href="http://www.w3.org/TR/html5/links.html#link-type-stylesheet">stylesheet</a>,
     and SVG elements <a href='#SVG'>[SVG]</a> such
     as <a href="http://www.w3.org/TR/SVG11/struct.html#SVGElement">svg</a>.
-
 </p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>
+	The <a href="http://www.w3.org/TR/html5/the-audio-element.html#audio">audio</a> and 
+    <a href="http://www.w3.org/TR/html5/the-video-element.html#video">video</a> elements are specifically covered in the 
+	<a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/Overview.html">Resource Timing Level 2</a> 
+	specification and not in this version of the specification.
+</p>
+</div>
 
 <p>The term "resource" is also used to refer to these elements in this work. </p>
 
@@ -471,7 +478,7 @@ this attribute must return the <a href="#dom-performanceresourcetiming-fetchstar
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
-and the <a href="#timing-allow-check">timing allow check</a> algorithm passes, this attribute must
+but the <a href="#timing-allow-check">timing allow check</a> algorithm passes for each redirected resource, this attribute must
 return the <a href="#dom-performanceresourcetiming-fetchstart">starting time of the fetch</a> that initiates the redirect.
 Otherwise, this attribute must return zero. </p>
 
@@ -483,7 +490,7 @@ this attribute must return the time immediately after receiving the last byte of
 
 <p>If there are HTTP redirects <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes">or equivalent</a>
 when <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource and if any of the redirects are not from the <a href="#origin">same origin</a> as the current document,
-and <a href="#timing-allow-check">timing allow check</a> algorithm passes, this attribute must return the 
+but the <a href="#timing-allow-check">timing allow check</a> algorithm passes for each redirected resource, this attribute must return the 
 time immediately after receiving the last byte of the response of the last redirect.
 Otherwise, this attribute must return zero. </p>
 
@@ -617,7 +624,7 @@ zero unless the <a href="#timing-allow-check">timing allow check</a> algorithm p
 <h4 id="response-end-attribute"><code><dfn id="dom-performanceresourcetiming-responseend">responseEnd</dfn></code> attribute </h4>
 
 <p>This attribute must return the time immediately after the user agent finishes
-receiving the last byte of the resource from from <a
+receiving the last byte of the resource from <a
 href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
@@ -705,7 +712,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
         restrictions previously specified in this section. </p>
     <h4 id="timing-allow-origin"><code>Timing-Allow-Origin</code> Response Header</h4>
     <div class="parameters">
-        <p>The <dfn id="http-access-control-allow-origin"><code>Timing-Allow-Origin</code></dfn> header indicates whether a resource's timing can be
+        <p>The <dfn id="http-timing-allow-origin"><code>Timing-Allow-Origin</code></dfn> header indicates whether a resource's timing can be
             shared based by returning the value of the Origin request header in the
             response. ABNF:</p>
         <pre>Timing-Allow-Origin = &quot;Timing-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;</pre>
@@ -898,8 +905,10 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
       <li>If the fetched resource results in an HTTP redirect 
       <a href="http://www.w3.org/TR/html5/fetching-resources.html#concept-http-equivalent-codes"> or equivalent</a>, then
       <ol style="list-style-type:lower-alpha;"> 
-            <li>If the current resource and the resource that is redirected to are not from the 
-             <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>, set <a href="#dom-performanceresourcetiming-redirectstart">
+            <li>If the current resource and the redirected resource are not from the 
+             <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a> as the current document,
+			 and the <a href="#timing-allow-check">timing allow check</a> algorithm fails for either resource,
+			 set <a href="#dom-performanceresourcetiming-redirectstart">
              redirectStart</a> and <a href="#dom-performanceresourcetiming-redirectend">redirectEnd</a> to 0. Then, return to step <a href="#step-fetch-start">
              3.5</a> with the new resource.
 	        </li>
@@ -910,8 +919,8 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
             <li>Set all the attributes in the <a href="#performanceresourcetiming">
              PerformanceResourceTiming</a> object to 0 except 
              <a href="#startTime-attribute">startTime</a>, 
-             <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>, <a href="#dom-performanceresourcetiming-redirectend"> and
-             redirectEnd</a>, <a href="#initiatorType-attribute">initiatorType</a>.
+             <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>, <a href="#dom-performanceresourcetiming-redirectend"> 
+             redirectEnd</a>, and <a href="#initiatorType-attribute">initiatorType</a>.
             </li>
             <li>Return to step <a href="#step-fetch-start">3.5</a> with the new resource.
             </li>
@@ -1037,7 +1046,6 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
 
    <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
-
 
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
