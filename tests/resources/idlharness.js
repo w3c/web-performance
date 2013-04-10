@@ -175,6 +175,14 @@ plh: 2013-02-07: Patched to add enum support
  */
 (function(){
 "use strict";
+/// Helpers ///
+function constValue (cnt) {
+    if (cnt.type === "null") return null;
+    if (cnt.type === "NaN") return NaN;
+    if (cnt.type === "Infinity") return cnt.negative ? -Infinity : Infinity;
+    return cnt.value;
+}
+
 /// IdlArray ///
 // Entry point
 window.IdlArray = function()
@@ -411,13 +419,11 @@ IdlArray.prototype.test = function()
     {
         this.recursively_get_implements(lhs).forEach(function(rhs)
         {
-            if (!(lhs in this.members)
-            || !(this.members[lhs] instanceof IdlInterface)
-            || !(rhs in this.members)
-            || !(this.members[rhs] instanceof IdlInterface))
-            {
-                throw lhs + " implements " + rhs + ", but one is undefined or not an interface";
-            }
+            var errStr = lhs + " implements " + rhs + ", but ";
+            if (!(lhs in this.members)) throw errStr + lhs + " is undefined.";
+            if (!(this.members[lhs] instanceof IdlInterface)) throw errStr + lhs + " is not an interface.";
+            if (!(rhs in this.members)) throw errStr + rhs + " is undefined.";
+            if (!(this.members[rhs] instanceof IdlInterface)) throw errStr + rhs + " is not an interface.";
             this.members[rhs].members.forEach(function(member)
             {
                 this.members[lhs].members.push(new IdlInterfaceMember(member));
@@ -886,7 +892,7 @@ IdlException.prototype.test_members = function()
                 // "The value of the property is the ECMAScript value that is
                 // equivalent to the constant’s IDL value, according to the
                 // rules in section 4.2 above."
-                assert_equals(window[this.name][member.name], eval(member.value),
+                assert_equals(window[this.name][member.name], constValue(member.value),
                               "property has wrong value");
                 // "The property has attributes { [[Writable]]: false,
                 // [[Enumerable]]: true, [[Configurable]]: false }."
@@ -907,7 +913,7 @@ IdlException.prototype.test_members = function()
                                     'exception "' + this.name + '" does not have own property "prototype"');
 
                 assert_own_property(window[this.name].prototype, member.name);
-                assert_equals(window[this.name].prototype[member.name], eval(member.value),
+                assert_equals(window[this.name].prototype[member.name], constValue(member.value),
                               "property has wrong value");
                 var desc = Object.getOwnPropertyDescriptor(window[this.name].prototype, member.name);
                 assert_false("get" in desc, "property has getter");
@@ -1026,7 +1032,7 @@ IdlException.prototype.test_object = function(desc)
             assert_inherits(obj, member.name);
             if (member.type == "const")
             {
-                assert_equals(obj[member.name], eval(member.value));
+                assert_equals(obj[member.name], constValue(member.value));
             }
             if (member.type == "field")
             {
@@ -1323,7 +1329,7 @@ IdlInterface.prototype.test_members = function()
                 // "The value of the property is that which is obtained by
                 // converting the constant’s IDL value to an ECMAScript
                 // value."
-                assert_equals(window[this.name][member.name], eval(member.value),
+                assert_equals(window[this.name][member.name], constValue(member.value),
                               "property has wrong value");
                 // "The property has attributes { [[Writable]]: false,
                 // [[Enumerable]]: true, [[Configurable]]: false }."
@@ -1351,7 +1357,7 @@ IdlInterface.prototype.test_members = function()
                                     'interface "' + this.name + '" does not have own property "prototype"');
 
                 assert_own_property(window[this.name].prototype, member.name);
-                assert_equals(window[this.name].prototype[member.name], eval(member.value),
+                assert_equals(window[this.name].prototype[member.name], constValue(member.value),
                               "property has wrong value");
                 var desc = Object.getOwnPropertyDescriptor(window[this.name], member.name);
                 assert_false("get" in desc, "property has getter");
@@ -1374,6 +1380,9 @@ IdlInterface.prototype.test_members = function()
                                     "window does not have own property " + format_value(this.name));
                 assert_own_property(window[this.name], "prototype",
                                     'interface "' + this.name + '" does not have own property "prototype"');
+                assert_true(member.name in window[this.name].prototype,
+                            "The prototype object must have a property " +
+                            format_value(member.name));
 
                 // TODO: Needs to test for LenientThis.
                 assert_throws(new TypeError(), function() {
@@ -1593,7 +1602,7 @@ IdlInterface.prototype.test_interface_of = function(desc, obj, exception, expect
                 assert_inherits(obj, member.name);
                 if (member.type == "const")
                 {
-                    assert_equals(obj[member.name], eval(member.value));
+                    assert_equals(obj[member.name], constValue(member.value));
                 }
                 if (member.type == "attribute")
                 {
