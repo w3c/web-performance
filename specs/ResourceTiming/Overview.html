@@ -54,9 +54,11 @@
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, <span
       class="email">jmann@microsoft.com</span> </dd>
-    <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
+    <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
       class="org">Google Inc.</span>, <span
-      class="email">zhihengw@google.com</span> </dd>
+      class="email">arvind@google.com</span> </dd>
+    <dd class="vcard"><span class="fn">Zhiheng Wang</span>, <span
+      class="org">Google Inc. <i>(Until July 2012)</i></span></dd>
     <dd class="vcard"><span class="fn">Anderson Quach</span>, <span
       class="org">Microsoft Corp. <i>(Until March 2011)</i></span></dd>
 </dl>
@@ -329,8 +331,7 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
 <p>
     The <a href="#performanceresourcetiming">PerformanceResourceTiming</a>
     interface facilitates timing measurement of downloadable resources on the
-    root page. It represents the timing information related to resources that
-    initiate network downloads. For example, this interface is available for
+    root page. For example, this interface is available for
     <a href="http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest">XMLHttpRequest</a> objects <a href='#XHR'>[XMLHttpRequest]</a>, HTML
     elements <a href='#HTML5'>[HTML5]</a> such as
     <a href="http://www.w3.org/TR/html5/the-iframe-element.html#the-iframe-element">iframe</a>,
@@ -362,10 +363,11 @@ official term ECMAScript, since the term JavaScript is more widely known. <a hre
 in the</span>
 <code><a href="#performanceresourcetiming">PerformanceResourceTiming</a></code> Interface</h3>
 <p>
-	All resources <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetched</a> from the networking layer by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>
+	All resources <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetched</a> by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>
 	must be included as <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> of the
 	current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>. Resources that are
-    retrieved from the user agent's networking layer cache must be included 
+    retrieved from <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or local resources must be included 
     as <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>.
 </p>
 <p>The rest of this section is non-normative.</p>
@@ -375,8 +377,8 @@ in the</span>
         <li>If the same canonical URL is used as the <code>src</code> attribute of two HTML <code>IMG</code> elements,
             the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource initiated by the first HTML <code>IMG</code> element should 
 			be included as a <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. 
-			The user agent might not re-request the URL from the networking layer for the second HTML <code>IMG</code> element, instead using an in-memory browser cache. 
-            In this case, there is only a single request sent to the networking layer for retrieval, so the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource by the first
+			The user agent might not re-request the URL for the second HTML <code>IMG</code> element, instead using the existing download it initiated for the first HTML <code>IMG</code> element. 
+            In this case, the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource by the first
             <code>IMG</code> element would be the only occurrence in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>.
         </li>
         <li>If the <code>src</code> attribute of a HTML <code>IMG</code> element is changed via script, both the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the original resource as well
@@ -394,7 +396,7 @@ in the</span>
         <li>
             If an <code>XMLHttpRequest</code> is generated twice for the same canonical URL, both <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetches</a> of the resource would be
             included as a <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>.
-			This is because the user agent must validate both requests from the networking layer, even if the resource is in a disk cache from the first request.
+			This is because the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> of the resource for the second <code>XMLHttpRequest</code> cannot reuse the download issued for the first <code>XMLHttpRequest</code>.
         </li>
         <li>
             If an HTML <code>IFRAME</code> element is included on the page, then only the resource requested by <code>IFRAME</code> <code>src</code> attribute is included 
@@ -405,7 +407,7 @@ in the</span>
         <li>
             If an HTML <code>IMG</code> element has a <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> as its source, then this resource will not
             be included as a <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object in the <a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a>. 
-			By definition <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> contains embedded data and does not require access to the networking layer.
+			By definition <code><a href="http://tools.ietf.org/html/rfc2397">data: URI</a></code> contains embedded data and does not require a <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a>.
         </li>
     </ul>
 <p>
@@ -801,7 +803,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
   <li>Set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
   by the user agent or set by the <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> method.
   </li>
-  <li>For each resource fetched by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
+  <li>For each resource <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetched</a> by the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
   <ol>
       <li id="step-create-object">Create a new <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object and 
       set <a href="#entryType-attribute">entryType</a> to the DOMString <code>resource</code>.
@@ -826,8 +828,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
      <a href="#dom-performanceresourcetiming-connectend">connectEnd</a> be the same value as
      <a href="#dom-performanceresourcetiming-fetchstart">fetchStart</a>.
       </li>
-      <li id="step-collection-start">If the resource is not to be fetched from the 
-          networking layer, such as being fetched from an in-memory cache, abort the 
+      <li id="step-collection-start">If the user agent is to reuse the data from another existing or completed <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> initiated from the current document, abort the 
           remaining steps.
       </li>
       <li>If <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> the resource is aborted for any reason, abort the remaining steps.       </li>
@@ -984,7 +985,7 @@ Statistical fingerprinting is a privacy concern where a malicious web site may d
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
 <p>We would like to sincerely thank Karen Anderson, Darin Fisher, Tony Gentilcore, 
-Nic Jansma, Arvind Jain, Kyle Scholz, Jonas Sicking, James Simonsen, Steve Souders, 
+Nic Jansma, Kyle Scholz, Jonas Sicking, James Simonsen, Steve Souders, 
 Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to this work.</p>
 
 <h2 class="no-num" id=references>References</h2>
