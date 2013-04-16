@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>High Resolution Time Level 2</title>
+<style>
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<hgroup>
+<h1>High Resolution Time Level 2</h1>
+<h2 class="no-num no-toc" id="editors-draft-april-16-2013">Editor's Draft April 16, 2013</h2>
+</hgroup>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html</a></dd>
+  <dt>Editor:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+  <dd class="vcard"><span class="fn">James Simonsen</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:simonjam@google.com">simonjam@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>
+	This specification defines a JavaScript interface that provides the current time 
+	in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments.
+</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BHighResolutionTime2%5D%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[HighResolutionTime2]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>
+	High Resolution Time Level 2 builds on the first version of <a href='#HighResolutionTime'>High Resolution Time</a> and includes:
+</p>
+<ul>
+<li>support for <code><a href="dom-worker-performance-now">performance.now()</a></code> in Web Workers.</li>
+</ul>
+   
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-high-resolution-time"><span class="secno">4 </span>High Resolution Time</a> 
+    <ol class="toc">
+      <li><a href="#sec-high-resolution-introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-time-origin"><span class="secno">4.2 </span>Time Origin</a></li>
+	  <li><a href="#sec-DOMHighResTimeStamp"><span class="secno">4.3 </span>The <code>DOMHighResTimeStamp</code> Type</a></li>
+	  <li><a href="#sec-now-method"><span class="secno">4.4 </span>The <code>performance.now()</code> method</a></li>
+	  <li><a href="#sec-monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</a></li>
+	  <li><a href="#sec-privacy-security"><span class="secno">4.6 </span>Privacy and Security</a></li>
+    </ol>
+  </li>
+  <li><a href="#references"><span class="secno">5 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+The <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a> defines the Date object as a time value representing time in milliseconds since 01 January, 1970 UTC. For most purposes, this definition of time is sufficient as
+these values represent time to millisecond precision for any instant that is within approximately 285,616 years from 
+01 January, 1970 UTC. The <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a> is defined similarly. 
+</p>
+
+<p>
+In practice, these definitions of time are subject to both clock skew and adjustment of the system clock. The value of time may not always be monotonically increasing and subsequent values may either decrease
+or remain the same. 
+</p>
+
+<div class="example">
+	For example, the following script may log a positive number, negative number, or zero.
+	<pre>
+var mark_start = Date.now();
+doTask(); // Some task
+if (window.console) window.console.log('Duration of task: ' + (Date.now() - mark_start));
+	</pre>
+</div>
+
+<p>
+For certain tasks this definition of time may not be sufficient as it does not allow for sub-millisecond resolution and is subject to system clock skew. For example, 
+<p>
+<ul>
+	<li>
+		When attempting to accurately measure the elapsed time of navigating to a Document, fetching of resources or execution of script, a monotonically increasing clock 
+		with sub-millisecond resolution is desired.
+	</li>
+	<li>
+		When calculating the animation state from script, developers will need to accurately know the amount of time that has elapsed in the animation in order to properly update the
+		next scene of the animation.
+	</li>
+	<li>
+		When calculating the frame rate of a script based animation, developers will need sub-millisecond resolution in order to determine if an animation is drawing at 60 FPS. 
+		Without sub-millisecond resolution, a developer can only determine if an animation is drawing at 58.8 FPS or 62.5 FPS.
+	</li>
+	<li>
+		In order to cue audio to a specific point in an animation or ensure that the audio is synchronized with the animation, 
+		developers will need to accurately know the amount of time elapsed in the animation and audio.
+	</li>
+</ul>
+
+<p>
+This specification does not propose changing the behavior of <code>Date.now()</code> as it is genuinely useful in determining the current value of the calendar time and has a long history of
+usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#dom-performance-now"><code>now</code></a> method of the 
+<a href="#performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
+</p>
+
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<p>The term "JavaScript" is used to refer to
+<a href="#ECMA262">ECMA-262</a>,
+rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
+
+
+<h2 id="sec-high-resolution-time"><span class="secno">4 High Resolution Time</span></h2>
+
+<h3 id="sec-high-resolution-introduction"><span class="secno">4.1 </span>Introduction</h3>
+
+<p>This section is non-normative.</p>
+
+<p>
+	This specification defines an interface that provides the current time 
+	in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments.
+</p>
+
+<h3 id="sec-time-origin"><span class="secno">4.2 </span>Time Origin</h3>
+<p>
+	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of navigation of the current document, which is equal to the 
+	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
+	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
+	interface <a href='#NavigationTiming'>[NavigationTiming]</a>. 
+</p>
+
+<p>
+	For a <a href="http://www.w3.org/TR/workers/#dedicated-workers-and-the-dedicatedworkerglobalscope-interface">dedicated worker</a>,
+	the <i>time origin</i> must be equal to the time of the start of navigation of the document where it was created, which is equal to the 
+	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
+	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
+	interface <a href='#NavigationTiming'>[NavigationTiming]</a> of that document.
+</p>
+
+<p>
+	For a <a href="http://www.w3.org/TR/workers/#shared-workers-and-the-sharedworkerglobalscope-interface">shared worker</a>,
+	the <i>time origin</i> must be equal to the time of creation of the shared worker. 
+</p>
+
+<h3 id="sec-DOMHighResTimeStamp"><span class="secno">4.3 </span>The <code>DOMHighResTimeStamp</code> Type</h3>
+<p>
+	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store a time value measured relative from the
+	<i><a href="#time-origin">time origin</a></i> or a time value that represents a duration
+	between two  <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamps</code></a>.
+</p>
+      
+<dl>
+	<dt>
+		<b>Type Definition <i id='domhighrestimestamp'>DOMHighResTimeStamp</i></b>
+	</dt>
+	<dd>
+		<p>A <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> SHOULD represent a number of milliseconds accurate to a thousandth of a millisecond.</p>
+<div class="note"><div class="noteHeader">Note</div>
+<p>
+If the User Agent is unable to provide a time value accurate to a thousandth of a millisecond due to hardware or software constraints, the User Agent
+can represent a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> as a number of milliseconds accurate to a millisecond.
+</p>
+</div>
+<dl>
+<dt><br><b>IDL Definition</b></dt>
+<dd>
+<pre class="idl">
+typedef double <a href='#domhighrestimestamp'>DOMHighResTimeStamp</a>;
+</pre>
+<br>
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+<h3 id="sec-now-method"><span class="secno">4.4 </span>The <code>performance.now()</code> method</h3>
+<pre class="idl">
+partial interface <dfn id="Performance">Performance</dfn> {
+  DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now()</a>;
+};
+
+[NoInterface]
+interface <dfn id="WorkerGlobalScope">WorkerPerformance</dfn> {
+  DOMHighResTimeStamp <a href="#dom-worker-performance-now" title="now">now()</a>;
+};
+
+partial interface <dfn id="WorkerGlobalScope"><a href="http://www.w3.org/TR/2012/CR-workers-20120501/#the-workerglobalscope-common-interface">WorkerGlobalScope</a></dfn> {
+  readonly attribute <a href="#WorkerPerformance">WorkerPerformance</a> <dfn id="dom-window-performance">performance</dfn>;
+};
+</pre>
+
+<h4 id='now-section'><code>now</code> method</h4>
+
+<p>The <dfn id="dom-performance-now"><code>now</code></dfn> method MUST 
+	return a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> representing the number of milliseconds 
+	from the <i><a href="#time-origin">time origin</a></i> to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
+</p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>
+As the now method returns the current time, time spent while a document is <a href="http://www.w3.org/TR/page-visibility/#pv-page-hidden">hidden</a> <a href="#PV">[Page Visibility]</a> or 
+not <a href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active</a> <a href="#HTML5">[HTML5]</a> is 
+included for the purpose of this method.
+</p>
+</div>
+
+
+<h3 id="sec-monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</h3>
+<p>
+The time values returned when calling the <a href="#dom-performance-now"><code>now</code></a> method MUST be monotonically increasing and not subject to system clock
+adjustments or system clock skew. The difference between any two chronologically recorded time values returned from the 
+<a href="#dom-performance-now"><code>now</code></a> method MUST never be negative. 
+</p>
+
+<h3 id="sec-privacy-security"><span class="secno">4.6 </span>Privacy and Security</h3>
+<p>
+Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a 
+third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. 
+Though the <a href="#dom-performance-now"><code>now</code></a> method of the <a href="#performance"><code>Performance</code></a> interface
+returns time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
+</p>
+ 
+
+<h2 id="references"><span class="secno">5 </span>References</h2>
+<h2 id="normative-references"><span class="secno">5.1 </span>Normative References</h2>
+
+<dl>
+
+   <dt id="rfc2119">[IETF RFC 2119]</dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+    <dt id="ECMA262">[ECMA-262]</dt>
+    <dd>
+     <cite><a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>ECMAScript Language Specification</a></cite>, 5.1
+     Edition. ECMA International, Standard
+     ECMA-262, June 2011. This version of the ECMAScript
+     Language is available from <a href='http://www.ecma-international.org/publications/standards/Ecma-262.htm'>http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
+    </dd>
+   <dt id="HighResolutionTime">[High Resolution Time]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. World Wide Web Consortium, December 2012. This version of the High Resolution Time Recommendation is available from http://www.w3.org/TR/2012/REC-hr-time-20121217/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
+	
+   <dt id="NavigationTiming">[Navigation Timing]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/REC-navigation-timing-20121217/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, December 2012. This version of the Navigation Timing Recommendation is available from http://www.w3.org/TR/2012/REC-navigation-timing-20121217/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dt id="WebIDL">[Web IDL]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/WebIDL/'>Web
+   IDL</a></cite>, Cameron McCormack, Editor. World Wide Web
+   Consortium, April 2012. This version of the Web IDL
+   specification is available from
+   http://www.w3.org/TR/2012/CR-WebIDL-20120419/.
+   The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web
+   IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+   <dt id="WebWorkers">[Web Workers]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-workers-20120501/'>Web Workers</a></cite>, Ian Hickson, Editor. World Wide Web Consortium, May 2012. This version of the Web Workers specification is available from http://www.w3.org/TR/2012/CR-workers-20120501/. The <a href='http://www.w3.org/TR/workers/'>latest version of Web Workers</a> is available at http://www.w3.org/TR/workers/.</dd>
+</dl>
+
+<h2 id="informative-references"><span class="secno">5.2 </span>Informative References</h2>
+
+<dl>
+<dt>[<a id="HTML5">HTML5</a>]</dt>
+<dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+<dt id="PV">[Page Visibility]</dt>
+<dd>
+<cite><a href="http://www.w3.org/TR/page-visibility/">Page Visibility</a></cite>, Jatinder Mann and Arvind Jain, Editors. World Wide Web Consortium, July 2012.
+This version of the Page Visibility specification is available from http://www.w3.org/TR/2012/CR-page-visibility-20120726/. The latest version of Page Visibility is available at http://www.w3.org/TR/page-visibility/.
+</dd>
+
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+<p>I would like to sincerely thank Karen Anderson, Nat Duca, Tony Gentilcore, Arvind Jain, and Jason Weber
+ to acknowledge their contributions to this work.</p>
+</body>
+</html>
