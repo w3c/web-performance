@@ -29,11 +29,12 @@
    table thead { border-bottom:solid }
    table tbody th:first-child { border-left:solid }
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-  .auto-style1 {
-	background-color: #FFFFFF;
-}
+  .auto-style1 { background-color: #FFFFFF;}
+  .ednote { border-top: 3px solid red; border-bottom: 3px solid red; margin: 1em 2em; padding: 0 1em 0 1em; background: #f8eeee }
+  .ednoteHeader { font-weight: bold; display: block; padding-top: 0.5em }
   </style>
   <link href="https://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body class="draft">
@@ -320,11 +321,29 @@ title="">Foo</code>". </p>
     have started downloading,
     not execute the script until after the document has been parsed.
 </p>
+
+<div class="ednote"><div class="ednoteHeader">Editorial note</div>
+  <p>
+	Open Issue: The <code>defer</code> attribute has already been used for <code>script</code> elements to mean that the script shouldn't
+	be executed until the document has been parsed. As the developer's intention was to delay script execution, we may decide to build on that
+	and also delay downloading the script until higher priority downloads have completed. Alternatively, we can keep the two separate by defining
+	a <code>delay</code> attribute name instead of changing the meaning of the <code>defer</code> attribute.
+  </p>
+</div>
+
+
 <p>
 	Setting the <a href="#dom-defer"><code>defer</code></a> attribute on an 
     <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object
 	MUST NOT change when the <code>load</code> event is fired.
 </p>
+
+<div class="ednote"><div class="ednoteHeader">Editorial note</div>
+  <p>
+	Open Issue: There is a performance benefit of allowing deferred resources to not impact the <code>load</code> event timing, as scripts can execute
+	sooner. 
+  </p>
+</div>
 
 <h2 id="references"><span class="secno">6 </span>References</h2>
 
