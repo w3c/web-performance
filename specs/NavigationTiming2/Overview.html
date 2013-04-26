@@ -282,7 +282,7 @@ to obtain accurate timing data related to the navigation of the document.
     &lt;script&gt;
        function init() 
        {
-           var navigationTiming = performance.getEntries("navigation");
+           var navigationTiming = performance.getEntriesByType("navigation")[0];
            if (window.console) console.log("Name: "        + navigationTiming.name      + "\n" +
                                            "Entry Type: " + navigationTiming.entryType + "\n" +
                                            "Start Time: " + navigationTiming.startTime + "\n" +
