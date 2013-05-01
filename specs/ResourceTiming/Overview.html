@@ -157,7 +157,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#introduction-1"><span class="secno">4.1</span> Introduction</a></li>
       <li><a href="#resources-included"><span class="secno">4.2</span> Resources Included in the <code>PerformanceResourceTiming</code> Interface</a></li>
       <li><a href="#performanceresourcetiming"><span class="secno">4.3</span> The <code>PerformanceResourceTiming</code> Interface</a></li>
-      <li><a href="#performanceresourcetiming-methods"><span class="secno">4.4 </span> The Resource Timing Methods</a></li>
+      <li><a href="#extensions-performance-interface"><span class="secno">4.4 </span> Extensions to the <code>Performance</code> Interface</a></li>
       <li><a href="#cross-origin-resources"><span class="secno">4.5 </span> Cross-origin Resources</a></li>
       <li><a href="#vendor-prefixes"><span class="secno">4.6 </span> Vendor Prefixes</a></li>
     </ol>
@@ -629,7 +629,7 @@ receiving the last byte of the resource from <a
 href="http://www.w3.org/TR/html5/offline.html#relevant-application-cache">relevant
 application caches</a> or from local resources.</p>
 
-<h3 id="performanceresourcetiming-methods"><span class="secno">4.4 </span>The Resource Timing Methods</h3>
+<h3 id="extensions-performance-interface"><span class="secno">4.4 </span>Extensions to the <code>Performance</code> Interface</h3>
 
 <pre class="idl">
 partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
@@ -656,7 +656,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 	<p>The <code>setResourceTimingBufferSize</code> method, when invoked, must set the maximum number of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources that may be stored in 
 	the buffer to the value of the maxSize parameter.</p>
 	<p>If this method is not called, the user agent should store at least 150 <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources in the buffer, unless otherwise specified by the user agent.</p>
-    <p>if the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#dom-performance-clearresourcetimings">clearResourceTimings</a> 
+    <p>If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#dom-performance-clearresourcetimings">clearResourceTimings</a> 
     method is called.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
@@ -669,24 +669,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 
 <div class="methods">
 	<h4 id="dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code> attribute</h4>
-	<p>The callback onresourcetimingbufferfull is triggered when the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> is full.
-    The callback can be used to package existing <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources and
-    clear the buffered <a href="#performanceresourcetiming">PerformanceResourceTiming</a> list.
-    While executing the onresourcetimingbufferfull callback, <a href="#performanceresourcetiming">PerformanceResourceTiming</a> will continue to be collected beyond the maximum limit of the resources allowed in the 
-    <a href="#performanceresourcetiming">PerformanceResourceTiming</a> interface until one of the following occurs:
-    <ol>
-		<li>
-            <a href="#dom-performance-clearresourcetimings"><code>clearResourceTimings</code></a> is called - The <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-            will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> 
-            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-            does not change unless otherwise specified by <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a>.
-        </li>
-		<li><a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> is called - The <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a> will extend and / or truncate to the buffer size specified.</li>
-		<li>
-            Neither <a href="#dom-performance-clearresourcetimings"><code>clearResourceTimings</code></a> or
-            <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> is called during the execution of the onresourcetimingbufferfull callback
-            - no updates are made to the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>.</li>
-    </ol>
+	<p>The callback <code>onresourcetimingbufferfull</code> is triggered immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources becomes full.
 </div>
 
 <h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>
@@ -926,33 +909,19 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
             </li>
         </ol>
       </li>
-      <li>If the <i>primary buffer</i> is full, and the callback <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> is defined,
+      <li>If the <i>primary buffer</i> is full, discard the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object, 
+      created in step <a href="#step-create-object">3.1</a>. Otherwise, add it to the <i>primary buffer</i>. If adding it causes the <i> primary buffer </i> to become full, and the callback <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> is defined,
 	  the callback <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> 
           must be triggered.<ol>
-            <li>Create a <i>temporary buffer</i> of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects.
-            </li>
-            <li>Add the current resource to the <i>temporary buffer</i>.
-            </li>
-            <li>If there are additional resources that are collected during the <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a>
-            callback, add them to the <i>temporary buffer</i>.
-            </li>
             <li>
             If the <a href="#dom-performance-clearresourcetimings"><code>clearResourceTimings</code></a> method is called in the <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
             clear all <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <i>primary buffer</i>. 
-            Copy all <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <i>temporary buffer</i> to the
-            <i>primary buffer</i>.
             </li>
             <li>
             If the <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> method is called in the <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
-            set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is larger than the previous size of the <i>primary buffer</i>,
-            append <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <i>temporary buffer</i> to the <i>primary buffer</i> up to the maxSize parameter.
+            set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed.
             </li>
-		    <li>Discard the <i>temporary buffer</i>.
-		    </li>
         </ol>
-      </li>
-      <li>If the <i>primary buffer</i> is not full, add the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object, 
-      created in step <a href="#step-create-object">3.1</a>, to the <i>primary buffer</i>.
       </li>
   </ol>
   </li>

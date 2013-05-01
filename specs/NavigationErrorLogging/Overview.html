@@ -62,6 +62,9 @@
     <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
       class="org">Compuware Corp.</span>, &lt;<a
       class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
+        <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
 </dl>
 
    <p class=copyright><a
@@ -144,8 +147,8 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Error Logging</a> 
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
-	  <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>NavigationErrorLogging</code> interface</a></li>
-      <li><a href="#performanceresourcetiming-methods"><span class="secno">4.3 </span> The Navigation Error Logging Methods</a></li>
+      <li><a href="#sec-NavigationErrorLogging"><span class="secno">4.2 </span> The <code>NavigationErrorLogging</code> interface</a></li>
+      <li><a href="#extensions-performance-interface"><span class="secno">4.3 </span> Extensions to the <code>Performance</code> Interface</a></li>
       <li><a href="#vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
       <li><a href="#processing-model"><span class="secno">4.5 </span>Monotonic Clock</a></li>
       <li><a href="#processing-model"><span class="secno">4.6 </span>Processing Model</a></li>
@@ -386,23 +389,43 @@ The <a href="#navigationerrorlogging">NavigationErrorLogging</a> interface parti
 	equal to 0.0. This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
 </p>
 
-<h3 id="performanceerrorlogging-methods"><span class="secno">4.3 </span>The Navigation Error Logging Methods</h3>
-
-<div class="ednote"><div class="ednoteHeader">Editorial note</div>
-  <p>
-	The Performance Timeline specification should define a clearData(DOMString entry) method, where entry is a type of PerformanceEntry object buffer that
-	is to be cleared. This method would currently apply to PerformanceResourceTiming, ResourceErrorLogging, and NavigationErrorLogging buffers.
-  </p>
-  <p>
-	The Performance Timeline specification should define a setBufferSize(DOMString entry, unsigned long maxSize) method, where entry is a type of PerformanceEntry object buffer that
-	is to be set. This method would currently apply to PerformanceResourceTiming, ResourceErrorLogging, and NavigationErrorLogging buffers.
-  </p>
-</div>
+<h3 id="extensions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> Interface</h3>
 
 <pre class="idl">
 partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+  void <a href='#dom-performance-clearnavigationerrors' title='clearnavigationerrors'>clearNavigationErrors</a>();
+  void <a href='#dom-performance-setnavigationerrorbuffersize' title='setResourceTimingBufferSize'>setNavigationErrorBufferSize</a>(unsigned long maxSize);
+
   attribute Function <a href='#dom-performance-onnavigationerrordatabufferfull' title='onnavigationerrordatabufferfull'>onnavigationerrordatabufferfull</a>;
 };</pre>
+
+<div class="methods">
+    <h4 id="dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code> method</h4>
+	<p>The method <code>clearNavigationErrors</code> clears the buffer used to store the 
+    list of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects.
+    </p>
+		<div class="parameters">
+			<p><b>No parameters</b></p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
+
+<div class="methods">
+	<h4 id="dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code> method</h4>
+	<p>The <code>setNavigationErrorBufferSize</code> method, when invoked, must set the maximum number of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects that may be stored in 
+	the buffer to the value of the maxSize parameter. This setting MUST be persisted across sessions.</p>
+	<p>The initial size of buffer is assumed to be zero. Therefore, if this method is not called, the user agent would not store <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects in the buffer.</p>
+    <p>If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#dom-performance-clearnavigationerrors">clearNavigationErrors</a> 
+    method is called.</p>
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+			in <code>maxSize</code> type of unsigned long
+			<p>The maxSize parameter sets the maximum number of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects that will be stored in the buffer.</p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
 
 <div class="methods">
 	<h4 id="dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code> attribute</h4>
@@ -412,16 +435,16 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
     <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects interface until one of the following occurs:
     <ol>
 		<li>
-            <a href="#dom-performance-cleardata"><code>clearData</code></a> method is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
+            <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> method is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
             will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#navigationerrorlogging">NavigationErrorLogging</a> 
             interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-            does not change unless otherwise specified by <a href="#dom-performance-setbuffersize"><code>setBufferSize</code></a>.
+            does not change unless otherwise specified by <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a>.
         </li>
-		<li><a href="#dom-performance-setbuffersize"><code>setBufferSize</code></a> is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a> 
+		<li><a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a> 
             will extend and / or truncate to the buffer size specified.</li>
 		<li>
-            Neither <a href="#dom-performance-cleardata"><code>clearData</code></a> or
-            <a href="#dom-performance-setbuffersize"><code>setBufferSize</code></a> is called during the execution of the <code>onnavigationerrordatabufferfull</code> callback:
+            Neither <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> or
+            <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> is called during the execution of the <code>onnavigationerrordatabufferfull</code> callback:
             no updates are made to the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>.</li>
     </ol>
     <p>
@@ -498,13 +521,13 @@ terms of a monotonic clock measuring time elapsed from the beginning of the navi
             callback, add them to the <i>temporary buffer</i>.
             </li>
             <li>
-            If the <a href="#dom-performance-clearData"><code>clearData</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
+            If the <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
             clear all <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>primary buffer</i>. 
             Copy all <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>temporary buffer</i> to the
             <i>primary buffer</i>.
             </li>
             <li>
-            If the <a href="#dom-performance-setbuffersize"><code>setBufferSize</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
+            If the <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
             set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is larger than the previous size of the <i>primary buffer</i>,
             append <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>temporary buffer</i> to the <i>primary buffer</i> up to the maxSize parameter.
             </li>
@@ -568,7 +591,7 @@ Access to the <a href="#navigationerrorlogging">NavigationErrorLogging</a> inter
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-<p>I would like to offer my sincere thanks to Aaron Heady, Dan Austin, James Simonsen, Arvind Jain, Philippe Le Hegaret, and Jason Weber for their contributions to this work.</p>
+<p>I would like to offer my sincere thanks to Aaron Heady, Dan Austin, James Simonsen, Philippe Le Hegaret, and Jason Weber for their contributions to this work.</p>
 
 </body>
 </html>
