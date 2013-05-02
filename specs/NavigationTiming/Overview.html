@@ -331,7 +331,7 @@ provided information. </p>
 
 <p>This attribute must return the time immediately after the user agent finishes <a
 href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prompting
-to unload</a> the previous document.
+to unload</a> the previous document. If there is no previous document, this attribute must return the time the current document is created.
 
 <h4><code><dfn id="dom-performancetiming-unloadeventstart">unloadEventStart</dfn></code> attribute</h4>
 
@@ -342,7 +342,7 @@ this attribute must return the time immediately before the user agent starts
 the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a>
 event of the previous document. 
 
-If the previous document has a
+If there is no previous document or the previous document has a
 different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document, this attribute must return zero.</p>
 
@@ -352,7 +352,7 @@ current document, this attribute must return zero.</p>
 same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
 this attribute must return the time immediately after the user agent finishes the
 <a href="http://www.w3.org/TR/html5/browsers.html#unload-a-document">unload</a>
-event of the previous document. If the previous document has
+event of the previous document. If there is no previous document or the previous document has
 a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
