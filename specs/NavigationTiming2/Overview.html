@@ -263,7 +263,7 @@ of the navigation.
 the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> data looks like so:
 </p>
 <pre>
-navigationStart:     0.000
+startTime:           0.000
 responseEnd:       100.000
 </pre>
 </div>
@@ -359,7 +359,6 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>PerformanceNavigationTiming</code> interface</h3>
 <pre class="idl">interface <dfn id="performancenavigationtiming">PerformanceNavigationTiming</dfn> : <dfn><a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a></dfn> {
-  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-navigationstart" title="navigationstart">navigationStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventstart" title="unloadeventstart">unloadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventend" title="unloadeventend">unloadEventEnd</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-linknegotiationstart" title="linknegotiationstart">linkNegotiationStart</a>;
@@ -413,18 +412,10 @@ The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> inter
 
     <p>
         The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	    equal to the difference between <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a> and <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>, respectively.
+	    equal to the difference between <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.
      </p>
 </div>
 
-
-<h4><code><dfn id="dom-performancenavigationtiming-navigationstart">navigationStart</dfn></code> attribute</h4>
-
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
-with a time value equal to the time immediately after the user agent finishes <a
-href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#prompt-to-unload-a-document">prompting
-to unload</a> the previous document. If there is no previous document, this attribute
-MUST return the same value as <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-unloadeventstart">unloadEventStart</dfn></code> attribute</h4>
 
@@ -465,14 +456,14 @@ with a time value equal to zero.</p>
 
 <p>This attribute is optional. User agents that don't have this attribute
 available MUST set it as undefined. If the network interface is not immediately available and must be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
- with a time value equal to the time immediately before starting that process. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>. </p>
+ with a time value equal to the time immediately before starting that process. If the network interface is immediately available, this attribute MUST return the same value as <a href="#startTime-attribute">startTime</a>. </p>
 
 
 <h4><code><dfn id="dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</dfn></code> attribute</h4>
 
 <p>This attribute is optional. User agents that don't have this attribute
 available MUST set it as undefined.  If the network interface is not immediately available and must be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
- with a time value equal to the time immediately after the network interface becomes available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>. </p>
+ with a time value equal to the time immediately after the network interface becomes available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#startTime-attribute">startTime</a>. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-redirectstart">redirectStart</dfn></code> attribute </h4>
 
@@ -806,7 +797,7 @@ non-normative intervals between timings.</p>
     <text x="769.86328" y="792" class="middle"><tspan>DOMContentLoaded</tspan></text>
     <text x="239.97607" y="792.12683" class="middle"><tspan>unload</tspan></text>
     <text x="490" y="512.12122"><tspan>(linkNegotiationStart)</tspan></text>
-    <text x="490.49219" y="491.88022" class='highlight'><tspan>navigationStart</tspan></text>
+    <text x="490.49219" y="491.88022" class='highlight'><tspan>startTime</tspan></text>
     <text x="490" y="532"><tspan>(linkNegotiationEnd)</tspan></text>
     <text x="490" y="552.60315"  class='highlight'><tspan>redirectStart</tspan></text>
     <text x="490" y="593.08502"><tspan>fetchStart</tspan></text>
@@ -884,12 +875,6 @@ non-normative intervals between timings.</p>
   <li>Set <a href="#name-attribute">name</a> to the DOMString <code>document</code>.</li>
   <li>Set <a href="#entryType-attribute">entryType</a> to the DOMString <code>navigation</code>.</li>
   <li>Set <a href="#startTime-attribute">startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero.</li>
-  <li>Immediately after the user agent <a
-    href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#prompt-to-unload-a-document">prompts
-    to unload</a> the previous <a
-    href="http://www.w3.org/html/wg/drafts/html/master/dom.html#document">document</a>,
-    record the current time as <a
-    href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>.</li>
   <li> Record the current navigation type in <a href="#dom-performancenavigationtiming-type">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
@@ -915,7 +900,7 @@ non-normative intervals between timings.</p>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a>.</li>
-  <li id="step-linknegotiation-start">If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>.</li>
+  <li id="step-linknegotiation-start">If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</a> and <a href="#dom-performancenavigationtiming-linknegotiationend">linkNegotiationEnd</a> be the same value as <a href="#startTime-attribute">startTime</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-get">or equivalent</a>,
     immediately before a user agent checks with the <a
@@ -1012,7 +997,7 @@ non-normative intervals between timings.</p>
       <li>Let <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a> be the value of
         <a href="#dom-performancenavigationtiming-responseend">responseEnd</a>.</li>
       <li>Set all the attributes in window.performance.timing to 0 except
-        <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>,
+        <a href="#startTime-attribute">startTime</a>,
         <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a>,
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>, 
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a> and
@@ -1049,7 +1034,7 @@ non-normative intervals between timings.</p>
     from <code>prerender</code> to <code>visible</code>. Otherwise, set this attribute to 0.</li>
   <li>
     Set the <a href="#duration-attribute">duration</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	equal to the difference between <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a> and <a href="#dom-performancenavigationtiming-navigationstart">navigationStart</a>, respectively.
+	equal to the difference between <a href="#dom-performancenavigationtiming-loadend">loadEventEnd</a> and <a href="#startTime-attribute">startTime</a>, respectively.
   </li>
 </ol>
 
