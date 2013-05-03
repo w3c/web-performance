@@ -43,7 +43,7 @@
 <div class="head">
 <hgroup>
 <h1>Navigation Error Logging</h1>
-<h2 class="no-num no-toc" id="editors-draft-april-24-2012">Editor's Draft April 24, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-may-01-2013">Editor's Draft May 01, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -56,15 +56,15 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html</a></dd>
   <dt>Editors:</dt>
-        <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+        <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+  <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
       class="org">Compuware Corp.</span>, &lt;<a
       class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
-        <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
-      class="org">Google Inc.</span>, &lt;<a
-      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
 </dl>
 
    <p class=copyright><a
@@ -144,14 +144,12 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Error Logging</a> 
+  <li><a href="#sec-navigation-error-logging"><span class="secno">4 </span>Navigation Error Logging</a> 
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
-      <li><a href="#sec-NavigationErrorLogging"><span class="secno">4.2 </span> The <code>NavigationErrorLogging</code> interface</a></li>
+      <li><a href="#sec-navigationerrorentry"><span class="secno">4.2 </span> The <code>NavigationErrorEntry</code> interface</a></li>
       <li><a href="#extensions-performance-interface"><span class="secno">4.3 </span> Extensions to the <code>Performance</code> Interface</a></li>
-      <li><a href="#vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
-      <li><a href="#processing-model"><span class="secno">4.5 </span>Monotonic Clock</a></li>
-      <li><a href="#processing-model"><span class="secno">4.6 </span>Processing Model</a></li>
+      <li><a href="#monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</a></li>
     </ol>
    </li>
   <li><a href="#privacy"><span class="secno">5 </span>Privacy and Security</a>
@@ -211,15 +209,15 @@ cite this document as other than work in progress. </p>
 <p>
     To address the need for complete and detailed information on the errors resulting from
     the navigation of the document and fetching of resources, the <a href="http://www.w3.org/TR/error-logging/">Navigation Error Logging</a> 
-    specification defines the <a href="http://www.w3.org/TR/error-logging/#navigationerrorlogging">NavigationErrorLogging</a>
+    specification defines the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a>
     interface. This interface allows JavaScript mechanisms to provide complete client-side error data on the navigation of the document
     and fetching of resources within the applications. As it is typically impossible to obtain error data through JavaScript mechanisms
     during an aborted navigation due to the error, this data is persisted across sessions.
 </p>
 
 <p>
-    The following script shows how a developer can use the <a href="#navigationerrorlogging">NavigationErrorLogging</a> interface 
-    to obtain accurate error timing data related to the previous and current navigations of the document.
+    The following script shows how a developer can use the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface 
+    to obtain accurate error timing data related to the previous navigations of the document.
 </p>
 
 <div class="example">
@@ -230,17 +228,19 @@ cite this document as other than work in progress. </p>
   &lt;/head&gt;
   &lt;body onload="init()"&gt;
     &lt;script&gt;
-       function init() 
-       {
-           var errorList = window.performance.getEntriesByType("navigationError");
+       function onNavigationErrorsReceived(errorList) {
            for (i = 0; i < errorList.length; i++)
            {
               if (window.console) console.log("Document: "                + errorList[i].name + "\n" +
-                                              "Error Category: "          + errorList[i].errorCategory + "\n" +
                                               "Error Type: "              + errorList[i].errorType + "\n" +
-                                              "HTTP Code: "               + errorList[i].httpResponseCode + "\n" +
-                                              "Time (UTC): "              + new Date(errorList[i].startTimeUTC);
+                                              "Time of Error (UTC): "     + new Date(errorList[i].startTime) + "\n" +
+                                              "Duration: "                + errorList[i].duration);
            }
+       }
+
+       function init() 
+       {
+           window.performance.getNavigationErrors(onNavigationErrorsReceived);
        }
     &lt;/script&gt;
   &lt;/body&gt;
@@ -292,117 +292,103 @@ title="">Foo</code>". </p>
 <a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<h2 id="sec-navigation-timing"><span class="secno">4 </span>Navigation Error Logging</h2>
+<h2 id="sec-navigation-error-logging"><span class="secno">4 </span>Navigation Error Logging</h2>
 
 <h3 id="sec-Introduction"><span class="secno">4.1 </span> Introduction</h3>
 <p>This section is non-normative.</p>
 
 <p>
-	This specification defines the <a href="#navigationerrorlogging">NavigationErrorLogging</a>
+	This specification defines the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a>
     interface to store and retrieve error data related to previous navigations of a document.
 </p>
 
-<h3 id="sec-NavigationErrorLogging"><span class="secno">4.2 </span> The <code>NavigationErrorLogging</code> interface</h3>
-<pre class="idl">interface <dfn id="navigationerrorlogging">NavigationErrorLogging</dfn> : <dfn><a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a></dfn> {
-  readonly attribute <a href="#NavigationErrorCategory" title="NavigationErrorCategory">NavigationErrorCategory</a> <a href="#dom-navigationerrorlogging-errorcategory">errorCategory</a>; 
-  readonly attribute DOMString <a href="#dom-navigationerrorlogging-errortype">errorType</a>; 
-  readonly attribute unsigned short <a href="#dom-navigationerrorlogging-httpresponsecode">httpResponseCode</a>; 
-  readonly attribute DOMTimeStamp <a href="#dom-navigationerrorlogging-starttimeutc">startTimeUTC</a>; 
+<h3 id="sec-navigationerrorentry"><span class="secno">4.2 </span> The <code>NavigationErrorEntry</code> interface</h3>
+<pre class="idl">interface <dfn id="navigationerrorentry">NavigationErrorEntry</dfn> {
+  readonly attribute <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'>DOMString</a> <a href='#dom-navigationerrorentry-name' title='name'>name</a>;
+  readonly attribute DOMTimeStamp <a href='#dom-navigationerrorentry-starttime' title='startTime'>startTime</a>; 
+  readonly attribute DOMTimeStamp <a href='#dom-navigationerrorentry-duration' title='duration'>duration</a>;
+  readonly attribute <a href="#NavigationErrorType" title="NavigationErrorType">NavigationErrorType</a> <a href="#dom-navigationerrorentry-errortype">errorType</a>; 
 };
 
-enum <dfn id="NavigationErrorCategory">NavigationErrorCategory</dfn> { "redirect", "apppcache", "dns", "tcp", "request", "response", "unload", "processing" };
+enum <dfn id="NavigationErrorType">NavigationErrorType</dfn> { "dns", "tcp", "ssl", "http", "abandoned" };
 </pre>
 
 <p>
-The <a href="#navigationerrorlogging">NavigationErrorLogging</a> interface participates in the 
-	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the 
-    <a href="dom-navigationerrorlogging-name"><code>name</code></a>, <a href="dom-navigationerrorlogging-entryType"><code>entryType</code></a>, 
-    <a href="dom-navigationerrorlogging-starttime"><code>startTime</code></a>, and <a href="dom-navigationerrorlogging-duration"><code>duration</code></a>
-    attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
-</p>
 
-
-<h4><code><dfn id="dom-navigationerrorlogging-name">name</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-navigationerrorentry-name">name</dfn></code> attribute</h4>
 <p>
     The <code id="name-attribute">name</code> attribute MUST return the <a href="http://www.w3.org/TR/2011/WD-html5-20110525/dom.html#the-document-s-current-address">current address</a>
     of the document where the error occurred, as an <a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">absolute URL</a>.
-    This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
 </p>
     
-<h4><code><dfn id="dom-navigationerrorlogging-entryType">entryType</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-navigationerrorentry-starttime">startTime</dfn></code> attribute</h4>
 <p>
-    The <code id="entryType-attribute">entryType</code> attribute MUST return the DOMString <code id="perf-navigation">navigationError</code>.
-    This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
+    The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a> 
+	with the time immediately after the user agent finishes <a
+href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prompting
+to unload</a> the previous document while <a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigating</a> to the document that resulted in an error.
+
+<h4><code><dfn id="dom-navigationerrorentry-duration">duration</dfn></code> attribute</h4>
+<p>
+    The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a>
+	equal to the difference between the time immediately after the User Agent logs the occurrence of the error and <a href="#dom-navigationerrorentry-starttime">startTime</a>.
 </p>
 
-<h4><code><dfn id="dom-navigationerrorlogging-errorcategory">errorCategory</dfn></code> attribute</h4>
+<h4><code><dfn id="dom-navigationerrorentry-errortype">errorType</dfn></code> attribute</h4>
 <p>
-    This attribute MUST return one of the following strings describing the category type of the error: <code>unload</code>, <code>redirect</code>, <code>appcache</code>,
-	<code>dns</code>, <code>tcp</code>, <code>request</code>, <code>response</code>, and <code>processing</code>.
+    This attribute MUST return one of the following strings describing the type of the error: <code>dns</code>, <code>tcp</code>, <code>ssl</code>,
+	<code>http</code>, and <code>abandoned</code>. The <code>abandoned</code> error type refers to the case where the user aborts the navigation before it is complete.
 </p>
 
-<h4><code><dfn id="dom-navigationerrorlogging-type">errorType</dfn></code> attribute</h4>
-
-<p>
-    This attribute MUST return one of the following strings describing the specific type of the error or a <a href="#vendor-prefixes">vendor prefixed</a> string:
-</p>
-<div class="ednote"><div class="ednoteHeader">Editorial note</div>
-  <p>
-	Open Issue: We are working through the list of errors to consider standarizing in this specification. 
-  </p>
-</div>
-
-<h4><code><dfn id="dom-navigationerrorlogging-navigationstart">httpResponseCode</dfn></code> attribute</h4>
-
-<p>
-    This attribute MUST return a short with the <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP Response code</a> number
-    that the User Agent recieved. Otherwise, this attribute MUST be equal to <code>0</code>.
-</p>
-<div class="ednote"><div class="ednoteHeader">Editorial note</div>
-  <p>
-	Open Issue: Due to privacy and security concerns, we should limit the HTTP response codes to a subset of all codes.  
-  </p>
-</div>
-<h4><code><dfn id="dom-navigationerrorlogging-startTime">startTime</dfn></code> attribute</h4>
-<p>
-    The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
-	with the time 0.0. This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
-</p>
-
-<div class="note">
-<div class="noteHeader">Note</div>
-	<p>
-		To ensure that errors from the previous navigations of a document don't show up on the timeline view of the current document, this attribute is set to 0.0.
-	</p>
-</div>
-
-
-<h4><code><dfn id="dom-navigationerrorlogging-starttimeutc">startTimeUTC</dfn></code> attribute</h4>
-<p>
-    The <code id="startTimeUTC-attribute">startTimeUTC</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a> 
-	with the time immediately after the User Agent logs the occurrence of the error.
-</p>
     
-<h4><code><dfn id="dom-navigationerrorlogging-duration">duration</dfn></code> attribute</h4>
-<p>
-    The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	equal to 0.0. This attribute is extended from the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface.
-</p>
-
 <h3 id="extensions-performance-interface"><span class="secno">4.3 </span>Extensions to the <code>Performance</code> Interface</h3>
 
 <pre class="idl">
 partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+  void <a href='#dom-performance-enablenavigationerrorlogging' title='enableNavigationErrorLogging'>enableNavigationErrorLogging</a>(boolean enable);
+  void <a href='#dom-performance-getnavigationerrors' title='getnavigationerrors'>getNavigationErrors</a>(<a href='#GetNavigationErrorsCallback'>GetNavigationErrorsCallback</a> getnavigationerrorscallback);
   void <a href='#dom-performance-clearnavigationerrors' title='clearnavigationerrors'>clearNavigationErrors</a>();
-  void <a href='#dom-performance-setnavigationerrorbuffersize' title='setResourceTimingBufferSize'>setNavigationErrorBufferSize</a>(unsigned long maxSize);
 
-  attribute Function <a href='#dom-performance-onnavigationerrordatabufferfull' title='onnavigationerrordatabufferfull'>onnavigationerrordatabufferfull</a>;
-};</pre>
+  typedef sequence &lt;NavigationErrorEntry&gt; <b><dfn id='navigationerrorentrylist'>NavigationErrorEntryList</dfn></b>;
+};
+
+callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn> = void (NavigationErrorEntryList navigationerrorentrylist);
+</pre>
+
+<div class="methods">
+	<h4 id="dom-performance-enablenavigationerrorlogging"><code>enableNavigationErrorLogging</code> method</h4>
+	<p>The <code>enableNavigationErrorLogging</code> method, when invoked, enables or disables logging of navigation errors, based on whether <code>enable</code> is <code>true</code>
+        or <code>false</code>, respectively, for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
+
+        <p>The user agent should limit the total number of <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects stored for a given 
+        <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a>. A limit of 150 entries is recommended.</p>
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+			in <code>enable</code> type of boolean
+			<p>The enable parameter enables or disables logging of navigation errors.</p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
+
+<div class="methods">
+    <h4 id="dom-performance-getnavigationerrors"><code>getNavigationErrors</code> method</h4>
+	<p>The <code>getNavigationErrors</code> method calls back the provided callback with a 
+		<a href="#navigationerrorentrylist"><code>NavigationErrorEntryList</code></a> object that contains a copy of all <a href="#sec-navigationerrorentry"><code>NavigationErrorEntry</code></a> objects
+                for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document in chronological order.
+    </p>
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+				in <code>getnavigationerrorscallback</code> type of <a href="#GetNavigationErrorsCallback">GetNavigationErrorsCallback</a>.
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+</div>
 
 <div class="methods">
     <h4 id="dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code> method</h4>
-	<p>The method <code>clearNavigationErrors</code> clears the buffer used to store the 
-    list of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects.
+	<p>The <code>clearNavigationErrors</code> method clears the buffer used to store the 
+    list of <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects.
     </p>
 		<div class="parameters">
 			<p><b>No parameters</b></p>
@@ -411,153 +397,25 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 		</div>
 </div>
 
-<div class="methods">
-	<h4 id="dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code> method</h4>
-	<p>The <code>setNavigationErrorBufferSize</code> method, when invoked, must set the maximum number of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects that may be stored in 
-	the buffer to the value of the maxSize parameter. This setting MUST be persisted across sessions.</p>
-	<p>The initial size of buffer is assumed to be zero. Therefore, if this method is not called, the user agent would not store <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects in the buffer.</p>
-    <p>If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. The maxSize parameter will apply only after the <a href="#dom-performance-clearnavigationerrors">clearNavigationErrors</a> 
-    method is called.</p>
-		<div class="parameters">
-			<p><b>Parameters</b></p>
-			in <code>maxSize</code> type of unsigned long
-			<p>The maxSize parameter sets the maximum number of <a href="#sec-NavigationErrorLogging">NavigationErrorLogging</a> objects that will be stored in the buffer.</p>
-			<p><b>No return value</b></p>
-			<p><b>No additional exceptions</b></p>
-		</div>
-</div>
-
-<div class="methods">
-	<h4 id="dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code> attribute</h4>
-	<p>The callback <code>onnavigationerrordatabufferfull</code> is triggered when the buffer used to store the list of <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects is full.
-    The callback can be used to package existing <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects and clear the buffered <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects list.
-    While executing the <code>onnavigationerrordatabufferfull</code> callback, <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects will continue to be collected beyond the maximum limit of the resources allowed in the 
-    <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects interface until one of the following occurs:
-    <ol>
-		<li>
-            <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> method is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-            will begin with the n+1th item if it exists and the first n elements are released, where n is the maximum number of resources allowed in the <a href="#navigationerrorlogging">NavigationErrorLogging</a> 
-            interface. If the n+1th item does not exist, the buffer is cleared. The max length of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-            does not change unless otherwise specified by <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a>.
-        </li>
-		<li><a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> is called: the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a> 
-            will extend and / or truncate to the buffer size specified.</li>
-		<li>
-            Neither <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> or
-            <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> is called during the execution of the <code>onnavigationerrordatabufferfull</code> callback:
-            no updates are made to the <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>.</li>
-    </ol>
-    <p>
-        If the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback is not defined and the buffer used to store the 
-        <a href="#performanceError">NavigationErrorLogging</a> objects is full, 
-	    the first <a href="#performanceError">NavigationErrorLogging</a> object in the buffer will be discarded and the new 
-        <a href="#performanceError">NavigationErrorLogging</a> object will be appended to the end of the buffer, like a FIFO queue.
-    </p>
-</div>
-
-<h3 id="vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</h3>
-<p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
-e.g., for experimental purposes, vendors MUST use the following extension mechanisms:</p>
-
-<ul>
-    <li>
-        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[errorType], where [vendorprefix] is a name
-        that identifies the vendor and [errorType] is the name of the error.
-    </li>
-</ul>
-
-<h3 id="monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</h3>
+<h3 id="monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</h3>
 <p>The value of the timing attributes must monotonically increase to ensure timing attributes are not 
 skewed by adjustments to the system clock while recording error data. The difference between any two chronologically 
-recorded timing attributes must never be negative. For all resources, including subdocument resources, the user agent must 
-record the system clock at the beginning of the root document navigation and define subsequent timing attributes in 
-terms of a monotonic clock measuring time elapsed from the beginning of the navigation.
+recorded timing attributes must never be negative.
 </p>
 
-<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
-
-<ol>
-  <li>If the User Agent has not already created a <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-  <i>primary buffer</i> object from a previous browsing session, once the <a href="http://www.w3.org/TR/html5/history.html#create-a-document-object">Window object of 
-  the current document is created</a>, the User Agent must create a <a href="http://www.w3.org/TR/performance-timeline/#performanceentrylist">PerformanceEntryList</a>
-  <i>primary buffer</i> object to store the list of <a href="#navigationerrorlogging">NavigationErrorLogging</a> resources.</li>
-  <li>If the <i>primary buffer</i> size has not been set, set the <i>primary buffer</i> to a size of 150, unless otherwise specified 
-  by the user agent or set by the <a href="#dom-performance-setbuffersize"><code>setBufferSize</code></a> method.
-  </li>
-  <li>For each error occurred within the current <a href="http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing context</a>, perform the following steps:
-  <ol>
-      <li id="step-create-object">Create a new <a href="#navigationerrorlogging">NavigationErrorLogging</a> object and 
-      set <a href="#entryType-attribute">entryType</a> to the DOMString <code>error</code>.
-      </li>      
-      <li>
-          Set <a href="#name-attribute">name</a> to the <a href="http://www.w3.org/TR/2011/WD-html5-20110525/dom.html#the-document-s-current-address">current address</a>
-           as an <a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">absolute URL</a>.
-      </li>
-      <li>
-          If the error is caused due to the <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> of a resource,
-          set <a href="#resourceName-attribute">resourceName</a> to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>. Otherwise,
-          set <a href="#resourceName-attribute">resourceName</a> to the string <code>null</code>.
-      </li>
-      
-      <li>Immediately after the User Agent logs the occurrence of the error, record the current time in <a href="#startTime-attribute">startTime</a> and
-          <a href="#dom-navigationerrorlogging-starttimeutc">startTimeUTC</a>.
-      </li>
-      <li>Record the HTTP Response code of the resource in <a href="#httpResponseCode-attribute">httpResponseCode</a>.
-      <li>Record the error type of the resource in <a href="#errorType-attribute">errorType</a>.
-      </li>
-      <li>
-          Set <a href="#duration-attribute">duration</a> to the double <code>0.0</code>.  
-      </li>
-      <li>If the <i>primary buffer</i> is full, and the callback <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> is defined,
-	  the following steps must be followed.<ol>
-            <li>
-                Trigger the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback.
-            </li>
-            <li>Create a <i>temporary buffer</i> of <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects.
-            </li>
-            <li>Add the current error to the <i>temporary buffer</i>.
-            </li>
-            <li>If there are additional errors that are collected during the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a>
-            callback, add them to the <i>temporary buffer</i>.
-            </li>
-            <li>
-            If the <a href="#dom-performance-clearnavigationerrors"><code>clearNavigationErrors</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
-            clear all <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>primary buffer</i>. 
-            Copy all <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>temporary buffer</i> to the
-            <i>primary buffer</i>.
-            </li>
-            <li>
-            If the <a href="#dom-performance-setnavigationerrorbuffersize"><code>setNavigationErrorBufferSize</code></a> method is called in the <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> callback, 
-            set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is larger than the previous size of the <i>primary buffer</i>,
-            append <a href="#navigationerrorlogging">NavigationErrorLogging</a> objects in the <i>temporary buffer</i> to the <i>primary buffer</i> up to the maxSize parameter.
-            </li>
-		    <li>Discard the <i>temporary buffer</i>.
-		    </li>
-        </ol>
-      <li>
-          If the <i>primary buffer</i> is full, and the callback <a href="#dom-performance-onnavigationerrordatabufferfull"><code>onnavigationerrordatabufferfull</code></a> is not defined,
-	      remove the first <a href="#performanceError">NavigationErrorLogging</a> object in the <i>primary buffer</i> and append this new 
-          <a href="#performanceError">NavigationErrorLogging</a> object to the end of the <i>primary buffer</i>.
-      </li>
-      <li>If the <i>primary buffer</i> is not full, add the <a href="#performanceError">NavigationErrorLogging</a> object to the <i>primary buffer</i>.
-      </li>
-  </ol>
-  </li>
-</ol>
-
-<h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
+<h2 id="privacy-security"><span class="secno">5 </span>Privacy and Security</h2>
 
 <p>This section is non-normative.</p>
 
-<p>The <a href="#navigationerrorlogging">NavigationErrorLogging</a> interface 
-exposes timing and other information for an error that has occurred in the current and previous navigations to the web page.
-Access to the <a href="#navigationerrorlogging">NavigationErrorLogging</a> interface is limited to the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>.
+<p>The <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface 
+exposes timing and other information for an error that has occurred in the previous navigations to the web page.
+Access to the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface is limited to the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>.
 </p>
+<p>The user agent mechanisms used to delete private data such as history or cookies for a given <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> or as a whole should also delete the corresponding <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects.
 
+<h2 id="references"><span class="secno">6 </span>References</h2>
 
-<h2 id="references"><span class="secno">8 </span>References</h2>
-
-<h3 id="normative-references"><span class="secno">8.1 </span>Normative References</h3>
+<h3 id="normative-references"><span class="secno">6.1 </span>Normative References</h3>
 
 <dl>
 <dt><a id="rfc2119">[IETF RFC 2119]</a></dt>
@@ -591,7 +449,7 @@ Access to the <a href="#navigationerrorlogging">NavigationErrorLogging</a> inter
 
 <h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
-<p>I would like to offer my sincere thanks to Aaron Heady, Dan Austin, James Simonsen, Philippe Le Hegaret, and Jason Weber for their contributions to this work.</p>
+<p>We would like to offer our sincere thanks to Aaron Heady, Dan Austin, James Simonsen, Philippe Le Hegaret, and Jason Weber for their contributions to this work.</p>
 
 </body>
 </html>
