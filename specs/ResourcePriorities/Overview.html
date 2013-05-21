@@ -42,7 +42,7 @@
 <div class="head">
 <h1>Resource Priorities</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-24-2013">Editor's Draft April 24, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-may-21-2013">Editor's Draft May 21, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -138,7 +138,7 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-resource-priorities"><span class="secno">4 </span>Resource Priorities</a> 
     <ol class="toc">
       <li><a href="#sec-resource-priorities-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-delay-attribute"><span class="secno">4.2 </span><code>delay</code> Attribute</li>
+      <li><a href="#sec-delayload-attribute"><span class="secno">4.2 </span><code>delayload</code> Attribute</li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">6 </span>References</a></li>
@@ -199,13 +199,13 @@ cite this document as other than work in progress. </p>
 </p>
 
 <p>
-    Using the <a href="#dom-delay"><code>delay</code></a> attribute on a resource will signal to the User Agent that
+    Using the <a href="#dom-delayload"><code>delayload</code></a> attribute on a resource will signal to the User Agent that
     it may want to lower the download priority of that resource.
 </p>
  
 <div class="example">
 <p>
-    The following example shows the same theoretical web page but with the <code>delay</code> attribute set for
+    The following example shows the same theoretical web page but with the <code>delayload</code> attribute set for
     resources whose download priority can be reduced, as they do not impact the visual appearance of the page
     above the fold.
 </p>
@@ -214,22 +214,22 @@ cite this document as other than work in progress. </p>
 &lt;html&gt;
  &lt;head&gt;
      &lt;link rel="stylesheet" type="text/css" href="Styles.css" /&gt;
-     &lt;link rel="stylesheet" type="text/css" href="Animations.css" delay /&gt;
+     &lt;link rel="stylesheet" type="text/css" href="Animations.css" delayload /&gt;
  &lt;/head&gt;
  &lt;body&gt;
     &lt;img id="Logo" href=".../images/Logo.png"/&gt;
     &lt;img id="Header" href=".../images/Header.png"/&gt;
-    &lt;img id="AdditionalImages1" href=".../images/AdditionalImages1.png" delay /&gt;
-    &lt;img id="AdditionalImages2" href=".../images/AdditionalImages2.png" delay /&gt;
+    &lt;img id="AdditionalImages1" href=".../images/AdditionalImages1.png" delayload /&gt;
+    &lt;img id="AdditionalImages2" href=".../images/AdditionalImages2.png" delayload /&gt;
     &lt;video id="MainContent" href=".../videos/MainContent.mp4"/&gt;
     &lt;script src="Visuals.js" &gt;&lt;/script&gt;
-    &lt;script src="Analytics.js" delay &gt;&lt;/script &gt;
+    &lt;script src="Analytics.js" delayload &gt;&lt;/script &gt;
  &lt;/body&gt;
 &lt;/html&gt;</pre>
 </div>
 
 <p>
-    In this example page, using the <a href="#dom-delay"><code>delay</code></a> attribute 
+    In this example page, using the <a href="#dom-delayload"><code>delayload</code></a> attribute 
     User Agent may instead download resources in the following order: root document, 
     Styles.css, Visuals.js, Logo.png, Header.png, MainContent.mp4, Animations.css, Analytics.js, AdditionalImages1.png
     and AdditionalImages2.png. 
@@ -284,12 +284,12 @@ title="">Foo</code>". </p>
     manage the order in which resources are downloaded.
 </p>
 
-<h3 id="sec-document-interface"><span class="secno">4.2 </span><code>delay</code> attribute</h3>
+<h3 id="sec-document-interface"><span class="secno">4.2 </span><code>delayload</code> attribute</h3>
 
 <p>
-   The <a href="#dom-delay"><code>delay</code></a> attribute can be specified on the following 
-   <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">HTML elements</a> and objects
-   capable of <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching </a>resources:
+   The <a href="#dom-delayload"><code>delayload</code></a> attribute can be specified on the following 
+   <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">HTML elements</a> 
+   capable of <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> resources:
 </p>
 <ul>
     <li><code><a href="http://www.w3.org/TR/html5/the-audio-element.html#audio">audio</a></code></li>
@@ -301,36 +301,35 @@ title="">Foo</code>". </p>
     <li><code><a href="http://www.w3.org/TR/html5/the-script-element.html#script">script</a></code></li>
     <li><code><a href="http://www.w3.org/TR/SVG11/struct.html#SVGElement">svg</a></code></li>
 	<li><code><a href="http://www.w3.org/TR/html5/the-video-element.html#video">video</a></code></li>
-    <li><code><a href="http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest">XMLHttpRequest</a></code></li>
 </ul>
 
 <p>
-    If the <a href="#dom-delay"><code>delay</code></a> attribute has been specified on a supported
-    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object, the User Agent
+    If the <a href="#dom-delayload"><code>delayload</code></a> attribute has been specified on a supported
+    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>, the User Agent
     SHOULD delay downloading that resource until after all other <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a>
-    or objects without the <a href="#dom-delay"><code>delay</code></a> attribute that will be 
+    without the <a href="#dom-delayload"><code>delayload</code></a> attribute that will be 
     <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> a resource
     have started downloading.
 </p>
 <p>
-    If the <a href="#dom-delay"><code>delay</code></a> attribute has been specified on a supported
-    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object,
-	and the bounding box of the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object 
-	is outside of the document's viewport, or the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object
+    If the <a href="#dom-delayload"><code>delayload</code></a> attribute has been specified on a supported
+    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>,
+	and the bounding box of the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
+	is outside of the document's viewport, or the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
 	has been styled such that its <code><a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop">display</a></code> property is set to <code>none</code>, in addition to waiting until 
 	after all other <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a>
-    or objects without the <a href="#dom-delay"><code>delay</code></a> attribute that will be 
+    without the <a href="#dom-delayload"><code>delayload</code></a> attribute that will be 
     <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetching</a> a resource
     have started downloading,
 	the User Agent MAY further delay downloading that resource
-	until either the bounding box of the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object 
-	is inside of the document's viewport, or the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object
+	until either the bounding box of the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
+	is inside of the document's viewport, or the <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
 	has been styled such that its <code><a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop">display</a></code> property is no longer set to <code>none</code>.
 </p>
 
 <p>
-	Setting the <a href="#dom-delay"><code>delay</code></a> attribute on an 
-    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> or object
+	Setting the <a href="#dom-delayload"><code>delayload</code></a> attribute on an 
+    <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
 	MUST NOT <a href="http://www.w3.org/TR/html5/single-page.html#delay-the-load-event">delay when the <code>load</code> event</a> of the document is fired.
 </p>
 
