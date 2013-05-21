@@ -56,6 +56,9 @@
     <dd class="vcard"><span class="fn">Zhiheng Wang</span> (<span
       class="org">Google Inc.</span>) &lt;<a
       class="email" href="mailto:zhihengw@google.com">zhihengw@google.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Arvind Jain</span> (<span
+      class="org">Google Inc.</span>) &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
 </dl>
 
    <p class=copyright><a
@@ -331,8 +334,7 @@ provided information. </p>
 
 <p>This attribute must return the time immediately after the user agent finishes <a
 href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prompting
-to unload</a> the previous document. If there is no previous document, this attribute
-must return the same value as <a href="#dom-performancetiming-fetchstart">fetchStart</a>.</p>
+to unload</a> the previous document. If there is no previous document, this attribute must return the time the current document is created.
 
 <h4><code><dfn id="dom-performancetiming-unloadeventstart">unloadEventStart</dfn></code> attribute</h4>
 
@@ -696,6 +698,25 @@ available in navigation involving documents from different
 <a href="http://tools.ietf.org/html/rfc6454">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
+<p> Note that user agents may choose to perform some of the steps involved in loading the
+document speculatively prior to user navigation e.g. the user agent could pre-resolve the
+host name, speculatively connect to the server hosting the document or prefetch the root
+document ahead of the actual user navigation. The timings in the 
+<a href="#performancetiming"><code>PerformanceTiming</code></a> interface represent the time
+spent waiting after user navigation in these steps. For example, in the case of speculative
+resolution that started and finished before user navigation and the user agent was able
+to use that result, the <a href="#dom-performancetiming-domainlookupstart">domainLookupStart</a>
+and  <a href="#dom-performancetiming-domainlookupend">domainLookupEnd</a> attributes should
+both return the same value as 
+<a href="#dom-performancetiming-fetchstart">fetchStart</a>. If the speculative resolution started
+before user navigation and finished after <a
+    href="#dom-performancetiming-navigationstart">navigationStart</a> and the user agent
+was able to use that result, the 
+<a href="#dom-performancetiming-domainlookupstart">domainLookupStart</a> attribute should
+return the same value as 
+<a href="#dom-performancetiming-fetchstart">fetchStart</a> and  the
+<a href="#dom-performancetiming-domainlookupend">domainLookupEnd</a> attribute should return
+the time immediately after the name lookup is successfully done. </p>
 <img style='display: block; margin:auto' src="timing-overview.png" alt='Timing attributes'>
 </div>
 
