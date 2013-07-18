@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Resource Timing cached resources</title>
+<title>Resource Timing self navigating iframes</title>
 <link rel="author" title="Google" href="http://www.google.com/" />
 <link rel="help" href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-initiatortype"/>
 <script src="/resources/testharness.js"></script>
@@ -14,32 +14,26 @@ setup({explicit_done: true});
 var d;
 var iframe;
 var iframeBody;
-var image;
-var random = Math.random();
 function setup_iframe() {
+    var iframe_content = '<iframe id="innerFrame" src="/webperf/tests/resources/inject_resource_test.html"></iframe>';
     iframe = document.getElementById('frameContext');
     d = iframe.contentWindow.document;
-    iframeBody = d.body;
-
-    image = d.createElement('img');
-    image.src = '/webperf/tests/resources/generate_resource.php?type=image&cacheable&id=' + random;
-    iframeBody.appendChild(image);
-    iframe.addEventListener("load", function() { setTimeout(reload_image, 0); }, false);
+    d.write(iframe_content);
+    iframe.contentWindow.setup_iframe = setup_inner_iframe;
 }
-function reload_image() {
-    iframeBody.removeChild(image);
-    image = d.createElement('img');
-    image.src = '/webperf/tests/resources/generate_resource.php?type=image&cacheable&id=' + random;
-    image.addEventListener('load', onload_test, false);
-    iframeBody.appendChild(image);
+function setup_inner_iframe() {
+    var iframe_content = '<script>window.location = "/webperf/tests/resources/generate_resource.php?type=iframe";</scr' + 'ipt>';
+    var inner_iframe = d.getElementById('innerFrame');
+    inner_iframe.contentWindow.document.write(iframe_content);
+    inner_iframe.addEventListener("load", onload_test);
 }
 function onload_test() {
     var context = new PerformanceContext(iframe.contentWindow.performance);
     var entries = context.getEntriesByType('resource');
-    test_equals(entries.length, 2, "There should be two entries");
-    if (entries.length >= 2) {
-        test_equals(entries[0].name, entries[1].name, "Both entries should have the same name");
-    }
+    var expected_entries = {
+        '/webperf/tests/resources/inject_resource_test.html': 'iframe',
+    };
+    test_resource_entries(entries, expected_entries);
     done();
 }
 window.setup_iframe = setup_iframe;
@@ -47,7 +41,7 @@ window.setup_iframe = setup_iframe;
 </head>
 <body>
 <h1>Description</h1>
-<p>This test validates that a 304 Not Modified resource appears in the buffer.</p>
+<p>This test validates that iframes that navigate themselves don't appear in the buffer.</p>
 <div id="log"></div>
 <iframe id="frameContext" src="/webperf/tests/resources/inject_resource_test.html"></iframe>
 </body>

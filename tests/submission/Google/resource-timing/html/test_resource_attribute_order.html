@@ -22,7 +22,8 @@ function setup_iframe() {
 }
 function onload_test() {
     var context = new PerformanceContext(iframe.contentWindow.performance);
-    var entries = context.getEntriesByName(window.location.origin + '/webperf/tests/resources/generate_resource.php?type=image');
+    var origin = window.location.protocol + "//" + window.location.host;
+    var entries = context.getEntriesByName(origin + '/webperf/tests/resources/generate_resource.php?type=image');
     test_equals(entries.length, 1, 'Only 1 PerformanceEntry should match');
     var entry = entries[0];
 

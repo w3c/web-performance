@@ -10,7 +10,8 @@
 <script src="/webperf/tests/resources/webperftestharness.js"></script>
 <script src="/webperf/tests/resources/webperftestharnessextension.js"></script>
 <script>
-setup({explicit_done: true});
+setup({explicit_done: true,
+       timeout: 30000});
 
 var background_loaded = false;
 var page_loaded = false;
@@ -27,6 +28,8 @@ function check_finished() {
     }
     if (page_loaded && ol_font_loaded && ul_font_loaded && background_loaded && xhr_loaded) {
         perform_test();
+    } else {
+        setTimeout(check_finished, 100);
     }
 }
 
@@ -58,7 +61,7 @@ function onload_test() {
         }
     }
 
-    setInterval(check_finished, 100);
+    setTimeout(check_finished, 100);
 }
 
 function perform_test() {
