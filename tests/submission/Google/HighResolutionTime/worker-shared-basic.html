@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>window.performance.now in shared workers</title>
+<link rel="author" title="Google" href="http://www.google.com/" />
+<link rel="help" href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html"/>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/webperf/tests/resources/webperftestharness.js"></script>
+<link rel="stylesheet" href="/resources/testharness.css" />
+<script>
+setup({explicit_done: true, timeout:10000});
+
+var tests = [
+  '"performance" in self;',
+  '"now" in self.performance;',
+  'self.performance.now();',
+];
+
+var startTime = window.performance.now();
+var worker = new SharedWorker("/webperf/tests/resources/worker.js");
+
+worker.port.onmessage = function(event) {
+    var results = event.data;
+    assert_true(results.length == 3);
+    test_true(results[0], "self.performance is defined");
+    test_true(results[1], "self.performance.now is defined");
+    test_greater_than(startTime, results[2], "Time since origin time should be greater in the main document than the worker");
+    setupIframe();
+}
+
+window.iframeStartTime = 0;
+window.test_iframe = function(event, iframeNow) {
+    var workerTime = event.data;
+    test_greater_than(workerTime, window.iframeStartTime, "Time since origin time should be greater in the worker than the iframe", {});
+    worker.port.postMessage(["close();"]);
+    done();
+}
+
+function start() {
+    worker.port.postMessage(tests);
+}
+
+function setupIframe() {
+    var iframe = document.createElement("iframe");
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(iframe);
+    var script = iframe.contentWindow.document.createElement("script");
+    script.innerHTML =
+        "window.top.iframeStartTime = window.performance.now();" +
+        "var worker = new SharedWorker('/webperf/tests/resources/worker.js');" +
+        "worker.port.onmessage = function(event) {" +
+        "    window.top.test_iframe(event);" +
+        "};" +
+        "worker.port.postMessage(['self.performance.now();']);";
+    iframe.contentWindow.document.body.appendChild(script);
+}
+
+window.addEventListener("load", start);
+</script>
+</head>
+<body>
+<h1>Description</h1>
+<p>This test validates that performance.now() exists in shared workers and reports reasonable times.</p>
+
+<div id="log"></div>
+
+</body>
+</html>

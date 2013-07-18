@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>window.performance.now in dedicated workers</title>
+<link rel="author" title="Google" href="http://www.google.com/" />
+<link rel="help" href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime2/Overview.html"/>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/webperf/tests/resources/webperftestharness.js"></script>
+<link rel="stylesheet" href="/resources/testharness.css" />
+<script>
+setup({explicit_done: true});
+
+var tests = [
+  '"performance" in self;',
+  '"now" in self.performance;',
+  'self.performance.now();',
+];
+
+var startTime = window.performance.now();
+var worker = new Worker("/webperf/tests/resources/worker.js");
+
+worker.onmessage = function(event) {
+    var results = event.data;
+    assert_true(results.length == 3);
+    test_true(results[0], "self.performance is defined");
+    test_true(results[1], "self.performance.now is defined");
+    test_greater_than(results[2], startTime, "Time in the worker should be after the startTime in the main document");
+    test_greater_than(window.performance.now(), results[2], "Time in the worker should be before the current time in the main document");
+    done();
+}
+
+function start() {
+    worker.postMessage(tests);
+}
+
+window.addEventListener("load", start);
+</script>
+</head>
+<body>
+<h1>Description</h1>
+<p>This test validates that performance.now() exists in dedicated workers and reports reasonable times.</p>
+
+<div id="log"></div>
+
+</body>
+</html>
