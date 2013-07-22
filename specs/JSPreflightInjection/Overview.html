@@ -281,7 +281,7 @@ The first interaction between browser and server is part of the HTTP request. Th
 </p>  
 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Communicating current preflight settings </h3>
+<h3 id="sec-Setting"><span class="secno">4.2</span> Communicating current Preflight settings </h3>
 
 <div class="example">
   <p>
@@ -291,6 +291,20 @@ The first interaction between browser and server is part of the HTTP request. Th
         GET /index.html HTTP/1.1
         Host: www.example.com
         Preflight-Cookie: /monitoring.js
+  </pre>
+</div>
+</p> 
+
+<h3 id="sec-Setting"><span class="secno">4.2</span> Clearing Preflight Injection </h3>
+
+<div class="example">
+  <p>
+  The Set-PreflightCookie: is set to remove a script from preflight injection.
+  </p>  
+  <pre>
+        GET /index.html HTTP/1.1
+        Host: www.example.com
+        Set-Preflight-Cookie: /monitoring.js;delete
   </pre>
 </div>
 </p> 
@@ -324,6 +338,9 @@ tbd
 <h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
 
 <p>This section is non-normative.</p>
+
+This specification utilizes current standard building blocks of web communication - specifically the HTTP Cookie mechanism. This implies that no additional security and pricacy threats are introduced. 
+
 
 <p>
 </p>
