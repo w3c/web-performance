@@ -634,7 +634,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
   void <a href='#dom-performance-clearresourcetimings' title='clearResourceTimings'>clearResourceTimings</a>();
   void <a href='#dom-performance-setresourcetimingbuffersize' title='setResourceTimingBufferSize'>setResourceTimingBufferSize</a>(unsigned long maxSize);
 
-  attribute Function <a href='#dom-performance-onresourcetimingbufferfull' title='onresourcetimingbufferfull'>onresourcetimingbufferfull</a>;
+  attribute EventHandler <a href='#dom-performance-onresourcetimingbufferfull' title='onresourcetimingbufferfull'>onresourcetimingbufferfull</a>;
 };</pre>
 
 <div class="methods">
@@ -667,7 +667,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 
 <div class="methods">
 	<h4 id="dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code> attribute</h4>
-	<p>The callback <code>onresourcetimingbufferfull</code> is triggered immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources becomes full.
+	<p>The event handler for the <code>resourcetimingbufferfull</code> event. The <code>resourcetimingbufferfull</code> event must be fired at the Document immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources becomes full.
 </div>
 
 <h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>
@@ -908,15 +908,15 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
         </ol>
       </li>
       <li>If the <i>primary buffer</i> is full, discard the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> object, 
-      created in step <a href="#step-create-object">3.1</a>. Otherwise, add it to the <i>primary buffer</i>. If adding it causes the <i> primary buffer </i> to become full, and the callback <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> is defined,
-	  the callback <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> 
-          must be triggered.<ol>
+      created in step <a href="#step-create-object">3.1</a>. Otherwise, add it to the <i>primary buffer</i>. 
+	  If adding it causes the <i> primary buffer </i> to become full, fire the <a href="#dom-performance-onresourcetimingbufferfull"><code>resourcetimingbufferfull</code></a> event at the Document.
+      <ol>
             <li>
-            If the <a href="#dom-performance-clearresourcetimings"><code>clearResourceTimings</code></a> method is called in the <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
+            If the <a href="#dom-performance-clearresourcetimings"><code>clearResourceTimings</code></a> method is called in the event handler for the <a href="#dom-performance-onresourcetimingbufferfull"><code>resourcetimingbufferfull</code></a> event, 
             clear all <a href="#performanceresourcetiming">PerformanceResourceTiming</a> objects in the <i>primary buffer</i>. 
             </li>
             <li>
-            If the <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> method is called in the <a href="#dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code></a> callback, 
+            If the <a href="#dom-performance-setresourcetimingbuffersize"><code>setResourceTimingBufferSize</code></a> method is called in the event handler for the <a href="#dom-performance-onresourcetimingbufferfull"><code>resourcetimingbufferfull</code></a> event, 
             set the maximum size of the <i>primary buffer</i> to the maxSize parameter. If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed.
             </li>
         </ol>
