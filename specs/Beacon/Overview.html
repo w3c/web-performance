@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-march-06-2013">Editor's Draft March 6, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-august-07-2013">Editor's Draft August 7, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -156,7 +156,12 @@ cite this document as other than work in progress. </p>
 </p>
 
 <p>
-    Analytics and diagnostics code will typically attempt to send data to a web server prior to the unloading
+	This method can be used at any time to asynchronously transfer data to a web server, without the need to check whether the data transfer has succeeded or not.
+	On a mobile website, batching multiple beacons at the same time and not having to check whether the data has been submitted can result in improved battery life.
+</p>
+
+<p>
+    Additionally, analytics and diagnostics code will typically attempt to send data to a web server prior to the unloading
     of the document. Sending the data any sooner may result in a missed opportunity to gather data. However,
     ensuring that the data has been sent during the unloading of a document is something that has 
     traditionally been difficult for developers.
@@ -219,11 +224,6 @@ function logData() {
 </pre>
 </div>
 
-<p>
-    The <a href="#beacon"><code>beacon</code></a> method does not necessarily have to be used during the unload of the page. This method can be used
-    at any time to asynchronously transfer data to a web server, without the need to check whether the data transfer has succeeded or not.
-</p>
-
 <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
 requirements</h2>
 
@@ -283,7 +283,7 @@ title="">Foo</code>". </p>
   
 
 <pre class="idl">
-enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT" };
+enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT", "GET" };
 
 partial interface <dfn id="Window">Window</dfn> {
 void <a href="#dom-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
@@ -310,13 +310,13 @@ void <a href="#dom-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconH
     The user agent may throw
     the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
     if the <code>method</code> parameter is not one of the following DOMStrings:
-    <code>POST</code> and <code>PUT</code>.
+    <code>POST</code>, <code>PUT</code>, and <code>GET</code>.
 </p>
 
 <div class="note">
 <div class="noteHeader">Note</div>
 <p>
-    As this interface can only be used to transmit data, only the <code>POST</code> and <code>PUT</code> 
+    As this interface can only be used to transmit data, only the <code>POST</code>, <code>PUT</code>, <code>GET</code>
     <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP methods</a> are supported by this interface. 
 </p>
 
@@ -397,7 +397,7 @@ void <a href="#dom-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconH
      <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#script's-referrer-source">script's referrer source</a>.
     </ol>
 
-   <li><p>If <var>method</var> does not match the <code>POST</code> or <code>PUT</code>
+   <li><p>If <var>method</var> does not match the <code>POST</code>, <code>PUT</code>, or <code>GET</code>
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token,
    <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
