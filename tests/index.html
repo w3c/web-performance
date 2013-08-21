@@ -31,6 +31,7 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 <!--begin-toc-->
 <ol>
+<li><a href='#pt'>Performance Timeline</a></li>
 <li><a href='#ut'>User Timing</a></li>
 <li><a href='#pv'>Page Visibility</a></li>
 <li><a href='#navigation_timing'>Navigation Timing</a></li>
@@ -39,6 +40,47 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 <!--
 <p>Looking to run the tests and see test results? check the <a href='http://w3c-test.org/framework/'>test framework</a> instead.</p>
 -->
+
+<h2 id='pt'>Performance Timeline</h2>
+
+<table>
+<colgroup>
+ <col class='test'>
+ <col class='description'>
+ <col class='spec_link'>
+ <col class='contact'>
+</colgroup>
+<thead>
+<tr>
+<th>Test</th>
+<th>Description</th>
+<th>Section</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://w3c-test.org/web-platform-tests/master/performance-timeline/test_performance_timeline_functions.html">test_performance_timeline_functions</a></td>
+<td>
+This test verifies the existence of getEntries, getEntriesByType and getEntriesByName functions that are defined in the Performance Timeline specification.
+</td>
+<td><a href='http://www.w3.org/TR/performance-timeline/#sec-window.performance-attribute'>4.3 Extensions to the Performance interface</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+<tr>
+<td><a href="http://w3c-test.org/web-platform-tests/master/performance-timeline/idlharness.html">idlharness</a></td>
+<td>
+This test validates the WebIDL included in the Performance Timeline specification.
+</td>
+<td><a href='http://www.w3.org/TR/performance-timeline/#sec-navigation-timing'>4 Performance Timeline</a></td>
+<td>
+<a href='http://www.w3.org/2010/webperf/'>Web Performance Working Group</a>
+</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id='ut'>User Timing</h2>
 
@@ -59,7 +101,7 @@ contact <a href='mailto:public-web-perf@w3.org'>public-web-perf@w3.org</a>.</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_clear_marks.htm">test_user_timing_clear_marks</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_clear_marks.html">test_user_timing_clear_marks</a></td>
 <td>
 This test validates that the performance.clearMarks() method is working properly. 
 </td>
@@ -69,7 +111,7 @@ This test validates that the performance.clearMarks() method is working properly
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_clear_measures.htm">test_user_timing_clear_measures</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_clear_measures.html">test_user_timing_clear_measures</a></td>
 <td>
 This test validates that the performance.clearMeasures() method is working properly.
 </td>
@@ -79,7 +121,7 @@ This test validates that the performance.clearMeasures() method is working prope
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_exists.htm">test_user_timing_exists</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_exists.html">test_user_timing_exists</a></td>
 <td>
 This test validates that all of the methods used to interact with the User Timing API are defined.
 </td>
@@ -89,7 +131,7 @@ This test validates that all of the methods used to interact with the User Timin
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_mark.htm">test_user_timing_mark</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_mark.html">test_user_timing_mark</a></td>
 <td>
 This test validates that the performance.mark() method is working properly.
 </td>
@@ -99,7 +141,7 @@ This test validates that the performance.mark() method is working properly.
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_mark_exceptions.htm">test_user_timing_mark_exceptions</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_mark_exceptions.html">test_user_timing_mark_exceptions</a></td>
 <td>
 This test validates that the performance.mark() method throws a SYNTAX_ERR exception whenever a navigation timing attribute is provided for the name parameter.
 </td>
@@ -109,7 +151,7 @@ This test validates that the performance.mark() method throws a SYNTAX_ERR excep
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure.htm">test_user_timing_measure</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_measure.html">test_user_timing_measure</a></td>
 <td>
 This test validates that the performance.measure() method is working properly.
 </td>
@@ -119,7 +161,7 @@ This test validates that the performance.measure() method is working properly.
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure_exceptions.htm">test_user_timing_measure_exceptions</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_measure_exceptions.html">test_user_timing_measure_exceptions</a></td>
 <td>
 This test validates that the performance.measure() method throws a
 SYNTAX_ERR exception whenever a non-existent mark is provided as the
@@ -133,7 +175,7 @@ provided as the startMark or endMark.
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/test_user_timing_measure_navigation_timing.htm">test_user_timing_measure_navigation_timing</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/test_user_timing_measure_navigation_timing.html">test_user_timing_measure_navigation_timing</a></td>
 <td>
 This test validates that the performance.measure() method is working properly when navigation timing attributes are used in place of mark names.
 </td>
@@ -143,7 +185,7 @@ This test validates that the performance.measure() method is working properly wh
 </td>
 </tr>
 <tr>
-<td><a href="http://w3c-test.org/webperf/tests/approved/UserTiming/idlharness.html">idlharness</a></td>
+<td><a href="http://w3c-test.org/web-platform-tests/master/user-timing/idlharness.html">idlharness</a></td>
 <td>
 This test validates the WebIDL included in the user Timing specification.
 </td>
