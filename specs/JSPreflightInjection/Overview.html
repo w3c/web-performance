@@ -81,7 +81,7 @@
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-<p>This specification defines a mechanism to load JavaScript monitoring code as part of HTTP communication.</p>
+<p>This specification defines an HTTP-based loading mechanism for JavaScript monitoring code which leverages other performance APIs (like Resource Timing).</p>
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
 document</h2>
@@ -135,17 +135,15 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Error Logging</a> 
+  <li><a href="#sec-preflight-injection"><span class="secno">4 JavaScript Preflight Injection</a> 
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
-	  <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>ErrorLogging</code> interface</a></li>
-      <li><a href="#performanceresourcetiming-methods"><span class="secno">4.3 </span> The Error Logging Methods</a></li>
-      <li><a href="#vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
-      <li><a href="#processing-model"><span class="secno">4.5 </span>Monotonic Clock</a></li>
-      <li><a href="#processing-model"><span class="secno">4.6 </span>Processing Model</a></li>
+      <li><a href="#sec-script-execution"><span class="secno">4.2 </span>Executing Preflight Scripts</a></li>      
+      <li><a href="#vendor-prefixes"><span class="secno">4.3 </span>Vendor Prefixes</a></li>
+      <li><a href="#processing-model"><span class="secno">4.4 </span>Processing Model</a></li>
     </ol>
    </li>
-  <li><a href="#privacy"><span class="secno">5 </span>Privacy and Security</a>
+  <li><a href="#privacy-security"><span class="secno">5 </span>Privacy and Security</a>
   </li>
   <li><a href="#references"><span class="secno">6 </span>References</a>
   </li>
@@ -236,7 +234,7 @@ title="">Foo</code>". </p>
 <a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<h2 id="sec-js-preflight"><span class="secno">4 </span>JavaScript Preflight Injection</h2>
+<h2 id="sec-preflight-injection"><span class="secno">4 </span>JavaScript Preflight Injection</h2>
 
 <h3 id="sec-Introduction"><span class="secno">4.1 </span> Introduction</h3>
 <p>This section is non-normative.</p>
@@ -310,14 +308,14 @@ The first interaction between browser and server is part of the HTTP request. Th
 </p> 
 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Executing Preflight Scripts </h3>
+<h3 id="sec-script-execution"><span class="secno">4.2</span> Executing Preflight Scripts </h3>
 
 <p>
 Preflight scripts are executed when the document object is created or when the page load has failed and a Navigation Error has been created.
 </p>  
 
 
-<h3 id="vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</h3>
+<h3 id="vendor-prefixes"><span class="secno">4.3 </span>Vendor Prefixes</h3>
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
 e.g., for experimental purposes, vendors MUST use the following extension mechanisms:</p>
 
@@ -331,7 +329,7 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 
 
 
-<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
+<h3 id="processing-model"><span class="secno">4.4 </span>Processing Model</h3>
 
 tbd
 
