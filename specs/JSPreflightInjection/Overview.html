@@ -322,7 +322,7 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 
 <ul>
     <li>
-        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[errorType], where [vendorprefix] is a name
+        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[preflight], where [vendorprefix] is a name
         that identifies the vendor and [errorType] is the name of the error.
     </li>
 </ul>
@@ -332,7 +332,22 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 
 <h3 id="processing-model"><span class="secno">4.4 </span>Processing Model</h3>
 
-tbd
+
+<p>This section is non-normative.</p>
+
+<ol>
+  <li>Wnen the browser receives a new document it checks for the JavaScript Preflight header. </li>
+  <li>If the browser finds a Preflight header or has a Preflight Coookie set for the documents domain it starts downloading it immediately. </li> 
+  <li>If the preflight JavaScript is cached, it takes it from the cache. Otherwise it downloads it like a normal resource. </li>
+  <li>If the document fails to load (e.g. due to a DNS error) the script gets executed as soon as it is available. </li> 
+  <li>If the document loads successfully the script is executed as soons as the document object is constructed</li>
+  <li>If the Preflight scirpt takes longer to load, the browser waits with all other JavaScript execution until the Preflight script is executed </li>
+</ol>  
+
+<p>
+<b>Note: </b> Possible we need a flag where a preflight script can specify an async attribute indicating it does not need to be executed before any JavaScript on the page. 
+</p>  
+
 
 <h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
 
