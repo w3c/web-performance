@@ -179,7 +179,7 @@ While this approach works in simple cases it is rather limited and may even resu
 
 <ul>
  <li> The manual injection approach can only be used for site where a user can modify the sources. If this is not the case, the benefits of Navigation or Resource Timing cannot be leveraged. Examples are Third
-       Partie Software Applications (like a CRH system) which is crucial to business operations, but cannot be monitored. </li>
+       Party Software Applications (like a CRH system) which is crucial to business operations, but cannot be monitored. </li>
  <li> When manual injection does not apply, the script has to be injected automatically - typically by a web server plugin. While this approach works it adds an unnecessary risk of breaking the HTML code
       of a page. An example are HTML base tags. A monitoring script has to be injected after these tags as it otherwise breaks the page. However, these tags might not appear right at the beginning of a page. The injection mechanism therefore cannnot reliably inject early on the page. This, however, is required to ensure that monitoring code is properly registered for events (like unbeforeUnload or onresourcetimingbufferfull).
  <li> The script injection approach cannot be used in case the page fails to load. Navigation Error Logging information therefore cannot be transferred using this mechanism </li>
@@ -336,7 +336,7 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 <p>This section is non-normative.</p>
 
 <ol>
-  <li>Wnen the browser receives a new document it checks for the JavaScript Preflight header. </li>
+  <li>When the browser receives a new document it checks for the JavaScript Preflight header. </li>
   <li>If the browser finds a Preflight header or has a Preflight Coookie set for the documents domain it starts downloading it immediately. </li> 
   <li>If the preflight JavaScript is cached, it takes it from the cache. Otherwise it downloads it like a normal resource. </li>
   <li>If the document fails to load (e.g. due to a DNS error) the script gets executed as soon as it is available. </li> 
@@ -345,7 +345,7 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 </ol>  
 
 <p>
-<b>Note: </b> Possible we need a flag where a preflight script can specify an async attribute indicating it does not need to be executed before any JavaScript on the page. 
+<b>Note: </b> Possibly we need a flag where a preflight script can specify an async attribute indicating it does not need to be executed before any JavaScript on the page. 
 </p>  
 
 
