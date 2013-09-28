@@ -41,7 +41,7 @@
 <div class="head">
 <hgroup>
 <h1>JavaScript Preflight Injection</h1>
-<h2 class="no-num no-toc" id="editors-draft-march-19-2012">Editor's Draft July 16, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-march-19-2012">Editor's Draft August 30, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -81,7 +81,7 @@
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-<p>This specification defines a mechanism to load JavaScript monitoring code as part of HTTP communication.</p>
+<p>This specification defines an HTTP-based loading mechanism for JavaScript monitoring code which leverages other performance APIs (like Resource Timing).</p>
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
 document</h2>
@@ -135,17 +135,15 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Error Logging</a> 
+  <li><a href="#sec-preflight-injection"><span class="secno">4 JavaScript Preflight Injection</a> 
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
-	  <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>ErrorLogging</code> interface</a></li>
-      <li><a href="#performanceresourcetiming-methods"><span class="secno">4.3 </span> The Error Logging Methods</a></li>
-      <li><a href="#vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</a></li>
-      <li><a href="#processing-model"><span class="secno">4.5 </span>Monotonic Clock</a></li>
-      <li><a href="#processing-model"><span class="secno">4.6 </span>Processing Model</a></li>
+      <li><a href="#sec-script-execution"><span class="secno">4.2 </span>Executing Preflight Scripts</a></li>      
+      <li><a href="#vendor-prefixes"><span class="secno">4.3 </span>Vendor Prefixes</a></li>
+      <li><a href="#processing-model"><span class="secno">4.4 </span>Processing Model</a></li>
     </ol>
    </li>
-  <li><a href="#privacy"><span class="secno">5 </span>Privacy and Security</a>
+  <li><a href="#privacy-security"><span class="secno">5 </span>Privacy and Security</a>
   </li>
   <li><a href="#references"><span class="secno">6 </span>References</a>
   </li>
@@ -160,7 +158,7 @@ cite this document as other than work in progress. </p>
 
 
 <p>
-Performance data collection is well supported by Navigation Timing, Resource Timng and Navigation Error Logging. At the same time there are no means to efficiently inject monitoring code into the page. Developers today are forced to modify the actual page content of individual pages.
+Performance data collection is well supported by Navigation Timing, Resource Timng and Navigation Error Logging. The collection, processing of the data as well as the data transfer to a monitoring server is left to application owners. The currently used approach is to add a script to the page which then takes care of the above tasks as shown below. 
 </p>
 
 <div class="example">
@@ -176,16 +174,17 @@ Performance data collection is well supported by Navigation Timing, Resource Tim
     </pre>
 </div>
 
-<p>
-This approach comes with a number of problems and limitations:
+While this approach works in simple cases it is rather limited and may even result in errors. 
+
 
 <ul>
-  <li>The monitoring JavaScript becomes a single point of failure for the page if it does not load </li>
-  <li>Modification of page source can result in unwanted side effects</li>
-  <li>The monitoring JavaScript will not be loaded when the page cannot be loaded (e.g. because of a DNS error).</li>
-  <li>It does not allow to collect performance data for non-HTML request (e.g. images, pdf downloads)</li>     
- </ul> 
-</p>
+ <li> The manual injection approach can only be used for site where a user can modify the sources. If this is not the case, the benefits of Navigation or Resource Timing cannot be leveraged. Examples are Third
+       Party Software Applications (like a CRH system) which is crucial to business operations, but cannot be monitored. </li>
+ <li> When manual injection does not apply, the script has to be injected automatically - typically by a web server plugin. While this approach works it adds an unnecessary risk of breaking the HTML code
+      of a page. An example are HTML base tags. A monitoring script has to be injected after these tags as it otherwise breaks the page. However, these tags might not appear right at the beginning of a page. The injection mechanism therefore cannnot reliably inject early on the page. This, however, is required to ensure that monitoring code is properly registered for events (like unbeforeUnload or onresourcetimingbufferfull).
+ <li> The script injection approach cannot be used in case the page fails to load. Navigation Error Logging information therefore cannot be transferred using this mechanism </li>
+</ul>
+
 
 <p>
 To address the need for a better mechanism to add analytics logic to web pages the <a href="">Javascript Preflight Injection</a> specification 
@@ -236,7 +235,7 @@ title="">Foo</code>". </p>
 <a href="#ECMA262">ECMA-262</a>,
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
-<h2 id="sec-js-preflight"><span class="secno">4 </span>JavaScript Preflight Injection</h2>
+<h2 id="sec-preflight-injection"><span class="secno">4 </span>JavaScript Preflight Injection</h2>
 
 <h3 id="sec-Introduction"><span class="secno">4.1 </span> Introduction</h3>
 <p>This section is non-normative.</p>
@@ -245,7 +244,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 	This specification defines the main steps involved in JavaScript Preflight Injection. The mechanism is heavily based on the behaviour of cookies.
 </P>
 
-<h3 id="sec-Capability"><span class="secno">4.2</span> Capability Communication</h3>
+<h3 id="sec-Capability"><span class="secno"></span> Capability Communication</h3>
 
 <p>
 The first interaction between browser and server is part of the HTTP request. The browser has to communicate that it supports PreFlight Injection.
@@ -264,7 +263,7 @@ The first interaction between browser and server is part of the HTTP request. Th
 </p>  
 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Setting Preflight Injection</h3>
+<h3 id="sec-Setting"><span class="secno"></span> Setting Preflight Injection</h3>
 
 <div class="example">
   <p>
@@ -275,13 +274,13 @@ The first interaction between browser and server is part of the HTTP request. Th
         Date: Thu, 24 Jan 2013 05:46:54 GMT
         Content-Length: 2291
         Content-Type: text/html
-        Set-PreflightCookie: /monitoring.js;domain=www.example.com;path=/;max-age=250000
+        Set-Preflight-Cookie: /monitoring.js;domain=www.example.com;path=/;max-age=250000
   </pre>
 </div>
 </p>  
 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Communicating current Preflight settings </h3>
+<h3 id="sec-Setting"><span class="secno"></span> Communicating current Preflight settings </h3>
 
 <div class="example">
   <p>
@@ -295,7 +294,7 @@ The first interaction between browser and server is part of the HTTP request. Th
 </div>
 </p> 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Clearing Preflight Injection </h3>
+<h3 id="sec-Setting"><span class="secno"></span> Clearing Preflight Injection </h3>
 
 <div class="example">
   <p>
@@ -310,20 +309,20 @@ The first interaction between browser and server is part of the HTTP request. Th
 </p> 
 
 
-<h3 id="sec-Setting"><span class="secno">4.2</span> Executing Preflight Scripts </h3>
+<h3 id="sec-script-execution"><span class="secno">4.2</span> Executing Preflight Scripts </h3>
 
 <p>
 Preflight scripts are executed when the document object is created or when the page load has failed and a Navigation Error has been created.
 </p>  
 
 
-<h3 id="vendor-prefixes"><span class="secno">4.4 </span>Vendor Prefixes</h3>
+<h3 id="vendor-prefixes"><span class="secno">4.3 </span>Vendor Prefixes</h3>
 <p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
 e.g., for experimental purposes, vendors MUST use the following extension mechanisms:</p>
 
 <ul>
     <li>
-        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[errorType], where [vendorprefix] is a name
+        If the extension to be added is an errorType, the new type MUST return a DOMString in the following naming convention: [vendorprefix]_[preflight], where [vendorprefix] is a name
         that identifies the vendor and [errorType] is the name of the error.
     </li>
 </ul>
@@ -331,9 +330,24 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
 
 
 
-<h3 id="processing-model"><span class="secno">4.6 </span>Processing Model</h3>
+<h3 id="processing-model"><span class="secno">4.4 </span>Processing Model</h3>
 
-tbd
+
+<p>This section is non-normative.</p>
+
+<ol>
+  <li>When the browser receives a new document it checks for the JavaScript Preflight header. </li>
+  <li>If the browser finds a Preflight header or has a Preflight Coookie set for the documents domain it starts downloading it immediately. </li> 
+  <li>If the preflight JavaScript is cached, it takes it from the cache. Otherwise it downloads it like a normal resource. </li>
+  <li>If the document fails to load (e.g. due to a DNS error) the script gets executed as soon as it is available. </li> 
+  <li>If the document loads successfully the script is executed as soons as the document object is constructed</li>
+  <li>If the Preflight scirpt takes longer to load, the browser waits with all other JavaScript execution until the Preflight script is executed </li>
+</ol>  
+
+<p>
+<b>Note: </b> Possibly we need a flag where a preflight script can specify an async attribute indicating it does not need to be executed before any JavaScript on the page. 
+</p>  
+
 
 <h2 id="privacy-security"><span class="secno">6 </span>Privacy and Security</h2>
 
