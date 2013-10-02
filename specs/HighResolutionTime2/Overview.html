@@ -41,7 +41,7 @@
 <div class="head">
 <hgroup>
 <h1>High Resolution Time Level 2</h1>
-<h2 class="no-num no-toc" id="editors-draft-april-16-2013">Editor's Draft April 16, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-oct-02-2013">Editor's Draft October 2, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -153,8 +153,9 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-time-origin"><span class="secno">4.2 </span>Time Origin</a></li>
 	  <li><a href="#sec-DOMHighResTimeStamp"><span class="secno">4.3 </span>The <code>DOMHighResTimeStamp</code> Type</a></li>
 	  <li><a href="#sec-now-method"><span class="secno">4.4 </span>The <code>performance.now()</code> method</a></li>
-	  <li><a href="#sec-monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</a></li>
-	  <li><a href="#sec-privacy-security"><span class="secno">4.6 </span>Privacy and Security</a></li>
+	  <li><a href="#sec-worker-start"><span class="secno">4.5 </span>The <code>workerStart</code> attribute</a></li>
+	  <li><a href="#sec-monotonic-clock"><span class="secno">4.6 </span>Monotonic Clock</a></li>
+	  <li><a href="#sec-privacy-security"><span class="secno">4.7 </span>Privacy and Security</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -337,14 +338,38 @@ partial interface <dfn id="WorkerGlobalScope"><a href="http://www.w3.org/TR/2012
 	from the <i><a href="#time-origin">time origin</a></i> to the occurrence of the call to the <a href="#dom-performance-now"><code>now</code></a> method.
 </p>
 
-<h3 id="sec-monotonic-clock"><span class="secno">4.5 </span>Monotonic Clock</h3>
+<h3 id="sec-worker-start"><span class="secno">4.5 </span>The <code>workerStart</code> attribute</h3>
+<pre class="idl">
+partial interface <dfn id="SharedWorker">SharedWorker</dfn> {
+  readonly attribute <a href="#sec-DOMHighResTimeStamp">DOMHighResTimeStamp</a> <a href="#dom-worker-start" title="workerStart">workerStart</a>;
+};
+</pre>
+
+<h4 id='worker-start-section'><code>workerStart</code> attribute</h4>
+
+<p>The <dfn id="dom-worker-start"><code>workerStart</code></dfn> attribute MUST 
+	return a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> representing the difference between
+        the construction of the <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope</a>
+        associated with the <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a>
+        and the <i><a href="#time-origin">time origin</a></i> of the current document.
+</p>
+
+<div class="note"><div class="noteHeader">Note</div>
+<p>
+  The value returned by <a href="#dom-worker-start" title="workerStart">workerStart</a> may be negative if a
+  <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope<a> already existed for the
+  <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a> prior to the <i><a href="#time-origin">time origin</a></i>.
+</p>
+</div>
+
+<h3 id="sec-monotonic-clock"><span class="secno">4.6 </span>Monotonic Clock</h3>
 <p>
 The time values returned when calling the <a href="#dom-performance-now"><code>now</code></a> method MUST be monotonically increasing and not subject to system clock
 adjustments or system clock skew. The difference between any two chronologically recorded time values returned from the 
 <a href="#dom-performance-now"><code>now</code></a> method MUST never be negative. 
 </p>
 
-<h3 id="sec-privacy-security"><span class="secno">4.6 </span>Privacy and Security</h3>
+<h3 id="sec-privacy-security"><span class="secno">4.7 </span>Privacy and Security</h3>
 <p>
 Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a 
 third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. 
