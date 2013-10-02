@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-august-7-2013">Editor's Draft August 7, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-cctober-2-2013">Editor's Draft October 2, 2013</h2>
 <dl>
   <dt>This version:</dt>
 		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -320,6 +320,18 @@ a new value is assigned to it. </p>
 
 <p>The term "JavaScript" is used to refer to ECMA262, rather than the
 official term ECMAScript, since the term JavaScript is more widely known. <a href="#ECMA262">[ECMA262]</a>
+</p>
+
+<p>
+  Throughout this work, all time values are measured in milliseconds since the start of 
+  navigation of the document. For example, the start of navigation of the document 
+  occurs at time 0. The term <i>current time</i> refers to the number of milliseconds 
+  since the start of navigation of the document until the current moment in time. 
+  This definition of time is based on the High Resolution Time specification
+  [<a href="http://www.w3.org/TR/hr-time/">High Resolution Time</a>] and is different
+  from the definition of time used in the Navigation Timing specification 
+  [<a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>],
+  where time is measured in milliseconds since midnight of January 1, 1970 (UTC).
 </p>
 
 <h2 id="resource-timing"><span class="secno">4 </span>Resource Timing</h2>
@@ -630,7 +642,7 @@ application caches</a> or from local resources.</p>
 <h3 id="extensions-performance-interface"><span class="secno">4.4 </span>Extensions to the <code>Performance</code> Interface</h3>
 
 <pre class="idl">
-partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> : EventTarget {
+partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
   void <a href='#dom-performance-clearresourcetimings' title='clearResourceTimings'>clearResourceTimings</a>();
   void <a href='#dom-performance-setresourcetimingbuffersize' title='setResourceTimingBufferSize'>setResourceTimingBufferSize</a>(unsigned long maxSize);
 
@@ -667,7 +679,11 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
 
 <div class="methods">
 	<h4 id="dom-performance-onresourcetimingbufferfull"><code>onresourcetimingbufferfull</code> attribute</h4>
-	<p>The event handler for the <code>resourcetimingbufferfull</code> event. The <code>resourcetimingbufferfull</code> event must be fired at the Document immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources becomes full.
+  <p>
+    The event handler for the <code>resourcetimingbufferfull</code> event. Immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a>
+    resources becomes full, the User Agent must fire a simple event named <code>resourcetimingbufferfull</code> that bubbles, isn't cancelable, has no default action, at the
+    <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> object. 
+  </p>
 </div>
 
 <h3 id="cross-origin-resources">4.5 Cross-origin Resources</h3>

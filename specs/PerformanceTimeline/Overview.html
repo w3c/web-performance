@@ -250,6 +250,18 @@ title="">Foo</code> is actually an interface, is sometimes used instead of
 the more accurate "an object implementing the interface <code
 title="">Foo</code>". </p>
 
+<p>
+  Throughout this work, all time values are measured in milliseconds since the start of 
+  navigation of the document. For example, the start of navigation of the document 
+  occurs at time 0. The term <i>current time</i> refers to the number of milliseconds 
+  since the start of navigation of the document until the current moment in time. 
+  This definition of time is based on the High Resolution Time specification
+  [<a href="http://www.w3.org/TR/hr-time/">High Resolution Time</a>] and is different
+  from the definition of time used in the Navigation Timing specification 
+  [<a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>],
+  where time is measured in milliseconds since midnight of January 1, 1970 (UTC).
+</p>
+
 <h2 id="sec-navigation-timing"><span class="secno">4 </span>Performance Timeline</h2>
 
 <h3 id="sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</h3>
