@@ -260,18 +260,21 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-time-origin"><span class="secno">4.2 </span>Time Origin</h3>
 <p>
-	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of navigation of the current document, which is equal to the 
-	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
-	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
-	interface <a href='#NavigationTiming'>[NavigationTiming]</a>. 
+	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of navigation of the current document.
 </p>
+
+<div class="note"><div class="noteHeader">Note</div>
+<p>
+  The time value of the start of navigation of the document in an attribute of type <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> is equal to 0. 
+  The same time value described with an attribute of type <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp"><code>DOMTimeStamp</code></a>
+  is equal to the <a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a>
+  attribute of the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a> interface <a href='#NavigationTiming'>[NavigationTiming]</a>. 
+</p>
+</div>
 
 <p>
 	For a <a href="http://www.w3.org/TR/workers/#dedicated-workers-and-the-dedicatedworkerglobalscope-interface">dedicated worker</a>,
-	the <i>time origin</i> must be equal to the time of the start of navigation of the document where it was created, which is equal to the 
-	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
-	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
-	interface <a href='#NavigationTiming'>[NavigationTiming]</a> of that document.
+	the <i>time origin</i> must be equal to the time of the start of navigation of the document where it was created.
 </p>
 
 <p>
