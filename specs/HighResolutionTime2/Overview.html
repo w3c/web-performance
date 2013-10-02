@@ -261,7 +261,8 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-time-origin"><span class="secno">4.2 </span>Time Origin</h3>
 <p>
-	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of navigation of the current document.
+	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of 
+  <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#navigate">navigation</a> of the current document.
 </p>
 
 <div class="note"><div class="noteHeader">Note</div>
@@ -275,12 +276,13 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <p>
 	For a <a href="http://www.w3.org/TR/workers/#dedicated-workers-and-the-dedicatedworkerglobalscope-interface">dedicated worker</a>,
-	the <i>time origin</i> must be equal to the time of the start of navigation of the document where it was created.
+	the <i>time origin</i> must be equal to the time of the start of <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#navigate">navigation</a> 
+  of the document where it was created.
 </p>
 
 <p>
 	For a <a href="http://www.w3.org/TR/workers/#shared-workers-and-the-sharedworkerglobalscope-interface">shared worker</a>,
-	the <i>time origin</i> must be equal to the time of creation of the shared worker. 
+	the <i>time origin</i> must be equal to the time of <a href="http://dev.w3.org/html5/workers/#official-moment-of-creation">creation</a> of the shared worker. 
 </p>
 
 <h3 id="sec-DOMHighResTimeStamp"><span class="secno">4.3 </span>The <code>DOMHighResTimeStamp</code> Type</h3>
