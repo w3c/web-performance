@@ -144,6 +144,9 @@ cite this document as other than work in progress. </p>
 <ol class="toc">
   <li><a href="#introduction"><span class="secno">1
   </span>Introduction</a></li>
+    <ol class="toc">
+      <li><a href="#sec-examples"><span class="secno">1.1 </span>Examples</a></li>
+    </ol>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
@@ -215,6 +218,79 @@ usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> t
 <a href="#performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
 </p>
 
+<h3 id="sec-examples"><span class="secno">1.1 </span>Examples</h3>
+
+<p>This section is non-normative.</p>
+
+<p>
+A developer may wish to construct a timeline of their entire application, including workers. With a dedicated
+<a href="http://www.w3.org/TR/workers/#worker">worker</a>, this is easy. All
+<a href="#domhighrestimestamp"><code>DOMHighResTimeStamps</code></a> recorded in the worker use the same
+<i><a href="#time-origin">time origin</a></i> as the document.
+</p>
+
+Worker:
+<div class="example">
+	<pre>
+var mark_start = performance.now();
+doTaskInWorker(); // Some task
+var mark_end = performance.now();
+postMessage({'task': 'Some worker task',
+             'start_time': mark_start,
+             'end_time': mark_end});
+	</pre>
+</div>
+
+Document:
+<div class="example">
+	<pre>
+var mark_start = performance.now();
+doTaskInDocument(); // Some other task
+var mark_end = performance.now();
+var document_entry = {'task': 'Some document task',
+                      'start_time': mark_start,
+                      'end_time': mark_end};
+var worker = new Worker('js');
+worker.onmessage = function (event) {
+  var worker_entry = event.data;
+  plotTimeline([worker_entry, document_entry]);
+}
+	</pre>
+</div>
+
+<p>
+Constructing a timeline with <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorkers</a>
+is slightly more difficult. The <i><a href="#time-origin">time origin</a></i> is different,
+because a worker may be shared across multiple documents. In that case, a developer must adjust
+<a href="#domhighrestimestamp"><code>DOMHighResTimeStamps</code></a> before displaying them on
+the same timeline. This can be done with the
+<a href="#dom-worker-start" title="workerStart">workerStart</a> attribute.
+</p>
+
+Document:
+<div class="example">
+	<pre>
+var mark_start = performance.now();
+doTaskInDocument(); // Some other task
+var mark_end = performance.now();
+var document_entry = {'task': 'Some document task',
+                      'start_time': mark_start,
+                      'end_time': mark_end};
+var worker = new SharedWorker('js');
+worker.port.onmessage = function (event) {
+  var worker_entry = event.data;
+  worker_entry.start_time -= worker.workerStart;
+  worker_entry.end_time -= worker.workerStart;
+  plotTimeline([worker_entry, document_entry]);
+}
+	</pre>
+</div>
+
+<p>
+Note that the <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope</a>
+doesn't have access to its workers' workerStart values. If needed, the document can send a message to
+the worker containing its <a href="#dom-worker-start" title="workerStart">workerStart</a> value.
+</p>
 
 <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
 requirements</h2>
@@ -349,7 +425,8 @@ partial interface <dfn id="SharedWorker">SharedWorker</dfn> {
 
 <p>The <dfn id="dom-worker-start"><code>workerStart</code></dfn> attribute MUST 
 	return a <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> representing the difference between
-        the construction of the <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope</a>
+        the <i><a href="#time-origin">time origin</a></i> of the
+        <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope</a>
         associated with the <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a>
         and the <i><a href="#time-origin">time origin</a></i> of the current document.
 </p>
@@ -358,7 +435,8 @@ partial interface <dfn id="SharedWorker">SharedWorker</dfn> {
 <p>
   The value returned by <a href="#dom-worker-start" title="workerStart">workerStart</a> may be negative if a
   <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope<a> already existed for the
-  <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a> prior to the <i><a href="#time-origin">time origin</a></i>.
+  <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a> prior to the document's
+  <i><a href="#time-origin">time origin</a></i>.
 </p>
 </div>
 
