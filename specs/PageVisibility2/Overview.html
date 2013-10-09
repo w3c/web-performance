@@ -1,0 +1,560 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page Visibility 2</title>
+<style>
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+  .auto-style1 {
+	background-color: #FFFFFF;
+}
+  </style>
+  <link href="https://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="draft">
+
+<div class="head">
+<h1>Page Visibility 2</h1>
+
+<h2 class="no-num no-toc" id="editors-draft-october-08-2013">Editor's Draft October 08, 2013</h2>
+<dl>
+  <dt>This version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html</a></dd>
+  <dt>Latest Editor's Draft:</dt>
+    <dd><a
+      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html</a></dd>
+  <dt>Editors:</dt>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+     <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+</dl>
+
+   <p class=copyright><a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web
+    Consortium">W3C</abbr></a><sup>&reg;</sup> (<a
+    href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute
+    of Technology">MIT</abbr></a>, <a
+    href="http://www.ercim.eu/"><abbr title="European Research Consortium
+    for Informatics and Mathematics">ERCIM</abbr></a>, <a
+    href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a
+    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+
+    and <a
+    href="http://www.w3.org/Consortium/Legal/copyright-documents">document
+    use</a> rules apply.</p>
+
+   <hr class='top'>
+</div>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>This specification defines a means for site developers to programmatically determine 
+the current visibility state of the page in order to develop power and CPU efficient web applications.
+</p>
+
+<h2 class="no-num no-toc" id="status-of-this-document">Status of this
+document</h2>
+
+  <p><em>This section describes the status of this document at the time of
+   its publication. Other documents may supersede this document. A list of
+   current W3C publications and the latest revision of this technical report
+   can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
+   index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This is a <strong>work in progress</strong> and may change without any
+notices. </p>
+
+<p>Please send comments
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BPageVisibility%5D%20">public-web-perf@w3.org</a>
+   (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
+   with <samp>[PageVisibility]</samp> at the start of the subject line.</p>
+
+<p>This document is produced by
+   the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
+   Working Group. The Web Performance Working Group is part of
+   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
+   Activity</a> in the
+   W3C <a href="http://www.w3.org/Interaction/">Interaction
+   Domain</a>.
+
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress. </p>
+
+<p>This document was produced by a group operating under
+   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+   February 2004 W3C Patent Policy</a>. W3C maintains
+   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
+   connection with the deliverables of the group; that page also
+   includes instructions for disclosing a patent. An individual who
+   has actual knowledge of a patent which the individual believes
+   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+   Claim(s)</a> must disclose the information in accordance
+   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+   6 of the W3C Patent Policy</a>.</p>
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+<!--begin-toc-->
+<ol class="toc">
+  <li><a href="#introduction"><span class="secno">1
+  </span>Introduction</a></li>
+  <li><a href="#conformance-requirements"><span class="secno">2
+    </span>Conformance requirements</a></li>
+  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
+  <li><a href="#sec-page-visibility"><span class="secno">4 </span>Page Visibility</a> 
+    <ol class="toc">
+      <li><a href="#sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</a></li>
+      <li><a href="#sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</a></li>
+      <li><a href="#sec-visibilitychange-event"><span class="secno">4.3 </span>The <code>visibilitychange</code> event</a></li>
+	  <li><a href="#sec-processing-model"><span class="secno">4.4 </span>Processing Model</a></li>
+      <li><a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec-privacy"><span class="secno">5 </span>Privacy</a></li>
+  <li><a href="#references"><span class="secno">6 </span>References</a></li>
+  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+<!--end-toc-->
+
+<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
+
+<p>This section is non-normative.</p>
+
+<p>
+The Page Visibility specification defines a means for site developers to 
+programmatically determine the current visibility of a document and be notified 
+of visibility changes. Without knowing the visibility state of a page, web developers 
+have been designing webpages as if they are always visible. This not only results in higher 
+machine resource utilization, but it prevents web developers from making runtime
+decisions based on whether the webpage is visible to the user. Designing web pages with knowledge
+of the page visibility will allow for improved user experiences and power efficient sites.</p>
+
+<p>With this interface, web applications may chose to alter behavior based on whether they are
+visible to the user or not. For example, this interface can be used to scale back work when the page is no
+longer visible. If a web based email client is visible, it may check the server for new messages every few seconds. 
+When hidden it might scale checking email to every few minutes. This interface can also be used to provide better runtime
+user experience decisions not related to power management. For example, a puzzle game could be paused when the user
+no longer has the game visible. Further, this interface can be used by advertisers to not charge for ads that are
+not visible to users.</p>
+
+
+<div class="example">
+<p>For example, the following script shows a theoretical web based email client checking for new messages every second without knowledge of 
+the Page Visibility:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   var timer = 0;
+   var PERIOD = 1000;
+
+   function onLoad() {
+       timer = setInterval(checkEmail, PERIOD);
+   }
+
+   function checkEmail() { 
+       // Check server for new messages
+   }
+
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload="onLoad()"&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<p>The script will always check for messages every second, even if the user
+is not actively viewing the page because it is not visible. This is an example of poor resource management.</p>
+
+<p>Using the <a href="#dom-document-hidden"><code>hidden</code></a> attribute of the <a href="#document">Document</a> 
+interface and the <a href="#pv-visibility-change-event"><code>visibilitychange</code></a> event, 
+the page will be able to throttle checking messages to every minute when the
+page is no longer visible.</p>
+
+<div class="example">
+<p>The following script show the theoretical web based email client checking for new messages every second when visible and every minute when not visible:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;script&gt;
+   var timer = 0;
+   var PERIOD_VISIBLE = 1000;
+   var PERIOD_NOT_VISIBLE = 60000;
+
+   function onLoad() {
+       timer = setInterval(checkEmail, (document.hidden) ? PERIOD_NOT_VISIBLE : PERIOD_VISIBLE);
+       if(document.addEventListener) document.addEventListener("visibilitychange", visibilityChanged);
+   }
+
+   function visibilityChanged() {
+       clearTimeout(timer);
+       timer = setInterval(checkEmail, (document.hidden) ? PERIOD_NOT_VISIBLE : PERIOD_VISIBLE);
+   }
+
+   function checkEmail() { 
+       // Check server for new messages
+   }
+
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload="onLoad()"&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance
+requirements</h2>
+
+<p>All diagrams, examples, and notes in this specification are non-normative,
+as are all sections explicitly marked non-normative. Everything else in this
+specification is normative. </p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document
+are to be interpreted as described in <a href="#rfc2119">RFC 2119</a>.
+For readability, these words do not appear in all uppercase letters in this specification.</p>
+
+<p>Requirements phrased in the imperative as part of algorithms (such as
+"strip any leading space characters" or "return false and abort these steps")
+are to be interpreted with the meaning of the key word ("must", "should",
+"may", etc) used in introducing the algorithm. </p>
+
+<p>Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents. </p>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.) </p>
+
+    <p>The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. <a href="#WebIDL">[Web IDL]</a></p>
+
+<h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+<p>The construction "a <code title="">Foo</code> object", where <code
+title="">Foo</code> is actually an interface, is sometimes used instead of
+the more accurate "an object implementing the interface <code
+title="">Foo</code>". </p>
+
+<h2 id="sec-page-visibility"><span class="secno">4 <span class="auto-style1">Page Visibility</span></span></h2>
+
+<h3 id="sec-page-visibility-introduction"><span class="secno">4.1 </span>Introduction</h3>
+
+<p>This section is non-normative.</p>
+
+<p>This specification introduces an interface that provides Web applications
+with the means to programmatically determine the current visibility of a page
+and be notified of visibility changes.</p>
+
+<h3 id="sec-document-interface"><span class="secno">4.2 </span>Extensions to the <code>Document</code> interface</h3>
+
+<p>
+The HTML5 specification defines a
+partial <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+interface <a href='#HTML5'>[HTML5]</a>, which this specification
+extends:
+</p>
+<pre class="idl">
+enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "unloaded" };
+
+partial interface <dfn id="document">Document</dfn> {
+  readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
+  readonly attribute <a href="#VisibilityState" title="VisibilityState">VisibilityState</a> <a href="#dom-document-visibilitystate" title="visibilitystate">visibilityState</a>; 
+};
+</pre>
+
+
+<h4><code><dfn id="dom-document-hidden">hidden</dfn></code> attribute</h4>
+
+<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return true if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+is not visible at all. The attribute <span class='rfc2119'>MUST</span> return false if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is at least partially visible on at least one screen.
+</p>
+
+<p>
+If the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is null, on getting, 
+the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return true.
+</p>
+
+<p>To accommodate accessibility tools that are typically full screen but still show a 
+view of the page, when applicable, this attribute MAY return false when the User Agent 
+is not minimized but is fully obscured by other applications.</p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+<p>As examples, on getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute returns true when: </p>
+	<ul>
+		 <li>The User Agent is minimized.</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
+         <li>The User Agent is about to unload the page.</li>
+         <li>The User Agent is about to traverse to a session history entry.</li>
+	 <li>The iFrame that is queried for this attribute is off the screen even though the page that contains the iframe is in the foreground and visible on the screen.</li>
+         <li>The Operating System lock screen is shown.</li>
+	</ul> 
+	
+ <p>Likewise, as examples, on getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute returns false when:</p>
+ <ul>
+		 <li>The User Agent is not minimized and the page is on a foreground tab.</li>
+		 <li>The User Agent is fully obscured by an Accessibility Tool, like a magnifier, but
+		 a view of the page is shown.</li>
+	</ul> 
+</div>
+	
+<h4><code><dfn id="dom-document-visibilitystate">visibilityState</dfn></code> attribute</h4>
+
+<p>On getting, <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return 
+one of the following <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a>s or a vendor prefixed <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> as defined in <a href="#sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</a>:
+
+<ul>
+	<li><code>hidden</code>,</li>
+	<li><code>visible</code>,</li>
+	<li><code>prerender</code>,</li>
+    <li><code>offscreen</code>,</li>
+    <li><code>unloaded</code>.</li>
+</ul> 
+
+
+<h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>  
+ is not visible at all on any screen.</p>
+
+<p>
+If the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-defaultview">defaultView</a> of the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is null, on getting, 
+the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a>.
+</p>
+ 
+ <p>To accommodate accessibility tools that are typically full screen but still show a 
+view of the page, when applicable, on getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MAY return 
+the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a>, instead of <a href="#pv-page-hidden"><code>hidden</code></a>, when the User Agent 
+is not minimized but is fully obscured by other applications.</p>
+
+ <div class="note">
+<div class="noteHeader">Note</div>
+<p>For example, in the following cases the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute would return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a>:</p>
+	<ul>
+		 <li>The User Agent is minimized.</li>
+		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
+		 <li>The Operating System lock screen is shown.</li>
+	</ul> 
+</div>
+
+<h5><code><dfn id="pv-page-visible">visible</dfn></code></h5>
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+ is at least partially visible at on at least one screen. This is the same condition under which the <code><dfn>hidden</dfn></code> attribute
+is set to false.</p>
+  
+<p>To accommodate accessibility tools that are typically full screen but still show a 
+view of the page, when applicable, on getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute MAY return 
+the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-visible"><code>visible</code></a> when the User Agent 
+is not minimized but is fully obscured by other applications.</p>
+
+<h5><code><dfn id="pv-prerender">prerender</dfn></code></h5>
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-prerender"><code>prerender</code></a> if the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+is loaded in the prerender mode and is not yet visible. User Agent support of the <a href="#pv-prerender"><code>prerender</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
+</p>
+
+<h5><code><dfn id="pv-offscreen">offscreen</dfn></code></h5>
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-offscreen"><code>offscreen</code></a> if the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+is loaded off-screen and is not visible. User Agent support of the <a href="#pv-offscreen"><code>offscreen</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
+</p>
+
+ <div class="note">
+<div class="noteHeader">Note</div>
+<p>For example, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute for a iFrame would return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-offscreen"><code>offscreen</code></a> if the iFrame is off screen e.g. below the fold, even though the page containing it is visible.</p>
+</div>
+
+<h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
+<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute <span class='rfc2119'>SHOULD</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
+<a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>. User Agent support of the <a href="#pv-unloaded"><code>unloaded</code></a> 
+return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
+</p>
+
+<h3 id="sec-visibilitychange-event"><span class="secno">4.3 </span>
+The <code><dfn id="pv-visibility-change-event">visibilitychange</dfn></code> event</h3>
+
+<p>
+The User Agent <span class='rfc2119'>MUST</span> fire the <code>visiblitychange</code> event at the 
+<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> when the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> 
+has changed.
+</p>
+
+<h3 id="sec-processing-model"><span class="secno">4.4 </span>Processing Model</h3>
+
+<p>
+    When the User Agent determines that the visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+    has changed, the User Agent <span class='rfc2119'>MUST</span> run the following steps. 
+</p>
+<p>
+    If the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+    is now at least partially visible on at least one screen, 
+</p>
+    <ol>
+        <li>
+			<p>
+			If traversing to a <a href="http://www.w3.org/TR/html5/browsers.html#session-history-entry">session history entry</a>,
+		   run the <a href="#now-visible-algorithm">now visible algorithm</a> before running the step to fire the <code><a href="http://www.w3.org/TR/html5/browsers.html#event-pageshow">pageshow</a></code> event.
+			</p>
+        </li>
+		<li>
+			<p>Otherwise, queue a task that runs the <a href="#now-visible-algorithm">now visible algorithm</a>.</p>
+		</li>
+    </ol>
+<p>
+    Else if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
+    is now not visible or if the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the
+	<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, 
+</p>
+<ol>
+	<li>
+		<p>
+		    If the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the
+		    <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, run the <a href="#now-hidden-algorithm">now hidden algorithm</a> 
+            during the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-document-visibility-change-steps">unloading document visibility change steps</a>,
+		</p>
+	   <li>
+			<p>
+                Otherwise, queue a task that runs the <a href="#now-hidden-algorithm">now hidden algorithm</a>.
+			</p>
+		</li>
+</ol>
+<p>
+        The <b><dfn id="now-visible-algorithm">now visible algorithm</dfn></b> runs the following steps synchronously:
+</p>
+        <ol> 
+            <li>
+                <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>false</code>.</p>
+            </li>
+            <li>
+                <p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>visible</code>.</p>
+            </li>
+            <li>
+                <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+                at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
+            </li>
+        </ol>
+<p>
+The <b><dfn id="now-hidden-algorithm">now hidden algorithm</dfn></b> runs the following steps synchronously:
+</p>
+<ol> 
+    <li>
+        <p>Set the <a href="#dom-document-hidden"><code>hidden</code></a> attribute to <code>true</code>.</p>
+    </li>
+    <li>
+        <p>Set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>hidden</code>.
+           If the user agent is to <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a> the 
+           <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>, set the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> 
+           attribute to <code>unloaded</code>. Setting <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute to <code>unloaded</code>
+           instead of <code>hidden</code> is optional.
+        </p>
+    </li>
+    <li>
+        <p>Fire a simple event named <code>visiblitychange</code> that bubbles, isn't cancelable, and has no default action,
+        at the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>.</p>
+    </li>
+</ol>
+
+<h3 id="sec-vendor-prefix"><span class="secno">4.5 </span>Vendor Prefixes</h3>
+
+<p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
+e.g., for experimental purposes, vendors <span class='rfc2119'>MUST</span> use the following extension mechanisms:
+</p>
+
+<p>If an extension to the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute return value
+ is needed for an experimental visibility state, User Agents MUST update the <a href="#VisibilityState" title="VisibilityState">VisibilityState</a> enum with
+ a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that uses the following convention:</p>
+ 
+<p><code>[vendorprefix]-[name]</code></p>
+
+<p>Where,</p>
+<ul>
+	<li><code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,</li>
+	<li><code>[name]</code> is a non-capitalized name given to the visibility state,</li>
+    <li>and the above names are in ASCII.</li>
+</ul>
+
+
+<h3 id="sec-privacy"><span class="secno">5 </span>Privacy</h3>
+
+<p>
+The <a href="#sec-document-interface">Page Visibility</a> API enables third party content on a web page to determine the 
+visibility of the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> with higher 
+precision compared to existing mechanisms, like <a href="http://www.w3.org/TR/html5/editing.html#focus-management">focus</a> 
+or <a href="http://www.w3.org/TR/html5/editing.html#focus-management">blur</a> events. However, for practical considerations, the additional exposure is not substantial. 
+</p>
+
+
+<h2 id="references"><span class="secno">6 </span>References</h2>
+
+<dl>
+
+   <dt id="rfc2119">[IETF RFC 2119]</dt>
+   <dd>
+    <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+    Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at
+    <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
+   </dd>
+
+   <dt>[<a id="HTML5">HTML5</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>,
+   Robin Berjon et al., Editors. World Wide Web Consortium, December
+   2012. This version of the HTML5 is available from <a
+   href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The
+   <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's
+   draft</a> of HTML5 is available at
+   http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+
+   <dt>[<a id="WebIDL">Web IDL</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+
+</dl>
+
+<h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+<p>We would like to sincerely thank Karen Anderson, Nic Jansma, Alex Komoroske, Cameron McCormack, James Robinson, 
+Jonas Sicking, Kyle Simpson, Jason Weber, and Boris Zbarsky to acknowledge their contributions to this work.</p>
+</body>
+</html>
