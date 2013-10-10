@@ -53,12 +53,12 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility2/Overview.html</a></dd>
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
-      class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
      <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
       class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
 </dl>
 
    <p class=copyright><a
@@ -297,7 +297,7 @@ interface <a href='#HTML5'>[HTML5]</a>, which this specification
 extends:
 </p>
 <pre class="idl">
-enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "unloaded" };
+enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "offscreen", "unloaded" };
 
 partial interface <dfn id="document">Document</dfn> {
   readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
