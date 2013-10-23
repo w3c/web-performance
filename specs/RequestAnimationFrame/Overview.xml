@@ -358,9 +358,9 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 
    <dt>[<a id="HTML5">HTML5</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>,
-   Robin Berjon et al., Editors. World Wide Web Consortium, December
-   2012. This version of the HTML5 is available from <a
-   href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The
+   Robin Berjon et al., Editors. World Wide Web Consortium, August
+   2013. The latest version of HTML is available from <a
+   href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html/</a>. The
    <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's
    draft</a> of HTML5 is available at
    http://www.w3.org/html/wg/drafts/html/CR/.</dd>
@@ -372,35 +372,16 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
   <dt id='ref-HighResolutionTime'>[HighResolutionTime]</dt>
-  <dd><cite><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html'>High Resolution Time</a></cite>.
-  Jatinder Mann, Microsoft Corp.
-  World Wide Web Consortium, April 2012.
-  Available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+  <dd><cite><a
+  href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High
+  Resolution Time</a></cite>.  Jatinder Mann, Editor. W3C
+  Recommendation, World Wide Web Consortium, December 2012.  Available
+  at http://www.w3.org/TR/2012/REC-hr-time-20121217/. Latest version
+  is available at http://www.w3.org/TR/hr-time/</dd>
 </dl>
 </div>
 
 </div> <!-- references -->
-
-<div id='changes' class='section'>
-<h2>Changes</h2>
-
-<p>The following is a list of substantial changes to the document on each publication.</p>
-
-<dl class='changes'>
-  <dt>Current editor’s draft</dt>
-  <dd>
-    <ul>
-      ...
-    </ul>
-  </dd>
-  <dt>2 June 2011 – FPWD</dt>
-  <dd>
-    <ul>
-      <li>Initial publication.</li>
-    </ul>
-  </dd>
-</dl>
-</div>
 
 </div> <!-- appendices -->
 
