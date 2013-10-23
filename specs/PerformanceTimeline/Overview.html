@@ -41,21 +41,20 @@
 <div class="head">
 <h1>Performance Timeline</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-june-27-2012">Editor's Draft June 27, 2012</h2>
+<h2 class="no-num no-toc" id="editors-draft-october-23-2013">Editor's Draft October 23, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
   <dt>Latest version:</dt>
     <dd><a
-      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
+      href="http://www.w3.org/TR/performance-timeline/">http://www.w3.org/TR/performance-timeline/</a></dd>
   <dt>Latest Editor's Draft:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PerformanceTimeline/Overview.html</a></dd>
   <dt>Previous versions:</dt>
-    <dd><a href="https://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/c447c9d465ef/specs/PerformanceTimeline/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/af648533758c/specs/PerformanceTimeline/Overview.html</a></dd>
-    <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/1198a5f83a1c/specs/PerformanceTimeline/Overview.html</a></dd>
+    <dd><a href="http://www.w3.org/TR/2012/CR-performance-timeline-20120726/">http://www.w3.org/TR/2012/CR-performance-timeline-20120726/</a></dd>
+    <dd><a href="http://www.w3.org/TR/2012/WD-performance-timeline-20120508/">http://www.w3.org/TR/2012/WD-performance-timeline-20120508/</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
@@ -146,6 +145,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#sec-performance-timeline"><span class="secno">4.1 </span> The Performance Timeline</a></li>
       <li><a href="#sec-PerformanceEntry-interface"><span class="secno">4.2 </span>The <code>PerformanceEntry</code> interface</a></li>
       <li><a href="#sec-window.performance-attribute"><span class="secno">4.3 </span> Extensions to the <code>Performance</code> interface</a></li>
+      <li><a href="#sec-vendor-extensions"><span class="secno">4.4 </span> Vendor Extensions</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">5 </span>References</a></li>
@@ -301,8 +301,14 @@ interface</h3>
 <h4 id="dom-performanceentry-entrytype"><code>entryType</code> attribute</h4>
 <p>
 	The <code>entryType</code> attribute <span class='rfc2119'>must</span> return a <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> that describes the <i>type</i> of the interface represented by this <a href="#performanceentry"><code>PerformanceEntry</code></a> object.
-	
 </p>
+
+<div class="note">
+<div class="noteHeader">Note</div>
+  <p>
+    The <a href="http://www.w3.org/wiki/Web_Performance/EntryType">Web Performance/entryType</a> wiki page lists all of the known <code>entryType</code> values.
+  </p>
+</div>
 
 <h4 id="dom-performanceentry-starttime"><code>startTime</code> attribute</h4>
 <p>
@@ -399,6 +405,31 @@ The <a href="http://www.w3.org/TR/navigation-timing/#dom-window-performance"><co
 				<p><b>No exceptions</b></p>
 		</div>
 </div>
+
+<h3 id="sec-vendor-extensions">4.4 Vendor Extensions</h3>
+
+<p>
+  If a vendor-specific proprietary user agent extension is needed to create experimental 
+  <a href="#performanceentry"><code>PerformanceEntry</code></a> objects, on getting the 
+  <a href="#dom-performanceentry-entrytype"><code>entryType</code></a> IDL attribute, vendors MUST return a DOMString that uses the following convention:
+</p>
+
+<p><code>[vendorprefix]-[entrytype]</code></p>
+
+<p>Where,</p>
+<ul>
+  <li>
+    <code>[vendorprefix]</code> is a non-capitalized name that identifies the vendor,
+  </li>
+  <li>
+    <code>[entrytype]</code> is a non-capitalized name given to the <i>type</i> of the interface 
+    represented by this <a href="#performanceentry"><code>PerformanceEntry</code></a> object,
+  </li>
+  <li>
+    and the above names are in ASCII.
+  </li>
+</ul>
+
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
