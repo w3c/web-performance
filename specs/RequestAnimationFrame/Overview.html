@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
 <body>
-<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>13 February 2013</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+<div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Timing control for script-based animations</h1><h2>W3C Editor’s Draft <em>23 October 2013</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/animation-timing/">http://www.w3.org/TR/animation-timing/</a></dd><dt>Editors:</dt><dd><a href="http://webstuff.nfshost.com/">James Robinson</a>, Google, Inc &lt;jamesr@chromium.org&gt;</dd><dd><a href="http://mcc.id.au/">Cameron McCormack</a>, Mozilla Corporation &lt;cam@mcc.id.au&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
 <div class="section">
 <h2>Abstract</h2>
@@ -39,7 +39,7 @@ by the browser.</p>
 publication.  Other documents may supersede this document. A list of current W3C
 publications and the latest revision of this technical report can be found in
 the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
-http://www.w3.org/TR/.</em></p><p>This document is the 13 February 2013 <b>Editor’s Draft</b> of the
+http://www.w3.org/TR/.</em></p><p>This document is the 23 October 2013 <b>Editor’s Draft</b> of the
   <cite>Timing control for script-based animations</cite> specification.
 
 Please send comments about this document to
@@ -73,7 +73,7 @@ must disclose the information in accordance with
 
 <div id="toc">
 <h2>Table of Contents</h2>
-<div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#definitions">3. Definitions</a></li><li><a href="#Window-interface-extensions">4. Window interface extensions</a></li><li><a href="#processingmodel">5. Processing Model</a></li><li><a href="#acknowledgements">6. Acknowledgements</a></li></ul><ul><li><a href="#references">A. References</a><ul><li><a href="#normative-references">A.1. Normative references</a></li></ul></li><li><a href="#changes">B. Changes</a></li></ul></div>
+<div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#definitions">3. Definitions</a></li><li><a href="#Window-interface-extensions">4. Window interface extensions</a></li><li><a href="#processingmodel">5. Processing Model</a></li><li><a href="#acknowledgements">6. Acknowledgements</a></li></ul><ul><li><a href="#references">A. References</a><ul><li><a href="#normative-references">A.1. Normative references</a></li></ul></li></ul></div>
 </div>
 
 <div id="sections">
@@ -356,8 +356,8 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 
    <dt>[<a id="HTML5">HTML5</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/html5/">HTML5</a></cite>,
-   Robin Berjon et al., Editors. World Wide Web Consortium, December
-   2012. This version of the HTML5 is available from <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>. The
+   Robin Berjon et al., Editors. World Wide Web Consortium, August
+   2013. The latest version of HTML is available from <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html/</a>. The
    <a href="http://www.w3.org/html/wg/drafts/html/CR/">latest editor's
    draft</a> of HTML5 is available at
    http://www.w3.org/html/wg/drafts/html/CR/.</dd>
@@ -369,35 +369,15 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
   <dt id="ref-HighResolutionTime">[HighResolutionTime]</dt>
-  <dd><cite><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html">High Resolution Time</a></cite>.
-  Jatinder Mann, Microsoft Corp.
-  World Wide Web Consortium, April 2012.
-  Available at http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html.</dd>
+  <dd><cite><a href="http://www.w3.org/TR/2012/REC-hr-time-20121217/">High
+  Resolution Time</a></cite>.  Jatinder Mann, Editor. W3C
+  Recommendation, World Wide Web Consortium, December 2012.  Available
+  at http://www.w3.org/TR/2012/REC-hr-time-20121217/. Latest version
+  is available at http://www.w3.org/TR/hr-time/</dd>
 </dl>
 </div>
 
 </div> <!-- references -->
-
-<div id="changes" class="section">
-<h2>B. Changes</h2>
-
-<p>The following is a list of substantial changes to the document on each publication.</p>
-
-<dl class="changes">
-  <dt>Current editor’s draft</dt>
-  <dd>
-    <ul>
-      ...
-    </ul>
-  </dd>
-  <dt>2 June 2011 – FPWD</dt>
-  <dd>
-    <ul>
-      <li>Initial publication.</li>
-    </ul>
-  </dd>
-</dl>
-</div>
 
 </div> <!-- appendices -->
 
