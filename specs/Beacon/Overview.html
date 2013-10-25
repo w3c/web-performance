@@ -96,7 +96,7 @@ document</h2>
 notices. </p>
 
 <p>Please send comments
-   to <a href="mailto:public-web-perf@w3.org?subject=%5BResourcePriorities%5D%20">public-web-perf@w3.org</a>
+   to <a href="mailto:public-web-perf@w3.org?subject=%5BBeacon%5D%20">public-web-perf@w3.org</a>
    (<a href="http://lists.w3.org/Archives/Public/public-web-perf/">archived</a>)
    with <samp>[Beacon]</samp> at the start of the subject line.</p>
 
@@ -192,7 +192,7 @@ function logData() {
 <div class="example">
 <p>
     The following example shows a theoretical analytics code that submits data to a server using the by
-    using the <a href="#beacon"><code>beacon</code></a> method.
+    using the <a href="#dom-beacon"><code>beacon</code></a> method.
 </p>
 <pre>
 window.addEventListener('unload', logData, false);
@@ -258,14 +258,14 @@ title="">Foo</code>". </p>
     send the data.
 </p>
 
-<h3 id="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</h3>
+<h3 id="sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</h3>
   
 
 <pre class="idl">
 enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT", "GET" };
 
 partial interface <dfn id="Window">Window</dfn> {
-void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://www.w3.org/TR/FileAPI/#blob">Blob</a> or <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">Document</a> or DOMString or <a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 
@@ -287,7 +287,7 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
     The <code>method</code> parameter indicates the desired 
     <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> used to transmit the data. 
     The user agent may throw
-    the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
+    the <a href="http://www.w3.org/dom/#syntaxerror">SyntaxError</a> exception 
     if the <code>method</code> parameter is not one of the following DOMStrings:
     <code>POST</code>, <code>PUT</code>, and <code>GET</code>.
 </p>
@@ -307,24 +307,24 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
     
 <h4 id="url-parameter"><code>url</code> parameter</h4>
 <p>
-    The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
+    The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url">URL</a>
     where the data is to be transmitted. The user agent must throw the 
-    <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
-    if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
+    <a href="http://www.w3.org/dom/#syntaxerror">SyntaxError</a> exception 
+    if the <a href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url">URL</a> cannot be resolved.
 </p>
 
 <h4 id="data-parameter"><code>data</code> parameter</h4>
 <p>
     The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
-    <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
-    <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a>,
-    DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
+    <a class="external" href="http://www.w3.org/TR/FileAPI/#blob">Blob</a>,
+    <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">Document</a>,
+    DOMString, or <a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a> data that is to be transmitted.
 </p>
 
 <h3 id="sec-processing-model"><span class="secno">4.3 </span>Processing Model</h3>
 
   <p>
-      On calling the <a href="#beacon">beacon</a> interface, the following steps must be run:
+      On calling the <a href="#dom-beacon">beacon</a> method, the following steps must be run:
   </p>
 
   <ol>
@@ -337,64 +337,62 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
 
    <li>
     <p>If the
-    <a class="external" href="http://dev.w3.org/html5/spec/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#document-environment">document environment</a>, run these steps:
+    <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#document-environment">document environment</a>, run these steps:
 
     <ol>
-     <li><p>If <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>
-     is not <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#fully-active">fully active</a>,
-     <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#invalidstateerror">InvalidStateError</a></code>" exception and
+     <li><p>If <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">document</a>
+     is not <a class="external" href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active</a>,
+     <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> an
+     "<code class="external"><a href="http://www.w3.org/TR/dom/#invalidstateerror">InvalidStateError</a></code>" exception and
      terminate the overall set of steps.
 
      <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://dev.w3.org/html5/spec/urls.html#document-base-url">document base URL</a> of
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
+     <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#document-base-url">document base URL</a> of document.
 
-     <li><p>Set <a href="#source-origin">source origin</a> to the
-     <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a> of
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a> otherwise.
+     <li><p>Set source origin to the
+     <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a> of
+     document otherwise.
 
-     <li><p>Set <a href="#referrer-source">referrer source</a> to
-     <a href="#concept-xmlhttprequest-document" title="concept-XMLHttpRequest-document">document</a>.
+     <li><p>Set referrer source to document.
     </ol>
 
    <li>
     <p>If the
-    <a class="external" href="http://dev.w3.org/html5/spec/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#worker-environment">worker environment</a>, run these steps:
+    <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
+    <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#worker-environment">worker environment</a>, run these steps:
 
     <ol>
      <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#script's-base-url">script's base URL</a>.
+     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#script's-base-url">script's base URL</a>.
 
      <li><p>Set <a href="#source-origin">source origin</a> to the
-     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#concept-script" title="concept-script">script</a>'s
-     <a class="external" href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a>.
+     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#concept-script" title="concept-script">script</a>'s
+     <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
 
-     <li><p>Set <a href="#referrer-source">referrer source</a> to the
-     <a class="external" href="http://dev.w3.org/html5/spec/webappapis.html#script's-referrer-source">script's referrer source</a>.
+     <li><p>Set referrer source to the
+     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#script's-referrer-source">script's referrer source</a>.
     </ol>
 
    <li><p>If <var>method</var> does not match the <code>POST</code>, <code>PUT</code>, or <code>GET</code>
    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token,
-   <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
 
    <li><p>Let <var title="">url</var> be a
-   <a class="external" href="http://dev.w3.org/html5/spec/urls.html#url">URL</a> with character encoding UTF-8.
+   <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#url">URL</a> with character encoding UTF-8.
 
-   <li><p><a class="external" href="http://dev.w3.org/html5/spec/urls.html#resolve-a-url" title="Resolve a URL">Resolve</a>
+   <li><p><a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url" title="Resolve a URL">Resolve</a>
    <var title="">url</var> relative to <var title="">base</var>. If the algorithm
    returns an error,
-   <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
 
-   <li>If <var title="">data</var> is null, <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://dev.w3.org/2006/webapi/DOM4Core/#syntaxerror">SyntaxError</a></code>" exception and terminate
+   <li>If <var title="">data</var> is null, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
+   "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
     
    <li>
@@ -407,11 +405,11 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
      <dd><p>Let the <var>transmittedData</var> be the raw data
      represented by <var>data</var>.</dd>
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code></dt>
+     <dt>If <var>data</var> is a <code class="external"><a href="http://www.w3.org/TR/FileAPI/#blob">Blob</a></code></dt>
 
      <dd>
       <p>If the object's
-      <code class="external" title="dom-Blob-type"><a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-type">type</a></code>
+      <code class="external" title="dom-Blob-type"><a href="http://www.w3.org/TR/FileAPI/#dfn-BPtype">type</a></code>
       attribute is not the empty string let <var>mime type</var> be its
       value.</p>
 
@@ -419,34 +417,34 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
      </dd>
 
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code>
+     <dt>If <var>data</var> is a <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code>
 
      <dd>
       <p>Let <var>encoding</var> be the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#preferred-mime-name">preferred MIME name</a> of the
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-encoding" title="concept-document-encoding">character encoding</a>
+      <a class="external" href="http://www.w3.org/dom/#preferred-mime-name">preferred MIME name</a> of the
+      <a class="external" href="http://www.w3.org/dom/#concept-document-encoding" title="concept-document-encoding">character encoding</a>
       of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
       UTF-8.</p>
 
       <p>Let <var>mime type</var> be "<code>application/xml</code>" or
       "<code>text/html</code>" if
-      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> is an
-      <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document">HTML document</a>, followed by
+      <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code> is an
+      <a class="external" href="http://www.w3.org/dom/#html-document">HTML document</a>, followed by
       "<code>;charset=</code>", followed by <var>encoding</var>.</p>
 
       <p>Let the <var>transmittedData</var> be the result of getting
       the <code>innerHTML</code>
       attribute on <var>data</var>
-      <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
+      <a class="external" href="http://www.w3.org/TR/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
       and encoded as <var>encoding</var>. Re-throw any exception this
       throws.</p> 
 
       <p class="note">In particular, if the document cannot be serialized an
-      "<code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror">InvalidStateError</a></code>" exception is
+      "<code class="external"><a href="http://www.w3.org/dom/#invalidstateerror">InvalidStateError</a></code>" exception is
       thrown.</p>
 
       <p class="note">Subsequent changes to the
-      <code class="external"><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a></code> have no effect on what
+      <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code> have no effect on what
       is transferred.</p>
      </dd>
 
@@ -458,17 +456,17 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
       <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
       <p>Let the <var>transmittedData</var>  be <var>data</var>
-      <a class="external" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
+      <a class="external" href="http://www.w3.org/TR/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
       and encoded as UTF-8.</p>
      </dd>
 
 
-     <dt>If <var>data</var> is a <code><a href="#formdata">FormData</a></code></dt>
+     <dt>If <var>data</var> is a <code><a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a></code></dt>
 
      <dd>
       <p>Let <var>transmittedData</var> be the result of running
       the
-      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
+      <a class="external" href="http://www.w3.org/TR/html5/forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>
       with <var>data</var> as <var>form data set</var> and with UTF-8 as the
       explicit character encoding.</p>
 
@@ -476,9 +474,9 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
       "<code title="">multipart/form-data;</code>",
       a U+0020 SPACE character,
       "<code title="">boundary=</code>", and the
-      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-boundary-string"><code>multipart/form-data</code> boundary string</a>
+      <a class="external" href="http://www.w3.org/TR/html5/forms.html#multipart/form-data-boundary-string"><code>multipart/form-data</code> boundary string</a>
       generated by the
-      <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>.
+      <a class="external" href="http://www.w3.org/TR/html5/forms.html#multipart/form-data-encoding-algorithm"><code>multipart/form-data</code> encoding algorithm</a>.
      </dd>
 
     </dl>
@@ -486,7 +484,7 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
    <li>
        <p>
            If <var>URL</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
-            <a href="http://www.w3.org/TR/html5/fetching-resources.html#fetch">fetch</a> <var>URL</var>
+            <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <var>URL</var>
             from the <var>base origin</var> using the <var>method</var> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
             with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
         </p>
@@ -500,8 +498,18 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
 <h2 id="references"><span class="secno">6 </span>References</h2>
 
 <dl>
-    <dt id="refsCORS">[CORS]
-    <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin Resource Sharing</a></cite>, Anne van Kesteren. W3C.
+    <dt id="refsCORS">[CORS]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/cors/">Cross-Origin
+    Resource Sharing</a></cite>, Anne van Kesteren, Editor. World Wide
+    Web Consortium, January 2013. This version of the CORS
+    specification is available from http://www.w3.org/TR/cors/.</dd>
+
+    <dt id="refsDOM">[DOM]</dt>
+
+    <dd><cite><a href="http://www.w3.org/TR/dom/">DOM4</a></cite>,
+    Anne van Kesteren, Editor. World Wide Web Consortium, December
+    2012. This version of the DOM4 specification is available from
+    http://www.w3.org/TR/dom/.</dd>
 
    <dt id="rfc2119">[IETF RFC 2119]</dt>
    <dd>
@@ -510,8 +518,13 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
     <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
    </dd>
 
+<dt>[<a id="rfc6454">IETF RFC 6454</a>]</dt>
+<dd>
+ <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>. 
+</dd>
+
    <dt id="HTML5">[HTML5]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon, et al, Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://dev.w3.org/html5/spec/'>latest editor's draft</a> is available at http://dev.w3.org/html5/spec/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon, et al, Editors. World Wide Web Consortium, August 2013. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The latest editor's draft of the HTML is available from <a href='http://www.w3.org/html/wg/drafts/html/master/'>latest editor's draft</a> is available at http://www.w3.org/html/wg/drafts/html/master/.</dd>
 
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-WebIDL-20120419/'>Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href='http://www.w3.org/TR/WebIDL/'>latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
@@ -519,6 +532,10 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
     <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array</a></cite>, David Herman and Kenneth Russell. Khronos.
 
 </dl>
+
+  <h2 id="acknowledgements">Acknowledgements</h2>
+
+  <p>TBD</p>
 
 
 </body>
