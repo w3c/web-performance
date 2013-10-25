@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -92,7 +92,7 @@ document</h2>
    can be found in the <a href="http://www.w3.org/TR/">W3C technical reports
    index</a> at http://www.w3.org/TR/.</em></p>
 
-<p>This is a <strong>work in progress</strong> and may change without any
+<p>This is an <strong>editor's draft</strong> and may change without any
 notices. </p>
 
 <p>Please send comments
@@ -102,28 +102,7 @@ notices. </p>
 
 <p>This document is produced by
    the <a href="http://www.w3.org/2010/webperf/">Web Performance</a>
-   Working Group. The Web Performance Working Group is part of
-   the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients
-   Activity</a> in the
-   W3C <a href="http://www.w3.org/Interaction/">Interaction
-   Domain</a>.
-
-<p>Publication as a Working Draft does not imply endorsement by the
-W3C Membership. This is a draft document and may be updated, replaced
-or obsoleted by other documents at any time. It is inappropriate to
-cite this document as other than work in progress. </p>
-
-<p>This document was produced by a group operating under
-   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
-   February 2004 W3C Patent Policy</a>. W3C maintains
-   a <a href="http://www.w3.org/2004/01/pp-impl/45211/status">public list of any patent disclosures</a> made in
-   connection with the deliverables of the group; that page also
-   includes instructions for disclosing a patent. An individual who
-   has actual knowledge of a patent which the individual believes
-   contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
-   Claim(s)</a> must disclose the information in accordance
-   with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-   6 of the W3C Patent Policy</a>.</p>
+   Working Group.</p>
 
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
@@ -137,8 +116,8 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-beacon"><span class="secno">4 </span>Beacon</a> 
     <ol class="toc">
       <li><a href="#sec-beacon-introduction"><span class="secno">4.1 </span>Introduction</a></li>
-      <li><a href="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</li>
-      <li><a href="#sec-processing-model"><span class="secno">4.3 </span>Processing Model</li>
+      <li><a href="#sec-beacon-method"><span class="secno">4.2 </span><code>beacon</code> Method</a></li>
+      <li><a href="#sec-processing-model"><span class="secno">4.3 </span>Processing Model</a></li>
     </ol>
   </li>
   <li><a href="#references"><span class="secno">6 </span>References</a></li>
@@ -204,10 +183,10 @@ function logData() {
 </pre>
 </div>
 <p>
-    Using the <a href="#beacon"><code>beacon</code></a> method, the data will be transmitted asynchronously 
+    Using the <a href="#dom-BeaconHTTPMethod-beacon"><code>beacon</code></a> method, the data will be transmitted asynchronously 
     to the web server when the user agent has had an opportunity to do so, without delaying the unload or 
     affecting the performance of the next navigation. As the user agent takes the responsibility to transmit the 
-    data, the <a href="#beacon"><code>beacon</code></a> method does not provide any return values indicating whether or not the transfer has succeeded.
+    data, the <a href="#dom-BeaconHTTPMethod-beacon"><code>beacon</code></a> method does not provide any return values indicating whether or not the transfer has succeeded.
 </p>
  
 <div class="example">
@@ -286,12 +265,12 @@ title="">Foo</code>". </p>
 enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT", "GET" };
 
 partial interface <dfn id="Window">Window</dfn> {
-void <a href="#dom-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 
 <p>
-    The <a href="#beacon"><code>beacon</code></a> method does not provide a return value indicating whether the data transfer has succeeded. 
+    The <dfn id="dom-BeaconHTTPMethod-beacon"><code>beacon</code></dfn> method does not provide a return value indicating whether the data transfer has succeeded. 
 </p>
 
 <div class="note">
