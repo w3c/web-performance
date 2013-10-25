@@ -192,7 +192,7 @@ function logData() {
 <div class="example">
 <p>
     The following example shows a theoretical analytics code that submits data to a server using the by
-    using the <a href="#dom-beacon"><code>beacon</code></a> method.
+    using the <a href="#dom-BeaconHTTPMethod-beacon"><code>beacon</code></a> method.
 </p>
 <pre>
 window.addEventListener('unload', logData, false);
@@ -265,7 +265,7 @@ title="">Foo</code>". </p>
 enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT", "GET" };
 
 partial interface <dfn id="Window">Window</dfn> {
-void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://www.w3.org/TR/FileAPI/#blob">Blob</a> or <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">Document</a> or DOMString or <a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a>)? <var>data</var>);
+void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var>, DOMString <var title="">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> or <a class="external" href="http://www.w3.org/TR/FileAPI/#blob">Blob</a> or <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">Document</a> or DOMString or <a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 
@@ -287,7 +287,7 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
     The <code>method</code> parameter indicates the desired 
     <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> used to transmit the data. 
     The user agent may throw
-    the <a href="http://www.w3.org/dom/#syntaxerror">SyntaxError</a> exception 
+    the <a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a> exception 
     if the <code>method</code> parameter is not one of the following DOMStrings:
     <code>POST</code>, <code>PUT</code>, and <code>GET</code>.
 </p>
@@ -309,13 +309,13 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
 <p>
     The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url">URL</a>
     where the data is to be transmitted. The user agent must throw the 
-    <a href="http://www.w3.org/dom/#syntaxerror">SyntaxError</a> exception 
+    <a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a> exception 
     if the <a href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url">URL</a> cannot be resolved.
 </p>
 
 <h4 id="data-parameter"><code>data</code> parameter</h4>
 <p>
-    The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
+    The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a>,
     <a class="external" href="http://www.w3.org/TR/FileAPI/#blob">Blob</a>,
     <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">Document</a>,
     DOMString, or <a href="http://www.w3.org/TR/XMLHttpRequest/#formdata">FormData</a> data that is to be transmitted.
@@ -324,7 +324,7 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
 <h3 id="sec-processing-model"><span class="secno">4.3 </span>Processing Model</h3>
 
   <p>
-      On calling the <a href="#dom-beacon">beacon</a> method, the following steps must be run:
+      On calling the <a href="#dom-BeaconHTTPMethod-beacon">beacon</a> method, the following steps must be run:
   </p>
 
   <ol>
@@ -401,7 +401,7 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
 
     <dl class="switch">
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#5">ArrayBuffer</a></code></dt>
+     <dt>If <var>data</var> is a <code class="external"><a href="http://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code></dt>
      <dd><p>Let the <var>transmittedData</var> be the raw data
      represented by <var>data</var>.</dd>
 
@@ -417,19 +417,19 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
      </dd>
 
 
-     <dt>If <var>data</var> is a <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code>
+     <dt>If <var>data</var> is a <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code>
 
      <dd>
       <p>Let <var>encoding</var> be the
-      <a class="external" href="http://www.w3.org/dom/#preferred-mime-name">preferred MIME name</a> of the
-      <a class="external" href="http://www.w3.org/dom/#concept-document-encoding" title="concept-document-encoding">character encoding</a>
+      <a class="external" href="http://www.w3.org/TR/dom/#preferred-mime-name">preferred MIME name</a> of the
+      <a class="external" href="http://www.w3.org/TR/dom/#concept-document-encoding" title="concept-document-encoding">character encoding</a>
       of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
       UTF-8.</p>
 
       <p>Let <var>mime type</var> be "<code>application/xml</code>" or
       "<code>text/html</code>" if
-      <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code> is an
-      <a class="external" href="http://www.w3.org/dom/#html-document">HTML document</a>, followed by
+      <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code> is an
+      <a class="external" href="http://www.w3.org/TR/dom/#html-document">HTML document</a>, followed by
       "<code>;charset=</code>", followed by <var>encoding</var>.</p>
 
       <p>Let the <var>transmittedData</var> be the result of getting
@@ -440,11 +440,11 @@ void <a href="#dom-BeaconHTTPMethod-beacon">beacon</a>(<a href="#BeaconHTTPMetho
       throws.</p> 
 
       <p class="note">In particular, if the document cannot be serialized an
-      "<code class="external"><a href="http://www.w3.org/dom/#invalidstateerror">InvalidStateError</a></code>" exception is
+      "<code class="external"><a href="http://www.w3.org/TR/dom/#invalidstateerror">InvalidStateError</a></code>" exception is
       thrown.</p>
 
       <p class="note">Subsequent changes to the
-      <code class="external"><a href="http://www.w3.org/dom/#document">Document</a></code> have no effect on what
+      <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code> have no effect on what
       is transferred.</p>
      </dd>
 
