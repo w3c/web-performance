@@ -249,12 +249,25 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <h3 id="sec-DOMHighResTimeStamp"><span class="secno">4.2 </span>The <code>DOMHighResTimeStamp</code> Type</h3>
 <p>
-	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a> type is used to store a time value measured relative to the 
+	The <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a>
+	type is used to store a time value measured relative to the
+	start of navigation of the document, or a time value that
+	represents a duration between
+	two <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamps</code></a>.
+</p>
+
+<div class="note"><div class="noteHeader">Note</div>
+<p>
+	The time value of the start of navigation of the document in
+	an attribute of
+	type <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a>
+	is equal to 0.  The same time value described with an attribute of
+	type <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMTimeStamp">DOMTimeStamp</a> is equal to
 	<a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart"><code>navigationStart</code></a> attribute of the 
 	<a href="http://www.w3.org/TR/navigation-timing/#performancetiming"><code>PerformanceTiming</code></a>
-	interface <a href='#NavigationTiming'>[NavigationTiming]</a>, the start of navigation of the document, or a time value that represents a duration
-	between two  <a href="#sec-DOMHighResTimeStamp"><code>DOMHighResTimeStamps</code></a>.
+	interface <a href='#NavigationTiming'>[NavigationTiming]</a>.
 </p>
+</div>
       
 <dl>
 	<dt>
