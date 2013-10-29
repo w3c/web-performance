@@ -268,7 +268,7 @@ If there is no callback with the given handle, then this function does nothing.<
 <div id="processingmodel" class="section">
 <h2>5. Processing Model</h2>
 Whenever a <a class="dfnref" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a>'s
-<a class="dfnref" href="http://www.w3.org/TR/page-visibility/#pv-hidden">hidden</a> attribute is false
+<a class="dfnref" href="http://www.w3.org/TR/page-visibility/#pv-hidden">hidden</a> attribute ([<a href='#ref-PageVisibility'>Page Visibility</a>]) is false
 and the <a class="dfnref" href="#dfn-animation-frame-request-callback-list">animation frame request callback list</a> is not empty, the user agent MUST
 regularly <a class="dfnref" href="http://www.w3.org/TR/html5/webappapis.html#queue-a-task">queue</a> a <a class="dfnref" href="http://www.w3.org/TR/html5/webappapis.html#concept-task">task</a> that
 <a class="dfnref" href="#dfn-sample-all-animations">samples all animations</a> for that
@@ -362,12 +362,19 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
    draft</a> of HTML5 is available at
    http://www.w3.org/html/wg/drafts/html/CR/.</dd>
 
+  <dt id="ref-PageVisibility">[PageVisibility]</dt>
+  <dd><cite><a href="http://www.w3.org/TR/2013/REC-page-visibility-20131029/">Page Visibility (Second Edition)</a></cite>.  Jatinder Mann, Editor. W3C
+  Recommendation, World Wide Web Consortium, October 2013.  Available
+  at http://www.w3.org/TR/2013/REC-page-visibility-20131029/. Latest version
+  is available at http://www.w3.org/TR/hr-time/</dd>
+
   <dt id="ref-RFC2119">[RFC2119]</dt>
   <dd><cite><a href="http://www.ietf.org/rfc/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
   S. Bradner.  IETF, March 1997.  Available at http://www.ietf.org/rfc/rfc2119.</dd>
 
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
+
   <dt id="ref-HighResolutionTime">[HighResolutionTime]</dt>
   <dd><cite><a href="http://www.w3.org/TR/2012/REC-hr-time-20121217/">High
   Resolution Time</a></cite>.  Jatinder Mann, Editor. W3C
