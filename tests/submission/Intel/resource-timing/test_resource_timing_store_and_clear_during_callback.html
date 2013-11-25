@@ -5,21 +5,54 @@
         <title>read and clear resource timing entry in onresourcetimingbufferfull callback</title>
         <script>
             var resource_timing_buffer_size = 1;
+            var resource_number = 3;
             var global_buffer = [];
+            var iframe;
+            var d;
+            var w;
+            var supportBufferControlInterface = false;
+
             function store_and_clear()
             {
-                var entry_list = performance.getEntriesByType('resource');
+                var entry_list = w.performance.getEntriesByType('resource');
                 for (var i = 0; i < entry_list.length; ++i)
                     global_buffer.push(entry_list[i]);
-                performance.clearResourceTimings();
+                w.performance.clearResourceTimings();
             }
 
-            var supportBufferControlInterface = false;
-            if (performance && performance.setResourceTimingBufferSize)
+            function onload_test()
             {
-                var supportBufferControlInterface = true;
-                performance.onresourcetimingbufferfull = store_and_clear;
-                performance.setResourceTimingBufferSize(resource_timing_buffer_size);
+                if (!supportBufferControlInterface || !performance.getEntriesByType)
+                {
+                    test_true(false, "Resource Timing and Performance Timeline interface required by this test are supported!");
+                    done();
+                    return;    
+                }
+
+                test_equals(w.performance.getEntriesByType('resource').length, 0, "No entry should be stored in resource timing buffer since it's cleared once an item arrived!");
+                test_equals(global_buffer.length, resource_number, resource_number + " resource timing entries should be moved to global buffer!");
+                done();
+            }
+
+            function setup_iframe() {
+                iframe = document.getElementById('frameContext');
+                iframe.onload = onload_test;
+                w = iframe.contentWindow;
+                d = iframe.contentWindow.document;
+                body = d.createElement('body');
+                d.getElementsByTagName('html')[0].appendChild(body);
+
+                if (performance && performance.setResourceTimingBufferSize)
+                {
+                    supportBufferControlInterface = true;
+                    w.performance.setResourceTimingBufferSize(resource_timing_buffer_size);
+                    w.performance.addEventListener('resourcetimingbufferfull', store_and_clear);
+                }
+
+                for (var i = 1; i <= resource_number; i++) {
+                    var image = d.createElement("img");
+                    image.src = "/webperf/tests/resources/generate_resource.php?type=image&id=" + i;
+                }
             }
         </script>
         <link rel="author" title="Intel" href="http://www.intel.com/" />
@@ -30,24 +63,12 @@
         <script>
             setup({ explicit_done: true });                
             test_namespace();
-            function onload_test()
-            {
-                if (!supportBufferControlInterface || !performance.getEntriesByType)
-                {
-                    test_true(false, "Resource Timing and Performance Timeline interface required by this test are supported!");
-                    done();
-                    return;    
-                }
-
-                test_equals(performance.getEntriesByType('resource').length, 0, "No entry should be stored in resource timing buffer since it's cleared once an item arrived!");
-                test_equals(global_buffer.length, 3, "3 resource timing entries should be moved to global buffer!");
-                done();
-            }
         </script>
     </head>
-    <body onload="onload_test();">
+    <body>
         <h1>Description</h1>
         <p>This test validates the behavior of read and clear operation in onresourcetimingbufferfull callback of resource timing.</p>
         <div id="log"></div>
+    <iframe id="frameContext" src="/webperf/tests/resources/inject_resource_test.html"></iframe>
     </body>
 </html>

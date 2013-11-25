@@ -21,6 +21,13 @@
         <script>
             setup({ explicit_done: true });            
             test_namespace();
+            if (performance && performance.clearResourceTimings) {
+                performance.clearResourceTimings();
+                for (var i = 1; i <= 3; i++) {
+                    var image = document.createElement("img");
+                    image.src = "/webperf/tests/resources/generate_resource.php?type=image&id=" + i;
+                }
+            }
 
             function onload_test()
             {
