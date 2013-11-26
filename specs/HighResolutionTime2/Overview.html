@@ -39,10 +39,8 @@
 <body class="draft">
 
 <div class="head">
-<hgroup>
 <h1>High Resolution Time Level 2</h1>
 <h2 class="no-num no-toc" id="editors-draft-oct-02-2013">Editor's Draft October 2, 2013</h2>
-</hgroup>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -118,7 +116,7 @@ notices. </p>
 	High Resolution Time Level 2 builds on the first version of <a href='#HighResolutionTime'>High Resolution Time</a> and includes:
 </p>
 <ul>
-<li>support for <code><a href="dom-worker-performance-now">performance.now()</a></code> in Web Workers.</li>
+<li>support for <code><a href="#dom-performance-now">performance.now()</a></code> in Web Workers.</li>
 </ul>
    
 <p>Publication as a Working Draft does not imply endorsement by the
@@ -143,10 +141,11 @@ cite this document as other than work in progress. </p>
 <!--begin-toc-->
 <ol class="toc">
   <li><a href="#introduction"><span class="secno">1
-  </span>Introduction</a></li>
+  </span>Introduction</a>
     <ol class="toc">
       <li><a href="#sec-examples"><span class="secno">1.1 </span>Examples</a></li>
     </ol>
+  </li>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
@@ -215,7 +214,7 @@ For certain tasks this definition of time may not be sufficient as it does not a
 <p>
 This specification does not propose changing the behavior of <code>Date.now()</code> as it is genuinely useful in determining the current value of the calendar time and has a long history of
 usage. The <a href="#domhighrestimestamp"><code>DOMHighResTimeStamp</code></a> type and the <a href="#dom-performance-now"><code>now</code></a> method of the 
-<a href="#performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
+<a href="#Performance"><code>Performance</code></a> interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
 </p>
 
 <h3 id="sec-examples"><span class="secno">1.1 </span>Examples</h3>
@@ -338,7 +337,7 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 <h3 id="sec-time-origin"><span class="secno">4.2 </span>Time Origin</h3>
 <p>
 	The <i id="time-origin">time origin</i> is the time value from which time is measured. The <i>time origin</i> must be equal to the time of the start of 
-  <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#navigate">navigation</a> of the current document.
+  <a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigation</a> of the current document.
 </p>
 
 <div class="note"><div class="noteHeader">Note</div>
@@ -399,9 +398,8 @@ partial interface <dfn id="Performance">Performance</dfn> {
   DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now()</a>;
 };
 
-[NoInterfaceObject]
-interface <dfn id="WorkerGlobalScope">WorkerPerformance</dfn> {
-  DOMHighResTimeStamp <a href="#dom-worker-performance-now" title="now">now()</a>;
+interface <dfn id="WorkerPerformance">WorkerPerformance</dfn> {
+  DOMHighResTimeStamp <a href="#dom-performance-now" title="now">now()</a>;
 };
 
 partial interface <dfn id="WorkerGlobalScope"><a href="http://www.w3.org/TR/2012/CR-workers-20120501/#the-workerglobalscope-common-interface">WorkerGlobalScope</a></dfn> {
@@ -436,7 +434,7 @@ partial interface <dfn id="SharedWorker">SharedWorker</dfn> {
 <div class="note"><div class="noteHeader">Note</div>
 <p>
   The value returned by <a href="#dom-worker-start" title="workerStart">workerStart</a> may be negative if a
-  <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope<a> already existed for the
+  <a href="http://www.w3.org/TR/workers/#sharedworkerglobalscope">SharedWorkerGlobalScope</a> already existed for the
   <a href="http://www.w3.org/TR/workers/#sharedworker">SharedWorker</a> prior to the document's
   <i><a href="#time-origin">time origin</a></i>.
 </p>
@@ -453,7 +451,7 @@ adjustments or system clock skew. The difference between any two chronologically
 <p>
 Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a 
 third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site. 
-Though the <a href="#dom-performance-now"><code>now</code></a> method of the <a href="#performance"><code>Performance</code></a> interface
+Though the <a href="#dom-performance-now"><code>now</code></a> method of the <a href="#Performance"><code>Performance</code></a> interface
 returns time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
 </p>
  
