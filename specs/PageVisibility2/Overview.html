@@ -297,7 +297,7 @@ interface <a href='#HTML5'>[HTML5]</a>, which this specification
 extends:
 </p>
 <pre class="idl">
-enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "offscreen", "unloaded" };
+enum <dfn id="VisibilityState">VisibilityState</dfn> { "hidden", "visible", "prerender", "unloaded" };
 
 partial interface <dfn id="document">Document</dfn> {
   readonly attribute boolean <a href="#dom-document-hidden" title="isHidden">hidden</a>;
@@ -308,8 +308,7 @@ partial interface <dfn id="document">Document</dfn> {
 
 <h4><code><dfn id="dom-document-hidden">hidden</dfn></code> attribute</h4>
 
-<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return true if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
-is not visible at all. The attribute <span class='rfc2119'>MUST</span> return false if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is at least partially visible on at least one screen.
+<p>On getting, the <a href="#dom-document-hidden"><code>hidden</code></a> attribute <span class='rfc2119'>MUST</span> return false if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is at least partially visible on at least one screen. The attribute <span class='rfc2119'>SHOULD</span> return true if the given <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a> is not visible at all.
 </p>
 
 <p>
@@ -331,6 +330,7 @@ is not minimized but is fully obscured by other applications.</p>
          <li>The User Agent is about to unload the page.</li>
          <li>The User Agent is about to traverse to a session history entry.</li>
 	 <li>The iFrame that is queried for this attribute is off the screen even though the page that contains the iframe is in the foreground and visible on the screen.</li>
+         <li>The document or one of its parent elements is styled so that it is hidden, such as with "display:none", "visibility:hidden", or "opacity:0".
          <li>The Operating System lock screen is shown.</li>
 	</ul> 
 	
@@ -351,13 +351,12 @@ one of the following <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>
 	<li><code>hidden</code>,</li>
 	<li><code>visible</code>,</li>
 	<li><code>prerender</code>,</li>
-    <li><code>offscreen</code>,</li>
-    <li><code>unloaded</code>.</li>
+        <li><code>unloaded</code>.</li>
 </ul> 
 
 
 <h5><code><dfn id="pv-page-hidden">hidden</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>MUST</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>  
+<p>On getting, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute <span class='rfc2119'>SHOULD</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-page-hidden"><code>hidden</code></a> if the <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>  
  is not visible at all on any screen.</p>
 
 <p>
@@ -378,6 +377,8 @@ is not minimized but is fully obscured by other applications.</p>
 		 <li>The User Agent is minimized.</li>
 		 <li>The User Agent is not minimized, but the page is on a background tab.</li>
 		 <li>The Operating System lock screen is shown.</li>
+                 <li>The iFrame that is queried for this attribute is off the screen even though the page that contains the iframe is in the foreground and visible on the screen.</li>
+                 <li>The document or one of its parent elements is styled so that it is hidden, such as with "display:none", "visibility:hidden", or "opacity:0".
 	</ul> 
 </div>
 
@@ -396,17 +397,6 @@ is not minimized but is fully obscured by other applications.</p>
 <a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
 is loaded in the prerender mode and is not yet visible. User Agent support of the <a href="#pv-prerender"><code>prerender</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
 </p>
-
-<h5><code><dfn id="pv-offscreen">offscreen</dfn></code></h5>
-<p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute MAY return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-offscreen"><code>offscreen</code></a> if the 
-<a href="http://www.w3.org/TR/html5/dom.html#document">Document</a>
-is loaded off-screen and is not visible. User Agent support of the <a href="#pv-offscreen"><code>offscreen</code></a> return value of the <a href="#dom-document-visibilitystate">visibilityState</a> attribute is optional.
-</p>
-
- <div class="note">
-<div class="noteHeader">Note</div>
-<p>For example, the <a href="#dom-document-visibilitystate"><code>visibilityState</code></a> attribute for a iFrame would return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-offscreen"><code>offscreen</code></a> if the iFrame is off screen e.g. below the fold, even though the page containing it is visible.</p>
-</div>
 
 <h5><code><dfn id="pv-unloaded">unloaded</dfn></code></h5>
 <p>On getting, the <a href="#dom-document-visibilitystate">visibilityState</a> attribute <span class='rfc2119'>SHOULD</span> return the <a href='http://www.w3.org/TR/WebIDL/#idl-DOMString'><code>DOMString</code></a> <a href="#pv-unloaded"><code>unloaded</code></a> if the User Agent is to 
