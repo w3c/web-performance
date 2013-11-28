@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-november-06-2013">Editor's Draft November 6, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-november-27-2013">Editor's Draft November 27, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -60,6 +60,9 @@
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Arvind Jain</span>, <span 
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
       class="org">Compuware Corp.</span>, &lt;<a
       class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
@@ -144,12 +147,7 @@ notices. </p>
 </p>
 
 <p>
-	This method can be used at any time to asynchronously transfer data to a web server, without the need to check whether the data transfer has succeeded or not.
-	On a mobile website, batching multiple beacons at the same time and not having to check whether the data has been submitted can result in improved battery life.
-</p>
-
-<p>
-    Additionally, analytics and diagnostics code will typically attempt to send data to a web server prior to the unloading
+    The specification addresses the needs of analytics and diagnostics code that typically attempt to send data to a web server prior to the unloading
     of the document. Sending the data any sooner may result in a missed opportunity to gather data. However,
     ensuring that the data has been sent during the unloading of a document is something that has 
     traditionally been difficult for developers.
@@ -163,8 +161,8 @@ notices. </p>
 </p>
 
 <p> 
-    In addition, there are other poor patterns used to ensure that data is submitted. One such pattern to delay
-    the unload in order to submit data is to create an Image element and set its <code>src</code> attribute within 
+    There are other techniques used to ensure that data is submitted. One such technique is to delay
+    the unload in order to submit data by creating an Image element and setting its <code>src</code> attribute within 
     the unload handler. As most user agents will delay the unload to complete the pending image load, data can be 
     submitted during the unload. Another technique is to create a no-op loop for several seconds within the 
     unload handler to delay the unload and submit data to a server.
@@ -194,20 +192,19 @@ function logData() {
 <p>
     Using the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method, the data will be transmitted asynchronously 
     to the web server when the User Agent has had an opportunity to do so, without delaying the unload or 
-    affecting the performance of the next navigation. As the User Agent takes the responsibility to transmit the 
-    data, the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method does not provide any return values indicating whether or not the transfer has succeeded.
+    affecting the performance of the next navigation.
 </p>
  
 <div class="example">
 <p>
-    The following example shows a theoretical analytics code that submits data to a server using the by
+    The following example shows a theoretical analytics code pattern that submits data to a server using the by
     using the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method.
 </p>
 <pre>
 window.addEventListener('unload', logData, false);
 
 function logData() {
-    return navigator.sendBeacon("/log", analyticsData, "POST");
+    return navigator.sendBeacon("/log", analyticsData);
 }
 </pre>
 </div>
@@ -270,16 +267,22 @@ title="">Foo</code>". </p>
   
 
 <pre class="idl">
-enum <dfn id="BeaconHTTPMethod">BeaconHTTPMethod</dfn> { "POST", "PUT", "GET" };
-
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    void <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>, optional <a href="#BeaconHTTPMethod" title="BeaconHTTPMethod">BeaconHTTPMethod</a> <var>method</var> = "GET");
+    void <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 
 <p>
-  The <a href="#sendBeacon"><code>sendBeacon</code></a> method MUST asynchronously transmit data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter using the <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> specified by the <a href="#method-parameter"><code>method</code></a> parameter. The User Agent SHOULD transmit data at the earliest available opportunity, however, to optimize for battery life and performance, the User Agent MAY defer transmitting data until a later time or batch transmitting data from multiple <a href="#sendBeacon"><code>sendBeacon</code></a> method calls. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+  The <a href="#sendBeacon"><code>sendBeacon</code></a> method MUST asynchronously transmit data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. The User Agent MUST use the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> to <a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">fetch</a> the <a href="#url-parameter"><code>url</code></a> for transmitting the data. All relevant cookie headers must be included in the request. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the responses. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
 </p>
+
+    <div class="note">
+    <div class="noteHeader">Note</div>
+    <p>
+        The User Agent should transmit the data at the earliest opportunity, but may prioritize the transmission of data lower compared to other network traffic.
+    </p>
+    </div>
+
 
 <div class="parameters"><h4 id="parameters">Parameters</h4>
     <h4 id="url-parameter"><code>url</code></h4>
@@ -309,29 +312,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
     </p>
     </div>
 
-    <h4 id="method-parameter"><code>method</code></h4>
-    <p>
-        The <code>method</code> parameter indicates the desired <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
-        used to transmit the data. As the <a href="#sendBeacon"><code>sendBeacon</code></a> method can only be used to transmit data, 
-        only the <code>POST</code>, <code>PUT</code>, and <code>GET</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP methods</a> of
-        transmission are supported. If the <code>method</code> parameter has not been specified, the User Agent MUST use the <code>GET</code>
-        <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP methods</a> of transmission. Same origin transmissions can use the 
-        <code>POST</code>, <code>PUT</code>, and <code>GET</code> methods. Cross-origin transmissions can only use the <code>POST</code> and <code>GET</code> methods.
-    </p>
-    <p>
-        The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> exception 
-        if the <code>method</code> parameter is not one of the following DOMStrings: <code>POST</code>, <code>PUT</code>, and <code>GET</code>.
-        The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#securityerror">SecurityError</a> exception 
-        if the <code>method</code> parameter is <code>PUT</code> for a cross-origin transmission.
-    </p>
-
-    <div class="note">
-    <div class="noteHeader">Note</div>
-    <p>
-        Throwing the SyntaxError exception for a unsupported method of transmission may not always be possible,
-        as the User Agent may not yet have received the Access-Control-Allow-Methods CORS header.
-    </p>
-    </div>
 </div>
 
 <div class="returnvalues"><h4 id="return-values">Return Value</h4>
@@ -343,7 +323,10 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
     <div class="noteHeader">Note</div>
     <p>
         This method does not provide any information whether the data transfer has succeeded or not, 
-        as the data transfer may occur after the page has unloaded.
+        as the data transfer may occur after the page has unloaded. To be still an effective mechanism for
+        developers, the User Agent should
+        make the best effort to transmit the data including making multiple attempts to transmit the
+        data in presence of transient network or server errors.
     </p>
     </div>
 </div>
@@ -592,7 +575,7 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
   <h2 id="acknowledgements">Acknowledgements</h2>
 
   <p>
-    We would like to sincerely thank Jonas Sicking, Ilya Grigorik, James Simonsen, William Chan, Arvind Jain, Jason Weber, Philippe Le Hegaret, Daniel Austin, Chase Douglas, and others who have helped refine this specification to acknowledge their contributions to this work.
+    We would like to sincerely thank Jonas Sicking, Ilya Grigorik, James Simonsen, William Chan, Jason Weber, Philippe Le Hegaret, Daniel Austin, Chase Douglas, and others who have helped refine this specification to acknowledge their contributions to this work.
   </p>
 
 
