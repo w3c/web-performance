@@ -212,7 +212,8 @@ cite this document as other than work in progress. </p>
     specification defines the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a>
     interface. This interface allows JavaScript mechanisms to provide client-side error data on the previous navigations of the document
     within the applications. As it is typically impossible to obtain error data through JavaScript mechanisms
-    during an aborted navigation due to the error, this data is persisted across sessions.
+    during an aborted navigation due to the error, this data is persisted across sessions. The interface also allows a web developer
+    to specify a error reporting url that the user agent can use to upload error data to in real time on a navigation error.
 </p>
 
 <p>
@@ -345,6 +346,8 @@ to unload</a> the previous document while <a href="http://www.w3.org/TR/html5/br
 
 <pre class="idl">
 partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+  void <a href='#dom-performance-enablenavigationerrorreporting' title='enableNavigationErrorReporting'>enableNavigationErrorReporting</a>(DOMString reportUrl);
+  void <a href='#dom-performance-disablenavigationerrorreporting' title='disableNavigationErrorReporting'>disableNavigationErrorReporting</a>();
   void <a href='#dom-performance-enablenavigationerrorlogging' title='enableNavigationErrorLogging'>enableNavigationErrorLogging</a>(boolean enable);
   void <a href='#dom-performance-getnavigationerrors' title='getnavigationerrors'>getNavigationErrors</a>(<a href='#GetNavigationErrorsCallback'>GetNavigationErrorsCallback</a> getnavigationerrorscallback);
   void <a href='#dom-performance-clearnavigationerrors' title='clearnavigationerrors'>clearNavigationErrors</a>();
@@ -356,6 +359,32 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
 </pre>
 
 <div class="methods">
+	<h4 id="dom-performance-enablenavigationerrorreporting"><code>enableNavigationErrorReporting</code> method</h4>
+	<p>The <code>enableNavigationErrorReporting</code> method, when invoked, enables reporting of future navigation errors for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <code>reportUrl</code> parameter. This setting must be persisted across sessions.</p>
+
+        <p> When a navigation to a url in the given origin fails, the user agent MUST <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <code>reportUrl</code>, with the synchronous flag not set, using HTTP method POST, with a Content-Type header field of application/json with an entity body consisting of the JSON stringification of the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> object corresponding to the failed navigation. The user agent must not follow redirects when fetching this and ignore the response.</p>
+
+		<div class="parameters">
+			<p><b>Parameters</b></p>
+                        in <code>reportUrl</code> type of DOMString
+                        <p> The <code>reportUrl</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
+                        where the error data is to be sent. The User Agent MUST throw the 
+                        <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#urlmismatcherror">URLMismatchError</a> exception 
+                        if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
+                        </p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+
+	<h4 id="dom-performance-disablenavigationerrorreporting"><code>disableNavigationErrorReporting</code> method</h4>
+	<p>The <code>disableNavigationErrorReporting</code> method, when invoked, disables reporting of navigation errors for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
+
+		<div class="parameters">
+			<p><b>No Parameters</b></p>
+			<p><b>No return value</b></p>
+			<p><b>No additional exceptions</b></p>
+		</div>
+
 	<h4 id="dom-performance-enablenavigationerrorlogging"><code>enableNavigationErrorLogging</code> method</h4>
 	<p>The <code>enableNavigationErrorLogging</code> method, when invoked, enables or disables logging of navigation errors, based on whether <code>enable</code> is <code>true</code>
         or <code>false</code>, respectively, for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
