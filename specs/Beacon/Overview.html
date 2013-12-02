@@ -384,15 +384,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
      <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#script's-referrer-source">script's referrer source</a>.
     </ol>
 
-   <li><p>If <var>method</var> is null, set <var>method</var> to the <code>GET</code> 
-    <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token.</p></li>
-
-   <li><p>If <var>method</var> does not match the <code>POST</code>, <code>PUT</code>, or <code>GET</code>
-   <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> tokens,
-   <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps.
-
 
    <li><p>Let <var title="">url</var> be a
    <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#url">URL</a> with character encoding UTF-8.
@@ -403,16 +394,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
    <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#urlmismatcherror">URLMismatchError</a></code>" exception and terminate
    these steps.
-
-  <li>
-      <p>
-        If <var>url</var> is not of the same <a href="#origin">origin</a> as <var>base</var>, and the 
-        <var>method</var> matches the <code>PUT</code> <a class="external" href="http://tools.ietf.org/html/rfc2616/#section-5.1.1">Method</a> token,
-        <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
-        "<code class="external"><a href="http://www.w3.org/TR/dom/#securityerror">SecurityError</a></code>" exception and terminate
-        these steps.       
-      </p>
-   </li>
 
    <li><p>If <var title="">data</var> is null, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
@@ -512,12 +493,12 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
        <p>
            If <var>url</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
             <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <var>URL</var>
-            from the <var>base origin</var> using the <var>method</var> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
+            from the <var>base origin</var> using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
             with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
         </p>
         <p>
             Otherwise, make a <a class="external" href="http://www.w3.org/TR/cors/#cross-origin-request">cross-origin request</a> to <var>URL</var>,
-            using the <var>method</var> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
+            using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
             with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
       </p>
    </li>
