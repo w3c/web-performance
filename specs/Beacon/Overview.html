@@ -279,7 +279,7 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
     <div class="note">
     <div class="noteHeader">Note</div>
     <p>
-        The User Agent should transmit the data at the earliest opportunity, but may prioritize the transmission of data lower compared to other network traffic. The User Agent should retry the request, even though it is a POST request, in case of network or server errors e.g. if it is not able to connect to the web server or the web server is busy.
+        The User Agent should transmit the data at the earliest opportunity, but may prioritize the transmission of data lower compared to other network traffic.
     </p>
     </div>
 
@@ -326,7 +326,7 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
         as the data transfer may occur after the page has unloaded. To be still an effective mechanism for
         developers, the User Agent should
         make the best effort to transmit the data including making multiple attempts to transmit the
-        data in presence of transient network or server errors.
+        data in presence of transient network or server errors, even though it uses POST to transmit the data.
     </p>
     </div>
 </div>
