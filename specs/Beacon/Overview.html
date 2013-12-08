@@ -338,11 +338,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
   </p>
 
   <ol>
-    <li>
-        Let the User Agent queue an asynchronous task that runs the following steps. These steps may be run
-        even after the document has unloaded. Return control flow back to script.
-    </li>
-    
     <li><p>Let <var title="">base</var> be null.</li>
 
    <li>
@@ -489,6 +484,11 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
 
     </dl>
 
+    <li>
+        Let the User Agent queue an asynchronous task that runs the following steps. These steps may be run
+        even after the document has unloaded. Return control flow back to script.
+    </li>
+    
    <li>
        <p>
            If <var>url</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
