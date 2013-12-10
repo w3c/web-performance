@@ -300,18 +300,8 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
         <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a>,
         DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
         The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> is <code>data</code> is null.
-        The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#quoataexceedederror">QuotaExceededError</a>
-        exception if the size of the <code>data</code> object being transmitted is greater than 10KBs.    
     </p>
     
-    <div class="ednote"><div class="ednoteHeader">Editorial note</div>
-    <p>
-        Based on the outcome of <i>ACTION 111: Determine appropriate size limit for beacon data based on current usage patterns</i>, the 10KB size limit may be adjusted. To block
-        size limit workarounds, like sending multiple smaller beacons rather than one large beacon, we may also consider whether to limit the number of beacons that can be sent per document or
-        the rate at which beacons are sent.
-    </p>
-    </div>
-
 </div>
 
 <div class="returnvalues"><h4 id="return-values">Return Value</h4>
@@ -394,7 +384,7 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.</p>
     
-   <li><p>If <var title="">data</var> is greater than 10KBs in size, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
+   <li><p>If the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#quotaexceedederror">QuotaExceededError</a></code>" exception and terminate
    these steps.</p>
 
