@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-december-09-2013">Editor's Draft December 09, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-11-2013">Editor's Draft December 11, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -306,14 +306,18 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
 
 <div class="returnvalues"><h4 id="return-values">Return Value</h4>
     <p>
-        The <a href="#sendBeacon"><code>sendBeacon</code></a> method does not provide a return value indicating whether the data transfer has succeeded. 
+        The <a href="#sendBeacon"><code>sendBeacon</code></a> method returns true if the user agent is able to successfully queue the data for transfer. Otherwise it returns false.
     </p>
 
     <div class="note">
     <div class="noteHeader">Note</div>
     <p>
-        This method does not provide any information whether the data transfer has succeeded or not, 
-        as the data transfer may occur after the page has unloaded. To be still an effective mechanism for
+        If the user agent limits the amount of data that can be queued to be sent using this API and the size of
+        <var title="">data</var> causes that limit to be exceeded, this method returns false. A return value of true
+        implies the browser has queued the data for transfer. But since the actual data
+        transfer happens asynchronously, this method does not provide any information whether the data transfer has
+        succeeded or not. The actual
+        data transfer may occur after the page has unloaded. To be still an effective mechanism for
         developers, the User Agent should
         make the best effort to transmit the data including making multiple attempts to transmit the
         data in presence of transient network or server errors, even though it uses POST to transmit the data.
@@ -384,9 +388,8 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.</p>
     
-   <li><p>If the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://www.w3.org/TR/dom/#quotaexceedederror">QuotaExceededError</a></code>" exception and terminate
-   these steps.</p>
+   <li><p>If the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, terminate
+   these steps and set the return value to false.</p>
 
    <li>
     <p>Otherwise, create the following temporary variable and then follow the rules below: let <var>encoding</var> be null, <var>mime type</var> be
@@ -476,7 +479,7 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
 
     <li>
         Let the User Agent queue an asynchronous task that runs the following steps. These steps may be run
-        even after the document has unloaded. Return control flow back to script.
+        even after the document has unloaded. Set the return value to true and give control flow back to script.
     </li>
     
    <li>
