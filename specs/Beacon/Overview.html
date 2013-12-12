@@ -204,7 +204,7 @@ function logData() {
 window.addEventListener('unload', logData, false);
 
 function logData() {
-    return navigator.sendBeacon("/log", analyticsData);
+    navigator.sendBeacon("/log", analyticsData);
 }
 </pre>
 </div>
@@ -268,7 +268,7 @@ title="">Foo</code>". </p>
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    void <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 

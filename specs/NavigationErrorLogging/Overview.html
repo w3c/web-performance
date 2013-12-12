@@ -43,7 +43,7 @@
 <div class="head">
 <hgroup>
 <h1>Navigation Error Logging</h1>
-<h2 class="no-num no-toc" id="editors-draft-nov-29-2013">Editor's Draft Nov 29, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-dec-11-2013">Editor's Draft Dec 11, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -362,7 +362,7 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
 	<h4 id="dom-performance-enablenavigationerrorreporting"><code>enableNavigationErrorReporting</code> method</h4>
 	<p>The <code>enableNavigationErrorReporting</code> method, when invoked, enables reporting of future navigation errors for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <code>reportUrl</code> parameter. This setting must be persisted across sessions.</p>
 
-        <p> When a navigation to a url in the given origin fails, the user agent MUST <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <code>reportUrl</code>, with the synchronous flag not set, using HTTP method POST, with a Content-Type header field of application/json with an entity body consisting of the JSON stringification of the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> object corresponding to the failed navigation. The user agent must not follow redirects when fetching this and ignore the response.</p>
+        <p> When a navigation to a url in the given origin fails, the user agent MUST <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <code>reportUrl</code>, with the synchronous flag not set, using HTTP method POST, with a Content-Type header field of application/json with an entity body consisting of the JSON stringification of the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> object corresponding to the failed navigation. The user agent MUST not follow redirects when fetching this and ignore the response. If the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> of <code>reportUrl</code> itself fails, the user agent MUST not retry <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetching</a> <code>reportUrl</code>.</p>
 
 		<div class="parameters">
 			<p><b>Parameters</b></p>
