@@ -41,7 +41,7 @@
 <div class="head">
 <hgroup>
 <h1>Navigation Timing 2</h1>
-<h2 class="no-num no-toc" id="editors-draft-october-2-2013">Editor's Draft October 2, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-11-2013">Editor's Draft December 11, 2013</h2>
 </hgroup>
 <dl>
   <dt>This version:</dt>
@@ -113,9 +113,11 @@ notices. </p>
    Domain</a>.
 
 <p>
- Navigation Timing 2 builds on the first version of <a href='#NavigationTiming'>Navigation Timing</a> and includes:
+ Navigation Timing 2 deprecates the first version of <a href='#NavigationTiming'>Navigation Timing</a> 
+ and includes the following changes:
 </p>
 <ul>
+<li><a href="#dom-window-performance">Performance</a> interface implements EventTarget;</li>
 <li>support for <a href="#PerformanceTimeline">Performance Timeline</a>;</li>
 <li>support for <a href="#HighResolutionTime">High Resolution Time</a>;</li>
 <li>timing information for <a href='#dom-performancenavigationtiming-linknegotiationstart'>link negotiation</a>.</li>
@@ -151,7 +153,8 @@ cite this document as other than work in progress. </p>
   <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Timing</a> 
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
-	  <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>PerformanceNavigationTiming</code> interface</a></li>
+      <li><a href="#sec-performance-interface"><span class="secno">4.2 </span> The <code>Performance</code> interface</a></li>
+	    <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.3 </span> The <code>PerformanceNavigationTiming</code> interface</a></li>
     </ol>
    </li>
     <li><a href="#process"><span class="secno">5 </span>Process</a> 
@@ -365,11 +368,25 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 <p>This section is non-normative.</p>
 
 <p>
-	This specification defines the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface 
-    to store and retrieve high resolution performance metric data related to the navigation of a document. 
+	This specification defines the <a href="#dom-window-performance">Performance</a> interface
+  to host performance related attributes and methods, and the 
+  <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface 
+  to store and retrieve high resolution performance metric data related to the navigation of a document. 
 </p>
 
-<h3 id="sec-PerformanceNavigationTiming"><span class="secno">4.2 </span> The <code>PerformanceNavigationTiming</code> interface</h3>
+<h3 id="sec-performance-interface"><span class="secno">4.2 </span> The <code><a href="#dom-window-performance">Performance</a> </code> interface</h3>
+<p>
+The <a href="#dom-window-performance">Performance</a> interface hosts performance related attributes and methods. 
+</p>
+
+<pre class="idl">interface <dfn id="performance">Performance</dfn> : EventTarget {};
+
+partial interface Window {
+  [Replaceable] readonly attribute <a href="#performance">Performance</a> <dfn id="dom-window-performance">performance</dfn>;
+};</pre>
+
+
+<h3 id="sec-PerformanceNavigationTiming"><span class="secno">4.3 </span> The <code>PerformanceNavigationTiming</code> interface</h3>
 <pre class="idl">interface <dfn id="performancenavigationtiming">PerformanceNavigationTiming</dfn> : <dfn><a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a></dfn> {
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventstart" title="unloadeventstart">unloadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-unloadeventend" title="unloadeventend">unloadEventEnd</a>;
