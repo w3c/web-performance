@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-december-11-2013">Editor's Draft December 11, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-14-2013">Editor's Draft December 14, 2013</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -268,7 +268,7 @@ title="">Foo</code>". </p>
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
 };
 </pre>
 
@@ -297,7 +297,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
     <p>
         The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
         <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
-        <a class="external" href="http://dev.w3.org/2006/webapi/DOM4Core/#document">Document</a>,
         DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
         The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> is <code>data</code> is null.
     </p>
@@ -412,37 +411,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
       <p>Let <var>transmittedData</var> be the raw data represented by <var>data</var>.</p>
      </dd>
 
-
-     <dt>If <var>data</var> is a <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code>
-
-     <dd>
-      <p>Let <var>encoding</var> be the
-      preferred MIME name of the
-      <a class="external" href="http://www.w3.org/TR/dom/#concept-document-encoding" title="concept-document-encoding">character encoding</a>
-      of <var>data</var>. If <var>encoding</var> is UTF-16 change it to
-      UTF-8.</p>
-
-      <p>Let <var>mime type</var> be "<code>application/xml</code>" or
-      "<code>text/html</code>" if
-      <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code> is an
-      <a class="external" href="http://www.w3.org/TR/dom/#html-document">HTML document</a>, followed by
-      "<code>;charset=</code>", followed by <var>encoding</var>.</p>
-
-      <p>Let the <var>transmittedData</var> be the result of getting
-      the <code>innerHTML</code>
-      attribute on <var>data</var>
-      <a class="external" href="http://www.w3.org/TR/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
-      and encoded as <var>encoding</var>. Re-throw any exception this
-      throws.</p> 
-
-      <p class="note">In particular, if the document cannot be serialized an
-      "<code class="external"><a href="http://www.w3.org/TR/dom/#invalidstateerror">InvalidStateError</a></code>" exception is
-      thrown.</p>
-
-      <p class="note">Subsequent changes to the
-      <code class="external"><a href="http://www.w3.org/TR/dom/#document">Document</a></code> have no effect on what
-      is transferred.</p>
-     </dd>
 
      <dt>If <var>data</var> is a string</dt>
 
