@@ -39,7 +39,7 @@
 <div class="head">
 <h1>Resource Timing</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-cctober-2-2013">Editor's Draft October 2, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-december-13-2013">Editor's Draft December 13, 2013</h2>
 <dl>
   <dt>This version:</dt>
 		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
@@ -48,7 +48,6 @@
   <dt>Latest Editor's Draft:</dt>
 		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Previous versions:</dt>
-		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/50aaeb896837/specs/ResourceTiming/Overview.html</a></dd>
 		<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/9f30b23d0d99/specs/ResourceTiming/Overview.html</a></dd>
   <dt>Editors:</dt>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
@@ -181,7 +180,7 @@ cite this document as other than work in progress. </p>
 User latency is an important quality benchmark for Web Applications. While
 JavaScript-based mechanisms can provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
-unable to provide a complete end-to-end latency picture. While Navigation Timing <a href="#NavigationTiming">[NavigationTiming]</a> addresses
+unable to provide a complete end-to-end latency picture. While Navigation Timing 2 <a href="#NavigationTiming">[NavigationTiming2]</a> addresses
 part of the problem by providing timing information associated with a
 navigation, this document introduces the <a href="#resource-timing">ResourceTiming</a>
 interface to allow JavaScript mechanisms to collect complete timing
@@ -642,7 +641,7 @@ application caches</a> or from local resources.</p>
 <h3 id="extensions-performance-interface"><span class="secno">4.4 </span>Extensions to the <code>Performance</code> Interface</h3>
 
 <pre class="idl">
-partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> {
+partial interface <a href="http://www.w3.org/TR/navigation-timing-2/#performance">Performance</a> {
   void <a href='#dom-performance-clearresourcetimings' title='clearResourceTimings'>clearResourceTimings</a>();
   void <a href='#dom-performance-setresourcetimingbuffersize' title='setResourceTimingBufferSize'>setResourceTimingBufferSize</a>(unsigned long maxSize);
 
@@ -682,7 +681,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
   <p>
     The event handler for the <code>resourcetimingbufferfull</code> event. Immediately after the buffer used to store the list of <a href="#performanceresourcetiming">PerformanceResourceTiming</a>
     resources becomes full, the User Agent must fire a simple event named <code>resourcetimingbufferfull</code> that bubbles, isn't cancelable, has no default action, at the
-    <a href="http://www.w3.org/TR/navigation-timing/#performance">Performance</a> object. 
+    <a href="http://www.w3.org/TR/navigation-timing-2/#performance">Performance</a> object. 
   </p>
 </div>
 
@@ -1023,8 +1022,8 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dt>[<a id="SVG">SVG</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, August 2011. This version of the SVG specification Recommendation is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
 
-   <dt>[<a id="NavigationTiming">Navigation Timing</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/CR-navigation-timing-20120313/'>Navigation Timing</a></cite>, Zhiheng Wang, Editor. World Wide Web Consortium, March 2012. This version of the Navigation Timing specification is available from http://www.w3.org/TR/2012/CR-navigation-timing-20120313/. The <a href='http://www.w3.org/TR/navigation-timing/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing/.</dd>
+   <dt>[<a id="NavigationTiming">Navigation Timing 2</a>]</dt>
+   <dd><cite><a href='http://www.w3.org/TR/2013/WD-navigation-timing-2-20130131/'>Navigation Timing 2</a></cite>, Jatinder Mann and Arvind Jain, Editors. World Wide Web Consortium, January 2013. This version of the Navigation Timing 2 specification is available from http://www.w3.org/TR/2013/WD-navigation-timing-2-20130131/. The <a href='http://www.w3.org/TR/navigation-timing-2/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing-2/.</dd>
 
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
