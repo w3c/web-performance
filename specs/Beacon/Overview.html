@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-december-14-2013">Editor's Draft December 14, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-january-7-2014">Editor's Draft January 7, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -268,29 +268,23 @@ title="">Foo</code>". </p>
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var>);
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>) <var>data</var>);
+};
+
+partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>) <var>data</var>);
 };
 </pre>
 
 <p>
-  The <a href="#sendBeacon"><code>sendBeacon</code></a> method MUST asynchronously transmit data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. The User Agent MUST use the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> to <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> the <a href="#url-parameter"><code>url</code></a> for transmitting the data. All relevant cookie headers MUST be included in the request. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+  The <a href="#sendBeacon"><code>sendBeacon</code></a> method MUST asynchronously transmit data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. The User Agent MUST use the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> to <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> the <a href="#url-parameter"><code>url</code></a> for transmitting the data. All relevant cookie headers MUST be included in the request. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data. To avoid the target confusion security risk, the User Agent MUST NOT display HTTP authorization prompts as a result of a <a href="#sendBeacon"><code>sendBeacon</code></a> method call.
 </p>
-
-    <div class="note">
-    <div class="noteHeader">Note</div>
-    <p>
-        The User Agent should transmit the data at the earliest opportunity, but may prioritize the transmission of data lower compared to other network traffic.
-    </p>
-    </div>
-
 
 <div class="parameters"><h4 id="parameters">Parameters</h4>
     <h4 id="url-parameter"><code>url</code></h4>
     <p>
         The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
-        where the data is to be transmitted. The User Agent MUST throw the 
-        <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#urlmismatcherror">URLMismatchError</a> exception 
-        if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
+        where the data is to be transmitted.
     </p>
 
     <h4 id="data-parameter"><code>data</code></h4>
@@ -298,7 +292,6 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
         The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
         <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
         DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
-        The User Agent MUST throw the <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror">SyntaxError</a> is <code>data</code> is null.
     </p>
     
 </div>
@@ -311,9 +304,9 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
     <div class="note">
     <div class="noteHeader">Note</div>
     <p>
-        If the user agent limits the amount of data that can be queued to be sent using this API and the size of
+        If the User Agent limits the amount of data that can be queued to be sent using this API and the size of
         <var title="">data</var> causes that limit to be exceeded, this method returns false. A return value of true
-        implies the browser has queued the data for transfer. But since the actual data
+        implies the browser has queued the data for transfer. However, since the actual data
         transfer happens asynchronously, this method does not provide any information whether the data transfer has
         succeeded or not. The actual
         data transfer may occur after the page has unloaded. To be still an effective mechanism for
@@ -380,12 +373,8 @@ partial interface <dfn id="Navigator">Navigator</dfn> {
    <var title="">url</var> relative to <var title="">base</var>. If the algorithm
    returns an error,
    <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
-   "<code class="external"><a href="http://www.w3.org/TR/dom/#urlmismatcherror">URLMismatchError</a></code>" exception and terminate
-   these steps.
-
-   <li><p>If <var title="">data</var> is null, <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
-   these steps.</p>
+   these steps.
     
    <li><p>If the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, terminate
    these steps and set the return value to false.</p>
