@@ -13,7 +13,6 @@
             if (performance && performance.setResourceTimingBufferSize)
             {
                 supportBufferControlInterface = true;
-                performance.onresourcetimingbufferfull = buffer_full_call_back;
                 performance.setResourceTimingBufferSize(2);
             }
         </script>
@@ -24,9 +23,6 @@
         <script src="/webperf/tests/resources/webperftestharness.js"></script>
         <script>
             setup({ explicit_done: true });
-            test_namespace();
-            if (!supportBufferControlInterface)
-                test_true(false, "performance.setResourceTimingBufferSize() interface is supported!");
 
             function onload_test()
             {
@@ -38,6 +34,20 @@
     <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the functionality of onresourcetimingbufferfull in resource timing.</p>
+        <script>
+            test_namespace();
+            if (!supportBufferControlInterface)
+                test_true(false, "performance.setResourceTimingBufferSize() interface is supported!");
+
+            if (performance && performance.clearResourceTimings) {
+                performance.clearResourceTimings();
+                performance.addEventListener("resourcetimingbufferfull", buffer_full_call_back);
+                for (var i = 1; i <= 3; i++) {
+                    var image = document.createElement("img");
+                    image.src = "/webperf/tests/resources/generate_resource.php?type=image&id=" + i;
+                }
+            }
+        </script>
         <div id="log"></div>
     </body>
 </html>
