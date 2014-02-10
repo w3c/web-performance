@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
@@ -41,17 +41,15 @@
 <body class="draft">
 
 <div class="head">
-<hgroup>
 <h1>Navigation Error Logging</h1>
 <h2 class="no-num no-toc" id="editors-draft-dec-11-2013">Editor's Draft Dec 11, 2013</h2>
-</hgroup>
 <dl>
   <dt>This version:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html</a></dd>
-  <dt>Latest version:</dt>
+  <dt>Latest published version:</dt>
     <dd><a
-      href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html</a></dd>
+      href="http://www.w3.org/TR/navigation-error-logging/">http://www.w3.org/TR/navigation-error-logging/</a></dd>
   <dt>Latest Editor's Draft:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html</a></dd>
@@ -152,7 +150,7 @@ cite this document as other than work in progress. </p>
       <li><a href="#monotonic-clock"><span class="secno">4.4 </span>Monotonic Clock</a></li>
     </ol>
    </li>
-  <li><a href="#privacy"><span class="secno">5 </span>Privacy and Security</a>
+  <li><a href="#privacy-security"><span class="secno">5 </span>Privacy and Security</a>
   </li>
   <li><a href="#references"><span class="secno">6 </span>References</a>
   </li>
@@ -187,13 +185,13 @@ cite this document as other than work in progress. </p>
     </p>
     <pre>
         HTTP/1. 1 200 OK
-        Date: Thu, 24 Jan 2013 05:46:54 GMT
+        Date: Thu, 24 Jan 2015 05:46:54 GMT
         Content-Length: 2291
         Content-Type: text/html
     </pre>
     <p>
         In this example, the seventh character of the first response, incorrectly has a space
-        (e.g., HTTP/1. 1 should be HTTP/1.1). When the server sends this response, this causes
+        (e.g., <code>HTTP/1. 1</code> should be <code>HTTP/1.1</code>). When the server sends this response, this causes
         strict format validation issues at the CDN near the user to fail to process the 
         request. So while the server sees a 200 OK HTTP response, the end user actually sees
         a 500 Server Error HTTP response. 
@@ -230,7 +228,7 @@ cite this document as other than work in progress. </p>
   &lt;body onload="init()"&gt;
     &lt;script&gt;
        function onNavigationErrorsReceived(errorList) {
-           for (i = 0; i < errorList.length; i++)
+           for (i = 0; i &lt; errorList.length; i++)
            {
               if (window.console) console.log("Document: "                + errorList[i].name + "\n" +
                                               "Error Type: "              + errorList[i].errorType + "\n" +
@@ -314,8 +312,6 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 enum <dfn id="NavigationErrorType">NavigationErrorType</dfn> { "dns", "tcp", "ssl", "http", "abandoned" };
 </pre>
 
-<p>
-
 <h4><code><dfn id="dom-navigationerrorentry-name">name</dfn></code> attribute</h4>
 <p>
     The <code id="name-attribute">name</code> attribute MUST return the <a href="http://www.w3.org/TR/2011/WD-html5-20110525/dom.html#the-document-s-current-address">current address</a>
@@ -324,14 +320,14 @@ enum <dfn id="NavigationErrorType">NavigationErrorType</dfn> { "dns", "tcp", "ss
     
 <h4><code><dfn id="dom-navigationerrorentry-starttime">startTime</dfn></code> attribute</h4>
 <p>
-    The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a> 
+    The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a> 
 	with the time immediately after the user agent finishes <a
 href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prompting
 to unload</a> the previous document while <a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigating</a> to the document that resulted in an error.
 
 <h4><code><dfn id="dom-navigationerrorentry-duration">duration</dfn></code> attribute</h4>
 <p>
-    The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">DOMTimeStamp</a>
+    The <code id="duration-attribute">duration</code> attribute MUST return a <a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">DOMTimeStamp</a>
 	equal to the difference between the time immediately after the User Agent logs the occurrence of the error and <a href="#dom-navigationerrorentry-starttime">startTime</a>.
 </p>
 
@@ -360,24 +356,24 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
 
 <div class="methods">
 	<h4 id="dom-performance-enablenavigationerrorreporting"><code>enableNavigationErrorReporting</code> method</h4>
-	<p>The <code>enableNavigationErrorReporting</code> method, when invoked, enables reporting of future navigation errors for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <code>reportUrl</code> parameter. This setting must be persisted across sessions.</p>
+	<p>The <code>enableNavigationErrorReporting</code> method, when invoked, enables reporting of future navigation errors for the <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> of the current document to the resolved <a href="http://www.w3.org/TR/html51/infrastructure.html#resolve-a-url">URL</a> provided by the <code>reportUrl</code> parameter. This setting must be persisted across sessions.</p>
 
         <p> When a navigation to a url in the given origin fails, the user agent MUST <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <code>reportUrl</code>, with the synchronous flag not set, using HTTP method POST, with a Content-Type header field of application/json with an entity body consisting of the JSON stringification of the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> object corresponding to the failed navigation. The user agent MUST not follow redirects when fetching this and ignore the response. If the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> of <code>reportUrl</code> itself fails, the user agent MUST not retry <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetching</a> <code>reportUrl</code>.</p>
 
 		<div class="parameters">
 			<p><b>Parameters</b></p>
                         in <code>reportUrl</code> type of DOMString
-                        <p> The <code>reportUrl</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
+                        <p> The <code>reportUrl</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html51/infrastructure.html#resolve-a-url">URL</a>
                         where the error data is to be sent. The User Agent MUST throw the 
-                        <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#urlmismatcherror">URLMismatchError</a> exception 
-                        if the <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> cannot be resolved.
+                        <a href="http://www.w3.org/TR/dom/#urlmismatcherror">URLMismatchError</a> exception 
+                        if the <a href="http://www.w3.org/TR/html51/infrastructure.html#resolve-a-url">URL</a> cannot be resolved.
                         </p>
 			<p><b>No return value</b></p>
 			<p><b>No additional exceptions</b></p>
 		</div>
 
 	<h4 id="dom-performance-disablenavigationerrorreporting"><code>disableNavigationErrorReporting</code> method</h4>
-	<p>The <code>disableNavigationErrorReporting</code> method, when invoked, disables reporting of navigation errors for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
+	<p>The <code>disableNavigationErrorReporting</code> method, when invoked, disables reporting of navigation errors for the <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
 
 		<div class="parameters">
 			<p><b>No Parameters</b></p>
@@ -387,10 +383,10 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
 
 	<h4 id="dom-performance-enablenavigationerrorlogging"><code>enableNavigationErrorLogging</code> method</h4>
 	<p>The <code>enableNavigationErrorLogging</code> method, when invoked, enables or disables logging of navigation errors, based on whether <code>enable</code> is <code>true</code>
-        or <code>false</code>, respectively, for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
+        or <code>false</code>, respectively, for the <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> of the current document. This setting must be persisted across sessions.</p>
 
         <p>The user agent should limit the total number of <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects stored for a given 
-        <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a>. A limit of 150 entries is recommended.</p>
+        <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a>. A limit of 150 entries is recommended.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			in <code>enable</code> type of boolean
@@ -404,7 +400,7 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
     <h4 id="dom-performance-getnavigationerrors"><code>getNavigationErrors</code> method</h4>
 	<p>The <code>getNavigationErrors</code> method calls back the provided callback with a 
 		<a href="#navigationerrorentrylist"><code>NavigationErrorEntryList</code></a> object that contains a copy of all <a href="#sec-navigationerrorentry"><code>NavigationErrorEntry</code></a> objects
-                for the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> of the current document in chronological order.
+                for the <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> of the current document in chronological order.
     </p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
@@ -438,9 +434,9 @@ recorded timing attributes must never be negative.
 
 <p>The <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface 
 exposes timing and other information for an error that has occurred in the previous navigations to the web page.
-Access to the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface is limited to the <a href="http://www.w3.org/TR/html5/origin-0.html#origin">same origin</a>.
+Access to the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> interface is limited to the <a href="http://www.w3.org/TR/html51/browsers.html#origin">same origin</a>.
 </p>
-<p>The user agent mechanisms used to delete private data such as history or cookies for a given <a href="http://www.w3.org/TR/html5/origin-0.html#origin">origin</a> or as a whole should also delete the corresponding <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects.
+<p>The user agent mechanisms used to delete private data such as history or cookies for a given <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> or as a whole should also delete the corresponding <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> objects.
 
 <h2 id="references"><span class="secno">6 </span>References</h2>
 
@@ -464,8 +460,17 @@ Access to the <a href="#sec-navigationerrorentry">NavigationErrorEntry</a> inter
 	Edition. ECMA International, Standard
 	ECMA-262, June 2011. This version of the ECMAScript
 	Language is available from <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a>.
-    </dd><dt>[<a id="HTML5">HTML5</a>]</dt>
-    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, December 2012. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html5/'>http://www.w3.org/TR/html5/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/CR/'>latest editor's draft</a> of HTML5 is available at http://www.w3.org/html/wg/drafts/html/CR/.</dd>
+    </dd>
+    <dt>[<a id="DOM4">W3C DOM4</a>]</dt>
+    <dd>
+     <cite><a href="http://www.w3.org/TR/dom/">W3C DOM4</a></cite>, Anne van Kesteren, et al., Editors. World
+     Wide Web Consortium, 4 February 2014. This version of the W3C DOM4 is
+     http://www.w3.org/TR/dom/. The <a class="normative" href="http://www.w3.org/TR/dom/">latest version of
+     W3C DOM4</a> is available at
+     http://www.w3.org/TR/dom/.
+    </dd>
+    <dt>[<a id="HTML5">HTML5</a>]</dt>
+    <dd><cite><a href='http://www.w3.org/TR/html51/'>HTML 5.1</a></cite>, Robin Berjon et al., Editors. World Wide Web Consortium, February 2014. This version of the HTML5 is available from <a href='http://www.w3.org/TR/html51/'>http://www.w3.org/TR/html51/</a>. The <a href='http://www.w3.org/html/wg/drafts/html/master/'>latest editor's draft</a> of HTML 5.1 is available at http://www.w3.org/html/wg/drafts/html/master/.</dd>
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 </dl>
