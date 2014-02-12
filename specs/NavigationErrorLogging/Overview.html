@@ -54,15 +54,15 @@
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationErrorLogging/Overview.html</a></dd>
   <dt>Editors:</dt>
-  <dd class="vcard"><span class="fn">Tobin Titus</span>, <span
-      class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:tobint@microsoft.com">tobint@microsoft.com</a>&gt; </dd>
   <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
       class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
       class="org">Compuware Corp.</span>, &lt;<a
       class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt;</dd>
+   <dd class="vcard"><span class="fn">Tobin Titus</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:tobint@microsoft.com">tobint@microsoft.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; <i>(Until February 2014)</i></dd>
@@ -223,19 +223,22 @@ cite this document as other than work in progress. </p>
   &lt;/head&gt;
   &lt;body onload="init()"&gt;
     &lt;script&gt;
-       function onNavigationErrorsReceived(errorList) {
-           for (i = 0; i &lt; errorList.length; i++)
-           {
-              if (window.console) console.log("Document: "                + errorList[i].name + "\n" +
-                                              "Error Type: "              + errorList[i].errorType + "\n" +
-                                              "Time of Error (UTC): "     + new Date(errorList[i].startTime) + "\n" +
-                                              "Duration: "                + errorList[i].duration);
-           }
-       }
-
        function init() 
        {
-           window.performance.getNavigationErrors(onNavigationErrorsReceived);
+           var p = window.performance.getNavigationErrors();
+           p.then(function (errorList) {
+              // this is the "resolve" side of the Promise
+              for (i = 0; i &lt; errorList.length; i++)
+              {
+                  if (window.console) console.log("Document: "                + errorList[i].name + "\n" +
+                                                  "Error Type: "              + errorList[i].errorType + "\n" +
+                                                  "Time of Error (UTC): "     + new Date(errorList[i].startTime) + "\n" +
+                                                  "Duration: "                + errorList[i].duration);
+              }
+           }, function (error) {
+                // there was some system error while fetching the list of nav errors
+                // i.e., this is the "reject" side of the Promise
+           });
        }
     &lt;/script&gt;
   &lt;/body&gt;
@@ -341,7 +344,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing/#performance">
   void <a href='#dom-performance-enablenavigationerrorreporting' title='enableNavigationErrorReporting'>enableNavigationErrorReporting</a>(DOMString reportUrl);
   void <a href='#dom-performance-disablenavigationerrorreporting' title='disableNavigationErrorReporting'>disableNavigationErrorReporting</a>();
   void <a href='#dom-performance-enablenavigationerrorlogging' title='enableNavigationErrorLogging'>enableNavigationErrorLogging</a>(boolean enable);
-  void <a href='#dom-performance-getnavigationerrors' title='getnavigationerrors'>getNavigationErrors</a>(<a href='#GetNavigationErrorsCallback'>GetNavigationErrorsCallback</a> getnavigationerrorscallback);
+  Promise <a href='#dom-performance-getnavigationerrors' title='getnavigationerrors'>getNavigationErrors</a>();
   void <a href='#dom-performance-clearnavigationerrors' title='clearnavigationerrors'>clearNavigationErrors</a>();
 
   typedef sequence &lt;NavigationErrorEntry&gt; <b><dfn id='navigationerrorentrylist'>NavigationErrorEntryList</dfn></b>;
@@ -394,14 +397,18 @@ callback <dfn id="GetNavigationErrorsCallback">GetNavigationErrorsCallback</dfn>
 
 <div class="methods">
     <h4 id="dom-performance-getnavigationerrors"><code>getNavigationErrors</code> method</h4>
-	<p>The <code>getNavigationErrors</code> method calls back the provided callback with a 
-		<a href="#navigationerrorentrylist"><code>NavigationErrorEntryList</code></a> object that contains a copy of all <a href="#sec-navigationerrorentry"><code>NavigationErrorEntry</code></a> objects
+      <ol>
+        <li>Let <i>promise</i> be a newly-created <code>Promise</code>.
+        <li>Let <i>errorList</i> be the <a href="#navigationerrorentrylist"><code>NavigationErrorEntryList</code></a> object that contains a copy of all <a href="#sec-navigationerrorentry"><code>NavigationErrorEntry</code></a> objects
                 for the <a href="http://www.w3.org/TR/html51/browsers.html#origin">origin</a> of the current document in chronological order.
-    </p>
+        <li>If <i>errorList</i> is created successfully, resolve <i>promise</i> with <i>errorList</i>.
+        <li>If <i>errorList</i> cannot be created, reject <i>promise</i> with an Error instance explaining the failure.
+        <li>Return <i>promise</i>.
+      </ol>
 		<div class="parameters">
-			<p><b>Parameters</b></p>
-				in <code>getnavigationerrorscallback</code> type of <a href="#GetNavigationErrorsCallback">GetNavigationErrorsCallback</a>.
-			<p><b>No return value</b></p>
+			<p><b>No Parameters</b></p>
+			<p><b>Return value</b></p>
+				A <code>Promise</code> object.
 			<p><b>No additional exceptions</b></p>
 		</div>
 </div>
