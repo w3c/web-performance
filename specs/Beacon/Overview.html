@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-11-2014">Editor's Draft February 11, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-february-12-2014">Editor's Draft February 12, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -57,15 +57,9 @@
       href="http://www.w3.org/TR/beacon/">http://www.w3.org/TR/beacon/</a></dd>
 
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Tobin Titus</span>, <span
-      class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:tobint@microsoft.com">tobint@microsoft.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Arvind Jain</span>, <span 
       class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
-    <dd class="vcard"><span class="fn">Alois Reitbauer</span>, <span
-      class="org">Compuware Corp.</span>, &lt;<a
-      class="email" href="mailto:alois.reitbauer@compuware.com">alois.reitbauer@compuware.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
       class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; 
@@ -336,20 +330,19 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#document-environment">document environment</a>, run these steps:
 
     <ol>
-     <li><p>If <a class="external" href="http://www.w3.org/TR/html5/dom.html#document">document</a>
+     <li><p>If the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry settings object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#responsible-document">responsible document</a>
      is not <a class="external" href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active</a>,
      <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> an
      "<code class="external"><a href="http://www.w3.org/TR/dom/#invalidstateerror">InvalidStateError</a></code>" exception and
      terminate the overall set of steps.
 
-     <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#document-base-url">document base URL</a> of document.
+     <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
 
-     <li><p>Set source origin to the
-     <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a> of
-     document otherwise.
+     <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+     <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
 
-     <li><p>Set referrer source to document.
+     <li><p>Set referrer source to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-referrer-source">API referrer source's</a> URL.
     </ol>
 
    <li>
@@ -358,15 +351,13 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#worker-environment">worker environment</a>, run these steps:
 
     <ol>
-     <li><p>Set <var title="">base</var> to the
-     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#script's-base-url">script's base URL</a>.
+     <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
 
-     <li><p>Set source origin to the
-     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#concept-script" title="concept-script">script</a>'s
+     <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
 
-     <li><p>Set referrer source to the
-     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#script's-referrer-source">script's referrer source</a>.
+     <li><p>Set referrer source to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-referrer-source">API referrer source</a>.
     </ol>
 
 
