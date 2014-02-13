@@ -266,11 +266,11 @@ title="">Foo</code>". </p>
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>) <var>data</var>);
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
 };
 
 partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>) <var>data</var>);
+    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
 };
 </pre>
 
@@ -371,7 +371,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
     
-   <li><p>If the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, terminate
+   <li><p>If <var>data</var> is not null and if the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, terminate
    these steps and set the return value to false.</p>
 
    <li>
