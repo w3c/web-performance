@@ -181,7 +181,7 @@ window.addEventListener('unload', logData, false);
 
 function logData() {
     var client = new XMLHttpRequest();
-    client.open("POST", "/log", false); // third paramater indicates sync xhr
+    client.open("POST", "/log", false); // third parameter indicates sync xhr
     client.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
     client.send(analyticsData);
 }
@@ -318,47 +318,16 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 <h3 id="sec-processing-model"><span class="secno">4.3 </span>Processing Model</h3>
 
   <p>
-      On calling the <a href="#dom-BeaconHTTPMethod-sendBeacon">sendBeacon</a> method, the following steps must be run:
+      On calling the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method, the following steps must be run:
   </p>
 
   <ol>
-    <li><p>Let <var title="">base</var> be null.</li>
-
-   <li>
-    <p>If the
-    <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#document-environment">document environment</a>, run these steps:
-
-    <ol>
-     <li><p>If the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry settings object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#responsible-document">responsible document</a>
-     is not <a class="external" href="http://www.w3.org/TR/html5/browsers.html#fully-active">fully active</a>,
-     <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> an
-     "<code class="external"><a href="http://www.w3.org/TR/dom/#invalidstateerror">InvalidStateError</a></code>" exception and
-     terminate the overall set of steps.
-
-     <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
 
-     <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
 
-     <li><p>Set referrer source to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-referrer-source">API referrer source's</a> URL.
-    </ol>
-
-   <li>
-    <p>If the
-    <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#javascript-global-environment">JavaScript global environment</a> is a
-    <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#worker-environment">worker environment</a>, run these steps:
-
-    <ol>
-     <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
-     <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
-
-     <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
-     <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
-
-     <li><p>Set referrer source to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a> <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-referrer-source">API referrer source</a>.
-    </ol>
 
 
    <li><p>Let <var title="">url</var> be a
@@ -430,19 +399,19 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     </dl>
 
     <li>
-        Let the User Agent queue an asynchronous task that runs the following steps. These steps may be run
-        even after the document has unloaded. Set the return value to true and give control flow back to script.
+        Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
+        even after the document has unloaded.
     </li>
     
    <li>
        <p>
            If <var>url</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
-            <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <var>URL</var>
+            <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <var>url</var>
             from the <var>base origin</var> using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
             with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
         </p>
         <p>
-            Otherwise, make a <a class="external" href="http://www.w3.org/TR/cors/#cross-origin-request">cross-origin request</a> to <var>URL</var>,
+            Otherwise, make a <a class="external" href="http://www.w3.org/TR/cors/#cross-origin-request">cross-origin request</a> to <var>url</var>,
             using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
             with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
       </p>
