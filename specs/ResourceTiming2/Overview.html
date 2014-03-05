@@ -46,7 +46,7 @@
   <dt>Latest version:</dt>
     <dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/Overview.html</a></dd>
   <dt>Latest Editor's Draft:</dt>
-  <dd><a href='http://www.w3c-test.org/webperf/specs/ResourceTiming2/'>http://www.w3c-test.org/webperf/specs/ResourceTiming2/</a></dd>
+  <dd><a href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/'>http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/</a></dd>
   <dt>Previous versions:</dt>
 	<dd><a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming2/Overview.html</a></dd>
   <dt>Editors:</dt>
@@ -110,7 +110,7 @@ notices. </p>
    Domain</a>.
 
 <p>
-<strong>You can find the latest <a href="http://www.w3c-test.org/webperf/specs/ResourceTiming/">Editor's Draft</a> of this document in the <a href="https://dvcs.w3.org/hg/webperf/">W3C's Mercurial repository</a>, which is updated on a regular basis.</strong>
+<strong>You can find the latest <a href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourceTiming/">Editor's Draft</a> of this document in the <a href="https://dvcs.w3.org/hg/webperf/">W3C's Mercurial repository</a>, which is updated on a regular basis.</strong>
 </p>
 
 <p>Publication as a Working Draft does not imply endorsement by the
@@ -200,7 +200,7 @@ measure the time it takes to fetch a resource:</p>
            var start = new Date().getTime();
            var image1 = new Image();
            image1.onload = resourceTiming;
-           image1.src = 'http://w3c-test.org/webperf/image1.png';
+           image1.src = 'http://www.w3.org/Icons/w3c_main.png';
 
            var resourceTiming = function() {
                var now = new Date().getTime();
@@ -209,7 +209,7 @@ measure the time it takes to fetch a resource:</p>
            };
         } 
     &lt;/script&gt;
-    &lt;img src="http://w3c-test.org/webperf/image0.png"&gt;
+    &lt;img src="http://www.w3.org/Icons/w3c_home.png"&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </pre>
@@ -229,7 +229,7 @@ perceived load time of a resource.
 <div class="example">
 <p>The following script calculates the amount of time it takes to fetch every resource in the 
 page, even those defined in markup. This example assumes
-that this page is hosted on http://w3c-test.org. 
+that this page is hosted on http://www.w3.org. 
 One could further measure the amount of time it takes in every phase of fetching a resource
 with the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> interface.
 </p>
@@ -244,7 +244,7 @@ with the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> inte
        {
           var image1 = new Image();
           image1.onload = resourceTiming;
-          image1.src = 'http://w3c-test.org/webperf/image1.png';
+          image1.src = 'http://www.w3.org/Icons/w3c_main.png';
        }
        
        function resourceTiming() 
@@ -259,7 +259,7 @@ with the <a href="#performanceresourcetiming">PerformanceResourceTiming</a> inte
            }
        }
     &lt;/script&gt;
-    &lt;img id="image0" src="http://w3c-test.org/webperf/image0.png"&gt;
+    &lt;img id="image0" src="http://www.w3.org/Icons/w3c_home.png"&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </pre>
