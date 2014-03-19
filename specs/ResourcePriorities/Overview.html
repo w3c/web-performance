@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Resource Priorities</title>
-<style>
+  <style>
    pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
    pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
    pre code { color:inherit; background:transparent }
@@ -29,22 +29,21 @@
    table thead { border-bottom:solid }
    table tbody th:first-child { border-left:solid }
    table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-  .auto-style1 { background-color: #FFFFFF;}
-  .ednote { border-top: 3px solid red; border-bottom: 3px solid red; margin: 1em 2em; padding: 0 1em 0 1em; background: #f8eeee }
-  .ednoteHeader { font-weight: bold; display: block; padding-top: 0.5em }
-  .element {background: #F4F4FA; color: black; margin: 0 0 1em 0.15em; padding: 0 1em 0.25em 0.75em; border-left: solid #9999FF 0.25em; position: relative; z-index: 1; }
+   .auto-style1 { background-color: #FFFFFF;}
+   .ednote { border-top: 3px solid red; border-bottom: 3px solid red; margin: 1em 2em; padding: 0 1em 0 1em; background: #f8eeee }
+   .ednoteHeader { font-weight: bold; display: block; padding-top: 0.5em }
+   .element {background: #F4F4FA; color: black; margin: 0 0 1em 0.15em; padding: 0 1em 0.25em 0.75em; border-left: solid #9999FF 0.25em; position: relative; z-index: 1; }
   </style>
   <link href="https://www.w3.org/StyleSheets/TR/W3C-ED.css" rel="stylesheet" type="text/css">
-
 </head>
-
 <body class="draft">
 
 <div class="head">
 <h1>Resource Priorities</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-February-1-2013">Editor's Draft February 11, 2013</h2>
+<h2 class="no-num no-toc" id="editors-draft-March-19-2014">Editor's Draft March 19, 2014</h2>
 <dl>
+
   <dt>Latest Editor's Draft:</dt>
     <dd><a
       href="http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourcePriorities/Overview.html">http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourcePriorities/Overview.html</a></dd>
@@ -75,8 +74,7 @@
     Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>),
     All Rights
     Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
-    <a
-    href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
 
     and <a
     href="http://www.w3.org/Consortium/Legal/copyright-documents">document
@@ -121,7 +119,7 @@ notices. </p>
     <ol class="toc">
 	  <li><a href="#intro-executing-scripts"><span class="secno">1.1 </span> Executing scripts sooner</a></li>
 	  <li><a href="#intro-download-priority"><span class="secno">1.2 </span> Optimizing download priority during network contention</a></li>
-      <li><a href="#intro-reducing-network-costs"><span class="secno">1.4 </span> Reducing Network Costs</a></li>
+    <li><a href="#intro-reducing-network-costs"><span class="secno">1.3 </span> Reducing Network Costs</a></li>
 	  <li><a href="#intro-proactively-loading"><span class="secno">1.4 </span> Proactively loading resources</a></li>
     </ol>
   </li>
@@ -131,29 +129,28 @@ notices. </p>
     <ol class="toc">
 		<li><a href="#sec-resource-priorities-introduction"><span class="secno">4.1 </span>Introduction</a></li>
 		<li><a href="#attr-lazyload"><span class="secno">4.2 </span>The <code>lazyload</code> attribute</a></li>
-        <li><a href="#attr-postpone"><span class="secno">4.3 </span>The <code>postpone</code> attribute</a></li>
-		<li><a href="#resource-priorities-property"><span class="secno">4.4 </span>The '<code>resource-priorities</code>' CSS property</a></li>
-		<li><a href="#the-elements"><span class="secno">4.5 </span> Elements capable of downloading resources</a>
+    <li><a href="#attr-postpone"><span class="secno">4.3 </span>The <code>postpone</code> attribute</a></li>
+		<li><a href="#the-elements"><span class="secno">4.4 </span> Elements capable of downloading resources</a>
         <ol class="toc">
-		    <li><a href="#the-img-element"><span class="secno">4.5.1 </span> The <code>img</code> element</a></li>
-		    <li><a href="#the-audio-element"><span class="secno">4.5.2 </span> The <code>audio</code> element</a></li>
-		    <li><a href="#the-video-element"><span class="secno">4.5.3 </span> The <code>video</code> element</a></li>
-		    <li><a href="#the-script-element"><span class="secno">4.5.4 </span> The <code>script</code> element</a></li>
-		    <li><a href="#the-link-element"><span class="secno">4.5.5</span> The <code>link</code> element</a></li>
-		    <li><a href="#the-embed-element"><span class="secno">4.5.6 </span> The <code>embed</code> element</a></li>
-		    <li><a href="#the-iframe-element"><span class="secno">4.5.7 </span> The <code>iframe</code> element</a></li>
-		    <li><a href="#the-object-element"><span class="secno">4.5.8 </span> The <code>object</code> element</a></li>
-			<li><a href="#the-svg-feImage"><span class="secno">4.5.9 </span> The <code>svg feImage</code> filter primitive</a></li>
-			<li><a href="#the-svg-image"><span class="secno">4.5.10 </span> The <code>svg image</code> element</a></li>
-			<li><a href="#the-svg-use"><span class="secno">4.5.11 </span> The <code>svg use</code> element</a></li>
-			<li><a href="#the-svg-script"><span class="secno">4.5.12 </span> The <code>svg script</code> element</a></li>
-			<li><a href="#the-svg-tref"><span class="secno">4.5.13 </span> The <code>svg tref</code> element</a></li>
+		    <li><a href="#the-img-element"><span class="secno">4.4.1 </span> The <code>img</code> element</a></li>
+		    <li><a href="#the-audio-element"><span class="secno">4.4.2 </span> The <code>audio</code> element</a></li>
+		    <li><a href="#the-video-element"><span class="secno">4.4.3 </span> The <code>video</code> element</a></li>
+		    <li><a href="#the-script-element"><span class="secno">4.4.4 </span> The <code>script</code> element</a></li>
+		    <li><a href="#the-link-element"><span class="secno">4.4.5</span> The <code>link</code> element</a></li>
+		    <li><a href="#the-embed-element"><span class="secno">4.4.6 </span> The <code>embed</code> element</a></li>
+		    <li><a href="#the-iframe-element"><span class="secno">4.4.7 </span> The <code>iframe</code> element</a></li>
+		    <li><a href="#the-object-element"><span class="secno">4.4.8 </span> The <code>object</code> element</a></li>
+			  <li><a href="#the-svg-feImage"><span class="secno">4.4.9 </span> The <code>svg feImage</code> filter primitive</a></li>
+			  <li><a href="#the-svg-image"><span class="secno">4.4.10 </span> The <code>svg image</code> element</a></li>
+			  <li><a href="#the-svg-use"><span class="secno">4.4.11 </span> The <code>svg use</code> element</a></li>
+			  <li><a href="#the-svg-script"><span class="secno">4.4.12 </span> The <code>svg script</code> element</a></li>
+			  <li><a href="#the-svg-tref"><span class="secno">4.4.13 </span> The <code>svg tref</code> element</a></li>
         </ol>
 	</li>
-		<li><a href="#sec-events"><span class="secno">4.6 </span>The Events</a>
+		<li><a href="#sec-events"><span class="secno">4.5 </span>The Events</a>
 		<ol class="toc">
-			<li><a href="#sec-load-event"><span class="secno">4.6.1 </span>The <code>load</code> event</a></li>
-			<li><a href="#sec-lazyloaded-event"><span class="secno">4.6.2 </span>The <code>lazyloaded</code> event</a></li>
+			<li><a href="#sec-load-event"><span class="secno">4.5.1 </span>The <code>load</code> event</a></li>
+			<li><a href="#sec-lazyloaded-event"><span class="secno">4.5.2 </span>The <code>lazyloaded</code> event</a></li>
 		</ol>
 		</li>
     </ol>
@@ -520,112 +517,11 @@ title="">Foo</code>". </p>
 </p>
 
 
-<h3 id="resource-priorities-property"><span class="secno">4.4 </span>The '<code>resource-priorities</code>' CSS property</h3>
-<div class="propdef">
-<dl><dt>
-<span class="index-def" title="'overflow'"><a id="propdef-resource-priority" class="propdef-resource-priority">'resource-priority'</a></span>
-<dd>
-<table class="propinfo">
-<tr><td><em>Value:</em>&nbsp;&nbsp;<td>normal | lazy-load | postpone
-<tr><td><em>Initial:</em>&nbsp;&nbsp;<td>normal
-<tr><td><em>Applies to:</em>&nbsp;&nbsp;<td>All elements (see prose)
-<tr><td><em>Inherited:</em>&nbsp;&nbsp;<td>Yes
-<tr><td><em>Percentages:</em>&nbsp;&nbsp;<td>N/A
-<tr><td><em>Media:</em>&nbsp;&nbsp;<td>All
-<tr><td><em>Computed&nbsp;value:</em>&nbsp;&nbsp;<td>as specified
-<tr><td><em>Canonical&nbsp;order:</em>&nbsp;&nbsp;<td>N/A
-<tr><td><em>Animatable:</em>&nbsp;&nbsp;<td>No
-</table>
-</dl>
-</div>
-
-
-<p>
-	This CSS property specifies the download priority of a resource associated with an element or another CSS property.
-</p>
-
-<dl>
-
-<dt>normal</dt>
-
-<dd>
-	This value indicates the resource associated with this element is downloaded with normal priority. 
-</dd>
-
-<dt>lazy-load</dt>
-
-<dd>
-	<p>
-		This value indicates that if the User Agent determines that there is <a href="#network-resource-contention">network resource contention</a>, 
-		the User Agent SHOULD delay downloading resources associated with this element until 
-		all other resources associated with elements that do not have the this value set or do not have the
-		<a href="#attr-lazyload"><code>lazyload</code></a> boolean attribute
-		specified on the element have started downloading. 
-	</p>
-	<p>
-		This value may only change the download priority of resources associated with the following
-		HTML elements, SVG elements, and CSS properties capable of downloading resources:
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element">img</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element">audio</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element">video</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/scripting-1.html#the-script-element">script</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/document-metadata.html#the-link-element">link</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element">embed</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element">iframe</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element">object</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement">feImage</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#ImageElement">image</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#UseElement">use</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/script.html#ScriptElement">script</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>,	
-		'<code><a href="http://www.w3.org/TR/CSS2/colors.html#background-properties">background-image</a></code>', 
-		'<code><a href="http://www.w3.org/TR/css3-background/#the-border-image-source">border-image-source</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/generate.html#propdef-content">content</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/ui.html#propdef-cursor">cursor</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/generate.html#propdef-list-style-image">list-style-image</a></code>', and 
-		'<code><a href="http://www.w3.org/TR/css-fonts-3/#at-font-face-rule">@font-face src</a></code>'.
-	<p>
-</dd>
-
-<dt>postpone</dt>
-
-<dd>
-	<p>
-		This value indicates that the User Agent MUST not start downloading the resource 
-		associated with the element until either the  bounding box of the element is inside the User Agent's 
-		interpretation of the Document's viewport, or the element has been styled such that its 
-		<code><a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop">display</a></code> property is 
-		no longer set to <code>none</code>.
-	</p>
-	<p>
-		This value may only change the download priority of resources associated with the following
-		HTML elements, SVG elements, and CSS properties capable of downloading resources:
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element">img</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element">audio</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element">video</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element">embed</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element">iframe</a></code>,
-		<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element">object</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement">feImage</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#ImageElement">image</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#UseElement">use</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/script.html#ScriptElement">script</a></code>,
-		<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>.	
-		'<code><a href="http://www.w3.org/TR/CSS2/colors.html#background-properties">background-image</a></code>', 
-		'<code><a href="http://www.w3.org/TR/css3-background/#the-border-image-source">border-image-source</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/generate.html#propdef-content">content</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/ui.html#propdef-cursor">cursor</a></code>', 
-		'<code><a href="http://www.w3.org/TR/CSS2/generate.html#propdef-list-style-image">list-style-image</a></code>', and 
-		'<code><a href="http://www.w3.org/TR/css-fonts-3/#at-font-face-rule">@font-face src</a></code>'.
-	<p>
-</dd>
-
-
 </dl>
 
-<h3 id="the-elements"><span class="secno">4.5 </span>Elements capable of downloading resources</h3>
+<h3 id="the-elements"><span class="secno">4.4 </span>Elements capable of downloading resources</h3>
 
-<h4 id="the-img-element"><span class="secno">4.5.1 </span>The <dfn id="img"><code>img</code></dfn> element</h4>
+<h4 id="the-img-element"><span class="secno">4.4.1 </span>The <dfn id="img"><code>img</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -646,7 +542,7 @@ partial interface <dfn id="htmlimagelement">HTMLImageElement</dfn> {
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element"><code>img</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p>
 
-<h4 id="the-audio-element"><span class="secno">4.5.2 </span>The <dfn id="audio"><code>audio</code></dfn> element</h4>
+<h4 id="the-audio-element"><span class="secno">4.4.2 </span>The <dfn id="audio"><code>audio</code></dfn> element</h4>
   <dl class="element">
   
    <dt>Content attributes:</dt>
@@ -667,7 +563,7 @@ partial interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> {
 	If the <code>audio</code> element does not have the <a href="http://www.w3.org/TR/html5/embedded-content-0.html#attr-media-controls"><code>controls</code></a> boolean attribute, the <a href="#attr-postpone"><code>postpone</code></a> attribute has no effect.
 </p>
 
-<h4 id="the-video-element"><span class="secno">4.5.3 </span>The <dfn id="video"><code>video</code></dfn> element</h4>
+<h4 id="the-video-element"><span class="secno">4.4.3 </span>The <dfn id="video"><code>video</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -688,7 +584,7 @@ partial interface <dfn id="htmlvideoelement">HTMLVideoElement</dfn> {
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element"><code>video</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p>
 
-<h4 id="the-script-element"><span class="secno">4.5.4 </span>The <dfn id="script"><code>script</code></dfn> element</h4>
+<h4 id="the-script-element"><span class="secno">4.4.4 </span>The <dfn id="script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -742,7 +638,7 @@ partial interface <dfn id="htmlscriptelement">HTMLScriptElement</dfn> {
 </p></li>
 </ul>
 
- <h4 id="the-link-element"><span class="secno">4.5.5 </span>The <dfn id="link"><code>link</code></dfn> element</h4>
+ <h4 id="the-link-element"><span class="secno">4.4.5 </span>The <dfn id="link"><code>link</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -774,7 +670,7 @@ partial interface <dfn id="htmllinkelement">HTMLLinkElement</dfn> {
 </p>	
 
 
-<h4 id="the-embed-element"><span class="secno">4.5.6 </span>The <dfn id="embed"><code>embed</code></dfn> element</h4>
+<h4 id="the-embed-element"><span class="secno">4.4.6 </span>The <dfn id="embed"><code>embed</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -796,7 +692,7 @@ partial interface <dfn id="htmlembedelement">HTMLEmbedElement</dfn> {
 	 element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p>
  
- <h4 id="the-iframe-element"><span class="secno">4.5.7 </span>The <dfn id="iframe"><code>iframe</code></dfn> element</h4>
+ <h4 id="the-iframe-element"><span class="secno">4.4.7 </span>The <dfn id="iframe"><code>iframe</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -817,7 +713,7 @@ partial interface <dfn id="htmliframeelement">HTMLIFrameElement</dfn> {
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element"><code>iframe</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p>
 
-<h4 id="the-object-element"><span class="secno">4.5.8 </span>The <dfn id="object"><code>object</code></dfn> element</h4>
+<h4 id="the-object-element"><span class="secno">4.4.8 </span>The <dfn id="object"><code>object</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -838,7 +734,7 @@ partial interface <dfn id="htmlobjectelement">HTMLObjectElement</dfn> {
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element"><code>object</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p>
 
-<h4 id="the-svg-feImage"><span class="secno">4.5.9 </span>The <code>svg</code> <dfn id="svg-feImage"><code>feImage</code></dfn> filter primitive</h4>
+<h4 id="the-svg-feImage"><span class="secno">4.4.9 </span>The <code>svg</code> <dfn id="svg-feImage"><code>feImage</code></dfn> filter primitive</h4>
 
   <dl class="element">
   
@@ -861,7 +757,7 @@ partial interface <dfn id="svgfeimageelement">SVGFEImageElement</dfn> {
 	<a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes will have no effect.
 </p> 
 
-<h4 id="the-svg-image"><span class="secno">4.5.10 </span>The <code>svg</code> <dfn id="svg-image"><code>image</code></dfn> element</h4>
+<h4 id="the-svg-image"><span class="secno">4.4.10 </span>The <code>svg</code> <dfn id="svg-image"><code>image</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -882,7 +778,7 @@ partial interface <dfn id="SVGImageElement">SVGImageElement </dfn> {
     The <a href="http://www.w3.org/TR/SVG/struct.html#ImageElement"><code>svg image</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p> 
 
-<h4 id="the-svg-use"><span class="secno">4.5.11 </span>The <code>svg</code> <dfn id="svg"><code>use</code></dfn> element</h4>
+<h4 id="the-svg-use"><span class="secno">4.4.11 </span>The <code>svg</code> <dfn id="svg"><code>use</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -903,7 +799,7 @@ partial interface <dfn id="SVGUseElement">SVGUseElement</dfn> {
     The <a href="http://www.w3.org/TR/SVG/struct.html#UseElement"><code>svg use</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p> 
 
-<h4 id="the-svg-script"><span class="secno">4.5.12 </span>The <code>svg</code> <dfn id="svg-script"><code>script</code></dfn> element</h4>
+<h4 id="the-svg-script"><span class="secno">4.4.12 </span>The <code>svg</code> <dfn id="svg-script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -922,7 +818,7 @@ partial interface <dfn id="SVGScriptElement">SVGScriptElement</dfn> {
     The <a href="http://www.w3.org/TR/SVG/script.html#ScriptElement"><code>svg script</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p> 
 
-<h4 id="the-svg-tref"><span class="secno">4.5.13 </span>The <code>svg</code> <dfn id="svg-tref"><code>tref</code></dfn> element</h4>
+<h4 id="the-svg-tref"><span class="secno">4.4.13 </span>The <code>svg</code> <dfn id="svg-tref"><code>tref</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -943,9 +839,9 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
     The <a href="http://www.w3.org/TR/SVG/text.html#TRefElement"><code>svg tref</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
 </p> 
 
-<h3 id="sec-events"><span class="secno">4.6 </span>Events</h3>
+<h3 id="sec-events"><span class="secno">4.5 </span>Events</h3>
 
-<h4 id="sec-load-event"><span class="secno">4.6.1 </span>The <code>load</code> event</h4>
+<h4 id="sec-load-event"><span class="secno">4.5.1 </span>The <code>load</code> event</h4>
 <p>
 	The <code>load</code> event of the Document MUST NOT be blocked by any <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
 	with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified, the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true,
@@ -961,7 +857,7 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
 	IDL attribute.
 </p>
 
-<h4 id="sec-lazyloaded-event"><span class="secno">4.6.2 </span>The <code>lazyloaded</code> event</h4>
+<h4 id="sec-lazyloaded-event"><span class="secno">4.5.2 </span>The <code>lazyloaded</code> event</h4>
 
 <p>
 	Immediately after all <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a> with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute
