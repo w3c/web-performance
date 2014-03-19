@@ -757,8 +757,8 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing-2/#performance
 <p>Vendor-specific proprietary user agent extensions are discouraged. 
 If such extensions are needed, e.g., for experimental purposes, vendors must use the following extension mechanisms:</p>
 
-<p>If an extension to the <a href="#dom-performanceresourcetiming-initiatortypee">initiatorType</a> IDL attribute return value
- is needed for an experimental initiator type, on getting the <a href="#dom-performanceresourcetiming-initiatortypee">initiatorType</a> IDL attribute, 
+<p>If an extension to the <a href="#dom-performanceresourcetiming-initiatortype">initiatorType</a> IDL attribute return value
+ is needed for an experimental initiator type, on getting the <a href="#dom-performanceresourcetiming-initiatortype">initiatorType</a> IDL attribute, 
   vendors MUST return a DOMString that uses the following convention:</p>
  
 <p><code>[vendorprefix]-[name]</code></p>
@@ -802,9 +802,9 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
       <li>Immediately before the user agent starts to queue the resource for retrieval,  
        record the current time in <a href="#startTime-attribute">startTime</a>. 
       </li>
-      <li>Record the initiator of the resource in <a href="#dom-performanceresourcetiming-initiatortypee">initiatorType</a>.
+      <li>Record the initiator of the resource in <a href="#dom-performanceresourcetiming-initiatortype">initiatorType</a>.
       </li>
-      <li>Record the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> of the requested resource in <a href="#name-attribute">name</a>.
+      <li>Record the resolved <a href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url">URL</a> of the requested resource in <a href="#name-attribute">name</a>.
       </li>
       <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET 
        <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes"> or equivalent</a>, 
@@ -911,7 +911,7 @@ If such extensions are needed, e.g., for experimental purposes, vendors must use
              PerformanceResourceTiming</a> object to 0 except 
              <a href="#startTime-attribute">startTime</a>, 
              <a href="#dom-performanceresourcetiming-redirectstart">redirectStart</a>, <a href="#dom-performanceresourcetiming-redirectend"> 
-             redirectEnd</a>, and <a href="#dom-performanceresourcetiming-initiatortypee">initiatorType</a>.
+             redirectEnd</a>, and <a href="#dom-performanceresourcetiming-initiatortype">initiatorType</a>.
             </li>
             <li>Return to step <a href="#step-fetch-start">3.5</a> with the new resource.
             </li>
@@ -1028,10 +1028,10 @@ Annie Sullivan, Sigbjørn Vik, Jason Weber to acknowledge their contributions to
    <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>Scalable Vector Graphics (SVG) 1.1</a></cite>, Erik Dahlstr&#246;m, et al, Editors. World Wide Web Consortium, August 2011. This version of the SVG specification Recommendation is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG/'>latest version of SVG</a> is available at http://www.w3.org/TR/SVG/.</dd>
 
    <dt>[<a id="NavigationTiming">Navigation Timing 2</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2013/WD-navigation-timing-2-20130131/'>Navigation Timing 2</a></cite>, Jatinder Mann and Arvind Jain, Editors. World Wide Web Consortium, March 2014. This version of the Navigation Timing 2 specification is available from http://www.w3.org/TR/2014/WD-navigation-timing-2-20140325/. The <a href='http://www.w3.org/TR/navigation-timing-2/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing-2/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2014/WD-navigation-timing-2-20140425/'>Navigation Timing 2</a></cite>, Jatinder Mann and Arvind Jain, Editors. World Wide Web Consortium, March 2014. This version of the Navigation Timing 2 specification is available from http://www.w3.org/TR/2014/WD-navigation-timing-2-20140325/. The <a href='http://www.w3.org/TR/navigation-timing-2/'>latest version of Navigation Timing</a> is available at http://www.w3.org/TR/navigation-timing-2/.</dd>
 
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
-   <dd><cite><a href='http://www.w3.org/TR/2012/WD-performance-timeline-20120508/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, May 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/WD-performance-timeline-20120508/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
+   <dd><cite><a href='http://www.w3.org/TR/2013/REC-performance-timeline-20131212/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, W3C Recommendation, December 2013. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2013/REC-performance-timeline-20131212/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
    
    <dt>[<a id="HighResolutionTime">High Resolution Time</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/REC-hr-time-20121217/'>High Resolution Time</a></cite>, Jatinder Mann, Editor. W3C Recommendation, World Wide Web Consortium, December 2012. This version of the High Resolution Time specification is available from http://www.w3.org/TR/2012/REC-hr-time-20121217/. The <a href='http://www.w3.org/TR/hr-time/'>latest version of High Resolution Time</a> is available at http://www.w3.org/TR/hr-time/.</dd>
