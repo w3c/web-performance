@@ -413,7 +413,7 @@ partial interface Window {
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-domcomplete" title="domcomplete">domComplete</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadstart" title="loadeventstart">loadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadend" title="loadeventend">loadEventEnd</a>;
-  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-prerenderSwitch" title="prerenderswitch">prerenderSwitch</a>;
+  readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-prerenderswitch" title="prerenderswitch">prerenderSwitch</a>;
   
   readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>; 
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
@@ -611,7 +611,7 @@ such as SSL handshake and SOCKS authentication.
 
 <p>This attribute is optional. User agents that don't have this attribute
 available MUST set it as undefined. When this attribute is available, if the
-<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#url-scheme">scheme</a> of the
+<a href="#rfc3986">scheme</a> of the
 current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
 attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
 with a time value equal to the time immediately before the user agent starts the
@@ -1143,6 +1143,12 @@ all so it's not always feasible to mitigate this attack.</p>
 <dd>
  <cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>. 
 </dd>
+
+	<dt>[<a id="rfc3986">IETF RFC 3986</a>]</dt>
+
+	<dd>
+	<cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee et al, Authors. Internet Engineering Task Force, January 2005. Available at <a href='http://www.ietf.org/rfc/rfc3986.txt'>http://www.ietf.org/rfc/rfc3986.txt</a>. 	
+	</dd>
 <dt>[<a id="rfc6454">IETF RFC 6454</a>]</dt>
 <dd>
  <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>. 
