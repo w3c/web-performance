@@ -41,7 +41,7 @@
 <div class="head">
 <h1>Resource Priorities</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-March-19-2014">Editor's Draft March 19, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-March-19-2014">Editor's Draft April 16, 2014</h2>
 <dl>
 
   <dt>Latest Editor's Draft:</dt>
@@ -119,8 +119,7 @@ notices. </p>
     <ol class="toc">
 	  <li><a href="#intro-executing-scripts"><span class="secno">1.1 </span> Executing scripts sooner</a></li>
 	  <li><a href="#intro-download-priority"><span class="secno">1.2 </span> Optimizing download priority during network contention</a></li>
-    <li><a href="#intro-reducing-network-costs"><span class="secno">1.3 </span> Reducing Network Costs</a></li>
-	  <li><a href="#intro-proactively-loading"><span class="secno">1.4 </span> Proactively loading resources</a></li>
+	  <li><a href="#intro-proactively-loading"><span class="secno">1.3 </span> Proactively loading resources</a></li>
     </ol>
   </li>
   <li><a href="#conformance-requirements"><span class="secno">2 </span>Conformance requirements</a></li>
@@ -129,28 +128,27 @@ notices. </p>
     <ol class="toc">
 		<li><a href="#sec-resource-priorities-introduction"><span class="secno">4.1 </span>Introduction</a></li>
 		<li><a href="#attr-lazyload"><span class="secno">4.2 </span>The <code>lazyload</code> attribute</a></li>
-    <li><a href="#attr-postpone"><span class="secno">4.3 </span>The <code>postpone</code> attribute</a></li>
-		<li><a href="#the-elements"><span class="secno">4.4 </span> Elements capable of downloading resources</a>
+		<li><a href="#the-elements"><span class="secno">4.3 </span> Elements capable of downloading resources</a>
         <ol class="toc">
-		    <li><a href="#the-img-element"><span class="secno">4.4.1 </span> The <code>img</code> element</a></li>
-		    <li><a href="#the-audio-element"><span class="secno">4.4.2 </span> The <code>audio</code> element</a></li>
-		    <li><a href="#the-video-element"><span class="secno">4.4.3 </span> The <code>video</code> element</a></li>
-		    <li><a href="#the-script-element"><span class="secno">4.4.4 </span> The <code>script</code> element</a></li>
-		    <li><a href="#the-link-element"><span class="secno">4.4.5</span> The <code>link</code> element</a></li>
-		    <li><a href="#the-embed-element"><span class="secno">4.4.6 </span> The <code>embed</code> element</a></li>
-		    <li><a href="#the-iframe-element"><span class="secno">4.4.7 </span> The <code>iframe</code> element</a></li>
-		    <li><a href="#the-object-element"><span class="secno">4.4.8 </span> The <code>object</code> element</a></li>
-			  <li><a href="#the-svg-feImage"><span class="secno">4.4.9 </span> The <code>svg feImage</code> filter primitive</a></li>
-			  <li><a href="#the-svg-image"><span class="secno">4.4.10 </span> The <code>svg image</code> element</a></li>
-			  <li><a href="#the-svg-use"><span class="secno">4.4.11 </span> The <code>svg use</code> element</a></li>
-			  <li><a href="#the-svg-script"><span class="secno">4.4.12 </span> The <code>svg script</code> element</a></li>
-			  <li><a href="#the-svg-tref"><span class="secno">4.4.13 </span> The <code>svg tref</code> element</a></li>
+		    <li><a href="#the-img-element"><span class="secno">4.3.1 </span> The <code>img</code> element</a></li>
+		    <li><a href="#the-audio-element"><span class="secno">4.3.2 </span> The <code>audio</code> element</a></li>
+		    <li><a href="#the-video-element"><span class="secno">4.3.3 </span> The <code>video</code> element</a></li>
+		    <li><a href="#the-script-element"><span class="secno">4.3.4 </span> The <code>script</code> element</a></li>
+		    <li><a href="#the-link-element"><span class="secno">4.3.5</span> The <code>link</code> element</a></li>
+		    <li><a href="#the-embed-element"><span class="secno">4.3.6 </span> The <code>embed</code> element</a></li>
+		    <li><a href="#the-iframe-element"><span class="secno">4.3.7 </span> The <code>iframe</code> element</a></li>
+		    <li><a href="#the-object-element"><span class="secno">4.3.8 </span> The <code>object</code> element</a></li>
+			  <li><a href="#the-svg-feImage"><span class="secno">4.3.9 </span> The <code>svg feImage</code> filter primitive</a></li>
+			  <li><a href="#the-svg-image"><span class="secno">4.3.10 </span> The <code>svg image</code> element</a></li>
+			  <li><a href="#the-svg-use"><span class="secno">4.3.11 </span> The <code>svg use</code> element</a></li>
+			  <li><a href="#the-svg-script"><span class="secno">4.3.12 </span> The <code>svg script</code> element</a></li>
+			  <li><a href="#the-svg-tref"><span class="secno">4.3.13 </span> The <code>svg tref</code> element</a></li>
         </ol>
 	</li>
-		<li><a href="#sec-events"><span class="secno">4.5 </span>The Events</a>
+		<li><a href="#sec-events"><span class="secno">4.4 </span>The Events</a>
 		<ol class="toc">
-			<li><a href="#sec-load-event"><span class="secno">4.5.1 </span>The <code>load</code> event</a></li>
-			<li><a href="#sec-lazyloaded-event"><span class="secno">4.5.2 </span>The <code>lazyloaded</code> event</a></li>
+			<li><a href="#sec-load-event"><span class="secno">4.4.1 </span>The <code>load</code> event</a></li>
+			<li><a href="#sec-lazyloaded-event"><span class="secno">4.4.2 </span>The <code>lazyloaded</code> event</a></li>
 		</ol>
 		</li>
     </ol>
@@ -268,23 +266,7 @@ notices. </p>
     and AdditionalImages2.png. 
 </p>
 
-<h3 id="intro-reducing-network-costs"><span class="secno">1.3 </span> Reducing Network Costs</h3>
-
-<p>
-    Users don't always scroll through the entire web page, even though there may be additional resources
-    the site may have downloaded. For example, a user may click on the headline link in a news web page without 
-    ever visiting any of the below the fold content. Even though those resources were never viewed by the user,
-    the User Agent had to spent time doing work to download those resources. Likewise, there are server overhead
-    costs of serving those resources, as well as potential costs to mobile web browsing users for downloading resources
-    that they never viewed.
-</p>
-
-<p>
-    Using the <a href="#attr-postpone"><code>postpone</code></a> attribute, developers can specify 
-    which resources the User Agent should not download until they are visible to the user. 
-</p>
-
-<h3 id="intro-proactively-loading"><span class="secno">1.4 </span> Proactively loading resources</h3>
+<h3 id="intro-proactively-loading"><span class="secno">1.3 </span> Proactively loading resources</h3>
 
 <p>
 	Some applications require a large number of resources that may not be required immediately. For example,
@@ -467,124 +449,67 @@ title="">Foo</code>". </p>
 	and <code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>.	
 </p>
 
-
-<h3 id="the-postpone-attribute"><span class="secno">4.3 </span>The <code>postpone</code> attribute</h3>
-
-<p>
-	The <dfn id="attr-postpone"><code>postpone</code></dfn> attribute is a boolean and IDL attribute
-	that indicates the priority order in which the User Agent will download the resource associated with 
-	the element when the element is not visible.
-</p>    
-<p>
-	If the <a href="#attr-postpone"><code>postpone</code></a> 
-	<a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attribute">boolean attribute</a>
-	has been specified on an element, the User Agent MUST not start downloading the resource 
-	associated with the element until either the  bounding box of the element is inside the User Agent's 
-	interpretation of the Document's viewport or the element has been styled such that its 
-	<code><a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop">display</a></code> property is 
-	no longer set to <code>none</code>.
-</p>
-<div class="note">
-<div class="noteHeader">Note</div>
-<p>
-	To avoid flashes of unavailable content while a user is panning or scrolling, the User Agent may
-    internally keep track of a region larger than the Document's viewport and begin downloading the 
-    resource when the element's bounding box is within that larger region.
-</p>
-</div>
-<p>
-    The <dfn id="dom-postpone"><code>postpone</code></dfn> IDL attribute MUST 
-	<a href="http://www.w3.org/TR/html5/infrastructure.html#reflect">reflect</a> the 
-	<a href="#attr-postpone"><code>postpone</code></a> boolean attribute value.
-</p>    
-<p>
-    The <a href="#attr-postpone"><code>postpone</code></a> boolean and IDL attributes 
-	can be specified on the following 
-   <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">HTML elements</a> 
-   and <a href="http://www.w3.org/TR/SVG/intro.html#TermSVGDocumentFragment">SVG elements</a>
-   capable of <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetching</a> resources:
-	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element">img</a></code>,
-	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element">audio</a></code>,
-	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element">video</a></code>,
-    <code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element">embed</a></code>,
-	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element">iframe</a></code>,
-	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element">object</a></code>,
-	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement">feImage</a></code>,
-	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#ImageElement">image</a></code>,
-	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#UseElement">use</a></code>,
-	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/script.html#ScriptElement">script</a></code>,
-	and <code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>.	
-</p>
-
-
 </dl>
 
-<h3 id="the-elements"><span class="secno">4.4 </span>Elements capable of downloading resources</h3>
+<h3 id="the-elements"><span class="secno">4.3 </span>Elements capable of downloading resources</h3>
 
-<h4 id="the-img-element"><span class="secno">4.4.1 </span>The <dfn id="img"><code>img</code></dfn> element</h4>
+<h4 id="the-img-element"><span class="secno">4.3.1 </span>The <dfn id="img"><code>img</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmlimagelement">HTMLImageElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element"><code>img</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element"><code>img</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
 
-<h4 id="the-audio-element"><span class="secno">4.4.2 </span>The <dfn id="audio"><code>audio</code></dfn> element</h4>
+<h4 id="the-audio-element"><span class="secno">4.3.2 </span>The <dfn id="audio"><code>audio</code></dfn> element</h4>
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-	The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element"><code>audio</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
-	If the <code>audio</code> element does not have the <a href="http://www.w3.org/TR/html5/embedded-content-0.html#attr-media-controls"><code>controls</code></a> boolean attribute, the <a href="#attr-postpone"><code>postpone</code></a> attribute has no effect.
+	The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-audio-element"><code>audio</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
 
-<h4 id="the-video-element"><span class="secno">4.4.3 </span>The <dfn id="video"><code>video</code></dfn> element</h4>
+<h4 id="the-video-element"><span class="secno">4.3.3 </span>The <dfn id="video"><code>video</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-        <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmlvideoelement">HTMLVideoElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
  
 <p>
-    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element"><code>video</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element"><code>video</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
 
-<h4 id="the-script-element"><span class="secno">4.4.4 </span>The <dfn id="script"><code>script</code></dfn> element</h4>
+<h4 id="the-script-element"><span class="secno">4.3.4 </span>The <dfn id="script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -638,7 +563,7 @@ partial interface <dfn id="htmlscriptelement">HTMLScriptElement</dfn> {
 </p></li>
 </ul>
 
- <h4 id="the-link-element"><span class="secno">4.4.5 </span>The <dfn id="link"><code>link</code></dfn> element</h4>
+ <h4 id="the-link-element"><span class="secno">4.3.5 </span>The <dfn id="link"><code>link</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -670,136 +595,124 @@ partial interface <dfn id="htmllinkelement">HTMLLinkElement</dfn> {
 </p>	
 
 
-<h4 id="the-embed-element"><span class="secno">4.4.6 </span>The <dfn id="embed"><code>embed</code></dfn> element</h4>
+<h4 id="the-embed-element"><span class="secno">4.3.6 </span>The <dfn id="embed"><code>embed</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-        <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmlembedelement">HTMLEmbedElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
  
 <p>
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element"><code>embed</code></a>
-	 element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+	 element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
  
- <h4 id="the-iframe-element"><span class="secno">4.4.7 </span>The <dfn id="iframe"><code>iframe</code></dfn> element</h4>
+ <h4 id="the-iframe-element"><span class="secno">4.3.7 </span>The <dfn id="iframe"><code>iframe</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
        <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-       <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmliframeelement">HTMLIFrameElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
  
 <p>
-    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element"><code>iframe</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element"><code>iframe</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
 
-<h4 id="the-object-element"><span class="secno">4.4.8 </span>The <dfn id="object"><code>object</code></dfn> element</h4>
+<h4 id="the-object-element"><span class="secno">4.3.8 </span>The <dfn id="object"><code>object</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
        <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-       <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="htmlobjectelement">HTMLObjectElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
  
 <p>
-    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element"><code>object</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element"><code>object</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
 
-<h4 id="the-svg-feImage"><span class="secno">4.4.9 </span>The <code>svg</code> <dfn id="svg-feImage"><code>feImage</code></dfn> filter primitive</h4>
+<h4 id="the-svg-feImage"><span class="secno">4.3.9 </span>The <code>svg</code> <dfn id="svg-feImage"><code>feImage</code></dfn> filter primitive</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="svgfeimageelement">SVGFEImageElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-    The <a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement"><code>svg feImage</code></a> primitive supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement"><code>svg feImage</code></a> primitive supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 	If the <a href="http://www.w3.org/TR/SVG11/struct.html#ExternalResourcesRequiredAttribute"><code>externalResourcesRequired</code></a> attribute is set to true, the
-	<a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes will have no effect.
+	<a href="#attr-lazyload"><code>lazyload</code></a> attribute will have no effect.
 </p> 
 
-<h4 id="the-svg-image"><span class="secno">4.4.10 </span>The <code>svg</code> <dfn id="svg-image"><code>image</code></dfn> element</h4>
+<h4 id="the-svg-image"><span class="secno">4.3.10 </span>The <code>svg</code> <dfn id="svg-image"><code>image</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="SVGImageElement">SVGImageElement </dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-    The <a href="http://www.w3.org/TR/SVG/struct.html#ImageElement"><code>svg image</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/SVG/struct.html#ImageElement"><code>svg image</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p> 
 
-<h4 id="the-svg-use"><span class="secno">4.4.11 </span>The <code>svg</code> <dfn id="svg"><code>use</code></dfn> element</h4>
+<h4 id="the-svg-use"><span class="secno">4.3.11 </span>The <code>svg</code> <dfn id="svg"><code>use</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="SVGUseElement">SVGUseElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-    The <a href="http://www.w3.org/TR/SVG/struct.html#UseElement"><code>svg use</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/SVG/struct.html#UseElement"><code>svg use</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p> 
 
-<h4 id="the-svg-script"><span class="secno">4.4.12 </span>The <code>svg</code> <dfn id="svg-script"><code>script</code></dfn> element</h4>
+<h4 id="the-svg-script"><span class="secno">4.3.12 </span>The <code>svg</code> <dfn id="svg-script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
   
@@ -818,46 +731,42 @@ partial interface <dfn id="SVGScriptElement">SVGScriptElement</dfn> {
     The <a href="http://www.w3.org/TR/SVG/script.html#ScriptElement"><code>svg script</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p> 
 
-<h4 id="the-svg-tref"><span class="secno">4.4.13 </span>The <code>svg</code> <dfn id="svg-tref"><code>tref</code></dfn> element</h4>
+<h4 id="the-svg-tref"><span class="secno">4.3.13 </span>The <code>svg</code> <dfn id="svg-tref"><code>tref</code></dfn> element</h4>
 
   <dl class="element">
   
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
-   <dd><code><a href="#attr-postpone">postpone</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">
 partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
      attribute boolean <a href="#dom-lazyload">lazyload</a>;
-     attribute boolean <a href="#dom-postpone">postpone</a>;
 };</pre>
    </dd>
   </dl>
 
 <p>
-    The <a href="http://www.w3.org/TR/SVG/text.html#TRefElement"><code>svg tref</code></a> element supports both the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes.
+    The <a href="http://www.w3.org/TR/SVG/text.html#TRefElement"><code>svg tref</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p> 
 
-<h3 id="sec-events"><span class="secno">4.5 </span>Events</h3>
+<h3 id="sec-events"><span class="secno">4.4 </span>Events</h3>
 
-<h4 id="sec-load-event"><span class="secno">4.5.1 </span>The <code>load</code> event</h4>
+<h4 id="sec-load-event"><span class="secno">4.4.1 </span>The <code>load</code> event</h4>
 <p>
 	The <code>load</code> event of the Document MUST NOT be blocked by any <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
-	with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified, the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true,
-	<a href="#attr-postpone"><code>postpone</code></a> content attribute specified, or the <a href="#attr-postpone"><code>postpone</code></a> IDL attribute set to true. 
+	with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified or the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true. 
 	The <code>load</code> event of an <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> with  
-	the <a href="#attr-lazyload"><code>lazyload</code></a> or <a href="#attr-postpone"><code>postpone</code></a> attributes MUST continue to be blocked until the resource is loaded.
+	the <a href="#attr-lazyload"><code>lazyload</code></a> attribute MUST continue to be blocked until the resource is loaded.
 </p>
 
 <p>	
-	The <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="#attr-postpone"><code>postpone</code></a> attributes MUST not change when the 
-	<code>DOMContentLoaded</code> event is fired or the behavior of the <code>loading</code>, <code>interactive</code>, and <code>complete</code> states of the Document's
-	<code><a href="http://www.w3.org/TR/html5/dom.html#dom-document-readystate">readyState</a></code>
-	IDL attribute.
+	The <a href="#attr-lazyload"><code>lazyload</code></a> attribute MUST not change when the <code>DOMContentLoaded</code> event is fired or the behavior of the 
+  <code>loading</code>, <code>interactive</code>, and <code>complete</code> states of the Document's 
+  <code><a href="http://www.w3.org/TR/html5/dom.html#dom-document-readystate">readyState</a></code>	IDL attribute.
 </p>
 
-<h4 id="sec-lazyloaded-event"><span class="secno">4.5.2 </span>The <code>lazyloaded</code> event</h4>
+<h4 id="sec-lazyloaded-event"><span class="secno">4.4.2 </span>The <code>lazyloaded</code> event</h4>
 
 <p>
 	Immediately after all <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a> with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute
