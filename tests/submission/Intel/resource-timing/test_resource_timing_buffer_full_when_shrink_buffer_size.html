@@ -13,8 +13,6 @@
             {
                 count++;
             }
-
-            performance.onresourcetimingbufferfull = buffer_full_call_back;
         </script>
         <link rel="author" title="Intel" href="http://www.intel.com/" />
         <link rel="help" href="http://www.w3.org/TR/resource-timing/#performanceresourcetiming"/>
@@ -30,7 +28,7 @@
                     test_true(false, "performance.setResourceTimingBufferSize() interface is supported!");
                     done();                
                     return;
-                }  
+                } 
  
                 performance.setResourceTimingBufferSize(3);
                 performance.setResourceTimingBufferSize(2);
@@ -42,6 +40,16 @@
     <body onload="onload_test();">
         <h1>Description</h1>
         <p>This test validates the functionality of onresourcetimingbufferfull in resource timing.</p>
+        <script>
+            if (performance && performance.clearResourceTimings) {
+                performance.clearResourceTimings();
+                performance.addEventListener("resourcetimingbufferfull", buffer_full_call_back);
+                for (var i = 1; i <= 3; i++) {
+                    var image = document.createElement("img");
+                    image.src = "/webperf/tests/resources/generate_resource.php?type=image&id=" + i;
+                }
+            }
+        </script>
         <div id="log"></div>
     </body>
 </html>
