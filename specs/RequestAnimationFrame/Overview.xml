@@ -22,7 +22,7 @@
   <options xmlns='http://mcc.id.au/ns/local'>
     <versions>
       <this href='http://www.w3.org/TR/2011/WD-animation-timing-20110602/'/>
-      <draft href='http://dvcs.w3.org/hg/webperf/raw-file/tip/specs/RequestAnimationFrame/Overview.html'/>
+      <draft href='https://w3c.github.io/web-performance/specs/RequestAnimationFrame/Overview.html'/>
       <latest href='http://www.w3.org/TR/animation-timing/'/>
     </versions>
     <editors>
@@ -65,7 +65,7 @@ by the browser.</p>
    Activity</a> in the
    W3C <a href="http://www.w3.org/Interaction/">Interaction
      Domain</a>.  Changes made to this document can be found in the
-   <a href='https://dvcs.w3.org/hg/webperf/file/tip/specs/RequestAnimationFrame/'>W3C
+   <a href='https://w3c.github.io/web-performance/specs/RequestAnimationFrame/'>W3C
      public Mercurial server</a>.</p>
 
 <?sotd-bottom http://www.w3.org/2004/01/pp-impl/45211/status?>
@@ -351,10 +351,10 @@ this specification: Boris Zbarsky, Jonas Sicking, Robert O’Callahan.</p>
 <dl>
   <dt id='ref-DOM'>[DOM]</dt>
   <dd><cite><a
-  href='http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html'>DOM4</a></cite>.
+  href='http://w3c.github.io/dom/'>DOM4</a></cite>.
   Anne van Kesteren, and al., Editors.  World Wide Web Consortium,
   December 2012.  Available at
-  http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html.</dd>
+  http://w3c.github.io/dom/.</dd>
 
    <dt>[<a id="ref-HTML5">HTML5</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/html5/'>HTML5</a></cite>,
