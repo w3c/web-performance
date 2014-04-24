@@ -1,5 +1,0 @@
-Tests got moved to
- https://github.com/w3c/web-platform-tests/
-
-For Open Pull Requests on Web Performance, see
- https://github.com/w3c/web-platform-tests/issues?labels=wg-webperf&state=open
