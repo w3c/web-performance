@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-february-12-2014">Editor's Draft February 12, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-25-2014">Editor's Draft April 25, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -275,7 +275,10 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 </pre>
 
 <p>
-  The <a href="#sendBeacon"><code>sendBeacon</code></a> method MUST asynchronously transmit data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. The User Agent MUST use the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a> to <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> the <a href="#url-parameter"><code>url</code></a> for transmitting the data. All relevant cookie headers MUST be included in the request. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data. To avoid the target confusion security risk, the User Agent MUST NOT display HTTP authorization prompts as a result of a <a href="#sendBeacon"><code>sendBeacon</code></a> method call.
+  The <a href="#sendBeacon"><code>sendBeacon</code></a> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+
+
+ To avoid the target confusion security risk, the User Agent MUST NOT display HTTP authorization prompts as a result of a <a href="#sendBeacon"><code>sendBeacon</code></a> method call.
 </p>
 
 <div class="parameters"><h4 id="parameters">Parameters</h4>
@@ -325,8 +328,17 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
 
-   <li><p>Set source origin to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <li><p>Set <var>origin</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/browsers.html#origin">origin</a>.
+
+   <li><p> Set <var>referrer</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a>'s
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document-url" title="concept-document-url">URL</a> if
+   <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a> is a
+   <a class="external" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, and
+   <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#api-referrer-source">API referrer source</a> otherwise
 
 
 
@@ -344,8 +356,8 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    these steps and set the return value to false.</p>
 
    <li>
-    <p>Otherwise, create the following temporary variable and then follow the rules below: let <var>encoding</var> be null, <var>mime type</var> be
-    null, and <var>transmittedData</var> be null.</p>
+    <p>Otherwise, create the following temporary variables and then follow the rules below: let <var>encoding</var> be null, <var>mime type</var> be
+    null, <var>author request headers</var> be null, and <var>transmittedData</var> be null.</p>
 
     <dl class="switch">
 
@@ -399,22 +411,60 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     </dl>
 
     <li>
+    <p>If <var>mime type</var> is not null, append a <code>Content-Type</code> header with value
+  <var >mime type</var> to <var>author request headers</var>.
+
+    <li>
         Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
         even after the document has unloaded.
     </li>
     
    <li>
-       <p>
-           If <var>url</var> is of the same <a href="#origin">origin</a> as <var>base</var>, 
-            <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetch</a> <var>url</var>
-            from the <var>base origin</var> using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
-            with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
-        </p>
-        <p>
-            Otherwise, make a <a class="external" href="http://www.w3.org/TR/cors/#cross-origin-request">cross-origin request</a> to <var>url</var>,
-            using the <code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
-            with <var>transmittedData</var>, <var>encoding</var>, and <var>mime type</var>.
-      </p>
+     <p>Let <var title="">req</var> be a new
+  <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as  follows:
+
+  <dl>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-method" title="concept-request-method">method</a>
+   <dd><code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
+   <dd><var>url</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
+   <dd><var>author request headers</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
+   <dd><var>origin</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
+   <dd>Set.
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-referrer" title="concept-request-referrer">referrer</a>
+   <dd><var>referrer</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
+   <dd><var>transmittedData</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
+   <dd><i title="">CORS</i>.
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
+   <dd><i title="">CORS</i>.
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
+   <dd>Set if either <a href="#request-url">request URL</a>'s
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
+   is not the empty string or <a href="#request-url">request URL</a>'s
+   <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is non-null.
+  </dl>
+
+ <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ `<code>Accept-Language</code>` is not in <var title="">req</var>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ append one with an appropriate
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+
+ <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
+ `<code>Accept</code>` is not in <var title="">req</var>'s
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
+ append one with `<code title="">*/*</code>` as
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
+
+ <li>
+  <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
    </li>
 </ol>
 <h2 id="references"><span class="secno">6 </span>References</h2>
