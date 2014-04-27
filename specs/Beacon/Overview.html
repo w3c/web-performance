@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-april-25-2014">Editor's Draft April 25, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-april-27-2014">Editor's Draft April 27, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -342,11 +342,8 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 
 
 
-   <li><p>Let <var title="">url</var> be a
-   <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#url">URL</a> with character encoding UTF-8.
-
-   <li><p><a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url" title="Resolve a URL">Resolve</a>
-   <var title="">url</var> relative to <var title="">base</var>. If the algorithm
+   <li><p>Set <var>resolvedUrl</var> to the result of <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url" title="Resolve a URL">resolving</a>
+   <code>url</code> relative to <var title="">base</var>. If the algorithm
    returns an error,
    <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
@@ -413,6 +410,10 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     <li>
     <p>If <var>mime type</var> is not null, append a <code>Content-Type</code> header with value
   <var >mime type</var> to <var>author request headers</var>.
+ Append a <code>Accept-Language</code> header with an appropriate
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>author request headers</var>.
+ Append a <code>Accept</code> header with <code title="">*/*</code> as the
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>author request headers</var>.
 
     <li>
         Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
@@ -427,7 +428,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-method" title="concept-request-method">method</a>
    <dd><code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
-   <dd><var>url</var>
+   <dd><var>resolvedUrl</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
    <dd><var>author request headers</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
@@ -442,26 +443,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dd><i title="">CORS</i>.
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
    <dd><i title="">CORS</i>.
-   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-use-url-credentials-flag" title="concept-request-use-url-credentials-flag">use URL credentials flag</a>
-   <dd>Set if either <a href="#request-url">request URL</a>'s
-   <a class="external" href="http://url.spec.whatwg.org/#concept-url-username" title="concept-url-username">username</a>
-   is not the empty string or <a href="#request-url">request URL</a>'s
-   <a class="external" href="http://url.spec.whatwg.org/#concept-url-password" title="concept-url-password">password</a> is non-null.
   </dl>
-
- <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
- `<code>Accept-Language</code>` is not in <var title="">req</var>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
- append one with an appropriate
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
-
- <li><p>If a <a class="external" href="http://fetch.spec.whatwg.org/#concept-header" title="concept-header">header</a>
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-name" title="concept-header-name">named</a>
- `<code>Accept</code>` is not in <var title="">req</var>'s
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>,
- append one with `<code title="">*/*</code>` as
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a>.
 
  <li>
   <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
