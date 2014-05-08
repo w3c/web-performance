@@ -663,7 +663,7 @@ partial interface <a href="http://www.w3.org/TR/navigation-timing-2/#performance
 	<p>The <code>setResourceTimingBufferSize</code> method, when invoked, must set the maximum number of <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources that may be stored in 
 	the buffer to the value of the maxSize parameter. The buffer is considered to be full if the number of entries in it is greater than or equal to maxSize.</p>
 	<p>If this method is not called, the user agent should store at least 150 <a href="#performanceresourcetiming">PerformanceResourceTiming</a> resources in the buffer, unless otherwise specified by the user agent.</p>
-    <p>If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed. In this case, the user agent MUST not fire the resourcetimingbufferfull event.</p>
+    <p>If the maxSize parameter is less than the number of elements currently stored in the buffer, no elements in the buffer are to be removed and the user agent must not fire the <code>resourcetimingbufferfull</code> event.</p>
 		<div class="parameters">
 			<p><b>Parameters</b></p>
 			in <code>maxSize</code> type of unsigned long
