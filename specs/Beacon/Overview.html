@@ -325,6 +325,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
   </p>
 
   <ol>
+   <li><p>Set <var>requestTime</var> to current time.
    <li><p>Set <var title="">base</var> to the <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#entry-settings-object">entry setting object's</a>
      <a class="external" href="http://www.w3.org/TR/html5/webappapis.html#api-base-url">API base URL</a>.
 
@@ -348,13 +349,13 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
-    
+
    <li><p>If <var>data</var> is not null and if the user agent limits the amount of data that can be queued to be sent using this API and the size of <var title="">data</var> causes that limit to be exceeded, terminate
    these steps and set the return value to false.</p>
 
    <li>
-    <p>Otherwise, create the following temporary variables and then follow the rules below: let <var>encoding</var> be null, <var>mime type</var> be
-    null, <var>author request headers</var> be null, and <var>transmittedData</var> be null.</p>
+    <p>Otherwise, create the following temporary variables and then follow the rules below: let <var>encoding</var> be null, <var>mimeType</var> be
+    null, <var>authorRequestHeaders</var> be null, and <var>transmittedData</var> be null.</p>
 
     <dl class="switch">
 
@@ -367,7 +368,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
      <dd>
       <p>If the object's
       <code class="external" title="dom-Blob-type"><a href="http://www.w3.org/TR/FileAPI/#dfn-BPtype">type</a></code>
-      attribute is not the empty string let <var>mime type</var> be its
+      attribute is not the empty string let <var>mimeType</var> be its
       value.</p>
 
       <p>Let <var>transmittedData</var> be the raw data represented by <var>data</var>.</p>
@@ -379,7 +380,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
      <dd>
       <p>Let <var>encoding</var> be UTF-8.</p>
 
-      <p>Let <var>mime type</var> be "<code>text/plain;charset=UTF-8</code>".</p>
+      <p>Let <var>mimeType</var> be "<code>text/plain;charset=UTF-8</code>".</p>
 
       <p>Let the <var>transmittedData</var>  be <var>data</var>
       <a class="external" href="http://www.w3.org/TR/WebIDL/#dfn-obtain-unicode" title="convert a DOMString to a sequence of Unicode characters">converted to Unicode</a>
@@ -396,7 +397,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
       with <var>data</var> as <var>form data set</var> and with UTF-8 as the
       explicit character encoding.</p>
 
-      <p>Let <var>mime type</var> be the concatenation of
+      <p>Let <var>mimeType</var> be the concatenation of
       "<code title="">multipart/form-data;</code>",
       a U+0020 SPACE character,
       "<code title="">boundary=</code>", and the
@@ -408,12 +409,12 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     </dl>
 
     <li>
-    <p>If <var>mime type</var> is not null, append a <code>Content-Type</code> header with value
-  <var >mime type</var> to <var>author request headers</var>.
+    <p>If <var>mimeType</var> is not null, append a <code>Content-Type</code> header with value
+  <var >mimeType</var> to <var>authorRequestHeaders</var>.
  Append a <code>Accept-Language</code> header with an appropriate
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>author request headers</var>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>authorRequestHeaders</var>.
  Append a <code>Accept</code> header with <code title="">*/*</code> as the
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>author request headers</var>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>authorRequestHeaders</var>.
 
     <li>
         Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
@@ -430,7 +431,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
    <dd><var>resolvedUrl</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
-   <dd><var>author request headers</var>
+   <dd><var>authorRequestHeaders</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
    <dd><var>origin</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
@@ -446,7 +447,9 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
   </dl>
 
  <li>
-  <p><a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
+  <p>Set <var>age</var> to current time minus <var>requestTime</var> expressed in seconds. Append a <code>Beacon-Age</code> header with value <var>age</var> to
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a> field of
+     <var>req</var>. <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
    </li>
 </ol>
 <h2 id="references"><span class="secno">6 </span>References</h2>
