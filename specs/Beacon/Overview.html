@@ -275,16 +275,14 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 </pre>
 
 <p>
-  The <a href="#sendBeacon"><code>sendBeacon</code></a> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a> provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+  The <a href="#sendBeacon"><code>sendBeacon</code></a> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the URL provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
 
-
- To avoid the target confusion security risk, the User Agent MUST NOT display HTTP authorization prompts as a result of a <a href="#sendBeacon"><code>sendBeacon</code></a> method call.
 </p>
 
 <div class="parameters"><h4 id="parameters">Parameters</h4>
     <h4 id="url-parameter"><code>url</code></h4>
     <p>
-        The <code>url</code> parameter indicates the resolved <a href="http://www.w3.org/TR/html5/urls.html#resolve-a-url">URL</a>
+        The <code>url</code> parameter indicates the URL
         where the data is to be transmitted.
     </p>
 
@@ -343,9 +341,9 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 
 
 
-   <li><p>Set <var>resolvedUrl</var> to the result of <a class="external" href="http://www.w3.org/TR/html5/infrastructure.html#resolve-a-url" title="Resolve a URL">resolving</a>
-   <code>url</code> relative to <var title="">base</var>. If the algorithm
-   returns an error,
+   <li><p>Set <var>parsedUrl</var> to the result of <a class="external" href="http://url.spec.whatwg.org/#concept-url-parser">parsing</a>
+   <code>url</code> with <var title="">base</var>. If the algorithm
+   returns an error, or if <var>parsedUrl</var>'s <a class="external" href="http://url.spec.whatwg.org/#concept-url-scheme">scheme</a> is not "http" or "https",
    <a class="external" href="http://www.w3.org/TR/dom/#concept-throw" title="concept-throw">throw</a> a
    "<code class="external"><a href="http://www.w3.org/TR/dom/#syntaxerror">SyntaxError</a></code>" exception and terminate
    these steps.
@@ -429,7 +427,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-method" title="concept-request-method">method</a>
    <dd><code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
-   <dd><var>resolvedUrl</var>
+   <dd><var>parsedUrl</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
    <dd><var>authorRequestHeaders</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
