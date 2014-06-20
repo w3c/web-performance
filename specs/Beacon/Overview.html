@@ -353,7 +353,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 
    <li>
     <p>Otherwise, create the following temporary variables and then follow the rules below: let <var>encoding</var> be null, <var>mimeType</var> be
-    null, <var>authorRequestHeaders</var> be null, and <var>transmittedData</var> be null.</p>
+    null, <var>headerList</var> be null, and <var>transmittedData</var> be null.</p>
 
     <dl class="switch">
 
@@ -408,11 +408,11 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 
     <li>
     <p>If <var>mimeType</var> is not null, append a <code>Content-Type</code> header with value
-  <var >mimeType</var> to <var>authorRequestHeaders</var>.
+  <var >mimeType</var> to <var>headerList</var>.
  Append a <code>Accept-Language</code> header with an appropriate
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>authorRequestHeaders</var>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>headerList</var>.
  Append a <code>Accept</code> header with <code title="">*/*</code> as the
- <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>authorRequestHeaders</var>.
+ <a class="external" href="http://fetch.spec.whatwg.org/#concept-header-value" title="concept-header-value">value</a> to <var>headerList</var>.
 
     <li>
         Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
