@@ -188,7 +188,7 @@ function logData() {
 </pre>
 </div>
 <p>
-    Using the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method, the data will be transmitted asynchronously 
+    Using the <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method, the data will be transmitted asynchronously 
     to the web server when the User Agent has had an opportunity to do so, without delaying the unload or 
     affecting the performance of the next navigation.
 </p>
@@ -196,7 +196,7 @@ function logData() {
 <div class="example">
 <p>
     The following example shows a theoretical analytics code pattern that submits data to a server using the by
-    using the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method.
+    using the <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method.
 </p>
 <pre>
 window.addEventListener('unload', logData, false);
@@ -266,16 +266,16 @@ title="">Foo</code>". </p>
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
+    boolean <a href="#dom-navigator-sendbeacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="http://www.w3.org/TR/XMLHttpRequest2/#formdata">FormData</a>)? <var>data</var> = null);
 };
 
 partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
-    boolean <a href="#dom-send-beacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="#formdata">FormData</a>)? <var>data</var> = null);
+    boolean <a href="#dom-navigator-sendbeacon">sendBeacon</a>(DOMString <var title="url">url</var>, optional (<a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a> or <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a> or DOMString or <a href="http://www.w3.org/TR/XMLHttpRequest2/#formdata">FormData</a>)? <var>data</var> = null);
 };
 </pre>
 
 <p>
-  The <a href="#sendBeacon"><code>sendBeacon</code></a> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the URL provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+  The <dfn id="dom-navigator-sendbeacon" title="dom-Navigator-sendBeacon"><code>sendBeacon</code></dfn> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the URL provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
 
 </p>
 
@@ -290,14 +290,14 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
     <p>
         The <code>data</code> parameter is the <a class="external" href="http://www.khronos.org/registry/typedarray/specs/latest/#ARRAYBUFFERVIEW">ArrayBufferView</a>,
         <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
-        DOMString, or <a href="#formdata">FormData</a> data that is to be transmitted.
+        DOMString, or <a href="http://www.w3.org/TR/XMLHttpRequest2/#formdata">FormData</a> data that is to be transmitted.
     </p>
     
 </div>
 
 <div class="returnvalues"><h4 id="return-values">Return Value</h4>
     <p>
-        The <a href="#sendBeacon"><code>sendBeacon</code></a> method returns true if the user agent is able to successfully queue the data for transfer. Otherwise it returns false.
+        The <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method returns true if the user agent is able to successfully queue the data for transfer. Otherwise it returns false.
     </p>
 
     <div class="note">
@@ -319,7 +319,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 <h3 id="sec-processing-model"><span class="secno">4.3 </span>Processing Model</h3>
 
   <p>
-      On calling the <a href="#dom-BeaconHTTPMethod-sendBeacon"><code>sendBeacon</code></a> method, the following steps must be run:
+      On calling the <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method, the following steps must be run:
   </p>
 
   <ol>
@@ -428,8 +428,8 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dd><code>POST</code> <a href="http://tools.ietf.org/html/rfc2616#section-5.1.1">HTTP method</a>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-url" title="concept-request-url">url</a>
    <dd><var>parsedUrl</var>
-   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a>
-   <dd><var>authorRequestHeaders</var>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-list">header list</a>
+   <dd><var>headerList</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-origin" title="concept-request-origin">origin</a>
    <dd><var>origin</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#force-origin-header-flag">force <code title="">Origin</code> header flag</a>
@@ -441,14 +441,14 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-body" title="concept-request-body">body</a>
    <dd><var>transmittedData</var>
    <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-mode" title="concept-request-mode">mode</a>
-   <dd><i title="">CORS</i>.
-   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-omit-credentials-mode" title="concept-request-omit-credentials-mode">omit credentials mode</a>
-   <dd><i title="">CORS</i>.
+   <dd><i title="">CORS</i>
+   <dt><a class="external" href="http://fetch.spec.whatwg.org/#concept-request-credentials-mode" title="concept-request-credentials-mode">credentials mode</a>
+   <dd><i title="">omit</i>
   </dl>
 
  <li>
   <p>Set <var>age</var> to current time minus <var>requestTime</var> expressed in seconds. Append a <code>Beacon-Age</code> header with value <var>age</var> to
-     <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-author-headers" title="concept-request-author-headers">author headers</a> field of
+     <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-author-headers">header list</a> field of
      <var>req</var>. <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
    </li>
 </ol>
