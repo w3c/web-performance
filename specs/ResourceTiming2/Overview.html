@@ -199,14 +199,15 @@ measure the time it takes to fetch a resource:</p>
         {
            var start = new Date().getTime();
            var image1 = new Image();
-           image1.onload = resourceTiming;
-           image1.src = 'http://www.w3.org/Icons/w3c_main.png';
-
            var resourceTiming = function() {
                var now = new Date().getTime();
                var latency = now - start;
                alert("End to end resource fetch: " + latency);
            };
+
+           image1.onload = resourceTiming;
+           image1.src = 'http://www.w3.org/Icons/w3c_main.png';
+
         } 
     &lt;/script&gt;
     &lt;img src="http://www.w3.org/Icons/w3c_home.png"&gt;
