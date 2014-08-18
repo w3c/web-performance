@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-may-22-2014">Editor's Draft May 22, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-august-17-2014">Editor's Draft August 17, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -275,7 +275,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 </pre>
 
 <p>
-  The <dfn id="dom-navigator-sendbeacon" title="dom-Navigator-sendBeacon"><code>sendBeacon</code></dfn> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the URL provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST honor the HTTP headers (including, in particular, redirects and HTTP cookie headers), but MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
+  The <dfn id="dom-navigator-sendbeacon" title="dom-Navigator-sendBeacon"><code>sendBeacon</code></dfn> method transmits data provided by the <a href="#data-parameter"><code>data</code></a> parameter to the URL provided by the <a href="#url-parameter"><code>url</code></a> parameter. User agents MUST ignore any entity bodies returned in the response. User agents MAY close the connection prematurely once they start receiving an entity body. The User Agent SHOULD transmit data at the earliest available opportunity, but MAY prioritize the transmission of data lower compared to other network traffic. The User Agent SHOULD make a best effort attempt to eventually transmit the data.
 
 </p>
 
@@ -455,12 +455,6 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 <h2 id="references"><span class="secno">6 </span>References</h2>
 
 <dl>
-    <dt id="refsCORS">[CORS]</dt>
-    <dd><cite><a href="http://www.w3.org/TR/cors/">Cross-Origin
-    Resource Sharing</a></cite>, Anne van Kesteren, Editor. W3C Recommendation, World Wide
-    Web Consortium, January 2014. This version of the CORS
-    specification is available from http://www.w3.org/TR/cors/.</dd>
-
     <dt id="refsDOM">[DOM]</dt>
 
     <dd><cite><a href="http://www.w3.org/TR/dom/">W3C DOM4</a></cite>,
