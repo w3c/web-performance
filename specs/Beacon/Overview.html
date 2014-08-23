@@ -46,7 +46,7 @@
 <div class="head">
 <h1>Beacon</h1>
 
-<h2 class="no-num no-toc" id="editors-draft-august-17-2014">Editor's Draft August 17, 2014</h2>
+<h2 class="no-num no-toc" id="editors-draft-august-23-2014">Editor's Draft August 23, 2014</h2>
 <dl>
   <dt>This version:</dt>
     <dd><a
@@ -57,12 +57,12 @@
       href="http://www.w3.org/TR/beacon/">http://www.w3.org/TR/beacon/</a></dd>
 
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Arvind Jain</span>, <span 
+    <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
       class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; 
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt;
       <i>(Until February 2014)</i></dd>
 </dl>
 
@@ -89,8 +89,8 @@
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
 <p>
-    This specification defines an interoperable means for site developers to asynchronously transfer 
-    small HTTP data from the User Agent to a web server. 
+    This specification defines an interoperable means for site developers to asynchronously transfer
+    small HTTP data from the User Agent to a web server.
 </p>
 
 <h2 class="no-num no-toc" id="status-of-this-document">Status of this
@@ -123,7 +123,7 @@ notices. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-beacon"><span class="secno">4 </span>Beacon</a> 
+  <li><a href="#sec-beacon"><span class="secno">4 </span>Beacon</a>
     <ol class="toc">
       <li><a href="#sec-beacon-introduction"><span class="secno">4.1 </span>Introduction</a></li>
       <li><a href="#sec-sendBeacon-method"><span class="secno">4.2 </span><code>sendBeacon</code> Method</a></li>
@@ -140,34 +140,34 @@ notices. </p>
 <p>This section is non-normative.</p>
 
 <p>
-    The Beacon specification defines an interface that web developers can use to asynchronously transfer 
+    The Beacon specification defines an interface that web developers can use to asynchronously transfer
     small HTTP data from the User Agent to a web server.
 </p>
 
 <p>
     The specification addresses the needs of analytics and diagnostics code that typically attempt to send data to a web server prior to the unloading
     of the document. Sending the data any sooner may result in a missed opportunity to gather data. However,
-    ensuring that the data has been sent during the unloading of a document is something that has 
+    ensuring that the data has been sent during the unloading of a document is something that has
     traditionally been difficult for developers.
 </p>
 <p>
     User agents will typically ignore asynchronous XMLHttpRequests made in an unload handler. To solve this problem,
     analytics and diagnostics code will typically make a synchronous XMLHttpRequest in an unload or beforeunload handler to submit
-    the data. The synchronous XMLHttpRequest forces the User Agent to delay unloading the document, and makes the 
-    next navigation appear to be slower. There is nothing the next page can do to avoid this perception of poor page 
+    the data. The synchronous XMLHttpRequest forces the User Agent to delay unloading the document, and makes the
+    next navigation appear to be slower. There is nothing the next page can do to avoid this perception of poor page
     load performance.
 </p>
 
-<p> 
+<p>
     There are other techniques used to ensure that data is submitted. One such technique is to delay
-    the unload in order to submit data by creating an Image element and setting its <code>src</code> attribute within 
-    the unload handler. As most user agents will delay the unload to complete the pending image load, data can be 
-    submitted during the unload. Another technique is to create a no-op loop for several seconds within the 
+    the unload in order to submit data by creating an Image element and setting its <code>src</code> attribute within
+    the unload handler. As most user agents will delay the unload to complete the pending image load, data can be
+    submitted during the unload. Another technique is to create a no-op loop for several seconds within the
     unload handler to delay the unload and submit data to a server.
 </p>
 
 <p>
-    Not only do these techniques represent poor coding patterns, some of them are unreliable and also result in the 
+    Not only do these techniques represent poor coding patterns, some of them are unreliable and also result in the
     perception of poor page load performance for the next navigation.
 </p>
 
@@ -188,11 +188,11 @@ function logData() {
 </pre>
 </div>
 <p>
-    Using the <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method, the data will be transmitted asynchronously 
-    to the web server when the User Agent has had an opportunity to do so, without delaying the unload or 
+    Using the <a href="#dom-navigator-sendbeacon"><code>sendBeacon</code></a> method, the data will be transmitted asynchronously
+    to the web server when the User Agent has had an opportunity to do so, without delaying the unload or
     affecting the performance of the next navigation.
 </p>
- 
+
 <div class="example">
 <p>
     The following example shows a theoretical analytics code pattern that submits data to a server using the by
@@ -257,12 +257,12 @@ title="">Foo</code>". </p>
 <p>This section is non-normative.</p>
 
 <p>
-    This specification defines an interoperable means for site developers to asynchronously transfer 
+    This specification defines an interoperable means for site developers to asynchronously transfer
     small HTTP data from the User Agent to a web server.
 </p>
 
 <h3 id="sec-sendBeacon-method"><span class="secno">4.2 </span><code>sendBeacon</code> Method</h3>
-  
+
 
 <pre class="idl">
 partial interface <dfn id="Navigator">Navigator</dfn> {
@@ -292,7 +292,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
         <a class="external" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a>,
         DOMString, or <a href="http://www.w3.org/TR/XMLHttpRequest2/#formdata">FormData</a> data that is to be transmitted.
     </p>
-    
+
 </div>
 
 <div class="returnvalues"><h4 id="return-values">Return Value</h4>
@@ -418,7 +418,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
         Set the return value to true and return the <code>sendBeacon()</code> call, but continue to runs the following steps. These steps may be run
         even after the document has unloaded.
     </li>
-    
+
    <li>
      <p>Let <var title="">req</var> be a new
   <a class="external" href="http://fetch.spec.whatwg.org/#concept-request" title="concept-request">request</a>, initialized as  follows:
@@ -447,7 +447,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
   </dl>
 
  <li>
-  <p>Set <var>age</var> to current time minus <var>requestTime</var> expressed in seconds. Append a <code>Beacon-Age</code> header with value <var>age</var> to
+  <p>Set <var>age</var> to current time minus <var>requestTime</var> expressed in seconds. If <var>age</var> is non-zero, append a <code>Beacon-Age</code> header with value <var>age</var> to
      <a class="external" href="http://fetch.spec.whatwg.org/#concept-request-header-list" title="concept-request-author-headers">header list</a> field of
      <var>req</var>. <a class="external" href="http://fetch.spec.whatwg.org/#concept-fetch" title="concept-fetch">Fetch</a> <var title="">req</var>.
    </li>
@@ -477,7 +477,7 @@ partial interface <dfn id="WorkerNavigator">WorkerNavigator</dfn> {
 
 <dt>[<a id="rfc6454">IETF RFC 6454</a>]</dt>
 <dd>
- <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>. 
+ <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>.
 </dd>
 
    <dt id="HTML5">[HTML5]</dt>
