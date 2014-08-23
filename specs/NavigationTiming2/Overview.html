@@ -54,15 +54,18 @@
     <dd><a
       href="https://w3c.github.io/web-performance/specs/NavigationTiming2/Overview.html">https://w3c.github.io/web-performance/specs/NavigationTiming2/Overview.html</a></dd>
   <dt>Editors:</dt>
-    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
-      class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; </dd>
-      <dd class="vcard"><span class="fn">Tobin Titus</span>, <span
-      class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:tobint@microsoft.com">tobint@microsoft.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Arvind Jain</span>, <span
       class="org">Google Inc.</span>, &lt;<a
       class="email" href="mailto:arvind@google.com">arvind@google.com</a>&gt; </dd>
+      <dd class="vcard"><span class="fn">Tobin Titus</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:tobint@microsoft.com">tobint@microsoft.com</a>&gt; </dd>
+      <dd class="vcard"><span class="fn">Przemysław Pietrzkiewicz</span>, <span
+      class="org">Google Inc.</span>, &lt;<a
+      class="email" href="mailto:ppi@google.com">ppi@google.com</a>&gt; </dd>
+    <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
+      class="org">Microsoft Corp.</span>, &lt;<a
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt;       <i>(Until February 2014)</i></dd>
 </dl>
 
    <p class=copyright><a
@@ -116,7 +119,7 @@ notices. </p>
    Domain</a>.
 
 <p>
- Navigation Timing 2 replaces the first version of <a href='#NavigationTiming'>Navigation Timing</a> 
+ Navigation Timing 2 replaces the first version of <a href='#NavigationTiming'>Navigation Timing</a>
  and includes the following changes:
 </p>
 <ul>
@@ -153,14 +156,14 @@ cite this document as other than work in progress. </p>
   <li><a href="#conformance-requirements"><span class="secno">2
     </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Timing</a> 
+  <li><a href="#sec-navigation-timing"><span class="secno">4 </span>Navigation Timing</a>
     <ol class="toc">
       <li><a href="#sec-Introduction"><span class="secno">4.1 </span> Introduction</a></li>
       <li><a href="#sec-performance-interface"><span class="secno">4.2 </span> The <code>Performance</code> interface</a></li>
 	    <li><a href="#sec-PerformanceNavigationTiming"><span class="secno">4.3 </span> The <code>PerformanceNavigationTiming</code> interface</a></li>
     </ol>
    </li>
-    <li><a href="#process"><span class="secno">5 </span>Process</a> 
+    <li><a href="#process"><span class="secno">5 </span>Process</a>
     <ol class="toc">
         <li><a href="#processing-model"><span class="secno">5.1 </span>Processing Model</a></li>
         <li><a href="#vendor-prefixes"><span class="secno">5.2 </span>Vendor Prefixes</a></li>
@@ -191,12 +194,12 @@ cite this document as other than work in progress. </p>
 
 <p>
 Accurately measuring performance characteristics of web applications is an important
-aspect of making web applications faster. 
-While JavaScript-based mechanisms, such as the one described in 
+aspect of making web applications faster.
+While JavaScript-based mechanisms, such as the one described in
 <a href="#JSMeasure">[JSMEASURE]</a>, can
 provide comprehensive instrumentation for
 user latency measurements within an application, in many cases, they are
-unable to provide a complete or detailed end-to-end latency picture. 
+unable to provide a complete or detailed end-to-end latency picture.
 </p>
 
 <div class="example">
@@ -226,7 +229,7 @@ first bit of JavaScript in the head is executed, but it does not give any
 information about the time it takes to get the page from the server. </p>
 
 <p>To address the need for complete and detailed information on the navigation of the
-document, the <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a> 
+document, the <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>
 specification defines the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
 interface. This interface allows JavaScript mechanisms to provide complete client-side latency
 measurements within applications. </p>
@@ -235,9 +238,9 @@ measurements within applications. </p>
 However, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
 interface was not defined to provide data in sub-millisecond resolution, which can be useful for analysis purposes.
 Further, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> interface
-does not participate in the 
-<a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a>, a unifying 
-interface to access and retrieve performance metrics from the performance timeline of a web application.  
+does not participate in the
+<a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a>, a unifying
+interface to access and retrieve performance metrics from the performance timeline of a web application.
 </p>
 
 <p>
@@ -251,16 +254,16 @@ the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">Performa
 </p>
 <pre>
 navigationStart:   1314223489190
-responseEnd:       1314223489290 
+responseEnd:       1314223489290
 </pre>
 </div>
 
 <p>
 This specification defines the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface which participates
-in the <a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> 
-to store and retrieve high resolution performance metric data related to the navigation of a document. 
-As the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface uses 
-<a href="http://www.w3.org/TR/2012/WD-hr-time-20120313/">High Resolution Time</a>, all time values are measured from the start 
+in the <a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a>
+to store and retrieve high resolution performance metric data related to the navigation of a document.
+As the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface uses
+<a href="http://www.w3.org/TR/2012/WD-hr-time-20120313/">High Resolution Time</a>, all time values are measured from the start
 of the navigation.
 </p>
 
@@ -274,7 +277,7 @@ responseEnd:       100.000
 </pre>
 </div>
 
-<p>The following script shows how a developer can use the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface 
+<p>The following script shows how a developer can use the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface
 to obtain accurate timing data related to the navigation of the document.
 </p>
 
@@ -286,13 +289,13 @@ to obtain accurate timing data related to the navigation of the document.
   &lt;/head&gt;
   &lt;body onload="init()"&gt;
     &lt;script&gt;
-       function init() 
+       function init()
        {
            var navigationTiming = performance.getEntriesByType("navigation")[0];
            if (window.console) console.log("Name: "        + navigationTiming.name      + "\n" +
                                            "Entry Type: " + navigationTiming.entryType + "\n" +
                                            "Start Time: " + navigationTiming.startTime + "\n" +
-                                           "Duration: "   + navigationTiming.duration  + "\n" + 
+                                           "Duration: "   + navigationTiming.duration  + "\n" +
                                            "Unload: "     + (navigationTiming.unloadEventEnd    - navigationTiming.unloadEventStart)  + "\n" +
                                            "Redirect: "   + (navigationTiming.redirectEnd       - navigationTiming.redirectStart)     + "\n" +
                                            "App Cache: "  + (navigationTiming.domainLookupStart - navigationTiming.fetchStart)        + "\n" +
@@ -354,13 +357,13 @@ title="">Foo</code>". </p>
 rather than the official term ECMAScript, since the term JavaScript is more widely known.</p>
 
 <p>
-  Throughout this work, all time values are measured in milliseconds since the start of 
-  navigation of the document. For example, the start of navigation of the document 
-  occurs at time 0. The term <i>current time</i> refers to the number of milliseconds 
-  since the start of navigation of the document until the current moment in time. 
+  Throughout this work, all time values are measured in milliseconds since the start of
+  navigation of the document. For example, the start of navigation of the document
+  occurs at time 0. The term <i>current time</i> refers to the number of milliseconds
+  since the start of navigation of the document until the current moment in time.
   This definition of time is based on the High Resolution Time specification
   [<a href="http://www.w3.org/TR/hr-time/">High Resolution Time</a>] and is different
-  from the definition of time used in the Navigation Timing specification 
+  from the definition of time used in the Navigation Timing specification
   [<a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>],
   where time is measured in milliseconds since midnight of January 1, 1970 (UTC).
 </p>
@@ -372,14 +375,14 @@ rather than the official term ECMAScript, since the term JavaScript is more wide
 
 <p>
 	This specification defines the <a href="#dom-window-performance">Performance</a> interface
-  to host performance related attributes and methods, and the 
-  <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface 
-  to store and retrieve high resolution performance metric data related to the navigation of a document. 
+  to host performance related attributes and methods, and the
+  <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface
+  to store and retrieve high resolution performance metric data related to the navigation of a document.
 </p>
 
 <h3 id="sec-performance-interface"><span class="secno">4.2 </span> The <code><a href="#dom-window-performance">Performance</a> </code> interface</h3>
 <p>
-The <a href="#dom-window-performance">Performance</a> interface hosts performance related attributes and methods. 
+The <a href="#dom-window-performance">Performance</a> interface hosts performance related attributes and methods.
 </p>
 
 <pre class="idl">interface <dfn id="performance">Performance</dfn> : EventTarget {};
@@ -414,8 +417,8 @@ partial interface Window {
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadstart" title="loadeventstart">loadEventStart</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-loadend" title="loadeventend">loadEventEnd</a>;
   readonly attribute <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> <a href="#dom-performancenavigationtiming-prerenderswitch" title="prerenderswitch">prerenderSwitch</a>;
-  
-  readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>; 
+
+  readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
 };
 
@@ -423,8 +426,8 @@ enum <dfn id="NavigationType">NavigationType</dfn> { "navigate", "reload", "back
 </pre>
 
 <p>
-The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface participates in the 
-	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the 
+The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface participates in the
+	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> and extends the following attributes of the
     <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:
 </p>
 
@@ -432,13 +435,13 @@ The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> inter
     <p>
     	The <code id="name-attribute">name</code> attribute MUST return the DOMString <code>document</code>.
    	</p>
-    
+
     <p>
         The <code id="entryType-attribute">entryType</code> attribute MUST return the DOMString <code id="perf-navigation">navigation</code>.
     </p>
-    
+
     <p>
-        The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+        The <code id="startTime-attribute">startTime</code> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 	    with a time value of 0.
     </p>
 
@@ -454,26 +457,26 @@ The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> inter
 <p>If the previous document and the current document have the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a>
 [<a href='#rfc6454'>IETF RFC 6454</a>],
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts
 the <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#unloading-documents">unload</a>
-event of the previous document. 
+event of the previous document.
 
 If there is no previous document or the previous document has a
 different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+current document, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-unloadeventend">unloadEventEnd</dfn></code> attribute</h4>
 
 <p>If the previous document and the current document have the
 same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent finishes the
 <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#unload-a-document">unload</a>
 event of the previous document. If there is no previous document or the previous document has
 a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <p>If there are HTTP redirects
@@ -481,7 +484,7 @@ with a time value equal to zero.</p>
 when navigating and not all the redirects or equivalent are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 both <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a> and
-<a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-linknegotiationstart">linkNegotiationStart</dfn></code> attribute</h4>
@@ -503,9 +506,9 @@ available MUST set it as undefined.  If the network interface is not immediately
 <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if all the redirects or equivalent are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the <a href="#dom-performancenavigationtiming-fetchstart">starting time
-of the fetch</a> that initiates the redirect. Otherwise, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+of the fetch</a> that initiates the redirect. Otherwise, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-redirectend">redirectEnd</dfn></code> attribute </h4>
@@ -514,26 +517,26 @@ with a time value equal to zero.</p>
 <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and all redirects and equivalents are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after receiving the last byte of
-the response of the last redirect. Otherwise, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+the response of the last redirect. Otherwise, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-fetchstart">fetchStart</dfn></code> attribute</h4>
 
 <p>If the new resource is to be
 <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">fetched</a> using HTTP GET
-<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-get">or 
-equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-get">or
+equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts
 checking <a href="http://www.w3.org/html/wg/drafts/html/master/single-page.html#relevant-application-cache">
-any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
-with a time value equal to the time when the user agent starts 
+any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time when the user agent starts
 <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">fetching</a> the resource.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domainlookupstart">domainLookupStart</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts the domain name
 lookup for the current document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
@@ -544,7 +547,7 @@ this attribute MUST return the same value as <a href="#dom-performancenavigation
 
 <h4><code><dfn id="dom-performancenavigationtiming-domainlookupend">domainLookupEnd</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent
 finishes the domain name lookup for the current document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
@@ -559,7 +562,7 @@ this attribute MUST return the same value as <a href="#dom-performancenavigation
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a> [<a href='#rfc2616'>RFC 2616</a>]
 is part of the <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#fetching-resources">
 fetching process</a>. It's covered by the
-<a href="#dom-performancenavigationtiming-requeststart">requestStart</a>, 
+<a href="#dom-performancenavigationtiming-requeststart">requestStart</a>,
 <a href="#dom-performancenavigationtiming-responsestart">responseStart</a> and
 <a href="#dom-performancenavigationtiming-responseend">responseEnd</a> attributes.</p>
 </div>
@@ -575,7 +578,7 @@ starts and ends the domain data retrieval from the cache. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-connectstart">connectStart</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent start
 establishing the connection to the server to retrieve the document.
 If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
@@ -586,7 +589,7 @@ this attribute MUST return value of <a href="#dom-performancenavigationtiming-do
 
 <h4><code><dfn id="dom-performancenavigationtiming-connectend">connectEnd</dfn></code> attribute </h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent
 finishes establishing the connection to the server to retrieve the current document.
 If a <a
@@ -613,7 +616,7 @@ such as SSL handshake and SOCKS authentication.
 available MUST set it as undefined. When this attribute is available, if the
 <a href="#rfc3986">scheme</a> of the
 current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
-attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts the
 handshake process to secure the current connection. If this attribute is
 available but HTTPS is not used, this attribute MUST return zero.
@@ -621,7 +624,7 @@ available but HTTPS is not used, this attribute MUST return zero.
 
 <h4><code><dfn id="dom-performancenavigationtiming-requeststart">requestStart</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent
 starts requesting the current document from the server, or from
 <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">
@@ -646,7 +649,7 @@ sending the request due to the HTTP layer encapsulation.</li>
 
 <h4><code><dfn id="dom-performancenavigationtiming-responsestart">responseStart</dfn></code> attribute </h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent receives the first
 byte of the response from the server, or from
 <a href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
@@ -654,7 +657,7 @@ application caches</a> or from local resources. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-responseend">responseEnd</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent
 receives the last byte of the current document or immediately before the
 transport connection is closed, whichever comes first. The document here
@@ -664,15 +667,15 @@ application caches</a> or from local resources.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domloading">domLoading</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
-document readiness</a> to 
+document readiness</a> to
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">"loading"</a>.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-dominteractive">domInteractive</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
 document readiness</a> to
@@ -680,24 +683,24 @@ document readiness</a> to
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcontenteventstart">domContentLoadedEventStart</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent fires <a
 href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">the DOMContentLoaded
 event</a> at the Document.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcontenteventend">domContentLoadedEventEnd</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the document's <a
 href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-domcomplete">domComplete</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">current
-document readiness</a> to 
+document readiness</a> to
 <a href="http://www.w3.org/html/wg/drafts/html/master/syntax.html#the-end">"complete"</a>.</p>
 
 <p>If the <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">
@@ -706,7 +709,7 @@ current document readiness</a> changes to the same state multiple times,
 <a href="#dom-performancenavigationtiming-dominteractive">domInteractive</a>,
 <a href="#dom-performancenavigationtiming-domcontenteventstart">domContentLoadedEventStart</a>,
 <a href="#dom-performancenavigationtiming-domcontenteventend">domContentLoadedEventEnd</a> and
-<a href="#dom-performancenavigationtiming-domcomplete">domComplete</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<a href="#dom-performancenavigationtiming-domcomplete">domComplete</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time of the first
 occurrence of the corresponding
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#current-document-readiness">document readiness</a>
@@ -714,25 +717,25 @@ change.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-loadstart">loadEventStart</dfn></code> attribute </h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the load event of
-the current document is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+the current document is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not
 fired yet.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-loadend">loadEventEnd</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time when the load event of the current
-document is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+document is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-prerenderswitch">prerenderSwitch</dfn></code> attribute</h4>
 
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> 
+<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/2013/PR-page-visibility-20130219/#dom-document-visibilitystate">visibilityState</a>
-from <code>prerender</code> to <code>visible</code>. If the document has not been prerendered by the User Agent, this attribute MUST return a 
+from <code>prerender</code> to <code>visible</code>. If the document has not been prerendered by the User Agent, this attribute MUST return a
 <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value equal to zero.
 </p>
 
@@ -782,10 +785,10 @@ origin</a> as the destination document, this attribute MUST return zero. </p>
 <div class="example">
 <div class="exampleHeader">Illustration</div>
 <p>This illustration is non-normative.</p>
-<p>The following graph illustrates the timing attributes defined by the 
+<p>The following graph illustrates the timing attributes defined by the
 <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface
 with or without redirect, respectively. Attributes underlined may not be
-available in navigation involving documents from different 
+available in navigation involving documents from different
 <a href="http://tools.ietf.org/html/rfc6454">origins</a>. User
 agents may perform internal processing in between timings, which allow for
 non-normative intervals between timings.</p>
@@ -903,7 +906,7 @@ non-normative intervals between timings.</p>
     </ol>
   </li>
   <li id="step-create-object">Create a new <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> object.
-  </li>      
+  </li>
   <li>Set <a href="#name-attribute">name</a> to the DOMString <code>document</code>.</li>
   <li>Set <a href="#entryType-attribute">entryType</a> to the DOMString <code>navigation</code>.</li>
   <li>Set <a href="#startTime-attribute">startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero.</li>
@@ -924,9 +927,9 @@ non-normative intervals between timings.</p>
         let the navigation type be the DOMString <a href="#dom-performancenavigationtiming-typebackforward">back_forward</a>.</li>
     </ol>
   </li>
-  <li>If the current document and the previous document are from different 
+  <li>If the current document and the previous document are from different
     <a href="http://tools.ietf.org/html/rfc6454">origins</a>,
-    set both <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and 
+    set both <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and
     <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> to 0 then go to step
     <a href="#step-linknegotiation-start">10</a>. Otherwise, record <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a>
     as the time immediately before the unload event.</li>
@@ -953,7 +956,7 @@ non-normative intervals between timings.</p>
     go to step <a href="#step-request-start">18</a>.</li>
   <li>If no domain lookup is required, go to step <a
     href="#step-connect-start">16</a>. Otherwise, immediately before a user
-    agent starts the domain name lookup, record the time as 
+    agent starts the domain name lookup, record the time as
     <a href="#dom-performancenavigationtiming-domainlookupstart">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-domainlookupend">domainLookupEnd</a>
     immediately after the domain name lookup is successfully done. A user
@@ -984,7 +987,7 @@ non-normative intervals between timings.</p>
     request for the document, record the current time as <a
     href="#dom-performancenavigationtiming-requeststart">requestStart</a>.</li>
   <li id="step-response-start">Record the time as <a href="#dom-performancenavigationtiming-responsestart">
-    responseStart</a> immediately after the user agent receives the first byte 
+    responseStart</a> immediately after the user agent receives the first byte
     of the response.</li>
   <li id="step-response-end">Record the time as <a
     href="#dom-performancenavigationtiming-responseend">responseEnd</a> immediately after receiving the
@@ -1012,7 +1015,7 @@ non-normative intervals between timings.</p>
         set <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a>,
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
-        <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> and 
+        <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> and
         <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
         return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
@@ -1020,7 +1023,7 @@ non-normative intervals between timings.</p>
         set <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a>,
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
-        <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and 
+        <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and
         <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
         return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
       <li>Increment <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> by 1.</li>
@@ -1031,7 +1034,7 @@ non-normative intervals between timings.</p>
       <li>Set all the attributes in window.performance.timing to 0 except
         <a href="#startTime-attribute">startTime</a>,
         <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a>,
-        <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>, 
+        <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a> and
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a>.</li>
       <li>Return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
@@ -1085,7 +1088,7 @@ e.g., for experimental purposes, vendors MUST use the following extension mechan
   <li>return a DOMString in the following naming convention: [vendorprefix]_[type], where [vendorprefix] is a name
   that identifies the vendor.</li>
   </ul>
-</li>  
+</li>
 <li>If the extension is a new timing attribute, it MUST
   <ul>
   <li>follow the naming convention: [vendorprefix]TimeAttribute, where [vendorprefix] identifies
@@ -1137,21 +1140,21 @@ all so it's not always feasible to mitigate this attack.</p>
 <dl>
 <dt><a id="rfc2119">[IETF RFC 2119]</a></dt>
 <dd>
- <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>. 
+ <cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner, Author. Internet Engineering Task Force, March 1997. Available at <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.
 </dd>
 <dt><a id="rfc2616">[IETF RFC 2616]</a></dt>
 <dd>
- <cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>. 
+ <cite><a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding et al., Authors. Internet Engineering Task Force, June 1999. Available at <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>.
 </dd>
 
 	<dt>[<a id="rfc3986">IETF RFC 3986</a>]</dt>
 
 	<dd>
-	<cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee et al, Authors. Internet Engineering Task Force, January 2005. Available at <a href='http://www.ietf.org/rfc/rfc3986.txt'>http://www.ietf.org/rfc/rfc3986.txt</a>. 	
+	<cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee et al, Authors. Internet Engineering Task Force, January 2005. Available at <a href='http://www.ietf.org/rfc/rfc3986.txt'>http://www.ietf.org/rfc/rfc3986.txt</a>.
 	</dd>
 <dt>[<a id="rfc6454">IETF RFC 6454</a>]</dt>
 <dd>
- <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>. 
+ <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth, Author.  Internet Engineering Task Force, December 2011. Available at <a href="http://www.ietf.org/rfc/rfc6454.txt">http://www.ietf.org/rfc/rfc6454.txt</a>.
 </dd>
 <dt>[<a id="ECMA262">ECMA-262</a>]</dt><dd>
 	<cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>, 5.1
@@ -1167,10 +1170,10 @@ all so it's not always feasible to mitigate this attack.</p>
 
    <dt>[<a id="A1">Page Visibility</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2013/PR-page-visibility-20130219/'>Page Visibility</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, February 2013. This version of the Page Visibility specification is available from http://www.w3.org/TR/2013/PR-page-visibility-20130219/. The <a href='http://www.w3.org/TR/page-visibility/'>latest version of Page Visibility</a> is available at http://www.w3.org/TR/page-visibility/.</dd>
-    
+
    <dt>[<a id="PerformanceTimeline">Performance Timeline</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2012/CR-performance-timeline-20120726/'>Performance Timeline</a></cite>, Jatinder Mann, et al, Editors. World Wide Web Consortium, July 2012. This version of the Performance Timeline specification is available from http://www.w3.org/TR/2012/CR-performance-timeline-20120726/. The <a href='http://www.w3.org/TR/performance-timeline/'>latest version of Performance Timeline</a> is available at http://www.w3.org/TR/performance-timeline/.</dd>
-   
+
    <dt>[<a id="WebIDL">Web IDL</a>]</dt>
    <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">Web IDL</a></cite>, Cameron McCormack, Editor. World Wide Web Consortium, April 2012. This version of the Web IDL specification is available from http://www.w3.org/TR/2012/CR-WebIDL-20120419/. The <a href="http://www.w3.org/TR/WebIDL/">latest version of Web IDL</a> is available at http://www.w3.org/TR/WebIDL/.</dd>
 
