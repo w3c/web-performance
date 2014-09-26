@@ -1,7 +1,16 @@
 WebPerf Specifications
 ==============================
 
-Editors' drafts from the Web Performance Working Group.
+*Old* Editors' drafts from the Web Performance Working Group.
+
+See instead:
+ http://w3c.github.io/navigation-timing/
+ http://w3c.github.io/page-visibility/
+ http://w3c.github.io/animation-timing/
+ http://w3c.github.io/hr-time/
+ http://w3c.github.io/beacon/
+ http://w3c.github.io/resource-hints/
+ http://w3c.github.io/performance-timeline/
 
 Web Performance tests can be found in [web-platforms-tests][WPT].
 
