@@ -39,6 +39,11 @@
 <body class="draft">
 
 <div class="head">
+
+<div style='background: red; color: white'>
+This specification is no longer maintained and has been abandonned. Folks should look at <a href='http://w3c.github.io/resource-hints/'>resource hints</a> instead.
+</div>
+
 <h1>Resource Priorities</h1>
 
 <h2 class="no-num no-toc" id="editors-draft-March-19-2014">Editor's Draft April 16, 2014</h2>
@@ -60,7 +65,7 @@
       class="email" href="mailto:simonjam@google.com">simonjam@google.com</a>&gt; </dd>
     <dd class="vcard"><span class="fn">Jatinder Mann</span>, <span
       class="org">Microsoft Corp.</span>, &lt;<a
-      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt; 
+      class="email" href="mailto:jmann@microsoft.com">jmann@microsoft.com</a>&gt;
       <i>(Until February 2014)</i> </dd>
 </dl>
 
@@ -124,7 +129,7 @@ notices. </p>
   </li>
   <li><a href="#conformance-requirements"><span class="secno">2 </span>Conformance requirements</a></li>
   <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
-  <li><a href="#sec-resource-priorities"><span class="secno">4 </span>Resource Priorities</a> 
+  <li><a href="#sec-resource-priorities"><span class="secno">4 </span>Resource Priorities</a>
     <ol class="toc">
 		<li><a href="#sec-resource-priorities-introduction"><span class="secno">4.1 </span>Introduction</a></li>
 		<li><a href="#attr-lazyload"><span class="secno">4.2 </span>The <code>lazyload</code> attribute</a></li>
@@ -163,12 +168,12 @@ notices. </p>
 <p>This section is non-normative.</p>
 
 <p>
-    The Resource Priorities specification defines a means for site developers to programmatically give 
-    the User Agent hints on the download priority of a resource. Without knowing the download priority of 
+    The Resource Priorities specification defines a means for site developers to programmatically give
+    the User Agent hints on the download priority of a resource. Without knowing the download priority of
     a resource, the User Agent will typically download resources in document order. However, the download
     order may not be best optimized for improving both the perceived and real page load performance.
 	By specifying lower priority resources using the <a href="#attr-lazyload"><code>lazyload</code></a> attribute,
-	the User Agent is able to better optimize download order when the User Agent is in a resource constrained 
+	the User Agent is able to better optimize download order when the User Agent is in a resource constrained
 	environment and sooner execute scripts triggered by the load event of the Document.
 </p>
 
@@ -177,17 +182,17 @@ notices. </p>
 	Today, most developers trigger script execution based on the load event of the Document. However,
 	the load event can be delayed by resources that are not necessary for page load visuals and do not interact
 	with script. For example, a site may have images well below the fold that are delaying
-	how long it takes the load event of the document to fire, delaying scripts from executing. Specifying 
+	how long it takes the load event of the document to fire, delaying scripts from executing. Specifying
 	the <code>lazyload</code> attribute on an element downloading a resource allows the User Agent to not block
-	the load event of the Document on those resources. By specifying the <code>lazyload</code> attribute on 
-	resources that have no interaction with script or are not necessary	for above the fold visuals, 
+	the load event of the Document on those resources. By specifying the <code>lazyload</code> attribute on
+	resources that have no interaction with script or are not necessary	for above the fold visuals,
 	scripts can execute sooner, improving real world page load performance.
 </p>
 
 <h3 id="intro-download-priority"><span class="secno">1.2 </span> Optimizing download priority during network contention</h3>
 <p>
     Site developers can improve the perception of page load performance by
-    optimizing the download of resources when there is network resource contention such that downloads for resources 
+    optimizing the download of resources when there is network resource contention such that downloads for resources
 	not required to create the above the fold visuals are prioritized lower.
 	However, determining which resources are required to create the above the fold visuals for a web page
     is something the User Agent cannot easily determine on its own. Instead, the site developer is in the
@@ -196,8 +201,8 @@ notices. </p>
 <div class="example">
     <p>
         The following example shows a theoretical web page that doesn't specify the download priority of resources.
-        In this example, the site developer will use Stylesheets from Styles.css and script within Visuals.js 
-        to re-layout the page such that Logo.png, Header.png, and MainContent.mp4 will be shown above the fold, 
+        In this example, the site developer will use Stylesheets from Styles.css and script within Visuals.js
+        to re-layout the page such that Logo.png, Header.png, and MainContent.mp4 will be shown above the fold,
         whereas AdditionalImages1.png and AdditionalImages2.png will be shown below the fold. Animations.css is used
         to display an animation when a user clicks on an image and Analytics.js is used to collect analytics information,
 		both not executed during the page load.
@@ -222,11 +227,11 @@ notices. </p>
 </div>
 
 <p>
-    As the example page has been specified, a User Agent may download resources in the following order: root document, 
-    CSS in document order, JavaScript in document order, and everything else in document order. In this case, 
-    AdditionalImages1.png and AddtionalImages.png will be downloaded before MainContent.mp4, even though they will not 
-    be displayed above the fold when the page loads. Additionally, Animations.css and Analytics.js will be downloaded 
-    prior to the visual aspect of the page, even though they won't be used in the page load sequence. 
+    As the example page has been specified, a User Agent may download resources in the following order: root document,
+    CSS in document order, JavaScript in document order, and everything else in document order. In this case,
+    AdditionalImages1.png and AddtionalImages.png will be downloaded before MainContent.mp4, even though they will not
+    be displayed above the fold when the page loads. Additionally, Animations.css and Analytics.js will be downloaded
+    prior to the visual aspect of the page, even though they won't be used in the page load sequence.
 </p>
 
 <p>
@@ -260,20 +265,20 @@ notices. </p>
 </div>
 
 <p>
-    In this example page, using the <a href="#attr-lazyload"><code>lazyload</code></a> attribute 
-    User Agent may instead download resources in the following order: root document, 
+    In this example page, using the <a href="#attr-lazyload"><code>lazyload</code></a> attribute
+    User Agent may instead download resources in the following order: root document,
     Styles.css, Visuals.js, Logo.png, Header.png, MainContent.mp4, Animations.css, Analytics.js, AdditionalImages1.png
-    and AdditionalImages2.png. 
+    and AdditionalImages2.png.
 </p>
 
 <h3 id="intro-proactively-loading"><span class="secno">1.3 </span> Proactively loading resources</h3>
 
 <p>
 	Some applications require a large number of resources that may not be required immediately. For example,
-	a Canvas game may have multiple game levels with different assets required for each level. 
-	Instead of slowing down the initial application loading experience by loading all assets during the 
-	page load, developers can use the <code>lazyload</code>	attribute on resources that they do not need immediately. 
-	These resources won't block script execution, as the load event of the Document will not be delayed, and in cases 
+	a Canvas game may have multiple game levels with different assets required for each level.
+	Instead of slowing down the initial application loading experience by loading all assets during the
+	page load, developers can use the <code>lazyload</code>	attribute on resources that they do not need immediately.
+	These resources won't block script execution, as the load event of the Document will not be delayed, and in cases
 	of network resource contention, the User Agent will optimize downloading the higher priority resources.
 </p>
 
@@ -301,28 +306,28 @@ notices. </p>
     var URL_GENERAL_ASSETS = "assets\\general\\";
 
    function init() {
-      // Load game assets 
+      // Load game assets
       loadGameAssets();
-	  
+
       // Play game
    }
 
-   function loadGameAssets() { 
+   function loadGameAssets() {
       var i, j, k;
-   
+
       // Load assets required for Level 1
       for (i = 0; i &lt; NUM_ASSETS_LEVEL1; i++) {
          assets[i] = new Image();
          assets[i].src = URL_LEVEL1_ASSETS + i + ".png";
       }
-      
+
       // Lazyload assets required for Level 2
       for (j = 0; j &lt; NUM_ASSETS_LEVEL2; j++) {
          assets[i + j] = new Image();
          assets[i + j].setAttribute('lazyload');
          assets[i + j].src = URL_LEVEL2_ASSETS + j + ".png";
       }
-	  
+
       // Load additional assets required for all levels
       for (k = 0; k &lt; NUM_ASSETS_GENERAL; k++) {
          assets[i + j + k] = new Image();
@@ -338,7 +343,7 @@ notices. </p>
 <p>
 	In the previous example, downloading the Background2.png specified in markup does not block the load event of the page
 	as it has been marked with <code>lazyload</code>. Similarly, for the dynamically loaded resources,
-	if there had been a network resource contention, the User Agent would have prioritized the downloads for level 1 
+	if there had been a network resource contention, the User Agent would have prioritized the downloads for level 1
 	and general assets over level 2 assets.
 </p>
 
@@ -403,35 +408,35 @@ title="">Foo</code>". </p>
 <h3 id="the-lazyload-attribute"><span class="secno">4.2 </span>The <code>lazyload</code> attribute</h3>
 
 <p>
-	The <dfn id="attr-lazyload"><code>lazyload</code></dfn> attribute is a boolean and IDL attribute 
-	that indicates the priority order in which the User Agent should download the resource associated with 
-	the element in cases of <a href="#network-resource-contention">network resource contention</a>. 
-</p>    
+	The <dfn id="attr-lazyload"><code>lazyload</code></dfn> attribute is a boolean and IDL attribute
+	that indicates the priority order in which the User Agent should download the resource associated with
+	the element in cases of <a href="#network-resource-contention">network resource contention</a>.
+</p>
 <p>
-    If the User Agent determines that there is <a href="#network-resource-contention">network resource contention</a>, 
+    If the User Agent determines that there is <a href="#network-resource-contention">network resource contention</a>,
 	the User Agent SHOULD delay downloading resources associated with elements that have the <a href="#attr-lazyload"><code>lazyload</code></a>
-	<a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attribute">boolean attribute</a> specified on the 
+	<a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attribute">boolean attribute</a> specified on the
 	element until all other resources associated with elements that do not have the <a href="#attr-lazyload"><code>lazyload</code></a>
-	<a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attribute">boolean attribute</a> specified on the 
-	element have started downloading. 
+	<a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attribute">boolean attribute</a> specified on the
+	element have started downloading.
 </p>
 <div class="note">
 <div class="noteHeader">Note</div>
 <p>
 	An example of network resource contention can be if there is a connection contention where the User
-	Agent is using all available connections. A User Agent may give available TCP connections, 
-	or give a more optimized TCP connection if there is a choice between available connections, 
+	Agent is using all available connections. A User Agent may give available TCP connections,
+	or give a more optimized TCP connection if there is a choice between available connections,
 	to resources that don’t have the <code>lazyload</code> attribute.
 </p>
 </div>
 <p>
-    The <dfn id="dom-lazyload"><code>lazyload</code></dfn> IDL attribute MUST 
-	<a href="http://www.w3.org/TR/html5/infrastructure.html#reflect">reflect</a> the 
+    The <dfn id="dom-lazyload"><code>lazyload</code></dfn> IDL attribute MUST
+	<a href="http://www.w3.org/TR/html5/infrastructure.html#reflect">reflect</a> the
 	<a href="#attr-lazyload"><code>lazyload</code></a> boolean attribute value.
-</p>    
+</p>
 <p>
-    The <a href="#attr-lazyload"><code>lazyload</code></a> boolean and IDL attributes are supported 
-	on the following <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">HTML elements</a> 
+    The <a href="#attr-lazyload"><code>lazyload</code></a> boolean and IDL attributes are supported
+	on the following <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">HTML elements</a>
 	and <a href="http://www.w3.org/TR/SVG/intro.html#TermSVGDocumentFragment">SVG elements</a>
    capable of <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetching</a> resources:
 	<code><a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element">img</a></code>,
@@ -446,7 +451,7 @@ title="">Foo</code>". </p>
 	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#ImageElement">image</a></code>,
 	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/struct.html#UseElement">use</a></code>,
 	<code>svg</code> <code><a href="http://www.w3.org/TR/SVG/script.html#ScriptElement">script</a></code>,
-	and <code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>.	
+	and <code>svg</code> <code><a href="http://www.w3.org/TR/SVG/text.html#TRefElement">tref</a></code>.
 </p>
 
 </dl>
@@ -456,7 +461,7 @@ title="">Foo</code>". </p>
 <h4 id="the-img-element"><span class="secno">4.3.1 </span>The <dfn id="img"><code>img</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -474,7 +479,7 @@ partial interface <dfn id="htmlimagelement">HTMLImageElement</dfn> {
 
 <h4 id="the-audio-element"><span class="secno">4.3.2 </span>The <dfn id="audio"><code>audio</code></dfn> element</h4>
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -493,7 +498,7 @@ partial interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> {
 <h4 id="the-video-element"><span class="secno">4.3.3 </span>The <dfn id="video"><code>video</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -504,7 +509,7 @@ partial interface <dfn id="htmlvideoelement">HTMLVideoElement</dfn> {
 };</pre>
    </dd>
   </dl>
- 
+
 <p>
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element"><code>video</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
@@ -512,7 +517,7 @@ partial interface <dfn id="htmlvideoelement">HTMLVideoElement</dfn> {
 <h4 id="the-script-element"><span class="secno">4.3.4 </span>The <dfn id="script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -525,40 +530,40 @@ partial interface <dfn id="htmlscriptelement">HTMLScriptElement</dfn> {
   </dl>
   <p>
 	The <a href="http://www.w3.org/TR/html5/scripting-1.html#the-script-element"><code>script</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> boolean attribute, along with the <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-defer"><code>defer</code></a>
-	and	<a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a> boolean attributes, to indicate the order in which the user agent will download and execute the script. 
+	and	<a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a> boolean attributes, to indicate the order in which the user agent will download and execute the script.
  </p>
-	
+
  <p>
 	There are a few possible modes that can be selected using these attributes:
  </p>
- 
+
  <ul>
  <li><p>
 	If the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a> attributes
 	are present, if there is network resource contention the User Agent SHOULD delay downloading the script until after all other
 	<a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a>
-    without the <a href="#attr-lazyload"><code>lazyload</code></a> attribute that will be 
+    without the <a href="#attr-lazyload"><code>lazyload</code></a> attribute that will be
     <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch">fetching</a> a resource
     have started downloading, and then the script MUST be executed asynchronously, as soon as it is available.
 </p></li>
 
 <li><p>
 	If the <a href="#attr-lazyload"><code>lazyload</code></a> and <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-defer"><code>defer</code></a> attributes
-	are present, the <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-defer"><code>defer</code></a> attribute behavior takes precedence and the <a href="#attr-lazyload"><code>lazyload</code></a> 
+	are present, the <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-defer"><code>defer</code></a> attribute behavior takes precedence and the <a href="#attr-lazyload"><code>lazyload</code></a>
 	attribute will have no effect.
 </p></li>
 
 <li><p>
-	If only the <a href="#attr-lazyload"><code>lazyload</code></a> attribute is present, 
-	the User Agent MUST run the same steps as if both the <a href="#attr-lazyload"><code>lazyload</code></a> 
+	If only the <a href="#attr-lazyload"><code>lazyload</code></a> attribute is present,
+	the User Agent MUST run the same steps as if both the <a href="#attr-lazyload"><code>lazyload</code></a>
 	and <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a> attributes
 	were present.
 </p></li>
 
 
 <li><p>
-	If the <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a> 
-	IDL attribute of the <code>script</code> element is set to <code>false</code>, the <a href="#attr-lazyload"><code>lazyload</code></a> 
+	If the <a href="http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#attr-script-async"><code>async</code></a>
+	IDL attribute of the <code>script</code> element is set to <code>false</code>, the <a href="#attr-lazyload"><code>lazyload</code></a>
 	attribute will have no effect.
 </p></li>
 </ul>
@@ -566,7 +571,7 @@ partial interface <dfn id="htmlscriptelement">HTMLScriptElement</dfn> {
  <h4 id="the-link-element"><span class="secno">4.3.5 </span>The <dfn id="link"><code>link</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -583,22 +588,22 @@ partial interface <dfn id="htmllinkelement">HTMLLinkElement</dfn> {
 </p>
 
 <p>
-	The User Agent MUST NOT block rendering on stylesheets that have the 
+	The User Agent MUST NOT block rendering on stylesheets that have the
 	<a href="#attr-lazyload"><code>lazyload</code></a> boolean attribute specified on the associated <code>link</code> element or
 	the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true on the associated <code>link</code> element.
-</p>	
+</p>
 
 <p>
-	The User Agent parser MUST NOT block launching new script contexts on stylesheets that have the 
+	The User Agent parser MUST NOT block launching new script contexts on stylesheets that have the
 	<a href="#attr-lazyload"><code>lazyload</code></a> boolean attribute specified on the associated <code>link</code> element or
 	the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true on the associated <code>link</code> element.
-</p>	
+</p>
 
 
 <h4 id="the-embed-element"><span class="secno">4.3.6 </span>The <dfn id="embed"><code>embed</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
         <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -609,16 +614,16 @@ partial interface <dfn id="htmlembedelement">HTMLEmbedElement</dfn> {
 };</pre>
    </dd>
   </dl>
- 
+
 <p>
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element"><code>embed</code></a>
 	 element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
- 
+
  <h4 id="the-iframe-element"><span class="secno">4.3.7 </span>The <dfn id="iframe"><code>iframe</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
        <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -629,7 +634,7 @@ partial interface <dfn id="htmliframeelement">HTMLIFrameElement</dfn> {
 };</pre>
    </dd>
   </dl>
- 
+
 <p>
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element"><code>iframe</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
@@ -637,7 +642,7 @@ partial interface <dfn id="htmliframeelement">HTMLIFrameElement</dfn> {
 <h4 id="the-object-element"><span class="secno">4.3.8 </span>The <dfn id="object"><code>object</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
        <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -648,7 +653,7 @@ partial interface <dfn id="htmlobjectelement">HTMLObjectElement</dfn> {
 };</pre>
    </dd>
   </dl>
- 
+
 <p>
     The <a href="http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element"><code>object</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 </p>
@@ -656,7 +661,7 @@ partial interface <dfn id="htmlobjectelement">HTMLObjectElement</dfn> {
 <h4 id="the-svg-feImage"><span class="secno">4.3.9 </span>The <code>svg</code> <dfn id="svg-feImage"><code>feImage</code></dfn> filter primitive</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -672,12 +677,12 @@ partial interface <dfn id="svgfeimageelement">SVGFEImageElement</dfn> {
     The <a href="http://www.w3.org/TR/SVG11/filters.html#feImageElement"><code>svg feImage</code></a> primitive supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
 	If the <a href="http://www.w3.org/TR/SVG11/struct.html#ExternalResourcesRequiredAttribute"><code>externalResourcesRequired</code></a> attribute is set to true, the
 	<a href="#attr-lazyload"><code>lazyload</code></a> attribute will have no effect.
-</p> 
+</p>
 
 <h4 id="the-svg-image"><span class="secno">4.3.10 </span>The <code>svg</code> <dfn id="svg-image"><code>image</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -691,12 +696,12 @@ partial interface <dfn id="SVGImageElement">SVGImageElement </dfn> {
 
 <p>
     The <a href="http://www.w3.org/TR/SVG/struct.html#ImageElement"><code>svg image</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
-</p> 
+</p>
 
 <h4 id="the-svg-use"><span class="secno">4.3.11 </span>The <code>svg</code> <dfn id="svg"><code>use</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -710,12 +715,12 @@ partial interface <dfn id="SVGUseElement">SVGUseElement</dfn> {
 
 <p>
     The <a href="http://www.w3.org/TR/SVG/struct.html#UseElement"><code>svg use</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
-</p> 
+</p>
 
 <h4 id="the-svg-script"><span class="secno">4.3.12 </span>The <code>svg</code> <dfn id="svg-script"><code>script</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -729,12 +734,12 @@ partial interface <dfn id="SVGScriptElement">SVGScriptElement</dfn> {
 
 <p>
     The <a href="http://www.w3.org/TR/SVG/script.html#ScriptElement"><code>svg script</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
-</p> 
+</p>
 
 <h4 id="the-svg-tref"><span class="secno">4.3.13 </span>The <code>svg</code> <dfn id="svg-tref"><code>tref</code></dfn> element</h4>
 
   <dl class="element">
-  
+
    <dt>Content attributes:</dt>
    <dd><code><a href="#attr-lazyload">lazyload</a></code></dd>
    <dt>DOM interface:</dt>
@@ -748,21 +753,21 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
 
 <p>
     The <a href="http://www.w3.org/TR/SVG/text.html#TRefElement"><code>svg tref</code></a> element supports the <a href="#attr-lazyload"><code>lazyload</code></a> attribute.
-</p> 
+</p>
 
 <h3 id="sec-events"><span class="secno">4.4 </span>Events</h3>
 
 <h4 id="sec-load-event"><span class="secno">4.4.1 </span>The <code>load</code> event</h4>
 <p>
 	The <code>load</code> event of the Document MUST NOT be blocked by any <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a>
-	with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified or the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true. 
-	The <code>load</code> event of an <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> with  
+	with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified or the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true.
+	The <code>load</code> event of an <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">element</a> with
 	the <a href="#attr-lazyload"><code>lazyload</code></a> attribute MUST continue to be blocked until the resource is loaded.
 </p>
 
-<p>	
-	The <a href="#attr-lazyload"><code>lazyload</code></a> attribute MUST not change when the <code>DOMContentLoaded</code> event is fired or the behavior of the 
-  <code>loading</code>, <code>interactive</code>, and <code>complete</code> states of the Document's 
+<p>
+	The <a href="#attr-lazyload"><code>lazyload</code></a> attribute MUST not change when the <code>DOMContentLoaded</code> event is fired or the behavior of the
+  <code>loading</code>, <code>interactive</code>, and <code>complete</code> states of the Document's
   <code><a href="http://www.w3.org/TR/html5/dom.html#dom-document-readystate">readyState</a></code>	IDL attribute.
 </p>
 
@@ -770,12 +775,12 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
 
 <p>
 	Immediately after all <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a> with the <a href="#attr-lazyload"><code>lazyload</code></a> content attribute
-	specified or <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true have their resources downloaded, the User Agent MUST queue a task to fire a simple 
-	event <code><a href="#sec-lazyloaded-event">lazyloaded</a></code> at the Document. If there are no <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a> with the 
+	specified or <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true have their resources downloaded, the User Agent MUST queue a task to fire a simple
+	event <code><a href="#sec-lazyloaded-event">lazyloaded</a></code> at the Document. If there are no <a href="http://www.w3.org/TR/html5/infrastructure.html#html-elements">elements</a> with the
 	<a href="#attr-lazyload"><code>lazyload</code></a> content attribute specified or with the <a href="#attr-lazyload"><code>lazyload</code></a> IDL attribute set to true,
 	the User Agent MUST queue a task to fire the <code><a href="#sec-lazyloaded-event">lazyloaded</a></code> event at the Document immediately after the <code>load</code> event of the Document has been fired.
 </p>
-  
+
 
 <h2 id="references"><span class="secno">5 </span>References</h2>
 
@@ -796,7 +801,7 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
 
    <dt>[<a id="CSS">CSS</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/REC-CSS2-20110607/'>CSS 2.1</a></cite>, Bert Box, et al, Editors. World Wide Web Consortium, June 2011. This version of the CSS 2.1 specification is available from http://www.w3.org/TR/2011/REC-CSS2-20110607/. The <a href='http://www.w3.org/TR/CSS2/'>latest version of CSS 2.1</a> is available at http://www.w3.org/TR/CSS2/.</dd>
-   
+
    <dt>[<a id="SVG">SVG</a>]</dt>
    <dd><cite><a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/'>SVG 1.1</a></cite>, Erik Dahlström, et al, Editors. World Wide Web Consortium, August 2011. This version of the SVG 1.1 specification is available from http://www.w3.org/TR/2011/REC-SVG11-20110816/. The <a href='http://www.w3.org/TR/SVG11/'>latest version of SVG 1.1</a> is available at http://www.w3.org/TR/SVG/.</dd>
 </dl>
@@ -804,7 +809,7 @@ partial interface <dfn id="SVGTRefElement">SVGTRefElement</dfn> {
 <h2 id="acknowledgements">Acknowledgements</h2>
 
 <p>
-    We would like to sincerely thank Bruno Racineux, Jake Archibald, Jason Weber, Josh Tumath, Tony Ross, Travis Leithead, 
+    We would like to sincerely thank Bruno Racineux, Jake Archibald, Jason Weber, Josh Tumath, Tony Ross, Travis Leithead,
 	Yoav Weiss, Marcos Caceres, Brian Birtles, Ivan Kotenkov, Erik Dahlstrom, Boris Zbarsky, William Chan, and Shwetank Dixit
     to acknowledge their contributions to this work.
 </p>
