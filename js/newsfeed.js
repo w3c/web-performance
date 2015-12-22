@@ -5,7 +5,7 @@ try {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4
         && this.status == 200) {
-      var body = document.getElementById("w3c_content_body");
+      var body = document.getElementById("articles");
       var feed = this.responseXML;
       var items = feed.querySelectorAll("item");
       for (var i = 0; i < items.length; i++) {
