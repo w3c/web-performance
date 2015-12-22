@@ -20,7 +20,6 @@ ul, ul li {
   margin: 0; padding: 0;
 }
 
-
 /*** header ***/
 header {
   background: #4285F4;
@@ -33,6 +32,7 @@ header ul {
   justify-content: space-around;
 }
 header a {
+  border-bottom: 1px solid #4285F4;
   display: block;
   color: white;
   text-decoration: none;
@@ -40,7 +40,7 @@ header a {
   padding: 0.5rem;
 }
 header a:hover {
-  background: #ccc;
+  background: white;
   color: black;
   text-decoration: none;
   font-weight: bold;
@@ -81,7 +81,7 @@ main nav li {
 }
 main nav li:hover {
   background: #ccc;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid black;
 }
 main nav li:hover a {
   color: black;
@@ -127,7 +127,6 @@ footer {
   background: linear-gradient(to top left, #4285F4, white, white);
   background: #4285F4;
   color: white;
-  text-shadow: 1px 1px 1px black;
   margin: 0;
   padding: 0.5rem;
   font-size: small;
@@ -163,6 +162,5 @@ footer a {
     background: #4285F4;
     position: static;
     text-align: left;
-    text-shadow: none;
   }
 }
