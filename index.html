@@ -1,41 +1,171 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
- <title>Web Performance Area</title>
- <meta charset='utf-8'>
- <link href="http://www.w3.org/StyleSheets/TR/base.css" rel="stylesheet" type="text/css">
-<style>
-table { border-collapse: collapse; }
-th, td { border: 1px solid black; padding: 0.5ex; }
-td { text-align: left; }
-</style>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>W3C Web Performance Working Group</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, width = content-width, initial-scale = 1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <header>
+      <nav id='w3c_top'>
+        <ul class="main_nav">
+          <li class="first-item"><a href="https://www.w3.org/standards/">Standards</a></li>
+          <li><a href="https://www.w3.org/participate/">Participate</a></li>
+          <li><a href="https://www.w3.org/Consortium/membership">Membership</a></li>
+          <li><a href="https://www.w3.org/Consortium/">About W3C</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<div class="head">
+    <main>
+      <nav id='group'>
+        <h3>Group Details</h3>
+        <ul>
+          <li><a href="https://www.w3.org/2015/06/webperf">Charter</a></li>
+          <li><a href="https://www.w3.org/2004/01/pp-impl/45211/status">Join</a></li>
+          <li><a href="https://www.w3.org/2000/09/dbwg/details?group=45211&amp;public=1&amp;gs=1&amp;">Group Participants</a></li>
+          <li><a href="board/">GitHub Dashboard</a></li>
+          <li><a href="https://www.w3.org/2004/01/pp-impl/45211/status">Royalty-free Patent Policy</a></li>
+        </ul>
+        <h3>Drafts and Notes</h3>
+        <ul>
+          <li><a href="https://www.w3.org/wiki/Web_Performance/Publications">Publications and Status</a></li>
+          <li><a href="https://www.w3.org/TR/tr-groups-all#tr_Web_Performance_Working_Group">Technical reports</a></li>
+        </ul>
+        <h3>Testing</h3>
+        <ul>
+          <li><a href="https://testthewebforward.org/docs/">How to</a></li>
+          <li><a href='https://github.com/w3c/web-platform-tests/'>Test Suites</a></li>
+        </ul>
+        <h3>Communication</h3>
+        <ul>
+          <li><a href="https://github.com/orgs/w3c/teams/web-performance/repositories">Github</a></li>
+          <li><a href="http://lists.w3.org/Archives/Public/public-web-perf/">public-web-perf@w3.org</a></li>
+          <li><a href="https://www.w3.org/wiki/Web_Performance/Call_Information">Call Information</a></li>
+        </ul>
+      </nav>
 
-<a href="http://www.w3.org/"><img height="48" width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home"/></a>
+      <section id='content'>
+        <h1 class="title">Web Performance Working Group</h1>
 
-<h1>Web Performance</h1>
+        <section id="mission">
+          <h2>Our Mission</h2>
+          <p>The <strong>mission</strong> of the Web Performance Working Group is to provide methods to measure aspects of application performance of user agent features   and APIs.</p>
+        </section>
 
+        <p>The Co-Chairs of the Working Group are
+            <a href="mailto:igrigorik@gmail.com">Ilya Grigorik</a> and
+            <a href="mailto:toddreif@microsoft.com">Todd Reifsteck</a>. The W3C Team Contact for the Web Performance Working Group are
+            <a href="https://www.w3.org/People/all#plh">Philippe Le H&eacute;garet</a> and Xiaoqian Wu.
+        </p>
 
-   <hr class='top'>
-</div>
+        <p>
+          We have a <a href="https://w3c.github.io/perf-timing-primer/">primer for Web Performance Timing APIs</a>. That's a good introduction for you.
+        </p>
+        <section id='articles'>
+          <article class="line">
+            <h3>Real-world RAIL (Response, Animation, Idle, Load)</h3>
+            <p>
+              <a href='https://www.igvita.com/'>Ilya Grigorik</a> presented on <a href="https://www.youtube.com/watch?v=NrEjkflqPxQ">Quantify and improve real-world RAIL  </a  > during the Chrome Dev Summit 2015. Check it out as a good introduction to the work done in the Web Performance Working Group.
+            </p>
+          </article>
 
-<h2 class="no-num no-toc" id="intro">Introduction</h2>
+          <article class="line">
+            <h3>High Resolution Time Level 2 is ready</h3>
+            <p>
+              We intend to ship a revision of <a href='http://www.w3.org/TR/hr-time-2/'>High Resolution Time</a> that includes a proper definition for time origin and     worker support. Check it out and send us feedback.
+            </p>
+          </article>
+        </section>
+      </section>
 
-<p>This is the development space of the Web Performance Working Group.</p>
+      <aside class="infobar">
+        <h2>What is the Performance Timeline?</h2>
+        <p>Methods to store and retrieve high resolution performance metric data in a common performance timeline. See also our <a href="https://w3c.github.io/perf-timing-primer/">primer</a>.</p>
+        <section id='demo'>
+          <h3>Your User Agent:</h3>
 
-<ol>
-<li><a href='https://www.w3.org/wiki/Web_Performance/Publications'>Specifications</a></li>
-<li><a href='https://github.com/w3c/web-platform-tests/'>Test Suites</a></li>
-</ol>
+          <table id='timings'>
+            <thead>
+              <tr>
+                <th><a id='nav_timing_link' href='https://www.w3.org/TR/navigation-timing/'>Navigation Timing</a>:</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Redirect:</th><td><span  id='js_navigation_timing_redirect'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>App cache:</th><td><span  id='js_navigation_timing_app_cache'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>DNS lookup:</th><td><span  id='js_navigation_timing_dns_lookup'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>TCP Connection:</th><td><span  id='js_navigation_timing_connect'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>TCP Request:</th><td><span  id='js_navigation_timing_request'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>Processing:</th><td><span  id='js_navigation_timing_processing'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th>Total page load:</th><td style='border-top: 1px solid #aaa'><span id='js_navigation_timing'>?</span>ms</td>
+              </tr>
+            </tbody>
+          </table>
+          <table id='res_timings'>
+            <thead>
+              <tr>
+                <th colspan='2'><a href='https://www.w3.org/TR/resource-timing/'>Resource Timing</a>:</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th></th><th>images:</th><td><span id='js_resource_timing_img'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th></th><th>links:</th><td><span id='js_resource_timing_link'>?</span>ms</td>
+              </tr>
+              <tr>
+                <th></th><th>scripts:</th><td><span id='js_resource_timing_script'>?</span>ms</td>
+              </tr>
+              <!--
+              <tr>
+                <th></th><th>XHRs:</th><td><span id='js_resource_timing_xmlhttprequest'>?</span>ms</td>
+              </tr>
+              -->
+              <tr>
+                <th></th><th>CSS:</th><td><span id='js_resource_timing_css'>?</span>ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </aside>
 
+    </main>
 
-<hr >
-<address>public-web-perf@w3.org</address>
+    <footer>
+      <address>
+        <a href="https://github.com/w3c/web-performance/">We are on GitHub</address>
+      <p class="copyright">
+        <a href="https://www.w3.org/Consortium/Legal/copyright-software">Copyright</a> ©  2015
+        <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
+        (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+        <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+        <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>)
+      </p>
+    </footer>
 
-
-</body>
+    <div id="w3c_scripts" style='display: none'>
+      <script src="https://www.w3.org/2008/site/js/main"> </script>
+      <script async type="text/javascript" src="newsfeed.js"> </script>
+      <script async src="overview-script.js"> </script>
+    </div>
+  </body>
 </html>
-
