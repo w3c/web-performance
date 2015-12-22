@@ -131,10 +131,6 @@ footer {
   margin: 0;
   padding: 0.5rem;
   font-size: small;
-  position: absolute;
-  bottom: 1vh;
-  right: 1vh;
-  width: 90vw;
   text-align: right;
 }
 footer a {
@@ -167,5 +163,6 @@ footer a {
     background: #4285F4;
     position: static;
     text-align: left;
+    text-shadow: none;
   }
 }
