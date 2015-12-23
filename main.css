@@ -2,6 +2,7 @@ body {
   margin:0;padding:0;
   background: white;
   max-width: 100%;
+  font-family: Helvetica,sans-serif;
 }
 
 h1 {
@@ -129,23 +130,23 @@ footer {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
-  padding-bottom: 0.1rem;
+  padding-bottom: 1rem;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+footer p { margin: 0; padding: 0;}
 footer a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
-#copyright, #copyright a {
-  font-size: smaller;
-  font-weight: 300;
-}
 
 @media screen and (min-width: 78rem) {
   main {
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
   }
   main > * {
@@ -177,6 +178,6 @@ footer a {
     bottom: 0;
     box-sizing: border-box;
     width: 100%;
-    text-align: right;
+    padding-bottom: 2rem;
   }
 }
