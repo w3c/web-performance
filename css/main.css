@@ -97,8 +97,8 @@ aside {
   border-top: 2px solid #ddd;
 }
 
-table caption {
-  text-align: left;
+figcaption {
+  text-align: left; font-style: italic; font-size: small;
 }
 #mission {
   font-style: italic;

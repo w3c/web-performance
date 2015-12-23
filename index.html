@@ -84,59 +84,10 @@
       <aside class="infobar">
         <h2>What is the Performance Timeline?</h2>
         <p>Methods to store and retrieve high resolution performance metric data in a common performance timeline. See also our <a href="https://w3c.github.io/perf-timing-primer/">primer</a>.</p>
-        <section id='demo'>
-          <h3>Your User Agent:</h3>
-
-          <table id='timings'>
-            <caption><a id='nav_timing_link' href='https://www.w3.org/TR/navigation-timing/'>Navigation Timing</a>
-            </caption>
-            <tbody>
-              <tr>
-                <th>Redirect:</th><td><span  id='js_navigation_timing_redirect'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>App cache:</th><td><span  id='js_navigation_timing_app_cache'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>DNS lookup:</th><td><span  id='js_navigation_timing_dns_lookup'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>TCP Connection:</th><td><span  id='js_navigation_timing_connect'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>TCP Request:</th><td><span  id='js_navigation_timing_request'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>Processing:</th><td><span  id='js_navigation_timing_processing'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th>Total page load:</th><td style='border-top: 1px solid #aaa'><span id='js_navigation_timing'>?</span>ms</td>
-              </tr>
-            </tbody>
-          </table>
-          <table id='res_timings'>
-            <caption><a href='https://www.w3.org/TR/resource-timing/'>Resource Timing</a></caption>
-            <tbody>
-              <tr>
-                <th></th><th>images:</th><td><span id='js_resource_timing_img'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th></th><th>links:</th><td><span id='js_resource_timing_link'>?</span>ms</td>
-              </tr>
-              <tr>
-                <th></th><th>scripts:</th><td><span id='js_resource_timing_script'>?</span>ms</td>
-              </tr>
-              <!--
-              <tr>
-                <th></th><th>XHRs:</th><td><span id='js_resource_timing_xmlhttprequest'>?</span>ms</td>
-              </tr>
-              -->
-              <tr>
-                <th></th><th>CSS:</th><td><span id='js_resource_timing_css'>?</span>ms</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+        <figure>
+          <img src='images/waterfall.png' alt='Network waterfall view of resources' width='153' height='153'>
+          <figcaption>Fig 1. Network watefall view</figcaption>
+        </figure>
       </aside>
 
     </main>
@@ -152,7 +103,6 @@
     <div id="w3c_scripts" style='display: none'>
       <script src="https://www.w3.org/2008/site/js/main"> </script>
       <script async type="text/javascript" src="js/newsfeed.js"> </script>
-      <script async src="js/main-script.js"> </script>
     </div>
   </body>
 </html>
