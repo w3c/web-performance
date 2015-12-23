@@ -22,6 +22,17 @@ ul, ul li {
   margin: 0; padding: 0;
 }
 
+a, a:visited, a:hover, a:focus {
+  color: #4184F3;
+  background: transparent;
+}
+a, a:visited {
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
 /*** header ***/
 header {
   background: #4285F4;
@@ -33,7 +44,7 @@ header ul {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-header a {
+header a, header a:visited {
   border-bottom: 1px solid #4285F4;
   display: block;
   color: white;
@@ -41,7 +52,7 @@ header a {
   font-weight: bold;
   padding: 0.5rem;
 }
-header a:hover {
+header a:hover, header a:focus {
   background: white;
   color: black;
   text-decoration: none;
@@ -79,15 +90,6 @@ main nav h3 {
 main nav li {
   font-weight: 500;
   padding: 0.5ex;
-  border-bottom: 1px solid #ccc;
-}
-main nav li:hover {
-  background: #ccc;
-  border-bottom: 1px solid black;
-}
-main nav li:hover a {
-  color: black;
-  background: transparent;
   border-bottom: 1px solid #ccc;
 }
 
@@ -137,9 +139,8 @@ footer {
   justify-content: space-around;
 }
 footer p { margin: 0; padding: 0;}
-footer a {
+footer a, footer a:visited, footer a:focus, footer a:hover {
   color: white;
-  text-decoration: none;
   font-weight: bold;
 }
 
