@@ -1,6 +1,7 @@
 body {
   margin:0;padding:0;
   background: white;
+  max-width: 100%;
 }
 
 h1 {
@@ -48,26 +49,27 @@ header a:hover {
 
 /*** main ***/
 main {
- display: flex;
- justify-content: space-between;
- background: white;
- color: black;
- line-height: 1.2;
- margin-left: 1rem;
- margin-right: 1rem;
+  display: flex;
+  flex-flow: column;
+  background: white;
+  color: black;
+  line-height: 1.2;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 main > * {
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 main nav {
+  order: 1;
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
-  border-right: 1px solid #ccc;
+  border-top: 2px solid #ccc;
 }
 main nav h3 {
   text-align: right;
@@ -89,17 +91,15 @@ main nav li:hover a {
   border-bottom: 1px solid #ccc;
 }
 
-#content {
-  max-width: 50em;
-}
-
 aside {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  max-width: 20em;
-  border-left: 1px solid #ccc;
+  border-top: 2px solid #ddd;
 }
 
+table caption {
+  text-align: left;
+}
 #mission {
   font-style: italic;
   margin-bottom: 1rem;
@@ -112,8 +112,8 @@ aside {
 }
 
 article {
-  margin-top: 2rem;
-  border-top: 0.5ex solid #ddd;
+  margin-top: 1rem;
+  border-top: 2px solid #ddd;
 }
 
 article h3 {
@@ -124,43 +124,53 @@ article h3 {
 /*** footer ***/
 
 footer {
-  background: linear-gradient(to top left, #4285F4, white, white);
   background: #4285F4;
   color: white;
   margin: 0;
-  padding: 0.5rem;
-  font-size: small;
-  text-align: right;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.1rem;
+  text-align: left;
 }
 footer a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
+#copyright, #copyright a {
+  font-size: smaller;
+  font-weight: 300;
+}
 
-@media screen and (max-width: 700px) {
-  /* Too narrow to support three columns */
-  main { flex-flow: column; }
-  main nav {
-    order: 1;
-    border: none;
-    border-top: 2px solid #ddd;
+@media screen and (min-width: 78rem) {
+  main {
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
   main > * {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
-  article {
-    margin-top: 1rem;
-    border-top: 2px solid #ddd;
+  main nav {
+    order: 0;
+    border-top: none;
+    border-right: 1px solid #ccc;
+  }
+  main #content {
+    max-width: 50rem;
   }
   aside {
-    border: none;
-    border-top: 2px solid #ddd;
+    max-width: 20em;
+    border-top: none;
+    border-left: 1px solid #ccc;
+  }
+  article {
+    margin-top: 2rem;
+    border-top: 0.5ex solid #ddd;
   }
   footer {
-    background: #4285F4;
-    position: static;
-    text-align: left;
+    text-align: right;
   }
 }
