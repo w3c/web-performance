@@ -35,7 +35,7 @@ a:hover, a:focus {
 
 /*** header ***/
 header {
-  background: #4285F4;
+  background: #005A9C;
   color: white;
   margin: 0;
 }
@@ -45,7 +45,7 @@ header ul {
   justify-content: space-around;
 }
 header a, header a:visited {
-  border-bottom: 1px solid #4285F4;
+  border-bottom: 1px solid #005A9C;
   display: block;
   color: white;
   text-decoration: none;
@@ -126,7 +126,7 @@ article h3 {
 /*** footer ***/
 
 footer {
-  background: #4285F4;
+  background: #005A9C;
   color: white;
   margin: 0;
   padding-right: 0.5rem;
