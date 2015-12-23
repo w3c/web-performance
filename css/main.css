@@ -175,10 +175,9 @@ footer a, footer a:visited, footer a:focus, footer a:hover {
     border-top: 0.5ex solid #ddd;
   }
   footer {
-    position: absolute;
-    bottom: 0;
     box-sizing: border-box;
     width: 100%;
+    margin-top: 5rem;
     padding-bottom: 2rem;
   }
 }
