@@ -72,7 +72,6 @@ main nav {
   border-top: 2px solid #ccc;
 }
 main nav h3 {
-  text-align: right;
   padding-bottom: 0.2ex;
   border-bottom: 3px solid #eee;
 }
@@ -158,6 +157,9 @@ footer a {
     border-top: none;
     border-right: 1px solid #ccc;
   }
+  main nav h3 {
+    text-align: right;
+  }
   main #content {
     max-width: 50rem;
   }
@@ -171,6 +173,10 @@ footer a {
     border-top: 0.5ex solid #ddd;
   }
   footer {
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
     text-align: right;
   }
 }
