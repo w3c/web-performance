@@ -1,12 +1,19 @@
 // Quick n' dirty news feed
+(function () {
 try {
-  var xhr = new XMLHttpRequest();
+  var attempts = 0;
 
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4
-        && this.status == 200) {
+  function updateArticles(feed) {
       var body = document.getElementById("articles");
-      var feed = this.responseXML;
+
+      if (body === null) {
+        // just in case the network request was really fast
+        attempts++;
+        if (attempts < 5) {
+          setTimeOut(function() { updateArticles(feed); }, 300);
+        }
+        return;
+      }
       var items = feed.querySelectorAll("item");
       for (var i = 0; i < items.length; i++) {
         var item = items.item(i);
@@ -26,7 +33,14 @@ try {
             + item.querySelector("encoded").textContent;
           body.appendChild(article);
         }
-      };
+      }
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4
+        && this.status == 200) {
+      updateArticles(this.responseXML);
     }
   };
 
@@ -34,4 +48,4 @@ try {
   xhr.withCredentials = false;
   xhr.send(null);
 } catch (e) {
-}
+}());
