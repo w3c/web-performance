@@ -48,4 +48,5 @@ try {
   xhr.withCredentials = false;
   xhr.send(null);
 } catch (e) {
-}());
+}
+})();
