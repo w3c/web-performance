@@ -2,10 +2,9 @@
 
 21 June 2016
 
-Location: Santa Clara, CA (to be confirmed)
-
-If we can't do Santa Clara, we'll do Mountain View.
-
+Location: Akamai office,
+3355 Scott Blvd, Santa Clara, CA 95054
+[map](https://goo.gl/maps/EqDeKE3z6kG2)
 
 Expected attendees
 
@@ -13,7 +12,7 @@ Expected attendees
 
 * Ilya Grigorik
 * Todd Reifsteck
-* Yoav Weis
+* Yoav Weiss
 * Philippe Le Hegaret
 
 
