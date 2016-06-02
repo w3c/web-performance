@@ -15,4 +15,5 @@ Expected attendees
 * Yoav Weiss
 * Philippe Le Hegaret
 * Ryosuke Niwa
+* Wesley Hales
 
