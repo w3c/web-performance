@@ -14,4 +14,5 @@ For specs, see the [dashboard](http://www.w3.org/wiki/Web_Performance/Publicatio
 * requestIdleCallback
   * moving towards a REC
 * Plans for Q3/Q4 2016, and beyond
+ * Discuss: https://docs.google.com/document/d/1bf8GTCqZCRibO-nH-KIc8GdBg--zsMLnDgVpEpooG3U/edit
 
