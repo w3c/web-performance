@@ -16,4 +16,7 @@ Expected attendees
 * Philippe Le Hegaret
 * Ryosuke Niwa
 * Wesley Hales
+* Stephen Ludin
+* Moritz Steiner
+* Colin Bendell
 
