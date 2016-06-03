@@ -20,3 +20,4 @@ Expected attendees
 * Moritz Steiner
 * Colin Bendell
 * Nic Jansma
+* Shubhie Panicker
