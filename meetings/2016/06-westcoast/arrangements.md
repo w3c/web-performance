@@ -19,4 +19,4 @@ Expected attendees
 * Stephen Ludin
 * Moritz Steiner
 * Colin Bendell
-
+* Nic Jansma
