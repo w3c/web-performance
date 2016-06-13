@@ -1,6 +1,6 @@
 # Web Performance F2F Meeting Arrangements
 
-21 June 2016
+21 June 2016 9:30am PST
 
 Location: Akamai office,
 3355 Scott Blvd, Santa Clara, CA 95054
