@@ -15,6 +15,7 @@ Expected attendees
 * Yoav Weiss
 * Philippe Le Hegaret
 * Ryosuke Niwa
+* Alex Christensen
 * Wesley Hales
 * Stephen Ludin
 * Moritz Steiner
