@@ -1,4 +1,6 @@
 
+Notes: https://docs.google.com/document/d/1DNRGhlYbMYdBkKsy7z9Bg--83KHa6r9-THurzBNLqTE/edit
+
 For specs, see the [dashboard](http://www.w3.org/wiki/Web_Performance/Publications)
 
 * Resource Hints
