@@ -7,6 +7,10 @@ For specs, see the [dashboard](http://www.w3.org/wiki/Web_Performance/Publicatio
 * Resource Timing
   * L1 progress
   * L2 plans
+* Beacon 1
+  * Beacon 2
+    * fetchBeacon spec currently slated for July
+    * Does room like fetchBeacon? (Anne has proposed a flag on fetch as alternative)
 * Page Visibility 2
   * Updating the REC progress
 * HRT 2
