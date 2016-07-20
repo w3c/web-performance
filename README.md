@@ -4,6 +4,8 @@ https://www.w3.org/webperf/
 
 ## Specifications
 
+GitHub repositories are linked from each specification.
+
 * https://w3c.github.io/hr-time/
 * https://w3c.github.io/performance-timeline/
 * https://w3c.github.io/resource-timing/
