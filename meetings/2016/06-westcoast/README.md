@@ -3,7 +3,6 @@
 
 * [Logistics](arrangements.md)
 * [Agenda](agenda.md)
-* [Registrants](https://www.w3.org/2002/09/wbs/35125/TPAC2016/registrants#WebPerf)
 
 ## Velocity
 
