@@ -4,14 +4,14 @@
 
 Location: Lisbon, Portugal
 
-See also (TPAC 2016: Accommodations and Transportation information)[https://www.w3.org/2016/09/TPAC/Hotels-Transportation.html#accommodations]
+See also [TPAC 2016: Accommodations and Transportation information](https://www.w3.org/2016/09/TPAC/Hotels-Transportation.html#accommodations)
 
 
 Expected attendees
 
-See (Member Visible Registration List)[https://www.w3.org/2002/09/wbs/35125/TPAC2016/registrants]
+See [Member Visible Registration List](https://www.w3.org/2002/09/wbs/35125/TPAC2016/registrants)
 
 
-To register, use (Registration form)[https://www.w3.org/2002/09/wbs/35125/TPAC2016/?login] (open until 2 September)
+To register, use [Registration form](https://www.w3.org/2002/09/wbs/35125/TPAC2016/?login) (open until 2 September)
 
-See also (TPAC 2016 Participation Policies and Recommendations)[https://www.w3.org/2016/09/TPAC/#Participation]
+See also [TPAC 2016 Participation Policies and Recommendations](https://www.w3.org/2016/09/TPAC/#Participation)
