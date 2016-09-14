@@ -4,6 +4,8 @@
 
 Location: Lisbon, Portugal
 
+Room 1.09, First Floor - Observers allowed
+
 See also [TPAC 2016: Accommodations and Transportation information](https://www.w3.org/2016/09/TPAC/Hotels-Transportation.html#accommodations)
 
 
