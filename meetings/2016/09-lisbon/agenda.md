@@ -4,25 +4,7 @@ From [Google docs](http://bitly.com/webperf-tpac16)
 
 The meeting starts at 9am and lasts until 5pm, each day.
 
-Sept 22 (Thursday): Room 1.09, First Floor - Observers allowed
-
-* 9AM-12PM: triage blocker spec issues
-* 12PM-2PM: lunch
-* 2PM-5PM:
-** Long Tasks API
-** First Paint, First Contentful Paint
-** Time to Interactive
-
-Sept 23 (Friday): Room 1.09, First Floor - Observers allowed
-
-* 9am-noon:
-** Triage (remaining) blocker spec issues
-** Administrative work
-* 12PM-2PM: lunch
-* 2PM-5PM:
-** Chrome reflector
-** Memory notification API
-** Declarative marks / Hero Timing
+Schedule (subject to change): https://docs.google.com/document/d/1U2DfWlToLlDoJyGvDZytM6VM2p67qisuCOfgnWIclzw/edit#heading=h.j1mdt1ve3sth
 
 
 Administrative work
