@@ -1,7 +1,32 @@
-Contributions to the Web Performance repositories are intended to become part of Recommendation-track documents governed by the
+## Editing Process
+
+Everyone use the standard fork, branch, and pull request workflow to propose changes to the specification. Please make branch names informative - by including the issue or bug number for example.
+
+Editorial changes that improve the readability of the specification or correct spelling or grammatical mistakes are welcome.
+
+All pull requests must have been reviewed by one or more participants of the working groups. Once the pull request gets enough support, it can be merged.
+
+### Test driven
+
+ALL normative spec changes are generally expected to have a corresponding pull request in [web-platforms-tests][WPT], either in the form of new tests or modifications to existing tests, or must include the rational for the lack of testing.
+
+Typically, both pull requests will be merged at the same time. If a pull request for the specification
+is approved but the other needs more work, add the 'needs tests' label or, in web-platform-tests, the
+'status:needs-spec-decision' label. Note that a test change that contradicts the specification should not be merged before the corresponding spec change.
+
+If testing is not practical due to [web-platforms-tests][WPT] limitations, please explain why and if appropriate [file an issue](https://github.com/w3c/web-platform-tests/issues/new) to follow up later.
+
+See also the [web-platform-tests documentation][WPT-intro].
+
+## Patent Policy and Licensing
+
+Contributions to the Web Performance repositories are intended to become part of Recommendation-track
+documents governed by the
 [W3C Patent Policy](http://www.w3.org/Consortium/Patent-Policy-20040205/) and
-[Document License](http://www.w3.org/Consortium/Legal/copyright-documents). To make substantive contributions to specifications, you must either participate
-in the relevant W3C Working Group or make a non-member patent licensing commitment.
+[Software and Document License](http://www.w3.org/Consortium/Legal/copyright-software). To make substantive contributions to specifications, you must either participate
+in the relevant W3C Working Group or make a non-member patent [licensing commitment][licensing].
+
+### Contributors
 
 If you are not the sole contributor to a contribution (pull request), please identify all
 contributors in the pull request comment.
@@ -20,3 +45,7 @@ If you added a contributor by mistake, you can remove them in a comment with:
 
 If you are making a pull request on behalf of someone else but you had no part in designing the
 feature, you can remove yourself with the above syntax.
+
+[licensing][https://www.w3.org/2004/01/pp-impl/45211/status#licensing-commitments]
+[WPT]: https://github.com/w3c/web-platform-tests/
+[WPT-intro]: http://web-platform-tests.org/introduction.html
