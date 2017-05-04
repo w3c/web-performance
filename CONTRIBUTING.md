@@ -46,6 +46,6 @@ If you added a contributor by mistake, you can remove them in a comment with:
 If you are making a pull request on behalf of someone else but you had no part in designing the
 feature, you can remove yourself with the above syntax.
 
-[licensing][https://www.w3.org/2004/01/pp-impl/45211/status#licensing-commitments]
+[licensing]: [https://www.w3.org/2004/01/pp-impl/45211/status#licensing-commitments]
 [WPT]: https://github.com/w3c/web-platform-tests/
 [WPT-intro]: http://web-platform-tests.org/introduction.html
