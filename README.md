@@ -16,6 +16,8 @@ GitHub repositories are linked from each specification.
 * https://w3c.github.io/beacon/
 * https://w3c.github.io/resource-hints/
 * https://w3c.github.io/preload/
+* https://w3c.github.io/server-timing/
+* https://w3c.github.io/longtasks/
 
 Web Performance tests can be found in [web-platforms-tests][WPT].
 
@@ -35,4 +37,5 @@ This repository used to contain editor's drafts from the Web Performance Working
 
 
 [WPT]: https://github.com/w3c/web-platform-tests/
-[db]: https://www.w3.org/wiki/Web_Performance/Publications
+[db]:  https://bit.ly/w3c-webperf-status
+
