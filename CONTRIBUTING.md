@@ -1,6 +1,6 @@
 ## Editing Process
 
-Everyone use the standard fork, branch, and pull request workflow to propose changes to the specification. Please make branch names informative - by including the issue or bug number for example.
+Everyone should use the standard fork, branch, and pull request workflow to propose changes to the specification. Please make branch names informative - by including the issue or bug number for example.
 
 Editorial changes that improve the readability of the specification or correct spelling or grammatical mistakes are welcome.
 
@@ -8,11 +8,12 @@ All pull requests must have been reviewed by one or more participants of the wor
 
 ### Test driven
 
-ALL normative spec changes are generally expected to have a corresponding pull request in [web-platforms-tests][WPT], either in the form of new tests or modifications to existing tests, or must include the rational for the lack of testing.
+ALL normative spec changes are generally expected to have a corresponding pull request in [web-platforms-tests][WPT], either in the form of new tests or modifications to existing tests, or must include the rationale for why test updates are not required for the proposed update.
 
-Typically, both pull requests will be merged at the same time. If a pull request for the specification
-is approved but the other needs more work, add the 'needs tests' label or, in web-platform-tests, the
-'status:needs-spec-decision' label. Note that a test change that contradicts the specification should not be merged before the corresponding spec change.
+Typically, both pull requests (spec updates and tests) will be merged at the same time. If a pull
+request for the specification is approved but the other needs more work, add the 'needs tests' label
+or, in web-platform-tests, the 'status:needs-spec-decision' label. Note that a test change that
+contradicts the specification should not be merged before the corresponding spec change.
 
 If testing is not practical due to [web-platforms-tests][WPT] limitations, please explain why and if appropriate [file an issue](https://github.com/w3c/web-platform-tests/issues/new) to follow up later.
 
