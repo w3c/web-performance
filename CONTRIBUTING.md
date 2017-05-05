@@ -15,7 +15,7 @@ request for the specification is approved but the other needs more work, add the
 or, in web-platform-tests, the 'status:needs-spec-decision' label. Note that a test change that
 contradicts the specification should not be merged before the corresponding spec change.
 
-If testing is not practical due to [web-platforms-tests][WPT] limitations, please explain why and if appropriate [file an issue](https://github.com/w3c/web-platform-tests/issues/new) to follow up later.
+If testing is not practical due to [web-platforms-tests][WPT] limitations, please explain why and if appropriate [file an issue](https://github.com/w3c/web-platform-tests/issues/new) with the 'type:untestable' label to follow up later.
 
 See also the [web-platform-tests documentation][WPT-intro].
 
