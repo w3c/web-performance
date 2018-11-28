@@ -32,6 +32,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 This repository used to contain editor's drafts from the Web Performance Working Group.
 
 
-[WPT]: https://github.com/w3c/web-platform-tests/
+[WPT]: https://github.com/web-platform-tests/wpt
 [db]:  https://bit.ly/w3c-webperf-status
 
