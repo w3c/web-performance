@@ -27,6 +27,10 @@ More information on our [dashboard][db].
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Group agenda
+
+See our [agenda][agenda].
+
 ## History
 
 This repository used to contain editor's drafts from the Web Performance Working Group.
@@ -34,4 +38,4 @@ This repository used to contain editor's drafts from the Web Performance Working
 
 [WPT]: https://github.com/web-platform-tests/wpt
 [db]:  https://bit.ly/w3c-webperf-status
-
+[agenda]:  https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/
