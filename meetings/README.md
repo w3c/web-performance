@@ -4,4 +4,6 @@ Agenda and records of meetings are now at [gdoc](https://docs.google.com/documen
 [January 7th](https://w3c.github.io/web-performance/meetings/2021/2021-01-07/WebPerfWGcallJanuary7th2021.html).
 
 
-#2020
+# 2020
+[December 3rd](https://w3c.github.io/web-performance/meetings/2020/2020-12-03/index.html).
+[TPAC](https://w3c.github.io/web-performance/meetings/2020/2020-10-TPAC/index.html)
