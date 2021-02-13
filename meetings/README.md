@@ -18,7 +18,7 @@ Agenda and records of meetings are now at [gdoc](https://docs.google.com/documen
 * [July 2nd](https://w3c.github.io/web-performance/meetings/2020/2020-07-02)
 * [June 18th](https://w3c.github.io/web-performance/meetings/2020/2020-06-18)
 * [June 4th](https://w3c.github.io/web-performance/meetings/2020/2020-06-04)
-* [May 21st](https://w3c.github.io/web-performance/meetings/2020/2020-05-21)
+* [May 19th](https://w3c.github.io/web-performance/meetings/2020/2020-05-19)
 * [May 7th](https://w3c.github.io/web-performance/meetings/2020/2020-05-07)
 * [April 23rd](https://w3c.github.io/web-performance/meetings/2020/2020-04-23)
 * [April 9th](https://w3c.github.io/web-performance/meetings/2020/2020-04-09)
