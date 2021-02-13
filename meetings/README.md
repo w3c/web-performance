@@ -46,3 +46,15 @@ Agenda and records of meetings are now at [gdoc](https://docs.google.com/documen
 * [March 29th](https://w3c.github.io/web-performance/meetings/2019/2019-03-29)
 * [March 14th](https://w3c.github.io/web-performance/meetings/2019/2019-03-14)
 * [March 8th](https://w3c.github.io/web-performance/meetings/2019/2019-03-08)
+* [February 14th](https://w3c.github.io/web-performance/meetings/2019/2019-02-14/)
+* [January 31st](https://w3c.github.io/web-performance/meetings/2019/2019-01-31/)
+* [January 10th](https://w3c.github.io/web-performance/meetings/2019/2019-01-10/)
+
+# 2018
+* [December 13th](https://w3c.github.io/web-performance/meetings/2018/2018-12-13/)
+* [November 27th](https://w3c.github.io/web-performance/meetings/2018/2018-11-27/)
+* [TPAC](https://w3c.github.io/web-performance/meetings/2018/2018-TPAC/index.html)
+* [October 16th](https://w3c.github.io/web-performance/meetings/2018/2018-10-16/)
+* [October 2nd](https://w3c.github.io/web-performance/meetings/2018/2018-10-02/)
+* [September 20th](https://w3c.github.io/web-performance/meetings/2018/2018-09-20/)
+* [September 6th](https://w3c.github.io/web-performance/meetings/2018/2018-09-06/)
