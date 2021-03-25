@@ -53,6 +53,21 @@
      "igrigorik"
     ],
     [
+     "",
+     "L3",
+     "WD",
+     "",
+     "https://www.w3.org/TR/hr-time-3/",
+     "https://github.com/w3c/hr-time/issues",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "yoavweiss"
+    ],
+    [
      "Performance Timeline",
      "L1",
      "REC",
@@ -475,6 +490,18 @@
      "PR": "-",
      "REC": "12/2019",
      "Active Editor": "igrigorik"
+    },
+    {
+     "Status": "WD",
+     "GitHub ID": "",
+     "Link": "TR/hr-time-3/",
+     "Issues": "View",
+     "Interop": "",
+     "WPT status": "",
+     "CR": "",
+     "PR": "",
+     "REC": "",
+     "Active Editor": "yoavweiss"
     },
     {
      "Status": "REC",
