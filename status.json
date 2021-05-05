@@ -107,7 +107,9 @@
      "",
      "-",
      "-",
-     "-"
+     "-",
+     "",
+     "yoavweiss"
     ],
     [
      "Resource Timing",
@@ -152,7 +154,9 @@
      "",
      "-",
      "-",
-     "-"
+     "-",
+     "",
+     "yoavweiss"
     ],
     [
      "Navigation Timing",
@@ -192,7 +196,13 @@
      "navigation-timing",
      "https://w3c.github.io/navigation-timing/",
      "https://github.com/w3c/navigation-timing/milestones/Level%203",
-     "-"
+     "-",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "yoavweiss"
     ],
     [
      "User Timing",
@@ -536,7 +546,8 @@
      "WPT status": "",
      "CR": "-",
      "PR": "-",
-     "REC": "-"
+     "REC": "-",
+     "Active Editor": "yoavweiss"
     },
     {
      "Status": "CR",
@@ -573,7 +584,8 @@
      "WPT status": "",
      "CR": "-",
      "PR": "-",
-     "REC": "-"
+     "REC": "-",
+     "Active Editor": "yoavweiss"
     },
     {
      "Status": "REC",
@@ -605,7 +617,12 @@
      "GitHub ID": "navigation-timing",
      "Link": "w3c/navigation-timing",
      "Issues": "View",
-     "Interop": "-"
+     "Interop": "-",
+     "WPT status": "",
+     "CR": "",
+     "PR": "",
+     "REC": "",
+     "Active Editor": "yoavweiss"
     },
     {
      "Status": "REC",
