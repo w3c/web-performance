@@ -45,6 +45,7 @@ Agenda and records of meetings are now at [gdoc](https://docs.google.com/documen
 * [August 8th](https://w3c.github.io/web-performance/meetings/2019/2019-08-08)
 * [July 10th](https://w3c.github.io/web-performance/meetings/2019/2019-07-10)
 * [June 26th](https://w3c.github.io/web-performance/meetings/2019/2019-06-26)
+* [June 11th - F2F](https://w3c.github.io/web-performance/meetings/2019/2019-06-11-F2F)
 * [May 29th](https://w3c.github.io/web-performance/meetings/2019/2019-05-29)
 * [May 16th](https://w3c.github.io/web-performance/meetings/2019/2019-05-16)
 * [May 2nd](https://w3c.github.io/web-performance/meetings/2019/2019-05-02)
