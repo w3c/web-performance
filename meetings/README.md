@@ -1,6 +1,7 @@
 Agenda and records of meetings are now at [gdoc](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/)
 
 # 2021
+* [June 24th](https://w3c.github.io/web-performance/meetings/2021/2021-06-24/index.html)
 * [June 10th](https://w3c.github.io/web-performance/meetings/2021/2021-06-10/index.html)
 * [May 27th](https://w3c.github.io/web-performance/meetings/2021/2021-05-27/index.html)
 * [May 12th](https://w3c.github.io/web-performance/meetings/2021/2021-05-12/index.html)
