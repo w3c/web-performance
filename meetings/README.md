@@ -1,6 +1,7 @@
 Agenda and records of meetings are now at [gdoc](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/)
 
 # 2021
+* [November 18th](https://w3c.github.io/web-performance/meetings/2021/2021-11-18/index.html)
 * [TPAC](https://w3c.github.io/web-performance/meetings/2021/2021-10-TPAC/index.html)
 * [October 14th](https://w3c.github.io/web-performance/meetings/2021/2021-10-14/index.html)
 * [September 30th](https://w3c.github.io/web-performance/meetings/2021/2021-09-30/index.html)
