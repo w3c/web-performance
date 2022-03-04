@@ -1,6 +1,7 @@
 Agenda and records of meetings are now at [gdoc](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/)
 
 # 2022
+* [March 3rd](https://w3c.github.io/web-performance/meetings/2022/2022-03-03/index.html)
 * [February 3rd](https://w3c.github.io/web-performance/meetings/2022/2022-02-03/index.html)
 * [January 20th](https://w3c.github.io/web-performance/meetings/2022/2022-01-20/index.html)
 
