@@ -48,13 +48,11 @@
      "https://wpt.fyi/results/hr-time?label=master&label=experimental&aligned",
      "-",
      "-",
-     "12/2019",
-     "",
-     "igrigorik"
+     "12/2019"
     ],
     [
      "",
-     "L3",
+     "LS",
      "WD",
      "",
      "https://www.w3.org/TR/hr-time-3/",
@@ -93,13 +91,13 @@
      "ETA: Q4 2019",
      "ETA: Q2 2020",
      "",
-     "igrigorik",
-     "[plh] re-republish the WD from L2 -> DONE\n[plh, siusin]: 12/04 -> call for review is out\n[mozilla]: fix the flaky case sensitivity test and Frozen array test on supportedEntryTypes"
+     "",
+     "[plh] re-republish the WD from L2 -> DONE\n[plh, siusin]: 12/04 -> call for review is out\n[mozilla]: fix the flaky case sensitivity test and Frozen array test on supportedEntryTypes\nDecided to abandon the L2 part"
     ],
     [
      "",
-     "L3",
-     "WD",
+     "LS",
+     "CR",
      "performance-timeline",
      "https://w3c.github.io/performance-timeline/",
      "https://github.com/w3c/performance-timeline/milestones/Level%203",
@@ -109,7 +107,8 @@
      "-",
      "-",
      "",
-     "yoavweiss"
+     "yoavweiss",
+     "CR snapshot"
     ],
     [
      "Resource Timing",
@@ -124,7 +123,7 @@
      "ETA: Q4 2019",
      "ETA: Q2 2020",
      "",
-     "yoavweiss",
+     "",
      "[plh, siusin]: transition L1 to REC No open issues"
     ],
     [
@@ -140,12 +139,12 @@
      "ETA: Q2 2020",
      "ETA: Q4 2020",
      "",
-     "yoavweiss",
+     "",
      "[plh, siusin]: 12/04 -> call for review is out; not blocking on closing all issues"
     ],
     [
      "",
-     "L3",
+     "LS",
      "WD",
      "resource-timing",
      "https://w3c.github.io/resource-timing/",
@@ -169,9 +168,7 @@
      "",
      "-",
      "https://www.w3.org/TR/2012/PR-navigation-timing-20120726/",
-     "https://www.w3.org/TR/2012/REC-navigation-timing-20121217/",
-     "",
-     "yoavweiss"
+     "https://www.w3.org/TR/2012/REC-navigation-timing-20121217/"
     ],
     [
      "",
@@ -186,12 +183,12 @@
      "ETA: Q1 2020",
      "ETA: Q2 2020",
      "",
-     "yoavweiss",
+     "",
      "[yoav] Review is ok. Move to CR?"
     ],
     [
      "",
-     "L3",
+     "LS",
      "WD",
      "navigation-timing",
      "https://w3c.github.io/navigation-timing/",
@@ -215,9 +212,7 @@
      "",
      "-",
      "-",
-     "https://www.w3.org/TR/2013/REC-user-timing-20131212/",
-     "",
-     "igrigorik"
+     "https://www.w3.org/TR/2013/REC-user-timing-20131212/"
     ],
     [
      "",
@@ -230,16 +225,14 @@
      "",
      "https://www.w3.org/TR/2018/CR-user-timing-2-20180709/",
      "https://www.w3.org/TR/2019/PR-user-timing-2-20190110/",
-     "https://www.w3.org/TR/2019/REC-user-timing-2-20190226/",
-     "",
-     "igrigorik"
+     "https://www.w3.org/TR/2019/REC-user-timing-2-20190226/"
     ],
     [
      "",
-     "L3",
-     "WD",
+     "LS",
+     "CR",
      "user-timing",
-     "https://w3c.github.io/user-timing/",
+     "https://www.w3.org/TR/user-timing/",
      "https://github.com/w3c/user-timing/milestones/Level%203",
      "-",
      "https://wpt.fyi/results/user-timing?label=experimental&label=master&aligned",
@@ -247,7 +240,7 @@
      "-",
      "-",
      "",
-     "npm"
+     "?"
     ],
     [
      "Page Visibility",
@@ -260,16 +253,14 @@
      "",
      "-",
      "-",
-     "05/2013",
-     "",
-     "igrigorik"
+     "05/2013"
     ],
     [
      "",
-     "L2",
-     "PR",
+     "LS",
+     "CR",
      "page-visibility",
-     "https://www.w3.org/TR/2017/PR-page-visibility-2-20171017/",
+     "https://www.w3.org/TR/page-visibility-2/",
      "https://github.com/w3c/page-visibility/milestones/Level%202",
      "-",
      "https://wpt.fyi/results/page-visibility?label=experimental&label=master&aligned",
@@ -293,7 +284,7 @@
      "ETA: Q1 2020",
      "ETA: Q2 2020",
      "",
-     "igrigorik",
+     "?",
      "[?] fix failing WPTs, otherwise ready for PR.\n[plh] start a draft of transition request to PR"
     ],
     [
@@ -309,13 +300,13 @@
      "https://www.w3.org/TR/2017/PR-requestidlecallback-20171010/",
      "ETA: Q4 2019",
      "",
-     "rmcilroy",
+     "?",
      "check-in in 01/2020; outstanding issues"
     ],
     [
      "Preload",
      "L1",
-     "CR",
+     "Discontinued",
      "preload",
      "https://www.w3.org/TR/2019/CR-preload-20190626/",
      "https://github.com/w3c/preload/milestones/Level%201",
@@ -341,7 +332,7 @@
      "-",
      "-",
      "",
-     "cvazac",
+     "?",
      "[plh, siusin]: send out call for review"
     ],
     [
@@ -428,16 +419,15 @@
      "https://github.com/w3c/resource-hints/milestones/Level%201",
      "-"
     ],
-    [],
     [
      "Largest Contentful Paint",
      "",
-     "WICG",
+     "ED",
      "",
-     "https://github.com/WICG/largest-contentful-paint",
-     "https://github.com/WICG/largest-contentful-paint/issues",
+     "https://github.com/w3c/largest-contentful-paint",
+     "https://github.com/w3c/largest-contentful-paint/issues",
      "",
-     "",
+     "https://wpt.fyi/results/largest-contentful-paint?label=master&label=experimental&aligned",
      "",
      "",
      "",
@@ -445,27 +435,28 @@
      "yoavweiss"
     ],
     [
+     "Event Timing",
+     "",
+     "ED",
+     "",
+     "https://github.com/w3c/event-timing",
+     "https://github.com/w3c/event-timing/issues",
+     "",
+     "https://wpt.fyi/results/event-timing?label=experimental&label=master&aligned",
+     "",
+     "",
+     "",
+     "",
+     "?"
+    ],
+    [],
+    [
      "Element Timing",
      "",
      "WICG",
      "",
      "https://github.com/WICG/element-timing",
      "https://github.com/WICG/element-timing/issues",
-     "",
-     "",
-     "-",
-     "-",
-     "-",
-     "",
-     "tdresser"
-    ],
-    [
-     "Event Timing",
-     "",
-     "WICG",
-     "",
-     "https://github.com/WICG/event-timing/",
-     "https://github.com/WICG/event-timing/issues",
      "",
      "",
      "-",
@@ -498,8 +489,7 @@
      "WPT status": "passing",
      "CR": "-",
      "PR": "-",
-     "REC": "12/2019",
-     "Active Editor": "igrigorik"
+     "REC": "12/2019"
     },
     {
      "Status": "WD",
@@ -534,11 +524,11 @@
      "CR": "WIP",
      "PR": "ETA: Q4 2019",
      "REC": "ETA: Q2 2020",
-     "Active Editor": "igrigorik",
-     "Notes": "[plh] re-republish the WD from L2 -> DONE\n[plh, siusin]: 12/04 -> call for review is out\n[mozilla]: fix the flaky case sensitivity test and Frozen array test on supportedEntryTypes"
+     "Active Editor": "",
+     "Notes": "[plh] re-republish the WD from L2 -> DONE\n[plh, siusin]: 12/04 -> call for review is out\n[mozilla]: fix the flaky case sensitivity test and Frozen array test on supportedEntryTypes\nDecided to abandon the L2 part"
     },
     {
-     "Status": "WD",
+     "Status": "CR",
      "GitHub ID": "performance-timeline",
      "Link": "w3c/performance-timeline",
      "Issues": "View",
@@ -547,7 +537,8 @@
      "CR": "-",
      "PR": "-",
      "REC": "-",
-     "Active Editor": "yoavweiss"
+     "Active Editor": "yoavweiss",
+     "Notes": "CR snapshot"
     },
     {
      "Status": "CR",
@@ -559,7 +550,7 @@
      "CR": "03/2017",
      "PR": "ETA: Q4 2019",
      "REC": "ETA: Q2 2020",
-     "Active Editor": "yoavweiss",
+     "Active Editor": "",
      "Notes": "[plh, siusin]: transition L1 to REC No open issues"
     },
     {
@@ -572,7 +563,7 @@
      "CR": "WIP",
      "PR": "ETA: Q2 2020",
      "REC": "ETA: Q4 2020",
-     "Active Editor": "yoavweiss",
+     "Active Editor": "",
      "Notes": "[plh, siusin]: 12/04 -> call for review is out; not blocking on closing all issues"
     },
     {
@@ -596,8 +587,7 @@
      "WPT status": "",
      "CR": "-",
      "PR": "07/2012",
-     "REC": "12/2017",
-     "Active Editor": "yoavweiss"
+     "REC": "12/2017"
     },
     {
      "Status": "CR",
@@ -609,7 +599,7 @@
      "CR": "WIP",
      "PR": "ETA: Q1 2020",
      "REC": "ETA: Q2 2020",
-     "Active Editor": "yoavweiss",
+     "Active Editor": "",
      "Notes": "[yoav] Review is ok. Move to CR?"
     },
     {
@@ -633,8 +623,7 @@
      "WPT status": "",
      "CR": "-",
      "PR": "-",
-     "REC": "12/2013",
-     "Active Editor": "igrigorik"
+     "REC": "12/2013"
     },
     {
      "Status": "REC",
@@ -645,11 +634,10 @@
      "WPT status": "",
      "CR": "07/2018",
      "PR": "1/2019",
-     "REC": "2/2019",
-     "Active Editor": "igrigorik"
+     "REC": "2/2019"
     },
     {
-     "Status": "WD",
+     "Status": "CR",
      "GitHub ID": "user-timing",
      "Link": "w3c/user-timing",
      "Issues": "View",
@@ -658,7 +646,7 @@
      "CR": "-",
      "PR": "-",
      "REC": "-",
-     "Active Editor": "npm"
+     "Active Editor": "?"
     },
     {
      "Status": "REC",
@@ -669,13 +657,12 @@
      "WPT status": "",
      "CR": "-",
      "PR": "-",
-     "REC": "05/2013",
-     "Active Editor": "igrigorik"
+     "REC": "05/2013"
     },
     {
-     "Status": "PR",
+     "Status": "CR",
      "GitHub ID": "page-visibility",
-     "Link": "PR-page-visibility-2-20171017",
+     "Link": "w3c/page-visibility-2",
      "Issues": "View",
      "Interop": "-",
      "WPT status": "almost",
@@ -695,7 +682,7 @@
      "CR": "04/2017",
      "PR": "ETA: Q1 2020",
      "REC": "ETA: Q2 2020",
-     "Active Editor": "igrigorik",
+     "Active Editor": "?",
      "Notes": "[?] fix failing WPTs, otherwise ready for PR.\n[plh] start a draft of transition request to PR"
     },
     {
@@ -708,11 +695,11 @@
      "CR": "01/2017",
      "PR": "10/2017",
      "REC": "ETA: Q4 2019",
-     "Active Editor": "rmcilroy",
+     "Active Editor": "?",
      "Notes": "check-in in 01/2020; outstanding issues"
     },
     {
-     "Status": "CR",
+     "Status": "Discontinued",
      "GitHub ID": "preload",
      "Link": "CR-preload-20190626",
      "Issues": "View",
@@ -734,7 +721,7 @@
      "CR": "-",
      "PR": "-",
      "REC": "-",
-     "Active Editor": "cvazac",
+     "Active Editor": "?",
      "Notes": "[plh, siusin]: send out call for review"
     },
     {
@@ -804,35 +791,35 @@
      "Issues": "View",
      "Interop": "-"
     },
-    {},
     {
-     "Status": "WICG",
+     "Status": "ED",
      "GitHub ID": "",
-     "Link": "wicg/largest-contentful-paint",
+     "Link": "w3c/largest-contentful-paint",
      "Issues": "View",
      "Interop": "",
-     "WPT status": "",
+     "WPT status": "nope",
      "CR": "",
      "PR": "",
      "REC": "",
      "Active Editor": "yoavweiss"
     },
     {
-     "Status": "WICG",
+     "Status": "ED",
      "GitHub ID": "",
-     "Link": "wicg/element-timing",
+     "Link": "w3c/event-timing",
      "Issues": "View",
      "Interop": "",
-     "WPT status": "",
-     "CR": "-",
-     "PR": "-",
-     "REC": "-",
-     "Active Editor": "tdresser"
+     "WPT status": "almost",
+     "CR": "",
+     "PR": "",
+     "REC": "",
+     "Active Editor": "?"
     },
+    {},
     {
      "Status": "WICG",
      "GitHub ID": "",
-     "Link": "wicg/event-timing",
+     "Link": "wicg/element-timing",
      "Issues": "View",
      "Interop": "",
      "WPT status": "",
