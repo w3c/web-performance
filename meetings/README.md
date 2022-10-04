@@ -1,7 +1,7 @@
 Agenda and records of meetings are now at [gdoc](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/)
 
 # 2022
-* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2022/2022-TPAC/)
+* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2022/2022-09-TPAC/)
 * [TPAC breakout - public resources](https://w3c.github.io/web-performance/meetings/2022/2022-09-public-resources)
 * [September 1st](https://w3c.github.io/web-performance/meetings/2022/2022-09-01/index.html)
 * [August 4th](https://w3c.github.io/web-performance/meetings/2022/2022-08-04/index.html)
