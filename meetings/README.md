@@ -1,4 +1,6 @@
-Agenda and records of meetings are now at [gdoc](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/)
+The WG's meeting schedule is being managed in its [agenda document](https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/).
+
+Links to the meeting minutes are below:
 
 # 2022
 * [December 8th](https://w3c.github.io/web-performance/meetings/2022/2022-12-08/index.html)
