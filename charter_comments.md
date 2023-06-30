@@ -89,7 +89,7 @@ Expires: 28 February 2023
 * We should call out[ open privacy issues](https://github.com/w3c/resource-timing/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-needs-resolution) and say that we strive to resolve them
 
 
-# <span style="text-decoration:underline;">CURRENT CHARTER</span>
+# <span style="text-decoration:underline;">CHARTER DRAFT</span>
 
 
 ## Scope
@@ -362,6 +362,33 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf)
 
+#### [Event Timing](https://www.w3.org/TR/event-timing/)
+
+This specification defines an API that provides web page authors with insights into the latency of certain events triggered by user interactions.
+
+**Draft state:** [First Public Working Draft](https://www.w3.org/TR/event-timing/)
+
+**Next Recommendation expected completion:**
+
+Latest publication: [24 May 2022](https://www.w3.org/TR/2022/WD-event-timing-20220524/)
+
+Reference Draft: [https://www.w3.org/TR/2022/WD-event-timing-20220524/](https://www.w3.org/TR/2022/WD-event-timing-20220524/)
+
+Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
+
+#### [Largest Contentful Paint](https://www.w3.org/TR/largest-contentful-paint/)
+
+This specification defines an API that enables monitoring the largest paint an element triggered on screen.
+
+**Draft state:** [First Public Working Draft](https://www.w3.org/TR/largest-contentful-paint/)
+
+**Next Recommendation expected completion:**
+
+Latest publication: [24 May 2022](https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/)
+
+Reference Draft: [https://www.w3.org/TR/2022/WD-event-timing-20220524/)](https://www.w3.org/TR/2022/WD-event-timing-20220524/))
+
+Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
 
 ### Past Deliverables
 
