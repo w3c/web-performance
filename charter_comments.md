@@ -9,22 +9,7 @@ Expires: 28 February 2023
 
 
 
-* Scope/Themes
-    * Measurement
-        * Proposal to be "Privacy Preserving Measurement"
-        * Coordinate w/ IETF group similarly-named
-    * Scheduling
-    * Adaptation
 * Specs Changes
-    * Resource Hints
-        * Discontinued (from 2021 charter)
-        * Moving to HTML
-        * Repo doesn't mention this [https://w3c.github.io/resource-hints/](https://w3c.github.io/resource-hints/)
-    * Preload
-        * Discontinued (from 2021 charter)
-        * Moved to HTML
-        * Repo archived
-        * Spec mentions this + redirects [https://github.com/w3c/preload/](https://github.com/w3c/preload/) 
     * Page Visibility
         * Discontinue (in 2023 charter)
         * Moved to HTML
@@ -37,9 +22,7 @@ Expires: 28 February 2023
         * Don't finalize to Rec, could incorporate Scheduling APIs
     * PaintTiming
     * EventTiming
-        * Listed as a repo, but not a deliverable/spec?
     * LCP
-        * Listed as a repo, but not a deliverable/spec?
         * Could incorporate ElementTiming?
     * Timing Names Entry Registry
         * New process for registries from W3C
@@ -63,7 +46,6 @@ Expires: 28 February 2023
         * Consider a move to HTML spec (same as rIC?)
     * JS self profiling [https://wicg.github.io/js-self-profiling/](https://wicg.github.io/js-self-profiling/) 
         * Any recent updates?
-    * Priority Hints [https://github.com/WICG/priority-hints](https://github.com/WICG/priority-hints) 
     * Page Lifecycle [https://github.com/WICG/page-lifecycle](https://github.com/WICG/page-lifecycle) 
     * Intervention/Deprecation/Crash Reporting
         * [https://github.com/WICG/deprecation-reporting](https://github.com/WICG/deprecation-reporting)
@@ -75,8 +57,6 @@ Expires: 28 February 2023
 
 
 
-* “Privacy preserving monitoring” - proposal from AlexC, to be discussed
-    * Potential collaboration with the IETF PPM WG
 * Sustainability - should it be covered in scope? No direct deliverables just yet
 * Lab tooling related browser interop - should it go back to being in scope?
 
@@ -100,16 +80,16 @@ The Web Performance Working Group's scope of work includes user agent features a
 
 
 
-* _Measurement \
-_The WG will deliver APIs to measure network and rendering performance, responsiveness and interactivity, memory and CPU use, application failures, and other aspects of the user’s experience, from the perspectives of both application loading and continuous user interaction. In particular, the group will deliver means to measure user experience metrics in popular web architectures, such as single-page apps, as well as means to collect those measurements.
-* _Scheduling \
-_The WG will deliver APIs to enable developers to improve scheduling of application work as well as use of network resources, to minimize loading times and ensure ideal user experience.
-* _Adaptation \
-_The WG will deliver APIs to enable developers to deliver resources adapted to the user’s device, preferences, conditions, or other circumstances.
+* _Measurement_
+The WG will deliver APIs to measure network and rendering performance, responsiveness and interactivity, memory and CPU use, application failures, and other aspects of the user’s experience, from the perspectives of both application loading and continuous user interaction. In particular, the group will deliver means to measure user experience metrics in popular web architectures, such as single-page apps, as well as means to collect those measurements. Where possible, privacy-preserving measurement techniques will be explored.
+* _Scheduling_
+The WG will deliver APIs to enable developers to improve scheduling of application work as well as use of network resources, to minimize loading times and ensure ideal user experience.
+* _Adaptation_
+The WG will deliver APIs to enable developers to deliver resources adapted to the user’s device, preferences, conditions, or other circumstances.
 
 Such deliverables will apply to desktop and mobile browsers and other non-browser environments where appropriate, and will be consistent with Web technologies designed in other working groups including HTML, CSS, Web Application Security, Web Apps, Device and Sensors, and SVG. The Group will strive for its deliverables to be well-integrated with other specifications where appropriate.
 
-In addition to developing Recommendation Track documents, the Web Performance Working Group may provide review of specifications from other Working Groups.
+In addition to developing Recommendation Track documents, the Web Performance Working Group may provide specification review to other Groups, and will collaborate with relevant incubations. Such collaboration can include both web platform specifications as well as relevant developer conventions that align with the Working Group's scope and mission.
 
 
 ### Out of Scope
@@ -495,7 +475,7 @@ This is the group responsible for ECMAScript standardization, and related ECMASc
 
 [Internet Engineering Task Force](https://www.ietf.org/)
 
-The IETF is responsible for defining robust and secure protocols for Internet functionality, in particular HTTP. The Working Group should coordinate protocol-related work (e.g. profiles of hybi or HTTP) with the appropriate IETF WGs.
+The IETF is responsible for defining robust and secure protocols for Internet functionality, in particular HTTP. The Working Group should coordinate protocol-related work (e.g. HTTP, Privacy-Preserving Measurement) with the appropriate IETF WGs.
 
 [Web Hypertext Application Technology Working Group (WHATWG)](https://whatwg.org/)
 
