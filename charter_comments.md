@@ -132,24 +132,23 @@ Normative specification changes are generally expected to have a corresponding s
 
 ## Deliverables
 
-Note: Latest milestone and publication schedules for the group's deliverables listed below can be found on the [publication status page](https://docs.google.com/spreadsheets/d/1JIB8c7hfyH_wuxkf6bLgovFekHP1LpTtqBTJGEUIK7E/edit#gid=0)
-
-_Draft state_ indicates the state of the deliverable at the time of the charter approval. _Next Recommendation expected completion_ indicates when the deliverable is projected to become a Recommendation, or otherwise reach a stable state.
+The WG expects to gradually move all of its deliverables to a Living Standard CR model. 
+Beyond that, the WG expects to converge at least some of its deliverables into a smaller number of specifications.
 
 
 ### Normative Specifications
 
 The working group will deliver incremental revisions of the following W3C normative specifications:
 
-**[High Resolution Time](https://w3c.github.io/hr-time/)**
+#### [High Resolution Time](https://w3c.github.io/hr-time/)
 
 This document defines an API that provides the current time in sub-millisecond resolution such that it is not subject to system clock skew or adjustments.
 
-**Level 3 Draft state:** [Working Draft](https://www.w3.org/TR/hr-time-3/)
+**Draft state:** [Working Draft](https://www.w3.org/TR/hr-time/)
 
-**Next Recommendation expected completion:** Q2 2021
+**Next Recommendation expected completion:**
 
-Latest publication: [01 October 2020](https://www.w3.org/TR/2020/WD-hr-time-3-20201001/)
+Latest publication: [25 April 2023](https://www.w3.org/TR/2023/WD-hr-time-3-20230425/)
 
 Patent Review Draft (level 3): [https://www.w3.org/TR/2020/WD-hr-time-3-20201001/](https://www.w3.org/TR/2020/WD-hr-time-3-20201001/)
 
@@ -159,15 +158,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**[Performance Timeline](https://w3c.github.io/performance-timeline/)**
+#### [Performance Timeline](https://w3c.github.io/performance-timeline/)
 
 This specification defines a unified interface to store and retrieve performance metric data.
 
-**Draft state:** [Working Draft](https://www.w3.org/TR/performance-timeline/)
+**Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/performance-timeline/)
 
-**Next Recommendation expected completion:** Q1 2021
+**Next Recommendation expected completion:** Living Standard
 
-Latest publication: [24 October 2019](https://www.w3.org/TR/2019/WD-performance-timeline-2-20191024/)
+Latest publication: [15 November 2022](https://www.w3.org/TR/2022/CRD-performance-timeline-20221115/)
 
 Reference Draft: [https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/](https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/)
 
@@ -175,19 +174,11 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**[Resource Timing](https://w3c.github.io/resource-timing/)**
+#### [Resource Timing](https://w3c.github.io/resource-timing/)
 
-An interoperable means for site developers to collect real-world performance information from the user agent while loading resources as specified from the root document of a webpage. The user agent captures the end to end latency associated with loading resources from a web server. This includes the time associated with fetching the resource from the network and the time associated to load the resource within the user agent. This might include:
-
-
-
-* timing associated with the network;
-* timings associated with loading the resource in the document;
-* a resource, such as one of the following elements: iframe, img, script, object, embed and link.
+This specification defines an interface for web applications to access the complete timing information for resources in a document or in a worker.
 
 **Level 1 Draft state:** [Candidate Recommendation](https://www.w3.org/TR/resource-timing-1/)
-
-**Next Recommendation expected completion:** Q1 2021
 
 Latest publication: [30 March 2017](https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/)
 
@@ -197,11 +188,11 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**Level 2 Draft state:** [Working Draft](https://www.w3.org/TR/resource-timing-2/)
+**Level 2 Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/resource-timing/)
 
 **Next Recommendation expected completion:** Living Standard
 
-Latest publication: [18 February 2020](https://www.w3.org/TR/2020/WD-resource-timing-2-20200218/)
+Latest publication: [11 May 2023](https://www.w3.org/TR/2023/CRD-resource-timing-20230511/)
 
 Reference Draft: [https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/](https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/)
 
@@ -209,9 +200,9 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
-**[Navigation Timing](https://w3c.github.io/navigation-timing/)**
+#### [Navigation Timing](https://w3c.github.io/navigation-timing/)
 
-An interoperable means for site developers to collect real-world performance information from the user agent while loading the root document of a webpage. The user agent captures the end to end latency associated with loading a webpage from a web server. This includes the time associated with fetching the document from the network to the time associated to load the document within the user agent.
+This specification defines an interface for web applications to access the complete timing information for navigation of a document.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/navigation-timing-2/)
 
@@ -219,7 +210,7 @@ An interoperable means for site developers to collect real-world performance inf
 
 Note: after Level 2 of Navigation Timing is ratified, future development of new Navigation Timing features will be done within Resource Timing; Navigation Timing will be merged with Resource Timing.
 
-Latest publication: [21 January 2020](https://www.w3.org/TR/2020/WD-navigation-timing-2-20200121/)
+Latest publication: [07 June 2023](https://www.w3.org/TR/2023/WD-navigation-timing-2-20230607/)
 
 Reference Draft: [https://www.w3.org/TR/2015/WD-navigation-timing-2-20150120/](https://www.w3.org/TR/2015/WD-navigation-timing-2-20150120/)
 
@@ -227,15 +218,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf).
 
-**[User Timing](https://w3c.github.io/user-timing/)**
+#### [User Timing](https://w3c.github.io/user-timing/)
 
 An interoperable means for site developers to capture timing information with a developer supplied name. The user agent captures the time stamp at the point and time specified in the code executing in the user agent.
 
-**Draft state:** [Working Draft](https://www.w3.org/TR/user-timing-3/)
+**Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/user-timing/)
 
 **Next Recommendation expected completion:** Living Standard
 
-Latest publication: [26 March 2020](https://www.w3.org/TR/2020/WD-user-timing-3-20200326/)
+Latest publication: [26 April 2023](https://www.w3.org/TR/2023/CRD-user-timing-20230426/)
 
 Reference Draft: [https://www.w3.org/TR/2019/WD-user-timing-3-20190305/](https://www.w3.org/TR/2019/WD-user-timing-3-20190305/)
 
@@ -243,31 +234,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf](https://www.w3.org/2018/09/webperf)
 
-**[Page Visibility](https://w3c.github.io/page-visibility/)**
-
-An interoperable means for site developers to programmatically determine the current visibility of a document and be notified of visibility changes.
-
-**Draft state:** [Proposed Recommendation](https://www.w3.org/TR/page-visibility-2/)
-
-**Next Recommendation expected completion:** Q1 2021
-
-Latest publication: [17 October 2017](https://www.w3.org/TR/2017/PR-page-visibility-2-20171017/)
-
-Reference Draft: [https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/](https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/)
-
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0003.html) on 29 March 2017 ended on 27 May 2017
-
-Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
-
-**[Beacon](https://w3c.github.io/beacon/)**
+#### [Beacon](https://w3c.github.io/beacon/)
 
 An interoperable API for site developers to asynchronously transfer data from the user agent to a web server, with a guarantee from the user agent that the data will be eventually sent.
 
-**Draft state:** [Candidate Recommendation](https://www.w3.org/TR/beacon/)
+**Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/beacon/)
 
-**Next Recommendation expected completion:** Q1 2021
+**Next Recommendation expected completion:** Living Standard
 
-Latest publication: [13 April 2017](https://www.w3.org/TR/2017/CR-beacon-20170413/)
+Latest publication: [03 August 2022](https://www.w3.org/TR/2022/CRD-beacon-20220803/)
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-beacon-20170413/](https://www.w3.org/TR/2017/CR-beacon-20170413/)
 
@@ -275,15 +250,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**[Cooperative Scheduling of Background Tasks](https://w3c.github.io/requestidlecallback/)**
+#### [Cooperative Scheduling of Background Tasks](https://w3c.github.io/requestidlecallback/)
 
 An API that web page authors can use to cooperatively schedule background tasks such that they do not introduce delays to other high priority tasks that share the same event loop, such as input processing, animations and frame compositing.
 
-**Draft state:** [Proposed Recommendation](https://www.w3.org/TR/requestidlecallback/)
+**Draft state:** [Working Draft](https://www.w3.org/TR/requestidlecallback/)
 
-**Next Recommendation expected completion:** Q2 2021
+**Next Recommendation expected completion:** Expected to move to Living Standard
 
-Latest publication: [10 October 2017](https://www.w3.org/TR/2017/PR-requestidlecallback-20171010/)
+Latest publication: [28 June 2022](https://www.w3.org/TR/2022/WD-requestidlecallback-20220628/)
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/](https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/)
 
@@ -291,13 +266,13 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**[Long Task](https://w3c.github.io/longtasks/)**
+#### [Long Task](https://w3c.github.io/longtasks/)
 
 This specification defines an API that web page authors can use to detect presence of "long tasks" that monopolize the UI thread for extended periods of time and block other critical tasks from being executed - e.g. reacting to user input.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/longtasks-1/)
 
-**Next Recommendation expected completion:** Q4 2021
+**Next Recommendation expected completion:** 
 
 Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 
@@ -307,13 +282,13 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
-**[Paint Timing](https://w3c.github.io/paint-timing/)**
+#### [Paint Timing](https://w3c.github.io/paint-timing/)
 
 An interoperable API for site developers to capture the set of key moments during pageload - e.g. first paint and first contentful paint.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/paint-timing/)
 
-**Next Recommendation expected completion:** Q1 2021
+**Next Recommendation expected completion:**
 
 Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-paint-timing-20170907/)
 
@@ -323,15 +298,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
-**[Server Timing](https://w3c.github.io/server-timing/)**
+#### [Server Timing](https://w3c.github.io/server-timing/)
 
 This specification enables a server to communicate performance metrics about the request-response cycle to the user agent. It also standardizes a JavaScript interface to enable applications to collect, process, and act on these metrics to optimize application delivery.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/server-timing/)
 
-**Next Recommendation expected completion:** Q2 2021
+**Next Recommendation expected completion:** 
 
-Latest publication: [20 January 2020](https://www.w3.org/TR/2020/WD-server-timing-20200120/)
+Latest publication: [11 April 2023](https://www.w3.org/TR/2023/WD-server-timing-20230411/)
 
 Reference Draft: [https://www.w3.org/TR/2017/WD-server-timing-20170713/](https://www.w3.org/TR/2017/WD-server-timing-20170713/)
 
@@ -339,15 +314,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
-**[Device Memory](https://w3c.github.io/device-memory/)**
+#### [Device Memory](https://w3c.github.io/device-memory/)
 
 This specification defines a JavaScript API and HTTP Client Hint header to surface device capability for memory — i.e. device RAM, in order to enable web apps to customize content depending on device memory constraints.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/device-memory/)
 
-**Next Recommendation expected completion:** Q4 2021
+**Next Recommendation expected completion:**
 
-Latest publication: [25-Sep-2018](https://www.w3.org/TR/2018/WD-device-memory-1-20180925/)
+Latest publication: [22 July 2022](https://www.w3.org/TR/2022/WD-device-memory-1-20220722/)
 
 Reference Draft: [https://www.w3.org/TR/2018/WD-device-memory-1-20180925/](https://www.w3.org/TR/2018/WD-device-memory-1-20180925/)
 
@@ -355,15 +330,15 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf/](https://www.w3.org/2018/09/webperf/)
 
-**[Reporting](https://w3c.github.io/reporting/)**
+#### [Reporting](https://w3c.github.io/reporting/)
 
 This specification defines a generic reporting framework which allows web developers to associate a set of named reporting endpoints with an origin. Various platform features (like Content Security Policy, Network Error Reporting, and others) will use these endpoints to deliver feature-specific reports in a consistent manner.
 
-**Draft state:** [Working Draft](https://www.w3.org/TR/reporting-1/)
+**Draft state:** [Working Draft](https://www.w3.org/TR/reporting/)
 
-**Next Recommendation expected completion:** Q4 2021
+**Next Recommendation expected completion:**
 
-Latest publication: [25-Sep-2018](https://www.w3.org/TR/2018/WD-reporting-1-20180925/)
+Latest publication: [12 May 2023](https://www.w3.org/TR/2023/WD-reporting-1-20230512/)
 
 Reference Draft: [https://www.w3.org/TR/2016/WD-reporting-1-20160407/](https://www.w3.org/TR/2016/WD-reporting-1-20160407/)
 
@@ -371,13 +346,13 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2015/06/webperf](https://www.w3.org/2015/06/webperf).
 
-**[Network Error Logging](https://w3c.github.io/network-error-logging)**
+#### [Network Error Logging](https://w3c.github.io/network-error-logging)
 
 This specification defines a mechanism that enables developers to declare a network error reporting policy for a web application. A user agent can use this policy to report encountered network errors that prevented it from successfully fetching requested resource.
 
 **Draft state:** [Working Draft](https://www.w3.org/TR/network-error-logging/)
 
-**Next Recommendation expected completion:** Q4 2021
+**Next Recommendation expected completion:**
 
 Latest publication: [25-Sep-2018](https://www.w3.org/TR/2018/WD-network-error-logging-1-20180925/)
 
@@ -392,7 +367,7 @@ Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https
 
 The Group plans to transition the contents of the following past-deliverables to the WHATWG and publish them as a Note.
 
-**[Resource Hints](https://w3c.github.io/resource-hints/)**
+#### [Resource Hints](https://w3c.github.io/resource-hints/)
 
 This specification defines the dns-prefetch, preconnect, prefetch, and prerender relationships of the HTML Link Element (&lt;link>).
 
@@ -406,7 +381,7 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf)
 
-**[Preload](https://w3c.github.io/preload/)**
+#### [Preload](https://w3c.github.io/preload/)
 
 This specification defines the link relation type preload, a declarative fetch primitive that initiates an early fetch and separates fetching from resource execution.
 
@@ -419,6 +394,20 @@ Reference Draft: [https://www.w3.org/TR/2017/CR-preload-20171026/](https://www.w
 associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Oct/0007.html) on 26 October 2017 ended on 25 December 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
+
+#### [Page Visibility](https://w3c.github.io/page-visibility/)
+
+An interoperable means for site developers to programmatically determine the current visibility of a document and be notified of visibility changes.
+
+**Draft state:** [Proposed Recommendation](https://www.w3.org/TR/page-visibility-2/)
+
+Latest publication: [17 October 2017](https://www.w3.org/TR/2017/PR-page-visibility-2-20171017/)
+
+Reference Draft: [https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/](https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/)
+
+associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0003.html) on 29 March 2017 ended on 27 May 2017
+
+Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
 
 ### Other Deliverables
