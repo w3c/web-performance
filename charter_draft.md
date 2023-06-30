@@ -89,7 +89,7 @@ The WG will deliver APIs to enable developers to deliver resources adapted to th
 
 Such deliverables will apply to desktop and mobile browsers and other non-browser environments where appropriate, and will be consistent with Web technologies designed in other working groups including HTML, CSS, Web Application Security, Web Apps, Device and Sensors, and SVG. The Group will strive for its deliverables to be well-integrated with other specifications where appropriate.
 
-In addition to developing Recommendation Track documents, the Web Performance Working Group may provide specification review to other Groups, and will collaborate with relevant incubations. Such collaboration can include both web platform specifications as well as relevant developer conventions that align with the Working Group's scope and mission.
+In addition to developing Recommendation Track documents, the Web Performance Working Group may provide specification review to other Groups, and will collaborate with relevant incubations. Such collaboration can be around web platform specifications, but can also include relevant developer or industry conventions, potentially applied in non-browser environments, as long as it's aligned with the Working Group's scope and mission.
 
 
 ### Out of Scope
