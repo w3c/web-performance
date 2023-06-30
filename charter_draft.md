@@ -138,6 +138,8 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
+Planned work: The specification defines time-related concepts beyond just high-resolution timers. It should be renamed to reflect that.
+
 #### [Performance Timeline](https://w3c.github.io/performance-timeline/)
 
 This specification defines a unified interface to store and retrieve performance metric data.
@@ -198,6 +200,8 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf).
 
+Planned work: The specification should be folded into the Resource Timing specification, on which it relies.
+
 #### [User Timing](https://w3c.github.io/user-timing/)
 
 An interoperable means for site developers to capture timing information with a developer supplied name. The user agent captures the time stamp at the point and time specified in the code executing in the user agent.
@@ -246,6 +250,8 @@ associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
+Planned work: The specification should be unified with other [Scheduling APIs](https://github.com/wicg/scheduling-apis), once they mature.
+
 #### [Long Task](https://w3c.github.io/longtasks/)
 
 This specification defines an API that web page authors can use to detect presence of "long tasks" that monopolize the UI thread for extended periods of time and block other critical tasks from being executed - e.g. reacting to user input.
@@ -261,6 +267,8 @@ Reference Draft: [https://www.w3.org/TR/2017/WD-longtasks-1-20170907/](https://w
 associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
+
+Planned work: Expanding the API to include [long animation frames](https://github.com/w3c/longtasks/blob/main/loaf-explainer.md).
 
 #### [Paint Timing](https://w3c.github.io/paint-timing/)
 
@@ -369,6 +377,8 @@ Latest publication: [24 May 2022](https://www.w3.org/TR/2022/WD-largest-contentf
 Reference Draft: [https://www.w3.org/TR/2022/WD-event-timing-20220524/)](https://www.w3.org/TR/2022/WD-event-timing-20220524/))
 
 Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
+
+Planned work: Should be folded into Paint Timing, alongside [Element Timing](https://wicg.github.io/element-timing/).
 
 ### Past Deliverables
 
