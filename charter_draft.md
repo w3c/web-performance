@@ -431,9 +431,9 @@ Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https
 
 The Group will maintain a [non-normative Primer document](https://w3c.github.io/perf-timing-primer/) to facilitate the understanding of the interrelationships between its deliverables.
 
+* Planned work for the Primer for 2023+ charter: Updating it to [include new specs](https://github.com/w3c/web-performance/issues/54), remove deprecated ones and more.
+
 Other non-normative documents may be created such as:
-
-
 
 * [Security and Privacy considerations for Performance APIs](https://w3c.github.io/perf-security-privacy/)
 * Test suites for each specification;
