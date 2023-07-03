@@ -134,7 +134,7 @@ Patent Review Draft (level 3): [https://www.w3.org/TR/2020/WD-hr-time-3-20201001
 
 Reference Draft (level 2): [https://www.w3.org/TR/2018/CR-hr-time-2-20180301/](https://www.w3.org/TR/2018/CR-hr-time-2-20180301/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Mar/0000.html) on 01 March 2018 ended on 30 April 2018
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Mar/0000.html) on 01 March 2018 ended on 30 April 2018
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -152,7 +152,7 @@ Latest publication: [15 November 2022](https://www.w3.org/TR/2022/CRD-performanc
 
 Reference Draft: [https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/](https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Dec/0001.html) on 08 December 2016 ended on 06 February 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Dec/0001.html) on 08 December 2016 ended on 06 February 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -166,7 +166,7 @@ Latest publication: [30 March 2017](https://www.w3.org/TR/2017/CR-resource-timin
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/](https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0005.html) on 30 March 2017 ended on 29 May 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0005.html) on 30 March 2017 ended on 29 May 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -178,7 +178,7 @@ Latest publication: [11 May 2023](https://www.w3.org/TR/2023/CRD-resource-timing
 
 Reference Draft: [https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/](https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Nov/0005.html) on 03 November 2016 ended on 02 April 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Nov/0005.html) on 03 November 2016 ended on 02 April 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
@@ -196,7 +196,7 @@ Latest publication: [07 June 2023](https://www.w3.org/TR/2023/WD-navigation-timi
 
 Reference Draft: [https://www.w3.org/TR/2015/WD-navigation-timing-2-20150120/](https://www.w3.org/TR/2015/WD-navigation-timing-2-20150120/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2013Jan/0014.html) on 31 January 2013 ended on 30 June 2013
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2013Jan/0014.html) on 31 January 2013 ended on 30 June 2013
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf).
 
@@ -214,7 +214,7 @@ Latest publication: [26 April 2023](https://www.w3.org/TR/2023/CRD-user-timing-2
 
 Reference Draft: [https://www.w3.org/TR/2019/WD-user-timing-3-20190305/](https://www.w3.org/TR/2019/WD-user-timing-3-20190305/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2019Mar/0000.html) on 05 March 2019 ended on 02 August 2019
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2019Mar/0000.html) on 05 March 2019 ended on 02 August 2019
 
 Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf](https://www.w3.org/2018/09/webperf)
 
@@ -230,7 +230,7 @@ Latest publication: [03 August 2022](https://www.w3.org/TR/2022/CRD-beacon-20220
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-beacon-20170413/](https://www.w3.org/TR/2017/CR-beacon-20170413/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Apr/0004.html) on 13 April 2017 ended on 12 June 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Apr/0004.html) on 13 April 2017 ended on 12 June 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -246,7 +246,7 @@ Latest publication: [28 June 2022](https://www.w3.org/TR/2022/WD-requestidlecall
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/](https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Feb/0000.html) on 02 February 2017 ended on 01 April 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Feb/0000.html) on 02 February 2017 ended on 01 April 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -264,7 +264,7 @@ Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-longtasks-
 
 Reference Draft: [https://www.w3.org/TR/2017/WD-longtasks-1-20170907/](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -282,7 +282,7 @@ Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-paint-timi
 
 Reference Draft: [https://www.w3.org/TR/2017/WD-paint-timing-20170907/](https://www.w3.org/TR/2017/WD-paint-timing-20170907/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
@@ -298,7 +298,7 @@ Latest publication: [11 April 2023](https://www.w3.org/TR/2023/WD-server-timing-
 
 Reference Draft: [https://www.w3.org/TR/2017/WD-server-timing-20170713/](https://www.w3.org/TR/2017/WD-server-timing-20170713/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Jul/0005.html) on 13 July 2017 ended on 10 December 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Jul/0005.html) on 13 July 2017 ended on 10 December 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
@@ -314,7 +314,7 @@ Latest publication: [22 July 2022](https://www.w3.org/TR/2022/WD-device-memory-1
 
 Reference Draft: [https://www.w3.org/TR/2018/WD-device-memory-1-20180925/](https://www.w3.org/TR/2018/WD-device-memory-1-20180925/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Sep/0003.html) on 25-Sep-2018 ended on 22-Feb-2019
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Sep/0003.html) on 25-Sep-2018 ended on 22-Feb-2019
 
 Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf/](https://www.w3.org/2018/09/webperf/)
 
@@ -330,7 +330,7 @@ Latest publication: [12 May 2023](https://www.w3.org/TR/2023/WD-reporting-1-2023
 
 Reference Draft: [https://www.w3.org/TR/2016/WD-reporting-1-20160407/](https://www.w3.org/TR/2016/WD-reporting-1-20160407/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Apr/0001.html) on 7 April 2016 ended on 4 September 2016
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Apr/0001.html) on 7 April 2016 ended on 4 September 2016
 
 Produced under Working Group Charter: [https://www.w3.org/2015/06/webperf](https://www.w3.org/2015/06/webperf).
 
@@ -346,7 +346,7 @@ Latest publication: [25-Sep-2018](https://www.w3.org/TR/2018/WD-network-error-lo
 
 Reference Draft: [https://www.w3.org/TR/2014/WD-navigation-error-logging-20140211/](https://www.w3.org/TR/2014/WD-navigation-error-logging-20140211/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2014Feb/0008.html) on 12-Feb-2014 ended on 12-Jul-2014
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2014Feb/0008.html) on 12-Feb-2014 ended on 12-Jul-2014
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf)
 
@@ -394,7 +394,7 @@ Latest publication: [02 July 2019](https://www.w3.org/TR/2019/WD-resource-hints-
 
 Reference Draft: [https://www.w3.org/TR/2014/WD-resource-hints-20141021/](https://www.w3.org/TR/2014/WD-resource-hints-20141021/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2014Oct/0006.html) on 23 October 2014 ended on 20 March 2015
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2014Oct/0006.html) on 23 October 2014 ended on 20 March 2015
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf)
 
@@ -408,7 +408,7 @@ Latest publication: [26 June 2019](https://www.w3.org/TR/2019/CR-preload-2019062
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-preload-20171026/](https://www.w3.org/TR/2017/CR-preload-20171026/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Oct/0007.html) on 26 October 2017 ended on 25 December 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Oct/0007.html) on 26 October 2017 ended on 25 December 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
@@ -422,7 +422,7 @@ Latest publication: [17 October 2017](https://www.w3.org/TR/2017/PR-page-visibil
 
 Reference Draft: [https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/](https://www.w3.org/TR/2017/CR-page-visibility-2-20170328/)
 
-associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0003.html) on 29 March 2017 ended on 27 May 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0003.html) on 29 March 2017 ended on 27 May 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
