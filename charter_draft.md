@@ -398,6 +398,8 @@ Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2013/01/webperf](https://www.w3.org/2013/01/webperf)
 
+Moved to the [HTML spec](https://html.spec.whatwg.org//multipage/links.html#linkTypes).
+
 #### [Preload](https://w3c.github.io/preload/)
 
 This specification defines the link relation type preload, a declarative fetch primitive that initiates an early fetch and separates fetching from resource execution.
@@ -411,6 +413,8 @@ Reference Draft: [https://www.w3.org/TR/2017/CR-preload-20171026/](https://www.w
 Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Oct/0007.html) on 26 October 2017 ended on 25 December 2017
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
+
+Moved to the [HTML spec](https://html.spec.whatwg.org/multipage/links.html#link-type-preload).
 
 #### [Page Visibility](https://w3c.github.io/page-visibility/)
 
@@ -426,6 +430,7 @@ Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
 
+Moved to the [HTML spec](https://html.spec.whatwg.org/multipage/interaction.html#page-visibility).
 
 ### Other Deliverables
 
