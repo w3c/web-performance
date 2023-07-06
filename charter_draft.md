@@ -511,6 +511,12 @@ The group also welcomes non-Members to contribute technical submissions for cons
 Participants in the group are required (by the [W3C Process](https://www.w3.org/Consortium/Process/#ParticipationCriteria)) to follow the W3C [Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc/).
 
 
+## Open privacy issues
+
+The following WG deliverables currently have a few open issues related to privacy - [Resource Timing](https://github.com/w3c/resource-timing/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-needs-resolution), [High Resolution time](https://github.com/w3c/hr-time/issues/79), and [Reporting](https://github.com/w3c/reporting/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-tracker).
+
+The WG will work with the relevant stake holders and strive to resolve those issues.
+
 ## Communication
 
 Technical discussions for this Working Group are conducted in [public](https://www.w3.org/2020/Process-20200915/#confidentiality-levels). Meeting minutes from teleconference and face-to-face meetings will be archived for public review, and technical discussions and issue tracking will be conducted in a manner that can be both read and written to by the general public. Working Drafts and Editor's Drafts of specifications will be developed on a public repository, and may permit direct public contribution requests.
