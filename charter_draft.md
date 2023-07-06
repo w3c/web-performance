@@ -432,15 +432,18 @@ Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https
 
 Moved to the [HTML spec](https://html.spec.whatwg.org/multipage/interaction.html#page-visibility).
 
+
 ### Other Deliverables
 
-The Group will maintain a [non-normative Primer document](https://w3c.github.io/perf-timing-primer/) to facilitate the understanding of the interrelationships between its deliverables.
+The Group maintains two non-normative documents:
 
-* Planned work for the Primer for 2023+ charter: Updating it to [include new specs](https://github.com/w3c/web-performance/issues/54), remove deprecated ones and more.
+* A [Primer for Web Performance Timing APIs](https://w3c.github.io/perf-timing-primer/) document to facilitate the understanding of the interrelationships between its deliverables.
+    * Planned work: Updating it to [include new specs](https://github.com/w3c/web-performance/issues/54), remove deprecated ones and more.
+* A [Performance APIs, Security and Privacy](https://w3c.github.io/perf-security-privacy/) document
+    * Planned work: [Reviewing and updating the content](https://github.com/w3c/web-performance/issues/46), and adding a section on the principals and value of performance measurements.
 
 Other non-normative documents may be created such as:
 
-* [Security and Privacy considerations for Performance APIs](https://w3c.github.io/perf-security-privacy/)
 * Test suites for each specification;
 * Use cases documents to support development and exploration of performance-critical web platform features and APIs;
 * Primer or Best Practice documents to support web developers when designing applications with performance in mind;
