@@ -150,9 +150,9 @@ This specification defines a unified interface to store and retrieve performance
 
 Latest publication: [15 November 2022](https://www.w3.org/TR/2022/CRD-performance-timeline-20221115/)
 
-Reference Draft: [https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/](https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/)
+Reference Draft: [https://www.w3.org/TR/2021/CR-performance-timeline-20211202/]([https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/](https://www.w3.org/TR/2021/CR-performance-timeline-20211202/))
 
-Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Dec/0001.html) on 08 December 2016 ended on 06 February 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2021Dec/0001.html) on 02 December 2021 ended on 31 January 2022
 
 Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
 
