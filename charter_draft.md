@@ -450,6 +450,8 @@ Other non-normative documents may be created such as:
 * Developer and user guides for its normative specifications;
 * Best practice document explaining how data is commonly gathered between the client and the server.
 
+The WG will also explore the possibility of renewing work on the [HAR file format](https://w3c.github.io/web-performance/specs/HAR/Overview.html).
+
 
 ## Coordination
 
