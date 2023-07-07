@@ -150,37 +150,27 @@ This specification defines a unified interface to store and retrieve performance
 
 Latest publication: [15 November 2022](https://www.w3.org/TR/2022/CRD-performance-timeline-20221115/)
 
-Reference Draft: [https://www.w3.org/TR/2021/CR-performance-timeline-20211202/]([https://www.w3.org/TR/2016/CR-performance-timeline-2-20161208/](https://www.w3.org/TR/2021/CR-performance-timeline-20211202/))
+Reference Draft: [https://www.w3.org/TR/2021/CR-performance-timeline-20211202/](https://www.w3.org/TR/2021/CR-performance-timeline-20211202/))
 
 Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2021Dec/0001.html) on 02 December 2021 ended on 31 January 2022
 
-Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
+Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html).
 
 #### [Resource Timing](https://w3c.github.io/resource-timing/)
 
 This specification defines an interface for web applications to access the complete timing information for resources in a document or in a worker.
 
-**Level 1 Draft state:** [Candidate Recommendation](https://www.w3.org/TR/resource-timing-1/)
-
-Latest publication: [30 March 2017](https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/)
-
-Reference Draft: [https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/](https://www.w3.org/TR/2017/CR-resource-timing-1-20170330/)
-
-Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Mar/0005.html) on 30 March 2017 ended on 29 May 2017
-
-Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf).
-
-**Level 2 Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/resource-timing/)
+**Draft state:** [Candidate Recommendation Draft](https://www.w3.org/TR/resource-timing/)
 
 **Next Recommendation expected completion:** Living Standard
 
 Latest publication: [11 May 2023](https://www.w3.org/TR/2023/CRD-resource-timing-20230511/)
 
-Reference Draft: [https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/](https://www.w3.org/TR/2016/WD-resource-timing-2-20161103/)
+Reference Draft: [https://www.w3.org/TR/2022/CR-resource-timing-20221004/](https://www.w3.org/TR/2022/CR-resource-timing-20221004/)
 
-Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2016Nov/0005.html) on 03 November 2016 ended on 02 April 2017
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2022Oct/0000.html) on 04 October 2022 ended on 03 December 2022
 
-Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https://www.w3.org/2016/07/webperf)
+Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html).
 
 #### [Navigation Timing](https://w3c.github.io/navigation-timing/)
 
@@ -212,11 +202,11 @@ An interoperable means for site developers to capture timing information with a 
 
 Latest publication: [26 April 2023](https://www.w3.org/TR/2023/CRD-user-timing-20230426/)
 
-Reference Draft: [https://www.w3.org/TR/2019/WD-user-timing-3-20190305/](https://www.w3.org/TR/2019/WD-user-timing-3-20190305/)
+Reference Draft: [https://www.w3.org/TR/2021/CR-user-timing-20211202/](https://www.w3.org/TR/2021/CR-user-timing-20211202/)
 
-Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2019Mar/0000.html) on 05 March 2019 ended on 02 August 2019
+Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2021Dec/0000.html) on 02 December 2021 ended on 31 January 2022
 
-Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf](https://www.w3.org/2018/09/webperf)
+Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html).
 
 #### [Beacon](https://w3c.github.io/beacon/)
 
@@ -252,7 +242,7 @@ Produced under Working Group Charter: [https://www.w3.org/2016/07/webperf](https
 
 Planned work: The specification should be unified with other [Scheduling APIs](https://github.com/wicg/scheduling-apis), once they mature.
 
-#### [Long Task](https://w3c.github.io/longtasks/)
+#### [Long Tasks API](https://w3c.github.io/longtasks/)
 
 This specification defines an API that web page authors can use to detect presence of "long tasks" that monopolize the UI thread for extended periods of time and block other critical tasks from being executed - e.g. reacting to user input.
 
@@ -278,7 +268,7 @@ An interoperable API for site developers to capture the set of key moments durin
 
 **Next Recommendation expected completion:**
 
-Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-paint-timing-20170907/)
+Latest publication: [03 July 2023](https://www.w3.org/TR/2023/WD-paint-timing-20230703/)
 
 Reference Draft: [https://www.w3.org/TR/2017/WD-paint-timing-20170907/](https://www.w3.org/TR/2017/WD-paint-timing-20170907/)
 
@@ -318,7 +308,7 @@ Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/
 
 Produced under Working Group Charter: [https://www.w3.org/2018/09/webperf/](https://www.w3.org/2018/09/webperf/)
 
-#### [Reporting](https://w3c.github.io/reporting/)
+#### [Reporting API](https://w3c.github.io/reporting/)
 
 This specification defines a generic reporting framework which allows web developers to associate a set of named reporting endpoints with an origin. Various platform features (like Content Security Policy, Network Error Reporting, and others) will use these endpoints to deliver feature-specific reports in a consistent manner.
 
@@ -358,7 +348,7 @@ This specification defines an API that provides web page authors with insights i
 
 **Next Recommendation expected completion:**
 
-Latest publication: [24 May 2022](https://www.w3.org/TR/2022/WD-event-timing-20220524/)
+Latest publication: [03 July 2022](https://www.w3.org/TR/2023/WD-event-timing-20230703/)
 
 Reference Draft: [https://www.w3.org/TR/2022/WD-event-timing-20220524/](https://www.w3.org/TR/2022/WD-event-timing-20220524/)
 
@@ -374,7 +364,7 @@ This specification defines an API that enables monitoring the largest paint an e
 
 Latest publication: [24 May 2022](https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/)
 
-Reference Draft: [https://www.w3.org/TR/2022/WD-event-timing-20220524/)](https://www.w3.org/TR/2022/WD-event-timing-20220524/))
+Reference Draft: [https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/)](https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/))
 
 Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
 
