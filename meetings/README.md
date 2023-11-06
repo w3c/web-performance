@@ -3,6 +3,10 @@ The WG's meeting schedule is being managed in its [agenda document](https://docs
 Links to the meeting minutes are below:
 
 # 2023
+* [October 12th](https://w3c.github.io/web-performance/meetings/2023/2023-10-12/index.html)
+* [September 28th](https://w3c.github.io/web-performance/meetings/2023/2023-09-28/index.html)
+* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2023/2023-09-TPAC/index.html)
+* [August 17th](https://w3c.github.io/web-performance/meetings/2023/2023-08-17/index.html)
 * [July 20th](https://w3c.github.io/web-performance/meetings/2023/2023-07-20/index.html)
 * [June 22nd](https://w3c.github.io/web-performance/meetings/2023/2023-06-22/index.html)
 * [June 8th](https://w3c.github.io/web-performance/meetings/2023/2023-06-08/index.html)
@@ -18,7 +22,7 @@ Links to the meeting minutes are below:
 * [November 10th](https://w3c.github.io/web-performance/meetings/2022/2022-11-10/index.html)
 * [October 13th](https://w3c.github.io/web-performance/meetings/2022/2022-10-13/index.html)
 * [September 29th](https://w3c.github.io/web-performance/meetings/2022/2022-09-29/index.html)
-* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2022/2022-09-TPAC/)
+* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2022/2022-09-TPAC/index.html)
 * [TPAC breakout - public resources](https://w3c.github.io/web-performance/meetings/2022/2022-09-public-resources)
 * [September 1st](https://w3c.github.io/web-performance/meetings/2022/2022-09-01/index.html)
 * [August 4th](https://w3c.github.io/web-performance/meetings/2022/2022-08-04/index.html)
