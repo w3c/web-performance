@@ -3,6 +3,7 @@ The WG's meeting schedule is being managed in its [agenda document](https://docs
 Links to the meeting minutes are below:
 
 # 2023
+* [December 7th](https://w3c.github.io/web-performance/meetings/2023/2023-12-07/index.html)
 * [November 17th](https://w3c.github.io/web-performance/meetings/2023/2023-11-17/index.html)
 * [November 9th](https://w3c.github.io/web-performance/meetings/2023/2023-11-09/index.html)
 * [October 12th](https://w3c.github.io/web-performance/meetings/2023/2023-10-12/index.html)
