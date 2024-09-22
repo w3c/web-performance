@@ -2,9 +2,9 @@
 
 # 2023 Charter Comments
 
-2021 Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
+2023 Charter: [https://www.w3.org/2023/11/webperf-charter-2023.html](https://www.w3.org/2023/11/webperf-charter-2023.html)
 
-Expires: 28 February 2023
+Expires: 01 December 2025
 
 * Specs Changes
     * Page Visibility
