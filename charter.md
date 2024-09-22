@@ -1,69 +1,10 @@
-# W3C Web Performance Working Group
+# Web Performance Working Group Charter
 
-# 2023 Charter Comments
-
-2023 Charter: [https://www.w3.org/2023/11/webperf-charter-2023.html](https://www.w3.org/2023/11/webperf-charter-2023.html)
-
-Expires: 01 December 2025
-
-* Specs Changes
-    * Page Visibility
-        * Discontinue (in 2023 charter)
-        * Moved to HTML
-        * Repo archived (but doesn't mention why)
-        * Spec says discontinued [https://github.com/w3c/page-visibility/](https://github.com/w3c/page-visibility/)
-        * Spec should redirect?
-    * Beacon
-        * Don't finalize to Rec, could incorporate Unload/Pending beacon into it
-    * Cooperative Scheduling of Background Tasks (rIC)
-        * Don't finalize to Rec, could incorporate Scheduling APIs
-    * PaintTiming
-    * EventTiming
-    * LCP
-        * Could incorporate ElementTiming?
-    * Timing Names Entry Registry
-        * New process for registries from W3C
-* Incubations
-    * ElementTiming [https://github.com/WICG/element-timing](https://github.com/WICG/element-timing)
-        * Move into LCP? Or at least bring into WG as LCP already is.
-        * Merge parts into LCP, parts into PaintTiming
-    * isInputPending [https://github.com/WICG/is-input-pending](https://github.com/WICG/is-input-pending)
-        * Any recent updates?
-    * Layout Instability [https://github.com/WICG/layout-instability](https://github.com/WICG/layout-instability)
-        * Discussion in early 2022 around lessons from implementation
-        * Barriers to adoption?
-            * Mozilla: Neutral (implementation, performance concerns)
-            * Apple: Opposed (circa 2019) (concerns on bookkeeping, cost at runtime, implementation, animations/scrolling not handled well)
-    * Memory Measurement [https://github.com/WICG/performance-measure-memory](https://github.com/WICG/performance-measure-memory)
-    * Network Info [https://github.com/WICG/netinfo/](https://github.com/WICG/netinfo/)
-    * Unload Beacon [https://github.com/WICG/unload-beacon](https://github.com/WICG/unload-beacon)
-        * Incorporate into Beacon?
-    * Scheduling APIs [https://github.com/WICG/scheduling-apis](https://github.com/WICG/scheduling-apis)
-        * Incorporate into Cooperative Scheduling of Background Tasks?
-        * Consider a move to HTML spec (same as rIC?)
-    * JS self profiling [https://wicg.github.io/js-self-profiling/](https://wicg.github.io/js-self-profiling/)
-        * Any recent updates?
-    * Page Lifecycle [https://github.com/WICG/page-lifecycle](https://github.com/WICG/page-lifecycle)
-    * Intervention/Deprecation/Crash Reporting
-        * [https://github.com/WICG/deprecation-reporting](https://github.com/WICG/deprecation-reporting)
-        * [https://github.com/WICG/intervention-reporting](https://github.com/WICG/intervention-reporting)
-        * [https://github.com/WICG/crash-reporting](https://github.com/WICG/crash-reporting)
-
-## TPAC 22 discussions
-
-* Sustainability - should it be covered in scope? No direct deliverables just yet
-* Lab tooling related browser interop - should it go back to being in scope?
-
-## Other questions
-
-* HR-Time is not just about high resolution timers, but defines time in general. Should we rename it?
-* We should call out [open privacy issues](https://github.com/w3c/resource-timing/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-needs-resolution) and say that we strive to resolve them
-
-# <span style="text-decoration:underline;">CHARTER DRAFT</span>
-
-## Scope
+## Motivation and Background
 
 Web developers are building sophisticated applications where application performance is a critical feature. Web developers want the ability to observe the performance characteristics of their applications, and they want the ability to write more efficient applications, using well-defined interoperable methods. Their methods must be both secure and privacy-enabling by design, using well-defined interoperable methods that conform to the current Web browser security model.
+
+## Scope
 
 The Web Performance Working Group's scope of work includes user agent features and APIs to observe and improve various aspects of application performance:
 
@@ -84,18 +25,15 @@ The following features are out of scope, and will not be addressed by this worki
 
 * performance data analysis techniques or algorithms.
 
-### Success Criteria
-
-In order to advance to [Proposed Recommendation](https://www.w3.org/2020/Process-20200915/#RecsPR), each specification is expected to have at least two independent implementations of each feature defined in the specification.
-
-Each specification should contain a section detailing any [known security](https://www.w3.org/TR/security-privacy-questionnaire/), fingerprinting, and privacy implications, and suggested [mitigation strategies](https://w3c.github.io/perf-security-privacy/) for implementers, Web authors, and end users. The group should not publish a specification if acceptable mitigation strategies cannot be found.
-
-Normative specification changes are generally expected to have a corresponding set of tests, either in the form of new tests or modifications to existing tests, or must include the rationale for why test updates are not required for the proposed update.
-
 ## Deliverables
 
-The WG expects to gradually move all of its deliverables to a Living Standard CR model.
-Beyond that, the WG expects to converge at least some of its deliverables into a smaller number of specifications.
+Updated document status is available on the [group publication status page](https://www.w3.org/groups/wg/webperf/publications).
+
+Draft state indicates the state of the deliverable at the time of the charter approval.
+
+The Working Group intends to publish the latest state of their work as Candidate Recommendations, upgrading specifications with Candidate Recommendation Snapshots. Alternatively, ongoing work may be published as Recommendations to be updated further with Candidate Changes.
+
+The Working Group expects to gradually move all of its deliverables to this model. Beyond that, the WG expects to converge at least some of its deliverables into a smaller number of specifications.
 
 ### Normative Specifications
 
@@ -414,6 +352,7 @@ The Group maintains two non-normative documents:
 
 Other non-normative documents may be created such as:
 
+* [Security and Privacy considerations for Performance APIs](https://w3c.github.io/perf-security-privacy/)
 * Test suites for each specification;
 * Use cases documents to support development and exploration of performance-critical web platform features and APIs;
 * Primer or Best Practice documents to support web developers when designing applications with performance in mind;
@@ -421,6 +360,22 @@ Other non-normative documents may be created such as:
 * Best practice document explaining how data is commonly gathered between the client and the server.
 
 The WG will also explore the possibility of renewing work on the [HAR file format](https://w3c.github.io/web-performance/specs/HAR/Overview.html).
+
+### Timeline
+
+* Next meeting: TPAC 2024 in hybrid mode.
+  
+## Success Criteria
+
+There should be testing plans for each specification, starting from the earliest drafts.
+
+To promote interoperability, all changes made to specifications in Candidate Recommendation or to features that have deployed implementations should have [tests](https://www.w3.org/2019/02/testing-policy.html). Testing efforts can be conducted via the [Web Platform Tests](https://github.com/web-platform-tests/wpt) project.
+
+Each specification should contain sections detailing all known security and privacy implications for implementers, Web authors, and end users.
+
+This Working Group expects to follow the TAG [Web Platform Design Principles](https://www.w3.org/TR/design-principles/).
+
+All new features should be supported by at least two intents to implement before being incorporated in the specification.
 
 ## Coordination
 
@@ -478,37 +433,33 @@ The group also welcomes non-Members to contribute technical submissions for cons
 
 Participants in the group are required (by the [W3C Process](https://www.w3.org/Consortium/Process/#ParticipationCriteria)) to follow the W3C [Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc/).
 
-## Open privacy issues
-
-The following WG deliverables currently have a few open issues related to privacy - [Resource Timing](https://github.com/w3c/resource-timing/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-needs-resolution), [High Resolution time](https://github.com/w3c/hr-time/issues/79), and [Reporting](https://github.com/w3c/reporting/issues?q=is%3Aissue+is%3Aopen+label%3Aprivacy-tracker).
-
-The WG will work with the relevant stake holders and strive to resolve those issues.
-
 ## Communication
 
-Technical discussions for this Working Group are conducted in [public](https://www.w3.org/2020/Process-20200915/#confidentiality-levels). Meeting minutes from teleconference and face-to-face meetings will be archived for public review, and technical discussions and issue tracking will be conducted in a manner that can be both read and written to by the general public. Working Drafts and Editor's Drafts of specifications will be developed on a public repository, and may permit direct public contribution requests.
+Technical discussions for this Working Group are conducted in [public](https://www.w3.org/Consortium/Process/#confidentiality-levels): the meeting minutes from teleconference and face-to-face meetings will be archived for public review, and technical discussions and issue tracking will be conducted in a manner that can be both read and written to by the general public. Working Drafts and Editor's Drafts of specifications will be developed in public repositories and may permit direct public contribution requests. The meetings themselves are not open to public participation, however.
 
-Information about the group (including details about deliverables, issues, actions, status, participants, and meetings) will be available from the [Web Performance Working Group home page.](https://www.w3.org/2010/webperf/)
+Information about the group (including details about deliverables, issues, actions, status, participants, and meetings) will be available from the [Web Performance Working Group home page](https://www.w3.org/groups/wg/webperf).
 
 Most Web Performance Working Group teleconferences will focus on discussion of particular specifications, and will be conducted on an as-needed basis.
 
-This group primarily conducts its technical work in its [public repositories](https://github.com/orgs/w3c/teams/web-performance/repositories). There is also a public mailing list [public-web-perf@w3.org](mailto:public-web-perf@w3.org) ([archive](https://lists.w3.org/Archives/Public/public-web-perf/)). The public is invited to contribute to the github repositories and post messages to the list. Regular activity summaries around the github repositories will be provided.
+This group primarily conducts its technical work on [GitHub](https://github.com/w3c/web-performance) in the relevant specifications repositories. The public is invited to review, discuss and contribute to this work.
+
+The group may use a Member-confidential mailing list for administrative purposes.
 
 ## Decision Policy
 
-This group will seek to make decisions through consensus and due process, per the [W3C Process Document (section 3.3](https://www.w3.org/2020/Process-20200915/#Consensus)). Typically, an editor or other participant makes an initial proposal, which is then refined in discussion with members of the group and other reviewers, and consensus emerges with little formal voting being required.
+This group will seek to make decisions through consensus and due process, per the [W3C Process Document (section 5.2.1, Consensus)](https://www.w3.org/Consortium/Process/#Consensus). Typically, an editor or other participant makes an initial proposal, which is then refined in discussion with members of the group and other reviewers, and consensus emerges with little formal voting being required.
 
-However, if a decision is necessary for timely progress, but consensus is not achieved after careful consideration of the range of views presented, the Chairs may call for a group vote, and record a decision along with any objections.
+However, if a decision is necessary for timely progress and consensus is not achieved after careful consideration of the range of views presented, the Chairs may call for a group vote and record a decision along with any objections.
 
-To afford asynchronous decisions and organizational deliberation, any resolution (including publication decisions) taken in a face-to-face meeting or teleconference will be considered provisional until 10 working days after the publication of the resolution in draft minutes sent, which will be published within 5 working days of the meeting to the working group's mailing list with a 'call for consensus' in the subject line. If no objections are raised on the mailing list by the end of the response period, the resolution will be considered to have consensus as a resolution of the Working Group.
+To afford asynchronous decisions and organizational deliberation, any resolution (including publication decisions) taken in a face-to-face meeting or teleconference will be considered provisional. A call for consensus (CfC) will be issued for all resolutions (for example, via email, GitHub issue or web-based survey), with a response period from one week to 10 working days, depending on the chair's evaluation of the group consensus on the issue. If no objections are raised by the end of the response period, the resolution will be considered to have consensus as a resolution of the Working Group.
 
-All decisions made by the group should be considered resolved unless and until new information becomes available, or unless reopened at the discretion of the Chairs or the Director.
+All decisions made by the group should be considered resolved unless and until new information becomes available or unless reopened at the discretion of the Chairs.
 
-This charter is written in accordance with the [W3C Process Document (Section 3.4, Votes)](https://www.w3.org/Consortium/Process/policies#Votes), and includes no voting procedures beyond what the Process Document requires.
+This charter is written in accordance with the [W3C Process Document (Section 5.2.3, Deciding by Vote)](https://www.w3.org/Consortium/Process/#Votes) and includes no voting procedures beyond what the Process Document requires.
 
 ## Patent Policy
 
-This Working Group operates under the [W3C Patent Policy](https://www.w3.org/Consortium/Patent-Policy-20200915/) 15 September 2020. To promote the widest adoption of Web standards, W3C seeks to issue Recommendations that can be implemented, according to this policy, on a Royalty-Free basis. For more information about disclosure obligations for this group, please see the [W3C Patent Policy Implementation](https://www.w3.org/2004/01/pp-impl/45211/status).
+This Working Group operates under the [W3C Patent Policy](https://www.w3.org/Consortium/Patent-Policy/) (Version of 15 September 2020). To promote the widest adoption of Web standards, W3C seeks to issue Web specifications that can be implemented, according to this policy, on a Royalty-Free basis. For more information about disclosure obligations for this group, please see the [licensing information](https://www.w3.org/groups/wg/webperf/ipr).
 
 ## Licensing
 
@@ -516,4 +467,4 @@ This Working Group will use the [W3C Software and Document license](https://www.
 
 ## About this Charter
 
-This charter has been created according to [section 5.2](https://www.w3.org/Consortium/Process/groups#GAGeneral) of the [Process Document](https://www.w3.org/Consortium/Process). In the event of a conflict between this document or the provisions of any charter and the W3C Process, the W3C Process shall take precedence.
+This charter has been created according to [section 3.4](https://www.w3.org/Consortium/Process/#GAGeneral) of the [Process Document](https://www.w3.org/Consortium/Process/). In the event of a conflict between this document or the provisions of any charter and the W3C Process, the W3C Process shall take precedence.
