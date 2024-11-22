@@ -4,6 +4,7 @@ Links to the meeting minutes are below:
 
 # 2024
 
+* [November 21st](https://w3c.github.io/web-performance/meetings/2024/2024-11-21/index.html)
 * [November 7th](https://w3c.github.io/web-performance/meetings/2024/2024-11-07/index.html)
 * [October 31st](https://w3c.github.io/web-performance/meetings/2024/2024-10-31/index.html)
 * [October 17th](https://w3c.github.io/web-performance/meetings/2024/2024-10-17/index.html)
