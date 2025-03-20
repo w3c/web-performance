@@ -27,15 +27,19 @@ More information on our [dashboard][db].
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Group agenda
+## Group Agenda
 
 See our [agenda][agenda].
+
+## Meeting Minutes
+
+Past meeting minutes are captured in the [meeting minutes archive][minutes].
 
 ## History
 
 This repository used to contain editor's drafts from the Web Performance Working Group.
 
-
 [WPT]: https://github.com/web-platform-tests/wpt
 [db]:  https://bit.ly/w3c-webperf-status
 [agenda]:  https://docs.google.com/document/d/10dz_7QM5XCNsGeI63R864lF9gFqlqQD37B4q8Q46LMM/
+[minutes]: https://w3c.github.io/web-performance/meetings/
