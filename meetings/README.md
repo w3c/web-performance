@@ -3,6 +3,11 @@ The WG's meeting schedule is being managed in its [agenda document](https://docs
 Links to the meeting minutes are below:
 
 # 2025
+
+* [April 24th](https://w3c.github.io/web-performance/meetings/2025/2025-04-24/index.html)
+* [April 10th](https://w3c.github.io/web-performance/meetings/2025/2025-04-10/index.html)
+* [March 27th](https://w3c.github.io/web-performance/meetings/2025/2025-03-27/index.html)
+* [March 13th](https://w3c.github.io/web-performance/meetings/2025/2025-03-13/index.html)
 * [February 26th](https://w3c.github.io/web-performance/meetings/2025/2025-02-26/index.html)
 * [February 13th](https://w3c.github.io/web-performance/meetings/2025/2025-02-13/index.html)
 * [January 16th](https://w3c.github.io/web-performance/meetings/2025/2025-01-16/index.html)
