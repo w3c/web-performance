@@ -4,6 +4,7 @@ Links to the meeting minutes are below:
 
 # 2025
 
+* [September 11th](https://w3c.github.io/web-performance/meetings/2025/2025-09-11/index.html)
 * [August 28th](https://w3c.github.io/web-performance/meetings/2025/2025-08-28/index.html)
 * [July 31st](https://w3c.github.io/web-performance/meetings/2025/2025-07-31/index.html)
 * [July 17th](https://w3c.github.io/web-performance/meetings/2025/2025-07-17/index.html)
