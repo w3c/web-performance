@@ -44,7 +44,7 @@ The working group will deliver incremental revisions of the following W3C normat
 This document defines an API that provides the current time in sub-millisecond resolution such that it is not subject to system clock skew or adjustments.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/hr-time/)
-* **Next Recommendation expected completion:** TODO
+* **Next Recommendation expected completion:** Living Standard
 * Latest publication: [25 April 2023](https://www.w3.org/TR/2023/WD-hr-time-3-20230425/)
 * Patent Review Draft (level 3): [https://www.w3.org/TR/2020/WD-hr-time-3-20201001/](https://www.w3.org/TR/2020/WD-hr-time-3-20201001/)
 *  Reference Draft (level 2): [https://www.w3.org/TR/2018/CR-hr-time-2-20180301/](https://www.w3.org/TR/2018/CR-hr-time-2-20180301/)
@@ -112,7 +112,7 @@ An interoperable API for site developers to asynchronously transfer data from th
 An interoperable API for site developers to capture the set of key moments during pageload - e.g. first paint and first contentful paint.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/paint-timing/)
-* **Next Recommendation expected completion:**
+* **Next Recommendation expected completion:** TODO
 * Latest publication: [03 July 2023](https://www.w3.org/TR/2023/WD-paint-timing-20230703/)
 * Reference Draft: [https://www.w3.org/TR/2017/WD-paint-timing-20170907/](https://www.w3.org/TR/2017/WD-paint-timing-20170907/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
@@ -123,7 +123,7 @@ An interoperable API for site developers to capture the set of key moments durin
 This specification enables a server to communicate performance metrics about the request-response cycle to the user agent. It also standardizes a JavaScript interface to enable applications to collect, process, and act on these metrics to optimize application delivery.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/server-timing/)
-* **Next Recommendation expected completion:**
+* **Next Recommendation expected completion:** TODO
 * Latest publication: [11 April 2023](https://www.w3.org/TR/2023/WD-server-timing-20230411/)
 * Reference Draft: [https://www.w3.org/TR/2017/WD-server-timing-20170713/](https://www.w3.org/TR/2017/WD-server-timing-20170713/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Jul/0005.html) on 13 July 2017 ended on 10 December 2017
@@ -175,8 +175,9 @@ This specification defines an API that enables monitoring the largest paint an e
 
 This specification defines an API that gives an indication when frames take a long time to render.
 
-* **Draft state:** [First Public Working Draft](https://www.w3.org/TR/long-animation-frames/) (TODO)
+* **Draft state:** [First Public Working Draft](https://www.w3.org/TR/long-animation-frames/)
 * **Next Recommendation expected completion:** TODO
+* Planned Work: Publish FPWD
 * Latest publication: [26 November 2024 Editor's Draft](https://w3c.github.io/long-animation-frames/)
 * Produced under Working Group Charter: [https://www.w3.org/2023/11/webperf-charter-2023.html](https://www.w3.org/2023/11/webperf-charter-2023.html)
 
@@ -222,7 +223,8 @@ An interoperable means for site developers to programmatically determine the cur
 An API that web page authors can use to cooperatively schedule background tasks such that they do not introduce delays to other high priority tasks that share the same event loop, such as input processing, animations and frame compositing.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/requestidlecallback/)
-* **Next Recommendation expected completion:** Planned to move to WHATWG/HTML
+* **Next Recommendation expected completion:** n/a
+* Planned Work: Move to WHATWG/HTML
 * Latest publication: [28 June 2022](https://www.w3.org/TR/2022/WD-requestidlecallback-20220628/)
 * Reference Draft: [https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/](https://www.w3.org/TR/2017/CR-requestidlecallback-20170131/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Feb/0000.html) on 02 February 2017 ended on 01 April 2017
@@ -233,7 +235,8 @@ An API that web page authors can use to cooperatively schedule background tasks 
 This specification defines an API that web page authors can use to detect presence of "long tasks" that monopolize the UI thread for extended periods of time and block other critical tasks from being executed - e.g. reacting to user input.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/longtasks-1/)
-* **Next Recommendation expected completion:** Transitioning back to WICG? TODO
+* **Next Recommendation expected completion:** n/a
+* Planned Work: Transition back to WICG
 * Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 * Reference Draft: [https://www.w3.org/TR/2017/WD-longtasks-1-20170907/](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
@@ -244,7 +247,8 @@ This specification defines an API that web page authors can use to detect presen
 This specification defines a JavaScript API and HTTP Client Hint header to surface device capability for memory — i.e. device RAM, in order to enable web apps to customize content depending on device memory constraints.
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/device-memory/)
-* **Next Recommendation expected completion:** Transitioning back to WICG? TODO
+* **Next Recommendation expected completion:** n/a
+* Planned Work: Transition back to WICG
 * Latest publication: [22 July 2022](https://www.w3.org/TR/2022/WD-device-memory-1-20220722/)
 * Reference Draft: [https://www.w3.org/TR/2018/WD-device-memory-1-20180925/](https://www.w3.org/TR/2018/WD-device-memory-1-20180925/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Sep/0003.html) on 25-Sep-2018 ended on 22-Feb-2019
