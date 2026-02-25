@@ -11,25 +11,23 @@ GitHub repositories are linked from each specification.
 * https://w3c.github.io/resource-timing/
 * https://w3c.github.io/navigation-timing/
 * https://w3c.github.io/user-timing/
-* https://w3c.github.io/requestidlecallback/
 * https://w3c.github.io/beacon/
 * https://w3c.github.io/server-timing/
 * https://w3c.github.io/paint-timing/
 * https://w3c.github.io/reporting/
 * https://w3c.github.io/network-error-logging
-* https://www.w3.org/TR/event-timing/
-* https://www.w3.org/TR/largest-contentful-paint/
-
-Seeking Additional Implementations:
-
-* https://w3c.github.io/longtasks/
-* https://w3c.github.io/device-memory/
+* https://w3c.github.io/event-timing/
+* https://w3c.github.io/largest-contentful-paint/
+* https://w3c.github.io/long-animation-frames/
 
 Past Deliverables:
 
 * https://w3c.github.io/page-visibility/
 * https://w3c.github.io/resource-hints/
 * https://w3c.github.io/preload/
+* https://w3c.github.io/longtasks/
+* https://w3c.github.io/device-memory/
+* https://w3c.github.io/requestidlecallback/
 
 Incubations:
 
