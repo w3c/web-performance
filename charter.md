@@ -236,7 +236,7 @@ This specification defines an API that web page authors can use to detect presen
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/longtasks-1/)
 * **Next Recommendation expected completion:** n/a
-* Planned Work: Transition back to WICG
+* Planned Work: As this is only implemented in a single browser, we plan to transition the spec back to WICG
 * Latest publication: [07 September 2017](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 * Reference Draft: [https://www.w3.org/TR/2017/WD-longtasks-1-20170907/](https://www.w3.org/TR/2017/WD-longtasks-1-20170907/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2017Dec/0001.html) on 07 December 2017 ended on 04 February 2018
@@ -248,7 +248,7 @@ This specification defines a JavaScript API and HTTP Client Hint header to surfa
 
 * **Draft state:** [Working Draft](https://www.w3.org/TR/device-memory/)
 * **Next Recommendation expected completion:** n/a
-* Planned Work: Transition back to WICG
+* Planned Work: As this is only implemented in a single browser, we plan to transition the spec back to WICG
 * Latest publication: [22 July 2022](https://www.w3.org/TR/2022/WD-device-memory-1-20220722/)
 * Reference Draft: [https://www.w3.org/TR/2018/WD-device-memory-1-20180925/](https://www.w3.org/TR/2018/WD-device-memory-1-20180925/)
 * Associated [Call for Exclusion](https://lists.w3.org/Archives/Member/member-cfe/2018Sep/0003.html) on 25-Sep-2018 ended on 22-Feb-2019
