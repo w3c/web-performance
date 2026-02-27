@@ -171,12 +171,22 @@ This specification defines an API that enables monitoring the largest paint an e
 * Reference Draft: [https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/)](https://www.w3.org/TR/2022/WD-largest-contentful-paint-20220524/))
 * Produced under Working Group Charter: [https://www.w3.org/2021/02/webperf.html](https://www.w3.org/2021/02/webperf.html)
 
+#### [Element Timing](https://github.com/w3c/element-timing/)
+
+The Element Timing API enables monitoring when developer-specified image elements or groups of text nodes are displayed on screen
+
+* **Draft state:** [Editor's Draft](https://w3c.github.io/element-timing/)
+* **Next Recommendation expected completion:** First Public Working Draft
+* Planned Work: Publish FPWD
+* Latest publication: [5 August 2025 Editor's Draft](https://w3c.github.io/element-timing/)
+* Produced under Working Group Charter: [https://www.w3.org/2023/11/webperf-charter-2023.html](https://www.w3.org/2023/11/webperf-charter-2023.html)
+
 #### [Long Animation Frames](https://github.com/w3c/long-animation-frames/)
 
 This specification defines an API that gives an indication when frames take a long time to render.
 
-* **Draft state:** [First Public Working Draft](https://www.w3.org/TR/long-animation-frames/)
-* **Next Recommendation expected completion:** TODO
+* **Draft state:** [Editor's Draft](https://w3c.github.io/long-animation-frames/)
+* **Next Recommendation expected completion:** First Public Working Draft
 * Planned Work: Publish FPWD
 * Latest publication: [26 November 2024 Editor's Draft](https://w3c.github.io/long-animation-frames/)
 * Produced under Working Group Charter: [https://www.w3.org/2023/11/webperf-charter-2023.html](https://www.w3.org/2023/11/webperf-charter-2023.html)
