@@ -31,7 +31,6 @@ Past Deliverables:
 
 Incubations:
 
-* https://github.com/WICG/element-timing/
 * https://github.com/WICG/container-timing/
 * https://github.com/WICG/is-input-pending/
 * https://github.com/WICG/layout-instability/
