@@ -2,9 +2,18 @@ The WG's meeting schedule is being managed in its [agenda document](https://docs
 
 Links to the meeting minutes are below:
 
+# 2026
+
+* [February 26th](https://w3c.github.io/web-performance/meetings/2026/2026-02-26/index.html)
+* [January 29th](https://w3c.github.io/web-performance/meetings/2026/2026-01-29/index.html)
+* [January 15th](https://w3c.github.io/web-performance/meetings/2026/2026-01-15/index.html)
+
 # 2025
 
+* [December 18th](https://w3c.github.io/web-performance/meetings/2025/2025-12-18/index.html)
+* [December 4th](https://w3c.github.io/web-performance/meetings/2025/2025-12-04/index.html)
 * [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2025/2025-11-TPAC/index.html)
+* [October 9th](https://w3c.github.io/web-performance/meetings/2025/2025-10-09/index.html)
 * [September 25th](https://w3c.github.io/web-performance/meetings/2025/2025-09-25/index.html)
 * [September 11th](https://w3c.github.io/web-performance/meetings/2025/2025-09-11/index.html)
 * [August 28th](https://w3c.github.io/web-performance/meetings/2025/2025-08-28/index.html)
