@@ -38,6 +38,26 @@ Based on [w3c/hr-time#173](https://github.com/w3c/hr-time/pull/173), these are t
 | IDL blocks | `idl-def-{name}` | `id=idl-def-domhighrestimestamp` |
 | Compound concepts | `dfn-{hyphenated}` | `id=dfn-current-high-resolution-time`, `id=dfn-relative-high-resolution-coarse-time` |
 
+### IDL Attribute Definitions
+
+When converting `<dfn>` elements inside a `<dl>` that describes IDL interface attributes, add the `attribute` keyword to each `<dfn>` so Bikeshed knows they define IDL attributes (not plain terms). The parent `<dl>` should have `dfn-for` set to the interface name.
+
+```html
+<!-- BAD: Bikeshed treats these as plain concept dfns -->
+<dl dfn-for="PerformanceEntry" data-export>
+  <dt><dfn>duration</dfn></dt>
+  <dd>...</dd>
+</dl>
+
+<!-- GOOD: Bikeshed knows these are IDL attributes -->
+<dl dfn-for="PerformanceEntry" data-export>
+  <dt><dfn attribute>duration</dfn></dt>
+  <dd>...</dd>
+</dl>
+```
+
+Without the `attribute` keyword, Bikeshed won't correctly associate the dfn with the IDL attribute, and cross-references like `{{PerformanceEntry/duration}}` may fail to resolve.
+
 ### Checklist
 
 When converting a spec to Bikeshed:
