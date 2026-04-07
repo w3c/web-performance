@@ -4,6 +4,7 @@ Links to the meeting minutes are below:
 
 # 2026
 
+* [March 26th](https://w3c.github.io/web-performance/meetings/2026/2026-03-26/index.html)
 * [March 12th](https://w3c.github.io/web-performance/meetings/2026/2026-03-12/index.html)
 * [February 26th](https://w3c.github.io/web-performance/meetings/2026/2026-02-26/index.html)
 * [January 29th](https://w3c.github.io/web-performance/meetings/2026/2026-01-29/index.html)
