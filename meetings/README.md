@@ -155,7 +155,7 @@ Links to the meeting minutes are below:
 
 * [December 6th](https://w3c.github.io/web-performance/meetings/2019/2019-12-06)
 * [November 19th](https://w3c.github.io/web-performance/meetings/2019/2019-11-19)
-* [Novmber 5th](https://w3c.github.io/web-performance/meetings/2019/2019-11-05)
+* [November 5th](https://w3c.github.io/web-performance/meetings/2019/2019-11-05)
 * [October 17th](https://w3c.github.io/web-performance/meetings/2019/2019-10-17)
 * [TPAC](https://w3c.github.io/web-performance/meetings/2019/2019-09-TPAC/index.html)
 * [September 6th](https://w3c.github.io/web-performance/meetings/2019/2019-09-06)

@@ -11,37 +11,41 @@ GitHub repositories are linked from each specification.
 * https://w3c.github.io/resource-timing/
 * https://w3c.github.io/navigation-timing/
 * https://w3c.github.io/user-timing/
-* https://w3c.github.io/requestidlecallback/
 * https://w3c.github.io/beacon/
 * https://w3c.github.io/server-timing/
-* https://w3c.github.io/longtasks/
 * https://w3c.github.io/paint-timing/
-* https://w3c.github.io/device-memory/
 * https://w3c.github.io/reporting/
 * https://w3c.github.io/network-error-logging
-* https://www.w3.org/TR/event-timing/
-* https://www.w3.org/TR/largest-contentful-paint/
+* https://w3c.github.io/event-timing/
+* https://w3c.github.io/largest-contentful-paint/
+* https://w3c.github.io/long-animation-frames/
 
 Past Deliverables:
 
 * https://w3c.github.io/page-visibility/
 * https://w3c.github.io/resource-hints/
 * https://w3c.github.io/preload/
+* https://w3c.github.io/requestidlecallback/
 
 Incubations:
 
-* https://github.com/WICG/element-timing
-* https://github.com/WICG/is-input-pending
-* https://github.com/WICG/layout-instability
-* https://github.com/WICG/performance-measure-memory
+* https://w3c.github.io/longtasks/
+* https://w3c.github.io/device-memory/
+* https://github.com/WICG/container-timing/
+* https://github.com/WICG/is-input-pending/
+* https://github.com/WICG/layout-instability/
+* https://github.com/WICG/performance-measure-memory/
 * https://github.com/WICG/netinfo/
-* https://github.com/WICG/unload-beacon
-* https://github.com/WICG/scheduling-apis
+* https://github.com/WICG/scheduling-apis/
 * https://github.com/WICG/js-self-profiling/
-* https://github.com/WICG/page-lifecycle
-* https://github.com/WICG/deprecation-reporting
-* https://github.com/WICG/intervention-reporting
-* https://github.com/WICG/crash-reporting
+* https://github.com/WICG/page-lifecycle/
+* https://github.com/WICG/deprecation-reporting/
+* https://github.com/WICG/intervention-reporting/
+* https://github.com/WICG/crash-reporting/
+
+Past Incubations:
+
+* https://github.com/WICG/pending-beacon/ (and https://github.com/WICG/unload-beacon/) were [merged](https://github.com/whatwg/fetch/pull/1647) into [Fetch](https://fetch.spec.whatwg.org/)
 
 Web Performance tests can be found in [web-platforms-tests][WPT].
 
