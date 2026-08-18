@@ -4,6 +4,7 @@ Links to the meeting minutes are below:
 
 # 2026
 
+* [August 13th](https://w3c.github.io/web-performance/meetings/2026/2026-08-13/index.html)
 * [June 18th](https://w3c.github.io/web-performance/meetings/2026/2026-06-18/index.html)
 * [June 4th](https://w3c.github.io/web-performance/meetings/2026/2026-06-04/index.html)
 * [May 21st](https://w3c.github.io/web-performance/meetings/2026/2026-05-21/index.html)
