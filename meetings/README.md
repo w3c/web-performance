@@ -5,6 +5,7 @@ Links to the meeting minutes are below:
 # 2026
 
 * [November 5th](https://w3c.github.io/web-performance/meetings/2026/2026-11-05/index.html)
+* [TPAC meeting minutes](https://w3c.github.io/web-performance/meetings/2026/2026-10-TPAC/index.html)
 * [September 24th](https://w3c.github.io/web-performance/meetings/2026/2026-09-24/index.html)
 * [September 10th](https://w3c.github.io/web-performance/meetings/2026/2026-09-10/index.html)
 * [August 27th](https://w3c.github.io/web-performance/meetings/2026/2026-08-27/index.html)
